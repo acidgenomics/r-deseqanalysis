@@ -7,6 +7,7 @@
 
 #' @name plotMA
 #' @inherit BiocGenerics::plotMA
+#' @inheritParams basejump::params
 #' @author Michael Steinbaugh, Rory Kirchner
 #'
 #' @details
@@ -16,9 +17,6 @@
 #' (mean average) scales, then plotting these values.
 #'
 #' @note We are not allowing post hoc `alpha` or `lfcThreshold` cutoffs here.
-#'
-#' @inheritParams params
-#' @inheritParams basejump::params
 #'
 #' @return `ggplot`.
 #'

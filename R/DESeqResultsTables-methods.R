@@ -1,6 +1,5 @@
 #' @name DESeqResultsTables
 #' @inherit DESeqResultsTables-class
-#' @inheritParams params
 #' @inheritParams basejump::params
 #' @author Michael Steinbaugh
 #'

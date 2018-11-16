@@ -1,10 +1,6 @@
 #' @name markdown
 #' @inherit basejump::markdown
-#' @author Michael Steinbaugh
-#'
-#' @inheritParams params
 #' @inheritParams basejump::params
-#'
 #' @examples
 #' data(deseq)
 #' x <- DESeqResultsTables(deseq)

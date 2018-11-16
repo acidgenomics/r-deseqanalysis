@@ -122,12 +122,14 @@ Imports:
     vsn
 Suggests:
     BiocStyle,
+    bcbioBase,
     hexbin,
     patrick,
     roxygen2,
     testthat (>= 2.0),
     viridis
 Remotes:
+    hbc/bcbioBase@develop,
     steinbaugh/basejump@develop,
     steinbaugh/goalie@develop
 biocViews:

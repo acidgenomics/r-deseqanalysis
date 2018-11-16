@@ -5,7 +5,7 @@
 #' @details
 #' Use either `contrast` or `name` to specify the desired contrast.
 #'
-#' @inheritParams params
+#' @inheritParams basejump::params
 #' @inheritParams DESeq2::results
 #' @param alpha `numeric`. Multiple alpha cutoffs.
 #'

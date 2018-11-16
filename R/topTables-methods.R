@@ -1,8 +1,7 @@
 #' @name topTables
 #' @inherit basejump::topTables
-#' @author Michael Steinbaugh
-#'
-#' @inheritParams params
+#' @inheritParams basejump::params
+#' 
 #' @param n `scalar integer`. Number of genes (per direction) to report.
 #'
 #' @examples

@@ -2,7 +2,7 @@
 #' @inherit basejump::contrastName
 #' @author Michael Steinbaugh
 #'
-#' @inheritParams params
+#' @inheritParams basejump::params
 #'
 #' @examples
 #' data(deseq)

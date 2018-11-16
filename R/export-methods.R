@@ -3,14 +3,15 @@
 # TODO Need to add a bcbioRNASeq method that also exports the on-the-fly
 # calculations (TMM, RLE).
 
+# FIXME Need to import bcbioBase to get `copyToDropbox()`
+# FIXME Need to add Dropbox upload support.
+
 
 
 #' @name export
 #' @inherit basejump::export
-#' @author Michael Steinbaugh
-#'
+#' @inheritParams basejump::params
 #' @inheritParams bcbioBase::copyToDropbox
-#' @inheritParams params
 #'
 #' @param counts `matrix`. Normalized counts. DESeq2 size-factor normalized
 #'   counts or transcripts per million (TPM) are recommended.
