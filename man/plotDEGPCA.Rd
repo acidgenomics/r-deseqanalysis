@@ -7,15 +7,12 @@
 \alias{plotDEGPCA,DESeqAnalysis-method}
 \title{Plot DEG PCA}
 \usage{
-\S4method{plotDEGPCA}{DESeqResults}(object, counts, direction = c("both",
-  "up", "down"), interestingGroups = NULL, `NA` = NULL,
-  label = getOption("basejump.label", FALSE), return = c("ggplot",
-  "DataFrame"))
-
-\S4method{plotDEGPCA}{DESeqAnalysis}(object, counts = NULL, results,
+\S4method{plotDEGPCA}{DESeqAnalysis}(object, results, counts,
   direction = c("both", "up", "down"), interestingGroups = NULL,
-  `NA` = NULL, label = getOption("basejump.label", FALSE),
-  return = c("ggplot", "DataFrame"))
+  label = getOption("basejump.label", FALSE),
+  pointColor = getOption("basejump.color.discrete", NULL),
+  pointSize = getOption("basejump.point.size", 4L),
+  return = c("ggplot", "DataFrame"), ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -29,8 +26,14 @@ define the samples. If left unset, defaults to \code{sampleName}.}
 
 \item{label}{\code{boolean}. Superimpose sample text labels on the plot.}
 
+\item{pointColor}{\code{string}. Default point color for the plot.}
+
+\item{pointSize}{\code{scalar numeric}. Cell point size.}
+
 \item{return}{\code{string}. Return type. Uses \code{base::match.arg()}
 internally and defaults to the first argument in the \code{character} vector.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{ggplot}.
