@@ -1,7 +1,25 @@
+#' @name plotGene
+#' @inherit basejump::plotGene
+#' @examples
+#' data(deseq)
+#' object <- deseq
+#' 
+#' g2s <- Gene2Symbol(as(object, "DESeqDataSet"))
+#' geneIDs <- head(g2s[["geneID"]])
+#' print(geneIDs)
+#' geneNames <- head(g2s[["geneName"]])
+#' print(geneNames)
+#' 
+#' plotGene(object, genes = geneIDs, style = "facet")
+#' plotGene(object, genes = geneNames, style = "wide")
+NULL
+
+
+
 plotGene.DESeqAnalysis <-  # nolint
     function(object) {
         validObject(object)
-        # Using DESeqTransform
+        # Using DESeqTransform data here.
         dt <- slot(object, "transform")
         if ("rlogIntercept" %in% colnames(dt)) {
             countsAxisLabel <- "rlog counts (log2)"
