@@ -4,8 +4,7 @@
 
 #' @name plotDEGPCA
 #' @inherit basejump::plotDEGPCA
-#' @inherit plotPCA
-#' @include plotPCA-methods.R
+#' @inheritParams basejump::plotPCA
 #' @author Michael Steinbaugh
 #'
 #' @inheritParams params
@@ -91,9 +90,14 @@ plotDEGPCA.DESeqResults <-  # nolint
             )
         )
     }
+
 f1 <- formals(plotDEGPCA.DESeqResults)
 # Note that we're not exporting the plotPCA SE method.
-f2 <- formals(plotPCA.SummarizedExperiment)
+f2 <- methodFormals(
+    f = "plotPCA", 
+    signature = "SummarizedExperiment",
+    package = "basejump"
+)
 f2 <- f2[c("interestingGroups", "color", "label", "return")]
 f <- c(f1, f2)
 formals(plotDEGPCA.DESeqResults) <- f
@@ -133,6 +137,7 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
             )
         )
     }
+
 f1 <- formals(plotDEGPCA.DESeqAnalysis)
 f2 <- formals(plotDEGPCA.DESeqResults)
 f2 <- f2[setdiff(names(f2), names(f1))]
