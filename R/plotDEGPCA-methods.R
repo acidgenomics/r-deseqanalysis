@@ -5,10 +5,8 @@
 #' @name plotDEGPCA
 #' @inherit basejump::plotDEGPCA
 #' @inheritParams basejump::plotPCA
-#' @author Michael Steinbaugh
-#'
-#' @inheritParams params
 #' @inheritParams basejump::params
+#' 
 #' @param counts `DESeqTransform`.
 #'
 #' @examples

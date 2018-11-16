@@ -3,13 +3,18 @@
 \docType{methods}
 \name{markdown}
 \alias{markdown}
-\alias{markdown,bcbioRNASeq-method}
+\alias{markdown,DESeqAnalysis-method}
+\alias{markdown,DESeqResultsTables-method}
 \title{Markdown}
 \usage{
-\S4method{markdown}{bcbioRNASeq}(object)
+\S4method{markdown}{DESeqAnalysis}(object)
+
+\S4method{markdown}{DESeqResultsTables}(object, headerLevel = 2L)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{headerLevel}{\code{scalar integer} (\code{1}-\code{7}). Markdown header level.}
 }
 \value{
 Markdown output.
@@ -19,11 +24,18 @@ Markdown
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{bcbioRNASeq}: Sample metadata table.
+\item \code{DESeqAnalysis}: List of contrast names.
+
+\item \code{DESeqResultsTables}: File paths (if exported) and top tables.
 }}
 
 \examples{
 data(deseq)
+
+# DESeqAnalysis ====
+markdown(deseq)
+
+## DESeqResultsTables ====
 x <- DESeqResultsTables(deseq)
 markdown(x)
 }

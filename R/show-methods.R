@@ -1,3 +1,19 @@
+#' @name show
+#' @inherit methods::show
+#' @examples
+#' data(deseq)
+#' show(deseq)
+NULL
+
+
+
+#' @importFrom methods show
+#' @aliases NULL
+#' @export
+methods::show
+
+
+
 # DESeqAnalysis ================================================================
 show.DESeqAnalysis <-  # nolint
     function(object) {

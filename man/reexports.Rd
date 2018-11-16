@@ -2,7 +2,7 @@
 % Please edit documentation in R/alphaSummary-methods.R,
 %   R/contrastName-methods.R, R/export-methods.R, R/markdown-methods.R,
 %   R/plotDEGHeatmap-methods.R, R/plotDEGPCA-methods.R, R/plotMA-methods.R,
-%   R/plotVolcano-methods.R, R/topTables-methods.R
+%   R/plotVolcano-methods.R, R/show-methods.R, R/topTables-methods.R
 \docType{import}
 \name{reexports}
 \title{Objects exported from other packages}
@@ -15,5 +15,7 @@ below to see their documentation.
   \item{basejump}{\code{\link[basejump]{alphaSummary}}, \code{\link[basejump]{contrastName}}, \code{\link[basejump]{export}}, \code{\link[basejump]{markdown}}, \code{\link[basejump]{plotDEGHeatmap}}, \code{\link[basejump]{plotDEGPCA}}, \code{\link[basejump]{plotVolcano}}, \code{\link[basejump]{topTables}}}
 
   \item{BiocGenerics}{\code{\link[BiocGenerics]{plotMA}}}
+
+  \item{methods}{\code{\link[methods]{show}}}
 }}
 

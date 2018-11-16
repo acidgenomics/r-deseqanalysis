@@ -7,10 +7,8 @@
 
 #' @name plotDEGHeatmap
 #' @inherit basejump::plotHeatmap
-#' @author Michael Steinbaugh
-#'
-#' @inheritParams params
 #' @inheritParams basejump::params
+#' 
 #' @param counts `DESeqTransform`.
 #'
 #' @examples

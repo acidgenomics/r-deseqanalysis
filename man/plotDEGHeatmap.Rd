@@ -132,6 +132,3 @@ plotDEGHeatmap(
 \item \code{\link[stats:hclust]{stats::hclust()}}.
 }
 }
-\author{
-Michael Steinbaugh
-}

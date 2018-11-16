@@ -50,6 +50,3 @@ plotDEGPCA(
     counts = as(deseq, "DESeqTransform")
 )
 }
-\author{
-Michael Steinbaugh
-}
