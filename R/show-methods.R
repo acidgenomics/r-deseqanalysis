@@ -14,6 +14,12 @@ methods::show
 
 
 
+.showHeader <- function(object, version = NULL) {
+    cat(paste(class(object), version), sep = "\n")
+}
+
+
+
 # DESeqAnalysis ================================================================
 show.DESeqAnalysis <-  # nolint
     function(object) {
