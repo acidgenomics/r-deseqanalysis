@@ -1,2 +1,16 @@
 ^.*\.Rproj$
+^.*\.gz$
+^.*\.pdf$
+^CONTRIBUTING\.md$
+^Meta$
+^\.Rprofile$
 ^\.Rproj\.user$
+^\.httr-oauth$
+^\.lintr$
+^\.travis\.yml$
+^_pkgdown\.yml$
+^appveyor\.yml$
+^data-raw$
+^doc$
+^docs$
+^pkgdown$
