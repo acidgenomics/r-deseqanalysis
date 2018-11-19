@@ -32,7 +32,6 @@ basejump::plotDEGPCA
 
 
 
-# DESeqResults =================================================================
 plotDEGPCA.DESeqResults <-  # nolint
     function(
         object,
@@ -107,7 +106,6 @@ setMethod(
 
 
 
-# DESeqAnalysis ================================================================
 plotDEGPCA.DESeqAnalysis <-  # nolint
     function(object, results) {
         results <- .matchResults(object = object, results = results)

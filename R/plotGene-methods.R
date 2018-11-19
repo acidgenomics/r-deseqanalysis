@@ -16,6 +16,13 @@ NULL
 
 
 
+#' @importFrom basejump plotGene
+#' @aliases NULL
+#' @export
+basejump::plotGene
+
+
+
 plotGene.DESeqAnalysis <-  # nolint
     function(object) {
         validObject(object)

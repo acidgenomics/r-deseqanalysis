@@ -33,7 +33,6 @@ basejump::plotDEGHeatmap
 
 
 
-# DESeqResults =================================================================
 plotDEGHeatmap.DESeqResults <-  # nolint
     function(
         object,
@@ -110,6 +109,7 @@ plotDEGHeatmap.DESeqResults <-  # nolint
             )
         )
     }
+
 f1 <- formals(plotDEGHeatmap.DESeqResults)
 f2 <- methodFormals(
     f = "plotHeatmap",
@@ -132,7 +132,6 @@ setMethod(
 
 
 
-# DESeqAnalysis ================================================================
 plotDEGHeatmap.DESeqAnalysis <-  # nolint
     function(object, results) {
         do.call(
@@ -151,6 +150,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
             )
         )
     }
+
 f1 <- formals(plotDEGHeatmap.DESeqAnalysis)
 f2 <- formals(plotDEGHeatmap.DESeqResults)
 f2 <- f2[setdiff(names(f2), names(f1))]
