@@ -43,7 +43,7 @@ vapply(
     FUN.VALUE = numeric(1L)
 )
 object_size(deseq)
-stopifnot(object_size(bcb) < limit)
+stopifnot(object_size(deseq) < limit)
 
 # Check that object is valid.
 stopifnot(is(deseq, "DESeqAnalysis"))
