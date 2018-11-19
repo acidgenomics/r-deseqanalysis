@@ -10,17 +10,13 @@
 \usage{
 \S4method{plotMA}{DESeqResults}(object, genes = NULL,
   gene2symbol = NULL, ntop = 0L, direction = c("both", "up", "down"),
-  pointColor = getOption("basejump.color", "gray50"),
-  sigPointColor = getOption("basejump.point.color", c(upregulated =
-  "purple", downregulated = "orange")), return = c("ggplot",
-  "DataFrame"))
+  pointColor = "gray50", sigPointColor = c(upregulated = "purple",
+  downregulated = "orange"), return = c("ggplot", "DataFrame"))
 
 \S4method{plotMA}{DESeqAnalysis}(object, results = 1L,
   lfcShrink = TRUE, genes = NULL, ntop = 0L, direction = c("both",
-  "up", "down"), pointColor = getOption("basejump.color", "gray50"),
-  sigPointColor = getOption("basejump.point.color", c(upregulated =
-  "purple", downregulated = "orange")), return = c("ggplot",
-  "DataFrame"))
+  "up", "down"), pointColor = "gray50", sigPointColor = c(upregulated =
+  "purple", downregulated = "orange"), return = c("ggplot", "DataFrame"))
 
 plotMeanAverage(...)
 }

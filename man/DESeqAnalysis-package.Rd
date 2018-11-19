@@ -21,17 +21,17 @@ Useful links:
 \author{
 \strong{Maintainer}: Michael Steinbaugh \email{mike@steinbaugh.com} (0000-0002-2403-2221)
 
-Authors:
+Other contributors:
 \itemize{
-  \item Lorena Pantano \email{lorena.pantano@gmail.com} (0000-0002-3859-3249)
-  \item Rory Kirchner \email{roryk@alum.mit.edu} (0000-0003-4814-5885)
-  \item Victor Barrera \email{barrera.vic@gmail.com} (0000-0003-0590-4634)
-  \item Mary Piper \email{mary.piper@gmail.com} (0000-0003-2699-3840)
-  \item Meeta Mistry \email{meeta.mistry@gmail.com} (0000-0002-5830-9479)
-  \item Radhika Khetani \email{rkhetani@hsph.harvard.edu} (0000-0003-2430-2970)
-  \item Kayleigh Rutherford \email{kayrut1@gmail.com} (0000-0001-9699-2363)
-  \item John Hutchinson \email{jnhutchinson@gmail.com} (0000-0002-7804-7576)
-  \item Shannan Ho Sui \email{shosui@hsph.harvard.edu} (0000-0002-6191-4709)
+  \item Lorena Pantano \email{lorena.pantano@gmail.com} (0000-0002-3859-3249) [contributor]
+  \item Rory Kirchner \email{roryk@alum.mit.edu} (0000-0003-4814-5885) [contributor]
+  \item Victor Barrera \email{barrera.vic@gmail.com} (0000-0003-0590-4634) [contributor]
+  \item Mary Piper \email{mary.piper@gmail.com} (0000-0003-2699-3840) [contributor]
+  \item Meeta Mistry \email{meeta.mistry@gmail.com} (0000-0002-5830-9479) [contributor]
+  \item Radhika Khetani \email{rkhetani@hsph.harvard.edu} (0000-0003-2430-2970) [contributor]
+  \item Kayleigh Rutherford \email{kayrut1@gmail.com} (0000-0001-9699-2363) [contributor]
+  \item John Hutchinson \email{jnhutchinson@gmail.com} (0000-0002-7804-7576) [contributor]
+  \item Shannan Ho Sui \email{shosui@hsph.harvard.edu} (0000-0002-6191-4709) [contributor]
 }
 
 }
