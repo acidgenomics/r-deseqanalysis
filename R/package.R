@@ -13,7 +13,7 @@
 #'
 #' @importMethodsFrom basejump coerce
 #' 
-#' @importFrom DESeq2 resultsNames
+#' @importFrom DESeq2 results resultsNames
 #' @importFrom S4Vectors as.data.frame head mcols mcols<- metadata
 #' @importFrom assertive.base assert_all_are_true assert_are_identical
 #' @importFrom assertive.files assert_all_are_existing_files
