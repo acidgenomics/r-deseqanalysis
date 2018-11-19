@@ -1,6 +1,7 @@
 #' @name topTables
 #' @inherit basejump::topTables
 #' @inheritParams basejump::params
+#' @inheritParams params
 #' 
 #' @param n `scalar integer`. Number of genes (per direction) to report.
 #'

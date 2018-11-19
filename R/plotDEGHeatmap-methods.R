@@ -8,6 +8,7 @@
 #' @name plotDEGHeatmap
 #' @inherit basejump::plotHeatmap
 #' @inheritParams basejump::params
+#' @inheritParams params
 #' 
 #' @param counts `DESeqTransform`.
 #'

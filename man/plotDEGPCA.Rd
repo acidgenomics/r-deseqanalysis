@@ -50,6 +50,8 @@ palette globally, use
 internally and defaults to the first argument in the \code{character} vector.}
 
 \item{...}{Additional arguments.}
+
+\item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
 }
 \value{
 \code{ggplot}.

@@ -1,6 +1,7 @@
 #' @name DESeqResultsTables
 #' @inherit DESeqResultsTables-class
 #' @inheritParams basejump::params
+#' @inheritParams params
 #'
 #' @section Obtaining results from DESeq2:
 #'

@@ -18,6 +18,10 @@ DESeqResultsTables(object, ...)
 \item{object}{Object.}
 
 \item{...}{Additional arguments.}
+
+\item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
+
+\item{lfcShrink}{\code{boolean}. Use shrunken log2 fold change (LFC) values.}
 }
 \value{
 \code{DESeqResultsTables}, containing the original, unmodified

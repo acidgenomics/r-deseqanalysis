@@ -1,9 +1,8 @@
 #' @name contrastName
-#' @inherit basejump::contrastName
 #' @author Michael Steinbaugh
-#'
+#' @inherit basejump::contrastName
 #' @inheritParams basejump::params
-#'
+#' @inheritParams params
 #' @examples
 #' data(deseq)
 #'

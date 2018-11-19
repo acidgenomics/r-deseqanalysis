@@ -1,4 +1,5 @@
 # TODO Show lfcThreshold info on the plot.
+# FIXME Consider not exporting DESeqResults here...
 # Do not allow post hoc alpha, lfcThreshold cutoffs.
 
 
@@ -7,6 +8,7 @@
 #' @inherit basejump::plotDEGPCA
 #' @inheritParams basejump::plotPCA
 #' @inheritParams basejump::params
+#' @inheritParams params
 #' 
 #' @param counts `DESeqTransform`.
 #'
