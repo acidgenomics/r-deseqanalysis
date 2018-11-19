@@ -24,7 +24,6 @@ basejump::contrastName
 
 
 
-# DESeqAnalysis ================================================================
 contrastName.DESeqAnalysis <-  # nolint
     function(object, results) {
         do.call(
@@ -47,7 +46,6 @@ setMethod(
 
 
 
-# DESeqResults =================================================================
 contrastName.DESeqResults <-  # nolint
     function(object) {
         validObject(object)
@@ -72,7 +70,6 @@ setMethod(
 
 
 
-# DESeqResultsTables ===========================================================
 contrastName.DESeqResultsTables <-  # nolint
     function(object) {
         contrastName(slot(object, name = "results"))

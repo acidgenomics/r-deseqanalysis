@@ -9,6 +9,7 @@
 
 
 
+# DESeqAnalysis ================================================================
 #' DESeq2 Analysis Container
 #'
 #' Class containing all elements generated during differential expression

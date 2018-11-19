@@ -1,5 +1,4 @@
 #' @inherit DESeqAnalysis-class
-#' @author Michael Steinbaugh
 #' @export
 #'
 #' @param data `DESeqDataSet`.
@@ -8,8 +7,6 @@
 #'   [DESeq2::results()] return here.
 #' @param lfcShrink `list`. One or more shrunken `DESeqResults`. Assign the
 #'   [DESeq2::lfcShrink()] return here.
-#'
-#' @return `DESeqAnalysis`.
 #'
 #' @examples
 #' library(DESeq2)

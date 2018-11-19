@@ -21,7 +21,6 @@ basejump::markdown
 
 
 
-# DESeqAnalysis ================================================================
 markdown.DESeqAnalysis <-  # nolint
     function(object) {
         show(markdownHeader("Contrast names"))
@@ -40,7 +39,6 @@ setMethod(
 
 
 
-# DESeqResultsTables ===========================================================
 markdown.DESeqResultsTables <-  # nolint
     function(
         object,

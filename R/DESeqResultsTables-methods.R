@@ -1,7 +1,6 @@
 #' @name DESeqResultsTables
 #' @inherit DESeqResultsTables-class
 #' @inheritParams basejump::params
-#' @author Michael Steinbaugh
 #'
 #' @section Obtaining results from DESeq2:
 #'
@@ -49,8 +48,6 @@
 #'
 #' [thread]: https://support.bioconductor.org/p/101504/
 #'
-#' @return `DESeqResultsTables`.
-#'
 #' @seealso
 #' - [DESeq2::results()].
 #' - [markdown()], [write()].
@@ -71,7 +68,6 @@ NULL
 
 
 
-# DESeqResults =================================================================
 DESeqResultsTables.DESeqResults <-  # nolint
     function(object) {
         validObject(object)
@@ -119,7 +115,18 @@ DESeqResultsTables.DESeqResults <-  # nolint
         )
     }
 
-# DESeqAnalysis ================================================================
+
+
+#' @rdname DESeqResultsTables
+#' @export
+setMethod(
+    f = "DESeqResultsTables",
+    signature = signature("DESeqResults"),
+    definition = DESeqResultsTables.DESeqResults
+)
+
+
+
 DESeqResultsTables.DESeqAnalysis <-  # nolint
     function(
         object,
@@ -200,16 +207,6 @@ DESeqResultsTables.DESeqAnalysis <-  # nolint
 
         out
     }
-
-
-
-#' @rdname DESeqResultsTables
-#' @export
-setMethod(
-    f = "DESeqResultsTables",
-    signature = signature("DESeqResults"),
-    definition = DESeqResultsTables.DESeqResults
-)
 
 
 
