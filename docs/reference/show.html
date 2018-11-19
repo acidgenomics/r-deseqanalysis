@@ -164,16 +164,15 @@ the discussion in <code>setIs</code> for the general concept.</p>
     <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>deseq</span>)
 <span class='fu'>show</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; DESeqAnalysis 1.22.1
 #&gt; transform: vst
-#&gt; contrastNames: treatment folic acid vs control
+#&gt; contrastNames: condition B vs A
 #&gt; class: DESeqDataSet 
-#&gt; dim: 500 6 
-#&gt; metadata(11): version caller ... date sessionInfo
+#&gt; dim: 500 12 
+#&gt; metadata(3): version date interestingGroups
 #&gt; assays(4): counts mu H cooks
-#&gt; rownames(500): ENSMUSG00000000088 ENSMUSG00000000326 ...
-#&gt;   ENSMUSG00000114367 ENSMUSG00000114458
-#&gt; rowData names(29): broadClass description ... deviance maxCooks
-#&gt; colnames(6): control_rep1 control_rep2 ... fa_day7_rep2 fa_day7_rep3
-#&gt; colData names(8): sampleName day ... interestingGroups sizeFactor</div></pre>
+#&gt; rownames(500): gene001 gene002 ... gene499 gene500
+#&gt; rowData names(27): geneID geneName ... deviance maxCooks
+#&gt; colnames(12): sample01 sample02 ... sample11 sample12
+#&gt; colData names(2): condition sizeFactor</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -155,7 +155,7 @@
 #&gt; [1] "knit_asis"
 #&gt; attr(,"knit_cacheable")
 #&gt; [1] NA
-#&gt; [1] "- treatment folic acid vs control\n"
+#&gt; [1] "- condition B vs A\n"
 #&gt; attr(,"format")
 #&gt; [1] "markdown"
 #&gt; attr(,"class")
@@ -163,41 +163,41 @@
 #&gt; attr(,"knit_cacheable")
 #&gt; [1] NA</div><div class='input'>
 <span class='co'>## DESeqResultsTables ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>DESeqResultsTables</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: treatment folic acid vs control (shrunken LFC)</span></div><div class='input'><span class='fu'>markdown</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; 
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>DESeqResultsTables</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='input'><span class='fu'>markdown</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; 
 #&gt; 
-#&gt; ## treatment folic acid vs control
+#&gt; ## condition B vs A
 #&gt; </div><div class='output co'>#&gt; <span class='message'>Object doesn't contain saved file paths.</span></div><div class='output co'>#&gt; 
 #&gt; 
 #&gt; ### Top tables
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; |                   | baseMean|lfc  |padj      |
-#&gt; |:------------------|--------:|:----|:---------|
-#&gt; |ENSMUSG00000024164 |    12562|8.27 |3.82e-194 |
-#&gt; |ENSMUSG00000029304 |    69340|5.36 |8.99e-76  |
-#&gt; |ENSMUSG00000003617 |     3560|4.08 |7.14e-45  |
-#&gt; |ENSMUSG00000022037 |     3544|3.56 |3.85e-42  |
-#&gt; |ENSMUSG00000040405 |     3002|3.74 |1.62e-37  |
-#&gt; |ENSMUSG00000026822 |     1079|5.90 |8.80e-33  |
-#&gt; |ENSMUSG00000069516 |     2369|4.54 |6.41e-28  |
-#&gt; |ENSMUSG00000030218 |      805|3.44 |7.60e-27  |
-#&gt; |ENSMUSG00000073421 |     1341|3.34 |3.81e-26  |
-#&gt; |ENSMUSG00000024610 |     8053|3.23 |7.05e-20  |
+#&gt; |        |geneName |geneBiotype    | baseMean|lfc  |padj     |
+#&gt; |:-------|:--------|:--------------|--------:|:----|:--------|
+#&gt; |gene062 |SLC22A16 |protein_coding |      242|1.91 |3.88e-19 |
+#&gt; |gene400 |ZFP64    |protein_coding |      506|1.93 |2.88e-12 |
+#&gt; |gene414 |C8B      |protein_coding |      388|1.91 |2.88e-12 |
+#&gt; |gene370 |CLCA1    |protein_coding |       80|2.20 |3.28e-12 |
+#&gt; |gene297 |PLAUR    |protein_coding |      167|2.11 |4.56e-11 |
+#&gt; |gene175 |TRAPPC6A |protein_coding |       75|2.36 |1.07e-08 |
+#&gt; |gene482 |HMGB3    |protein_coding |      933|1.42 |1.52e-08 |
+#&gt; |gene107 |FBXL3    |protein_coding |      113|2.19 |2.00e-08 |
+#&gt; |gene079 |POLR2J   |protein_coding |      166|1.69 |1.24e-07 |
+#&gt; |gene231 |RPS20    |protein_coding |      200|1.64 |1.95e-07 |
 #&gt; 
 #&gt; 
-#&gt; |                   | baseMean|lfc   |padj     |
-#&gt; |:------------------|--------:|:-----|:--------|
-#&gt; |ENSMUSG00000027199 |    11624|-2.31 |9.64e-13 |
-#&gt; |ENSMUSG00000005980 |     5795|-2.72 |1.10e-12 |
-#&gt; |ENSMUSG00000049152 |    13888|-1.72 |6.77e-11 |
-#&gt; |ENSMUSG00000028713 |    14806|-1.65 |1.90e-10 |
-#&gt; |ENSMUSG00000061906 |     7413|-1.98 |7.49e-10 |
-#&gt; |ENSMUSG00000001827 |     1691|-1.88 |1.12e-09 |
-#&gt; |ENSMUSG00000060002 |    22828|-1.56 |8.06e-09 |
-#&gt; |ENSMUSG00000064370 |   159710|-1.31 |1.53e-08 |
-#&gt; |ENSMUSG00000032758 |    46089|-2.49 |1.14e-07 |
-#&gt; |ENSMUSG00000025980 |     4452|-1.51 |5.37e-07 |</div></pre>
+#&gt; |        |geneName |geneBiotype    | baseMean|lfc   |padj     |
+#&gt; |:-------|:--------|:--------------|--------:|:-----|:--------|
+#&gt; |gene298 |ANLN     |protein_coding |      148|-2.35 |5.59e-10 |
+#&gt; |gene044 |MTMR7    |protein_coding |       84|-1.95 |4.08e-09 |
+#&gt; |gene315 |PRICKLE3 |protein_coding |       30|-2.19 |2.81e-07 |
+#&gt; |gene181 |TKTL1    |protein_coding |       18|-2.44 |3.85e-07 |
+#&gt; |gene283 |APBA3    |protein_coding |       49|-1.89 |4.18e-07 |
+#&gt; |gene009 |GCLC     |protein_coding |      108|-1.33 |9.17e-07 |
+#&gt; |gene361 |MATR3    |protein_coding |       28|-2.04 |1.43e-06 |
+#&gt; |gene374 |IGF1     |protein_coding |       25|-1.94 |5.27e-06 |
+#&gt; |gene500 |CHPF2    |protein_coding |       40|-1.87 |8.45e-06 |
+#&gt; |gene255 |NCAPD2   |protein_coding |       27|-1.82 |8.47e-06 |</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

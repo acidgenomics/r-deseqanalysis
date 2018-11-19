@@ -172,32 +172,30 @@ corresponds to results containing log2 fold change (LFC) values that
 <span class='co'>## DESeqAnalysis ====</span>
 <span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
 <span class='fu'>print</span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; class: DESeqDataSet 
-#&gt; dim: 500 6 
-#&gt; metadata(11): version caller ... date sessionInfo
+#&gt; dim: 500 12 
+#&gt; metadata(3): version date interestingGroups
 #&gt; assays(4): counts mu H cooks
-#&gt; rownames(500): ENSMUSG00000000088 ENSMUSG00000000326 ...
-#&gt;   ENSMUSG00000114367 ENSMUSG00000114458
-#&gt; rowData names(29): broadClass description ... deviance maxCooks
-#&gt; colnames(6): control_rep1 control_rep2 ... fa_day7_rep2 fa_day7_rep3
-#&gt; colData names(8): sampleName day ... interestingGroups sizeFactor</div><div class='input'><span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqTransform"</span>)
+#&gt; rownames(500): gene001 gene002 ... gene499 gene500
+#&gt; rowData names(27): geneID geneName ... deviance maxCooks
+#&gt; colnames(12): sample01 sample02 ... sample11 sample12
+#&gt; colData names(2): condition sizeFactor</div><div class='input'><span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqTransform"</span>)
 <span class='fu'>print</span>(<span class='no'>dt</span>)</div><div class='output co'>#&gt; class: DESeqTransform 
-#&gt; dim: 500 6 
-#&gt; metadata(11): version caller ... date sessionInfo
+#&gt; dim: 500 12 
+#&gt; metadata(3): version date interestingGroups
 #&gt; assays(1): ''
-#&gt; rownames(500): ENSMUSG00000000088 ENSMUSG00000000326 ...
-#&gt;   ENSMUSG00000114367 ENSMUSG00000114458
-#&gt; rowData names(30): broadClass description ... dispGeneIter.1 dispFit
-#&gt; colnames(6): control_rep1 control_rep2 ... fa_day7_rep2 fa_day7_rep3
-#&gt; colData names(8): sampleName day ... interestingGroups sizeFactor</div><div class='input'><span class='co'>## Pulls the first results slotted.</span>
+#&gt; rownames(500): gene001 gene002 ... gene499 gene500
+#&gt; rowData names(28): geneID geneName ... dispGeneIter.1 dispFit
+#&gt; colnames(12): sample01 sample02 ... sample11 sample12
+#&gt; colData names(2): condition sizeFactor</div><div class='input'><span class='co'>## Pulls the first results slotted.</span>
 <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqResults"</span>)
-<span class='fu'>contrastName</span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; [1] "treatment folic acid vs control"</div><div class='input'><span class='fu'>summary</span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; 
+<span class='fu'>contrastName</span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; [1] "condition B vs A"</div><div class='input'><span class='fu'>summary</span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; 
 #&gt; out of 500 with nonzero total read count
 #&gt; adjusted p-value &lt; 0.1
-#&gt; LFC &gt; 0 (up)       : 115, 23%
-#&gt; LFC &lt; 0 (down)     : 139, 28%
-#&gt; outliers [1]       : 6, 1.2%
-#&gt; low counts [2]     : 0, 0%
-#&gt; (mean count &lt; 33)
+#&gt; LFC &gt; 0 (up)       : 82, 16%
+#&gt; LFC &lt; 0 (down)     : 89, 18%
+#&gt; outliers [1]       : 3, 0.6%
+#&gt; low counts [2]     : 20, 4%
+#&gt; (mean count &lt; 1)
 #&gt; [1] see 'cooksCutoff' argument of ?results
 #&gt; [2] see 'independentFiltering' argument of ?results
 #&gt; </div></pre>
