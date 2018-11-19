@@ -4,6 +4,10 @@
 \name{DESeqAnalysis-class}
 \alias{DESeqAnalysis-class}
 \title{DESeq2 Analysis Container}
+\value{
+\code{DESeqAnalysis}, which contains a \code{DESeqDataSet}, \code{DESeqTransform},
+and corresponding \code{DESeqResults}.
+}
 \description{
 Class containing all elements generated during differential expression
 analysis with DESeq2. This class is essentially a \code{list} with validity checks

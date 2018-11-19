@@ -18,7 +18,8 @@ DESeqAnalysis(data, transform, results, lfcShrink)
 \code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}} return here.}
 }
 \value{
-\code{DESeqAnalysis}.
+\code{DESeqAnalysis}, which contains a \code{DESeqDataSet}, \code{DESeqTransform},
+and corresponding \code{DESeqResults}.
 }
 \description{
 Class containing all elements generated during differential expression
@@ -71,7 +72,4 @@ print(x)
 \code{\link[=DESeqAnalysis]{DESeqAnalysis()}}.
 
 Other S4 classes: \code{\link{DESeqResultsTables-class}}
-}
-\author{
-Michael Steinbaugh
 }
