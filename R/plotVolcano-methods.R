@@ -68,7 +68,6 @@ basejump::plotVolcano
 
 
 
-# DESeqResults =================================================================
 plotVolcano.DESeqResults <-  # nolint
     function(
         object,
@@ -77,14 +76,8 @@ plotVolcano.DESeqResults <-  # nolint
         gene2symbol = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
-        pointColor = getOption("basejump.color", "gray50"),
-        sigPointColor = getOption(
-            "basejump.point.color",
-            c(
-                upregulated = "purple",
-                downregulated = "orange"
-            )
-        ),
+        pointColor = "gray50",
+        sigPointColor = c(upregulated = "purple", downregulated = "orange"),
         histograms = FALSE,
         return = c("ggplot", "DataFrame")
     ) {
@@ -325,14 +318,13 @@ plotVolcano.DESeqResults <-  # nolint
 #' @rdname plotVolcano
 #' @export
 setMethod(
-    "plotVolcano",
-    signature("DESeqResults"),
+    f = "plotVolcano",
+    signature = signature("DESeqResults"),
     definition = plotVolcano.DESeqResults
 )
 
 
 
-# DESeqAnalysis ================================================================
 plotVolcano.DESeqAnalysis <-  # nolint
     function(
         object,
@@ -356,6 +348,7 @@ plotVolcano.DESeqAnalysis <-  # nolint
             )
         )
     }
+
 f1 <- formals(plotVolcano.DESeqAnalysis)
 f2 <- formals(plotVolcano.DESeqResults)
 f2 <- f2[setdiff(names(f2), c(names(f1), "gene2symbol"))]

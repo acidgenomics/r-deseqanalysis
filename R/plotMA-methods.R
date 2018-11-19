@@ -1,14 +1,7 @@
-# TODO Don't export DESeqResults method for plotMA. Consider only exporting
-# DESeqAnalysis method.
-
-# TODO Add a `results = "all"` plot mode?
-
-
-
 #' @name plotMA
+#' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
 #' @inheritParams basejump::params
-#' @author Michael Steinbaugh, Rory Kirchner
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual representation
@@ -72,7 +65,6 @@ BiocGenerics::plotMA
 
 
 
-# DESeqResults =================================================================
 plotMA.DESeqResults <-  # nolint
     function(
         object,
@@ -80,14 +72,8 @@ plotMA.DESeqResults <-  # nolint
         gene2symbol = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
-        pointColor = getOption("basejump.color", "gray50"),
-        sigPointColor = getOption(
-            "basejump.point.color",
-            c(
-                upregulated = "purple",
-                downregulated = "orange"
-            )
-        ),
+        pointColor = "gray50",
+        sigPointColor = c(upregulated = "purple", downregulated = "orange"),
         return = c("ggplot", "DataFrame")
     ) {
         validObject(object)
@@ -285,7 +271,6 @@ setMethod(
 
 
 
-# DESeqAnalysis ================================================================
 plotMA.DESeqAnalysis <-  # nolint
     function(
         object,
@@ -309,6 +294,7 @@ plotMA.DESeqAnalysis <-  # nolint
             )
         )
     }
+
 f1 <- formals(plotMA.DESeqAnalysis)
 f2 <- formals(plotMA.DESeqResults)
 f2 <- f2[setdiff(names(f2), c(names(f1), "gene2symbol"))]
@@ -327,7 +313,6 @@ setMethod(
 
 
 
-# Aliases ======================================================================
 #' @rdname plotMA
 #' @export
 plotMeanAverage <- function(...) {

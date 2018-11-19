@@ -25,7 +25,7 @@
 #'   assert_is_a_string assert_is_all_of assert_is_any_of assert_is_character
 #'   assert_is_list assert_is_matrix assert_is_numeric is_a_string
 #' @importFrom assertthat assert_that
-#' @importFrom basejump GeneSymbol assertFormalGene2Symbol as_tibble
+#' @importFrom basejump Gene2Symbol assertFormalGene2Symbol as_tibble
 #'   basejump_geom_label_repel camel initDir interestingGroups<-
 #'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
 #'   matchInterestingGroups plotGene plotHeatmap plotPCA sanitizeRowData
