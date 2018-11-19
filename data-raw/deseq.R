@@ -12,7 +12,7 @@ limit <- structure(2e6, class = "object_size")
 # DESeqDataSet
 # Consider having the example RSE in basejump include more genes.
 data(rse, package = "basejump")
-dds <- DESeqDataSet(se = rse, design = ~ treatment)
+dds <- DESeqDataSet(se = rse, design = ~ condition)
 dds <- DESeq(dds)
 validObject(dds)
 
