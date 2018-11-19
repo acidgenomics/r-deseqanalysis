@@ -40,6 +40,9 @@
 #' @slot lfcShrink `list`. One or more shrunken `DESeqResults`.
 #'
 #' @seealso [DESeqAnalysis()].
+#' 
+#' @return `DESeqAnalysis`, which contains a `DESeqDataSet`, `DESeqTransform`,
+#'   and corresponding `DESeqResults`.
 setClass(
     Class = "DESeqAnalysis",
     slots = c(
@@ -132,6 +135,10 @@ setValidity(
 #'   whether we're writing locally or to Dropbox.
 #'
 #' @seealso [DESeqResultsTables()].
+#' 
+#' @return `DESeqResultsTables`, containing the original, unmodified
+#'   `DESeqResults` `DataFrame` along with the corresponding differentially
+#'   expressed genes and gene-level metadata (rowRanges).
 setClass(
     Class = "DESeqResultsTables",
     slots = c(
