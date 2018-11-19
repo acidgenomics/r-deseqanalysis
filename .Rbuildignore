@@ -1,8 +1,6 @@
 ^.*\.Rproj$
 ^.*\.gz$
 ^.*\.pdf$
-^CONTRIBUTING\.md$
-^Meta$
 ^\.Rprofile$
 ^\.Rproj\.user$
 ^\.httr-oauth$
