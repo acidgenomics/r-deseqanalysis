@@ -1,27 +1,10 @@
-# TODO Add dropbox mode for all supported methods.
-# TODO Set `dropbox` as a boolean, instead of separate `dropboxDir` argument.
-# TODO Need to add a bcbioRNASeq method that also exports the on-the-fly
-# calculations (TMM, RLE).
-
-# FIXME Need to import bcbioBase to get `copyToDropbox()`
-# FIXME Need to add Dropbox upload support.
-
-
-
 #' @name export
 #' @inherit basejump::export
 #' @inheritParams basejump::params
-#' @inheritParams bcbioBase::copyToDropbox
 #'
 #' @param counts `matrix`. Normalized counts. DESeq2 size-factor normalized
 #'   counts or transcripts per million (TPM) are recommended.
 #' @param dir `string`. Directory path.
-#' @param dropbox `boolean`. Export results to [Dropbox][] instead of local
-#'   storage. Recommended method by [HBC][] for permanent storage (e.g. [Stem
-#'   Cell Commons][]). When this option is enabled, unique links per file are
-#'   generated internally with [bcbioBase::copyToDropbox()], which relies on the
-#'   [rdrop2][] package. Note that local files are written to [base::tempdir()]
-#'   when this option is enabled.
 #' @param rowData `DataFrame`. Row annotation data.
 #' @param sampleNames Named `character`. Human readable sample names. Only
 #'   applies when `counts` argument is defined. Names must correspond to
@@ -29,14 +12,6 @@
 #'   [base::make.names()] for details). Values will be remapped onto the counts
 #'   columns per sample in the exported file, and can contain non-alphanumeric
 #'   characters, hyphens, spaces, or start with a number.
-#'
-#'   [Dropbox]: https://dropbox.com
-#'   [HBC]: http://bioinformatics.sph.harvard.edu
-#'   [rdrop2]: https://cran.r-project.org/package=rdrop2
-#'   [Stem Cell Commons]: https://stemcellcommons.org
-#' @param rdsToken `string` or `NULL`. RDS file token to use for Dropbox
-#'   authentication. If set `NULL` and `dropbox = TRUE` then an interactive
-#'   prompt will appear requesting authorization.
 #'
 #' @examples
 #' data(deseq)
@@ -66,7 +41,6 @@ basejump::export
 
 
 
-# Internal =====================================================================
 .prepareDESeqResults <- function(
     object,
     rowData = NULL,
@@ -114,7 +88,6 @@ basejump::export
 
 
 
-# DESeqResults =================================================================
 export.DESeqResults <-  # nolint
     function(
         x,
@@ -146,7 +119,6 @@ setMethod(
 
 
 
-# DESeqResultsTables ===========================================================
 .prepareResultsTablesList <- function(object) {
     assert_that(is(object, "DESeqResultsTables"))
     validObject(object)
@@ -187,22 +159,10 @@ setMethod(
 
 
 export.DESeqResultsTables <-  # nolint
-    function(
-        x,
-        dir = ".",
-        compress = FALSE,
-        dropbox = FALSE,
-        rdsToken = NULL
-    ) {
+    function(x, dir = ".", compress = FALSE) {
         validObject(x)
-        # Write local files to tempdir if Dropbox mode is enabled.
-        if (isTRUE(dropbox)) {
-            dir <- tempdir()  # nocov
-        } else {
-            dir <- initDir(dir)
-        }
+        dir <- initDir(dir)
         assert_is_a_bool(compress)
-        assert_is_a_bool(dropbox)
 
         # Prepare the subset tables.
         tables <- .prepareResultsTablesList(x)
@@ -219,28 +179,11 @@ export.DESeqResultsTables <-  # nolint
             format <- paste0(format, ".gz")
         }
         ext <- paste0(".", format)
-        files <- file.path(
-            dir,
-            paste0(stem, "_", snake(names(tables)), ext)
-        )
+        files <- file.path(dir, paste0(stem, "_", snake(names(tables)), ext))
         names(files) <- names(tables)
 
         # Write the results tables to local directory.
-        if (isTRUE(dropbox)) {
-            # nocov start
-            # Use local Dropbox token.
-            message(paste0(
-                "Writing ",
-                toString(basename(files)),
-                " to Dropbox (", dir, ")."
-            ))
-            # nocov end
-        } else {
-            message(paste0(
-                "Writing ", toString(basename(files)), " to ", dir, "."
-            ))
-        }
-
+        message(paste0("Writing ", toString(basename(files)), " to ", dir, "."))
         invisible(mapply(
             x = tables,
             file = files,
@@ -253,20 +196,6 @@ export.DESeqResultsTables <-  # nolint
 
         # Check that all writes were successful.
         assert_all_are_existing_files(files)
-
-        # Copy to Dropbox (optional) -------------------------------------------
-        if (isTRUE(dropbox)) {
-            # nocov start
-            # Using a local token to cover this code.
-            files <- copyToDropbox(
-                files = files,
-                dir = dir,
-                rdsToken = rdsToken
-            )
-            assert_is_list(files)
-            slot(x, "metadata")[["dropbox"]] <- TRUE
-            # nocov end
-        }
 
         # Return ---------------------------------------------------------------
         # Assign the local file paths to the object.
