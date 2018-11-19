@@ -7,11 +7,18 @@
 \alias{plotDEGPCA,DESeqAnalysis-method}
 \title{Plot DEG PCA}
 \usage{
-\S4method{plotDEGPCA}{DESeqAnalysis}(object, results, counts,
-  direction = c("both", "up", "down"), interestingGroups = NULL,
+\S4method{plotDEGPCA}{DESeqResults}(object, counts, direction = c("both",
+  "up", "down"), object, assay = 1L, interestingGroups = NULL,
   label = getOption("basejump.label", FALSE),
-  pointColor = getOption("basejump.color.discrete", NULL),
-  pointSize = getOption("basejump.point.size", 4L),
+  color = getOption("basejump.color.discrete", NULL),
+  pointSize = getOption("basejump.point.size", 3L),
+  return = c("ggplot", "DataFrame"), ...)
+
+\S4method{plotDEGPCA}{DESeqAnalysis}(object, results, counts,
+  direction = c("both", "up", "down"), assay = 1L,
+  interestingGroups = NULL, label = getOption("basejump.label", FALSE),
+  color = getOption("basejump.color.discrete", NULL),
+  pointSize = getOption("basejump.point.size", 3L),
   return = c("ggplot", "DataFrame"), ...)
 }
 \arguments{
@@ -21,12 +28,21 @@
 
 \item{direction}{\code{string}. Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 
+\item{assay}{\code{scalar}. Name or index of count matrix slotted in
+\code{SummarizedExperiment::assays()}. When passing in a \code{string}, the name must
+be defined in \code{SummarizedExperiment::assayNames()}.}
+
 \item{interestingGroups}{\code{character} or \code{NULL}. Groups of interest that
 define the samples. If left unset, defaults to \code{sampleName}.}
 
 \item{label}{\code{boolean}. Superimpose sample text labels on the plot.}
 
-\item{pointColor}{\code{string}. Default point color for the plot.}
+\item{color}{\code{ggproto}/\code{ScaleDiscrete} or \code{NULL}. Desired ggplot2 color
+scale. Must supply discrete values. When set to \code{NULL}, the default ggplot2
+color palette will be used. If manual color definitions are desired, we
+recommend using \code{ggplot2::scale_color_manual()}. To set the discrete color
+palette globally, use
+\code{options(basejump.color.discrete = ggplot2::scale_color_viridis_d())}.}
 
 \item{pointSize}{\code{scalar numeric}. Cell point size.}
 
@@ -44,10 +60,10 @@ Plot DEG PCA
 \examples{
 data(deseq)
 
-## DESeqAnalysis ====
+## DESeqAnalysis (recommended) ====
 plotDEGPCA(deseq)
 
-## DESeqResults ====
+## DESeqResults (legacy; not recommended) ====
 plotDEGPCA(
     object = as(deseq, "DESeqResults"),
     counts = as(deseq, "DESeqTransform")

@@ -20,7 +20,9 @@ DESeqResultsTables(object, ...)
 \item{...}{Additional arguments.}
 }
 \value{
-\code{DESeqResultsTables}.
+\code{DESeqResultsTables}, containing the original, unmodified
+\code{DESeqResults} \code{DataFrame} along with the corresponding differentially
+expressed genes and gene-level metadata (rowRanges).
 }
 \description{
 \code{DESeqResults} object with \code{DataFrame} subsets and file path information.
@@ -89,7 +91,4 @@ print(x)
 \item \code{\link[DESeq2:results]{DESeq2::results()}}.
 \item \code{\link[=markdown]{markdown()}}, \code{\link[=write]{write()}}.
 }
-}
-\author{
-Michael Steinbaugh
 }

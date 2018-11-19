@@ -10,8 +10,7 @@
 \S4method{export}{DESeqResults}(x, file, format, rowData = NULL,
   counts = NULL, sampleNames = NULL)
 
-\S4method{export}{DESeqResultsTables}(x, dir = ".", compress = FALSE,
-  dropbox = FALSE, rdsToken = NULL)
+\S4method{export}{DESeqResultsTables}(x, dir = ".", compress = FALSE)
 }
 \arguments{
 \item{x}{Object.}
@@ -35,17 +34,6 @@ characters, hyphens, spaces, or start with a number.}
 \item{dir}{\code{string}. Directory path.}
 
 \item{compress}{\code{boolean}. Apply gzip compression to all files.}
-
-\item{dropbox}{\code{boolean}. Export results to [Dropbox][] instead of local
-storage. Recommended method by [HBC][] for permanent storage (e.g. [Stem
-Cell Commons][]). When this option is enabled, unique links per file are
-generated internally with \code{\link[bcbioBase:copyToDropbox]{bcbioBase::copyToDropbox()}}, which relies on the
-[rdrop2][] package. Note that local files are written to \code{\link[base:tempdir]{base::tempdir()}}
-when this option is enabled.}
-
-\item{rdsToken}{\code{string} or \code{NULL}. RDS file token to use for Dropbox
-authentication. If set \code{NULL} and \code{dropbox = TRUE} then an interactive
-prompt will appear requesting authorization.}
 }
 \value{
 Invisible \code{character}. File path(s).

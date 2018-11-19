@@ -4,6 +4,11 @@
 \name{DESeqResultsTables-class}
 \alias{DESeqResultsTables-class}
 \title{DESeq2 Differential Expression Results Tables}
+\value{
+\code{DESeqResultsTables}, containing the original, unmodified
+\code{DESeqResults} \code{DataFrame} along with the corresponding differentially
+expressed genes and gene-level metadata (rowRanges).
+}
 \description{
 \code{DESeqResults} object with \code{DataFrame} subsets and file path information.
 }
