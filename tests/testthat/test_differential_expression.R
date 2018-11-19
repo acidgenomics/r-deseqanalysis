@@ -1,11 +1,12 @@
 context("Differential Expression")
 
-data(bcb, deseq, envir = environment())
-dds_small <- as(deseq, "DESeqDataSet")
-vst_small <- as(deseq, "DESeqTransform")
-res_small <- as(deseq, "DESeqResults")
+data(deseq, envir = environment())
 
-g2s <- Gene2Symbol(bcb)
+dds <- as(deseq, "DESeqDataSet")
+vst <- as(deseq, "DESeqTransform")
+res <- as(deseq, "DESeqResults")
+
+g2s <- Gene2Symbol(dds)
 geneIDs <- head(g2s[["geneID"]])
 geneNames <- head(g2s[["geneName"]])
 
@@ -13,20 +14,21 @@ geneNames <- head(g2s[["geneName"]])
 
 # alphaSummary =================================================================
 test_that("alphaSummary : DESeqDataSet", {
-    object <- dds_small
+    object <- dds
 
     # Default, no contrast specified.
     x <- alphaSummary(object)
     expect_is(x, "matrix")
+    expect_type(x, "integer")
     expect_equal(
         object = x,
         expected = matrix(
             # nolint start
             data = c(
-                115,  88,  58,  31,  19,
-                139, 120, 100,  59,  14,
-                  6,   6,   6,    6,  6,
-                  0,   0,   0,    0,  39
+                82, 63, 46,  29,  13,
+                89, 67, 40,  22,   7,
+                 3,  3,  3,   3,   3,
+                20, 38, 77, 134, 173
             ),
             # nolint end
             nrow = 4L,
@@ -48,7 +50,7 @@ test_that("alphaSummary : DESeqDataSet", {
     expect_identical(
         object = alphaSummary(
             object = object,
-            contrast = c("treatment", "folic_acid", "control")
+            contrast = c("condition", "B", "A")
         ),
         expected = x
     )
@@ -57,7 +59,7 @@ test_that("alphaSummary : DESeqDataSet", {
     expect_identical(
         object = alphaSummary(
             object = object,
-            name = "treatment_folic_acid_vs_control"
+            name = "condition_B_vs_A"
         ),
         expected = x
     )
@@ -75,8 +77,8 @@ with_parameters_test_that(
     },
     args = list(
         DESeqResults = list(
-            object = res_small,
-            counts = vst_small
+            object = res,
+            counts = vst
         ),
         DESeqAnalysis = list(object = deseq)
     )
@@ -94,8 +96,8 @@ with_parameters_test_that(
     },
     args = list(
         DESeqResults = list(
-            object = res_small,
-            counts = vst_small
+            object = res,
+            counts = vst
         ),
         DESeqAnalysis = list(object = deseq)
     )
@@ -169,7 +171,7 @@ with_parameters_test_that(
     },
     object = list(
         DESeqAnalysis = deseq,
-        DESeqResults = res_small
+        DESeqResults = res
     )
 )
 
@@ -221,7 +223,7 @@ with_parameters_test_that(
     },
     object = list(
         DESeqAnalysis = deseq,
-        DESeqResults = res_small
+        DESeqResults = res
     )
 )
 
@@ -238,6 +240,6 @@ with_parameters_test_that(
     },
     object = list(
         DESeqAnalysis = deseq,
-        DESeqResults = res_small
+        DESeqResults = res
     )
 )
