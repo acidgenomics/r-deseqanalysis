@@ -2,51 +2,34 @@
 #' 2018-11-19
 
 library(pryr)
+library(basejump)
 library(DESeq2)
-library(bcbioRNASeq)
 
 # Restrict to 2 MB.
 # Use `pryr::object_size()` instead of `utils::object.size()`.
 limit <- structure(2e6, class = "object_size")
 
 # DESeqDataSet
-# Coerce from bcbioRNASeq object.
-data(bcb, package = "bcbioRNASeq")
-dds <- as(bcb, "DESeqDataSet")
-design(dds) <- ~ treatment
+# Consider having the example RSE in basejump include more genes.
+data(rse, package = "basejump")
+dds <- DESeqDataSet(se = rse, design = ~ treatment)
 dds <- DESeq(dds)
 validObject(dds)
-stopifnot(design(dds) == ~ treatment)
-stopifnot(identical(
-    resultsNames(dds),
-    c("Intercept", "treatment_folic_acid_vs_control")
-))
 
 # DESeqTransform
-vst <- varianceStabilizingTransformation(dds)
+dt <- varianceStabilizingTransformation(dds)
 
 # DESeqResults
-resultsNames(dds)
-res <- results(
-    object = dds,
-    contrast = c(
-        factor = "treatment",
-        numerator = "folic_acid",
-        denominator = "control"
-    )
-)
+contrast <- resultsNames(dds)[[2L]]
+res <- results(dds, name = contrast)
 
 # Shrink log2 fold changes
-res_shrunken <- lfcShrink(
-    dds = dds,
-    coef = 2L,
-    res = res
-)
+res_shrunken <- lfcShrink(dds = dds, coef = contrast, res = res)
 validObject(res_shrunken)
 
 deseq <- DESeqAnalysis(
     data = dds,
-    transform = vst,
+    transform = dt,
     results = list(res),
     lfcShrink = list(res_shrunken)
 )
