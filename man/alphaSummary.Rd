@@ -56,8 +56,8 @@ object <- as(deseq, "DESeqDataSet")
 design(object)
 resultsNames(object)
 alphaSummary(object)
-alphaSummary(object, contrast = c("treatment", "folic_acid", "control"))
-alphaSummary(object, name = "treatment_folic_acid_vs_control")
+alphaSummary(object, contrast = c("condition", "B", "A"))
+alphaSummary(object, name = "condition_B_vs_A")
 }
 \seealso{
 \itemize{

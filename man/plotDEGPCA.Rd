@@ -44,7 +44,7 @@ recommend using \code{ggplot2::scale_color_manual()}. To set the discrete color
 palette globally, use
 \code{options(basejump.color.discrete = ggplot2::scale_color_viridis_d())}.}
 
-\item{pointSize}{\code{scalar numeric}. Cell point size.}
+\item{pointSize}{\code{scalar numeric}. Point size for dots in the plot.}
 
 \item{return}{\code{string}. Return type. Uses \code{base::match.arg()}
 internally and defaults to the first argument in the \code{character} vector.}
