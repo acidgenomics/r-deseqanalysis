@@ -74,8 +74,7 @@ setValidity(
         assert_that(is(data, "DESeqDataSet"))
         assertHasValidDimnames(data)
 
-        # Require gene-to-symbol mappings.
-        # FIXME Consider warning instead of erroring.
+        # Warn if gene-to-symbol mappings are not defined.
         # assert_is_subset(
         #     x = c("geneID", "geneName"),
         #     y = colnames(rowData(data))
