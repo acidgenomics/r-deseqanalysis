@@ -46,15 +46,11 @@ care of this automatically in supported methods.
 
 \examples{
 library(DESeq2)
-data(bcb)
-
-dds <- as(bcb, "DESeqDataSet")
-design(dds) <- ~ treatment
-dds <- DESeq(dds)
+dds <- DESeq(makeExampleDESeqDataSet())
 class(dds)
 
-vst <- varianceStabilizingTransformation(dds)
-class(vst)
+dt <- varianceStabilizingTransformation(dds)
+class(dt)
 
 resultsNames(dds)
 res <- results(dds, name = resultsNames(dds)[[2L]])
@@ -62,9 +58,9 @@ class(res)
 
 x <- DESeqAnalysis(
     data = dds,
-    transform = vst,
+    transform = dt,
     results = list(res),
-    lfcShrink = list(lfcShrink(dds = dds, coef = 2L))
+    lfcShrink = list(lfcShrink(dds = dds, res = res, coef = 2L))
 )
 print(x)
 }
