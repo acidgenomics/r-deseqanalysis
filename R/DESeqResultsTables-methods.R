@@ -119,6 +119,7 @@ DESeqResultsTables.DESeqResults <-  # nolint
 
 
 #' @rdname DESeqResultsTables
+#' @usage NULL
 #' @export
 setMethod(
     f = "DESeqResultsTables",
