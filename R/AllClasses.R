@@ -1,5 +1,8 @@
-.valid <- function(...) {
+validateS4 <- function(...) {
     list <- list(...)
+    if (is.list(list[[1L]])) {
+        list <- list[[1L]]
+    }
     invalid <- Filter(f = Negate(isTRUE), x = list)
     if (has_length(invalid)) {
         unlist(invalid)
@@ -66,8 +69,8 @@ setValidity(
         results <- slot(object, "results")
         lfcShrink <- slot(object, "lfcShrink")
         
-        valid[["dimnames"]] <- assert_that(validDimnames(data))
-        valid[["gene2symbol"]] <- assert_that(
+        valid[["dimnames"]] <- validate_that(validDimnames(data))
+        valid[["gene2symbol"]] <- validate_that(
             is_subset(
                 x = c("geneID", "geneName"),
                 y = colnames(rowData(data))
@@ -75,7 +78,7 @@ setValidity(
         )
         
         # Ensure that all objects slotted are matched.
-        valid[["matched"]] <- assert_that(
+        valid[["matched"]] <- validate_that(
             # DESeqDataSet and DESeqTransform.
             identical(dimnames(data), dimnames(transform)),
             # DESeqDataSet and DESeqResults.
@@ -90,7 +93,7 @@ setValidity(
 
         # Unshrunken and shrunken DESeqResults.
         if (length(lfcShrink) > 0L) {
-            valid[["lfcShrink"]] <- assert_that(
+            valid[["lfcShrink"]] <- validate_that(
                 mapply(
                     unshrunken = results,
                     shrunken = lfcShrink,
@@ -101,8 +104,8 @@ setValidity(
                 )
             )
         }
-
-        .valid(valid)
+        
+        validateS4(valid)
     }
 )
 
@@ -153,42 +156,42 @@ setClass(
         metadata = list()
     )
 )
-# TODO Add assert check to ensure counts and rowRanges are identical.
 setValidity(
     Class = "DESeqResultsTables",
     method = function(object) {
+        valid <- list()
+        
         results <- slot(object, "results")
-        assert_that(is(results, "DESeqResults"))
-        assert_is_a_string(contrastName(results))
-
+        alpha <- metadata(results)[["alpha"]]
+        lfcThreshold <- metadata(results)[["lfcThreshold"]]
+        
         deg <- slot(object, "deg")
         up <- deg[["up"]]
-        assert_is_character(up)
-        assert_is_subset(up, rownames(results))
         down <- deg[["down"]]
-        assert_is_character(down)
-        assert_is_subset(down, rownames(results))
-        assert_are_disjoint_sets(up, down)
-
-        alpha <- metadata(results)[["alpha"]]
-        assert_is_a_number(alpha)
-        lfcThreshold <- metadata(results)[["lfcThreshold"]]
-        assert_is_a_number(lfcThreshold)
-
+        
         # Check that DEGs match the `DESeqResults` summary.
-        match <- removeNA(str_match(
+        degMatch <- removeNA(str_match(
             string = capture.output(summary(results)),
             pattern = "^LFC.*\\s\\:\\s([0-9]+).*"
         ))
-        assert_are_identical(
-            x = length(up),
-            y = as.integer(match[1L, 2L])
+        
+        validate_that(
+            is(results, "DESeqResults"),
+            is.character(up),
+            is_subset(up, rownames(results)),
+            is.character(down),
+            is_subset(down, rownames(results)),
+            are_disjoint_sets(up, down),
+            is_a_number(alpha),
+            is_a_number(lfcThreshold),
+            identical(
+                x = length(up),
+                y = as.integer(degMatch[1L, 2L])
+            ),
+            identical(
+                x = length(down),
+                y = as.integer(degMatch[2L, 2L])
+            )
         )
-        assert_are_identical(
-            x = length(down),
-            y = as.integer(match[2L, 2L])
-        )
-
-        TRUE
     }
 )
