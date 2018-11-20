@@ -1,6 +1,7 @@
 context("Markdown")
 
 data(deseq, envir = environment())
+
 res_small <- as(deseq, "DESeqResults")
 res_tables <- DESeqResultsTables(res_small)
 
