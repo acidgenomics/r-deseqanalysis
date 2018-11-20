@@ -55,6 +55,8 @@
 #'
 #' @examples
 #' data(deseq)
+#' 
+#' ## DESeqAnalysis ====
 #' x <- DESeqResultsTables(deseq)
 #' print(x)
 NULL

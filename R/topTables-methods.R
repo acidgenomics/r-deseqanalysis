@@ -7,6 +7,8 @@
 #'
 #' @examples
 #' data(deseq)
+#' 
+#' ## DESeqAnalysis ====
 #' topTables(deseq, results = 1L, n = 5L)
 NULL
 
@@ -19,21 +21,18 @@ basejump::topTables
 
 
 
-# DESeqResults =================================================================
 topTables.DESeqResults <-  # nolint
     function(object, n = 10L) {
         do.call(
             what = topTables,
-            args = list(
-                object = DESeqResultsTables(object),
-                n = n
-            )
+            args = list(object = DESeqResultsTables(object), n = n)
         )
     }
 
 
 
 #' @rdname topTables
+#' @usage NULL
 #' @export
 setMethod(
     f = "topTables",
@@ -43,13 +42,8 @@ setMethod(
 
 
 
-# DESeqResultsTables ===========================================================
 .topTable <-  # nolint
-    function(
-        object,
-        direction = c("up", "down"),
-        n
-    ) {
+    function(object, direction = c("up", "down"), n) {
         assert_that(is(object, "DESeqResultsTables"))
         validObject(object)
         direction <- match.arg(direction)
@@ -121,8 +115,8 @@ setMethod(
             # This coercion will automatically set rownames.
             as("DataFrame")
     }
-formals(.topTable)[["n"]] <-
-    formals(topTables.DESeqResults)[["n"]]
+
+formals(.topTable)[["n"]] <- formals(topTables.DESeqResults)[["n"]]
 
 
 
@@ -154,6 +148,7 @@ topTables.DESeqResultsTables <-  # nolint
         # Invisibly return list containing the subsets.
         invisible(list(up = up, down = down))
     }
+
 formals(topTables.DESeqResultsTables)[["n"]] <-
     formals(topTables.DESeqResults)[["n"]]
 
@@ -162,14 +157,13 @@ formals(topTables.DESeqResultsTables)[["n"]] <-
 #' @rdname topTables
 #' @export
 setMethod(
-    "topTables",
-    signature("DESeqResultsTables"),
+    f = "topTables",
+    signature = signature("DESeqResultsTables"),
     definition = topTables.DESeqResultsTables
 )
 
 
 
-# DESeqAnalysis ================================================================
 topTables.DESeqAnalysis <-  # nolint
     function(
         object,
@@ -190,6 +184,7 @@ topTables.DESeqAnalysis <-  # nolint
             )
         )
     }
+
 formals(topTables.DESeqAnalysis)[["n"]] <-
     formals(topTables.DESeqResults)[["n"]]
 

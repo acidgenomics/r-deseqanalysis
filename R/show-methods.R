@@ -2,6 +2,8 @@
 #' @inherit methods::show
 #' @examples
 #' data(deseq)
+#' 
+#' ## DESeqAnalysis ====
 #' show(deseq)
 NULL
 
@@ -20,7 +22,6 @@ methods::show
 
 
 
-# DESeqAnalysis ================================================================
 show.DESeqAnalysis <-  # nolint
     function(object) {
         validObject(object)
@@ -50,7 +51,6 @@ setMethod(
 
 
 
-# DESeqResultsTables ===========================================================
 show.DESeqResultsTables <-  # nolint
     function(object) {
         validObject(object)

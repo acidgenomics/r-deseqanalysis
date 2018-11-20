@@ -5,13 +5,13 @@
 #' @inheritParams params
 #' @examples
 #' data(deseq)
-#'
-#' ## DESeqAnalysis ====
-#' contrastName(deseq, results = 1L)
-#'
+#' 
 #' ## DESeqResults ====
 #' object <- as(deseq, "DESeqResults")
 #' contrastName(object)
+#'
+#' ## DESeqAnalysis ====
+#' contrastName(deseq, results = 1L)
 NULL
 
 
@@ -20,28 +20,6 @@ NULL
 #' @aliases NULL
 #' @export
 basejump::contrastName
-
-
-
-contrastName.DESeqAnalysis <-  # nolint
-    function(object, results) {
-        do.call(
-            what = contrastName,
-            args = list(
-                object = .matchResults(object, results)
-            )
-        )
-    }
-
-
-
-#' @rdname contrastName
-#' @export
-setMethod(
-    f = "contrastName",
-    signature = signature("DESeqAnalysis"),
-    definition = contrastName.DESeqAnalysis
-)
 
 
 
@@ -65,6 +43,28 @@ setMethod(
     f = "contrastName",
     signature = signature("DESeqResults"),
     definition = contrastName.DESeqResults
+)
+
+
+
+contrastName.DESeqAnalysis <-  # nolint
+    function(object, results) {
+        do.call(
+            what = contrastName,
+            args = list(
+                object = .matchResults(object, results)
+            )
+        )
+    }
+
+
+
+#' @rdname contrastName
+#' @export
+setMethod(
+    f = "contrastName",
+    signature = signature("DESeqAnalysis"),
+    definition = contrastName.DESeqAnalysis
 )
 
 

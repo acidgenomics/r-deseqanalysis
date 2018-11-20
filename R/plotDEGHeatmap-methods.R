@@ -17,12 +17,6 @@
 #'
 #' ## DESeqAnalysis ====
 #' plotDEGHeatmap(deseq)
-#'
-#' ## DESeqResults ====
-#' plotDEGHeatmap(
-#'     object = as(deseq, "DESeqResults"),
-#'     counts = as(deseq, "DESeqTransform")
-#' )
 NULL
 
 
@@ -124,6 +118,7 @@ formals(plotDEGHeatmap.DESeqResults) <- f
 
 
 #' @rdname plotDEGHeatmap
+#' @usage NULL
 #' @export
 setMethod(
     f = "plotDEGHeatmap",

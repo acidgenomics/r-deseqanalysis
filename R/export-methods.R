@@ -20,13 +20,6 @@
 #' @examples
 #' data(deseq)
 #'
-#' ## DESeqResults ====
-#' x <- as(deseq, "DESeqResults")
-#' export(x, file = "example.csv")
-#'
-#' ## Clean up.
-#' unlink("example.csv", recursive = TRUE)
-#'
 #' ## DESeqResultsTables ====
 #' x <- DESeqResultsTables(deseq)
 #' export(x, dir = "example")
@@ -114,6 +107,7 @@ export.DESeqResults <-  # nolint
 
 
 #' @rdname export
+#' @usage NULL
 #' @export
 setMethod(
     f = "export",

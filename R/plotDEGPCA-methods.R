@@ -15,14 +15,8 @@
 #' @examples
 #' data(deseq)
 #'
-#' ## DESeqAnalysis (recommended) ====
+#' ## DESeqAnalysis ====
 #' plotDEGPCA(deseq)
-#'
-#' ## DESeqResults (legacy; not recommended) ====
-#' plotDEGPCA(
-#'     object = as(deseq, "DESeqResults"),
-#'     counts = as(deseq, "DESeqTransform")
-#' )
 NULL
 
 
@@ -99,6 +93,7 @@ formals(plotDEGPCA.DESeqResults) <- f
 
 
 #' @rdname plotDEGPCA
+#' @usage NULL
 #' @export
 setMethod(
     f = "plotDEGPCA",
