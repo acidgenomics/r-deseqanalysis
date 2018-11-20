@@ -8,8 +8,6 @@
 \alias{topTables,DESeqAnalysis-method}
 \title{Top Tables of Differential Expression Results}
 \usage{
-\S4method{topTables}{DESeqResults}(object, n = 10L)
-
 \S4method{topTables}{DESeqResultsTables}(object, n = 10L)
 
 \S4method{topTables}{DESeqAnalysis}(object, results = 1L,
@@ -32,5 +30,7 @@ Top Tables of Differential Expression Results
 }
 \examples{
 data(deseq)
+
+## DESeqAnalysis ====
 topTables(deseq, results = 1L, n = 5L)
 }

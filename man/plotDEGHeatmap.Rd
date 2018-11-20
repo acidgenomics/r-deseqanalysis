@@ -7,14 +7,6 @@
 \alias{plotDEGHeatmap,DESeqAnalysis-method}
 \title{Plot Heatmap}
 \usage{
-\S4method{plotDEGHeatmap}{DESeqResults}(object, counts,
-  direction = c("both", "up", "down"), clusteringMethod = "ward.D2",
-  scale = "row", title = TRUE, interestingGroups = NULL,
-  clusterRows = TRUE, clusterCols = TRUE, showRownames = FALSE,
-  showColnames = TRUE, treeheightRow = 0L, treeheightCol = 50L,
-  color = viridis::viridis, legendColor = viridis::viridis,
-  borderColor = NULL, ...)
-
 \S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results, counts,
   direction = c("both", "up", "down"), clusteringMethod = "ward.D2",
   scale = "row", title = TRUE, interestingGroups = NULL,
@@ -115,12 +107,6 @@ data(deseq)
 
 ## DESeqAnalysis ====
 plotDEGHeatmap(deseq)
-
-## DESeqResults ====
-plotDEGHeatmap(
-    object = as(deseq, "DESeqResults"),
-    counts = as(deseq, "DESeqTransform")
-)
 }
 \seealso{
 \itemize{

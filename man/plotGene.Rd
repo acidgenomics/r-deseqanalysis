@@ -50,7 +50,6 @@ Plot Gene Expression
 }
 \examples{
 data(deseq)
-object <- deseq
 
 g2s <- Gene2Symbol(as(object, "DESeqDataSet"))
 geneIDs <- head(g2s[["geneID"]])
@@ -58,6 +57,7 @@ print(geneIDs)
 geneNames <- head(g2s[["geneName"]])
 print(geneNames)
 
-plotGene(object, genes = geneIDs, style = "facet")
-plotGene(object, genes = geneNames, style = "wide")
+## DESeqAnalysis ====
+plotGene(deseq, genes = geneIDs, style = "facet")
+plotGene(deseq, genes = geneNames, style = "wide")
 }

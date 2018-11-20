@@ -41,6 +41,8 @@ the discussion in \code{\link{setIs}} for the general concept.
 }
 \examples{
 data(deseq)
+
+## DESeqAnalysis ====
 show(deseq)
 }
 \seealso{

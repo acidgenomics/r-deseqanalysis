@@ -72,28 +72,24 @@ We are not allowing post hoc \code{alpha} or \code{lfcThreshold} cutoffs here.
 \examples{
 data(deseq)
 
-## DESeqAnalysis ====
-## This is the current recommended method.
-object <- deseq
-print(object)
-
-dds <- as(object, "DESeqDataSet")
+dds <- as(deseq, "DESeqDataSet")
 g2s <- Gene2Symbol(dds)
 geneIDs <- head(g2s[["geneID"]])
 print(geneIDs)
 geneNames <- head(g2s[["geneName"]])
 print(geneNames)
 
-plotMA(object)
+## DESeqAnalysis ====
+plotMA(deseq)
 
 ## Customize the colors.
 plotMA(
-    object = object,
+    object = deseq,
     pointColor = "black",
     sigPointColor = "purple"
 )
 plotMA(
-    object = object,
+    object = deseq,
     sigPointColor = c(
         upregulated = "green",
         downregulated = "red"
@@ -101,13 +97,13 @@ plotMA(
 )
 
 ## Directional support (up or down).
-plotMA(object, direction = "up", ntop = 5L)
-plotMA(object, direction = "down", ntop = 5L)
+plotMA(deseq, direction = "up", ntop = 5L)
+plotMA(deseq, direction = "down", ntop = 5L)
 
 ## Label genes manually.
 ## Note that either gene IDs or names (symbols) are supported.
-plotMA(object = object, genes = geneIDs)
-plotMA(object = object, genes = geneNames)
+plotMA(deseq, genes = geneIDs)
+plotMA(deseq, genes = geneNames)
 }
 \seealso{
 \code{\link[DESeq2:plotMA]{DESeq2::plotMA()}}.

@@ -3,14 +3,14 @@
 \docType{methods}
 \name{contrastName}
 \alias{contrastName}
-\alias{contrastName,DESeqAnalysis-method}
 \alias{contrastName,DESeqResults-method}
+\alias{contrastName,DESeqAnalysis-method}
 \alias{contrastName,DESeqResultsTables-method}
 \title{Contrast Name}
 \usage{
-\S4method{contrastName}{DESeqAnalysis}(object, results)
-
 \S4method{contrastName}{DESeqResults}(object)
+
+\S4method{contrastName}{DESeqAnalysis}(object, results)
 
 \S4method{contrastName}{DESeqResultsTables}(object)
 }
@@ -28,12 +28,12 @@ Contrast Name
 \examples{
 data(deseq)
 
-## DESeqAnalysis ====
-contrastName(deseq, results = 1L)
-
 ## DESeqResults ====
 object <- as(deseq, "DESeqResults")
 contrastName(object)
+
+## DESeqAnalysis ====
+contrastName(deseq, results = 1L)
 }
 \author{
 Michael Steinbaugh

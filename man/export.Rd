@@ -7,9 +7,6 @@
 \alias{export,DESeqResultsTables-method}
 \title{Export}
 \usage{
-\S4method{export}{DESeqResults}(x, file, format, rowData = NULL,
-  counts = NULL, sampleNames = NULL)
-
 \S4method{export}{DESeqResultsTables}(x, dir = ".", compress = FALSE)
 }
 \arguments{
@@ -60,13 +57,6 @@ column in the CSV export.
 
 \examples{
 data(deseq)
-
-## DESeqResults ====
-x <- as(deseq, "DESeqResults")
-export(x, file = "example.csv")
-
-## Clean up.
-unlink("example.csv", recursive = TRUE)
 
 ## DESeqResultsTables ====
 x <- DESeqResultsTables(deseq)

@@ -7,13 +7,6 @@
 \alias{plotDEGPCA,DESeqAnalysis-method}
 \title{Plot DEG PCA}
 \usage{
-\S4method{plotDEGPCA}{DESeqResults}(object, counts, direction = c("both",
-  "up", "down"), object, assay = 1L, interestingGroups = NULL,
-  label = getOption("basejump.label", FALSE),
-  color = getOption("basejump.color.discrete", NULL),
-  pointSize = getOption("basejump.point.size", 3L),
-  return = c("ggplot", "DataFrame"), ...)
-
 \S4method{plotDEGPCA}{DESeqAnalysis}(object, results, counts,
   direction = c("both", "up", "down"), assay = 1L,
   interestingGroups = NULL, label = getOption("basejump.label", FALSE),
@@ -62,12 +55,6 @@ Plot DEG PCA
 \examples{
 data(deseq)
 
-## DESeqAnalysis (recommended) ====
+## DESeqAnalysis ====
 plotDEGPCA(deseq)
-
-## DESeqResults (legacy; not recommended) ====
-plotDEGPCA(
-    object = as(deseq, "DESeqResults"),
-    counts = as(deseq, "DESeqTransform")
-)
 }

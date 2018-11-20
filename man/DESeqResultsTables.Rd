@@ -77,6 +77,8 @@ sufficient evidence that the LFC is above the chosen threshold."
 
 \examples{
 data(deseq)
+
+## DESeqAnalysis ====
 x <- DESeqResultsTables(deseq)
 print(x)
 }
