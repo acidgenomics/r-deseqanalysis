@@ -1,11 +1,5 @@
-# FIXME
-# Error in validityMethod(object) : 
-#     is_subset : The elements 'geneID', 'geneName' in c("geneID", "geneName") are not in colnames(rowData(data)).
-# Calls: DESeqAnalysis ... assert_is_subset -> assert_engine -> give_feedback -> handler
-
-
-
-.valid <- function(list) {
+.valid <- function(...) {
+    list <- list(...)
     invalid <- Filter(f = Negate(isTRUE), x = list)
     if (has_length(invalid)) {
         unlist(invalid)
@@ -62,57 +56,53 @@ setClass(
         lfcShrink = list()
     )
 )
-# FIXME Switch to using `validate_that()` here.
 setValidity(
     Class = "DESeqAnalysis",
     method = function(object) {
+        valid <- list()
+        
         data <- slot(object, "data")
         transform <- slot(object, "transform")
         results <- slot(object, "results")
         lfcShrink <- slot(object, "lfcShrink")
-
-        assert_that(is(data, "DESeqDataSet"))
-        assertHasValidDimnames(data)
-
-        # Warn if gene-to-symbol mappings are not defined.
-        # assert_is_subset(
-        #     x = c("geneID", "geneName"),
-        #     y = colnames(rowData(data))
-        # )
-
-        # DESeqDataSet and DESeqTransform must match.
-        assert_are_identical(
-            x = dimnames(data),
-            y = dimnames(transform)
+        
+        valid[["dimnames"]] <- assert_that(validDimnames(data))
+        valid[["gene2symbol"]] <- assert_that(
+            is_subset(
+                x = c("geneID", "geneName"),
+                y = colnames(rowData(data))
+            )
+        )
+        
+        # Ensure that all objects slotted are matched.
+        valid[["matched"]] <- assert_that(
+            # DESeqDataSet and DESeqTransform.
+            identical(dimnames(data), dimnames(transform)),
+            # DESeqDataSet and DESeqResults.
+            vapply(
+                X = results,
+                FUN = function(x) {
+                    identical(rownames(x), rownames(data))
+                },
+                FUN.VALUE = logical(1L)
+            )
         )
 
-        # DESeqDataSet and DESeqResults must match.
-        invisible(lapply(
-            X = results,
-            FUN = function(x) {
-                assert_are_identical(
-                    x = rownames(x),
-                    y = rownames(data)
-                )
-            }
-        ))
-
-        # DESeqResults and lfcShrink rownames must match, if shrinkage has been
-        # calculated.
+        # Unshrunken and shrunken DESeqResults.
         if (length(lfcShrink) > 0L) {
-            invisible(mapply(
-                unshrunken = results,
-                shrunken = lfcShrink,
-                FUN = function(unshrunken, shrunken) {
-                    assert_are_identical(
-                        x = rownames(unshrunken),
-                        y = rownames(shrunken)
-                    )
-                }
-            ))
+            valid[["lfcShrink"]] <- assert_that(
+                mapply(
+                    unshrunken = results,
+                    shrunken = lfcShrink,
+                    FUN = function(unshrunken, shrunken) {
+                        identical(rownames(unshrunken), rownames(shrunken))
+                    },
+                    SIMPLIFY = TRUE
+                )
+            )
         }
 
-        TRUE
+        .valid(valid)
     }
 )
 
