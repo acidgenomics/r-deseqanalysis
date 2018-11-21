@@ -9,7 +9,7 @@
 #' @inheritParams basejump::plotPCA
 #' @inheritParams basejump::params
 #' @inheritParams params
-#' 
+#'
 #' @param counts `DESeqTransform`.
 #'
 #' @examples
@@ -82,7 +82,7 @@ plotDEGPCA.DESeqResults <-  # nolint
 
 f1 <- formals(plotDEGPCA.DESeqResults)
 f2 <- methodFormals(
-    f = "plotPCA", 
+    f = "plotPCA",
     signature = "SummarizedExperiment",
     package = "basejump"
 )

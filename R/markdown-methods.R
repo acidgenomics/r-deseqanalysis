@@ -3,10 +3,10 @@
 #' @inheritParams basejump::params
 #' @examples
 #' data(deseq)
-#' 
+#'
 #' # DESeqAnalysis ====
 #' markdown(deseq)
-#' 
+#'
 #' ## DESeqResultsTables ====
 #' x <- DESeqResultsTables(deseq)
 #' markdown(x)
@@ -47,17 +47,17 @@ markdown.DESeqResultsTables <-  # nolint
         assert_that(is(object, "DESeqResultsTables"))
         validObject(object)
         assertIsHeaderLevel(headerLevel)
-        
+
         metadata <- slot(object, "metadata")
-        
+
         # Include a contrast header, which is useful for looping.
         contrast <- contrastName(object)
         markdownHeader(contrast, level = headerLevel, asis = TRUE)
         headerLevel <- headerLevel + 1L
-        
+
         # File paths -----------------------------------------------------------
         files <- metadata[["files"]]
-        
+
         if (length(files) > 0L) {
             # Get Dropbox URLs, if necessary.
             dropbox <- metadata[["dropbox"]]
@@ -78,7 +78,7 @@ markdown.DESeqResultsTables <-  # nolint
                 basenames <- basename(files)
             }
             names(basenames) <- names(files)
-            
+
             markdownHeader("File downloads", level = headerLevel, asis = TRUE)
             markdownList(c(
                 paste0(
@@ -106,7 +106,7 @@ markdown.DESeqResultsTables <-  # nolint
         } else {
             message("Object doesn't contain saved file paths.")
         }
-        
+
         # Top tables -----------------------------------------------------------
         markdownHeader("Top tables", level = headerLevel, asis = TRUE)
         topTables(object)
