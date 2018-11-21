@@ -4,19 +4,6 @@
 
 #' @name export
 #' @inherit basejump::export
-#' @inheritParams basejump::params
-#'
-#' @param counts `matrix`. Normalized counts. DESeq2 size-factor normalized
-#'   counts or transcripts per million (TPM) are recommended.
-#' @param dir `string`. Directory path.
-#' @param rowData `DataFrame`. Row annotation data.
-#' @param sampleNames Named `character`. Human readable sample names. Only
-#'   applies when `counts` argument is defined. Names must correspond to
-#'   `colnames` of `counts` (these should be valid in R; see
-#'   [base::make.names()] for details). Values will be remapped onto the counts
-#'   columns per sample in the exported file, and can contain non-alphanumeric
-#'   characters, hyphens, spaces, or start with a number.
-#'
 #' @examples
 #' data(deseq)
 #'
@@ -82,38 +69,6 @@ basejump::export
 
     data
 }
-
-
-
-export.DESeqResults <-  # nolint
-    function(
-        x,
-        file,
-        format,
-        rowData = NULL,
-        counts = NULL,
-        sampleNames = NULL
-    ) {
-        x <- .prepareDESeqResults(
-            object = x,
-            rowData = rowData,
-            counts = counts,
-            sampleNames = sampleNames
-        )
-        # Export using ANY method.
-        export(x = x, file = file, format = format)
-    }
-
-
-
-#' @rdname export
-#' @usage NULL
-#' @export
-setMethod(
-    f = "export",
-    signature = signature("DESeqResults"),
-    definition = export.DESeqResults
-)
 
 
 
