@@ -3,7 +3,7 @@
 #' @examples
 #' data(deseq)
 #' 
-#' g2s <- Gene2Symbol(as(object, "DESeqDataSet"))
+#' g2s <- Gene2Symbol(as(deseq, "DESeqDataSet"))
 #' geneIDs <- head(g2s[["geneID"]])
 #' print(geneIDs)
 #' geneNames <- head(g2s[["geneName"]])
