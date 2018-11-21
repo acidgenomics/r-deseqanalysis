@@ -113,16 +113,7 @@
     
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>counts</span>,
-  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='kw'>clusteringMethod</span> <span class='kw'>=</span> <span class='st'>"ward.D2"</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='st'>"row"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>clusterRows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>clusterCols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>showRownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>showColnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>treeheightRow</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='kw'>treeheightCol</span> <span class='kw'>=</span> <span class='fl'>50L</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw pkg'>viridis</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/viridis/topics/reexports'>viridis</a></span>, <span class='kw'>legendColor</span> <span class='kw'>=</span> <span class='kw pkg'>viridis</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/viridis/topics/reexports'>viridis</a></span>,
-  <span class='kw'>borderColor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
-
-<span class='co'># S4 method for DESeqAnalysis</span>
+    <pre class="usage"><span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='no'>counts</span>,
   <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='kw'>clusteringMethod</span> <span class='kw'>=</span> <span class='st'>"ward.D2"</span>,
   <span class='kw'>scale</span> <span class='kw'>=</span> <span class='st'>"row"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -268,12 +259,7 @@ or <code>clusterCols</code> to <code>FALSE</code>.</p>
     <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotDEGHeatmap</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='img'><img src='plotDEGHeatmap-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'>## DESeqResults ====</span>
-<span class='fu'>plotDEGHeatmap</span>(
-    <span class='kw'>object</span> <span class='kw'>=</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqResults"</span>),
-    <span class='kw'>counts</span> <span class='kw'>=</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqTransform"</span>)
-)</div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='img'><img src='plotDEGHeatmap-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plotDEGHeatmap</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='img'><img src='plotDEGHeatmap-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

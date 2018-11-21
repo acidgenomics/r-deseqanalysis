@@ -115,9 +115,6 @@
 
     <pre class="usage"><span class='fu'>DESeqResultsTables</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
-<span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>DESeqResultsTables</span>(<span class='no'>object</span>)
-
 <span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>DESeqResultsTables</span>(<span class='no'>object</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
   <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
@@ -200,22 +197,7 @@ sufficient evidence that the LFC is above the chosen threshold."</p>
     <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='co'>## This is the recommended default method.</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>DESeqResultsTables</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='input'><span class='fu'>print</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; DESeqResultsTables 1.22.1
-#&gt; contrast: condition B vs A
-#&gt; alpha: 0.1
-#&gt; lfcThreshold: 0
-#&gt; out of 500 with nonzero total read count
-#&gt; adjusted p-value &lt; 0.1
-#&gt; LFC &gt; 0 (up)       : 82, 16%
-#&gt; LFC &lt; 0 (down)     : 89, 18%
-#&gt; outliers [1]       : 3, 0.6%
-#&gt; low counts [2]     : 20, 4%
-#&gt; (mean count &lt; 1)</div><div class='input'>
-<span class='co'>## DESeqResults ====</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqResults"</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>DESeqResultsTables</span>(<span class='no'>res</span>)
-<span class='fu'>print</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; DESeqResultsTables 
 #&gt; contrast: condition B vs A
 #&gt; alpha: 0.1
 #&gt; lfcThreshold: 0

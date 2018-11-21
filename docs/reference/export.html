@@ -113,11 +113,7 @@
     
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>export</span>(<span class='no'>x</span>, <span class='no'>file</span>, <span class='no'>format</span>, <span class='kw'>rowData</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>counts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sampleNames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='co'># S4 method for DESeqResultsTables</span>
+    <pre class="usage"><span class='co'># S4 method for DESeqResultsTables</span>
 <span class='fu'>export</span>(<span class='no'>x</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>compress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -126,32 +122,6 @@
     <tr>
       <th>x</th>
       <td><p>Object.</p></td>
-    </tr>
-    <tr>
-      <th>file</th>
-      <td><p><code>string</code>. File path.</p></td>
-    </tr>
-    <tr>
-      <th>format</th>
-      <td><p>An optional character string containing the file format, which can be used to override the format inferred from <code>file</code> or, in lieu of specifying <code>file</code>, a file with the symbol name of <code>x</code> and the specified file extension will be created. Must specify <code>file</code> and/or <code>format</code>. Shortcuts include: &#8220;,&#8221; (for comma-separated values), &#8220;;&#8221; (for semicolon-separated values), &#8220;|&#8221; (for pipe-separated values), and &#8220;dump&#8221; for <code><a href='http://www.rdocumentation.org/packages/base/topics/dump'>dump</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>rowData</th>
-      <td><p><code>DataFrame</code>. Row annotation data.</p></td>
-    </tr>
-    <tr>
-      <th>counts</th>
-      <td><p><code>matrix</code>. Normalized counts. DESeq2 size-factor normalized
-counts or transcripts per million (TPM) are recommended.</p></td>
-    </tr>
-    <tr>
-      <th>sampleNames</th>
-      <td><p>Named <code>character</code>. Human readable sample names. Only
-applies when <code>counts</code> argument is defined. Names must correspond to
-<code>colnames</code> of <code>counts</code> (these should be valid in R; see
-<code><a href='http://www.rdocumentation.org/packages/base/topics/make.names'>base::make.names()</a></code> for details). Values will be remapped onto the counts
-columns per sample in the exported file, and can contain non-alphanumeric
-characters, hyphens, spaces, or start with a number.</p></td>
     </tr>
     <tr>
       <th>dir</th>
@@ -190,18 +160,12 @@ column in the CSV export.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>deseq</span>)
 
-<span class='co'>## DESeqResults ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqResults"</span>)
-<span class='fu'>export</span>(<span class='no'>x</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"example.csv"</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: rio</span></div><div class='output co'>#&gt; <span class='message'>Exported example.csv.</span></div><div class='input'>
-<span class='co'>## Clean up.</span>
-<span class='fu'>unlink</span>(<span class='st'>"example.csv"</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
 <span class='co'>## DESeqResultsTables ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>DESeqResultsTables</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='input'><span class='fu'>export</span>(<span class='no'>x</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"example"</span>)</div><div class='output co'>#&gt; <span class='message'>Joining annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining counts.</span></div><div class='output co'>#&gt; <span class='message'>Writing condition_b_vs_a_all.csv, condition_b_vs_a_up.csv, condition_b_vs_a_down.csv, condition_b_vs_a_both.csv to /data01/git/DESeqAnalysis/docs/reference/example.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_all.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_up.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_down.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_both.csv.</span></div><div class='output co'>#&gt; DESeqResultsTables 1.22.1
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>DESeqResultsTables</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='input'><span class='fu'>export</span>(<span class='no'>x</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"example"</span>)</div><div class='output co'>#&gt; <span class='message'>Joining annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining counts.</span></div><div class='output co'>#&gt; <span class='message'>Writing condition_b_vs_a_all.csv, condition_b_vs_a_up.csv, condition_b_vs_a_down.csv, condition_b_vs_a_both.csv to /Users/mike/git/DESeqAnalysis/docs/reference/example.</span></div><div class='output co'>#&gt; <span class='message'>Loading required namespace: rio</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_all.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_up.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_down.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_both.csv.</span></div><div class='output co'>#&gt; DESeqResultsTables 1.22.1
 #&gt; contrast: condition B vs A
 #&gt; alpha: 0.1
 #&gt; lfcThreshold: 0
-#&gt; dir: /data01/git/DESeqAnalysis/docs/reference/example
+#&gt; dir: /Users/mike/git/DESeqAnalysis/docs/reference/example
 #&gt; out of 500 with nonzero total read count
 #&gt; adjusted p-value &lt; 0.1
 #&gt; LFC &gt; 0 (up)       : 82, 16%
