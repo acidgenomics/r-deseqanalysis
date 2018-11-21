@@ -70,12 +70,12 @@ setValidity(
         lfcShrink <- slot(object, "lfcShrink")
         
         valid[["dimnames"]] <- validate_that(validDimnames(data))
-        valid[["gene2symbol"]] <- validate_that(
-            is_subset(
-                x = c("geneID", "geneName"),
-                y = colnames(rowData(data))
-            )
-        )
+        # valid[["gene2symbol"]] <- validate_that(
+        #     is_subset(
+        #         x = c("geneID", "geneName"),
+        #         y = colnames(rowData(data))
+        #     )
+        # )
         
         # Ensure that all objects slotted are matched.
         valid[["matched"]] <- validate_that(
