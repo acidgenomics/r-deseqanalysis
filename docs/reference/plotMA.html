@@ -207,44 +207,31 @@ taken in two samples, by transforming the data onto M (log ratio) and A
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>deseq</span>)
 
-<span class='co'>## DESeqAnalysis ====</span>
-<span class='co'>## This is the current recommended method.</span>
-<span class='no'>object</span> <span class='kw'>&lt;-</span> <span class='no'>deseq</span>
-<span class='fu'>print</span>(<span class='no'>object</span>)</div><div class='output co'>#&gt; DESeqAnalysis 1.22.1
-#&gt; transform: vst
-#&gt; contrastNames: condition B vs A
-#&gt; class: DESeqDataSet 
-#&gt; dim: 500 12 
-#&gt; metadata(3): version date interestingGroups
-#&gt; assays(4): counts mu H cooks
-#&gt; rownames(500): gene001 gene002 ... gene499 gene500
-#&gt; rowData names(27): geneID geneName ... deviance maxCooks
-#&gt; colnames(12): sample01 sample02 ... sample11 sample12
-#&gt; colData names(2): condition sizeFactor</div><div class='input'>
-<span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>object</span>, <span class='st'>"DESeqDataSet"</span>)
+<span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
 <span class='no'>g2s</span> <span class='kw'>&lt;-</span> <span class='fu'>Gene2Symbol</span>(<span class='no'>dds</span>)
 <span class='no'>geneIDs</span> <span class='kw'>&lt;-</span> <span class='fu'>head</span>(<span class='no'>g2s</span><span class='kw'>[[</span><span class='st'>"geneID"</span>]])
 <span class='fu'>print</span>(<span class='no'>geneIDs</span>)</div><div class='output co'>#&gt; [1] "ENSG00000000003" "ENSG00000000005" "ENSG00000000419" "ENSG00000000457"
 #&gt; [5] "ENSG00000000460" "ENSG00000000938"</div><div class='input'><span class='no'>geneNames</span> <span class='kw'>&lt;-</span> <span class='fu'>head</span>(<span class='no'>g2s</span><span class='kw'>[[</span><span class='st'>"geneName"</span>]])
 <span class='fu'>print</span>(<span class='no'>geneNames</span>)</div><div class='output co'>#&gt; [1] "TSPAN6"   "TNMD"     "DPM1"     "SCYL3"    "C1orf112" "FGR"     </div><div class='input'>
-<span class='fu'>plotMA</span>(<span class='no'>object</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotMA-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'>## DESeqAnalysis ====</span>
+<span class='fu'>plotMA</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotMA-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Customize the colors.</span>
 <span class='fu'>plotMA</span>(
-    <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>object</span>,
+    <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
     <span class='kw'>pointColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
     <span class='kw'>sigPointColor</span> <span class='kw'>=</span> <span class='st'>"purple"</span>
 )</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotMA-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotMA</span>(
-    <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>object</span>,
+    <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
     <span class='kw'>sigPointColor</span> <span class='kw'>=</span> <span class='fu'>c</span>(
         <span class='kw'>upregulated</span> <span class='kw'>=</span> <span class='st'>"green"</span>,
         <span class='kw'>downregulated</span> <span class='kw'>=</span> <span class='st'>"red"</span>
     )
 )</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotMA-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Directional support (up or down).</span>
-<span class='fu'>plotMA</span>(<span class='no'>object</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='st'>"up"</span>, <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotMA-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotMA</span>(<span class='no'>object</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='st'>"down"</span>, <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotMA-5.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plotMA</span>(<span class='no'>deseq</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='st'>"up"</span>, <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotMA-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotMA</span>(<span class='no'>deseq</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='st'>"down"</span>, <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotMA-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Label genes manually.</span>
 <span class='co'>## Note that either gene IDs or names (symbols) are supported.</span>
-<span class='fu'>plotMA</span>(<span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>object</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>geneIDs</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotMA-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotMA</span>(<span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>object</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>geneNames</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotMA-7.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plotMA</span>(<span class='no'>deseq</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>geneIDs</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotMA-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotMA</span>(<span class='no'>deseq</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>geneNames</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotMA-7.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -148,7 +148,7 @@ samples are colored by sample name.</p></td>
       <td><p><code>ggproto</code>/<code>ScaleDiscrete</code> or <code>NULL</code>. Desired ggplot2 color
 scale. Must supply discrete values. When set to <code>NULL</code>, the default ggplot2
 color palette will be used. If manual color definitions are desired, we
-recommend using <code><a href='ggplot2.tidyverse.org/reference/scale_manual.html'>ggplot2::scale_color_manual()</a></code>. To set the discrete color
+recommend using <code><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>ggplot2::scale_color_manual()</a></code>. To set the discrete color
 palette globally, use
 <code>options(basejump.color.discrete = ggplot2::scale_color_viridis_d())</code>.</p></td>
     </tr>
@@ -167,7 +167,7 @@ palette globally, use
     <p><code>ggplot</code>.</p>
 <ul>
 <li><p><code>style = "facet"</code>: <code>ggplot</code> grouped by <code>sampleName</code>, with
-<code><a href='ggplot2.tidyverse.org/reference/facet_wrap.html'>ggplot2::facet_wrap()</a></code> applied to panel the samples.</p></li>
+<code><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>ggplot2::facet_wrap()</a></code> applied to panel the samples.</p></li>
 <li><p><code>style = "wide"</code>: <code>ggplot</code> in wide format, with genes on the x-axis.</p></li>
 </ul>
 
@@ -175,14 +175,14 @@ palette globally, use
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>deseq</span>)
-<span class='no'>object</span> <span class='kw'>&lt;-</span> <span class='no'>deseq</span>
 
-<span class='no'>g2s</span> <span class='kw'>&lt;-</span> <span class='fu'>Gene2Symbol</span>(<span class='fu'>as</span>(<span class='no'>object</span>, <span class='st'>"DESeqDataSet"</span>))
+<span class='no'>g2s</span> <span class='kw'>&lt;-</span> <span class='fu'>Gene2Symbol</span>(<span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>))
 <span class='no'>geneIDs</span> <span class='kw'>&lt;-</span> <span class='fu'>head</span>(<span class='no'>g2s</span><span class='kw'>[[</span><span class='st'>"geneID"</span>]])
 <span class='fu'>print</span>(<span class='no'>geneIDs</span>)</div><div class='output co'>#&gt; [1] "ENSG00000000003" "ENSG00000000005" "ENSG00000000419" "ENSG00000000457"
 #&gt; [5] "ENSG00000000460" "ENSG00000000938"</div><div class='input'><span class='no'>geneNames</span> <span class='kw'>&lt;-</span> <span class='fu'>head</span>(<span class='no'>g2s</span><span class='kw'>[[</span><span class='st'>"geneName"</span>]])
 <span class='fu'>print</span>(<span class='no'>geneNames</span>)</div><div class='output co'>#&gt; [1] "TSPAN6"   "TNMD"     "DPM1"     "SCYL3"    "C1orf112" "FGR"     </div><div class='input'>
-<span class='fu'>plotGene</span>(<span class='no'>object</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>geneIDs</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"facet"</span>)</div><div class='img'><img src='plotGene-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotGene</span>(<span class='no'>object</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>geneNames</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"wide"</span>)</div><div class='img'><img src='plotGene-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='co'>## DESeqAnalysis ====</span>
+<span class='fu'>plotGene</span>(<span class='no'>deseq</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>geneIDs</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"facet"</span>)</div><div class='img'><img src='plotGene-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotGene</span>(<span class='no'>deseq</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>geneNames</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"wide"</span>)</div><div class='img'><img src='plotGene-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
