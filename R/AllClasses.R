@@ -44,7 +44,7 @@ validateS4 <- function(...) {
 #' @slot lfcShrink `list`. One or more shrunken `DESeqResults`.
 #'
 #' @seealso [DESeqAnalysis()].
-#' 
+#'
 #' @return `DESeqAnalysis`, which contains a `DESeqDataSet`, `DESeqTransform`,
 #'   and corresponding `DESeqResults`.
 setClass(
@@ -63,20 +63,20 @@ setValidity(
     Class = "DESeqAnalysis",
     method = function(object) {
         valid <- list()
-        
+
         data <- slot(object, "data")
         transform <- slot(object, "transform")
         results <- slot(object, "results")
         lfcShrink <- slot(object, "lfcShrink")
-        
+
         valid[["dimnames"]] <- validate_that(validDimnames(data))
         # valid[["gene2symbol"]] <- validate_that(
         #     is_subset(
         #         x = c("geneID", "geneName"),
-        #         y = colnames(rowData(data))
+        #         hy = colnames(rowData(data))
         #     )
         # )
-        
+
         # Ensure that all objects slotted are matched.
         valid[["matched"]] <- validate_that(
             # DESeqDataSet and DESeqTransform.
@@ -104,7 +104,7 @@ setValidity(
                 )
             )
         }
-        
+
         validateS4(valid)
     }
 )
@@ -135,7 +135,7 @@ setValidity(
 #'   whether we're writing locally or to Dropbox.
 #'
 #' @seealso [DESeqResultsTables()].
-#' 
+#'
 #' @return `DESeqResultsTables`, containing the original, unmodified
 #'   `DESeqResults` `DataFrame` along with the corresponding differentially
 #'   expressed genes and gene-level metadata (rowRanges).
@@ -160,21 +160,21 @@ setValidity(
     Class = "DESeqResultsTables",
     method = function(object) {
         valid <- list()
-        
+
         results <- slot(object, "results")
         alpha <- metadata(results)[["alpha"]]
         lfcThreshold <- metadata(results)[["lfcThreshold"]]
-        
+
         deg <- slot(object, "deg")
         up <- deg[["up"]]
         down <- deg[["down"]]
-        
+
         # Check that DEGs match the `DESeqResults` summary.
         degMatch <- removeNA(str_match(
             string = capture.output(summary(results)),
             pattern = "^LFC.*\\s\\:\\s([0-9]+).*"
         ))
-        
+
         validate_that(
             is(results, "DESeqResults"),
             is.character(up),

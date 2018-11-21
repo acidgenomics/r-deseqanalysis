@@ -2,8 +2,8 @@ context("Markdown")
 
 data(deseq, envir = environment())
 
-res_small <- as(deseq, "DESeqResults")
-res_tables <- DESeqResultsTables(res_small)
+res <- as(deseq, "DESeqResults")
+resTbl <- DESeqResultsTables(res)
 
 
 
@@ -15,7 +15,7 @@ with_parameters_test_that(
     },
     object = list(
         DESeqAnalysis = deseq,
-        DESeqResults = res_small,
-        DESeqResultsTables = res_tables
+        DESeqResults = res,
+        DESeqResultsTables = resTbl
     )
 )
