@@ -2,7 +2,7 @@ Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
 Version: 0.1.1
-Date: 2018-11-21
+Date: 2018-11-24
 Authors@R: c(
     person(
         given = "Michael",
@@ -83,12 +83,11 @@ Encoding: UTF-8
 LazyData: false
 Depends:
     R (>= 3.5),
-    SummarizedExperiment (>= 1.10),
-    basejump (>= 0.8.2),
     DESeq2 (>= 1.20)
 Imports:
     BiocGenerics,
     S4Vectors,
+    SummarizedExperiment (>= 1.10),
     assertive.base,
     assertive.files,
     assertive.numbers,
@@ -96,6 +95,7 @@ Imports:
     assertive.sets,
     assertive.types,
     assertthat,
+    basejump (>= 0.8.2),
     cowplot,
     dplyr,
     ggplot2,
