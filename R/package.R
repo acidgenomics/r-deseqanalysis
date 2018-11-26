@@ -30,7 +30,7 @@
 #' @importFrom basejump Gene2Symbol assertFormalGene2Symbol as_tibble
 #'   basejump_geom_label_repel camel initDir interestingGroups<-
 #'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
-#'   matchInterestingGroups methodFormals plotGene plotHeatmap plotPCA
+#'   matchInterestingGroups methodFormals plotGene plotHeatmap plotPCA removeNA
 #'   sanitizeRowData showSlotInfo snake
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom dplyr arrange desc everything filter left_join mutate pull rename
@@ -40,6 +40,7 @@
 #'   scale_x_continuous scale_y_continuous theme
 #' @importFrom goalie assertIsAlpha assertIsAnImplicitInteger
 #'   assertIsHeaderLevel assertIsImplicitInteger assertIsStringOrNULL
+#'   validDimnames
 #' @importFrom knitr kable
 #' @importFrom magrittr %>%
 #' @importFrom methods as is new slot slot<- validObject
@@ -51,3 +52,11 @@
 "_PACKAGE"
 
 globalVariables(".")
+
+#' @importFrom basejump Gene2Symbol
+#' @export
+basejump::Gene2Symbol
+
+#' @importFrom magrittr %>%
+#' @export
+magrittr::`%>%`
