@@ -83,6 +83,7 @@ Encoding: UTF-8
 LazyData: false
 Depends:
     R (>= 3.5),
+    basejump (>= 0.8.2),
     DESeq2 (>= 1.20)
 Imports:
     BiocGenerics,
@@ -95,7 +96,6 @@ Imports:
     assertive.sets,
     assertive.types,
     assertthat,
-    basejump (>= 0.8.2),
     cowplot,
     dplyr,
     ggplot2,
