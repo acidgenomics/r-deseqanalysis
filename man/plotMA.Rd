@@ -17,8 +17,6 @@
   lfcShrink = TRUE, genes = NULL, ntop = 0L, direction = c("both",
   "up", "down"), pointColor = "gray50", sigPointColor = c(upregulated =
   "purple", downregulated = "orange"), return = c("ggplot", "DataFrame"))
-
-plotMeanAverage(...)
 }
 \arguments{
 \item{object}{
@@ -72,12 +70,10 @@ We are not allowing post hoc \code{alpha} or \code{lfcThreshold} cutoffs here.
 \examples{
 data(deseq)
 
+## Get genes from DESeqDataSet.
 dds <- as(deseq, "DESeqDataSet")
-g2s <- Gene2Symbol(dds)
-geneIDs <- head(g2s[["geneID"]])
-print(geneIDs)
-geneNames <- head(g2s[["geneName"]])
-print(geneNames)
+genes <- head(rownames(dds))
+print(genes)
 
 ## DESeqAnalysis ====
 plotMA(deseq)
@@ -102,11 +98,10 @@ plotMA(deseq, direction = "down", ntop = 5L)
 
 ## Label genes manually.
 ## Note that either gene IDs or names (symbols) are supported.
-plotMA(deseq, genes = geneIDs)
-plotMA(deseq, genes = geneNames)
+plotMA(deseq, genes = genes)
 }
 \seealso{
-\code{\link[DESeq2:plotMA]{DESeq2::plotMA()}}.
+\code{DESeq2::plotMA()}.
 }
 \author{
 Michael Steinbaugh, Rory Kirchner

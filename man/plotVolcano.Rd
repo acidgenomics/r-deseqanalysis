@@ -63,11 +63,8 @@ data(deseq)
 
 ## Get genes from DESeqDataSet.
 dds <- as(deseq, "DESeqDataSet")
-g2s <- Gene2Symbol(dds)
-geneIDs <- head(g2s[["geneID"]])
-print(geneIDs)
-geneNames <- head(g2s[["geneName"]])
-print(geneNames)
+genes <- head(rownames(dds))
+print(genes)
 
 ## DESeqAnalysis ====
 plotVolcano(deseq)
@@ -100,8 +97,7 @@ plotVolcano(
 
 ## Label genes manually.
 ## Note that either gene IDs or names (symbols) are supported.
-plotVolcano(deseq, genes = geneIDs)
-plotVolcano(deseq, genes = geneNames)
+plotVolcano(deseq, genes = genes)
 }
 \seealso{
 This method is an updated variant of

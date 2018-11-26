@@ -41,7 +41,7 @@ palette globally, use
 
 \itemize{
 \item \code{style = "facet"}: \code{ggplot} grouped by \code{sampleName}, with
-\code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}} applied to panel the samples.
+\code{ggplot2::facet_wrap()} applied to panel the samples.
 \item \code{style = "wide"}: \code{ggplot} in wide format, with genes on the x-axis.
 }
 }
@@ -51,13 +51,12 @@ Plot Gene Expression
 \examples{
 data(deseq)
 
-g2s <- Gene2Symbol(as(deseq, "DESeqDataSet"))
-geneIDs <- head(g2s[["geneID"]])
-print(geneIDs)
-geneNames <- head(g2s[["geneName"]])
-print(geneNames)
+## Get genes from DESeqDataSet.
+dds <- as(deseq, "DESeqDataSet")
+genes <- head(rownames(dds))
+print(genes)
 
 ## DESeqAnalysis ====
-plotGene(deseq, genes = geneIDs, style = "facet")
-plotGene(deseq, genes = geneNames, style = "wide")
+plotGene(deseq, genes = genes, style = "facet")
+plotGene(deseq, genes = genes, style = "wide")
 }

@@ -14,18 +14,16 @@
 #'
 #' @return `ggplot`.
 #'
-#' @seealso [DESeq2::plotMA()].
+#' @seealso `DESeq2::plotMA()`.
 #'
 #' @examples
 #' data(deseq)
 #'
+#' ## Get genes from DESeqDataSet.
 #' dds <- as(deseq, "DESeqDataSet")
-#' g2s <- Gene2Symbol(dds)
-#' geneIDs <- head(g2s[["geneID"]])
-#' print(geneIDs)
-#' geneNames <- head(g2s[["geneName"]])
-#' print(geneNames)
-#' 
+#' genes <- head(rownames(dds))
+#' print(genes)
+#'
 #' ## DESeqAnalysis ====
 #' plotMA(deseq)
 #'
@@ -49,8 +47,7 @@
 #'
 #' ## Label genes manually.
 #' ## Note that either gene IDs or names (symbols) are supported.
-#' plotMA(deseq, genes = geneIDs)
-#' plotMA(deseq, genes = geneNames)
+#' plotMA(deseq, genes = genes)
 NULL
 
 
@@ -311,6 +308,7 @@ setMethod(
 
 
 #' @rdname plotMA
+#' @usage NULL
 #' @export
 plotMeanAverage <- function(...) {
     # This function is soft deprecated.

@@ -2,16 +2,15 @@
 #' @inherit basejump::plotGene
 #' @examples
 #' data(deseq)
-#' 
-#' g2s <- Gene2Symbol(as(deseq, "DESeqDataSet"))
-#' geneIDs <- head(g2s[["geneID"]])
-#' print(geneIDs)
-#' geneNames <- head(g2s[["geneName"]])
-#' print(geneNames)
-#' 
+#'
+#' ## Get genes from DESeqDataSet.
+#' dds <- as(deseq, "DESeqDataSet")
+#' genes <- head(rownames(dds))
+#' print(genes)
+#'
 #' ## DESeqAnalysis ====
-#' plotGene(deseq, genes = geneIDs, style = "facet")
-#' plotGene(deseq, genes = geneNames, style = "wide")
+#' plotGene(deseq, genes = genes, style = "facet")
+#' plotGene(deseq, genes = genes, style = "wide")
 NULL
 
 
