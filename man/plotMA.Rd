@@ -106,7 +106,7 @@ plotMA(deseq, genes = geneIDs)
 plotMA(deseq, genes = geneNames)
 }
 \seealso{
-\code{\link[DESeq2:plotMA]{DESeq2::plotMA()}}.
+\code{DESeq2::plotMA()}.
 }
 \author{
 Michael Steinbaugh, Rory Kirchner
