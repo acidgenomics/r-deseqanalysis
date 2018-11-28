@@ -51,7 +51,7 @@ and wildtype samples, here's how to set the contrast vector:\preformatted{c(
 \section{Log fold change threshold cutoffs}{
 
 
-Refer to \code{\link[DESeq2:results]{DESeq2::results()}} for additional information about using
+Refer to \code{DESeq2::results()} for additional information about using
 \code{lfcThreshold} and \code{altHypothesis} to set an alternative hypothesis based on
 expected fold changes. In addition, the "Hypothesis tests with thresholds on
 effect size" section in the DESeq2 paper provides additional explanation.
@@ -61,7 +61,7 @@ this will destroy the meaning of the adjusted \emph{P} values computed. If you a
 expecting a biological effect size past a particular threshold, set
 \code{lfcThreshold}, but be conservative.
 
-This \href{https://support.bioconductor.org/p/101504/}{thread} on the Bioconductor forums explains how \code{\link[DESeq2:results]{DESeq2::results()}}
+This \href{https://support.bioconductor.org/p/101504/}{thread} on the Bioconductor forums explains how \code{DESeq2::results()}
 should be called with regard to LFC cutoffs in nice detail.
 }
 
@@ -74,7 +74,7 @@ print(x)
 }
 \seealso{
 \itemize{
-\item \code{\link[DESeq2:results]{DESeq2::results()}}.
-\item \code{\link[=markdown]{markdown()}}, \code{\link[=write]{write()}}.
+\item \code{DESeq2::results()}.
+\item \code{markdown()}, \code{write()}.
 }
 }
