@@ -24,7 +24,7 @@
 #'
 #' @section Log fold change threshold cutoffs:
 #'
-#' Refer to [DESeq2::results()] for additional information about using
+#' Refer to `DESeq2::results()` for additional information about using
 #' `lfcThreshold` and `altHypothesis` to set an alternative hypothesis based on
 #' expected fold changes. In addition, the "Hypothesis tests with thresholds on
 #' effect size" section in the DESeq2 paper provides additional explanation.
@@ -34,14 +34,14 @@
 #' expecting a biological effect size past a particular threshold, set
 #' `lfcThreshold`, but be conservative.
 #'
-#' This [thread][] on the Bioconductor forums explains how [DESeq2::results()]
+#' This [thread][] on the Bioconductor forums explains how `DESeq2::results()`
 #' should be called with regard to LFC cutoffs in nice detail.
 #'
 #' [thread]: https://support.bioconductor.org/p/101504/
 #'
 #' @seealso
-#' - [DESeq2::results()].
-#' - [markdown()], [write()].
+#' - `DESeq2::results()`.
+#' - `markdown()`, `write()`.
 #'
 #' @examples
 #' data(deseq)
