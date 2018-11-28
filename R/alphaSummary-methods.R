@@ -10,8 +10,8 @@
 #' @param alpha `numeric`. Multiple alpha cutoffs.
 #'
 #' @seealso
-#' - [DESeq2::results()].
-#' - [DESeq2::resultsNames()].
+#' - `DESeq2::results()`.
+#' - `DESeq2::resultsNames()`.
 #'
 #' @examples
 #' data(deseq)

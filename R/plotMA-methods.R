@@ -14,7 +14,7 @@
 #'
 #' @return `ggplot`.
 #'
-#' @seealso [DESeq2::plotMA()].
+#' @seealso `DESeq2::plotMA()`.
 #'
 #' @examples
 #' data(deseq)

@@ -22,21 +22,21 @@ contain all genes, including those with \code{NA} adjusted \emph{P} values.}
 vectors of genes that are upregulated (\code{up}) or downregulated (\code{down}).
 Values map to the \code{rownames} of the internal \code{DESeqResults}. These are
 genes that pass \code{alpha} and \code{lfcThreshold} cutoffs set in
-\code{\link[DESeq2:results]{DESeq2::results()}} call.}
+\code{DESeq2::results()} call.}
 
 \item{\code{counts}}{\code{matrix}. Normalized counts matrix.}
 
 \item{\code{rowRanges}}{\code{GRanges}. Row annotations.}
 
 \item{\code{sampleNames}}{\code{character}. Human-friendly sample names. Must contain
-\code{\link[=names]{names()}} that map to the \code{\link[=colnames]{colnames()}} of the \code{DESeqDataSet}.}
+\code{names()} that map to the \code{colnames()} of the \code{DESeqDataSet}.}
 
 \item{\code{metadata}}{\code{list}. Metadata. Contains file paths and information on
 whether we're writing locally or to Dropbox.}
 }}
 
 \seealso{
-\code{\link[=DESeqResultsTables]{DESeqResultsTables()}}.
+\code{DESeqResultsTables()}.
 
 Other S4 classes: \code{\link{DESeqAnalysis-class}}
 }
