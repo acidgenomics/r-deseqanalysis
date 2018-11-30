@@ -3,37 +3,27 @@
 \docType{methods}
 \name{export}
 \alias{export}
-\alias{export,DESeqResults-method}
+\alias{export,DESeqAnalysis-method}
 \alias{export,DESeqResultsTables-method}
 \title{Export}
 \usage{
-\S4method{export}{DESeqResults}(x, file, format, rowData = NULL,
-  counts = NULL, sampleNames = NULL)
+\S4method{export}{DESeqAnalysis}(x, name = NULL, dir = ".",
+  compress = FALSE, human = FALSE)
 
 \S4method{export}{DESeqResultsTables}(x, dir = ".", compress = FALSE)
 }
 \arguments{
 \item{x}{Object.}
 
-\item{file}{\code{string}. File path.}
-
-\item{format}{An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for \code{\link[base]{dump}}.}
-
-\item{rowData}{\code{DataFrame}. Row annotation data.}
-
-\item{counts}{\code{matrix}. Normalized counts. DESeq2 size-factor normalized
-counts or transcripts per million (TPM) are recommended.}
-
-\item{sampleNames}{Named \code{character}. Human readable sample names. Only
-applies when \code{counts} argument is defined. Names must correspond to
-\code{colnames} of \code{counts} (these should be valid in R; see
-\code{\link[base:make.names]{base::make.names()}} for details). Values will be remapped onto the counts
-columns per sample in the exported file, and can contain non-alphanumeric
-characters, hyphens, spaces, or start with a number.}
+\item{name}{\code{string}. Name to use on disk. If left \code{NULL}, will use the name
+of the object instead.}
 
 \item{dir}{\code{string}. Directory path.}
 
 \item{compress}{\code{boolean}. Apply gzip compression to all files.}
+
+\item{human}{\code{boolean}. Automatically convert gene IDs to gene symbols in the
+\code{rownames()} and sample IDs to sample names in the \code{colnames()}.}
 }
 \value{
 Invisible \code{character}. File path(s).
@@ -61,17 +51,12 @@ column in the CSV export.
 \examples{
 data(deseq)
 
-## DESeqResults ====
-x <- as(deseq, "DESeqResults")
-export(x, file = "example.csv")
-
-## Clean up.
-unlink("example.csv", recursive = TRUE)
+## DESeqAnalysis ====
+export(deseq, dir = "example")
 
 ## DESeqResultsTables ====
 x <- DESeqResultsTables(deseq)
 export(x, dir = "example")
-list.files("example")
 
 ## Clean up.
 unlink("example", recursive = TRUE)

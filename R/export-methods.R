@@ -1,36 +1,17 @@
-# TODO Include `export()` method for DESeqAnalysis.
-
-
-
 #' @name export
 #' @inherit basejump::export
 #' @inheritParams basejump::params
-#'
-#' @param counts `matrix`. Normalized counts. DESeq2 size-factor normalized
-#'   counts or transcripts per million (TPM) are recommended.
-#' @param dir `string`. Directory path.
-#' @param rowData `DataFrame`. Row annotation data.
-#' @param sampleNames Named `character`. Human readable sample names. Only
-#'   applies when `counts` argument is defined. Names must correspond to
-#'   `colnames` of `counts` (these should be valid in R; see
-#'   [base::make.names()] for details). Values will be remapped onto the counts
-#'   columns per sample in the exported file, and can contain non-alphanumeric
-#'   characters, hyphens, spaces, or start with a number.
+#' @inheritParams params
 #'
 #' @examples
 #' data(deseq)
-#'
-#' ## DESeqResults ====
-#' x <- as(deseq, "DESeqResults")
-#' export(x, file = "example.csv")
-#'
-#' ## Clean up.
-#' unlink("example.csv", recursive = TRUE)
+#' 
+#' ## DESeqAnalysis ====
+#' export(deseq, dir = "example")
 #'
 #' ## DESeqResultsTables ====
 #' x <- DESeqResultsTables(deseq)
 #' export(x, dir = "example")
-#' list.files("example")
 #'
 #' ## Clean up.
 #' unlink("example", recursive = TRUE)
@@ -45,71 +26,109 @@ basejump::export
 
 
 
-.prepareDESeqResults <- function(
-    object,
-    rowData = NULL,
-    counts = NULL,
-    sampleNames = NULL
+# Consider using `methodFormals()` here to get the formals from
+# SummarizedExperiment method exported in basejump.
+export.DESeqAnalysis <- function(
+    x,
+    name = NULL,
+    dir = ".",
+    compress = FALSE,
+    human = FALSE
 ) {
-    assert_is_all_of(object, "DESeqResults")
-    assert_is_any_of(rowData, c("DataFrame", "NULL"))
-    assert_is_any_of(counts, c("matrix", "NULL"))
-    assert_is_any_of(sampleNames, c("character", "NULL"))
-
-    # Coerce DESeqResults to DataFrame.
-    data <- as(object, "DataFrame")
-
-    # Row annotations.
-    if (!is.null(rowData) && ncol(rowData) > 0L) {
-        message("Joining annotations.")
-        assert_is_all_of(rowData, "DataFrame")
-        rowData <- sanitizeRowData(rowData)
-        assert_are_identical(rownames(data), rownames(rowData))
-        data <- cbind(data, rowData)
+    validObject(x)
+    call <- standardizeCall()
+    assertIsStringOrNULL(name)
+    if (is.null(name)) {
+        name <- as.character(call[["x"]])
     }
-
-    # Variance-stabilized counts (DESeqTransform).
-    if (!is.null(counts) && ncol(counts) > 0L) {
-        message("Joining counts.")
-        assert_is_matrix(counts)
-        assert_are_identical(rownames(data), rownames(counts))
-        # Convert to human friendly sample names, if possible.
-        if (
-            is.character(sampleNames) &&
-            has_length(sampleNames)
-        ) {
-            message("Mapping human-friendly sample names.")
-            assert_has_names(sampleNames)
-            assert_are_identical(names(sampleNames), colnames(counts))
-            colnames(counts) <- as.character(sampleNames)
+    # Note that we're combining the dir with name, so we can set subdirectories
+    # for each slotted data type (e.g. DESeqDataSet).
+    dir <- initDir(file.path(dir, name))
+    rm(name)
+    
+    files <- list()
+    
+    # Using inherited SummarizedExperiment method here.
+    message("Exporting DESeqDataSet.")
+    data <- slot(x, name = "data")
+    stopifnot(is(data, "DESeqDataSet"))
+    files[["data"]] <- export(
+        x = data,
+        name = "data",
+        dir = dir,
+        compress = compress,
+        human = human
+    )
+    
+    # Only export the assay from this object, as we already have the
+    # corresponding `rowRanges()` and `colData()` in the DESeqDataSet.
+    message("Exporting DESeqTransform.")
+    transform <- slot(x, name = "transform")
+    stopifnot(is(transform, "DESeqTransform"))
+    files[["transform"]] <- export(
+        x = transform,
+        name = "transform",
+        dir = dir,
+        compress = compress,
+        human = human
+    )
+    
+    # Humanize rownames and colnames if necessary.
+    if (isTRUE(human)) {
+        data <- humanize(data)
+    }
+    dimnames <- dimnames(data)
+    
+    # Define an internal function that work on both unshrunken and shrunken
+    # results.
+    exportResults <- function(slotName = c("results", "lfcShrink")) {
+        slotName <- match.arg(slotName)
+        list <- slot(x, name = slotName)
+        assert_is_list(list)
+        if (!is(list[[1L]], "DESeqResults")) {
+            message(paste(
+                slotName, "does not contain DESeqResults.",
+                "Skipping export."
+            ))
+            return(NULL)
         }
-        assert_are_disjoint_sets(colnames(data), colnames(counts))
-        data <- cbind(data, counts)
-    }
-
-    data
-}
-
-
-
-export.DESeqResults <-  # nolint
-    function(
-        x,
-        file,
-        format,
-        rowData = NULL,
-        counts = NULL,
-        sampleNames = NULL
-    ) {
-        x <- .prepareDESeqResults(
-            object = x,
-            rowData = rowData,
-            counts = counts,
-            sampleNames = sampleNames
+        message(paste0("Exporting ", slotName, "."))
+        if (!has_names(list)) {
+            names(list) <- makeNames(vapply(
+                X = list,
+                FUN = contrastName,
+                FUN.VALUE = character(1L)
+            ))
+        }
+        mapply(
+            name = names(list),
+            x = list,
+            MoreArgs = list(
+                dir = file.path(dir, slotName),
+                compress = compress,
+                human = human
+            ),
+            FUN = function(name, x, dir, compress, human) {
+                file <- file.path(dir, paste0(name, ".csv"))
+                if (isTRUE(compress)) {
+                    file <- paste0(file, ".gz")
+                }
+                if (isTRUE(human)) {
+                    res[["geneID"]] <- rownames(res)
+                    rownames(res) <- dimnames[[1L]]
+                }
+                export(res, file = file)
+            },
+            SIMPLIFY = TRUE,
+            USE.NAMES = TRUE
         )
-        # Export using ANY method.
-        export(x = x, file = file, format = format)
     }
+    
+    files[["results"]] <- exportResults("results")
+    files[["lfcShrink"]] <- exportResults("lfcShrink")
+    
+    invisible(files)
+}
 
 
 
@@ -117,48 +136,9 @@ export.DESeqResults <-  # nolint
 #' @export
 setMethod(
     f = "export",
-    signature = signature("DESeqResults"),
-    definition = export.DESeqResults
+    signature = signature("DESeqAnalysis"),
+    definition = export.DESeqAnalysis
 )
-
-
-
-.prepareResultsTablesList <- function(object) {
-    assert_that(is(object, "DESeqResultsTables"))
-    validObject(object)
-
-    deg <- slot(object, "deg")
-    assert_is_list(deg)
-    assert_are_identical(names(deg), c("up", "down"))
-
-    # Up-regulated, down-regulated, and bidirectional DEGs.
-    up <- deg[["up"]]
-    down <- deg[["down"]]
-    both <- c(up, down)
-
-    results <- slot(object, "results")
-    rowData <- slot(object, "rowRanges") %>%
-        # Coerce to standard data.frame first, to collapse "X" ranges column.
-        as.data.frame() %>%
-        as("DataFrame")
-    counts <- slot(object, "counts")
-    sampleNames <- slot(object, "sampleNames")
-
-    all <- .prepareDESeqResults(
-        object = results,
-        rowData = rowData,
-        counts = counts,
-        sampleNames = sampleNames
-    )
-    assert_that(is(all, "DataFrame"))
-
-    list(
-        all = all,
-        up = all[up, , drop = FALSE],
-        down = all[down, , drop = FALSE],
-        both = all[both, , drop = FALSE]
-    )
-}
 
 
 
@@ -168,12 +148,56 @@ export.DESeqResultsTables <-  # nolint
         dir <- initDir(dir)
         assert_is_a_bool(compress)
 
-        # Prepare the subset tables.
-        tables <- .prepareResultsTablesList(x)
-        assert_is_list(tables)
-        assert_are_identical(
-            x = names(tables),
-            y = c("all", "up", "down", "both")
+        # Prepare the subset tables --------------------------------------------
+        deg <- slot(x, "deg")
+        assert_is_list(deg)
+        assert_are_identical(names(deg), c("up", "down"))
+        
+        # Up-regulated, down-regulated, and bidirectional DEGs.
+        up <- deg[["up"]]
+        down <- deg[["down"]]
+        both <- c(up, down)
+        
+        # Coerce DESeqResults to DataFrame.
+        data <- slot(x, name = "results") %>%
+            as("DataFrame")
+        rowData <- slot(x, name = "rowRanges") %>%
+            # Coerce to data.frame first, to collapse "X" ranges column.
+            as.data.frame() %>%
+            as("DataFrame")
+        counts <- slot(x, name = "counts")
+        sampleNames <- slot(x, name = "sampleNames")
+    
+        # Row annotations.
+        if (!is.null(rowData) && ncol(rowData) > 0L) {
+            message("Joining annotations.")
+            assert_is_all_of(rowData, "DataFrame")
+            rowData <- sanitizeRowData(rowData)
+            assert_are_identical(rownames(data), rownames(rowData))
+            data <- cbind(data, rowData)
+        }
+        
+        # Variance-stabilized counts (DESeqTransform).
+        if (!is.null(counts) && ncol(counts) > 0L) {
+            message("Joining counts.")
+            assert_is_matrix(counts)
+            assert_are_identical(rownames(data), rownames(counts))
+            # Convert to human friendly sample names, if possible.
+            if (is.character(sampleNames) && has_length(sampleNames)) {
+                message("Mapping human-friendly sample names to counts.")
+                assert_has_names(sampleNames)
+                assert_are_identical(names(sampleNames), colnames(counts))
+                colnames(counts) <- as.character(sampleNames)
+            }
+            assert_are_disjoint_sets(colnames(data), colnames(counts))
+            data <- cbind(data, counts)
+        }
+        
+        tables <- list(
+            all = data,
+            deg_up = data[up, , drop = FALSE],
+            deg_down = data[down, , drop = FALSE],
+            deg_both = data[both, , drop = FALSE]
         )
 
         # Local files (required) -----------------------------------------------
@@ -197,15 +221,6 @@ export.DESeqResultsTables <-  # nolint
             SIMPLIFY = FALSE,
             USE.NAMES = FALSE
         ))
-
-        # Check that all writes were successful.
-        assert_all_are_existing_files(files)
-
-        # Return ---------------------------------------------------------------
-        # Assign the local file paths to the object.
-        slot(x, "metadata")[["export"]] <- files
-
-        x
     }
 
 
