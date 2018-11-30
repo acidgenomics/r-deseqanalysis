@@ -111,7 +111,7 @@ export.DESeqAnalysis <- function(
                     file <- paste0(file, ".gz")
                 }
                 if (isTRUE(human)) {
-                    x[["geneID"]] <- rownames(res)
+                    x[["geneID"]] <- rownames(x)
                     rownames(x) <- dimnames[[1L]]
                 }
                 export(x, file = file)
