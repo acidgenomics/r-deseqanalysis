@@ -1,4 +1,20 @@
+context("DESeqResultsTables")
+
+data(deseq, envir = environment())
+
 lfcThreshold <- 0.25
+
+
+
+# DESeqResultsTables ===========================================================
+test_that("DESeqResultsTables", {
+    expect_s4_class(
+        object = DESeqResultsTables(deseq),
+        class = "DESeqResultsTables"
+    )
+})
+
+
 
 # export
 # markdown
