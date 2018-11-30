@@ -40,10 +40,7 @@ setMethod(
 
 
 markdown.DESeqResultsTables <-  # nolint
-    function(
-        object,
-        headerLevel = 2L
-    ) {
+    function(object, headerLevel = 2L) {
         assert_that(is(object, "DESeqResultsTables"))
         validObject(object)
         assertIsHeaderLevel(headerLevel)
@@ -55,59 +52,7 @@ markdown.DESeqResultsTables <-  # nolint
         markdownHeader(contrast, level = headerLevel, asis = TRUE)
         headerLevel <- headerLevel + 1L
 
-        # File paths -----------------------------------------------------------
-        files <- metadata[["files"]]
-
-        if (length(files) > 0L) {
-            # Get Dropbox URLs, if necessary.
-            dropbox <- metadata[["dropbox"]]
-            if (isTRUE(dropbox)) {
-                # nocov start
-                # Using local Dropbox token for code coverage here.
-                files <- vapply(
-                    X = files,
-                    FUN = function(x) {
-                        x[["url"]]
-                    },
-                    FUN.VALUE = "character"
-                )
-                # Remove trailing query string from URL.
-                basenames <- gsub("\\?.*$", "", basename(files))
-                # nocov end
-            } else {
-                basenames <- basename(files)
-            }
-            names(basenames) <- names(files)
-
-            markdownHeader("File downloads", level = headerLevel, asis = TRUE)
-            markdownList(c(
-                paste0(
-                    "[`", basenames[["all"]], "`]",
-                    "(", files[["all"]], "): ",
-                    "All genes, sorted by Ensembl identifier."
-                ),
-                paste0(
-                    "[`", basenames[["deg"]], "`]",
-                    "(", files[["deg"]], "): ",
-                    "Genes that pass the alpha (FDR) and",
-                    "log2 fold change (LFC) cutoffs."
-                ),
-                paste0(
-                    "[`", basenames[["degUp"]], "`]",
-                    "(", files[["degUp"]], "): ",
-                    "Upregulated DEG; positive fold change."
-                ),
-                paste0(
-                    "[`", basenames[["degDown"]], "`]",
-                    "(", files[["degDown"]], "): ",
-                    "Downregulated DEG; negative fold change."
-                )
-            ), asis = TRUE)
-        } else {
-            message("Object doesn't contain saved file paths.")
-        }
-
-        # Top tables -----------------------------------------------------------
+        # Top tables.
         markdownHeader("Top tables", level = headerLevel, asis = TRUE)
         topTables(object)
     }
