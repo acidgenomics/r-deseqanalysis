@@ -20,18 +20,17 @@
 #' @importFrom assertive.numbers assert_all_are_in_range
 #'   assert_all_are_non_negative
 #' @importFrom assertive.properties assert_has_names assert_is_non_empty
-#'   assert_is_of_length assert_is_scalar
-#' @importFrom assertive.sets are_disjoint_sets assert_are_disjoint_sets
-#'   assert_is_subset is_subset
+#'   assert_is_of_length assert_is_scalar has_names
+#' @importFrom assertive.sets assert_are_disjoint_sets assert_is_subset
 #' @importFrom assertive.types assert_is_a_bool assert_is_a_number
 #'   assert_is_a_string assert_is_all_of assert_is_any_of assert_is_character
 #'   assert_is_list assert_is_matrix assert_is_numeric is_a_number is_a_string
 #' @importFrom assertthat assert_that validate_that
 #' @importFrom basejump Gene2Symbol assertFormalGene2Symbol as_tibble
-#'   basejump_geom_label_repel camel initDir interestingGroups<-
-#'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
-#'   matchInterestingGroups methodFormals plotGene plotHeatmap plotPCA removeNA
-#'   sanitizeRowData showSlotInfo snake
+#'   basejump_geom_label_repel camel humanize initDir interestingGroups<-
+#'   makeNames mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
+#'   matchInterestingGroups plotGene plotHeatmap plotPCA sanitizeRowData
+#'   showSlotInfo snake standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom dplyr arrange desc everything filter left_join mutate pull rename
 #'   row_number select
@@ -52,11 +51,3 @@
 "_PACKAGE"
 
 globalVariables(".")
-
-#' @importFrom basejump Gene2Symbol
-#' @export
-basejump::Gene2Symbol
-
-#' @importFrom magrittr %>%
-#' @export
-magrittr::`%>%`

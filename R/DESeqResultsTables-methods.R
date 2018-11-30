@@ -45,7 +45,7 @@
 #'
 #' @examples
 #' data(deseq)
-#' 
+#'
 #' ## DESeqAnalysis ====
 #' x <- DESeqResultsTables(deseq)
 #' print(x)
@@ -53,14 +53,23 @@ NULL
 
 
 
-DESeqResultsTables.DESeqResults <-  # nolint
-    function(object) {
+DESeqResultsTables.DESeqAnalysis <-  # nolint
+    function(
+        object,
+        results = 1L,
+        lfcShrink = TRUE
+    ) {
         validObject(object)
-        assert_that(is(object, "DESeqResults"))
-        assert_is_subset(c("log2FoldChange", "padj"), colnames(object))
-        alpha <- metadata(object)[["alpha"]]
+        results <- .matchResults(
+            object = object,
+            results = results,
+            lfcShrink = lfcShrink
+        )
+
+        # Get the thresholds applied from DESeqResults metadata.
+        alpha <- metadata(results)[["alpha"]]
         assertIsAlpha(alpha)
-        lfcThreshold <- metadata(object)[["lfcThreshold"]]
+        lfcThreshold <- metadata(results)[["lfcThreshold"]]
         assert_is_a_number(lfcThreshold)
         assert_all_are_non_negative(lfcThreshold)
 
@@ -69,13 +78,10 @@ DESeqResultsTables.DESeqResults <-  # nolint
         testCol <- "padj"
         lfc <- sym(lfcCol)
         test <- sym(testCol)
-        assert_is_subset(
-            x = c(lfcCol, testCol),
-            y = colnames(object)
-        )
+        assert_is_subset(c(lfcCol, testCol), colnames(results))
 
         # DEG tables are sorted by adjusted P value.
-        deg <- object %>%
+        deg <- results %>%
             as_tibble(rownames = "rowname") %>%
             # Remove genes without an adjusted P value.
             filter(!is.na(!!test)) %>%
@@ -85,7 +91,8 @@ DESeqResultsTables.DESeqResults <-  # nolint
             arrange(!!test) %>%
             # Remove genes that don't pass LFC threshold.
             filter(!!lfc > !!lfcThreshold | !!lfc < -UQ(lfcThreshold))
-        # Get directional subsets.
+
+        # Get directional subsets. We'll stash these in the S4 object.
         up <- deg %>%
             filter(!!lfc > 0L) %>%
             pull("rowname")
@@ -93,8 +100,9 @@ DESeqResultsTables.DESeqResults <-  # nolint
             filter(!!lfc < 0L) %>%
             pull("rowname")
 
-        new(
+        out <- new(
             Class = "DESeqResultsTables",
+<<<<<<< HEAD
             results = object,
             deg = list(up = up, down = down)
         )
@@ -124,12 +132,11 @@ DESeqResultsTables.DESeqAnalysis <-  # nolint
         # Prepare the DESeqResultsTables object with our DESeqResults method.
         results <- .matchResults(
             object = object,
+=======
+>>>>>>> fea65586f8d60e551a0bbb9c5382bda1999081d3
             results = results,
-            lfcShrink = lfcShrink
+            deg = list(up = up, down = down)
         )
-        # Prepare the DESeqResultsTables object.
-        out <- DESeqResultsTables(results)
-        rm(results)
 
         # Automatically populate additional slots using DESeqDataSet.
         data <- as(object, "DESeqDataSet")
@@ -138,11 +145,9 @@ DESeqResultsTables.DESeqAnalysis <-  # nolint
         counts <- counts(data, normalized = TRUE)
         slot(out, "counts") <- counts
 
-        # Slot the row annotations (genomic ranges).
-        #
+        # Slot the row annotations ---------------------------------------------
         # DESeq2 includes additional columns in `mcols()` that aren't
         # informative for a user, and doesn't need to be included in the tables.
-        #
         # Instead, only keep informative columns that are character or factor.
         # Be sure to drop complex, non-atomic columns (e.g. list, S4) that are
         # allowed in GRanges/DataFrame but will fail to write to disk as CSV.
@@ -184,7 +189,6 @@ DESeqResultsTables.DESeqAnalysis <-  # nolint
         ) {
             slot(out, "sampleNames") <- sampleNames
         }
-
 
         # Slot metadata.
         slot(out, "metadata") <- list(
