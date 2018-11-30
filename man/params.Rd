@@ -4,9 +4,21 @@
 \alias{params}
 \title{Parameters}
 \arguments{
+\item{counts}{\code{matrix}. Normalized counts. Size-factor normalized counts or
+transcripts per million (TPM) are recommended.}
+
 \item{lfcShrink}{\code{boolean}. Use shrunken log2 fold change (LFC) values.}
 
 \item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
+
+\item{rowData}{\code{DataFrame}. Row annotation data.}
+
+\item{sampleNames}{Named \code{character}. Human readable sample names. Only
+applies when \code{counts} argument is defined. Names must correspond to
+\code{colnames} of \code{counts} (these should be valid in R; see \code{make.names()} for
+details). Values will be remapped onto the counts columns per sample in the
+exported file, and can contain non-alphanumeric characters, hyphens,
+spaces, or start with a number.}
 }
 \value{
 No value.
