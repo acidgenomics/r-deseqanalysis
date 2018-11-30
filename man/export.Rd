@@ -52,14 +52,11 @@ column in the CSV export.
 data(deseq)
 
 ## DESeqAnalysis ====
-export(deseq, dir = "example")
+export(deseq, dir = tempdir())
 
 ## DESeqResultsTables ====
 x <- DESeqResultsTables(deseq)
-export(x, dir = "example")
-
-## Clean up.
-unlink("example", recursive = TRUE)
+export(x, dir = tempdir())
 }
 \seealso{
 \code{rio::export()}.
