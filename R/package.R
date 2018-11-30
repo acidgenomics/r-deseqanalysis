@@ -27,7 +27,7 @@
 #'   assert_is_list assert_is_matrix assert_is_numeric is_a_string
 #' @importFrom assertthat assert_that
 #' @importFrom basejump Gene2Symbol assertFormalGene2Symbol as_tibble
-#'   basejump_geom_label_repel camel initDir interestingGroups<-
+#'   basejump_geom_label_repel camel humanize initDir interestingGroups<-
 #'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
 #'   matchInterestingGroups plotGene plotHeatmap plotPCA sanitizeRowData
 #'   showSlotInfo snake
@@ -48,10 +48,6 @@
 #' @importFrom tidyselect starts_with
 #' @importFrom utils capture.output globalVariables packageVersion
 "_PACKAGE"
-
-
-
-# copyToDropbox 
 
 
 
