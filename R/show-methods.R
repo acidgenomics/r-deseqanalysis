@@ -2,7 +2,7 @@
 #' @inherit methods::show
 #' @examples
 #' data(deseq)
-#' 
+#'
 #' ## DESeqAnalysis ====
 #' show(deseq)
 NULL
@@ -55,39 +55,13 @@ show.DESeqResultsTables <-  # nolint
     function(object) {
         validObject(object)
         results <- slot(object, "results")
-        deg <- slot(object, "deg")
         metadata <- slot(object, "metadata")
-
-        .showHeader(
-            object = object,
-            version = metadata[["version"]]
-        )
-
-        contrast <- contrastName(results)
-        alpha <- metadata(results)[["alpha"]]
-        lfcThreshold <- metadata(results)[["lfcThreshold"]]
-
-        list <- list(
-            contrast = contrast,
-            alpha = alpha,
-            lfcThreshold = lfcThreshold
-        )
-
-        # Include file paths, if they're stashed (from `export()`).
-        if (is.character(metadata[["export"]])) {
-            if (isTRUE(metadata[["dropbox"]])) {
-                name <- "dropbox"
-            } else {
-                name <- "dir"
-            }
-            files <- metadata[["export"]]
-            dirname <- unique(dirname(files))
-            assert_is_a_string(dirname)
-            list[[name]] <- dirname
-        }
-
-        showSlotInfo(list)
-
+        .showHeader(object = object, version = metadata[["version"]])
+        showSlotInfo(list(
+            contrast = contrastName(results),
+            alpha = metadata(results)[["alpha"]],
+            lfcThreshold = metadata(results)[["lfcThreshold"]]
+        ))
         # Include DESeqResults summary.
         summary <- capture.output(summary(results)) %>%
             # Remove leading and trailing whitespace.
