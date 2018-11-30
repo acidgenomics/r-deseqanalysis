@@ -21,7 +21,8 @@
 #'   assert_all_are_non_negative
 #' @importFrom assertive.properties assert_has_names assert_is_non_empty
 #'   assert_is_of_length assert_is_scalar has_names
-#' @importFrom assertive.sets assert_are_disjoint_sets assert_is_subset
+#' @importFrom assertive.sets are_disjoint_sets assert_are_disjoint_sets
+#'   assert_is_subset is_subset
 #' @importFrom assertive.types assert_is_a_bool assert_is_a_number
 #'   assert_is_a_string assert_is_all_of assert_is_any_of assert_is_character
 #'   assert_is_list assert_is_matrix assert_is_numeric is_a_number is_a_string

@@ -3,7 +3,6 @@
 \docType{methods}
 \name{DESeqResultsTables}
 \alias{DESeqResultsTables}
-\alias{DESeqResultsTables,DESeqResults-method}
 \alias{DESeqResultsTables,DESeqAnalysis-method}
 \title{DESeq2 Differential Expression Results Tables}
 \usage{

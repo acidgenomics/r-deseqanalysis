@@ -115,7 +115,11 @@
     
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for DESeqResultsTables</span>
+    <pre class="usage"><span class='co'># S4 method for DESeqAnalysis</span>
+<span class='fu'>export</span>(<span class='no'>x</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>compress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>human</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># S4 method for DESeqResultsTables</span>
 <span class='fu'>export</span>(<span class='no'>x</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>compress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -126,12 +130,22 @@
       <td><p>Object.</p></td>
     </tr>
     <tr>
+      <th>name</th>
+      <td><p><code>string</code>. Name to use on disk. If left <code>NULL</code>, will use the name
+of the object instead.</p></td>
+    </tr>
+    <tr>
       <th>dir</th>
       <td><p><code>string</code>. Directory path.</p></td>
     </tr>
     <tr>
       <th>compress</th>
       <td><p><code>boolean</code>. Apply gzip compression to all files.</p></td>
+    </tr>
+    <tr>
+      <th>human</th>
+      <td><p><code>boolean</code>. Automatically convert gene IDs to gene symbols in the
+<code><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>rownames()</a></code> and sample IDs to sample names in the <code><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames()</a></code>.</p></td>
     </tr>
     </table>
     
@@ -162,22 +176,10 @@ column in the CSV export.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
 
+<span class='co'>## DESeqAnalysis ====</span>
+<span class='fu'>export</span>(<span class='no'>deseq</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>())</div><div class='output co'>#&gt; <span class='message'>Exporting DESeqDataSet.</span></div><div class='output co'>#&gt; <span class='message'>Exporting assays: counts, mu, H, cooks</span></div><div class='output co'>#&gt; <span class='message'>Loading required namespace: rio</span></div><div class='output co'>#&gt; <span class='message'>Exported counts.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported mu.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported H.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported cooks.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported rowData.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported colData.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported data to /tmp/RtmpZnZ3gd/deseq/data.</span></div><div class='output co'>#&gt; <span class='message'>Exporting DESeqTransform.</span></div><div class='output co'>#&gt; <span class='message'>Exporting assays: assay</span></div><div class='output co'>#&gt; <span class='message'>Exported assay.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported rowData.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported colData.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported transform to /tmp/RtmpZnZ3gd/deseq/transform.</span></div><div class='output co'>#&gt; <span class='message'>Exporting results.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_B_vs_A.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exporting lfcShrink.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_B_vs_A.csv.</span></div><div class='input'>
 <span class='co'>## DESeqResultsTables ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='DESeqResultsTables.html'>DESeqResultsTables</a></span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='input'><span class='fu'>export</span>(<span class='no'>x</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"example"</span>)</div><div class='output co'>#&gt; <span class='message'>Joining annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining counts.</span></div><div class='output co'>#&gt; <span class='message'>Writing condition_b_vs_a_all.csv, condition_b_vs_a_up.csv, condition_b_vs_a_down.csv, condition_b_vs_a_both.csv to /home/ubuntu/git/DESeqAnalysis/docs/reference/example.</span></div><div class='output co'>#&gt; <span class='message'>Loading required namespace: rio</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_all.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_up.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_down.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_both.csv.</span></div><div class='output co'>#&gt; DESeqResultsTables 1.22.1
-#&gt; contrast: condition B vs A
-#&gt; alpha: 0.1
-#&gt; lfcThreshold: 0
-#&gt; dir: /home/ubuntu/git/DESeqAnalysis/docs/reference/example
-#&gt; out of 500 with nonzero total read count
-#&gt; adjusted p-value &lt; 0.1
-#&gt; LFC &gt; 0 (up)       : 82, 16%
-#&gt; LFC &lt; 0 (down)     : 89, 18%
-#&gt; outliers [1]       : 3, 0.6%
-#&gt; low counts [2]     : 20, 4%
-#&gt; (mean count &lt; 1)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list.files'>list.files</a></span>(<span class='st'>"example"</span>)</div><div class='output co'>#&gt; [1] "condition_b_vs_a_all.csv"  "condition_b_vs_a_both.csv"
-#&gt; [3] "condition_b_vs_a_down.csv" "condition_b_vs_a_up.csv"  </div><div class='input'>
-<span class='co'>## Clean up.</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"example"</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='DESeqResultsTables.html'>DESeqResultsTables</a></span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='input'><span class='fu'>export</span>(<span class='no'>x</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>())</div><div class='output co'>#&gt; <span class='message'>Joining annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining counts.</span></div><div class='output co'>#&gt; <span class='message'>Writing condition_b_vs_a_all.csv, condition_b_vs_a_deg_up.csv, condition_b_vs_a_deg_down.csv, condition_b_vs_a_deg_both.csv to /tmp/RtmpZnZ3gd.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_all.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_deg_up.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_deg_down.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_b_vs_a_deg_both.csv.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

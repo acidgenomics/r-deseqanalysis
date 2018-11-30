@@ -3,17 +3,27 @@
 \docType{methods}
 \name{export}
 \alias{export}
+\alias{export,DESeqAnalysis-method}
 \alias{export,DESeqResultsTables-method}
 \title{Export}
 \usage{
+\S4method{export}{DESeqAnalysis}(x, name = NULL, dir = ".",
+  compress = FALSE, human = FALSE)
+
 \S4method{export}{DESeqResultsTables}(x, dir = ".", compress = FALSE)
 }
 \arguments{
 \item{x}{Object.}
 
+\item{name}{\code{string}. Name to use on disk. If left \code{NULL}, will use the name
+of the object instead.}
+
 \item{dir}{\code{string}. Directory path.}
 
 \item{compress}{\code{boolean}. Apply gzip compression to all files.}
+
+\item{human}{\code{boolean}. Automatically convert gene IDs to gene symbols in the
+\code{rownames()} and sample IDs to sample names in the \code{colnames()}.}
 }
 \value{
 Invisible \code{character}. File path(s).
@@ -41,13 +51,12 @@ column in the CSV export.
 \examples{
 data(deseq)
 
+## DESeqAnalysis ====
+export(deseq, dir = tempdir())
+
 ## DESeqResultsTables ====
 x <- DESeqResultsTables(deseq)
-export(x, dir = "example")
-list.files("example")
-
-## Clean up.
-unlink("example", recursive = TRUE)
+export(x, dir = tempdir())
 }
 \seealso{
 \code{rio::export()}.
