@@ -20,7 +20,7 @@
 #' @importFrom assertive.numbers assert_all_are_in_range
 #'   assert_all_are_non_negative
 #' @importFrom assertive.properties assert_has_names assert_is_non_empty
-#'   assert_is_of_length assert_is_scalar
+#'   assert_is_of_length assert_is_scalar has_names
 #' @importFrom assertive.sets assert_are_disjoint_sets assert_is_subset
 #' @importFrom assertive.types assert_is_a_bool assert_is_a_number
 #'   assert_is_a_string assert_is_all_of assert_is_any_of assert_is_character
