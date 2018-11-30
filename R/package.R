@@ -28,9 +28,9 @@
 #' @importFrom assertthat assert_that
 #' @importFrom basejump Gene2Symbol assertFormalGene2Symbol as_tibble
 #'   basejump_geom_label_repel camel humanize initDir interestingGroups<-
-#'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
+#'   makeNames mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
 #'   matchInterestingGroups plotGene plotHeatmap plotPCA sanitizeRowData
-#'   showSlotInfo snake
+#'   showSlotInfo snake standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom dplyr arrange desc everything filter left_join mutate pull rename
 #'   row_number select
