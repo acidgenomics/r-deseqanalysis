@@ -31,7 +31,7 @@
 \item{direction}{\code{string}. Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 
 \item{clusteringMethod}{\code{string}. Clustering method. Accepts the same values
-as \code{\link[stats:hclust]{stats::hclust()}}.}
+as \code{stats::hclust()}.}
 
 \item{scale}{\code{string}. Whether the values should be centered and scaled in
 either the row or column direction ("\code{row}", "\code{column}"), or remain
@@ -39,7 +39,7 @@ unscaled ("\code{none}").}
 
 \item{title}{\code{string} or \code{NULL}. Plot title.}
 
-\item{interestingGroups}{\code{character} or \code{NULL}. Groups of interest that
+\item{interestingGroups}{\code{character}. Groups of interest that
 define the samples. If left unset, defaults to \code{sampleName}.}
 
 \item{clusterRows}{\code{boolean}. Arrange with hierarchical
@@ -62,10 +62,10 @@ column dendrograms. Use \code{0} to disable.}
 or values to use for plot. We generally recommend these hexadecimal
 functions from the viridis package:
 \itemize{
-\item \code{\link[viridis:viridis]{viridis::viridis()}} (\emph{default}).
-\item \code{\link[viridis:inferno]{viridis::inferno()}}.
-\item \code{\link[viridis:magma]{viridis::magma()}}.
-\item \code{\link[viridis:plasma]{viridis::plasma()}}.
+\item \code{viridis::viridis()} (\emph{default}).
+\item \code{viridis::inferno()}.
+\item \code{viridis::magma()}.
+\item \code{viridis::plasma()}.
 Alternatively, colors can be defined manually using hexadecimal values
 (e.g. \code{c("#FF0000", "#0000FF")}), but this is not generally recommended.
 Refer to the RColorBrewer package for hexadecimal color palettes that may
@@ -79,7 +79,7 @@ for legend labels. Note that hexadecimal values are not supported. If set
 \item{borderColor}{\code{string} or \code{NULL}. Border color. Disabled by default for
 improved aesthetics.}
 
-\item{...}{Passthrough arguments to \code{\link[pheatmap:pheatmap]{pheatmap::pheatmap()}}. The names of the
+\item{...}{Passthrough arguments to \code{pheatmap::pheatmap()}. The names of the
 arguments should be formatted in camel case, not snake case.}
 
 \item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
@@ -124,13 +124,13 @@ plotDEGHeatmap(
 }
 \seealso{
 \itemize{
-\item \code{\link[pheatmap:pheatmap]{pheatmap::pheatmap()}}.
-\item \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}}.
+\item \code{pheatmap::pheatmap()}.
+\item \code{RColorBrewer::brewer.pal()}.
 }
 
 \itemize{
-\item \code{\link[pheatmap:pheatmap]{pheatmap::pheatmap()}}.
-\item \code{\link[stats:cor]{stats::cor()}}.
-\item \code{\link[stats:hclust]{stats::hclust()}}.
+\item \code{pheatmap::pheatmap()}.
+\item \code{stats::cor()}.
+\item \code{stats::hclust()}.
 }
 }
