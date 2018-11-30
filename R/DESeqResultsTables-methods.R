@@ -24,7 +24,7 @@
 #'
 #' @section Log fold change threshold cutoffs:
 #'
-#' Refer to [DESeq2::results()] for additional information about using
+#' Refer to `DESeq2::results()` for additional information about using
 #' `lfcThreshold` and `altHypothesis` to set an alternative hypothesis based on
 #' expected fold changes. In addition, the "Hypothesis tests with thresholds on
 #' effect size" section in the DESeq2 paper provides additional explanation.
@@ -34,7 +34,7 @@
 #' expecting a biological effect size past a particular threshold, set
 #' `lfcThreshold`, but be conservative.
 #'
-#' This [thread][] on the Bioconductor forums explains how [DESeq2::results()]
+#' This [thread][] on the Bioconductor forums explains how `DESeq2::results()`
 #' should be called with regard to LFC cutoffs in nice detail. In particular,
 #' refer to Mike Love:
 #'
@@ -50,81 +50,16 @@
 #' [thread]: https://support.bioconductor.org/p/101504/
 #'
 #' @seealso
-#' - [DESeq2::results()].
-#' - [markdown()], [write()].
+#' - `DESeq2::results()`.
+#' - `markdown()`, `write()`.
 #'
 #' @examples
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' ## This is the recommended default method.
 #' x <- DESeqResultsTables(deseq)
 #' print(x)
-#'
-#' ## DESeqResults ====
-#' res <- as(deseq, "DESeqResults")
-#' x <- DESeqResultsTables(res)
-#' print(x)
 NULL
-
-
-
-DESeqResultsTables.DESeqResults <-  # nolint
-    function(object) {
-        validObject(object)
-        assert_that(is(object, "DESeqResults"))
-        assert_is_subset(c("log2FoldChange", "padj"), colnames(object))
-        alpha <- metadata(object)[["alpha"]]
-        assertIsAlpha(alpha)
-        lfcThreshold <- metadata(object)[["lfcThreshold"]]
-        assert_is_a_number(lfcThreshold)
-        assert_all_are_non_negative(lfcThreshold)
-
-        # Set LFC and test (P value) columns.
-        lfcCol <- "log2FoldChange"
-        testCol <- "padj"
-        lfc <- sym(lfcCol)
-        test <- sym(testCol)
-        assert_is_subset(
-            x = c(lfcCol, testCol),
-            y = colnames(object)
-        )
-
-        # DEG tables are sorted by adjusted P value.
-        deg <- object %>%
-            as_tibble(rownames = "rowname") %>%
-            # Remove genes without an adjusted P value.
-            filter(!is.na(!!test)) %>%
-            # Remove genes that don't pass alpha cutoff.
-            filter(!!test < !!alpha) %>%
-            # Arrange by adjusted P value.
-            arrange(!!test) %>%
-            # Remove genes that don't pass LFC threshold.
-            filter(!!lfc > !!lfcThreshold | !!lfc < -UQ(lfcThreshold))
-        # Get directional subsets.
-        up <- deg %>%
-            filter(!!lfc > 0L) %>%
-            pull("rowname")
-        down <- deg %>%
-            filter(!!lfc < 0L) %>%
-            pull("rowname")
-
-        new(
-            Class = "DESeqResultsTables",
-            results = object,
-            deg = list(up = up, down = down)
-        )
-    }
-
-
-
-#' @rdname DESeqResultsTables
-#' @export
-setMethod(
-    f = "DESeqResultsTables",
-    signature = signature("DESeqResults"),
-    definition = DESeqResultsTables.DESeqResults
-)
 
 
 
@@ -135,16 +70,51 @@ DESeqResultsTables.DESeqAnalysis <-  # nolint
         lfcShrink = TRUE
     ) {
         validObject(object)
-
-        # Prepare the DESeqResultsTables object with our DESeqResults method.
         results <- .matchResults(
             object = object,
             results = results,
             lfcShrink = lfcShrink
         )
-        # Prepare the DESeqResultsTables object.
-        out <- DESeqResultsTables(results)
-        rm(results)
+        
+        # Get the thresholds applied from DESeqResults metadata.
+        alpha <- metadata(results)[["alpha"]]
+        assertIsAlpha(alpha)
+        lfcThreshold <- metadata(results)[["lfcThreshold"]]
+        assert_is_a_number(lfcThreshold)
+        assert_all_are_non_negative(lfcThreshold)
+        
+        # Set LFC and test (P value) columns.
+        lfcCol <- "log2FoldChange"
+        testCol <- "padj"
+        lfc <- sym(lfcCol)
+        test <- sym(testCol)
+        assert_is_subset(c(lfcCol, testCol), colnames(results))
+        
+        # DEG tables are sorted by adjusted P value.
+        deg <- results %>%
+            as_tibble(rownames = "rowname") %>%
+            # Remove genes without an adjusted P value.
+            filter(!is.na(!!test)) %>%
+            # Remove genes that don't pass alpha cutoff.
+            filter(!!test < !!alpha) %>%
+            # Arrange by adjusted P value.
+            arrange(!!test) %>%
+            # Remove genes that don't pass LFC threshold.
+            filter(!!lfc > !!lfcThreshold | !!lfc < -UQ(lfcThreshold))
+        
+        # Get directional subsets. We'll stash these in the S4 object.
+        up <- deg %>%
+            filter(!!lfc > 0L) %>%
+            pull("rowname")
+        down <- deg %>%
+            filter(!!lfc < 0L) %>%
+            pull("rowname")
+        
+        out <- new(
+            Class = "DESeqResultsTables",
+            results = results,
+            deg = list(up = up, down = down)
+        )
 
         # Automatically populate additional slots using DESeqDataSet.
         data <- as(object, "DESeqDataSet")
@@ -153,11 +123,9 @@ DESeqResultsTables.DESeqAnalysis <-  # nolint
         counts <- counts(data, normalized = TRUE)
         slot(out, "counts") <- counts
 
-        # Slot the row annotations (genomic ranges).
-        #
+        # Slot the row annotations ---------------------------------------------
         # DESeq2 includes additional columns in `mcols()` that aren't
         # informative for a user, and doesn't need to be included in the tables.
-        #
         # Instead, only keep informative columns that are character or factor.
         # Be sure to drop complex, non-atomic columns (e.g. list, S4) that are
         # allowed in GRanges/DataFrame but will fail to write to disk as CSV.
@@ -199,7 +167,6 @@ DESeqResultsTables.DESeqAnalysis <-  # nolint
         ) {
             slot(out, "sampleNames") <- sampleNames
         }
-
 
         # Slot metadata.
         slot(out, "metadata") <- list(
