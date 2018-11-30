@@ -102,38 +102,6 @@ DESeqResultsTables.DESeqAnalysis <-  # nolint
 
         out <- new(
             Class = "DESeqResultsTables",
-<<<<<<< HEAD
-            results = object,
-            deg = list(up = up, down = down)
-        )
-    }
-
-
-
-#' @rdname DESeqResultsTables
-#' @usage NULL
-#' @export
-setMethod(
-    f = "DESeqResultsTables",
-    signature = signature("DESeqResults"),
-    definition = DESeqResultsTables.DESeqResults
-)
-
-
-
-DESeqResultsTables.DESeqAnalysis <-  # nolint
-    function(
-        object,
-        results = 1L,
-        lfcShrink = TRUE
-    ) {
-        validObject(object)
-
-        # Prepare the DESeqResultsTables object with our DESeqResults method.
-        results <- .matchResults(
-            object = object,
-=======
->>>>>>> fea65586f8d60e551a0bbb9c5382bda1999081d3
             results = results,
             deg = list(up = up, down = down)
         )
