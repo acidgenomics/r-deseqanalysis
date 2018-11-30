@@ -7,14 +7,11 @@
 #' data(deseq)
 #' 
 #' ## DESeqAnalysis ====
-#' export(deseq, dir = "example")
+#' export(deseq, dir = tempdir())
 #'
 #' ## DESeqResultsTables ====
 #' x <- DESeqResultsTables(deseq)
-#' export(x, dir = "example")
-#'
-#' ## Clean up.
-#' unlink("example", recursive = TRUE)
+#' export(x, dir = tempdir())
 NULL
 
 
@@ -114,10 +111,10 @@ export.DESeqAnalysis <- function(
                     file <- paste0(file, ".gz")
                 }
                 if (isTRUE(human)) {
-                    res[["geneID"]] <- rownames(res)
-                    rownames(res) <- dimnames[[1L]]
+                    x[["geneID"]] <- rownames(res)
+                    rownames(x) <- dimnames[[1L]]
                 }
-                export(res, file = file)
+                export(x, file = file)
             },
             SIMPLIFY = TRUE,
             USE.NAMES = TRUE
