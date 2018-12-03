@@ -3,22 +3,26 @@
 \docType{methods}
 \name{plotDEGHeatmap}
 \alias{plotDEGHeatmap}
-\alias{plotDEGHeatmap,DESeqResults-method}
 \alias{plotDEGHeatmap,DESeqAnalysis-method}
 \title{Plot Heatmap}
 \usage{
-\S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results, counts,
-  direction = c("both", "up", "down"), clusteringMethod = "ward.D2",
-  scale = "row", title = TRUE, interestingGroups = NULL,
-  clusterRows = TRUE, clusterCols = TRUE, showRownames = FALSE,
-  showColnames = TRUE, treeheightRow = 0L, treeheightCol = 50L,
-  color = viridis::viridis, legendColor = viridis::viridis,
-  borderColor = NULL, ...)
+\S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results = 1L,
+  contrastSamples = FALSE, direction = c("both", "up", "down"),
+  clusteringMethod = "ward.D2", scale = "row",
+  interestingGroups = NULL, clusterRows = TRUE, clusterCols = TRUE,
+  showRownames = FALSE, showColnames = TRUE, treeheightRow = 0L,
+  treeheightCol = 50L, color = viridis::viridis,
+  legendColor = viridis::viridis, borderColor = NULL, title = NULL,
+  ...)
 }
 \arguments{
 \item{object}{Object.}
 
-\item{counts}{\code{DESeqTransform}.}
+\item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
+
+\item{contrastSamples}{\code{boolean}. \strong{Experimental}. Only include the samples
+used to define the contrast passed to \code{DESeq2::results()}. This setting
+will break for complex DESeq2 contrasts (e.g. interaction effect).}
 
 \item{direction}{\code{string}. Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 
@@ -28,8 +32,6 @@ as \code{stats::hclust()}.}
 \item{scale}{\code{string}. Whether the values should be centered and scaled in
 either the row or column direction ("\code{row}", "\code{column}"), or remain
 unscaled ("\code{none}").}
-
-\item{title}{\code{string} or \code{NULL}. Plot title.}
 
 \item{interestingGroups}{\code{character}. Groups of interest that
 define the samples. If left unset, defaults to \code{sampleName}.}
@@ -71,10 +73,12 @@ for legend labels. Note that hexadecimal values are not supported. If set
 \item{borderColor}{\code{string} or \code{NULL}. Border color. Disabled by default for
 improved aesthetics.}
 
+\item{title}{\code{string} or \code{NULL}. Plot title.}
+
 \item{...}{Passthrough arguments to \code{pheatmap::pheatmap()}. The names of the
 arguments should be formatted in camel case, not snake case.}
 
-\item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
+\item{counts}{\code{DESeqTransform}.}
 }
 \value{
 \code{pheatmap}.

@@ -5,11 +5,15 @@
 
 
 
+# Do not allow post hoc alpha or lfcThreshold cutoffs here.
+
+
+
 #' @name plotDEGHeatmap
 #' @inherit basejump::plotHeatmap
 #' @inheritParams basejump::params
 #' @inheritParams params
-#' 
+#'
 #' @param counts `DESeqTransform`.
 #'
 #' @examples
@@ -28,25 +32,32 @@ basejump::plotDEGHeatmap
 
 
 
-plotDEGHeatmap.DESeqResults <-  # nolint
+plotDEGHeatmap.DESeqAnalysis <-  # nolint
     function(
         object,
-        counts,
+        results = 1L,
+        contrastSamples = FALSE,
         direction = c("both", "up", "down"),
         clusteringMethod = "ward.D2",
-        scale = "row",
-        title = TRUE
+        scale = "row"
     ) {
-        assert_is_all_of(object, "DESeqResults")
         validObject(object)
-        assert_is_all_of(counts, "DESeqTransform")
+        results <- .matchResults(object = object, results = results)
+        validObject(results)
+        counts <- as(object, "DESeqTransform")
         validObject(counts)
-        assert_are_identical(rownames(object), rownames(counts))
-        alpha <- metadata(object)[["alpha"]]
+        assert_are_identical(rownames(results), rownames(counts))
+        interestingGroups <- matchInterestingGroups(
+            object = counts,
+            interestingGroups = interestingGroups
+        )
+        interestingGroups(counts) <- interestingGroups
+        alpha <- metadata(results)[["alpha"]]
         assertIsAlpha(alpha)
-        lfcThreshold <- metadata(object)[["lfcThreshold"]]
+        lfcThreshold <- metadata(results)[["lfcThreshold"]]
         assert_is_a_number(lfcThreshold)
         assert_all_are_non_negative(lfcThreshold)
+        assert_is_a_bool(contrastSamples)
         direction <- match.arg(direction)
         assert_is_a_string(clusteringMethod)
         # Hiding the choices from the user by default, because in most cases row
@@ -55,7 +66,7 @@ plotDEGHeatmap.DESeqResults <-  # nolint
 
         # Get the character vector of DEGs.
         deg <- .deg(
-            object = object,
+            results = results,
             alpha = alpha,
             lfcThreshold = lfcThreshold,
             direction = direction
@@ -65,91 +76,55 @@ plotDEGHeatmap.DESeqResults <-  # nolint
             return(invisible())
         }
 
-        # Coerce DESeqTransform to RSE then SE to preserve rowData.
-        if (is(counts, "RangedSummarizedExperiment")) {
-            counts <- as(counts, "RangedSummarizedExperiment")
-        }
-        counts <- as(counts, "SummarizedExperiment")
+        se <- counts %>%
+            as("RangedSummarizedExperiment") %>%
+            as("SummarizedExperiment") %>%
+            .[deg, , drop = FALSE]
 
-        # Subset the counts to only contain DEGs.
-        counts <- counts[deg, , drop = FALSE]
+        # Subset the counts to match contrast samples, if desired.
+        if (isTRUE(contrastSamples)) {
+            samples <- .contrastSamples(results = results, counts = se)
+            assert_is_subset(samples, colnames(se))
+            se <- se[, samples, drop = FALSE]
+        }
 
         # Title
-        if (isTRUE(title)) {
-            title <- paste0(
-                contrastName(object), "\n",
-                "(",
-                "alpha < ", alpha, "; ",
-                "n = ", length(deg),
-                ")"
-            )
-        } else if (!is_a_string(title)) {
-            title <- NULL
+        title <- paste0(
+            contrastName(object), "\n",
+            length(deg), " genes; ",
+            "alpha < ", alpha
+        )
+        if (lfcThreshold > 0L) {
+            title <- paste0(title, "; lfc > ", lfcThreshold)
         }
 
-        # Using `do.call()` return with SummarizedExperiment method here.
+        # Using SummarizedExperiment method here.
         do.call(
             what = plotHeatmap,
             args = matchArgsToDoCall(
                 args = list(
-                    object = counts,
+                    object = se,
                     title = title
                 ),
                 removeFormals = c(
-                    "counts",
                     "alpha",
+                    "contrastSamples",
+                    "counts",
+                    "direction",
                     "lfcThreshold",
-                    "direction"
+                    "results"
                 )
             )
         )
     }
 
-f1 <- formals(plotDEGHeatmap.DESeqResults)
+f1 <- formals(plotDEGHeatmap.DESeqAnalysis)
 f2 <- methodFormals(
     f = "plotHeatmap",
     signature = "SummarizedExperiment",
     package = "basejump"
 )
 f2 <- f2[setdiff(names(f2), c(names(f1), "object", "assay"))]
-f <- c(f1, f2)
-formals(plotDEGHeatmap.DESeqResults) <- f
-
-
-
-#' @rdname plotDEGHeatmap
-#' @usage NULL
-#' @export
-setMethod(
-    f = "plotDEGHeatmap",
-    signature = signature("DESeqResults"),
-    definition = plotDEGHeatmap.DESeqResults
-)
-
-
-
-plotDEGHeatmap.DESeqAnalysis <-  # nolint
-    function(object, results) {
-        do.call(
-            what = plotDEGHeatmap,
-            args = matchArgsToDoCall(
-                args = list(
-                    # DESeqResults
-                    object = .matchResults(
-                        object = object,
-                        results = results
-                    ),
-                    # DESeqTransform
-                    counts = as(object, "DESeqTransform")
-                ),
-                removeFormals = "results"
-            )
-        )
-    }
-
-f1 <- formals(plotDEGHeatmap.DESeqAnalysis)
-f2 <- formals(plotDEGHeatmap.DESeqResults)
-f2 <- f2[setdiff(names(f2), names(f1))]
 f <- c(f1, f2)
 formals(plotDEGHeatmap.DESeqAnalysis) <- f
 
