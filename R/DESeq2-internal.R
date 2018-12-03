@@ -43,23 +43,28 @@
 # Match the samples in a DESeqDataSet used to define contrast in a corresponding
 # DESeqResults object. Note that this only works for simple (e.g. pairwise)
 # contrasts and will intentionally error for more complex comparisons.
-.contrastSamples <- function(data, results) {
-    colData <- colData(data)
-    assertHasRownames(colData)
+.contrastSamples <- function(results, counts) {
     contrast <- snake(contrastName(results))
     stopifnot(grepl("_vs_", contrast))
+
     # Figure out which column was used to define the pairwise contrast.
     match <- str_match(contrast, "^([[:alnum:]]+)_(.+)_vs_(.+)$")
     factor <- match[1L, 2L]
+
+    colData <- colData(counts)
+    assertHasRownames(colData)
     stopifnot(factor %in% colnames(colData))
     factor <- snake(colData[[factor]])
     assert_is_factor(factor)
+
     numerator <- match[1L, 3L]
     stopifnot(numerator %in% factor)
     denominator <- match[1L, 4L]
     stopifnot(denominator %in% factor)
+
     samples <- rownames(colData)[factor %in% c(numerator, denominator)]
     stopifnot(length(samples) > 1L)
+
     samples
 }
 
