@@ -25,7 +25,8 @@
 #'   assert_is_subset is_subset
 #' @importFrom assertive.types assert_is_a_bool assert_is_a_number
 #'   assert_is_a_string assert_is_all_of assert_is_any_of assert_is_character
-#'   assert_is_list assert_is_matrix assert_is_numeric is_a_number is_a_string
+#'   assert_is_factor assert_is_list assert_is_matrix assert_is_numeric
+#'   is_a_number is_a_string
 #' @importFrom assertthat assert_that validate_that
 #' @importFrom basejump Gene2Symbol assertFormalGene2Symbol as_tibble
 #'   basejump_geom_label_repel camel humanize initDir interestingGroups<-
@@ -38,7 +39,7 @@
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_density
 #'   geom_hline geom_point geom_vline ggplot guides labs scale_color_manual
 #'   scale_x_continuous scale_y_continuous theme
-#' @importFrom goalie assertIsAlpha assertIsAnImplicitInteger
+#' @importFrom goalie assertHasRownames assertIsAlpha assertIsAnImplicitInteger
 #'   assertIsHeaderLevel assertIsImplicitInteger assertIsStringOrNULL
 #'   validDimnames
 #' @importFrom knitr kable
