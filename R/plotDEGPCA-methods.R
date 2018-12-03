@@ -1,6 +1,4 @@
-# TODO Show lfcThreshold info on the plot.
-# FIXME Consider not exporting DESeqResults here...
-# Do not allow post hoc alpha, lfcThreshold cutoffs.
+# Do not allow post hoc alpha or lfcThreshold cutoffs here.
 
 
 
@@ -28,33 +26,48 @@ basejump::plotDEGPCA
 
 
 
-plotDEGPCA.DESeqResults <-  # nolint
+plotDEGPCA.DESeqAnalysis <-  # nolint
     function(
         object,
-        counts,
+        results,
+        contrastSamples = FALSE,
         direction = c("both", "up", "down")
     ) {
-        assert_is_all_of(object, "DESeqResults")
         validObject(object)
-        assert_is_all_of(counts, "DESeqTransform")
+        results <- .matchResults(object = object, results = results)
+        validObject(results)
+        counts <- as(object, "DESeqTransform")
         validObject(counts)
-        assert_are_identical(rownames(object), rownames(counts))
+        assert_are_identical(rownames(results), rownames(counts))
         interestingGroups <- matchInterestingGroups(
             object = counts,
             interestingGroups = interestingGroups
         )
         interestingGroups(counts) <- interestingGroups
-        alpha <- metadata(object)[["alpha"]]
+        alpha <- metadata(results)[["alpha"]]
         assertIsAlpha(alpha)
-        lfcThreshold <- metadata(object)[["lfcThreshold"]]
+        lfcThreshold <- metadata(results)[["lfcThreshold"]]
         assert_is_a_number(lfcThreshold)
         assert_all_are_non_negative(lfcThreshold)
+        assert_is_a_bool(contrastSamples)
         direction <- match.arg(direction)
         return <- match.arg(return)
 
+        # Dynamically set the subtitle, if LFC threshold is non-zero.
+        subtitle <- paste0(
+            length(deg), " genes; ",
+            "alpha < ", alpha
+        )
+        if (lfcThreshold > 0L) {
+            subtitle <- paste0(
+                subtitle, "; ",
+                "lfc > ", lfcThreshold
+            )
+        }
+
         # Get the character vector of DEGs.
         deg <- .deg(
-            object = object,
+            results = results,
             alpha = alpha,
             lfcThreshold = lfcThreshold,
             direction = direction
@@ -64,8 +77,19 @@ plotDEGPCA.DESeqResults <-  # nolint
             return(invisible())
         }
 
+        se <- counts %>%
+            as("RangedSummarizedExperiment") %>%
+            as("SummarizedExperiment") %>%
+            .[deg, , drop = FALSE]
+
+        # Subset the counts to match contrast samples, if desired.
+        if (isTRUE(contrastSamples)) {
+            samples <- .contrastSamples(results = results, counts = se)
+            assert_is_subset(samples, colnames(se))
+            se <- se[, samples, drop = FALSE]
+        }
+
         # Using SummarizedExperiment method here.
-        se <- as(counts[deg, , drop = FALSE], "SummarizedExperiment")
         do.call(
             what = plotPCA,
             args = list(
@@ -74,51 +98,19 @@ plotDEGPCA.DESeqResults <-  # nolint
                 ntop = Inf,
                 label = label,
                 title = contrastName(object),
-                subtitle = paste(length(deg), "genes;", "alpha <", alpha),
+                subtitle = subtitle,
                 return = return
             )
         )
     }
 
-f1 <- formals(plotDEGPCA.DESeqResults)
+f1 <- formals(plotDEGPCA.DESeqAnalysis)
 f2 <- methodFormals(
     f = "plotPCA",
     signature = "SummarizedExperiment",
     package = "basejump"
 )
 f2 <- f2[setdiff(names(f2), c("ntop", "subtitle", "title"))]
-f <- c(f1, f2)
-formals(plotDEGPCA.DESeqResults) <- f
-
-
-
-#' @rdname plotDEGPCA
-#' @usage NULL
-#' @export
-setMethod(
-    f = "plotDEGPCA",
-    signature = signature("DESeqResults"),
-    definition = plotDEGPCA.DESeqResults
-)
-
-
-
-plotDEGPCA.DESeqAnalysis <-  # nolint
-    function(object, results) {
-        results <- .matchResults(object = object, results = results)
-        counts <- slot(object, "transform")
-        do.call(
-            what = plotDEGPCA,
-            args = matchArgsToDoCall(
-                args = list(object = results, counts = counts),
-                removeFormals = "results"
-            )
-        )
-    }
-
-f1 <- formals(plotDEGPCA.DESeqAnalysis)
-f2 <- formals(plotDEGPCA.DESeqResults)
-f2 <- f2[setdiff(names(f2), names(f1))]
 f <- c(f1, f2)
 formals(plotDEGPCA.DESeqAnalysis) <- f
 
