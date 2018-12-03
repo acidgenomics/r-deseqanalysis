@@ -77,26 +77,26 @@ setValidity(
             # DESeqDataSet and DESeqTransform.
             identical(dimnames(data), dimnames(transform)),
             # DESeqDataSet and DESeqResults.
-            vapply(
+            all(vapply(
                 X = results,
                 FUN = function(x) {
                     identical(rownames(x), rownames(data))
                 },
                 FUN.VALUE = logical(1L)
-            )
+            ))
         )
 
         # Unshrunken and shrunken DESeqResults.
         if (length(lfcShrink) > 0L) {
             valid[["lfcShrink"]] <- validate_that(
-                mapply(
+                all(mapply(
                     unshrunken = results,
                     shrunken = lfcShrink,
                     FUN = function(unshrunken, shrunken) {
                         identical(rownames(unshrunken), rownames(shrunken))
                     },
                     SIMPLIFY = TRUE
-                )
+                ))
             )
         }
 
