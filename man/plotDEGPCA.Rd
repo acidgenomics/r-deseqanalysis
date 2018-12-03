@@ -47,8 +47,6 @@ palette globally, use
 internally and defaults to the first argument in the \code{character} vector.}
 
 \item{...}{Additional arguments.}
-
-\item{counts}{\code{DESeqTransform}.}
 }
 \value{
 \code{ggplot}.

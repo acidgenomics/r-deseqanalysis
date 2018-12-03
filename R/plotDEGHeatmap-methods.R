@@ -14,8 +14,6 @@
 #' @inheritParams basejump::params
 #' @inheritParams params
 #'
-#' @param counts `DESeqTransform`.
-#'
 #' @examples
 #' data(deseq)
 #'
