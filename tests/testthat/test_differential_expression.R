@@ -68,40 +68,22 @@ test_that("alphaSummary : DESeqDataSet", {
 
 
 # plotDEGHeatmap ===============================================================
-with_parameters_test_that(
-    "plotDEGHeatmap", {
-        expect_is(
-            object = do.call(what = plotDEGHeatmap, args = args),
-            class = "pheatmap"
-        )
-    },
-    args = list(
-        DESeqResults = list(
-            object = res,
-            counts = vst
-        ),
-        DESeqAnalysis = list(object = deseq)
+test_that("plotDEGHeatmap", {
+    expect_is(
+        object = plotDEGHeatmap(deseq),
+        class = "pheatmap"
     )
-)
+})
 
 
 
 # plotDEGPCA ===================================================================
-with_parameters_test_that(
-    "plotDEGPCA", {
-        expect_is(
-            object = do.call(what = plotDEGPCA, args = args),
-            class = "ggplot"
-        )
-    },
-    args = list(
-        DESeqResults = list(
-            object = res,
-            counts = vst
-        ),
-        DESeqAnalysis = list(object = deseq)
+test_that("plotDEGPCA", {
+    expect_is(
+        object = plotDEGPCA(deseq),
+        class = "ggplot"
     )
-)
+})
 
 
 
