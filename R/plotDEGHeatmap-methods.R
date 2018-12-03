@@ -63,14 +63,8 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         scale <- match.arg(scale, choices = c("row", "column", "none"))
 
         # Get the character vector of DEGs.
-        deg <- .deg(
-            results = results,
-            alpha = alpha,
-            lfcThreshold = lfcThreshold,
-            direction = direction
-        )
+        deg <- deg(object = results, direction = direction)
         if (!has_length(deg)) {
-            warning("No significant DEGs to plot.", call. = FALSE)
             return(invisible())
         }
 
@@ -88,7 +82,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
 
         # Title
         title <- paste0(
-            contrastName(object), "\n",
+            contrastName(results), "\n",
             length(deg), " genes; ",
             "alpha < ", alpha
         )
