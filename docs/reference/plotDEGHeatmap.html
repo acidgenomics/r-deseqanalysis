@@ -116,13 +116,14 @@
     </div>
 
     <pre class="usage"><span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='no'>counts</span>,
-  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='kw'>clusteringMethod</span> <span class='kw'>=</span> <span class='st'>"ward.D2"</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='st'>"row"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>clusterRows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>clusterCols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>showRownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>showColnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>treeheightRow</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='kw'>treeheightCol</span> <span class='kw'>=</span> <span class='fl'>50L</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw pkg'>viridis</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/viridis/topics/reexports'>viridis</a></span>, <span class='kw'>legendColor</span> <span class='kw'>=</span> <span class='kw pkg'>viridis</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/viridis/topics/reexports'>viridis</a></span>,
-  <span class='kw'>borderColor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
+  <span class='kw'>contrastSamples</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
+  <span class='kw'>clusteringMethod</span> <span class='kw'>=</span> <span class='st'>"ward.D2"</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='st'>"row"</span>,
+  <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>clusterRows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>clusterCols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>showRownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>showColnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>treeheightRow</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
+  <span class='kw'>treeheightCol</span> <span class='kw'>=</span> <span class='fl'>50L</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw pkg'>viridis</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/viridis/topics/reexports'>viridis</a></span>,
+  <span class='kw'>legendColor</span> <span class='kw'>=</span> <span class='kw pkg'>viridis</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/viridis/topics/reexports'>viridis</a></span>, <span class='kw'>borderColor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -132,8 +133,14 @@
       <td><p>Object.</p></td>
     </tr>
     <tr>
-      <th>counts</th>
-      <td><p><code>DESeqTransform</code>.</p></td>
+      <th>results</th>
+      <td><p><code>scalar</code>. Position or name of <code>DESeqResults</code>.</p></td>
+    </tr>
+    <tr>
+      <th>contrastSamples</th>
+      <td><p><code>boolean</code>. <strong>Experimental</strong>. Only include the samples
+used to define the contrast passed to <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>DESeq2::results()</a></code>. This setting
+will break for complex DESeq2 contrasts (e.g. interaction effect).</p></td>
     </tr>
     <tr>
       <th>direction</th>
@@ -149,10 +156,6 @@ as <code><a href='https://www.rdocumentation.org/packages/stats/topics/hclust'>s
       <td><p><code>string</code>. Whether the values should be centered and scaled in
 either the row or column direction ("<code>row</code>", "<code>column</code>"), or remain
 unscaled ("<code>none</code>").</p></td>
-    </tr>
-    <tr>
-      <th>title</th>
-      <td><p><code>string</code> or <code>NULL</code>. Plot title.</p></td>
     </tr>
     <tr>
       <th>interestingGroups</th>
@@ -214,13 +217,13 @@ for legend labels. Note that hexadecimal values are not supported. If set
 improved aesthetics.</p></td>
     </tr>
     <tr>
+      <th>title</th>
+      <td><p><code>string</code> or <code>NULL</code>. Plot title.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>Passthrough arguments to <code><a href='https://www.rdocumentation.org/packages/pheatmap/topics/pheatmap'>pheatmap::pheatmap()</a></code>. The names of the
 arguments should be formatted in camel case, not snake case.</p></td>
-    </tr>
-    <tr>
-      <th>results</th>
-      <td><p><code>scalar</code>. Position or name of <code>DESeqResults</code>.</p></td>
     </tr>
     </table>
     
@@ -261,7 +264,7 @@ or <code>clusterCols</code> to <code>FALSE</code>.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotDEGHeatmap</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='img'><img src='plotDEGHeatmap-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plotDEGHeatmap</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A</span></div><div class='img'><img src='plotDEGHeatmap-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
