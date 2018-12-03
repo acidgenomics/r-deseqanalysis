@@ -52,14 +52,8 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
         return <- match.arg(return)
 
         # Get the character vector of DEGs.
-        deg <- .deg(
-            results = results,
-            alpha = alpha,
-            lfcThreshold = lfcThreshold,
-            direction = direction
-        )
+        deg <- deg(object = results, direction = direction)
         if (!has_length(deg)) {
-            warning("No significant DEGs to plot.", call. = FALSE)
             return(invisible())
         }
 
@@ -89,7 +83,7 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
                 interestingGroups = interestingGroups,
                 ntop = Inf,
                 label = label,
-                title = contrastName(object),
+                title = contrastName(results),
                 subtitle = subtitle,
                 return = return
             )

@@ -29,7 +29,7 @@
 #'   is_a_number is_a_string
 #' @importFrom assertthat assert_that validate_that
 #' @importFrom basejump Gene2Symbol assertFormalGene2Symbol as_tibble
-#'   basejump_geom_label_repel camel humanize initDir interestingGroups<-
+#'   basejump_geom_label_repel camel deg humanize initDir interestingGroups<-
 #'   makeNames mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
 #'   matchInterestingGroups methodFormals plotGene plotHeatmap plotPCA removeNA
 #'   sanitizeRowData showSlotInfo snake standardizeCall
