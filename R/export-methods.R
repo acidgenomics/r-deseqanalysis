@@ -24,107 +24,108 @@ basejump::export
 
 # Consider using `methodFormals()` here to get the formals from
 # SummarizedExperiment method exported in basejump.
-export.DESeqAnalysis <- function(
-    x,
-    name = NULL,
-    dir = ".",
-    compress = FALSE,
-    human = FALSE
-) {
-    validObject(x)
-    call <- standardizeCall()
-    assertIsStringOrNULL(name)
-    if (is.null(name)) {
-        name <- as.character(call[["x"]])
-    }
-    # Note that we're combining the dir with name, so we can set subdirectories
-    # for each slotted data type (e.g. DESeqDataSet).
-    dir <- initDir(file.path(dir, name))
-    rm(name)
-
-    files <- list()
-
-    # Using inherited SummarizedExperiment method here.
-    message("Exporting DESeqDataSet.")
-    data <- slot(x, name = "data")
-    stopifnot(is(data, "DESeqDataSet"))
-    files[["data"]] <- export(
-        x = data,
-        name = "data",
-        dir = dir,
-        compress = compress,
-        human = human
-    )
-
-    # Only export the assay from this object, as we already have the
-    # corresponding `rowRanges()` and `colData()` in the DESeqDataSet.
-    message("Exporting DESeqTransform.")
-    transform <- slot(x, name = "transform")
-    stopifnot(is(transform, "DESeqTransform"))
-    files[["transform"]] <- export(
-        x = transform,
-        name = "transform",
-        dir = dir,
-        compress = compress,
-        human = human
-    )
-
-    # Humanize rownames and colnames if necessary.
-    if (isTRUE(human)) {
-        data <- humanize(data)
-    }
-    dimnames <- dimnames(data)
-
-    # Define an internal function that work on both unshrunken and shrunken
-    # results.
-    exportResults <- function(slotName = c("results", "lfcShrink")) {
-        slotName <- match.arg(slotName)
-        list <- slot(x, name = slotName)
-        assert_is_list(list)
-        if (!is(list[[1L]], "DESeqResults")) {
-            message(paste(
-                slotName, "does not contain DESeqResults.",
-                "Skipping export."
-            ))
-            return(NULL)
+export.DESeqAnalysis <-  # nolint
+    function(
+        x,
+        name = NULL,
+        dir = ".",
+        compress = FALSE,
+        human = FALSE
+    ) {
+        validObject(x)
+        call <- standardizeCall()
+        assertIsStringOrNULL(name)
+        if (is.null(name)) {
+            name <- as.character(call[["x"]])
         }
-        message(paste0("Exporting ", slotName, "."))
-        if (!has_names(list)) {
-            names(list) <- makeNames(vapply(
-                X = list,
-                FUN = contrastName,
-                FUN.VALUE = character(1L)
-            ))
-        }
-        mapply(
-            name = names(list),
-            x = list,
-            MoreArgs = list(
-                dir = file.path(dir, slotName),
-                compress = compress,
-                human = human
-            ),
-            FUN = function(name, x, dir, compress, human) {
-                file <- file.path(dir, paste0(name, ".csv"))
-                if (isTRUE(compress)) {
-                    file <- paste0(file, ".gz")
-                }
-                if (isTRUE(human)) {
-                    x[["geneID"]] <- rownames(x)
-                    rownames(x) <- dimnames[[1L]]
-                }
-                export(x, file = file)
-            },
-            SIMPLIFY = TRUE,
-            USE.NAMES = TRUE
+        # Note that we're combining the dir with name, so we can set
+        # subdirectories for each slotted data type (e.g. DESeqDataSet).
+        dir <- initDir(file.path(dir, name))
+        rm(name)
+
+        files <- list()
+
+        # Using inherited SummarizedExperiment method here.
+        message("Exporting DESeqDataSet.")
+        data <- slot(x, name = "data")
+        stopifnot(is(data, "DESeqDataSet"))
+        files[["data"]] <- export(
+            x = data,
+            name = "data",
+            dir = dir,
+            compress = compress,
+            human = human
         )
+
+        # Only export the assay from this object, as we already have the
+        # corresponding `rowRanges()` and `colData()` in the DESeqDataSet.
+        message("Exporting DESeqTransform.")
+        transform <- slot(x, name = "transform")
+        stopifnot(is(transform, "DESeqTransform"))
+        files[["transform"]] <- export(
+            x = transform,
+            name = "transform",
+            dir = dir,
+            compress = compress,
+            human = human
+        )
+
+        # Humanize rownames and colnames if necessary.
+        if (isTRUE(human)) {
+            data <- humanize(data)
+        }
+        dimnames <- dimnames(data)
+
+        # Define an internal function that work on both unshrunken and shrunken
+        # results.
+        exportResults <- function(slotName = c("results", "lfcShrink")) {
+            slotName <- match.arg(slotName)
+            list <- slot(x, name = slotName)
+            assert_is_list(list)
+            if (!is(list[[1L]], "DESeqResults")) {
+                message(paste(
+                    slotName, "does not contain DESeqResults.",
+                    "Skipping export."
+                ))
+                return(NULL)
+            }
+            message(paste0("Exporting ", slotName, "."))
+            if (!has_names(list)) {
+                names(list) <- makeNames(vapply(
+                    X = list,
+                    FUN = contrastName,
+                    FUN.VALUE = character(1L)
+                ))
+            }
+            mapply(
+                name = names(list),
+                x = list,
+                MoreArgs = list(
+                    dir = file.path(dir, slotName),
+                    compress = compress,
+                    human = human
+                ),
+                FUN = function(name, x, dir, compress, human) {
+                    file <- file.path(dir, paste0(name, ".csv"))
+                    if (isTRUE(compress)) {
+                        file <- paste0(file, ".gz")
+                    }
+                    if (isTRUE(human)) {
+                        x[["geneID"]] <- rownames(x)
+                        rownames(x) <- dimnames[[1L]]
+                    }
+                    export(x, file = file)
+                },
+                SIMPLIFY = TRUE,
+                USE.NAMES = TRUE
+            )
+        }
+
+        files[["results"]] <- exportResults("results")
+        files[["lfcShrink"]] <- exportResults("lfcShrink")
+
+        invisible(files)
     }
-
-    files[["results"]] <- exportResults("results")
-    files[["lfcShrink"]] <- exportResults("lfcShrink")
-
-    invisible(files)
-}
 
 
 
