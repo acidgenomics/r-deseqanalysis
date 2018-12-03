@@ -75,6 +75,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
             samples <- contrastSamples(object)
             assert_is_subset(samples, colnames(se))
             se <- se[, samples, drop = FALSE]
+            colData(se) <- relevelColData(colData(se))
         }
 
         # Title
