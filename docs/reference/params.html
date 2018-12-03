@@ -120,6 +120,12 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>contrastSamples</th>
+      <td><p><code>boolean</code>. <strong>Experimental</strong>. Only include the samples
+used to define the contrast passed to <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>DESeq2::results()</a></code>. This setting
+will break for complex DESeq2 contrasts (e.g. interaction effect).</p></td>
+    </tr>
+    <tr>
       <th>lfcShrink</th>
       <td><p><code>boolean</code>. Use shrunken log2 fold change (LFC) values.</p></td>
     </tr>
