@@ -29,7 +29,7 @@ basejump::plotDEGPCA
 plotDEGPCA.DESeqAnalysis <-  # nolint
     function(
         object,
-        results,
+        results = 1L,
         contrastSamples = FALSE,
         direction = c("both", "up", "down")
     ) {
@@ -53,18 +53,6 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
         direction <- match.arg(direction)
         return <- match.arg(return)
 
-        # Dynamically set the subtitle, if LFC threshold is non-zero.
-        subtitle <- paste0(
-            length(deg), " genes; ",
-            "alpha < ", alpha
-        )
-        if (lfcThreshold > 0L) {
-            subtitle <- paste0(
-                subtitle, "; ",
-                "lfc > ", lfcThreshold
-            )
-        }
-
         # Get the character vector of DEGs.
         deg <- .deg(
             results = results,
@@ -87,6 +75,12 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
             samples <- .contrastSamples(results = results, counts = se)
             assert_is_subset(samples, colnames(se))
             se <- se[, samples, drop = FALSE]
+        }
+
+        # Subtitle.
+        subtitle <- paste0(length(deg), " genes; alpha < ", alpha)
+        if (lfcThreshold > 0L) {
+            subtitle <- paste0(subtitle, "; lfc > ", lfcThreshold)
         }
 
         # Using SummarizedExperiment method here.

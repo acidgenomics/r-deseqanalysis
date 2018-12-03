@@ -1,3 +1,8 @@
+# FIXME Need to slot DESeqAnalysis package version in object...
+# Define a `metadata()` list and slot prototype metadata.
+
+
+
 validateS4 <- function(...) {
     list <- list(...)
     if (is.list(list[[1L]])) {

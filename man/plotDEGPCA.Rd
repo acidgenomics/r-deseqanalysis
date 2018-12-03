@@ -3,13 +3,13 @@
 \docType{methods}
 \name{plotDEGPCA}
 \alias{plotDEGPCA}
-\alias{plotDEGPCA,DESeqResults-method}
 \alias{plotDEGPCA,DESeqAnalysis-method}
 \title{Plot DEG PCA}
 \usage{
-\S4method{plotDEGPCA}{DESeqAnalysis}(object, results, counts,
-  direction = c("both", "up", "down"), assay = 1L,
-  interestingGroups = NULL, label = getOption("basejump.label", FALSE),
+\S4method{plotDEGPCA}{DESeqAnalysis}(object, results = 1L,
+  contrastSamples = FALSE, direction = c("both", "up", "down"), object,
+  assay = 1L, interestingGroups = NULL,
+  label = getOption("basejump.label", FALSE),
   color = getOption("basejump.color.discrete", NULL),
   pointSize = getOption("basejump.point.size", 3L),
   return = c("ggplot", "DataFrame"), ...)
@@ -17,7 +17,11 @@
 \arguments{
 \item{object}{Object.}
 
-\item{counts}{\code{DESeqTransform}.}
+\item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
+
+\item{contrastSamples}{\code{boolean}. \strong{Experimental}. Only include the samples
+used to define the contrast passed to \code{DESeq2::results()}. This setting
+will break for complex DESeq2 contrasts (e.g. interaction effect).}
 
 \item{direction}{\code{string}. Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 
@@ -44,7 +48,7 @@ internally and defaults to the first argument in the \code{character} vector.}
 
 \item{...}{Additional arguments.}
 
-\item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
+\item{counts}{\code{DESeqTransform}.}
 }
 \value{
 \code{ggplot}.
