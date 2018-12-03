@@ -1,5 +1,6 @@
 #' @name deg
 #' @inherit basejump::deg
+#' @inheritParams params
 #' @examples
 #' data(deseq)
 #'

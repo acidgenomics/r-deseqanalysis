@@ -15,6 +15,8 @@
 }
 \arguments{
 \item{object}{Object.}
+
+\item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
 }
 \value{
 \code{character}. Gene identifiers.
