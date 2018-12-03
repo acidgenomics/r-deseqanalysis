@@ -6,3 +6,14 @@ setGeneric(
         standardGeneric("DESeqResultsTables")
     }
 )
+
+
+
+#' @rdname contrastSamples
+#' @export
+setGeneric(
+    name = "contrastSamples",
+    def = function(object, ...) {
+        standardGeneric("contrastSamples")
+    }
+)
