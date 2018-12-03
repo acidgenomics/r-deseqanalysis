@@ -31,8 +31,8 @@
 #' @importFrom basejump Gene2Symbol assertFormalGene2Symbol as_tibble
 #'   basejump_geom_label_repel camel deg humanize initDir interestingGroups<-
 #'   makeNames mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
-#'   matchInterestingGroups methodFormals plotGene plotHeatmap plotPCA removeNA
-#'   sanitizeRowData showSlotInfo snake standardizeCall
+#'   matchInterestingGroups methodFormals plotGene plotHeatmap plotPCA
+#'   relevelColData removeNA sanitizeRowData showSlotInfo snake standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom dplyr arrange desc everything filter left_join mutate pull rename
 #'   row_number select
