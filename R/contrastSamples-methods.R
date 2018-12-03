@@ -1,8 +1,9 @@
 #' Match the Samples Used to Define Contrast
 #'
-#' Match the samples in a `DESeqDataSet` used to define contrast in a corresponding
-#' `DESeqResults` object. Note that this only works for simple (e.g. pairwise)
-#' contrasts and will intentionally error for more complex comparisons.
+#' Match the samples in a `DESeqDataSet` used to define contrast in a
+#' corresponding `DESeqResults` object. Note that this only works for simple
+#' (e.g. pairwise) contrasts and will intentionally error for more complex
+#' comparisons.
 #'
 #' @note **EXPERIMENTAL METHOD**. This approach will error intentionally for
 #'   `DESeqResults` objects generated with complex contrasts (e.g. interaction

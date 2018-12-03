@@ -40,15 +40,12 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         scale = "row"
     ) {
         validObject(object)
-        results <- .matchResults(object = object, results = results)
+        results <- .matchResults(object, results)
         validObject(results)
         counts <- as(object, "DESeqTransform")
         validObject(counts)
         assert_are_identical(rownames(results), rownames(counts))
-        interestingGroups <- matchInterestingGroups(
-            object = counts,
-            interestingGroups = interestingGroups
-        )
+        interestingGroups <- matchInterestingGroups(counts, interestingGroups)
         interestingGroups(counts) <- interestingGroups
         alpha <- metadata(results)[["alpha"]]
         assertIsAlpha(alpha)
@@ -75,7 +72,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
 
         # Subset the counts to match contrast samples, if desired.
         if (isTRUE(contrastSamples)) {
-            samples <- .contrastSamples(results = results, counts = se)
+            samples <- contrastSamples(object)
             assert_is_subset(samples, colnames(se))
             se <- se[, samples, drop = FALSE]
         }
