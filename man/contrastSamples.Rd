@@ -21,9 +21,10 @@ contrastSamples(object, ...)
 \code{character}. Sample identifiers (corresponding to columns).
 }
 \description{
-Match the samples in a \code{DESeqDataSet} used to define contrast in a corresponding
-\code{DESeqResults} object. Note that this only works for simple (e.g. pairwise)
-contrasts and will intentionally error for more complex comparisons.
+Match the samples in a \code{DESeqDataSet} used to define contrast in a
+corresponding \code{DESeqResults} object. Note that this only works for simple
+(e.g. pairwise) contrasts and will intentionally error for more complex
+comparisons.
 }
 \note{
 \strong{EXPERIMENTAL METHOD}. This approach will error intentionally for
