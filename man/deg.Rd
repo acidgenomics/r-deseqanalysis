@@ -16,6 +16,15 @@
 \arguments{
 \item{object}{Object.}
 
+\item{alpha}{\code{scalar numeric}. Adjusted P value ("alpha") cutoff.
+If left \code{NULL}, will use the cutoff defined in the object.}
+
+\item{lfcThreshold}{\code{scalar numeric}. Log fold change ratio (base
+2) cutoff threshold. If left \code{NULL}, will use the cutoff defined in the
+object.}
+
+\item{direction}{\code{string}. Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
+
 \item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
 }
 \value{
