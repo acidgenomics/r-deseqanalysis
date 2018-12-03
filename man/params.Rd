@@ -4,6 +4,10 @@
 \alias{params}
 \title{Parameters}
 \arguments{
+\item{contrastSamples}{\code{boolean}. \strong{Experimental}. Only include the samples
+used to define the contrast passed to \code{DESeq2::results()}. This setting
+will break for complex DESeq2 contrasts (e.g. interaction effect).}
+
 \item{lfcShrink}{\code{boolean}. Use shrunken log2 fold change (LFC) values.}
 
 \item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
