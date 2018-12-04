@@ -8,12 +8,11 @@
 \usage{
 \S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results = 1L,
   contrastSamples = FALSE, direction = c("both", "up", "down"),
-  clusteringMethod = "ward.D2", scale = "row",
-  interestingGroups = NULL, clusterRows = TRUE, clusterCols = TRUE,
-  showRownames = FALSE, showColnames = TRUE, treeheightRow = 0L,
-  treeheightCol = 50L, color = viridis::viridis,
-  legendColor = viridis::viridis, borderColor = NULL, title = NULL,
-  ...)
+  scale = "row", clusteringMethod = "ward.D2", clusterRows = TRUE,
+  clusterCols = TRUE, interestingGroups = NULL, showRownames = FALSE,
+  showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
+  color = viridis::viridis, legendColor = viridis::viridis,
+  borderColor = NULL, title = NULL, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -26,21 +25,21 @@ will break for complex DESeq2 contrasts (e.g. interaction effect).}
 
 \item{direction}{\code{string}. Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 
-\item{clusteringMethod}{\code{string}. Clustering method. Accepts the same values
-as \code{stats::hclust()}.}
-
 \item{scale}{\code{string}. Whether the values should be centered and scaled in
 either the row or column direction ("\code{row}", "\code{column}"), or remain
 unscaled ("\code{none}").}
 
-\item{interestingGroups}{\code{character}. Groups of interest that
-define the samples. If left unset, defaults to \code{sampleName}.}
+\item{clusteringMethod}{\code{string}. Clustering method. Accepts the same values
+as \code{stats::hclust()}.}
 
 \item{clusterRows}{\code{boolean}. Arrange with hierarchical
 clustering.}
 
 \item{clusterCols}{\code{boolean}. Arrange with hierarchical
 clustering.}
+
+\item{interestingGroups}{\code{character}. Groups of interest that
+define the samples. If left unset, defaults to \code{sampleName}.}
 
 \item{showRownames}{\code{boolean}. Show row or column names.}
 
@@ -98,9 +97,23 @@ of the matrix.
 
 
 
-By default, row- and column-wise hierarchical clustering is performed using
-the Ward method, but this behavior can be overrided by setting \code{clusterRows}
-or \code{clusterCols} to \code{FALSE}.
+Row- and column-wise hierarchical clustering is performed when \code{clusterRows}
+and/or \code{clusterCols} are set to \code{TRUE}. Internally, this calls \code{hclust()},
+and defaults to the Ward method.
+
+Automatic hierarchical clustering of rows and/or columns can error for some
+datasets. When this occurs, you'll likely see this error:\preformatted{Error in hclust(d, method = method) :
+NA/NaN/Inf in foreign function call
+}
+
+In this case, either set \code{clusterRows} and/or \code{clusterCols} to \code{FALSE}, or
+you can attempt to pass an \code{hclust} object to these arguments. This is
+recommended as an alternate approach to be used with \code{pheatmap::pheatmap()},
+which is called internally by our plotting code. Here's how this can be
+accomplished:\preformatted{mat <- assay(mat)
+dist <- dist(mat)
+hclust <- hclust(dist, method = "ward.D2")
+}
 
 }
 
