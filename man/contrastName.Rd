@@ -5,14 +5,11 @@
 \alias{contrastName}
 \alias{contrastName,DESeqResults-method}
 \alias{contrastName,DESeqAnalysis-method}
-\alias{contrastName,DESeqResultsTables-method}
 \title{Contrast Name}
 \usage{
 \S4method{contrastName}{DESeqResults}(object)
 
 \S4method{contrastName}{DESeqAnalysis}(object, results)
-
-\S4method{contrastName}{DESeqResultsTables}(object)
 }
 \arguments{
 \item{object}{Object.}

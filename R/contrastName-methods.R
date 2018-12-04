@@ -5,7 +5,7 @@
 #' @inheritParams params
 #' @examples
 #' data(deseq)
-#' 
+#'
 #' ## DESeqResults ====
 #' object <- as(deseq, "DESeqResults")
 #' contrastName(object)
@@ -65,21 +65,4 @@ setMethod(
     f = "contrastName",
     signature = signature("DESeqAnalysis"),
     definition = contrastName.DESeqAnalysis
-)
-
-
-
-contrastName.DESeqResultsTables <-  # nolint
-    function(object) {
-        contrastName(slot(object, name = "results"))
-    }
-
-
-
-#' @rdname contrastName
-#' @export
-setMethod(
-    f = "contrastName",
-    signature = signature("DESeqResultsTables"),
-    definition = contrastName.DESeqResultsTables
 )
