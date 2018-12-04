@@ -42,7 +42,7 @@ resultsTables.DESeqAnalysis <-  # nolint
     function(
         object,
         results = 1L,
-        return = c("DataFrame", "tbl_df")
+        return = c("tbl_df", "DataFrameList")
     ) {
         validObject(object)
         return <- match.arg(return)
@@ -110,7 +110,7 @@ resultsTables.DESeqAnalysis <-  # nolint
 
         switch(
             EXPR = return,
-            DataFrame = out,
+            DataFrameList = DataFrameList(out),
             tbl_df = lapply(out, as_tibble)
         )
     }
