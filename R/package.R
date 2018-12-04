@@ -15,6 +15,7 @@
 #'
 #' @importFrom DESeq2 results resultsNames
 #' @importFrom S4Vectors as.data.frame head mcols mcols<- metadata
+#' @importFrom SummarizedExperiment colData colData<-
 #' @importFrom assertive.base assert_all_are_true assert_are_identical
 #' @importFrom assertive.files assert_all_are_existing_files
 #' @importFrom assertive.numbers assert_all_are_in_range
