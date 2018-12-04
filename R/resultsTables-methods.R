@@ -77,6 +77,7 @@ resultsTables.DESeqAnalysis <-  # nolint
         # write to disk as CSV. Note that we're using `decode()` here to handle
         # S4 Rle columns from the Genomic Ranges.
         if (isTRUE(rowData)) {
+            message("Joining row annotations.")
             rowData <- decode(rowData(dds))
             assertHasRownames(rowData)
             keep <- vapply(
@@ -100,6 +101,7 @@ resultsTables.DESeqAnalysis <-  # nolint
 
         # Join the normalized counts.
         if (isTRUE(counts)) {
+            message("Joining size factor adjusted normalized counts.")
             # We're using the size factor adjusted normalized counts here.
             counts <- counts(dds, normalized = TRUE)
             assert_are_identical(rownames(all), rownames(counts))
