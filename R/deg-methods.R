@@ -37,39 +37,49 @@ deg.DESeqResults <- function(
     direction <- match.arg(direction)
 
     # Define symbols to use in dplyr calls below.
-    padj <- sym("padj")
-    lfc <- sym("log2FoldChange")
+    alphaCol <- sym("padj")
+    lfcCol <- sym("log2FoldChange")
 
     # Coerce to minimal tibble.
     data <- as(object, "tbl_df")
-    cols <- c("rowname", "log2FoldChange", "padj")
-    assert_is_subset(cols, colnames(data))
-    data <- select(data, !!!syms(cols))
+    data <- select(data, !!!syms(c("rowname", "log2FoldChange", "padj")))
 
     # Apply alpha cutoff.
-    data <- filter(data, !!padj < !!alpha)
+    data <- filter(data, !!alphaCol < !!alpha)
 
     # Apply LFC threshold cutoff.
     if (lfcThreshold > 0L) {
         data <- filter(
             data,
-            !!lfc > UQ(lfcThreshold) | !!lfc < -UQ(lfcThreshold)
+            !!lfcCol > UQ(lfcThreshold) | !!lfcCol < -UQ(lfcThreshold)
         )
     }
 
     # Apply directional filtering.
     if (direction == "up") {
-        data <- filter(data, !!lfc > 0L)
+        data <- filter(data, !!lfcCol > 0L)
     } else if (direction == "down") {
-        data <- filter(data, !!lfc < 0L)
+        data <- filter(data, !!lfcCol < 0L)
     }
+
+    # Arrange table by adjusted P value.
+    data <- arrange(data, !!alphaCol)
 
     deg <- pull(data, "rowname")
 
     if (!has_length(deg)) {
         warning("No significant DEGs detected.")
     } else {
-        message(paste(length(deg), "differentially expressed genes detected."))
+        message(paste(
+            length(deg),
+            switch(
+                EXPR = direction,
+                up = "upregulated",
+                down = "downregulated",
+                both = "differentially expressed"
+            ),
+            "genes detected."
+        ))
     }
 
     deg
@@ -93,7 +103,9 @@ deg.DESeqAnalysis <- function(
     results = 1L,
     direction = c("both", "up", "down")
 ) {
-    results <- .matchResults(object = object, results = results)
+    suppressMessages(
+        results <- .matchResults(object = object, results = results)
+    )
     direction <- match.arg(direction)
     deg(object = results, direction = direction)
 }
