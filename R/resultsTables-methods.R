@@ -22,6 +22,8 @@
 #' @inheritParams basejump::params
 #' @inheritParams params
 #'
+#' @param rowData `boolean`. Join the row annotations.
+#' @param counts `boolean`. Join the size-factor adjusted normalized counts.
 #' @param return `string`. Type of data frame to return in the list. Uses
 #'   `match.arg()`. Note that `DataFrame` option will return with rownames,
 #'   whereas `tbl_df` option will return with `"rowname"` column.
@@ -42,6 +44,8 @@ resultsTables.DESeqAnalysis <-  # nolint
     function(
         object,
         results = 1L,
+        rowData = TRUE,
+        counts = TRUE,
         return = c("tbl_df", "DataFrameList")
     ) {
         validObject(object)
@@ -56,9 +60,6 @@ resultsTables.DESeqAnalysis <-  # nolint
         # `sampleName` column in `colData()`. We're using this downstream when
         # joining the normalized counts.
         dds <- convertSampleIDsToNames(dds)
-
-        # We're using the size factor adjusted normalized counts here.
-        counts <- counts(dds, normalized = TRUE)
 
         # Get the DEG character vectors, which we'll use against the rownames.
         up <- deg(object, direction = "up")
@@ -75,30 +76,36 @@ resultsTables.DESeqAnalysis <-  # nolint
         # (e.g. list, S4) that are allowed in GRanges/DataFrame but will fail to
         # write to disk as CSV. Note that we're using `decode()` here to handle
         # S4 Rle columns from the Genomic Ranges.
-        rowData <- decode(rowData(dds))
-        assertHasRownames(rowData)
-        keep <- vapply(
-            X = rowData,
-            FUN = function(x) {
-                is.character(x) || is.factor(x)
-            },
-            FUN.VALUE = logical(1L)
-        )
-        rowData <- rowData[, keep, drop = FALSE]
-        assert_all_are_true(vapply(
-            X = rowData,
-            FUN = is.atomic,
-            FUN.VALUE = logical(1L)
-        ))
-        assert_is_non_empty(rowData)
-        assert_are_identical(rownames(all), rownames(rowData))
-        assert_are_disjoint_sets(colnames(all), colnames(rowData))
-        all <- cbind(all, rowData)
+        if (isTRUE(rowData)) {
+            rowData <- decode(rowData(dds))
+            assertHasRownames(rowData)
+            keep <- vapply(
+                X = rowData,
+                FUN = function(x) {
+                    is.character(x) || is.factor(x)
+                },
+                FUN.VALUE = logical(1L)
+            )
+            rowData <- rowData[, keep, drop = FALSE]
+            assert_all_are_true(vapply(
+                X = rowData,
+                FUN = is.atomic,
+                FUN.VALUE = logical(1L)
+            ))
+            assert_is_non_empty(rowData)
+            assert_are_identical(rownames(all), rownames(rowData))
+            assert_are_disjoint_sets(colnames(all), colnames(rowData))
+            all <- cbind(all, rowData)
+        }
 
         # Join the normalized counts.
-        assert_are_identical(rownames(all), rownames(counts))
-        assert_are_disjoint_sets(colnames(all), colnames(counts))
-        all <- cbind(all, counts)
+        if (isTRUE(counts)) {
+            # We're using the size factor adjusted normalized counts here.
+            counts <- counts(dds, normalized = TRUE)
+            assert_are_identical(rownames(all), rownames(counts))
+            assert_are_disjoint_sets(colnames(all), colnames(counts))
+            all <- cbind(all, counts)
+        }
 
         # Prepare the return list.
         out <- list(
