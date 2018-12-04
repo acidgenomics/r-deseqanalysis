@@ -76,4 +76,8 @@ print(x)
 \item \code{DESeq2::results()}.
 \item \code{markdown()}, \code{write()}.
 }
+
+\code{DESeqResultsTables()}.
+
+Other S4 classes: \code{\link{DESeqAnalysis-class}}
 }

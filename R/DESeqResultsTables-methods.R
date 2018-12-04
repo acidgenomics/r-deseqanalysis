@@ -2,47 +2,6 @@
 #' @inherit DESeqResultsTables-class
 #' @inheritParams basejump::params
 #' @inheritParams params
-#'
-#' @section Obtaining results from DESeq2:
-#'
-#' It is recommended to specify the `contrast` argument as `character`:
-#'
-#' 1. Design matrix factor of interest.
-#' 2. Numerator for LFC (expt).
-#' 3. Denominator for LFC (control).
-#'
-#' For example, to get the relative change in gene expression between mutant
-#' and wildtype samples, here's how to set the contrast vector:
-#'
-#' ```
-#' c(
-#'     factor = "genotype",
-#'     numerator = "mutant",
-#'     denominator = "wildtype"
-#' )
-#' ```
-#'
-#' @section Log fold change threshold cutoffs:
-#'
-#' Refer to `DESeq2::results()` for additional information about using
-#' `lfcThreshold` and `altHypothesis` to set an alternative hypothesis based on
-#' expected fold changes. In addition, the "Hypothesis tests with thresholds on
-#' effect size" section in the DESeq2 paper provides additional explanation.
-#'
-#' Don't apply *post hoc* LFC threshold filtering to obtain results tables, as
-#' this will destroy the meaning of the adjusted *P* values computed. If you are
-#' expecting a biological effect size past a particular threshold, set
-#' `lfcThreshold`, but be conservative.
-#'
-#' This [thread][] on the Bioconductor forums explains how `DESeq2::results()`
-#' should be called with regard to LFC cutoffs in nice detail.
-#'
-#' [thread]: https://support.bioconductor.org/p/101504/
-#'
-#' @seealso
-#' - `DESeq2::results()`.
-#' - `markdown()`, `write()`.
-#'
 #' @examples
 #' data(deseq)
 #'

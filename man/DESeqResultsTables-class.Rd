@@ -24,7 +24,9 @@ Values map to the \code{rownames} of the internal \code{DESeqResults}. These are
 genes that pass \code{alpha} and \code{lfcThreshold} cutoffs set in
 \code{DESeq2::results()} call.}
 
-\item{\code{counts}}{\code{matrix}. Normalized counts matrix.}
+\item{\code{counts}}{\code{matrix}. Size-factor adjusted (normalized) counts matrix from
+the \code{DESeqDataSet}. This matrix is returned by \code{DESeq2::counts(object, normalized = TRUE)}. These should NOT be the log2 variance-stabilized
+counts defined in the \code{DESeqTransform} object.}
 
 \item{\code{rowRanges}}{\code{GRanges}. Row annotations.}
 
@@ -35,7 +37,48 @@ genes that pass \code{alpha} and \code{lfcThreshold} cutoffs set in
 whether we're writing locally or to Dropbox.}
 }}
 
+\section{Obtaining results from DESeq2}{
+
+
+It is recommended to specify the \code{contrast} argument as \code{character}:
+\enumerate{
+\item Design matrix factor of interest.
+\item Numerator for LFC (expt).
+\item Denominator for LFC (control).
+}
+
+For example, to get the relative change in gene expression between mutant
+and wildtype samples, here's how to set the contrast vector:\preformatted{c(
+    factor = "genotype",
+    numerator = "mutant",
+    denominator = "wildtype"
+)
+}
+}
+
+\section{Log fold change threshold cutoffs}{
+
+
+Refer to \code{DESeq2::results()} for additional information about using
+\code{lfcThreshold} and \code{altHypothesis} to set an alternative hypothesis based on
+expected fold changes. In addition, the "Hypothesis tests with thresholds on
+effect size" section in the DESeq2 paper provides additional explanation.
+
+Don't apply \emph{post hoc} LFC threshold filtering to obtain results tables, as
+this will destroy the meaning of the adjusted \emph{P} values computed. If you are
+expecting a biological effect size past a particular threshold, set
+\code{lfcThreshold}, but be conservative.
+
+This \href{https://support.bioconductor.org/p/101504/}{thread} on the Bioconductor forums explains how \code{DESeq2::results()}
+should be called with regard to LFC cutoffs in nice detail.
+}
+
 \seealso{
+\itemize{
+\item \code{DESeq2::results()}.
+\item \code{markdown()}, \code{write()}.
+}
+
 \code{DESeqResultsTables()}.
 
 Other S4 classes: \code{\link{DESeqAnalysis-class}}
