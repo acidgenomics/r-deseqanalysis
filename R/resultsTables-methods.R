@@ -1,7 +1,29 @@
-#' @name DESeqResultsTables
-#' @inherit DESeqResultsTables-class
+#' Differential Expression Results Tables
+#'
+#' Generate tables summarizing the differential expression, with subsets for
+#' differentially expressed genes (DEGs).
+#'
+#' DEG tables (i.e. everything except the `all` table), are arranged by adjusted
+#' *P* value.
+#'
+#' @note Do not apply post hoc log fold change cutoffs.
+#'
+#' @section Tables:
+#'
+#' - `all`: All genes, including genes without an adjusted *P* value. This table
+#' is unmodified, and the rows have not been re-arranged or subset. It is
+#' suitable for gene set enrichment analysis (GSEA).
+#' - `up`: Upregulated genes.
+#' - `down`: Downregulated genes.
+#' - `both`: Bi-directional DEGs (up- and down-regulated). This table can be
+#'   used for overrepresentation testing but should NOT be used for GSEA.
+#'
+#' @name resultsTables
 #' @inheritParams basejump::params
 #' @inheritParams params
+#'
+#' @return `list`.
+#'
 #' @examples
 #' data(deseq)
 #'
@@ -12,7 +34,7 @@ NULL
 
 
 
-DESeqResultsTables.DESeqAnalysis <-  # nolint
+resultsTables.DESeqAnalysis <-  # nolint
     function(
         object,
         results = 1L,
@@ -127,10 +149,10 @@ DESeqResultsTables.DESeqAnalysis <-  # nolint
 
 
 
-#' @rdname DESeqResultsTables
+#' @rdname resultsTables
 #' @export
 setMethod(
-    f = "DESeqResultsTables",
+    f = "resultsTables",
     signature = signature("DESeqAnalysis"),
-    definition = DESeqResultsTables.DESeqAnalysis
+    definition = resultsTables.DESeqAnalysis
 )
