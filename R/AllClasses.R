@@ -42,7 +42,6 @@ validateS4 <- function(...) {
 #' rearranging the rows or dropping genes without adjusted P values. We'll take
 #' care of this automatically in supported methods.
 #'
-#' @family S4 classes
 #' @author Michael Steinbaugh
 #' @export
 #'

@@ -45,10 +45,7 @@ care of this automatically in supported methods.
 
 \seealso{
 \code{DESeqAnalysis()}.
-
-Other S4 classes: \code{\link{DESeqResultsTables-class}}
 }
 \author{
 Michael Steinbaugh
 }
-\concept{S4 classes}
