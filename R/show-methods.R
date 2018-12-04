@@ -48,35 +48,3 @@ setMethod(
     signature = signature("DESeqAnalysis"),
     definition = show.DESeqAnalysis
 )
-
-
-
-show.DESeqResultsTables <-  # nolint
-    function(object) {
-        validObject(object)
-        results <- slot(object, "results")
-        metadata <- slot(object, "metadata")
-        .showHeader(object = object, version = metadata[["version"]])
-        showSlotInfo(list(
-            contrast = contrastName(results),
-            alpha = metadata(results)[["alpha"]],
-            lfcThreshold = metadata(results)[["lfcThreshold"]]
-        ))
-        # Include DESeqResults summary.
-        summary <- capture.output(summary(results)) %>%
-            # Remove leading and trailing whitespace.
-            .[!grepl("^$", .)] %>%
-            # Remove the lines about results documentation.
-            .[!grepl("\\?results$", .)]
-        cat(summary, sep = "\n")
-    }
-
-
-
-#' @rdname show
-#' @export
-setMethod(
-    f = "show",
-    signature = signature("DESeqResultsTables"),
-    definition = show.DESeqResultsTables
-)
