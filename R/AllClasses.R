@@ -4,6 +4,9 @@
 # Consider taking out the `DESeqResultsTables` S4 object. I'm not sure this
 # makes sense, and makes the package more complicated...
 
+# TODO Add a tighter assert check to ensure that `lfcShrink` contains
+# shrunken values. Can use `priorInfo()` to test for this.
+
 
 
 validateS4 <- function(...) {
