@@ -22,13 +22,17 @@
 #' @inheritParams basejump::params
 #' @inheritParams params
 #'
-#' @return `list`.
+#' @param return `string`. Type of data frame to return in the list. Uses
+#'   `match.arg()`. Note that `DataFrame` option will return with rownames,
+#'   whereas `tbl_df` option will return with `"rowname"` column.
+#'
+#' @return `list`. Named list containing subsets of `DESeqResults`.
 #'
 #' @examples
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' x <- DESeqResultsTables(deseq)
+#' x <- resultsTables(deseq)
 #' print(x)
 NULL
 
@@ -38,113 +42,77 @@ resultsTables.DESeqAnalysis <-  # nolint
     function(
         object,
         results = 1L,
-        lfcShrink = TRUE
+        return = c("DataFrame", "tbl_df")
     ) {
         validObject(object)
-        results <- .matchResults(
-            object = object,
-            results = results,
-            lfcShrink = lfcShrink
-        )
+        return <- match.arg(return)
 
-        # Get the thresholds applied from DESeqResults metadata.
-        alpha <- metadata(results)[["alpha"]]
-        assertIsAlpha(alpha)
-        lfcThreshold <- metadata(results)[["lfcThreshold"]]
-        assert_is_a_number(lfcThreshold)
-        assert_all_are_non_negative(lfcThreshold)
+        # Note that this will use the shrunken LFC values, if slotted.
+        res <- .matchResults(object, results)
 
-        # Set LFC and test (P value) columns.
-        lfcCol <- "log2FoldChange"
-        testCol <- "padj"
-        lfc <- sym(lfcCol)
-        test <- sym(testCol)
-        assert_is_subset(c(lfcCol, testCol), colnames(results))
+        # Get the DESeqDataSet, and humanize the sample na.
+        dds <- as(object, "DESeqDataSet")
+        # Always attempt to use human-friendly sample names, defined by the
+        # `sampleName` column in `colData()`. We're using this downstream when
+        # joining the normalized counts.
+        dds <- convertSampleIDsToNames(dds)
 
-        # DEG tables are sorted by adjusted P value.
-        deg <- results %>%
-            as_tibble(rownames = "rowname") %>%
-            # Remove genes without an adjusted P value.
-            filter(!is.na(!!test)) %>%
-            # Remove genes that don't pass alpha cutoff.
-            filter(!!test < !!alpha) %>%
-            # Arrange by adjusted P value.
-            arrange(!!test) %>%
-            # Remove genes that don't pass LFC threshold.
-            filter(!!lfc > !!lfcThreshold | !!lfc < -UQ(lfcThreshold))
+        # We're using the size factor adjusted normalized counts here.
+        counts <- counts(dds, normalized = TRUE)
 
-        # Get directional subsets. We'll stash these in the S4 object.
-        up <- deg %>%
-            filter(!!lfc > 0L) %>%
-            pull("rowname")
-        down <- deg %>%
-            filter(!!lfc < 0L) %>%
-            pull("rowname")
+        # Get the DEG character vectors, which we'll use against the rownames.
+        up <- deg(object, direction = "up")
+        down <- deg(object, direction = "down")
+        both <- deg(object, direction = "both")
 
-        out <- new(
-            Class = "DESeqResultsTables",
-            results = results,
-            deg = list(up = up, down = down)
-        )
+        # Prepare all genes data using S4 DataFrame.
+        all <- as(res, "DataFrame")
 
-        # Automatically populate additional slots using DESeqDataSet.
-        data <- as(object, "DESeqDataSet")
-
-        # Note that we're slotting the size factor-normalized counts here.
-        counts <- counts(data, normalized = TRUE)
-        slot(out, "counts") <- counts
-
-        # Slot the row annotations ---------------------------------------------
-        # DESeq2 includes additional columns in `mcols()` that aren't
-        # informative for a user, and doesn't need to be included in the tables.
-        # Instead, only keep informative columns that are character or factor.
-        # Be sure to drop complex, non-atomic columns (e.g. list, S4) that are
-        # allowed in GRanges/DataFrame but will fail to write to disk as CSV.
-        rowRanges <- rowRanges(data)
-        mcols <- mcols(rowRanges)
+        # Join the row annotations. DESeq2 includes additional columns in
+        # `rowData()` that aren't informative for a user, and doesn't need to be
+        # included in the tables. Instead, only keep informative columns that
+        # are character or factor. Be sure to drop complex, non-atomic columns
+        # (e.g. list, S4) that are allowed in GRanges/DataFrame but will fail to
+        # write to disk as CSV. Note that we're using `decode()` here to handle
+        # S4 Rle columns from the Genomic Ranges.
+        rowData <- decode(rowData(dds))
+        assertHasRownames(rowData)
         keep <- vapply(
-            X = mcols,
+            X = rowData,
             FUN = function(x) {
                 is.character(x) || is.factor(x)
             },
             FUN.VALUE = logical(1L)
         )
-        mcols <- mcols[, keep, drop = FALSE]
-        mcols(rowRanges) <- mcols
-        assert_is_non_empty(rowRanges)
-        assert_are_identical(
-            x = rownames(data),
-            y = names(rowRanges)
-        )
-        assert_are_disjoint_sets(
-            x = colnames(data),
-            y = colnames(mcols(rowRanges))
-        )
+        rowData <- rowData[, keep, drop = FALSE]
         assert_all_are_true(vapply(
-            X = mcols(rowRanges),
+            X = rowData,
             FUN = is.atomic,
             FUN.VALUE = logical(1L)
         ))
-        slot(out, "rowRanges") <- rowRanges
+        assert_is_non_empty(rowData)
+        assert_are_identical(rownames(all), rownames(rowData))
+        assert_are_disjoint_sets(colnames(all), colnames(rowData))
+        all <- cbind(all, rowData)
 
-        # Slot human-friendly sample names, if they are defined.
-        sampleNames <- sampleNames(data)
-        if (
-            has_length(sampleNames) &&
-            !identical(
-                x = as.character(sampleNames),
-                y = colnames(data)
-            )
-        ) {
-            slot(out, "sampleNames") <- sampleNames
-        }
+        # Join the normalized counts.
+        assert_are_identical(rownames(all), rownames(counts))
+        assert_are_disjoint_sets(colnames(all), colnames(counts))
+        all <- cbind(all, counts)
 
-        # Slot metadata.
-        slot(out, "metadata") <- list(
-            version = metadata(data)[["version"]]
+        # Prepare the return list.
+        out <- list(
+            all = all,
+            up = all[up, , drop = FALSE],
+            down = all[down, , drop = FALSE],
+            both = all[both, , drop = FALSE]
         )
 
-        out
+        switch(
+            EXPR = return,
+            DataFrame = out,
+            tbl_df = lapply(out, as_tibble)
+        )
     }
 
 
