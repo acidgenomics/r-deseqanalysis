@@ -66,6 +66,4 @@ print(x)
 }
 \seealso{
 \code{DESeqAnalysis()}.
-
-Other S4 classes: \code{\link{DESeqResultsTables-class}}
 }
