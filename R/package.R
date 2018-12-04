@@ -14,6 +14,7 @@
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom DESeq2 results resultsNames
+#' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors as.data.frame head mcols mcols<- metadata
 #' @importFrom SummarizedExperiment colData colData<-
 #' @importFrom assertive.base assert_all_are_true assert_are_identical
@@ -30,10 +31,11 @@
 #'   is_a_number is_a_string
 #' @importFrom assertthat assert_that validate_that
 #' @importFrom basejump Gene2Symbol assertFormalGene2Symbol as_tibble
-#'   basejump_geom_label_repel camel deg humanize initDir interestingGroups<-
-#'   makeNames mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
-#'   matchInterestingGroups methodFormals plotGene plotHeatmap plotPCA
-#'   relevelColData removeNA sanitizeRowData showSlotInfo snake standardizeCall
+#'   basejump_geom_label_repel camel decode deg humanize initDir
+#'   interestingGroups<- makeNames mapGenesToRownames markdownHeader
+#'   markdownList matchArgsToDoCall matchInterestingGroups methodFormals
+#'   plotGene plotHeatmap plotPCA relevelColData removeNA sanitizeRowData
+#'   showSlotInfo snake standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom dplyr arrange desc everything filter left_join mutate pull rename
 #'   row_number select
