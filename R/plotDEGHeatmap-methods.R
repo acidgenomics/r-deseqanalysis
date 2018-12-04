@@ -1,5 +1,5 @@
-# TODO Add method to arrange the columns by interestingGroups (e.g. appy) rather
-# than using hierarchical clustering.
+# NOTE: `clusterRows = TRUE` can fail for some datasets.
+# Use a `tryCatch()` call here to attempt to detect.
 
 
 
@@ -34,8 +34,10 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         results = 1L,
         contrastSamples = FALSE,
         direction = c("both", "up", "down"),
+        scale = "row",
         clusteringMethod = "ward.D2",
-        scale = "row"
+        clusterRows = TRUE,
+        clusterCols = TRUE
     ) {
         validObject(object)
         results <- .matchResults(object, results)
