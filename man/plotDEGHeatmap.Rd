@@ -93,6 +93,27 @@ of the matrix.
 }
 }
 
+\section{Scaling}{
+
+
+
+Here we're scaling simply by calculating the standard score (z-score).
+\itemize{
+\item mu: mean.
+\item sigma: standard deviation.
+\item x: raw score (e.g. count matrix).
+\item z: standard score (z-score).
+}\preformatted{z = (x - mu) / sigma
+}
+
+See also:
+\itemize{
+\item \code{pheatmap:::scale_rows()}.
+\item \code{base::scale()} for additional scaling approaches.
+}
+
+}
+
 \section{Hierarchical clustering}{
 
 

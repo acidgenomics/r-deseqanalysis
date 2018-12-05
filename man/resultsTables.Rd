@@ -9,7 +9,8 @@
 resultsTables(object, ...)
 
 \S4method{resultsTables}{DESeqAnalysis}(object, results = 1L,
-  return = c("tbl_df", "DataFrameList"))
+  rowData = TRUE, counts = TRUE, return = c("tbl_df",
+  "DataFrameList"))
 }
 \arguments{
 \item{object}{Object.}
@@ -17,6 +18,10 @@ resultsTables(object, ...)
 \item{...}{Additional arguments.}
 
 \item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
+
+\item{rowData}{\code{boolean}. Join the row annotations.}
+
+\item{counts}{\code{boolean}. Join the size-factor adjusted normalized counts.}
 
 \item{return}{\code{string}. Type of data frame to return in the list. Uses
 \code{match.arg()}. Note that \code{DataFrame} option will return with rownames,
