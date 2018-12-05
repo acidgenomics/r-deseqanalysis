@@ -4,13 +4,10 @@
 \name{export}
 \alias{export}
 \alias{export,DESeqAnalysis-method}
-\alias{export,DESeqResultsTables-method}
 \title{Export}
 \usage{
 \S4method{export}{DESeqAnalysis}(x, name = NULL, dir = ".",
   compress = FALSE, human = FALSE)
-
-\S4method{export}{DESeqResultsTables}(x, dir = ".", compress = FALSE)
 }
 \arguments{
 \item{x}{Object.}
@@ -53,10 +50,6 @@ data(deseq)
 
 ## DESeqAnalysis ====
 export(deseq, dir = tempdir())
-
-## DESeqResultsTables ====
-x <- DESeqResultsTables(deseq)
-export(x, dir = tempdir())
 }
 \seealso{
 \code{rio::export()}.
