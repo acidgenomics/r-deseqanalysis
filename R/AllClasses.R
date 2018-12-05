@@ -7,6 +7,9 @@
 # TODO Add a tighter assert check to ensure that `lfcShrink` contains
 # shrunken values. Can use `priorInfo()` to test for this.
 
+# FIXME Require `results` slot to be named. This makes downstream programming
+# easier.
+
 
 
 validateS4 <- function(...) {
@@ -95,6 +98,9 @@ setValidity(
                 FUN.VALUE = logical(1L)
             ))
         )
+
+        # Require that the DESeqResults list is named.
+        valid[["results"]] <- validate_that(has_names(results))
 
         # Unshrunken and shrunken DESeqResults.
         if (length(lfcShrink) > 0L) {
