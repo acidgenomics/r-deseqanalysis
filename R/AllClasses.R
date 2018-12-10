@@ -18,7 +18,7 @@ validateS4 <- function(...) {
         list <- list[[1L]]
     }
     invalid <- Filter(f = Negate(isTRUE), x = list)
-    if (has_length(invalid)) {
+    if (length(invalid) > 0L) {
         unlist(invalid)
     } else {
         TRUE

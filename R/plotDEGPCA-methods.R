@@ -50,7 +50,7 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
 
         # Get the character vector of DEGs.
         deg <- deg(object = results, direction = direction)
-        if (!has_length(deg)) {
+        if (length(deg) == 0L) {
             return(invisible())
         }
 

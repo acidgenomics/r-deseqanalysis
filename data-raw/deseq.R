@@ -47,6 +47,6 @@ stopifnot(object_size(deseq) < limit)
 
 # Check that object is valid.
 stopifnot(is(deseq, "DESeqAnalysis"))
-stopifnot(validObject(deseq))
+validObject(deseq)
 
 usethis::use_data(deseq, overwrite = TRUE, compress = "xz")
