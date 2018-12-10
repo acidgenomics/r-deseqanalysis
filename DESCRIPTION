@@ -117,7 +117,7 @@ Suggests:
     viridis
 Remotes:
     steinbaugh/basejump@develop,
-    steinbaugh/goalie
+    steinbaugh/goalie@develop
 biocViews:
     DataRepresentation,
     DifferentialExpression,
