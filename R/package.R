@@ -48,7 +48,7 @@
 #' @importFrom knitr kable
 #' @importFrom magrittr %>%
 #' @importFrom methods as is new slot slot<- validObject
-#' @importFrom rlang := UQ has_length sym syms
+#' @importFrom rlang := UQ sym syms
 #' @importFrom scales pretty_breaks
 #' @importFrom stringr str_match str_trunc
 #' @importFrom tidyselect starts_with

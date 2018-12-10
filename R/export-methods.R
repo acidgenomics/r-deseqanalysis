@@ -20,7 +20,7 @@ basejump::export
 
 .exportDESeqDataSet <- function(x, dir, compress, human) {
     # Using the inherited SummarizedExperiment method here.
-    stopifnot(is(x, "DESeqAnalysis"))
+    assert(is(x, "DESeqAnalysis"))
     message("Exporting DESeqDataSet.")
     export(
         x = as(x, "DESeqDataSet"),
@@ -35,7 +35,7 @@ basejump::export
 
 .exportDESeqTransform <- function(x, dir, compress, human) {
     # Using the inherited SummarizedExperiment method here.
-    stopifnot(is(x, "DESeqAnalysis"))
+    assert(is(x, "DESeqAnalysis"))
     message("Exporting DESeqTransform.")
     export(
         x = as(x, "DESeqTransform"),
@@ -58,7 +58,7 @@ basejump::export
     compress,
     human
 ) {
-    stopifnot(is(x, "DESeqAnalysis"))
+    assert(is(x, "DESeqAnalysis"))
     slotName <- match.arg(slotName)
 
     # Get the DESeqDataSet.
@@ -112,7 +112,7 @@ basejump::export
 # NOTE: This step picks shrunken LFCs over unshrunken if slotted.
 # NOTE: We don't need to support human here because `geneName` is required.
 .exportResultsTables <- function(x, dir, compress) {
-    stopifnot(is(x, "DESeqAnalysis"))
+    assert(is(x, "DESeqAnalysis"))
     dir <- file.path(dir, "resultsTables")
     resultsNames <- names(x@results)
     out <- lapply(

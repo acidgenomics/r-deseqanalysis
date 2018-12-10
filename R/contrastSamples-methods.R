@@ -29,7 +29,7 @@ contrastSamples.DESeqAnalysis <- function(object, results = 1L) {
     validObject(object)
     results <- .matchResults(object, results)
     contrast <- snake(contrastName(results))
-    stopifnot(grepl("_vs_", contrast))
+    assert(grepl("_vs_", contrast))
 
     # Figure out which column was used to define the pairwise contrast.
     match <- str_match(contrast, "^([[:alnum:]]+)_(.+)_vs_(.+)$")
@@ -41,18 +41,18 @@ contrastSamples.DESeqAnalysis <- function(object, results = 1L) {
     colData <- colData(data)
     assertHasRownames(colData)
 
-    stopifnot(factor %in% colnames(colData))
+    assert(factor %in% colnames(colData))
     message(paste("Factor column:", factor))
     factor <- snake(colData[[factor]])
     assert_is_factor(factor)
 
     numerator <- match[1L, 3L]
-    stopifnot(numerator %in% factor)
+    assert(numerator %in% factor)
     numerator <- samples[factor %in% numerator]
     message(paste("Numerator samples:", toString(numerator)))
 
     denominator <- match[1L, 4L]
-    stopifnot(denominator %in% factor)
+    assert(denominator %in% factor)
     denominator <- samples[factor %in% denominator]
     message(paste("Denominator samples:", toString(denominator)))
 

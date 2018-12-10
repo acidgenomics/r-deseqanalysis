@@ -106,7 +106,7 @@ topTables.DESeqAnalysis <-  # nolint
 
         # Upregulated genes.
         up <- list[["up"]]
-        if (has_length(up)) {
+        if (length(up) > 0L) {
             show(kable(
                 x = .topTable(up, n = n),
                 caption = paste(contrast, "(upregulated)")
@@ -115,7 +115,7 @@ topTables.DESeqAnalysis <-  # nolint
 
         # Downregulated genes.
         down <- list[["down"]]
-        if (has_length(down)) {
+        if (length(down) > 0L) {
             show(kable(
                 x = .topTable(down, n = n),
                 caption = paste(contrast, "(downregulated)")
