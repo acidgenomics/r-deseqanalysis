@@ -26,14 +26,16 @@ deg.DESeqResults <- function(
     } else {
         warning("Applying a post hoc alpha cutoff is not recommended.")
     }
-    assertIsAlpha(alpha)
+    assert(containsAlpha(alpha))
     if (is.null(lfcThreshold)) {
         lfcThreshold <- metadata(object)[["lfcThreshold"]]
     } else {
         warning("Applying a post hoc LFC threshold cutoff is not recommended.")
     }
-    assert_is_a_number(lfcThreshold)
-    assert_all_are_non_negative(lfcThreshold)
+    assert(
+        isNumber(lfcThreshold),
+        isNonNegative(lfcThreshold)
+    )
     direction <- match.arg(direction)
 
     # Define symbols to use in dplyr calls below.

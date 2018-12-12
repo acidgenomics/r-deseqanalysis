@@ -31,7 +31,7 @@
 #'   scale_x_continuous scale_y_continuous theme
 #' @importFrom goalie assert containsAlpha containsHeaderLevel hasLength
 #'   hasNames hasLength hasRownames hasValidDimnames isAny isCharacter isFlag
-#'   isInt isScalar isString validate
+#'   isInt isNonNegative isNumber isScalar isString validate
 #' @importFrom knitr kable
 #' @importFrom magrittr %>%
 #' @importFrom methods as is new slot slot<- validObject
