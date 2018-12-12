@@ -18,8 +18,8 @@
 #' @importFrom S4Vectors as.data.frame head mcols mcols<- metadata
 #' @importFrom SummarizedExperiment colData colData<-
 #' @importFrom basejump Gene2Symbol as_tibble basejump_geom_label_repel camel
-#'   decode deg humanize initDir interestingGroups<- makeNames
-#'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
+#'   convertSampleIDsToNames decode deg humanize initDir interestingGroups<-
+#'   makeNames mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
 #'   matchInterestingGroups matchesGene2Symbol methodFormals plotGene
 #'   plotHeatmap plotPCA relevelColData removeNA sanitizeRowData showSlotInfo
 #'   snake standardizeCall
