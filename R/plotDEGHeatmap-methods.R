@@ -71,7 +71,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
 
         # Get the character vector of DEGs.
         deg <- deg(object = results, direction = direction)
-        if (!has_length(deg)) {
+        if (!hasLength(deg)) {
             return(invisible())
         }
 
