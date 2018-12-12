@@ -220,11 +220,11 @@ plotMA.DESeqResults <-  # nolint
         # Visualize specific genes on the plot, if desired.
         if (!is.null(genes)) {
             validObject(gene2symbol)
-            assertFormalGene2Symbol(
+            assert(matchesGene2Symbol(
                 x = object,
                 genes = genes,
                 gene2symbol = gene2symbol
-            )
+            ))
 
             # Map the user-defined `genes` to `gene2symbol` rownames.
             # We're using this to match back to the `DESeqResults` object.
