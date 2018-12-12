@@ -44,14 +44,14 @@ directions.}
 downregulated genes. Also supports a character string for labeling DEGs
 with the same color, regardless of direction.}
 
-\item{histograms}{\code{boolean}. Show LFC and P value histograms.}
+\item{histograms}{\code{logical(1)}. Show LFC and P value histograms.}
 
 \item{return}{\code{character(1)}. Return type. Uses \code{match.arg} internally and
 defaults to the first argument in the \code{character} vector.}
 
 \item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
 
-\item{lfcShrink}{\code{boolean}. Use shrunken log2 fold change (LFC) values.}
+\item{lfcShrink}{\code{logical(1)}. Use shrunken log2 fold change (LFC) values.}
 }
 \value{
 \code{ggplot}.
@@ -102,7 +102,7 @@ plotVolcano(deseq, genes = genes)
 }
 \seealso{
 This method is an updated variant of
-\code{CHBUtils::volcano_density_plot()}.
+\code{CHBUtils::volcano_density_plot}.
 }
 \author{
 Michael Steinbaugh, John Hutchinson, Lorena Pantano

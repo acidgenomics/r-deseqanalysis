@@ -1,5 +1,5 @@
 # NOTE: `clusterRows = TRUE` can fail for some datasets.
-# Use a `tryCatch()` call here to attempt to detect.
+# Use a `tryCatch` call here to attempt to detect.
 
 # Error in hclust(d, method = method) :
 # NA/NaN/Inf in foreign function call (arg 11)

@@ -22,10 +22,10 @@
 #' @inheritParams basejump::params
 #' @inheritParams params
 #'
-#' @param rowData `boolean`. Join the row annotations.
-#' @param counts `boolean`. Join the size-factor adjusted normalized counts.
-#' @param return `string`. Type of data frame to return in the list. Uses
-#'   `match.arg()`. Note that `DataFrame` option will return with rownames,
+#' @param rowData `logical(1)`. Join the row annotations.
+#' @param counts `logical(1)`. Join the size-factor adjusted normalized counts.
+#' @param return `character(1)`. Type of data frame to return in the list. Uses
+#'   `match.arg`. Note that `DataFrame` option will return with rownames,
 #'   whereas `tbl_df` option will return with `"rowname"` column.
 #'
 #' @return `list`. Named list containing subsets of `DESeqResults`.
@@ -57,7 +57,7 @@ resultsTables.DESeqAnalysis <-  # nolint
         # Get the DESeqDataSet, and humanize the sample na.
         dds <- as(object, "DESeqDataSet")
         # Always attempt to use human-friendly sample names, defined by the
-        # `sampleName` column in `colData()`. We're using this downstream when
+        # `sampleName` column in `colData`. We're using this downstream when
         # joining the normalized counts.
         dds <- convertSampleIDsToNames(dds)
 
@@ -70,11 +70,11 @@ resultsTables.DESeqAnalysis <-  # nolint
         all <- as(res, "DataFrame")
 
         # Join the row annotations. DESeq2 includes additional columns in
-        # `rowData()` that aren't informative for a user, and doesn't need to be
+        # `rowData` that aren't informative for a user, and doesn't need to be
         # included in the tables. Instead, only keep informative columns that
         # are character or factor. Be sure to drop complex, non-atomic columns
         # (e.g. list, S4) that are allowed in GRanges/DataFrame but will fail to
-        # write to disk as CSV. Note that we're using `decode()` here to handle
+        # write to disk as CSV. Note that we're using `decode` here to handle
         # S4 Rle columns from the Genomic Ranges.
         if (isTRUE(rowData)) {
             message("Joining row annotations.")

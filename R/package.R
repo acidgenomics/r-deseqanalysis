@@ -17,19 +17,6 @@
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors as.data.frame head mcols mcols<- metadata
 #' @importFrom SummarizedExperiment colData colData<-
-#' @importFrom assertive.base assert_all_are_true assert_are_identical
-#' @importFrom assertive.files assert_all_are_existing_files
-#' @importFrom assertive.numbers assert_all_are_in_range
-#'   assert_all_are_non_negative
-#' @importFrom assertive.properties assert_has_names assert_is_non_empty
-#'   assert_is_of_length assert_is_scalar has_names
-#' @importFrom assertive.sets are_disjoint_sets assert_are_disjoint_sets
-#'   assert_is_subset is_subset
-#' @importFrom assertive.types assert_is_a_bool assert_is_a_number
-#'   assert_is_a_string assert_is_all_of assert_is_any_of assert_is_character
-#'   assert_is_factor assert_is_list assert_is_matrix assert_is_numeric
-#'   is_a_number is_a_string
-#' @importFrom assertthat assert_that validate_that
 #' @importFrom basejump Gene2Symbol as_tibble basejump_geom_label_repel camel
 #'   decode deg humanize initDir interestingGroups<- makeNames
 #'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
@@ -43,7 +30,7 @@
 #'   geom_hline geom_point geom_vline ggplot guides labs scale_color_manual
 #'   scale_x_continuous scale_y_continuous theme
 #' @importFrom goalie assert containsAlpha containsHeaderLevel hasLength
-#'   hasRownames hasValidDimnames isInt isString
+#'   hasRownames hasValidDimnames isInt isString validate
 #' @importFrom knitr kable
 #' @importFrom magrittr %>%
 #' @importFrom methods as is new slot slot<- validObject

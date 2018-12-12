@@ -46,7 +46,7 @@ defaults to the first argument in the \code{character} vector.}
 
 \item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
 
-\item{lfcShrink}{\code{boolean}. Use shrunken log2 fold change (LFC) values.}
+\item{lfcShrink}{\code{logical(1)}. Use shrunken log2 fold change (LFC) values.}
 
 \item{...}{
     Additional arguments, for use in specific methods.
@@ -102,7 +102,7 @@ plotMA(deseq, direction = "down", ntop = 5L)
 plotMA(deseq, genes = genes)
 }
 \seealso{
-\code{DESeq2::plotMA()}.
+\code{DESeq2::plotMA}.
 }
 \author{
 Michael Steinbaugh, Rory Kirchner
