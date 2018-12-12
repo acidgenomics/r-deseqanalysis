@@ -1,6 +1,6 @@
 #' @name alphaSummary
-#' @inherit basejump::alphaSummary
 #' @author Michael Steinbaugh, Lorena Patano
+#' @inherit basejump::alphaSummary
 #'
 #' @details
 #' Use either `contrast` or `name` to specify the desired contrast.
@@ -17,12 +17,12 @@
 #' data(deseq)
 #'
 #' ## DESeqDataSet ====
-#' object <- as(deseq, "DESeqDataSet")
-#' design(object)
-#' resultsNames(object)
-#' alphaSummary(object)
-#' alphaSummary(object, contrast = c("condition", "B", "A"))
-#' alphaSummary(object, name = "condition_B_vs_A")
+#' dds <- as(deseq, "DESeqDataSet")
+#' design(dds)
+#' resultsNames(dds)
+#' alphaSummary(dds)
+#' alphaSummary(dds, contrast = c("condition", "B", "A"))
+#' alphaSummary(dds, name = "condition_B_vs_A")
 NULL
 
 
@@ -42,9 +42,17 @@ alphaSummary.DESeqDataSet <-  # nolint
         name = NULL
     ) {
         validObject(object)
-        assert_is_numeric(alpha)
-        assert_is_any_of(contrast, c("character", "NULL"))
-        assertIsStringOrNULL(name)
+        assert(
+            is.numeric(alpha),
+            # containsAlpha requires scalar, so let's apply here.
+            all(vapply(
+                X = alpha,
+                FUN = containsAlpha,
+                FUN.VALUE = logical(1L)
+            )),
+            isAny(contrast, classes = c("character", "NULL")),
+            isString(name) || is.null(name)
+        )
 
         # Either `contrast` or `name`.
         # If neither are defined, we're checking the intercept.
