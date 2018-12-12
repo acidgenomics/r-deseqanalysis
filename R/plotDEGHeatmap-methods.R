@@ -44,30 +44,38 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         results = 1L,
         contrastSamples = FALSE,
         direction = c("both", "up", "down"),
-        scale = "row",
+        scale = c("row", "column", "none"),
         clusteringMethod = "ward.D2",
         clusterRows = TRUE,
         clusterCols = TRUE
     ) {
         validObject(object)
+        assert(
+            isFlag(contrastSamples),
+            isString(clusteringMethod)
+        )
+        direction <- match.arg(direction)
+        scale <- match.arg(scale)
+
         results <- .matchResults(object, results)
         validObject(results)
+
         counts <- as(object, "DESeqTransform")
         validObject(counts)
-        assert_are_identical(rownames(results), rownames(counts))
-        interestingGroups <- matchInterestingGroups(counts, interestingGroups)
-        interestingGroups(counts) <- interestingGroups
+
+        assert(identical(rownames(results), rownames(counts)))
+
+        interestingGroups(counts) <-
+            matchInterestingGroups(counts, interestingGroups)
+
         alpha <- metadata(results)[["alpha"]]
-        assertIsAlpha(alpha)
+        assert(containsAlpha(alpha))
+
         lfcThreshold <- metadata(results)[["lfcThreshold"]]
-        assert_is_a_number(lfcThreshold)
-        assert_all_are_non_negative(lfcThreshold)
-        assert_is_a_bool(contrastSamples)
-        direction <- match.arg(direction)
-        assert_is_a_string(clusteringMethod)
-        # Hiding the choices from the user by default, because in most cases row
-        # scaling should be used.
-        scale <- match.arg(scale, choices = c("row", "column", "none"))
+        assert(
+            isNumber(lfcThreshold),
+            isNonNegative(lfcThreshold)
+        )
 
         # Get the character vector of DEGs.
         deg <- deg(object = results, direction = direction)
@@ -83,7 +91,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         # Subset the counts to match contrast samples, if desired.
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object)
-            assert_is_subset(samples, colnames(se))
+            assert(isSubset(samples, colnames(se)))
             se <- se[, samples, drop = FALSE]
             colData(se) <- relevelColData(colData(se))
         }
@@ -104,6 +112,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
             args = matchArgsToDoCall(
                 args = list(
                     object = se,
+                    scale = scale,
                     title = title
                 ),
                 removeFormals = c(

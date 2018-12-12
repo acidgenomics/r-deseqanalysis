@@ -56,7 +56,7 @@
 
 
 .transformType <- function(object) {
-    assert_is_all_of(object, "DESeqTransform")
+    assert(is(object, "DESeqTransform"))
     if ("rlogIntercept" %in% colnames(mcols(object))) {
         "rlog"
     } else {

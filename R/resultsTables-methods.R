@@ -79,7 +79,7 @@ resultsTables.DESeqAnalysis <-  # nolint
         if (isTRUE(rowData)) {
             message("Joining row annotations.")
             rowData <- decode(rowData(dds))
-            assertHasRownames(rowData)
+            assert(hasRownames(rowData))
             keep <- vapply(
                 X = rowData,
                 FUN = function(x) {
@@ -88,14 +88,16 @@ resultsTables.DESeqAnalysis <-  # nolint
                 FUN.VALUE = logical(1L)
             )
             rowData <- rowData[, keep, drop = FALSE]
-            assert_all_are_true(vapply(
-                X = rowData,
-                FUN = is.atomic,
-                FUN.VALUE = logical(1L)
-            ))
-            assert_is_non_empty(rowData)
-            assert_are_identical(rownames(all), rownames(rowData))
-            assert_are_disjoint_sets(colnames(all), colnames(rowData))
+            assert(
+                all(vapply(
+                    X = rowData,
+                    FUN = is.atomic,
+                    FUN.VALUE = logical(1L)
+                )),
+                isNonEmpty(rowData),
+                identical(rownames(all), rownames(rowData)),
+                areDisjointSets(colnames(all), colnames(rowData))
+            )
             all <- cbind(all, rowData)
         }
 
@@ -104,8 +106,10 @@ resultsTables.DESeqAnalysis <-  # nolint
             message("Joining size factor adjusted normalized counts.")
             # We're using the size factor adjusted normalized counts here.
             counts <- counts(dds, normalized = TRUE)
-            assert_are_identical(rownames(all), rownames(counts))
-            assert_are_disjoint_sets(colnames(all), colnames(counts))
+            assert(
+                identical(rownames(all), rownames(counts)),
+                areDisjointSets(colnames(all), colnames(counts))
+            )
             all <- cbind(all, counts)
         }
 

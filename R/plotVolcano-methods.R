@@ -78,29 +78,30 @@ plotVolcano.DESeqResults <-  # nolint
     ) {
         validObject(object)
         alpha <- metadata(object)[["alpha"]]
-        assertIsAlpha(alpha)
+        assert(containsAlpha(alpha))
         lfcThreshold <- metadata(object)[["lfcThreshold"]]
-        assert_is_a_number(lfcThreshold)
-        assert_is_a_number(ylim)
-        assert_all_are_in_range(
-            x = ylim,
-            lower = 1e-100,
-            upper = 1e-3
+        assert(
+            isNumber(lfcThreshold),
+            isNonNegative(lfcThreshold),
+            isNumber(ylim),
+            isInRange(ylim, lower = 1e-100, upper = 1e-3),
+            isInt(ntop),
+            isNonNegative(ntop),
+            isString(pointColor),
+            isCharacter(sigPointColor),
+            isFlag(histograms)
         )
-        assertIsImplicitInteger(ntop)
-        assert_all_are_non_negative(c(lfcThreshold, ntop))
         direction <- match.arg(direction)
-        assert_is_a_string(pointColor)
-        assert_is_character(sigPointColor)
-        if (is_a_string(sigPointColor)) {
+        return <- match.arg(return)
+
+        # Automatically handle monochromatic coloring by significance.
+        if (isString(sigPointColor)) {
             sigPointColor <- c(
                 upregulated = sigPointColor,
                 downregulated = sigPointColor
             )
         }
-        assert_is_of_length(sigPointColor, n = 2L)
-        assert_is_a_bool(histograms)
-        return <- match.arg(return)
+        assert(hasLength(sigPointColor, n = 2L))
 
         # Check to see if we should use `sval` instead of `padj`
         if ("svalue" %in% names(object)) {
@@ -225,7 +226,7 @@ plotVolcano.DESeqResults <-  # nolint
                 y = "-log10 adj p value"
             )
 
-        if (is_a_string(pointColor) && is.character(sigPointColor)) {
+        if (isString(pointColor) && is.character(sigPointColor)) {
             p <- p +
                 scale_color_manual(
                     values = c(
@@ -242,14 +243,10 @@ plotVolcano.DESeqResults <-  # nolint
         # Gene text labels -----------------------------------------------------
         # Get the genes to visualize when `ntop` is declared.
         if (ntop > 0L) {
-            assert_is_subset(
-                x = c("rowname", "rank"),
-                y = colnames(data)
-            )
-            # Double check that data is arranged by `rank` column.
-            assert_are_identical(
-                x = data[["rank"]],
-                y = sort(data[["rank"]])
+            assert(
+                isSubset(c("rowname", "rank"), colnames(data)),
+                # Double check that data is arranged by `rank` column.
+                identical(data[["rank"]], sort(data[["rank"]]))
             )
             # Since we know the data is arranged by rank, simply take the head.
             genes <- head(data[["rowname"]], n = ntop)
