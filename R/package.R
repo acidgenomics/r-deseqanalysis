@@ -30,7 +30,8 @@
 #'   geom_hline geom_point geom_vline ggplot guides labs scale_color_manual
 #'   scale_x_continuous scale_y_continuous theme
 #' @importFrom goalie assert containsAlpha containsHeaderLevel hasLength
-#'   hasNames hasLength hasRownames hasValidDimnames isInt isString validate
+#'   hasNames hasLength hasRownames hasValidDimnames isAny isCharacter isFlag
+#'   isInt isScalar isString validate
 #' @importFrom knitr kable
 #' @importFrom magrittr %>%
 #' @importFrom methods as is new slot slot<- validObject
