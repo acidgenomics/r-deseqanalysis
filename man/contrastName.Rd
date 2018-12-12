@@ -32,6 +32,3 @@ contrastName(object)
 ## DESeqAnalysis ====
 contrastName(deseq, results = 1L)
 }
-\author{
-Michael Steinbaugh
-}
