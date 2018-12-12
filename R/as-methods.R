@@ -14,7 +14,7 @@
 #' - `DESeqTransform`.
 #' - `DESeqResults`. Extracts the first results slotted. Note that this
 #'   corresponds to results containing log2 fold change (LFC) values that
-#'   *have not been shrunken* using `DESeq2::lfcShrink()`.
+#'   *have not been shrunken* using `DESeq2::lfcShrink`.
 #'
 #' @examples
 #' data(deseq)

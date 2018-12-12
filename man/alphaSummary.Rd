@@ -61,8 +61,8 @@ alphaSummary(object, name = "condition_B_vs_A")
 }
 \seealso{
 \itemize{
-\item \code{DESeq2::results()}.
-\item \code{DESeq2::resultsNames()}.
+\item \code{DESeq2::results}.
+\item \code{DESeq2::resultsNames}.
 }
 }
 \author{

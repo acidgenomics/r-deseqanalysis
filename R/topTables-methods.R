@@ -23,7 +23,7 @@ basejump::topTables
 
 .topTable <-  # nolint
     function(object, n = 10L) {
-        assert_that(
+        assert(
             is_tibble(object),
             isAnImplicitInteger(n)
         )
@@ -91,7 +91,7 @@ topTables.DESeqAnalysis <-  # nolint
         n = 10L
     ) {
         # Suppress the message about which results we're matching here,
-        # otherwise it will be duplicated in the `resultsTables()` call.
+        # otherwise it will be duplicated in the `resultsTables` call.
         suppressMessages(
             contrast <- contrastName(object, results = results)
         )

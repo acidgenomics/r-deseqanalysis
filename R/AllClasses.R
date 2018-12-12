@@ -1,11 +1,11 @@
 # FIXME Need to slot DESeqAnalysis package version in object...
-# Define a `metadata()` list and slot prototype metadata.
+# Define a `metadata` list and slot prototype metadata.
 
 # Consider taking out the `DESeqResultsTables` S4 object. I'm not sure this
 # makes sense, and makes the package more complicated...
 
 # TODO Add a tighter assert check to ensure that `lfcShrink` contains
-# shrunken values. Can use `priorInfo()` to test for this.
+# shrunken values. Can use `priorInfo` to test for this.
 
 # FIXME Require `results` slot to be named. This makes downstream programming
 # easier.
@@ -38,8 +38,8 @@ validateS4 <- function(...) {
 #' @section DESeqDataSet:
 #'
 #' We recommend generating the `DESeqDataSet` by coercion from `bcbioRNASeq`
-#' object using `as(dds, "bcbioRNASeq")`. Don't use the `DESeq2::DESeqDataSet()`
-#' or `DESeq2::DESeqDataSetFromMatrix()` constructors to generate the
+#' object using `as(dds, "bcbioRNASeq")`. Don't use the `DESeq2::DESeqDataSet`
+#' or `DESeq2::DESeqDataSetFromMatrix` constructors to generate the
 #' `DESeqDataSet` object.
 #'
 #' @section DESeqResults:
@@ -56,7 +56,7 @@ validateS4 <- function(...) {
 #' @slot results `list`. One or more unshrunken `DESeqResults`.
 #' @slot lfcShrink `list`. One or more shrunken `DESeqResults`.
 #'
-#' @seealso `DESeqAnalysis()`.
+#' @seealso `DESeqAnalysis`.
 #'
 #' @return `DESeqAnalysis`, which contains a `DESeqDataSet`, `DESeqTransform`,
 #'   and corresponding `DESeqResults`.
@@ -83,10 +83,10 @@ setValidity(
         lfcShrink <- slot(object, "lfcShrink")
 
         # Require that dimnames are valid.
-        valid[["dimnames"]] <- validate_that(validDimnames(data))
+        valid[["dimnames"]] <- validate(validDimnames(data))
 
         # Ensure that all objects slotted are matched.
-        valid[["matched"]] <- validate_that(
+        valid[["matched"]] <- validate(
             # DESeqDataSet and DESeqTransform.
             identical(dimnames(data), dimnames(transform)),
             # DESeqDataSet and DESeqResults.
@@ -100,11 +100,11 @@ setValidity(
         )
 
         # Require that the DESeqResults list is named.
-        valid[["results"]] <- validate_that(has_names(results))
+        valid[["results"]] <- validate(has_names(results))
 
         # Unshrunken and shrunken DESeqResults.
         if (length(lfcShrink) > 0L) {
-            valid[["lfcShrink"]] <- validate_that(
+            valid[["lfcShrink"]] <- validate(
                 all(mapply(
                     unshrunken = results,
                     shrunken = lfcShrink,

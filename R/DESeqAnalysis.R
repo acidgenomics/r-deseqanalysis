@@ -4,9 +4,9 @@
 #' @param data `DESeqDataSet`.
 #' @param transform `DESeqTransform`.
 #' @param results `list`. One or more unshrunken `DESeqResults`. Assign the
-#'   `DESeq2::results()` return here.
+#'   `DESeq2::results` return here.
 #' @param lfcShrink `list`. One or more shrunken `DESeqResults`. Assign the
-#'   `DESeq2::lfcShrink()` return here.
+#'   `DESeq2::lfcShrink` return here.
 #'
 #' @examples
 #' library(DESeq2)
@@ -46,7 +46,7 @@ DESeqAnalysis <-  # nolint
 
 
 .contrastNames <- function(object) {
-    assert_that(is(object, "DESeqAnalysis"))
+    assert(is(object, "DESeqAnalysis"))
     vapply(
         X = slot(object, "results"),
         FUN = contrastName,

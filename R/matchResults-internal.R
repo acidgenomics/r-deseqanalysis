@@ -1,4 +1,4 @@
-# Can use `priorInfo()` to inform the user about `lfcShrink()`.
+# Can use `priorInfo` to inform the user about `lfcShrink`.
 .matchResults <- function(
     object,
     results,

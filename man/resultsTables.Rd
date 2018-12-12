@@ -19,12 +19,12 @@ resultsTables(object, ...)
 
 \item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
 
-\item{rowData}{\code{boolean}. Join the row annotations.}
+\item{rowData}{\code{logical(1)}. Join the row annotations.}
 
-\item{counts}{\code{boolean}. Join the size-factor adjusted normalized counts.}
+\item{counts}{\code{logical(1)}. Join the size-factor adjusted normalized counts.}
 
-\item{return}{\code{string}. Type of data frame to return in the list. Uses
-\code{match.arg()}. Note that \code{DataFrame} option will return with rownames,
+\item{return}{\code{character(1)}. Type of data frame to return in the list. Uses
+\code{match.arg}. Note that \code{DataFrame} option will return with rownames,
 whereas \code{tbl_df} option will return with \code{"rowname"} column.}
 }
 \value{

@@ -12,10 +12,10 @@ DESeqAnalysis(data, transform, results, lfcShrink)
 \item{transform}{\code{DESeqTransform}.}
 
 \item{results}{\code{list}. One or more unshrunken \code{DESeqResults}. Assign the
-\code{DESeq2::results()} return here.}
+\code{DESeq2::results} return here.}
 
 \item{lfcShrink}{\code{list}. One or more shrunken \code{DESeqResults}. Assign the
-\code{DESeq2::lfcShrink()} return here.}
+\code{DESeq2::lfcShrink} return here.}
 }
 \value{
 \code{DESeqAnalysis}, which contains a \code{DESeqDataSet}, \code{DESeqTransform},
@@ -31,8 +31,8 @@ to ensure \code{DESeqTransform} and \code{DESeqResults} correspond to the
 
 
 We recommend generating the \code{DESeqDataSet} by coercion from \code{bcbioRNASeq}
-object using \code{as(dds, "bcbioRNASeq")}. Don't use the \code{DESeq2::DESeqDataSet()}
-or \code{DESeq2::DESeqDataSetFromMatrix()} constructors to generate the
+object using \code{as(dds, "bcbioRNASeq")}. Don't use the \code{DESeq2::DESeqDataSet}
+or \code{DESeq2::DESeqDataSetFromMatrix} constructors to generate the
 \code{DESeqDataSet} object.
 }
 
@@ -65,5 +65,5 @@ x <- DESeqAnalysis(
 print(x)
 }
 \seealso{
-\code{DESeqAnalysis()}.
+\code{DESeqAnalysis}.
 }

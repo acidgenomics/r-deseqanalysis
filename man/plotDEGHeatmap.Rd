@@ -19,8 +19,8 @@
 
 \item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
 
-\item{contrastSamples}{\code{boolean}. \strong{Experimental}. Only include the samples
-used to define the contrast passed to \code{DESeq2::results()}. This setting
+\item{contrastSamples}{\code{logical(1)}. \strong{Experimental}. Only include the samples
+used to define the contrast passed to \code{DESeq2::results}. This setting
 will break for complex DESeq2 contrasts (e.g. interaction effect).}
 
 \item{direction}{\code{character(1)}. Plot "\code{both}", "\code{up}", or "\code{down}"
