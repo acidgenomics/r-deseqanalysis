@@ -25,7 +25,8 @@ threshold. If left \code{NULL}, will use the cutoff defined in the object.}
 \item{direction}{\code{character(1)}. Plot "\code{both}", "\code{up}", or "\code{down}"
 directions.}
 
-\item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
+\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
+\code{DESeqResults}.}
 }
 \value{
 \code{character}. Gene identifiers.

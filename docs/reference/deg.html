@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DESeq2 Differential Expression Results Tables — DESeqResultsTables • DESeqAnalysis</title>
+<title>Differentially Expressed Genes — deg • DESeqAnalysis</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="DESeq2 Differential Expression Results Tables — DESeqResultsTables" />
+<meta property="og:title" content="Differentially Expressed Genes — deg" />
 
-<meta property="og:description" content="DESeqResults object with DataFrame subsets and file path information." />
+<meta property="og:description" content="Differentially Expressed Genes" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -104,22 +104,24 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>DESeq2 Differential Expression Results Tables</h1>
-    <small class="dont-index">Source: <a href='https://github.com/steinbaugh/DESeqAnalysis/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/steinbaugh/DESeqAnalysis/blob/master/R/DESeqResultsTables-methods.R'><code>R/DESeqResultsTables-methods.R</code></a></small>
-    <div class="hidden name"><code>DESeqResultsTables.Rd</code></div>
+    <h1>Differentially Expressed Genes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/steinbaugh/DESeqAnalysis/blob/master/R/deg-methods.R'><code>R/deg-methods.R</code></a></small>
+    <div class="hidden name"><code>deg.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>DESeqResults</code> object with <code>DataFrame</code> subsets and file path information.</p>
+    <p>Differentially Expressed Genes</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>DESeqResultsTables</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='co'># S4 method for DESeqResults</span>
+<span class='fu'>deg</span>(<span class='no'>object</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>))
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>DESeqResultsTables</span>(<span class='no'>object</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>deg</span>(<span class='no'>object</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
+  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -129,78 +131,61 @@
       <td><p>Object.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Additional arguments.</p></td>
+      <th>alpha</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric(1)</a></code>. Adjusted P value ("alpha") cutoff. If left <code>NULL</code>,
+will use the cutoff defined in the object.</p></td>
+    </tr>
+    <tr>
+      <th>lfcThreshold</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric(1)</a></code>. Log fold change ratio (base 2) cutoff
+threshold. If left <code>NULL</code>, will use the cutoff defined in the object.</p></td>
+    </tr>
+    <tr>
+      <th>direction</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>. Plot "<code>both</code>", "<code>up</code>", or "<code>down</code>"
+directions.</p></td>
     </tr>
     <tr>
       <th>results</th>
-      <td><p><code>scalar</code>. Position or name of <code>DESeqResults</code>.</p></td>
-    </tr>
-    <tr>
-      <th>lfcShrink</th>
-      <td><p><code>boolean</code>. Use shrunken log2 fold change (LFC) values.</p></td>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>. Name or positive of
+<code>DESeqResults</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>DESeqResultsTables</code>, containing the original, unmodified
-<code>DESeqResults</code> <code>DataFrame</code> along with the corresponding differentially
-expressed genes and gene-level metadata (rowRanges).</p>
-    
-    <h2 class="hasAnchor" id="obtaining-results-from-deseq-"><a class="anchor" href="#obtaining-results-from-deseq-"></a>Obtaining results from DESeq2</h2>
-
-    
-    <p>It is recommended to specify the <code>contrast</code> argument as <code>character</code>:</p><ol>
-<li><p>Design matrix factor of interest.</p></li>
-<li><p>Numerator for LFC (expt).</p></li>
-<li><p>Denominator for LFC (control).</p></li>
-</ol>
-    <p>For example, to get the relative change in gene expression between mutant
-and wildtype samples, here's how to set the contrast vector:</p><pre>c(
-    factor = "genotype",
-    numerator = "mutant",
-    denominator = "wildtype"
-)
-</pre>
-    
-    <h2 class="hasAnchor" id="log-fold-change-threshold-cutoffs"><a class="anchor" href="#log-fold-change-threshold-cutoffs"></a>Log fold change threshold cutoffs</h2>
-
-    
-    <p>Refer to <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>DESeq2::results()</a></code> for additional information about using
-<code>lfcThreshold</code> and <code>altHypothesis</code> to set an alternative hypothesis based on
-expected fold changes. In addition, the "Hypothesis tests with thresholds on
-effect size" section in the DESeq2 paper provides additional explanation.</p>
-<p>Don't apply <em>post hoc</em> LFC threshold filtering to obtain results tables, as
-this will destroy the meaning of the adjusted <em>P</em> values computed. If you are
-expecting a biological effect size past a particular threshold, set
-<code>lfcThreshold</code>, but be conservative.</p>
-<p>This <a href='https://support.bioconductor.org/p/101504/'>thread</a> on the Bioconductor forums explains how <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>DESeq2::results()</a></code>
-should be called with regard to LFC cutoffs in nice detail.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><ul>
-<li><p><code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>DESeq2::results()</a></code>.</p></li>
-<li><p><code><a href='markdown.html'>markdown()</a></code>, <code><a href='https://www.rdocumentation.org/packages/base/topics/write'>write()</a></code>.</p></li>
-</ul></div>
+    <p><code>character</code>. Gene identifiers.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>DESeqResultsTables</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; DESeqResultsTables 1.22.1
-#&gt; contrast: condition B vs A
-#&gt; alpha: 0.1
-#&gt; lfcThreshold: 0
-#&gt; out of 499 with nonzero total read count
-#&gt; adjusted p-value &lt; 0.1
-#&gt; LFC &gt; 0 (up)       : 84, 17%
-#&gt; LFC &lt; 0 (down)     : 87, 17%
-#&gt; outliers [1]       : 2, 0.4%
-#&gt; low counts [2]     : 0, 0%
-#&gt; (mean count &lt; 0)</div></pre>
+<span class='fu'>deg</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt;   [1] "gene427" "gene419" "gene095" "gene334" "gene323" "gene494" "gene352"
+#&gt;   [8] "gene391" "gene145" "gene078" "gene403" "gene497" "gene248" "gene004"
+#&gt;  [15] "gene285" "gene489" "gene063" "gene023" "gene148" "gene448" "gene215"
+#&gt;  [22] "gene473" "gene412" "gene060" "gene105" "gene277" "gene298" "gene317"
+#&gt;  [29] "gene291" "gene363" "gene181" "gene097" "gene166" "gene217" "gene441"
+#&gt;  [36] "gene449" "gene456" "gene364" "gene001" "gene375" "gene085" "gene321"
+#&gt;  [43] "gene235" "gene198" "gene117" "gene405" "gene378" "gene366" "gene422"
+#&gt;  [50] "gene377" "gene395" "gene439" "gene057" "gene150" "gene491" "gene206"
+#&gt;  [57] "gene460" "gene320" "gene336" "gene116" "gene444" "gene374" "gene091"
+#&gt;  [64] "gene003" "gene360" "gene270" "gene495" "gene384" "gene376" "gene388"
+#&gt;  [71] "gene394" "gene299" "gene385" "gene250" "gene333" "gene338" "gene305"
+#&gt;  [78] "gene021" "gene365" "gene209" "gene272" "gene269" "gene223" "gene498"
+#&gt;  [85] "gene133" "gene469" "gene236" "gene415" "gene470" "gene231" "gene082"
+#&gt;  [92] "gene160" "gene090" "gene355" "gene300" "gene058" "gene396" "gene039"
+#&gt;  [99] "gene142" "gene176" "gene478" "gene122" "gene417" "gene500" "gene044"
+#&gt; [106] "gene208" "gene274" "gene140" "gene214" "gene156" "gene327" "gene149"
+#&gt; [113] "gene273" "gene067" "gene358" "gene483" "gene075" "gene304" "gene411"
+#&gt; [120] "gene045" "gene315" "gene292" "gene123" "gene111" "gene141" "gene408"
+#&gt; [127] "gene342" "gene340" "gene071" "gene399" "gene143" "gene167" "gene080"
+#&gt; [134] "gene496" "gene454" "gene012" "gene468" "gene204" "gene341" "gene035"
+#&gt; [141] "gene129" "gene393" "gene447" "gene014" "gene401" "gene252" "gene022"
+#&gt; [148] "gene261" "gene283" "gene329" "gene138" "gene186" "gene265" "gene354"
+#&gt; [155] "gene147" "gene325" "gene087" "gene175" "gene418" "gene369" "gene177"
+#&gt; [162] "gene301" "gene066" "gene295" "gene486" "gene114" "gene475" "gene069"
+#&gt; [169] "gene330" "gene350" "gene428"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -208,12 +193,6 @@ should be called with regard to LFC cutoffs in nice detail.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#obtaining-results-from-deseq-">Obtaining results from DESeq2</a></li>
-
-      <li><a href="#log-fold-change-threshold-cutoffs">Log fold change threshold cutoffs</a></li>
-
-      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
@@ -227,7 +206,7 @@ should be called with regard to LFC cutoffs in nice detail.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
    </div>

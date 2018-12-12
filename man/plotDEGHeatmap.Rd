@@ -18,7 +18,8 @@
 \arguments{
 \item{object}{Object.}
 
-\item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
+\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
+\code{DESeqResults}.}
 
 \item{contrastSamples}{\code{logical(1)}. \strong{Experimental}. Only include the samples
 used to define the contrast passed to \code{DESeq2::results}. This setting
