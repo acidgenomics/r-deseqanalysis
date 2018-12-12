@@ -1,18 +1,3 @@
-# NOTE: `clusterRows = TRUE` can fail for some datasets.
-# Use a `tryCatch` call here to attempt to detect.
-
-# Error in hclust(d, method = method) :
-# NA/NaN/Inf in foreign function call (arg 11)
-# Calls: plotDEGHeatmap ... do.call -> do.call -> <Anonymous> -> cluster_mat -> hclust
-
-# Works:
-# plotDEGHeatmap(MCF7_analysis, results = 2L, contrastSamples = TRUE, clusterRows = FALSE)
-#
-# Errors:
-# plotDEGHeatmap(MCF7_analysis, results = 2L, contrastSamples = TRUE, clusterRows = FALSE)
-
-
-
 # Do not allow post hoc alpha or lfcThreshold cutoffs here.
 
 

@@ -10,21 +10,31 @@
 #'
 #' @examples
 #' library(DESeq2)
-#' dds <- DESeq(makeExampleDESeqDataSet())
-#' class(dds)
-#' 
-#' dt <- varianceStabilizingTransformation(dds)
-#' class(dt)
-#' 
-#' resultsNames(dds)
-#' res <- results(dds, name = resultsNames(dds)[[2L]])
-#' class(res)
-#' 
+#'
+#' data <- DESeq(makeExampleDESeqDataSet())
+#' class(data)
+#'
+#' transform <- varianceStabilizingTransformation(data)
+#' class(transform)
+#'
+#' resultsNames(data)
+#' name <- resultsNames(data)[[2L]]
+#' results <- results(data, name = name)
+#' class(results)
+#'
+#' lfcShrink <- lfcShrink(dds = data, res = results, coef = 2L)
+#'
+#' results <- list(results)
+#' names(results) <- name
+#' lfcShrink <- list(lfcShrink)
+#' names(lfcShrink) <- name
+#' identical(names(results), names(lfcShrink))
+#'
 #' x <- DESeqAnalysis(
-#'     data = dds,
-#'     transform = dt,
-#'     results = list(res),
-#'     lfcShrink = list(lfcShrink(dds = dds, res = res, coef = 2L))
+#'     data = data,
+#'     transform = transform,
+#'     results = results,
+#'     lfcShrink = lfcShrink
 #' )
 #' print(x)
 DESeqAnalysis <-  # nolint
