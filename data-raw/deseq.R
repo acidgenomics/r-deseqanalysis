@@ -1,5 +1,8 @@
 #' Example DESeq2 differential expression analysis
-#' 2018-11-30
+#' 2018-12-12
+
+# FIXME Name results...otherwise the object won't return valid.
+# Assign with `makeNames()`.
 
 library(pryr)
 library(basejump)
