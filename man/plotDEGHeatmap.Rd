@@ -23,27 +23,28 @@
 used to define the contrast passed to \code{DESeq2::results()}. This setting
 will break for complex DESeq2 contrasts (e.g. interaction effect).}
 
-\item{direction}{\code{string}. Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
+\item{direction}{\code{character(1)}. Plot "\code{both}", "\code{up}", or "\code{down}"
+directions.}
 
-\item{scale}{\code{string}. Whether the values should be centered and scaled in
+\item{scale}{\code{character(1)}. Whether the values should be centered and scaled in
 either the row or column direction ("\code{row}", "\code{column}"), or remain
 unscaled ("\code{none}").}
 
-\item{clusteringMethod}{\code{string}. Clustering method. Accepts the same values
-as \code{stats::hclust()}.}
+\item{clusteringMethod}{\code{character(1)}. Clustering method. Accepts the same values
+as \code{stats::hclust}.}
 
-\item{clusterRows}{\code{boolean}. Arrange with hierarchical
+\item{clusterRows}{\code{logical(1)}. Arrange with hierarchical
 clustering.}
 
-\item{clusterCols}{\code{boolean}. Arrange with hierarchical
+\item{clusterCols}{\code{logical(1)}. Arrange with hierarchical
 clustering.}
 
-\item{interestingGroups}{\code{character}. Groups of interest that
-define the samples. If left unset, defaults to \code{sampleName}.}
+\item{interestingGroups}{\code{character}. Groups of interest that define the
+samples. If left unset, defaults to \code{sampleName}.}
 
-\item{showRownames}{\code{boolean}. Show row or column names.}
+\item{showRownames}{\code{logical(1)}. Show row or column names.}
 
-\item{showColnames}{\code{boolean}. Show row or column names.}
+\item{showColnames}{\code{logical(1)}. Show row or column names.}
 
 \item{treeheightRow}{\code{scalar integer}. Size of the row and
 column dendrograms. Use \code{0} to disable.}
@@ -55,10 +56,10 @@ column dendrograms. Use \code{0} to disable.}
 or values to use for plot. We generally recommend these hexadecimal
 functions from the viridis package:
 \itemize{
-\item \code{viridis::viridis()} (\emph{default}).
-\item \code{viridis::inferno()}.
-\item \code{viridis::magma()}.
-\item \code{viridis::plasma()}.
+\item \code{viridis::viridis} (\emph{default}).
+\item \code{viridis::inferno}.
+\item \code{viridis::magma}.
+\item \code{viridis::plasma}.
 Alternatively, colors can be defined manually using hexadecimal values
 (e.g. \code{c("#FF0000", "#0000FF")}), but this is not generally recommended.
 Refer to the RColorBrewer package for hexadecimal color palettes that may
@@ -69,12 +70,12 @@ be suitable. If set \code{NULL}, will use the default pheatmap colors.
 for legend labels. Note that hexadecimal values are not supported. If set
 \code{NULL}, will use the default pheatmap colors.}
 
-\item{borderColor}{\code{string} or \code{NULL}. Border color. Disabled by default for
+\item{borderColor}{\code{character(1)} or \code{NULL}. Border color. Disabled by default for
 improved aesthetics.}
 
-\item{title}{\code{string} or \code{NULL}. Plot title.}
+\item{title}{\code{character(1)} or \code{NULL}. Plot title.}
 
-\item{...}{Passthrough arguments to \code{pheatmap::pheatmap()}. The names of the
+\item{...}{Passthrough arguments to \code{pheatmap::pheatmap}. The names of the
 arguments should be formatted in camel case, not snake case.}
 }
 \value{
@@ -108,8 +109,8 @@ Here we're scaling simply by calculating the standard score (z-score).
 
 See also:
 \itemize{
-\item \code{pheatmap:::scale_rows()}.
-\item \code{base::scale()} for additional scaling approaches.
+\item \code{pheatmap:::scale_rows}.
+\item \code{base::scale} for additional scaling approaches.
 }
 
 }
@@ -119,7 +120,7 @@ See also:
 
 
 Row- and column-wise hierarchical clustering is performed when \code{clusterRows}
-and/or \code{clusterCols} are set to \code{TRUE}. Internally, this calls \code{hclust()},
+and/or \code{clusterCols} are set to \code{TRUE}. Internally, this calls \code{hclust},
 and defaults to the Ward method.
 
 Automatic hierarchical clustering of rows and/or columns can error for some
@@ -129,7 +130,7 @@ NA/NaN/Inf in foreign function call
 
 In this case, either set \code{clusterRows} and/or \code{clusterCols} to \code{FALSE}, or
 you can attempt to pass an \code{hclust} object to these arguments. This is
-recommended as an alternate approach to be used with \code{pheatmap::pheatmap()},
+recommended as an alternate approach to be used with \code{pheatmap::pheatmap},
 which is called internally by our plotting code. Here's how this can be
 accomplished:\preformatted{mat <- assay(mat)
 dist <- dist(mat)
@@ -146,13 +147,13 @@ plotDEGHeatmap(deseq)
 }
 \seealso{
 \itemize{
-\item \code{pheatmap::pheatmap()}.
-\item \code{RColorBrewer::brewer.pal()}.
+\item \code{pheatmap::pheatmap}.
+\item \code{RColorBrewer::brewer.pal}.
 }
 
 \itemize{
-\item \code{pheatmap::pheatmap()}.
-\item \code{stats::cor()}.
-\item \code{stats::hclust()}.
+\item \code{pheatmap::pheatmap}.
+\item \code{stats::cor}.
+\item \code{stats::hclust}.
 }
 }
