@@ -9,6 +9,7 @@ setGeneric(
 
 
 
+# TODO Consider moving this to basejump?
 #' @rdname resultsTables
 #' @export
 setGeneric(
