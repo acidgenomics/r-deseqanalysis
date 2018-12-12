@@ -29,9 +29,10 @@
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_density
 #'   geom_hline geom_point geom_vline ggplot guides labs scale_color_manual
 #'   scale_x_continuous scale_y_continuous theme
-#' @importFrom goalie assert containsAlpha containsHeaderLevel hasLength
-#'   hasNames hasLength hasRownames hasValidDimnames isAny isCharacter isFlag
-#'   isInt isNonNegative isNumber isScalar isString validate
+#' @importFrom goalie areDisjointSets assert containsAlpha containsHeaderLevel
+#'   hasLength hasNames hasLength hasRownames hasValidDimnames isAny isCharacter
+#'   isFlag isInRange isInt isNonEmpty isNonNegative isNumber isScalar isString
+#'   isSubset validate
 #' @importFrom knitr kable
 #' @importFrom magrittr %>%
 #' @importFrom methods as is new slot slot<- validObject

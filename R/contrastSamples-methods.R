@@ -41,18 +41,18 @@ contrastSamples.DESeqAnalysis <- function(object, results = 1L) {
     colData <- colData(data)
     assert(hasRownames(colData))
 
-    assert(factor %in% colnames(colData))
+    assert(isSubset(factor, colnames(colData)))
     message(paste("Factor column:", factor))
     factor <- snake(colData[[factor]])
-    assert_is_factor(factor)
+    assert(is.factor(factor))
 
     numerator <- match[1L, 3L]
-    assert(numerator %in% factor)
+    assert(isSubset(numerator, factor))
     numerator <- samples[factor %in% numerator]
     message(paste("Numerator samples:", toString(numerator)))
 
     denominator <- match[1L, 4L]
-    assert(denominator %in% factor)
+    assert(isSubset(denominator, factor))
     denominator <- samples[factor %in% denominator]
     message(paste("Denominator samples:", toString(denominator)))
 

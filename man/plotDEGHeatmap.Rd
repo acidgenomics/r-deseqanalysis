@@ -8,11 +8,12 @@
 \usage{
 \S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results = 1L,
   contrastSamples = FALSE, direction = c("both", "up", "down"),
-  scale = "row", clusteringMethod = "ward.D2", clusterRows = TRUE,
-  clusterCols = TRUE, interestingGroups = NULL, showRownames = FALSE,
-  showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
-  color = viridis::viridis, legendColor = viridis::viridis,
-  borderColor = NULL, title = NULL, ...)
+  scale = c("row", "column", "none"), clusteringMethod = "ward.D2",
+  clusterRows = TRUE, clusterCols = TRUE, interestingGroups = NULL,
+  showRownames = FALSE, showColnames = TRUE, treeheightRow = 50L,
+  treeheightCol = 50L, color = viridis::viridis,
+  legendColor = viridis::viridis, borderColor = NULL, title = NULL,
+  ...)
 }
 \arguments{
 \item{object}{Object.}

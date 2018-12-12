@@ -36,15 +36,17 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
         validObject(results)
         counts <- as(object, "DESeqTransform")
         validObject(counts)
-        assert_are_identical(rownames(results), rownames(counts))
+        assert(identical(rownames(results), rownames(counts)))
         interestingGroups <- matchInterestingGroups(counts, interestingGroups)
         interestingGroups(counts) <- interestingGroups
         alpha <- metadata(results)[["alpha"]]
-        assertIsAlpha(alpha)
+        assert(containsAlpha(alpha))
         lfcThreshold <- metadata(results)[["lfcThreshold"]]
-        assert_is_a_number(lfcThreshold)
-        assert_all_are_non_negative(lfcThreshold)
-        assert_is_a_bool(contrastSamples)
+        assert(
+            isNumber(lfcThreshold),
+            isNonNegative(lfcThreshold),
+            isFlag(contrastSamples)
+        )
         direction <- match.arg(direction)
         return <- match.arg(return)
 
@@ -62,7 +64,7 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
         # Subset the counts to match contrast samples, if desired.
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object)
-            assert_is_subset(samples, colnames(se))
+            assert(isSubset(samples, colnames(se)))
             se <- se[, samples, drop = FALSE]
             colData(se) <- relevelColData(colData(se))
         }

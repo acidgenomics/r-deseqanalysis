@@ -72,28 +72,33 @@ plotMA.DESeqResults <-  # nolint
     ) {
         validObject(object)
         alpha <- metadata(object)[["alpha"]]
-        assertIsAlpha(alpha)
+        assert(containsAlpha(alpha))
         lfcThreshold <- metadata(object)[["lfcThreshold"]]
-        assert_is_a_number(lfcThreshold)
-        assert_all_are_non_negative(lfcThreshold)
-        assert_is_any_of(genes, c("character", "NULL"))
-        assert_is_any_of(gene2symbol, c("Gene2Symbol", "NULL"))
+        assert(
+            isNumber(lfcThreshold),
+            isNonNegative(lfcThreshold),
+            isAny(genes, classes = c("character", "NULL")),
+            isAny(gene2symbol, classes = c("Gene2Symbol", "NULL")),
+            isString(pointColor),
+            isCharacter(sigPointColor),
+            isInt(ntop),
+            isNonNegative(ntop)
+        )
         direction <- match.arg(direction)
-        assert_is_a_number(ntop)
-        assert_all_are_non_negative(ntop)
+        return <- match.arg(return)
+
         if (!is.null(genes) && ntop > 0L) {
             stop("Specify either `genes` or `ntop`.", call. = FALSE)
         }
-        assert_is_a_string(pointColor)
-        assert_is_character(sigPointColor)
-        if (is_a_string(sigPointColor)) {
+
+        # Automatically handle monochromatic coloring by significance.
+        if (isString(sigPointColor)) {
             sigPointColor <- c(
                 upregulated = sigPointColor,
                 downregulated = sigPointColor
             )
         }
-        assert_is_of_length(sigPointColor, n = 2L)
-        return <- match.arg(return)
+        assert(hasLength(sigPointColor, n = 2L))
 
         # Check to see if we should use `sval` column instead of `padj`.
         if ("svalue" %in% names(object)) {
@@ -119,7 +124,7 @@ plotMA.DESeqResults <-  # nolint
                 lfcCol = lfcCol,
                 lfcThreshold = lfcThreshold
             )
-        assert_is_subset(
+        assert(isSubset(
             x = c(
                 "rowname",
                 "baseMean",
@@ -130,7 +135,7 @@ plotMA.DESeqResults <-  # nolint
                 "isDE"
             ),
             y = colnames(data)
-        )
+        ))
 
         # Apply directional filtering, if desired.
         if (direction == "up") {
@@ -187,7 +192,7 @@ plotMA.DESeqResults <-  # nolint
 
         # Color the significant points.
         # Note that we're using direction-specific coloring by default.
-        if (is_a_string(pointColor) && is.character(sigPointColor)) {
+        if (isString(pointColor) && is.character(sigPointColor)) {
             p <- p +
                 scale_color_manual(
                     values = c(
@@ -204,14 +209,10 @@ plotMA.DESeqResults <-  # nolint
         # Gene text labels -----------------------------------------------------
         # Get the genes to visualize when `ntop` is declared.
         if (ntop > 0L) {
-            assert_is_subset(
-                x = c("rowname", "rank"),
-                y = colnames(data)
-            )
-            # Double check that data is arranged by `rank` column.
-            assert_are_identical(
-                x = data[["rank"]],
-                y = sort(data[["rank"]])
+            assert(
+                isSubset(c("rowname", "rank"), colnames(data)),
+                # Double check that data is arranged by `rank` column.
+                identical(data[["rank"]], sort(data[["rank"]]))
             )
             # Since we know the data is arranged by rank, simply take the head.
             genes <- head(data[["rowname"]], n = ntop)

@@ -71,7 +71,7 @@ basejump::export
 
     # Get the DESeqResults list.
     list <- slot(x, name = slotName)
-    assert_is_list(list)
+    assert(is.list(list))
     if (!is(list[[1L]], "DESeqResults")) {
         message(paste(
             slotName, "does not contain DESeqResults.",
