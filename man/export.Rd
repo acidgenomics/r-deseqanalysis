@@ -7,7 +7,7 @@
 \title{Export}
 \usage{
 \S4method{export}{DESeqAnalysis}(x, name = NULL, dir = ".",
-  compress = FALSE, human = FALSE)
+  compress = FALSE, humanize = FALSE)
 }
 \arguments{
 \item{x}{An object supporting \code{dim} to be written to disk.}
@@ -18,6 +18,9 @@ name of the object instead.}
 \item{dir}{\code{character(1)}. Directory path.}
 
 \item{compress}{\code{logical(1)}. Apply gzip compression to all files.}
+
+\item{humanize}{\code{logical(1)}. Automatically convert gene IDs to gene symbols
+in the \code{rownames} and sample IDs to sample names in the \code{colnames}.}
 }
 \value{
 Invisible \code{character}. File path(s).

@@ -18,7 +18,7 @@ basejump::export
 
 
 
-.exportDESeqDataSet <- function(x, dir, compress, human) {
+.exportDESeqDataSet <- function(x, dir, compress, humanize) {
     # Using the inherited SummarizedExperiment method here.
     assert(is(x, "DESeqAnalysis"))
     message("Exporting DESeqDataSet.")
@@ -27,13 +27,13 @@ basejump::export
         name = "data",
         dir = dir,
         compress = compress,
-        human = human
+        humanize = humanize
     )
 }
 
 
 
-.exportDESeqTransform <- function(x, dir, compress, human) {
+.exportDESeqTransform <- function(x, dir, compress, humanize) {
     # Using the inherited SummarizedExperiment method here.
     assert(is(x, "DESeqAnalysis"))
     message("Exporting DESeqTransform.")
@@ -42,7 +42,7 @@ basejump::export
         name = "transform",
         dir = dir,
         compress = compress,
-        human = human
+        humanize = humanize
     )
 }
 
@@ -56,7 +56,7 @@ basejump::export
     slotName = c("results", "lfcShrink"),
     dir,
     compress,
-    human
+    humanize
 ) {
     assert(is(x, "DESeqAnalysis"))
     slotName <- match.arg(slotName)
@@ -64,7 +64,7 @@ basejump::export
     # Get the DESeqDataSet.
     data <- as(x, "DESeqDataSet")
     # Humanize rownames and colnames, if desired.
-    if (isTRUE(human)) {
+    if (isTRUE(humanize)) {
         data <- humanize(data)
     }
     dimnames <- dimnames(data)
@@ -87,14 +87,14 @@ basejump::export
         MoreArgs = list(
             dir = file.path(dir, slotName),
             compress = compress,
-            human = human
+            humanize = humanize
         ),
-        FUN = function(name, x, dir, compress, human) {
+        FUN = function(name, x, dir, compress, humanize) {
             file <- file.path(dir, paste0(name, ".csv"))
             if (isTRUE(compress)) {
                 file <- paste0(file, ".gz")
             }
-            if (isTRUE(human)) {
+            if (isTRUE(humanize)) {
                 x[["geneID"]] <- rownames(x)
                 rownames(x) <- dimnames[[1L]]
             }
@@ -110,7 +110,7 @@ basejump::export
 # TODO Improve the messages here.
 # Here we are looping across each contrast and writing out DEG tables.
 # NOTE: This step picks shrunken LFCs over unshrunken if slotted.
-# NOTE: We don't need to support human here because `geneName` is required.
+# NOTE: We don't need to support humanize here because `geneName` is required.
 .exportResultsTables <- function(x, dir, compress) {
     assert(is(x, "DESeqAnalysis"))
     dir <- file.path(dir, "resultsTables")
@@ -154,7 +154,7 @@ export.DESeqAnalysis <-  # nolint
         name = NULL,
         dir = ".",
         compress = FALSE,
-        human = FALSE
+        humanize = FALSE
     ) {
         validObject(x)
         call <- standardizeCall()
@@ -175,7 +175,7 @@ export.DESeqAnalysis <-  # nolint
                 x = x,
                 dir = dir,
                 compress = compress,
-                human = human
+                humanize = humanize
             )
         )
 
@@ -186,7 +186,7 @@ export.DESeqAnalysis <-  # nolint
                 x = x,
                 dir = dir,
                 compress = compress,
-                human = human
+                humanize = humanize
             )
         )
 
@@ -199,7 +199,7 @@ export.DESeqAnalysis <-  # nolint
                 slotName = "results",
                 dir = dir,
                 compress = compress,
-                human = human
+                humanize = humanize
             )
         )
         files[["lfcShrink"]] <- do.call(
@@ -209,7 +209,7 @@ export.DESeqAnalysis <-  # nolint
                 slotName = "lfcShrink",
                 dir = dir,
                 compress = compress,
-                human = human
+                humanize = humanize
             )
         )
 
