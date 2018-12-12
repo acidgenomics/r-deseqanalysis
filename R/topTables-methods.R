@@ -24,8 +24,9 @@ basejump::topTables
 .topTable <-  # nolint
     function(object, n = 10L) {
         assert(
-            is_tibble(object),
-            isAnImplicitInteger(n)
+            is(object, "tbl_df"),
+            isInt(n),
+            isPositive(n)
         )
 
         # Select minimal columns of interest.
@@ -37,7 +38,7 @@ basejump::topTables
             "padj",
             "geneBiotype"
         )
-        assert_is_subset(required, colnames(object))
+        assert(isSubset(required, colnames(object)))
         optional <- "description"
         keep <- intersect(
             x = c(required, optional),
@@ -102,7 +103,7 @@ topTables.DESeqAnalysis <-  # nolint
             counts = FALSE,
             return = "tbl_df"
         )
-        assert_is_subset(c("up", "down"), names(list))
+        assert(isSubset(c("up", "down"), names(list)))
 
         # Upregulated genes.
         up <- list[["up"]]

@@ -6,10 +6,6 @@
 #'
 #' # DESeqAnalysis ====
 #' markdown(deseq)
-#'
-#' ## DESeqResultsTables ====
-#' x <- DESeqResultsTables(deseq)
-#' markdown(x)
 NULL
 
 

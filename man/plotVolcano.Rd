@@ -49,7 +49,8 @@ with the same color, regardless of direction.}
 \item{return}{\code{character(1)}. Return type. Uses \code{match.arg} internally and
 defaults to the first argument in the \code{character} vector.}
 
-\item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
+\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
+\code{DESeqResults}.}
 
 \item{lfcShrink}{\code{logical(1)}. Use shrunken log2 fold change (LFC) values.}
 }

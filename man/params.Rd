@@ -10,7 +10,8 @@ will break for complex DESeq2 contrasts (e.g. interaction effect).}
 
 \item{lfcShrink}{\code{logical(1)}. Use shrunken log2 fold change (LFC) values.}
 
-\item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
+\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
+\code{DESeqResults}.}
 }
 \value{
 No value.
