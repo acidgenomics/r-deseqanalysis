@@ -30,25 +30,24 @@
 #'   assert_is_factor assert_is_list assert_is_matrix assert_is_numeric
 #'   is_a_number is_a_string
 #' @importFrom assertthat assert_that validate_that
-#' @importFrom basejump Gene2Symbol assertFormalGene2Symbol as_tibble
-#'   basejump_geom_label_repel camel decode deg humanize initDir
-#'   interestingGroups<- makeNames mapGenesToRownames markdownHeader
-#'   markdownList matchArgsToDoCall matchInterestingGroups methodFormals
-#'   plotGene plotHeatmap plotPCA relevelColData removeNA sanitizeRowData
-#'   showSlotInfo snake standardizeCall
+#' @importFrom basejump Gene2Symbol as_tibble basejump_geom_label_repel camel
+#'   decode deg humanize initDir interestingGroups<- makeNames
+#'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
+#'   matchInterestingGroups matchesGene2Symbol methodFormals plotGene
+#'   plotHeatmap plotPCA relevelColData removeNA sanitizeRowData showSlotInfo
+#'   snake standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom dplyr arrange desc everything filter left_join mutate pull rename
 #'   row_number select
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_density
 #'   geom_hline geom_point geom_vline ggplot guides labs scale_color_manual
 #'   scale_x_continuous scale_y_continuous theme
-#' @importFrom goalie assertHasRownames assertIsAlpha assertIsAnImplicitInteger
-#'   assertIsHeaderLevel assertIsImplicitInteger assertIsStringOrNULL
-#'   validDimnames
+#' @importFrom goalie assert containsAlpha containsHeaderLevel hasLength
+#'   hasRownames hasValidDimnames isInt isString
 #' @importFrom knitr kable
 #' @importFrom magrittr %>%
 #' @importFrom methods as is new slot slot<- validObject
-#' @importFrom rlang := UQ has_length sym syms
+#' @importFrom rlang := UQ sym syms
 #' @importFrom scales pretty_breaks
 #' @importFrom stringr str_match str_trunc
 #' @importFrom tidyselect starts_with
