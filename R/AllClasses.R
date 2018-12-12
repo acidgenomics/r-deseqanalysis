@@ -18,7 +18,7 @@ validateS4 <- function(...) {
         list <- list[[1L]]
     }
     invalid <- Filter(f = Negate(isTRUE), x = list)
-    if (has_length(invalid)) {
+    if (hasLength(invalid)) {
         unlist(invalid)
     } else {
         TRUE
@@ -83,7 +83,7 @@ setValidity(
         lfcShrink <- slot(object, "lfcShrink")
 
         # Require that dimnames are valid.
-        valid[["dimnames"]] <- validate(validDimnames(data))
+        valid[["dimnames"]] <- validate(hasValidDimnames(data))
 
         # Ensure that all objects slotted are matched.
         valid[["matched"]] <- validate(
@@ -100,7 +100,7 @@ setValidity(
         )
 
         # Require that the DESeqResults list is named.
-        valid[["results"]] <- validate(has_names(results))
+        valid[["results"]] <- validate(hasNames(results))
 
         # Unshrunken and shrunken DESeqResults.
         if (length(lfcShrink) > 0L) {

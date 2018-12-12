@@ -67,7 +67,7 @@ deg.DESeqResults <- function(
 
     deg <- pull(data, "rowname")
 
-    if (!has_length(deg)) {
+    if (!hasLength(deg)) {
         warning("No significant DEGs detected.")
     } else {
         message(paste(
