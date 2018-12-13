@@ -11,7 +11,7 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' plotDEGHeatmap(deseq)
+#' plotDEGHeatmap(deseq, results = 1L)
 NULL
 
 

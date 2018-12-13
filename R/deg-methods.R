@@ -6,7 +6,7 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' deg(deseq)
+#' deg(deseq, results = 1L)
 NULL
 
 

@@ -12,7 +12,7 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' plotDEGPCA(deseq)
+#' plotDEGPCA(deseq, results = 1L)
 NULL
 
 
