@@ -4,9 +4,14 @@
 \alias{params}
 \title{Parameters}
 \arguments{
-\item{lfcShrink}{\code{boolean}. Use shrunken log2 fold change (LFC) values.}
+\item{contrastSamples}{\code{logical(1)}. \strong{Experimental}. Only include the samples
+used to define the contrast passed to \code{DESeq2::results}. This setting
+will break for complex DESeq2 contrasts (e.g. interaction effect).}
 
-\item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
+\item{lfcShrink}{\code{logical(1)}. Use shrunken log2 fold change (LFC) values.}
+
+\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
+\code{DESeqResults}.}
 }
 \value{
 No value.

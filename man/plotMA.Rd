@@ -3,51 +3,47 @@
 \docType{methods}
 \name{plotMA}
 \alias{plotMA}
-\alias{plotMA,DESeqResults-method}
 \alias{plotMA,DESeqAnalysis-method}
 \alias{plotMeanAverage}
 \title{MA-plot: plot differences versus averages for high-throughput data}
 \usage{
-\S4method{plotMA}{DESeqResults}(object, genes = NULL,
-  gene2symbol = NULL, ntop = 0L, direction = c("both", "up", "down"),
+\S4method{plotMA}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
+  genes = NULL, ntop = 0L, direction = c("both", "up", "down"),
   pointColor = "gray50", sigPointColor = c(upregulated = "purple",
   downregulated = "orange"), return = c("ggplot", "DataFrame"))
-
-\S4method{plotMA}{DESeqAnalysis}(object, results = 1L,
-  lfcShrink = TRUE, genes = NULL, ntop = 0L, direction = c("both",
-  "up", "down"), pointColor = "gray50", sigPointColor = c(upregulated =
-  "purple", downregulated = "orange"), return = c("ggplot", "DataFrame"))
-
-plotMeanAverage(...)
 }
 \arguments{
 \item{object}{
     A data object, typically containing count values from an RNA-Seq experiment or microarray intensity values.
   }
 
-\item{genes}{\code{character}. Gene identifiers. It is considered better practice
-to input the stable gene identifiers from Ensembl (e.g. "ENSG00000000003")
-and not the (HGNC) gene symbols (e.g. "TSPN6"), if possible.}
+\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
+\code{DESeqResults}.}
 
-\item{gene2symbol}{\code{Gene2Symbol}. Gene-to-symbol mappings. Must contain
-\code{geneID} and \code{geneName} columns. See \code{Gene2Symbol()} for more information.}
+\item{lfcShrink}{\code{logical(1)}. Use shrunken log2 fold change (LFC) values.}
 
-\item{ntop}{\code{scalar integer}. Number of top genes to label.}
+\item{genes}{\code{character}.
+Gene identifiers. It is considered better practice to input the stable gene
+identifiers from Ensembl (e.g. "ENSG00000000003") and not the (HGNC) gene
+symbols (e.g. "TSPN6"), if possible.}
 
-\item{direction}{\code{string}. Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
+\item{ntop}{\code{integer(1)}.
+Number of top genes to label.}
 
-\item{pointColor}{\code{string}. Default point color for the plot.}
+\item{direction}{\code{character(1)}.
+Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 
-\item{sigPointColor}{\code{character}. Color names for labeling upregulated and
-downregulated genes. Also supports a character string for labeling DEGs
-with the same color, regardless of direction.}
+\item{pointColor}{\code{character(1)}.
+Default point color for the plot.}
 
-\item{return}{\code{string}. Return type. Uses \code{base::match.arg()}
-internally and defaults to the first argument in the \code{character} vector.}
+\item{sigPointColor}{\code{character}.
+Color names for labeling upregulated and downregulated genes. Also supports
+a character string for labeling DEGs with the same color, regardless of
+direction.}
 
-\item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
-
-\item{lfcShrink}{\code{boolean}. Use shrunken log2 fold change (LFC) values.}
+\item{return}{\code{character(1)}.
+Return type. Uses \code{match.arg} internally and defaults to the first argument
+in the \code{character} vector.}
 
 \item{...}{
     Additional arguments, for use in specific methods.
@@ -72,24 +68,24 @@ We are not allowing post hoc \code{alpha} or \code{lfcThreshold} cutoffs here.
 \examples{
 data(deseq)
 
+## Get genes from DESeqDataSet.
 dds <- as(deseq, "DESeqDataSet")
-g2s <- Gene2Symbol(dds)
-geneIDs <- head(g2s[["geneID"]])
-print(geneIDs)
-geneNames <- head(g2s[["geneName"]])
-print(geneNames)
+genes <- head(rownames(dds))
+print(genes)
 
 ## DESeqAnalysis ====
-plotMA(deseq)
+plotMA(deseq, results = 1L)
 
 ## Customize the colors.
 plotMA(
     object = deseq,
+    results = 1L,
     pointColor = "black",
     sigPointColor = "purple"
 )
 plotMA(
     object = deseq,
+    results = 1L,
     sigPointColor = c(
         upregulated = "green",
         downregulated = "red"
@@ -97,16 +93,15 @@ plotMA(
 )
 
 ## Directional support (up or down).
-plotMA(deseq, direction = "up", ntop = 5L)
-plotMA(deseq, direction = "down", ntop = 5L)
+plotMA(deseq, results = 1L, direction = "up", ntop = 5L)
+plotMA(deseq, results = 1L, direction = "down", ntop = 5L)
 
 ## Label genes manually.
 ## Note that either gene IDs or names (symbols) are supported.
-plotMA(deseq, genes = geneIDs)
-plotMA(deseq, genes = geneNames)
+plotMA(deseq, results = 1L, genes = genes)
 }
 \seealso{
-\code{DESeq2::plotMA()}.
+\code{DESeq2::plotMA}.
 }
 \author{
 Michael Steinbaugh, Rory Kirchner

@@ -1,11 +1,10 @@
 #' @name contrastName
-#' @author Michael Steinbaugh
 #' @inherit basejump::contrastName
 #' @inheritParams basejump::params
 #' @inheritParams params
 #' @examples
 #' data(deseq)
-#' 
+#'
 #' ## DESeqResults ====
 #' object <- as(deseq, "DESeqResults")
 #' contrastName(object)
@@ -27,11 +26,11 @@ contrastName.DESeqResults <-  # nolint
     function(object) {
         validObject(object)
         contrast <- mcols(object)[2L, "description"]
-        assert_is_character(contrast)
+        assert(isCharacter(contrast))
         contrast %>%
             gsub("^.*:\\s", "", .) %>%
             gsub("_", " ", .) %>%
-            # Improve appearance for difference of differences
+            # Improve appearance for difference of differences.
             gsub("\\+", " \\+\n    ", .)
     }
 
@@ -65,21 +64,4 @@ setMethod(
     f = "contrastName",
     signature = signature("DESeqAnalysis"),
     definition = contrastName.DESeqAnalysis
-)
-
-
-
-contrastName.DESeqResultsTables <-  # nolint
-    function(object) {
-        contrastName(slot(object, name = "results"))
-    }
-
-
-
-#' @rdname contrastName
-#' @export
-setMethod(
-    f = "contrastName",
-    signature = signature("DESeqResultsTables"),
-    definition = contrastName.DESeqResultsTables
 )

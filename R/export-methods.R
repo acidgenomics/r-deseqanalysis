@@ -1,19 +1,12 @@
-# TODO Include `export()` method for DESeqAnalysis.
-
-
-
 #' @name export
 #' @inherit basejump::export
+#' @inheritParams basejump::params
+#' @inheritParams params
 #' @examples
 #' data(deseq)
 #'
-#' ## DESeqResultsTables ====
-#' x <- DESeqResultsTables(deseq)
-#' export(x, dir = "example")
-#' list.files("example")
-#'
-#' ## Clean up.
-#' unlink("example", recursive = TRUE)
+#' ## DESeqAnalysis ====
+#' export(deseq, dir = "example")
 NULL
 
 
@@ -25,136 +18,212 @@ basejump::export
 
 
 
-.prepareDESeqResults <- function(
-    object,
-    rowData = NULL,
-    counts = NULL,
-    sampleNames = NULL
+.exportDESeqDataSet <- function(x, dir, compress, humanize) {
+    # Using the inherited SummarizedExperiment method here.
+    assert(is(x, "DESeqAnalysis"))
+    message("Exporting DESeqDataSet.")
+    export(
+        x = as(x, "DESeqDataSet"),
+        name = "data",
+        dir = dir,
+        compress = compress,
+        humanize = humanize
+    )
+}
+
+
+
+.exportDESeqTransform <- function(x, dir, compress, humanize) {
+    # Using the inherited SummarizedExperiment method here.
+    assert(is(x, "DESeqAnalysis"))
+    message("Exporting DESeqTransform.")
+    export(
+        x = as(x, "DESeqTransform"),
+        name = "transform",
+        dir = dir,
+        compress = compress,
+        humanize = humanize
+    )
+}
+
+
+
+# Here we are defining an internal function that works on both
+# unshrunken (results) and shrunken (lfcShrink) results. We're using
+# inherited global variables here for more compact code.
+.exportDESeqResultsList <- function(
+    x,
+    slotName = c("results", "lfcShrink"),
+    dir,
+    compress,
+    humanize
 ) {
-    assert_is_all_of(object, "DESeqResults")
-    assert_is_any_of(rowData, c("DataFrame", "NULL"))
-    assert_is_any_of(counts, c("matrix", "NULL"))
-    assert_is_any_of(sampleNames, c("character", "NULL"))
+    assert(is(x, "DESeqAnalysis"))
+    slotName <- match.arg(slotName)
 
-    # Coerce DESeqResults to DataFrame.
-    data <- as(object, "DataFrame")
+    # Get the DESeqDataSet.
+    data <- as(x, "DESeqDataSet")
+    # Humanize rownames and colnames, if desired.
+    if (isTRUE(humanize)) {
+        data <- humanize(data)
+    }
+    dimnames <- dimnames(data)
 
-    # Row annotations.
-    if (!is.null(rowData) && ncol(rowData) > 0L) {
-        message("Joining annotations.")
-        assert_is_all_of(rowData, "DataFrame")
-        rowData <- sanitizeRowData(rowData)
-        assert_are_identical(rownames(data), rownames(rowData))
-        data <- cbind(data, rowData)
+    # Get the DESeqResults list.
+    list <- slot(x, name = slotName)
+    assert(is.list(list))
+    if (!is(list[[1L]], "DESeqResults")) {
+        message(paste(
+            slotName, "does not contain DESeqResults.",
+            "Skipping export."
+        ))
+        return(NULL)
     }
 
-    # Variance-stabilized counts (DESeqTransform).
-    if (!is.null(counts) && ncol(counts) > 0L) {
-        message("Joining counts.")
-        assert_is_matrix(counts)
-        assert_are_identical(rownames(data), rownames(counts))
-        # Convert to human friendly sample names, if possible.
-        if (
-            is.character(sampleNames) &&
-            has_length(sampleNames)
-        ) {
-            message("Mapping human-friendly sample names.")
-            assert_has_names(sampleNames)
-            assert_are_identical(names(sampleNames), colnames(counts))
-            colnames(counts) <- as.character(sampleNames)
+    message(paste0("Exporting ", slotName, "."))
+    mapply(
+        name = names(list),
+        x = list,
+        MoreArgs = list(
+            dir = file.path(dir, slotName),
+            compress = compress,
+            humanize = humanize
+        ),
+        FUN = function(name, x, dir, compress, humanize) {
+            file <- file.path(dir, paste0(name, ".csv"))
+            if (isTRUE(compress)) {
+                file <- paste0(file, ".gz")
+            }
+            if (isTRUE(humanize)) {
+                x[["geneID"]] <- rownames(x)
+                rownames(x) <- dimnames[[1L]]
+            }
+            export(x, file = file)
+        },
+        SIMPLIFY = TRUE,
+        USE.NAMES = TRUE
+    )
+}
+
+
+
+# TODO Improve the messages here.
+# Here we are looping across each contrast and writing out DEG tables.
+# NOTE: This step picks shrunken LFCs over unshrunken if slotted.
+# NOTE: We don't need to support humanize here because `geneName` is required.
+.exportResultsTables <- function(x, dir, compress) {
+    assert(is(x, "DESeqAnalysis"))
+    dir <- file.path(dir, "resultsTables")
+    resultsNames <- names(x@results)
+    out <- lapply(
+        X = resultsNames,
+        FUN = function(results) {
+            resTbl <- resultsTables(
+                object = x,
+                results = results,
+                rowData = TRUE,
+                counts = TRUE,
+                return = "tbl_df"
+            )
+            files <- file.path(
+                dir,
+                results,
+                paste0(names(resTbl), ".csv")
+            )
+            if (isTRUE(compress)) {
+                files <- paste0(files, ".gz")
+            }
+            mapply(
+                x = resTbl,
+                file = files,
+                FUN = export,
+                SIMPLIFY = TRUE,
+                USE.NAMES = TRUE
+            )
         }
-        assert_are_disjoint_sets(colnames(data), colnames(counts))
-        data <- cbind(data, counts)
-    }
-
-    data
+    )
+    names(out) <- resultsNames
+    out
 }
 
 
 
-.prepareResultsTablesList <- function(object) {
-    assert_that(is(object, "DESeqResultsTables"))
-    validObject(object)
-
-    deg <- slot(object, "deg")
-    assert_is_list(deg)
-    assert_are_identical(names(deg), c("up", "down"))
-
-    # Up-regulated, down-regulated, and bidirectional DEGs.
-    up <- deg[["up"]]
-    down <- deg[["down"]]
-    both <- c(up, down)
-
-    results <- slot(object, "results")
-    rowData <- slot(object, "rowRanges") %>%
-        # Coerce to standard data.frame first, to collapse "X" ranges column.
-        as.data.frame() %>%
-        as("DataFrame")
-    counts <- slot(object, "counts")
-    sampleNames <- slot(object, "sampleNames")
-
-    all <- .prepareDESeqResults(
-        object = results,
-        rowData = rowData,
-        counts = counts,
-        sampleNames = sampleNames
-    )
-    assert_that(is(all, "DataFrame"))
-
-    list(
-        all = all,
-        up = all[up, , drop = FALSE],
-        down = all[down, , drop = FALSE],
-        both = all[both, , drop = FALSE]
-    )
-}
-
-
-
-export.DESeqResultsTables <-  # nolint
-    function(x, dir = ".", compress = FALSE) {
+export.DESeqAnalysis <-  # nolint
+    function(
+        x,
+        name = NULL,
+        dir = ".",
+        compress = FALSE,
+        humanize = FALSE
+    ) {
         validObject(x)
-        dir <- initDir(dir)
-        assert_is_a_bool(compress)
+        call <- standardizeCall()
+        assert(isString(name) || is.null(name))
+        if (is.null(name)) {
+            name <- as.character(call[["x"]])
+        }
+        # Note that we're combining the dir with name, so we can set
+        # subdirectories for each slotted data type (e.g. DESeqDataSet).
+        dir <- initDir(file.path(dir, name))
+        rm(name)
+        files <- list()
 
-        # Prepare the subset tables.
-        tables <- .prepareResultsTablesList(x)
-        assert_is_list(tables)
-        assert_are_identical(
-            x = names(tables),
-            y = c("all", "up", "down", "both")
+        # DESeqDataSet.
+        files[["data"]] <- do.call(
+            what = .exportDESeqDataSet,
+            args = list(
+                x = x,
+                dir = dir,
+                compress = compress,
+                humanize = humanize
+            )
         )
 
-        # Local files (required) -----------------------------------------------
-        stem <- snake(contrastName(x))
-        format <- "csv"
-        if (isTRUE(compress)) {
-            format <- paste0(format, ".gz")
-        }
-        ext <- paste0(".", format)
-        files <- file.path(dir, paste0(stem, "_", snake(names(tables)), ext))
-        names(files) <- names(tables)
+        # DESeqTransform.
+        files[["transform"]] <- do.call(
+            what = .exportDESeqTransform,
+            args = list(
+                x = x,
+                dir = dir,
+                compress = compress,
+                humanize = humanize
+            )
+        )
 
-        # Write the results tables to local directory.
-        message(paste0("Writing ", toString(basename(files)), " to ", dir, "."))
-        invisible(mapply(
-            x = tables,
-            file = files,
-            FUN = function(x, file) {
-                export(x = x, file = file)
-            },
-            SIMPLIFY = FALSE,
-            USE.NAMES = FALSE
-        ))
+        # DESeqResults.
+        # Here we are writing out both the unshrunken and shrunken values.
+        files[["results"]] <- do.call(
+            what = .exportDESeqResultsList,
+            args = list(
+                x = x,
+                slotName = "results",
+                dir = dir,
+                compress = compress,
+                humanize = humanize
+            )
+        )
+        files[["lfcShrink"]] <- do.call(
+            what = .exportDESeqResultsList,
+            args = list(
+                x = x,
+                slotName = "lfcShrink",
+                dir = dir,
+                compress = compress,
+                humanize = humanize
+            )
+        )
 
-        # Check that all writes were successful.
-        assert_all_are_existing_files(files)
+        # DEG results tables.
+        files[["resultsTables"]] <- do.call(
+            what = .exportResultsTables,
+            args = list(
+                x = x,
+                dir = dir,
+                compress = compress
+            )
+        )
 
-        # Return ---------------------------------------------------------------
-        # Assign the local file paths to the object.
-        slot(x, "metadata")[["export"]] <- files
-
-        x
+        invisible(files)
     }
 
 
@@ -163,6 +232,6 @@ export.DESeqResultsTables <-  # nolint
 #' @export
 setMethod(
     f = "export",
-    signature = signature("DESeqResultsTables"),
-    definition = export.DESeqResultsTables
+    signature = signature("DESeqAnalysis"),
+    definition = export.DESeqAnalysis
 )
