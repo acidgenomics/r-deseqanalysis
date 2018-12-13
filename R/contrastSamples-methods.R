@@ -25,39 +25,40 @@ NULL
 
 
 
-contrastSamples.DESeqAnalysis <- function(object, results = 1L) {
-    validObject(object)
-    results <- .matchResults(object, results)
-    contrast <- snake(contrastName(results))
-    assert(grepl("_vs_", contrast))
+contrastSamples.DESeqAnalysis <-  # nolint
+    function(object, results = 1L) {
+        validObject(object)
+        results <- .matchResults(object, results)
+        contrast <- snake(contrastName(results))
+        assert(grepl("_vs_", contrast))
 
-    # Figure out which column was used to define the pairwise contrast.
-    match <- str_match(contrast, "^([[:alnum:]]+)_(.+)_vs_(.+)$")
-    factor <- match[1L, 2L]
+        # Figure out which column was used to define the pairwise contrast.
+        match <- str_match(contrast, "^([[:alnum:]]+)_(.+)_vs_(.+)$")
+        factor <- match[1L, 2L]
 
-    data <- as(object, "DESeqDataSet")
-    samples <- colnames(data)
+        data <- as(object, "DESeqDataSet")
+        samples <- colnames(data)
 
-    colData <- colData(data)
-    assert(hasRownames(colData))
+        colData <- colData(data)
+        assert(hasRownames(colData))
 
-    assert(isSubset(factor, colnames(colData)))
-    message(paste("Factor column:", factor))
-    factor <- snake(colData[[factor]])
-    assert(is.factor(factor))
+        assert(isSubset(factor, colnames(colData)))
+        message(paste("Factor column:", factor))
+        factor <- snake(colData[[factor]])
+        assert(is.factor(factor))
 
-    numerator <- match[1L, 3L]
-    assert(isSubset(numerator, factor))
-    numerator <- samples[factor %in% numerator]
-    message(paste("Numerator samples:", toString(numerator)))
+        numerator <- match[1L, 3L]
+        assert(isSubset(numerator, factor))
+        numerator <- samples[factor %in% numerator]
+        message(paste("Numerator samples:", toString(numerator)))
 
-    denominator <- match[1L, 4L]
-    assert(isSubset(denominator, factor))
-    denominator <- samples[factor %in% denominator]
-    message(paste("Denominator samples:", toString(denominator)))
+        denominator <- match[1L, 4L]
+        assert(isSubset(denominator, factor))
+        denominator <- samples[factor %in% denominator]
+        message(paste("Denominator samples:", toString(denominator)))
 
-    c(numerator, denominator)
-}
+        c(numerator, denominator)
+    }
 
 
 
