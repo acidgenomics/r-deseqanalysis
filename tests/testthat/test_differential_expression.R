@@ -25,10 +25,10 @@ test_that("alphaSummary : DESeqDataSet", {
         expected = matrix(
             # nolint start
             data = c(
-                82, 63, 46,  29,  13,
-                89, 67, 40,  22,   7,
-                 3,  3,  3,   3,   3,
-                20, 38, 77, 134, 173
+                84, 69,  42,  23, 6,
+                87, 68,  31,  16, 3,
+                 2,  2,   2,   2, 2,
+                 0, 77, 125, 115, 0
             ),
             # nolint end
             nrow = 4L,
@@ -68,178 +68,178 @@ test_that("alphaSummary : DESeqDataSet", {
 
 
 # plotDEGHeatmap ===============================================================
-with_parameters_test_that(
-    "plotDEGHeatmap", {
-        expect_is(
-            object = do.call(what = plotDEGHeatmap, args = args),
-            class = "pheatmap"
-        )
-    },
-    args = list(
-        DESeqResults = list(
-            object = res,
-            counts = vst
-        ),
-        DESeqAnalysis = list(object = deseq)
+test_that("plotDEGHeatmap", {
+    expect_is(
+        object = plotDEGHeatmap(deseq, results = 1L),
+        class = "pheatmap"
     )
-)
+})
 
 
 
 # plotDEGPCA ===================================================================
-with_parameters_test_that(
-    "plotDEGPCA", {
-        expect_is(
-            object = do.call(what = plotDEGPCA, args = args),
-            class = "ggplot"
-        )
-    },
-    args = list(
-        DESeqResults = list(
-            object = res,
-            counts = vst
-        ),
-        DESeqAnalysis = list(object = deseq)
+test_that("plotDEGPCA", {
+    expect_is(
+        object = plotDEGPCA(deseq, results = 1L),
+        class = "ggplot"
     )
-)
+})
 
 
 
 # plotMA =======================================================================
-with_parameters_test_that(
-    "plotMA", {
-        x <- plotMA(object)
-        expect_is(x, "ggplot")
+test_that("plotMA", {
+    args <- list(object = deseq, results = 1L)
 
-        # Check geom classes.
-        geomtype <- vapply(
-            X = x[["layers"]],
-            FUN = function(x) {
-                class(x[["geom"]])[[1L]]
-            },
-            FUN.VALUE = character(1L)
-        )
-        expect_identical(
-            object = geomtype,
-            expected = c("GeomHline", "GeomPoint", "GeomLogticks")
-        )
+    x <- do.call(plotMA, args)
+    expect_is(x, "ggplot")
 
-        # Check plot labels.
-        expect_identical(
-            object = x[["labels"]][["y"]],
-            expected = "log2 fold change"
-        )
-        expect_identical(
-            object = x[["labels"]][["x"]],
-            expected = "mean expression across all samples"
-        )
-
-        # Directional support.
-        x <- plotMA(
-            object = object,
-            direction = "up",
-            sigPointColor = "red"
-        )
-        expect_is(x, "ggplot")
-        x <- plotMA(
-            object = object,
-            direction = "down",
-            sigPointColor = "green"
-        )
-        expect_is(x, "ggplot")
-
-        # Label the top genes.
-        args <- list(object = object, ntop = 10L)
-        if (!is(object, "DESeqAnalysis")) {
-            args[["gene2symbol"]] <- g2s
-        }
-        x <- do.call(what = plotMA, args = args)
-        expect_is(x, "ggplot")
-
-        # Label specific genes.
-        args <- list(object = object, genes = geneNames)
-        if (!is(object, "DESeqAnalysis")) {
-            args[["gene2symbol"]] <- g2s
-        }
-        x <- do.call(what = plotMA, args = args)
-        expect_is(x, "ggplot")
-
-        # DataFrame return.
-        x <- plotMA(object, return = "DataFrame")
-        expect_s4_class(x, "DataFrame")
-        expect_true("isDE" %in% colnames(x))
-    },
-    object = list(
-        DESeqAnalysis = deseq,
-        DESeqResults = res
+    # Check geom classes.
+    geomtype <- vapply(
+        X = x[["layers"]],
+        FUN = function(x) {
+            class(x[["geom"]])[[1L]]
+        },
+        FUN.VALUE = character(1L)
     )
-)
+    expect_identical(
+        object = geomtype,
+        expected = c("GeomHline", "GeomPoint", "GeomLogticks")
+    )
+
+    # Check plot labels.
+    expect_identical(
+        object = x[["labels"]][["y"]],
+        expected = "log2 fold change"
+    )
+    expect_identical(
+        object = x[["labels"]][["x"]],
+        expected = "mean expression across all samples"
+    )
+
+    # Directional support.
+    x <- do.call(
+        what = plotMA,
+        args = c(
+            args,
+            list(
+                direction = "up",
+                sigPointColor = "red"
+            )
+        )
+    )
+    expect_is(x, "ggplot")
+    x <- do.call(
+        what = plotMA,
+        args = c(
+            args,
+            list(
+                direction = "down",
+                sigPointColor = "green"
+            )
+        )
+    )
+    expect_is(x, "ggplot")
+
+    # Label the top genes.
+    x <- do.call(
+        what = plotMA,
+        args = c(args, list(ntop = 10L))
+    )
+    expect_is(x, "ggplot")
+
+    # Label specific genes.
+    x <- do.call(
+        what = plotMA,
+        args = c(
+            args,
+            list(genes = geneNames)
+        )
+    )
+    expect_is(x, "ggplot")
+
+    # DataFrame return.
+    x <- do.call(
+        what = plotMA,
+        args = c(
+            args,
+            list(return = "DataFrame")
+        )
+    )
+    expect_s4_class(x, "DataFrame")
+    expect_true("isDE" %in% colnames(x))
+})
 
 
 
 # plotVolcano ==================================================================
-with_parameters_test_that(
-    "plotVolcano", {
-        x <- plotVolcano(object)
-        expect_is(x, "ggplot")
+test_that("plotVolcano", {
+    args <- list(object = deseq, results = 1L)
 
-        # Enable histograms.
-        x <- plotVolcano(object, histograms = TRUE)
-        expect_is(x, "ggplot")
+    x <- do.call(plotVolcano, args)
+    expect_is(x, "ggplot")
 
-        # Directional support.
-        x <- plotVolcano(
-            object = object,
-            direction = "up",
-            sigPointColor = "red"
+    # Enable histograms.
+    x <- do.call(
+        what = plotVolcano,
+        args = c(
+            args,
+            list(histograms = TRUE)
         )
-        expect_is(x, "ggplot")
-        x <- plotVolcano(
-            object = object,
-            direction = "down",
-            sigPointColor = "green"
-        )
-        expect_is(x, "ggplot")
-
-        # Label the top genes.
-        args <- list(object = object, ntop = 5L)
-        if (!is(object, "DESeqAnalysis")) {
-            args[["gene2symbol"]] <- g2s
-        }
-        x <- do.call(what = plotVolcano, args = args)
-        expect_is(x, "ggplot")
-
-        # Label specific genes.
-        args <- list(object = object, genes = geneNames)
-        if (!is(object, "DESeqAnalysis")) {
-            args[["gene2symbol"]] <- g2s
-        }
-        x <- do.call(what = plotVolcano, args = args)
-        expect_is(x, "ggplot")
-
-        # Return DataFrame.
-        x <- plotVolcano(object, return = "DataFrame")
-        expect_s4_class(x, "DataFrame")
-    },
-    object = list(
-        DESeqAnalysis = deseq,
-        DESeqResults = res
     )
-)
+    expect_is(x, "ggplot")
 
-
-
-# FIXME Move to generators test file...
-# DESeqResultsTables ===========================================================
-with_parameters_test_that(
-    "DESeqResultsTables", {
-        expect_s4_class(
-            object = DESeqResultsTables(object),
-            class = "DESeqResultsTables"
+    # Directional support.
+    x <- do.call(
+        what = plotVolcano,
+        args = c(
+            args,
+            list(
+                direction = "up",
+                sigPointColor = "red"
+            )
         )
-    },
-    object = list(
-        DESeqAnalysis = deseq,
-        DESeqResults = res
     )
-)
+    expect_is(x, "ggplot")
+    x <- do.call(
+        what = plotVolcano,
+        args = c(
+            args,
+            list(
+                direction = "down",
+                sigPointColor = "green"
+            )
+        )
+    )
+    expect_is(x, "ggplot")
+
+    # Label the top genes.
+    x <- do.call(
+        what = plotVolcano,
+        args = c(
+            args,
+            list(ntop = 5L)
+        )
+    )
+    expect_is(x, "ggplot")
+
+    # Label specific genes.
+    x <- do.call(
+        what = plotVolcano,
+        args = c(
+            args,
+            list(genes = geneNames)
+        )
+    )
+    expect_is(x, "ggplot")
+
+    # Return DataFrame.
+    x <- do.call(
+        what = plotVolcano,
+        args = c(
+            args,
+            list(return = "DataFrame")
+        )
+    )
+    expect_s4_class(x, "DataFrame")
+})

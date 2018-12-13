@@ -1,8 +1,24 @@
-#' @rdname DESeqResultsTables
+# TODO Consider exporting `contrastNames`
+
+
+
+#' @rdname contrastSamples
 #' @export
 setGeneric(
-    name = "DESeqResultsTables",
+    name = "contrastSamples",
     def = function(object, ...) {
-        standardGeneric("DESeqResultsTables")
+        standardGeneric("contrastSamples")
+    }
+)
+
+
+
+# TODO Consider moving this to basejump?
+#' @rdname resultsTables
+#' @export
+setGeneric(
+    name = "resultsTables",
+    def = function(object, ...) {
+        standardGeneric("resultsTables")
     }
 )

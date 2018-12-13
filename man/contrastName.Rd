@@ -5,22 +5,21 @@
 \alias{contrastName}
 \alias{contrastName,DESeqResults-method}
 \alias{contrastName,DESeqAnalysis-method}
-\alias{contrastName,DESeqResultsTables-method}
 \title{Contrast Name}
 \usage{
 \S4method{contrastName}{DESeqResults}(object)
 
 \S4method{contrastName}{DESeqAnalysis}(object, results)
-
-\S4method{contrastName}{DESeqResultsTables}(object)
 }
 \arguments{
 \item{object}{Object.}
 
-\item{results}{\code{scalar}. Position or name of \code{DESeqResults}.}
+\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
+\code{DESeqResults}.}
 }
 \value{
-\code{string}. Contrast name.
+\code{character(1)}.
+Contrast name.
 }
 \description{
 Contrast Name
@@ -34,7 +33,4 @@ contrastName(object)
 
 ## DESeqAnalysis ====
 contrastName(deseq, results = 1L)
-}
-\author{
-Michael Steinbaugh
 }

@@ -12,10 +12,10 @@ DESeqAnalysis(data, transform, results, lfcShrink)
 \item{transform}{\code{DESeqTransform}.}
 
 \item{results}{\code{list}. One or more unshrunken \code{DESeqResults}. Assign the
-\code{DESeq2::results()} return here.}
+\code{DESeq2::results} return here.}
 
 \item{lfcShrink}{\code{list}. One or more shrunken \code{DESeqResults}. Assign the
-\code{DESeq2::lfcShrink()} return here.}
+\code{DESeq2::lfcShrink} return here.}
 }
 \value{
 \code{DESeqAnalysis}, which contains a \code{DESeqDataSet}, \code{DESeqTransform},
@@ -31,8 +31,8 @@ to ensure \code{DESeqTransform} and \code{DESeqResults} correspond to the
 
 
 We recommend generating the \code{DESeqDataSet} by coercion from \code{bcbioRNASeq}
-object using \code{as(dds, "bcbioRNASeq")}. Don't use the \code{DESeq2::DESeqDataSet()}
-or \code{DESeq2::DESeqDataSetFromMatrix()} constructors to generate the
+object using \code{as(dds, "bcbioRNASeq")}. Don't use the \code{DESeq2::DESeqDataSet}
+or \code{DESeq2::DESeqDataSetFromMatrix} constructors to generate the
 \code{DESeqDataSet} object.
 }
 
@@ -46,26 +46,34 @@ care of this automatically in supported methods.
 
 \examples{
 library(DESeq2)
-dds <- DESeq(makeExampleDESeqDataSet())
-class(dds)
 
-dt <- varianceStabilizingTransformation(dds)
-class(dt)
+data <- DESeq(makeExampleDESeqDataSet())
+class(data)
 
-resultsNames(dds)
-res <- results(dds, name = resultsNames(dds)[[2L]])
-class(res)
+transform <- varianceStabilizingTransformation(data)
+class(transform)
+
+resultsNames(data)
+name <- resultsNames(data)[[2L]]
+results <- results(data, name = name)
+class(results)
+
+lfcShrink <- lfcShrink(dds = data, res = results, coef = 2L)
+
+results <- list(results)
+names(results) <- name
+lfcShrink <- list(lfcShrink)
+names(lfcShrink) <- name
+identical(names(results), names(lfcShrink))
 
 x <- DESeqAnalysis(
-    data = dds,
-    transform = dt,
-    results = list(res),
-    lfcShrink = list(lfcShrink(dds = dds, res = res, coef = 2L))
+    data = data,
+    transform = transform,
+    results = results,
+    lfcShrink = lfcShrink
 )
 print(x)
 }
 \seealso{
-\code{DESeqAnalysis()}.
-
-Other S4 classes: \code{\link{DESeqResultsTables-class}}
+\code{DESeqAnalysis}.
 }

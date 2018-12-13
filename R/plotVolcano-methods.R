@@ -7,33 +7,32 @@
 #' @param ylim `scalar numeric`. Upper boundary limit for y-axis. Helps preserve
 #'   dynamic range for gene sets containing highly significant P values (e.g.
 #'   `1e-100`).
-#' @param histograms `boolean`. Show LFC and P value histograms.
+#' @param histograms `logical(1)`. Show LFC and P value histograms.
 #'
 #' @seealso This method is an updated variant of
-#'   `CHBUtils::volcano_density_plot()`.
+#'   `CHBUtils::volcano_density_plot`.
 #'
 #' @examples
 #' data(deseq)
 #'
 #' ## Get genes from DESeqDataSet.
 #' dds <- as(deseq, "DESeqDataSet")
-#' g2s <- Gene2Symbol(dds)
-#' geneIDs <- head(g2s[["geneID"]])
-#' print(geneIDs)
-#' geneNames <- head(g2s[["geneName"]])
-#' print(geneNames)
+#' genes <- head(rownames(dds))
+#' print(genes)
 #'
 #' ## DESeqAnalysis ====
-#' plotVolcano(deseq)
+#' plotVolcano(deseq, results = 1L)
 #'
 #' ## Customize the colors.
 #' plotVolcano(
 #'     object = deseq,
+#'     results = 1L,
 #'     pointColor = "black",
 #'     sigPointColor = "purple"
 #' )
 #' plotVolcano(
 #'     object = deseq,
+#'     results = 1L,
 #'     sigPointColor = c(
 #'         upregulated = "green",
 #'         downregulated = "red"
@@ -43,19 +42,20 @@
 #' ## Directional support (up or down).
 #' plotVolcano(
 #'     object = deseq,
+#'     results = 1L,
 #'     direction = "up",
 #'     ntop = 5L
 #' )
 #' plotVolcano(
 #'     object = deseq,
+#'     results = 1L,
 #'     direction = "down",
 #'     ntop = 5L
 #' )
 #'
 #' ## Label genes manually.
 #' ## Note that either gene IDs or names (symbols) are supported.
-#' plotVolcano(deseq, genes = geneIDs)
-#' plotVolcano(deseq, genes = geneNames)
+#' plotVolcano(deseq, results = 1L, genes = genes)
 NULL
 
 
@@ -82,29 +82,30 @@ plotVolcano.DESeqResults <-  # nolint
     ) {
         validObject(object)
         alpha <- metadata(object)[["alpha"]]
-        assertIsAlpha(alpha)
+        assert(containsAlpha(alpha))
         lfcThreshold <- metadata(object)[["lfcThreshold"]]
-        assert_is_a_number(lfcThreshold)
-        assert_is_a_number(ylim)
-        assert_all_are_in_range(
-            x = ylim,
-            lower = 1e-100,
-            upper = 1e-3
+        assert(
+            isNumber(lfcThreshold),
+            isNonNegative(lfcThreshold),
+            isNumber(ylim),
+            isInRange(ylim, lower = 1e-100, upper = 1e-3),
+            isInt(ntop),
+            isNonNegative(ntop),
+            isString(pointColor),
+            isCharacter(sigPointColor),
+            isFlag(histograms)
         )
-        assertIsImplicitInteger(ntop)
-        assert_all_are_non_negative(c(lfcThreshold, ntop))
         direction <- match.arg(direction)
-        assert_is_a_string(pointColor)
-        assert_is_character(sigPointColor)
-        if (is_a_string(sigPointColor)) {
+        return <- match.arg(return)
+
+        # Automatically handle monochromatic coloring by significance.
+        if (isString(sigPointColor)) {
             sigPointColor <- c(
                 upregulated = sigPointColor,
                 downregulated = sigPointColor
             )
         }
-        assert_is_of_length(sigPointColor, n = 2L)
-        assert_is_a_bool(histograms)
-        return <- match.arg(return)
+        assert(hasLength(sigPointColor, n = 2L))
 
         # Check to see if we should use `sval` instead of `padj`
         if ("svalue" %in% names(object)) {
@@ -229,7 +230,7 @@ plotVolcano.DESeqResults <-  # nolint
                 y = "-log10 adj p value"
             )
 
-        if (is_a_string(pointColor) && is.character(sigPointColor)) {
+        if (isString(pointColor) && is.character(sigPointColor)) {
             p <- p +
                 scale_color_manual(
                     values = c(
@@ -246,14 +247,10 @@ plotVolcano.DESeqResults <-  # nolint
         # Gene text labels -----------------------------------------------------
         # Get the genes to visualize when `ntop` is declared.
         if (ntop > 0L) {
-            assert_is_subset(
-                x = c("rowname", "rank"),
-                y = colnames(data)
-            )
-            # Double check that data is arranged by `rank` column.
-            assert_are_identical(
-                x = data[["rank"]],
-                y = sort(data[["rank"]])
+            assert(
+                isSubset(c("rowname", "rank"), colnames(data)),
+                # Double check that data is arranged by `rank` column.
+                identical(data[["rank"]], sort(data[["rank"]]))
             )
             # Since we know the data is arranged by rank, simply take the head.
             genes <- head(data[["rowname"]], n = ntop)
@@ -262,11 +259,11 @@ plotVolcano.DESeqResults <-  # nolint
         # Visualize specific genes on the plot, if desired.
         if (!is.null(genes)) {
             validObject(gene2symbol)
-            assertFormalGene2Symbol(
+            assert(matchesGene2Symbol(
                 x = object,
                 genes = genes,
                 gene2symbol = gene2symbol
-            )
+            ))
             # Map the user-defined `genes` to `gene2symbol` rownames.
             # We're using this to match back to the `DESeqResults` object.
             rownames <- mapGenesToRownames(
@@ -314,25 +311,15 @@ plotVolcano.DESeqResults <-  # nolint
 
 
 
-#' @rdname plotVolcano
-#' @export
-setMethod(
-    f = "plotVolcano",
-    signature = signature("DESeqResults"),
-    definition = plotVolcano.DESeqResults
-)
-
-
-
 plotVolcano.DESeqAnalysis <-  # nolint
     function(
         object,
-        results = 1L,
+        results,
         lfcShrink = TRUE
     ) {
         validObject(object)
         do.call(
-            what = plotVolcano,
+            what = plotVolcano.DESeqResults,
             args = matchArgsToDoCall(
                 args = list(
                     object = .matchResults(

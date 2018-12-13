@@ -52,17 +52,17 @@ Use either \code{contrast} or \code{name} to specify the desired contrast.
 data(deseq)
 
 ## DESeqDataSet ====
-object <- as(deseq, "DESeqDataSet")
-design(object)
-resultsNames(object)
-alphaSummary(object)
-alphaSummary(object, contrast = c("condition", "B", "A"))
-alphaSummary(object, name = "condition_B_vs_A")
+dds <- as(deseq, "DESeqDataSet")
+design(dds)
+resultsNames(dds)
+alphaSummary(dds)
+alphaSummary(dds, contrast = c("condition", "B", "A"))
+alphaSummary(dds, name = "condition_B_vs_A")
 }
 \seealso{
 \itemize{
-\item \code{DESeq2::results()}.
-\item \code{DESeq2::resultsNames()}.
+\item \code{DESeq2::results}.
+\item \code{DESeq2::resultsNames}.
 }
 }
 \author{

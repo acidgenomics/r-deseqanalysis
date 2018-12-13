@@ -15,33 +15,39 @@
 \arguments{
 \item{object}{Object.}
 
-\item{genes}{\code{character}. Gene identifiers. It is considered better practice
-to input the stable gene identifiers from Ensembl (e.g. "ENSG00000000003")
-and not the (HGNC) gene symbols (e.g. "TSPN6"), if possible.}
+\item{genes}{\code{character}.
+Gene identifiers. It is considered better practice to input the stable gene
+identifiers from Ensembl (e.g. "ENSG00000000003") and not the (HGNC) gene
+symbols (e.g. "TSPN6"), if possible.}
 
-\item{interestingGroups}{\code{character}. Groups of interest that
-define the samples. If left unset, defaults to \code{sampleName}.}
+\item{interestingGroups}{\code{character}.
+Groups of interest that define the samples. If left unset, defaults to
+\code{sampleName}.}
 
-\item{medianLine}{\code{boolean}. Include median line for each group. Disabled if
-samples are colored by sample name.}
+\item{medianLine}{\code{logical(1)}.
+Include median line for each group. Disabled if samples are colored by
+sample name.}
 
-\item{color}{\code{ggproto}/\code{ScaleDiscrete}. Desired ggplot2 color
-scale. Must supply discrete values. When set to \code{NULL}, the default ggplot2
-color palette will be used. If manual color definitions are desired, we
-recommend using \code{ggplot2::scale_color_manual()}. To set the discrete color
-palette globally, use
-\code{options(basejump.color.discrete = ggplot2::scale_color_viridis_d())}.}
+\item{color}{\code{ScaleDiscrete}.
+Desired ggplot2 color scale. Must supply discrete values. When set \code{NULL},
+the default ggplot2 color palette will be used. If manual color definitions
+are desired, we recommend using \code{ggplot2::scale_color_manual}.
 
-\item{legend}{\code{boolean}. Show plot legend.}
+To set the discrete color palette globally, use:\preformatted{options(basejump.color.discrete = ggplot2::scale_color_viridis_d())
+}}
 
-\item{style}{\code{string}. Plot style.}
+\item{legend}{\code{logical(1)}.
+Show plot legend.}
+
+\item{style}{\code{character(1)}.
+Plot style.}
 }
 \value{
 \code{ggplot}.
 
 \itemize{
 \item \code{style = "facet"}: \code{ggplot} grouped by \code{sampleName}, with
-\code{ggplot2::facet_wrap()} applied to panel the samples.
+\code{ggplot2::facet_wrap} applied to panel the samples.
 \item \code{style = "wide"}: \code{ggplot} in wide format, with genes on the x-axis.
 }
 }
@@ -51,13 +57,12 @@ Plot Gene Expression
 \examples{
 data(deseq)
 
-g2s <- Gene2Symbol(as(deseq, "DESeqDataSet"))
-geneIDs <- head(g2s[["geneID"]])
-print(geneIDs)
-geneNames <- head(g2s[["geneName"]])
-print(geneNames)
+## Get genes from DESeqDataSet.
+dds <- as(deseq, "DESeqDataSet")
+genes <- head(rownames(dds))
+print(genes)
 
 ## DESeqAnalysis ====
-plotGene(deseq, genes = geneIDs, style = "facet")
-plotGene(deseq, genes = geneNames, style = "wide")
+plotGene(deseq, genes = genes, style = "facet")
+plotGene(deseq, genes = genes, style = "wide")
 }

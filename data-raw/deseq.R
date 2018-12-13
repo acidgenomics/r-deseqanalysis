@@ -1,5 +1,8 @@
 #' Example DESeq2 differential expression analysis
-#' 2018-11-19
+#' 2018-12-12
+
+# FIXME Name results...otherwise the object won't return valid.
+# Assign with `makeNames()`.
 
 library(pryr)
 library(basejump)
@@ -23,7 +26,7 @@ dt <- varianceStabilizingTransformation(dds)
 contrast <- resultsNames(dds)[[2L]]
 res <- results(dds, name = contrast)
 
-# Shrink log2 fold changes
+# Shrink log2 fold changes.
 res_shrunken <- lfcShrink(dds = dds, coef = contrast, res = res)
 validObject(res_shrunken)
 
@@ -47,6 +50,6 @@ stopifnot(object_size(deseq) < limit)
 
 # Check that object is valid.
 stopifnot(is(deseq, "DESeqAnalysis"))
-stopifnot(validObject(deseq))
+validObject(deseq)
 
 usethis::use_data(deseq, overwrite = TRUE, compress = "xz")
