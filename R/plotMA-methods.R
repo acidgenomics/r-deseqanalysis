@@ -269,7 +269,7 @@ setMethod(
 plotMA.DESeqAnalysis <-  # nolint
     function(
         object,
-        results = 1L,
+        results,
         lfcShrink = TRUE
     ) {
         validObject(object)

@@ -102,12 +102,10 @@ setMethod(
 
 deg.DESeqAnalysis <- function(
     object,
-    results = 1L,
+    results,
     direction = c("both", "up", "down")
 ) {
-    suppressMessages(
-        results <- .matchResults(object = object, results = results)
-    )
+    results <- .matchResults(object = object, results = results)
     direction <- match.arg(direction)
     deg(object = results, direction = direction)
 }

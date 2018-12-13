@@ -43,7 +43,7 @@ NULL
 resultsTables.DESeqAnalysis <-  # nolint
     function(
         object,
-        results = 1L,
+        results,
         rowData = TRUE,
         counts = TRUE,
         return = c("tbl_df", "DataFrameList")

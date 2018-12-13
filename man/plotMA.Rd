@@ -13,36 +13,42 @@
   pointColor = "gray50", sigPointColor = c(upregulated = "purple",
   downregulated = "orange"), return = c("ggplot", "DataFrame"))
 
-\S4method{plotMA}{DESeqAnalysis}(object, results = 1L,
-  lfcShrink = TRUE, genes = NULL, ntop = 0L, direction = c("both",
-  "up", "down"), pointColor = "gray50", sigPointColor = c(upregulated =
-  "purple", downregulated = "orange"), return = c("ggplot", "DataFrame"))
+\S4method{plotMA}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
+  genes = NULL, ntop = 0L, direction = c("both", "up", "down"),
+  pointColor = "gray50", sigPointColor = c(upregulated = "purple",
+  downregulated = "orange"), return = c("ggplot", "DataFrame"))
 }
 \arguments{
 \item{object}{
     A data object, typically containing count values from an RNA-Seq experiment or microarray intensity values.
   }
 
-\item{genes}{\code{character}. Gene identifiers. It is considered better practice
-to input the stable gene identifiers from Ensembl (e.g. "ENSG00000000003")
-and not the (HGNC) gene symbols (e.g. "TSPN6"), if possible.}
+\item{genes}{\code{character}.
+Gene identifiers. It is considered better practice to input the stable gene
+identifiers from Ensembl (e.g. "ENSG00000000003") and not the (HGNC) gene
+symbols (e.g. "TSPN6"), if possible.}
 
-\item{gene2symbol}{\code{Gene2Symbol}. Gene-to-symbol mappings. Must contain
-\code{geneID} and \code{geneName} columns. See \code{Gene2Symbol} for more information.}
+\item{gene2symbol}{\code{Gene2Symbol}.
+Gene-to-symbol mappings. Must contain \code{geneID} and \code{geneName} columns. See
+\code{Gene2Symbol} for more information.}
 
-\item{ntop}{\code{integer(1)}. Number of top genes to label.}
+\item{ntop}{\code{integer(1)}.
+Number of top genes to label.}
 
-\item{direction}{\code{character(1)}. Plot "\code{both}", "\code{up}", or "\code{down}"
-directions.}
+\item{direction}{\code{character(1)}.
+Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 
-\item{pointColor}{\code{character(1)}. Default point color for the plot.}
+\item{pointColor}{\code{character(1)}.
+Default point color for the plot.}
 
-\item{sigPointColor}{\code{character}. Color names for labeling upregulated and
-downregulated genes. Also supports a character string for labeling DEGs
-with the same color, regardless of direction.}
+\item{sigPointColor}{\code{character}.
+Color names for labeling upregulated and downregulated genes. Also supports
+a character string for labeling DEGs with the same color, regardless of
+direction.}
 
-\item{return}{\code{character(1)}. Return type. Uses \code{match.arg} internally and
-defaults to the first argument in the \code{character} vector.}
+\item{return}{\code{character(1)}.
+Return type. Uses \code{match.arg} internally and defaults to the first argument
+in the \code{character} vector.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
 \code{DESeqResults}.}
