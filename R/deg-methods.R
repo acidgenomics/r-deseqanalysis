@@ -69,20 +69,21 @@ deg.DESeqResults <-  # nolint
         data <- arrange(data, !!alphaCol)
 
         deg <- pull(data, "rowname")
+        status <- paste(
+            length(deg),
+            switch(
+                EXPR = direction,
+                up = "upregulated",
+                down = "downregulated",
+                both = "differentially expressed"
+            ),
+            "genes detected."
+        )
 
         if (!hasLength(deg)) {
-            warning("No significant DEGs detected.")
+            warning(status, call. = FALSE)
         } else {
-            message(paste(
-                length(deg),
-                switch(
-                    EXPR = direction,
-                    up = "upregulated",
-                    down = "downregulated",
-                    both = "differentially expressed"
-                ),
-                "genes detected."
-            ))
+            message(status)
         }
 
         deg

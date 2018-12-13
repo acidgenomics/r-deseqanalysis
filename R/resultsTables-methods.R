@@ -1,3 +1,6 @@
+# FIXME Add a Filter step here to remove empty.
+
+
 #' Differential Expression Results Tables
 #'
 #' Generate tables summarizing the differential expression, with subsets for
@@ -62,9 +65,19 @@ resultsTables.DESeqAnalysis <-  # nolint
         dds <- convertSampleIDsToNames(dds)
 
         # Get the DEG character vectors, which we'll use against the rownames.
+        both <- deg(res, direction = "both")
+
+        # Early return with warning if there are not DEGs.
+        if (!hasLength(both)) {
+            warning(paste(
+                deparse(results),
+                "does not contain any DEGs. Skipping."
+            ), call. = FALSE)
+            return(invisible())
+        }
+
         up <- deg(res, direction = "up")
         down <- deg(res, direction = "down")
-        both <- deg(res, direction = "both")
 
         # Prepare all genes data using S4 DataFrame.
         all <- as(res, "DataFrame")
@@ -120,6 +133,9 @@ resultsTables.DESeqAnalysis <-  # nolint
             down = all[down, , drop = FALSE],
             both = all[both, , drop = FALSE]
         )
+
+        # Filter out empty up/down tibbles.
+        out <- Filter(hasRows, out)
 
         switch(
             EXPR = return,

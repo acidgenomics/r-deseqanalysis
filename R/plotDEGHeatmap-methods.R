@@ -66,7 +66,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         # Get the character vector of DEGs.
         deg <- deg(res, direction = direction)
         if (!hasLength(deg)) {
-            message("There are no DEGs to plot. Skipping.")
+            warning("There are no DEGs to plot. Skipping.", call. = FALSE)
             return(invisible())
         }
 
