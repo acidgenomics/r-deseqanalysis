@@ -72,5 +72,5 @@ argument, which must contain/extend a \code{SummarizedExperiment}.
 data(deseq)
 
 ## DESeqAnalysis ====
-plotDEGPCA(deseq)
+plotDEGPCA(deseq, results = 1L)
 }
