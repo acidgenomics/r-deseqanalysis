@@ -101,15 +101,16 @@ setMethod(
 
 
 
-deg.DESeqAnalysis <- function(
-    object,
-    results,
-    direction = c("both", "up", "down")
-) {
-    results <- .matchResults(object = object, results = results)
-    direction <- match.arg(direction)
-    deg(object = results, direction = direction)
-}
+deg.DESeqAnalysis <-  # nolint
+    function(
+        object,
+        results,
+        direction = c("both", "up", "down")
+    ) {
+        results <- .matchResults(object = object, results = results)
+        direction <- match.arg(direction)
+        deg(object = results, direction = direction)
+    }
 
 
 
