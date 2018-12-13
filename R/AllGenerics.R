@@ -1,3 +1,7 @@
+# TODO Consider exporting `contrastNames`
+
+
+
 #' @rdname contrastSamples
 #' @export
 setGeneric(

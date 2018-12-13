@@ -10,26 +10,29 @@
 \S4method{deg}{DESeqResults}(object, alpha = NULL, lfcThreshold = NULL,
   direction = c("both", "up", "down"))
 
-\S4method{deg}{DESeqAnalysis}(object, results = 1L,
-  direction = c("both", "up", "down"))
+\S4method{deg}{DESeqAnalysis}(object, results, direction = c("both",
+  "up", "down"))
 }
 \arguments{
 \item{object}{Object.}
 
-\item{alpha}{\code{numeric(1)}. Adjusted P value ("alpha") cutoff. If left \code{NULL},
-will use the cutoff defined in the object.}
+\item{alpha}{\code{numeric(1)}.
+Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
+defined in the object.}
 
-\item{lfcThreshold}{\code{numeric(1)}. Log fold change ratio (base 2) cutoff
-threshold. If left \code{NULL}, will use the cutoff defined in the object.}
+\item{lfcThreshold}{\code{numeric(1)}.
+Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
+the cutoff defined in the object.}
 
-\item{direction}{\code{character(1)}. Plot "\code{both}", "\code{up}", or "\code{down}"
-directions.}
+\item{direction}{\code{character(1)}.
+Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
 \code{DESeqResults}.}
 }
 \value{
-\code{character}. Gene identifiers.
+\code{character}.
+Gene identifiers.
 }
 \description{
 Differentially Expressed Genes

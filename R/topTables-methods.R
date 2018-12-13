@@ -88,7 +88,7 @@ basejump::topTables
 topTables.DESeqAnalysis <-  # nolint
     function(
         object,
-        results = 1L,
+        results,
         n = 10L
     ) {
         # Suppress the message about which results we're matching here,
