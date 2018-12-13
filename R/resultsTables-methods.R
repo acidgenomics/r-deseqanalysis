@@ -34,7 +34,7 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' x <- resultsTables(deseq)
+#' x <- resultsTables(deseq, results = 1L)
 #' print(x)
 NULL
 
@@ -62,9 +62,9 @@ resultsTables.DESeqAnalysis <-  # nolint
         dds <- convertSampleIDsToNames(dds)
 
         # Get the DEG character vectors, which we'll use against the rownames.
-        up <- deg(object, direction = "up")
-        down <- deg(object, direction = "down")
-        both <- deg(object, direction = "both")
+        up <- deg(res, direction = "up")
+        down <- deg(res, direction = "down")
+        both <- deg(res, direction = "both")
 
         # Prepare all genes data using S4 DataFrame.
         all <- as(res, "DataFrame")
