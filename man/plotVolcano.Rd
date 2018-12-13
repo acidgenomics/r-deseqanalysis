@@ -3,16 +3,9 @@
 \docType{methods}
 \name{plotVolcano}
 \alias{plotVolcano}
-\alias{plotVolcano,DESeqResults-method}
 \alias{plotVolcano,DESeqAnalysis-method}
 \title{Plot Volcano}
 \usage{
-\S4method{plotVolcano}{DESeqResults}(object, ylim = 1e-10,
-  genes = NULL, gene2symbol = NULL, ntop = 0L,
-  direction = c("both", "up", "down"), pointColor = "gray50",
-  sigPointColor = c(upregulated = "purple", downregulated = "orange"),
-  histograms = FALSE, return = c("ggplot", "DataFrame"))
-
 \S4method{plotVolcano}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
   ylim = 1e-10, genes = NULL, ntop = 0L, direction = c("both",
   "up", "down"), pointColor = "gray50", sigPointColor = c(upregulated =
@@ -22,6 +15,11 @@
 \arguments{
 \item{object}{Object.}
 
+\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
+\code{DESeqResults}.}
+
+\item{lfcShrink}{\code{logical(1)}. Use shrunken log2 fold change (LFC) values.}
+
 \item{ylim}{\code{scalar numeric}. Upper boundary limit for y-axis. Helps preserve
 dynamic range for gene sets containing highly significant P values (e.g.
 \code{1e-100}).}
@@ -30,10 +28,6 @@ dynamic range for gene sets containing highly significant P values (e.g.
 Gene identifiers. It is considered better practice to input the stable gene
 identifiers from Ensembl (e.g. "ENSG00000000003") and not the (HGNC) gene
 symbols (e.g. "TSPN6"), if possible.}
-
-\item{gene2symbol}{\code{Gene2Symbol}.
-Gene-to-symbol mappings. Must contain \code{geneID} and \code{geneName} columns. See
-\code{Gene2Symbol} for more information.}
 
 \item{ntop}{\code{integer(1)}.
 Number of top genes to label.}
@@ -54,11 +48,6 @@ direction.}
 \item{return}{\code{character(1)}.
 Return type. Uses \code{match.arg} internally and defaults to the first argument
 in the \code{character} vector.}
-
-\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
-\code{DESeqResults}.}
-
-\item{lfcShrink}{\code{logical(1)}. Use shrunken log2 fold change (LFC) values.}
 }
 \value{
 \code{ggplot}.
@@ -75,16 +64,18 @@ genes <- head(rownames(dds))
 print(genes)
 
 ## DESeqAnalysis ====
-plotVolcano(deseq)
+plotVolcano(deseq, results = 1L)
 
 ## Customize the colors.
 plotVolcano(
     object = deseq,
+    results = 1L,
     pointColor = "black",
     sigPointColor = "purple"
 )
 plotVolcano(
     object = deseq,
+    results = 1L,
     sigPointColor = c(
         upregulated = "green",
         downregulated = "red"
@@ -94,18 +85,20 @@ plotVolcano(
 ## Directional support (up or down).
 plotVolcano(
     object = deseq,
+    results = 1L,
     direction = "up",
     ntop = 5L
 )
 plotVolcano(
     object = deseq,
+    results = 1L,
     direction = "down",
     ntop = 5L
 )
 
 ## Label genes manually.
 ## Note that either gene IDs or names (symbols) are supported.
-plotVolcano(deseq, genes = genes)
+plotVolcano(deseq, results = 1L, genes = genes)
 }
 \seealso{
 This method is an updated variant of

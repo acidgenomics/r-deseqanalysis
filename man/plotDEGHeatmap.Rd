@@ -153,7 +153,7 @@ hclust <- hclust(dist, method = "ward.D2")
 data(deseq)
 
 ## DESeqAnalysis ====
-plotDEGHeatmap(deseq)
+plotDEGHeatmap(deseq, results = 1L)
 }
 \seealso{
 \itemize{

@@ -58,6 +58,6 @@ used for overrepresentation testing but should NOT be used for GSEA.
 data(deseq)
 
 ## DESeqAnalysis ====
-x <- resultsTables(deseq)
+x <- resultsTables(deseq, results = 1L)
 print(x)
 }
