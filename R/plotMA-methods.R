@@ -25,16 +25,18 @@
 #' print(genes)
 #'
 #' ## DESeqAnalysis ====
-#' plotMA(deseq)
+#' plotMA(deseq, results = 1L)
 #'
 #' ## Customize the colors.
 #' plotMA(
 #'     object = deseq,
+#'     results = 1L,
 #'     pointColor = "black",
 #'     sigPointColor = "purple"
 #' )
 #' plotMA(
 #'     object = deseq,
+#'     results = 1L,
 #'     sigPointColor = c(
 #'         upregulated = "green",
 #'         downregulated = "red"
@@ -42,12 +44,12 @@
 #' )
 #'
 #' ## Directional support (up or down).
-#' plotMA(deseq, direction = "up", ntop = 5L)
-#' plotMA(deseq, direction = "down", ntop = 5L)
+#' plotMA(deseq, results = 1L, direction = "up", ntop = 5L)
+#' plotMA(deseq, results = 1L, direction = "down", ntop = 5L)
 #'
 #' ## Label genes manually.
 #' ## Note that either gene IDs or names (symbols) are supported.
-#' plotMA(deseq, genes = genes)
+#' plotMA(deseq, results = 1L, genes = genes)
 NULL
 
 
@@ -256,16 +258,6 @@ plotMA.DESeqResults <-  # nolint
 
 
 
-#' @rdname plotMA
-#' @export
-setMethod(
-    f = "plotMA",
-    signature = signature("DESeqResults"),
-    definition = plotMA.DESeqResults
-)
-
-
-
 plotMA.DESeqAnalysis <-  # nolint
     function(
         object,
@@ -274,7 +266,7 @@ plotMA.DESeqAnalysis <-  # nolint
     ) {
         validObject(object)
         do.call(
-            what = plotMA,
+            what = plotMA.DESeqResults,
             args = matchArgsToDoCall(
                 args = list(
                     object = .matchResults(
