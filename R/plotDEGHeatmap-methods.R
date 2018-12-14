@@ -11,7 +11,7 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' plotDEGHeatmap(deseq)
+#' plotDEGHeatmap(deseq, results = 1L)
 NULL
 
 
@@ -26,7 +26,7 @@ basejump::plotDEGHeatmap
 plotDEGHeatmap.DESeqAnalysis <-  # nolint
     function(
         object,
-        results = 1L,
+        results,
         contrastSamples = FALSE,
         direction = c("both", "up", "down"),
         scale = c("row", "column", "none"),
@@ -42,48 +42,47 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         direction <- match.arg(direction)
         scale <- match.arg(scale)
 
-        results <- .matchResults(object, results)
-        validObject(results)
+        res <- .matchResults(object, results)
+        validObject(res)
 
-        counts <- as(object, "DESeqTransform")
-        validObject(counts)
+        # We're using the variance-stabilized counts for visualization.
+        dt <- as(object, "DESeqTransform")
+        validObject(dt)
 
-        assert(identical(rownames(results), rownames(counts)))
+        assert(identical(rownames(res), rownames(dt)))
 
-        interestingGroups(counts) <-
-            matchInterestingGroups(counts, interestingGroups)
+        interestingGroups(dt) <-
+            matchInterestingGroups(dt, interestingGroups)
 
-        alpha <- metadata(results)[["alpha"]]
+        alpha <- metadata(res)[["alpha"]]
         assert(containsAlpha(alpha))
 
-        lfcThreshold <- metadata(results)[["lfcThreshold"]]
+        lfcThreshold <- metadata(res)[["lfcThreshold"]]
         assert(
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold)
         )
 
         # Get the character vector of DEGs.
-        deg <- deg(object = results, direction = direction)
+        deg <- deg(res, direction = direction)
         if (!hasLength(deg)) {
+            warning("There are no DEGs to plot. Skipping.", call. = FALSE)
             return(invisible())
         }
 
-        se <- counts %>%
-            as("RangedSummarizedExperiment") %>%
-            as("SummarizedExperiment") %>%
-            .[deg, , drop = FALSE]
+        # Subset to only include the DEGs.
+        dt <- dt[deg, , drop = FALSE]
 
-        # Subset the counts to match contrast samples, if desired.
         if (isTRUE(contrastSamples)) {
-            samples <- contrastSamples(object)
-            assert(isSubset(samples, colnames(se)))
-            se <- se[, samples, drop = FALSE]
-            colData(se) <- relevelColData(colData(se))
+            samples <- contrastSamples(object, results = results)
+            assert(isSubset(samples, colnames(dt)))
+            dt <- dt[, samples, drop = FALSE]
+            colData(dt) <- relevelColData(colData(dt))
         }
 
         # Title
         title <- paste0(
-            contrastName(results), "\n",
+            contrastName(res), "\n",
             length(deg), " genes; ",
             "alpha < ", alpha
         )
@@ -96,7 +95,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
             what = plotHeatmap,
             args = matchArgsToDoCall(
                 args = list(
-                    object = se,
+                    object = as(dt, "RangedSummarizedExperiment"),
                     scale = scale,
                     title = title
                 ),

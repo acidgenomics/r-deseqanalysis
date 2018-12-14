@@ -4,12 +4,8 @@
     results,
     lfcShrink = TRUE
 ) {
-    assert(is(object, "DESeqAnalysis"))
-    # Default to using the first contrast, for convenience.
-    if (missing(results)) {
-        results <- 1L
-    }
     assert(
+        is(object, "DESeqAnalysis"),
         isScalar(results),
         isFlag(lfcShrink)
     )

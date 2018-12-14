@@ -6,7 +6,7 @@
 \alias{plotDEGPCA,DESeqAnalysis-method}
 \title{Plot DEG PCA}
 \usage{
-\S4method{plotDEGPCA}{DESeqAnalysis}(object, results = 1L,
+\S4method{plotDEGPCA}{DESeqAnalysis}(object, results,
   contrastSamples = FALSE, direction = c("both", "up", "down"), object,
   assay = 1L, interestingGroups = NULL,
   label = getOption("basejump.label", FALSE),
@@ -24,29 +24,34 @@
 used to define the contrast passed to \code{DESeq2::results}. This setting
 will break for complex DESeq2 contrasts (e.g. interaction effect).}
 
-\item{direction}{\code{character(1)}. Plot "\code{both}", "\code{up}", or "\code{down}"
-directions.}
+\item{direction}{\code{character(1)}.
+Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 
-\item{assay}{\code{vector(1)}. Name or index of count matrix slotted in \code{assays}.
-When passing in a string, the name must be defined in \code{assayNames}.}
+\item{assay}{\code{vector(1)}.
+Name or index of count matrix slotted in \code{assays}. When passing in a
+string, the name must be defined in \code{assayNames}.}
 
-\item{interestingGroups}{\code{character}. Groups of interest that define the
-samples. If left unset, defaults to \code{sampleName}.}
+\item{interestingGroups}{\code{character}.
+Groups of interest that define the samples. If left unset, defaults to
+\code{sampleName}.}
 
-\item{label}{\code{logical(1)}. Superimpose sample text labels on the plot.}
+\item{label}{\code{logical(1)}.
+Superimpose sample text labels on the plot.}
 
-\item{color}{\code{ScaleDiscrete}. Desired ggplot2 color scale. Must supply
-discrete values. When set to \code{NULL}, the default ggplot2 color palette will
-be used. If manual color definitions are desired, we recommend using
-\code{ggplot2::scale_color_manual}.
+\item{color}{\code{ScaleDiscrete}.
+Desired ggplot2 color scale. Must supply discrete values. When set \code{NULL},
+the default ggplot2 color palette will be used. If manual color definitions
+are desired, we recommend using \code{ggplot2::scale_color_manual}.
 
 To set the discrete color palette globally, use:\preformatted{options(basejump.color.discrete = ggplot2::scale_color_viridis_d())
 }}
 
-\item{pointSize}{\code{numeric(1)}. Point size for dots in the plot.}
+\item{pointSize}{\code{numeric(1)}.
+Point size for dots in the plot.}
 
-\item{return}{\code{character(1)}. Return type. Uses \code{match.arg} internally and
-defaults to the first argument in the \code{character} vector.}
+\item{return}{\code{character(1)}.
+Return type. Uses \code{match.arg} internally and defaults to the first argument
+in the \code{character} vector.}
 
 \item{...}{Additional arguments.}
 }
@@ -67,5 +72,5 @@ argument, which must contain/extend a \code{SummarizedExperiment}.
 data(deseq)
 
 ## DESeqAnalysis ====
-plotDEGPCA(deseq)
+plotDEGPCA(deseq, results = 1L)
 }

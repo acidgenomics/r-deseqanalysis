@@ -8,9 +8,8 @@
 \usage{
 resultsTables(object, ...)
 
-\S4method{resultsTables}{DESeqAnalysis}(object, results = 1L,
-  rowData = TRUE, counts = TRUE, return = c("tbl_df",
-  "DataFrameList"))
+\S4method{resultsTables}{DESeqAnalysis}(object, results, rowData = TRUE,
+  counts = TRUE, return = c("tbl_df", "DataFrameList"))
 }
 \arguments{
 \item{object}{Object.}
@@ -59,6 +58,6 @@ used for overrepresentation testing but should NOT be used for GSEA.
 data(deseq)
 
 ## DESeqAnalysis ====
-x <- resultsTables(deseq)
+x <- resultsTables(deseq, results = 1L)
 print(x)
 }
