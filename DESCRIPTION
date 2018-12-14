@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.1.3
-Date: 2018-12-12
+Version: 0.1.4
+Date: 2018-12-13
 Authors@R: c(
     person(
         given = "Michael",
