@@ -6,7 +6,7 @@
 \alias{topTables,DESeqAnalysis-method}
 \title{Top Tables of Differential Expression Results}
 \usage{
-\S4method{topTables}{DESeqAnalysis}(object, results = 1L, n = 10L)
+\S4method{topTables}{DESeqAnalysis}(object, results, n = 10L)
 }
 \arguments{
 \item{object}{Object.}
@@ -17,7 +17,8 @@
 \item{n}{\code{scalar integer}. Number of genes (per direction) to report.}
 }
 \value{
-\code{kable}. Markdown tables.
+\code{kable}.
+Markdown tables.
 }
 \description{
 Top Tables of Differential Expression Results

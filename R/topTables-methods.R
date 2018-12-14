@@ -88,7 +88,7 @@ basejump::topTables
 topTables.DESeqAnalysis <-  # nolint
     function(
         object,
-        results = 1L,
+        results,
         n = 10L
     ) {
         # Suppress the message about which results we're matching here,
@@ -103,7 +103,6 @@ topTables.DESeqAnalysis <-  # nolint
             counts = FALSE,
             return = "tbl_df"
         )
-        assert(isSubset(c("up", "down"), names(list)))
 
         # Upregulated genes.
         up <- list[["up"]]

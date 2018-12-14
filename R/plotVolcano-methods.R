@@ -21,16 +21,18 @@
 #' print(genes)
 #'
 #' ## DESeqAnalysis ====
-#' plotVolcano(deseq)
+#' plotVolcano(deseq, results = 1L)
 #'
 #' ## Customize the colors.
 #' plotVolcano(
 #'     object = deseq,
+#'     results = 1L,
 #'     pointColor = "black",
 #'     sigPointColor = "purple"
 #' )
 #' plotVolcano(
 #'     object = deseq,
+#'     results = 1L,
 #'     sigPointColor = c(
 #'         upregulated = "green",
 #'         downregulated = "red"
@@ -40,18 +42,20 @@
 #' ## Directional support (up or down).
 #' plotVolcano(
 #'     object = deseq,
+#'     results = 1L,
 #'     direction = "up",
 #'     ntop = 5L
 #' )
 #' plotVolcano(
 #'     object = deseq,
+#'     results = 1L,
 #'     direction = "down",
 #'     ntop = 5L
 #' )
 #'
 #' ## Label genes manually.
 #' ## Note that either gene IDs or names (symbols) are supported.
-#' plotVolcano(deseq, genes = genes)
+#' plotVolcano(deseq, results = 1L, genes = genes)
 NULL
 
 
@@ -307,25 +311,15 @@ plotVolcano.DESeqResults <-  # nolint
 
 
 
-#' @rdname plotVolcano
-#' @export
-setMethod(
-    f = "plotVolcano",
-    signature = signature("DESeqResults"),
-    definition = plotVolcano.DESeqResults
-)
-
-
-
 plotVolcano.DESeqAnalysis <-  # nolint
     function(
         object,
-        results = 1L,
+        results,
         lfcShrink = TRUE
     ) {
         validObject(object)
         do.call(
-            what = plotVolcano,
+            what = plotVolcano.DESeqResults,
             args = matchArgsToDoCall(
                 args = list(
                     object = .matchResults(

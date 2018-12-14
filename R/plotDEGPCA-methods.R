@@ -12,7 +12,7 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' plotDEGPCA(deseq)
+#' plotDEGPCA(deseq, results = 1L)
 NULL
 
 
@@ -27,46 +27,52 @@ basejump::plotDEGPCA
 plotDEGPCA.DESeqAnalysis <-  # nolint
     function(
         object,
-        results = 1L,
+        results,
         contrastSamples = FALSE,
         direction = c("both", "up", "down")
     ) {
         validObject(object)
-        results <- .matchResults(object, results)
-        validObject(results)
-        counts <- as(object, "DESeqTransform")
-        validObject(counts)
-        assert(identical(rownames(results), rownames(counts)))
-        interestingGroups <- matchInterestingGroups(counts, interestingGroups)
-        interestingGroups(counts) <- interestingGroups
-        alpha <- metadata(results)[["alpha"]]
-        assert(containsAlpha(alpha))
-        lfcThreshold <- metadata(results)[["lfcThreshold"]]
-        assert(
-            isNumber(lfcThreshold),
-            isNonNegative(lfcThreshold),
-            isFlag(contrastSamples)
-        )
+        assert(isFlag(contrastSamples))
         direction <- match.arg(direction)
         return <- match.arg(return)
 
+        res <- .matchResults(object, results)
+        validObject(res)
+
+        # Using the variance-stabilized counts for visualization.
+        dt <- as(object, "DESeqTransform")
+        validObject(dt)
+
+        assert(identical(rownames(res), rownames(dt)))
+
+        interestingGroups(dt) <-
+            matchInterestingGroups(dt, interestingGroups)
+
+        alpha <- metadata(res)[["alpha"]]
+        assert(containsAlpha(alpha))
+
+        lfcThreshold <- metadata(res)[["lfcThreshold"]]
+        assert(
+            isNumber(lfcThreshold),
+            isNonNegative(lfcThreshold)
+        )
+
         # Get the character vector of DEGs.
-        deg <- deg(object = results, direction = direction)
+        deg <- deg(res, direction = direction)
         if (!hasLength(deg)) {
+            warning("There are no DEGs to plot. Skipping.", call. = FALSE)
             return(invisible())
         }
 
-        se <- counts %>%
-            as("RangedSummarizedExperiment") %>%
-            as("SummarizedExperiment") %>%
-            .[deg, , drop = FALSE]
+        # Subset to only include the DEGs.
+        dt <- dt[deg, , drop = FALSE]
 
         # Subset the counts to match contrast samples, if desired.
         if (isTRUE(contrastSamples)) {
-            samples <- contrastSamples(object)
-            assert(isSubset(samples, colnames(se)))
-            se <- se[, samples, drop = FALSE]
-            colData(se) <- relevelColData(colData(se))
+            samples <- contrastSamples(object, results = results)
+            assert(isSubset(samples, colnames(dt)))
+            dt <- dt[, samples, drop = FALSE]
+            colData(dt) <- relevelColData(colData(dt))
         }
 
         # Subtitle.
@@ -79,11 +85,11 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
         do.call(
             what = plotPCA,
             args = list(
-                object = se,
+                object = as(dt, "RangedSummarizedExperiment"),
                 interestingGroups = interestingGroups,
                 ntop = Inf,
                 label = label,
-                title = contrastName(results),
+                title = contrastName(res),
                 subtitle = subtitle,
                 return = return
             )

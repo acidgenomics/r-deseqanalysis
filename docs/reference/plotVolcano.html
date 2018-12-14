@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
       </span>
     </div>
 
@@ -115,19 +115,12 @@
     
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>plotVolcano</span>(<span class='no'>object</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
-  <span class='kw'>genes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>gene2symbol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
-  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='kw'>pointColor</span> <span class='kw'>=</span> <span class='st'>"gray50"</span>,
-  <span class='kw'>sigPointColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='kw'>upregulated</span> <span class='kw'>=</span> <span class='st'>"purple"</span>, <span class='kw'>downregulated</span> <span class='kw'>=</span> <span class='st'>"orange"</span>),
-  <span class='kw'>histograms</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"ggplot"</span>, <span class='st'>"DataFrame"</span>))
-
-<span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotVolcano</span>(<span class='no'>object</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
-  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='kw'>pointColor</span> <span class='kw'>=</span> <span class='st'>"gray50"</span>,
-  <span class='kw'>sigPointColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='kw'>upregulated</span> <span class='kw'>=</span> <span class='st'>"purple"</span>, <span class='kw'>downregulated</span> <span class='kw'>=</span> <span class='st'>"orange"</span>),
-  <span class='kw'>histograms</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"ggplot"</span>, <span class='st'>"DataFrame"</span>))</pre>
+    <pre class="usage"><span class='co'># S4 method for DESeqAnalysis</span>
+<span class='fu'>plotVolcano</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>,
+  <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='kw'>pointColor</span> <span class='kw'>=</span> <span class='st'>"gray50"</span>, <span class='kw'>sigPointColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='kw'>upregulated</span> <span class='kw'>=</span>
+  <span class='st'>"purple"</span>, <span class='kw'>downregulated</span> <span class='kw'>=</span> <span class='st'>"orange"</span>), <span class='kw'>histograms</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"ggplot"</span>, <span class='st'>"DataFrame"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,51 +130,6 @@
       <td><p>Object.</p></td>
     </tr>
     <tr>
-      <th>ylim</th>
-      <td><p><code>scalar numeric</code>. Upper boundary limit for y-axis. Helps preserve
-dynamic range for gene sets containing highly significant P values (e.g.
-<code>1e-100</code>).</p></td>
-    </tr>
-    <tr>
-      <th>genes</th>
-      <td><p><code>character</code>. Gene identifiers. It is considered better practice
-to input the stable gene identifiers from Ensembl (e.g. "ENSG00000000003")
-and not the (HGNC) gene symbols (e.g. "TSPN6"), if possible.</p></td>
-    </tr>
-    <tr>
-      <th>gene2symbol</th>
-      <td><p><code>Gene2Symbol</code>. Gene-to-symbol mappings. Must contain
-<code>geneID</code> and <code>geneName</code> columns. See <code>Gene2Symbol</code> for more information.</p></td>
-    </tr>
-    <tr>
-      <th>ntop</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>. Number of top genes to label.</p></td>
-    </tr>
-    <tr>
-      <th>direction</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>. Plot "<code>both</code>", "<code>up</code>", or "<code>down</code>"
-directions.</p></td>
-    </tr>
-    <tr>
-      <th>pointColor</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>. Default point color for the plot.</p></td>
-    </tr>
-    <tr>
-      <th>sigPointColor</th>
-      <td><p><code>character</code>. Color names for labeling upregulated and
-downregulated genes. Also supports a character string for labeling DEGs
-with the same color, regardless of direction.</p></td>
-    </tr>
-    <tr>
-      <th>histograms</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>. Show LFC and P value histograms.</p></td>
-    </tr>
-    <tr>
-      <th>return</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>. Return type. Uses <code>match.arg</code> internally and
-defaults to the first argument in the <code>character</code> vector.</p></td>
-    </tr>
-    <tr>
       <th>results</th>
       <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>. Name or positive of
 <code>DESeqResults</code>.</p></td>
@@ -189,6 +137,51 @@ defaults to the first argument in the <code>character</code> vector.</p></td>
     <tr>
       <th>lfcShrink</th>
       <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>. Use shrunken log2 fold change (LFC) values.</p></td>
+    </tr>
+    <tr>
+      <th>ylim</th>
+      <td><p><code>scalar numeric</code>. Upper boundary limit for y-axis. Helps preserve
+dynamic range for gene sets containing highly significant P values (e.g.
+<code>1e-100</code>).</p></td>
+    </tr>
+    <tr>
+      <th>genes</th>
+      <td><p><code>character</code>.
+Gene identifiers. It is considered better practice to input the stable gene
+identifiers from Ensembl (e.g. "ENSG00000000003") and not the (HGNC) gene
+symbols (e.g. "TSPN6"), if possible.</p></td>
+    </tr>
+    <tr>
+      <th>ntop</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>.
+Number of top genes to label.</p></td>
+    </tr>
+    <tr>
+      <th>direction</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>.
+Plot "<code>both</code>", "<code>up</code>", or "<code>down</code>" directions.</p></td>
+    </tr>
+    <tr>
+      <th>pointColor</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>.
+Default point color for the plot.</p></td>
+    </tr>
+    <tr>
+      <th>sigPointColor</th>
+      <td><p><code>character</code>.
+Color names for labeling upregulated and downregulated genes. Also supports
+a character string for labeling DEGs with the same color, regardless of
+direction.</p></td>
+    </tr>
+    <tr>
+      <th>histograms</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>. Show LFC and P value histograms.</p></td>
+    </tr>
+    <tr>
+      <th>return</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>.
+Return type. Uses <code>match.arg</code> internally and defaults to the first argument
+in the <code>character</code> vector.</p></td>
     </tr>
     </table>
     
@@ -210,14 +203,16 @@ defaults to the first argument in the <code>character</code> vector.</p></td>
 <span class='no'>genes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>rownames</a></span>(<span class='no'>dds</span>))
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>genes</span>)</div><div class='output co'>#&gt; [1] "gene001" "gene002" "gene003" "gene004" "gene005" "gene006"</div><div class='input'>
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Customize the colors.</span>
 <span class='fu'>plotVolcano</span>(
     <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
+    <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
     <span class='kw'>pointColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
     <span class='kw'>sigPointColor</span> <span class='kw'>=</span> <span class='st'>"purple"</span>
 )</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotVolcano</span>(
     <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
+    <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
     <span class='kw'>sigPointColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(
         <span class='kw'>upregulated</span> <span class='kw'>=</span> <span class='st'>"green"</span>,
         <span class='kw'>downregulated</span> <span class='kw'>=</span> <span class='st'>"red"</span>
@@ -226,16 +221,18 @@ defaults to the first argument in the <code>character</code> vector.</p></td>
 <span class='co'>## Directional support (up or down).</span>
 <span class='fu'>plotVolcano</span>(
     <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
+    <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
     <span class='kw'>direction</span> <span class='kw'>=</span> <span class='st'>"up"</span>,
     <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>5L</span>
 )</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotVolcano</span>(
     <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
+    <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
     <span class='kw'>direction</span> <span class='kw'>=</span> <span class='st'>"down"</span>,
     <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>5L</span>
 )</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Label genes manually.</span>
 <span class='co'>## Note that either gene IDs or names (symbols) are supported.</span>
-<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>genes</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-6.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>genes</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-6.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

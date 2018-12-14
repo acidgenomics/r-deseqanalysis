@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
       </span>
     </div>
 
@@ -120,8 +120,8 @@
   <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>))
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>deg</span>(<span class='no'>object</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>))</pre>
+<span class='fu'>deg</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>,
+  <span class='st'>"up"</span>, <span class='st'>"down"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -132,18 +132,20 @@
     </tr>
     <tr>
       <th>alpha</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric(1)</a></code>. Adjusted P value ("alpha") cutoff. If left <code>NULL</code>,
-will use the cutoff defined in the object.</p></td>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric(1)</a></code>.
+Adjusted P value ("alpha") cutoff. If left <code>NULL</code>, will use the cutoff
+defined in the object.</p></td>
     </tr>
     <tr>
       <th>lfcThreshold</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric(1)</a></code>. Log fold change ratio (base 2) cutoff
-threshold. If left <code>NULL</code>, will use the cutoff defined in the object.</p></td>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric(1)</a></code>.
+Log fold change ratio (base 2) cutoff threshold. If left <code>NULL</code>, will use
+the cutoff defined in the object.</p></td>
     </tr>
     <tr>
       <th>direction</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>. Plot "<code>both</code>", "<code>up</code>", or "<code>down</code>"
-directions.</p></td>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>.
+Plot "<code>both</code>", "<code>up</code>", or "<code>down</code>" directions.</p></td>
     </tr>
     <tr>
       <th>results</th>
@@ -154,14 +156,15 @@ directions.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>character</code>. Gene identifiers.</p>
+    <p><code>character</code>.
+Gene identifiers.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>deg</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt;   [1] "gene427" "gene419" "gene095" "gene334" "gene323" "gene494" "gene352"
+<span class='fu'>deg</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt;   [1] "gene427" "gene419" "gene095" "gene334" "gene323" "gene494" "gene352"
 #&gt;   [8] "gene391" "gene145" "gene078" "gene403" "gene497" "gene248" "gene004"
 #&gt;  [15] "gene285" "gene489" "gene063" "gene023" "gene148" "gene448" "gene215"
 #&gt;  [22] "gene473" "gene412" "gene060" "gene105" "gene277" "gene298" "gene317"
