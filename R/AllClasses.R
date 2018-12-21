@@ -12,8 +12,7 @@
 
 
 
-# DESeqAnalysis ================================================================
-#' DESeq2 Analysis Container
+#' DESeq2 differential expression analysis
 #'
 #' Class containing all elements generated during differential expression
 #' analysis with DESeq2. This class is essentially a `list` with validity checks
@@ -24,7 +23,7 @@
 #'
 #' We recommend generating the `DESeqDataSet` by coercion from `bcbioRNASeq`
 #' object using `as(dds, "bcbioRNASeq")`. Don't use the `DESeq2::DESeqDataSet`
-#' or `DESeq2::DESeqDataSetFromMatrix` constructors to generate the
+#' or `DESeq2::DESeqDataSetFromMatrix()` constructors to generate the
 #' `DESeqDataSet` object.
 #'
 #' @section DESeqResults:

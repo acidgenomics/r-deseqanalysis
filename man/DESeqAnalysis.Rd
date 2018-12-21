@@ -2,7 +2,7 @@
 % Please edit documentation in R/DESeqAnalysis.R
 \name{DESeqAnalysis}
 \alias{DESeqAnalysis}
-\title{DESeq2 Analysis Container}
+\title{DESeq2 differential expression analysis}
 \usage{
 DESeqAnalysis(data, transform, results, lfcShrink)
 }
@@ -32,7 +32,7 @@ to ensure \code{DESeqTransform} and \code{DESeqResults} correspond to the
 
 We recommend generating the \code{DESeqDataSet} by coercion from \code{bcbioRNASeq}
 object using \code{as(dds, "bcbioRNASeq")}. Don't use the \code{DESeq2::DESeqDataSet}
-or \code{DESeq2::DESeqDataSetFromMatrix} constructors to generate the
+or \code{DESeq2::DESeqDataSetFromMatrix()} constructors to generate the
 \code{DESeqDataSet} object.
 }
 

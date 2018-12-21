@@ -3,7 +3,7 @@
 \docType{class}
 \name{DESeqAnalysis-class}
 \alias{DESeqAnalysis-class}
-\title{DESeq2 Analysis Container}
+\title{DESeq2 differential expression analysis}
 \value{
 \code{DESeqAnalysis}, which contains a \code{DESeqDataSet}, \code{DESeqTransform},
 and corresponding \code{DESeqResults}.
@@ -31,7 +31,7 @@ to ensure \code{DESeqTransform} and \code{DESeqResults} correspond to the
 
 We recommend generating the \code{DESeqDataSet} by coercion from \code{bcbioRNASeq}
 object using \code{as(dds, "bcbioRNASeq")}. Don't use the \code{DESeq2::DESeqDataSet}
-or \code{DESeq2::DESeqDataSetFromMatrix} constructors to generate the
+or \code{DESeq2::DESeqDataSetFromMatrix()} constructors to generate the
 \code{DESeqDataSet} object.
 }
 
