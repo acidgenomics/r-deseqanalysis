@@ -1,5 +1,5 @@
 #' @name deg
-#' @inherit basejump::deg
+#' @inherit bioverbs::deg
 #' @inheritParams basejump::params
 #' @inheritParams params
 #' @examples
@@ -8,6 +8,13 @@
 #' ## DESeqAnalysis ====
 #' deg(deseq, results = 1L)
 NULL
+
+
+
+#' @importFrom bioverbs deg
+#' @aliases NULL
+#' @export
+bioverbs::deg
 
 
 

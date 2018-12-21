@@ -2,7 +2,7 @@ Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
 Version: 0.1.4
-Date: 2018-12-13
+Date: 2018-12-21
 Authors@R: c(
     person(
         given = "Michael",
@@ -83,17 +83,18 @@ Encoding: UTF-8
 LazyData: false
 Depends:
     R (>= 3.5),
-    basejump (>= 0.9),
+    basejump (>= 0.9.1),
     DESeq2 (>= 1.20)
 Imports:
     BiocGenerics,
     IRanges,
     S4Vectors,
     SummarizedExperiment (>= 1.10),
+    bioverbs (>= 0.1),
     cowplot,
     dplyr,
     ggplot2,
-    goalie (>= 0.2),
+    goalie (>= 0.2.1),
     knitr,
     magrittr,
     methods,
@@ -110,6 +111,7 @@ Suggests:
     viridis
 Remotes:
     steinbaugh/basejump@develop,
+    steinbaugh/bioverbs@develop,
     steinbaugh/goalie@develop
 biocViews:
     DataRepresentation,

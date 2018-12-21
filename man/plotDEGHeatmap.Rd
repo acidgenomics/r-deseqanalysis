@@ -4,7 +4,7 @@
 \name{plotDEGHeatmap}
 \alias{plotDEGHeatmap}
 \alias{plotDEGHeatmap,DESeqAnalysis-method}
-\title{Plot Heatmap}
+\title{Differentially expressed gene heatmap}
 \usage{
 \S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results,
   contrastSamples = FALSE, direction = c("both", "up", "down"),
@@ -28,142 +28,37 @@ will break for complex DESeq2 contrasts (e.g. interaction effect).}
 \item{direction}{\code{character(1)}.
 Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 
-\item{scale}{\code{character(1)}.
-Whether the values should be centered and scaled in either the row or
-column direction ("\code{row}", "\code{column}"), or remain unscaled ("\code{none}").}
-
-\item{clusteringMethod}{\code{character(1)}.
-Clustering method. Accepts the same values as \code{stats::hclust}.}
-
-\item{clusterRows}{\code{logical(1)}.
-Arrange with hierarchical clustering.}
-
-\item{clusterCols}{\code{logical(1)}.
-Arrange with hierarchical clustering.}
-
 \item{interestingGroups}{\code{character}.
 Groups of interest that define the samples. If left unset, defaults to
 \code{sampleName}.}
 
-\item{showRownames}{\code{logical(1)}.
-Show row or column names.}
+\item{color}{\code{ScaleDiscrete}.
+Desired ggplot2 color scale. Must supply discrete values. When set \code{NULL},
+the default ggplot2 color palette will be used. If manual color definitions
+are desired, we recommend using \code{\link[ggplot2:scale_color_manual]{ggplot2::scale_color_manual()}}.
 
-\item{showColnames}{\code{logical(1)}.
-Show row or column names.}
+To set the discrete color palette globally, use:\preformatted{options(basejump.color.discrete = ggplot2::scale_color_viridis_d())
+}}
 
-\item{treeheightRow}{\code{integer(1)}.
-Size of the row and column dendrograms. Use \code{0} to disable.}
-
-\item{treeheightCol}{\code{integer(1)}.
-Size of the row and column dendrograms. Use \code{0} to disable.}
-
-\item{color}{\code{function}, \code{character}, or \code{NULL}.
-Hexadecimal color function or values to use for plot.
-
-We generally recommend these hexadecimal functions from the viridis
-package:
-\itemize{
-\item \code{viridis::viridis} (\emph{default}).
-\item \code{viridis::inferno}.
-\item \code{viridis::magma}.
-\item \code{viridis::plasma}.
-}
-
-Alternatively, colors can be defined manually using hexadecimal values
-(e.g. \code{c("#FF0000", "#0000FF")}), but this is not generally recommended.
-Refer to the RColorBrewer package for hexadecimal color palettes that may
-be suitable. If set \code{NULL}, will use the default pheatmap colors.}
-
-\item{legendColor}{\code{function} or \code{NULL}.
-Hexadecimal color function to use for legend labels. Note that hexadecimal
-values are not supported. If set \code{NULL}, will use the default pheatmap
-colors.}
-
-\item{borderColor}{\code{character(1)} or \code{NULL}.
-Border color. Disabled by default for improved aesthetics.}
-
-\item{title}{\code{character(1)} or \code{NULL}.
+\item{title}{\code{character(1)}.
 Plot title.}
 
-\item{...}{Passthrough arguments to \code{pheatmap::pheatmap}.
-The argument names must be formatted in camel case, not snake case.}
-}
-\value{
-\code{pheatmap}.
+\item{...}{Additional arguments.}
 }
 \description{
-Construct a simple heatmap.
+This function is an extension of \code{plotHeatmap} that is optimized
+for automatic handling differentially expressed genes, rather than requiring
+manual input of a gene vector. All of the optional parameters for
+\code{plotHeatmap} are also supported by this function.
 }
-\section{Methods (by class)}{
-
-\itemize{
-\item \code{SummarizedExperiment}: Construct a correlation heatmap comparing the columns
-of the matrix.
-
-\item \code{SummarizedExperiment}: Scale the heatmap by applying quantile breaks.
+\details{
+To adjust the annotation columns, modify the
+\link[SummarizedExperiment:colData]{colData} of the \code{counts} argument, which must
+contain a \code{SummarizedExperiment}.
 }
-}
-
-\section{Scaling}{
-
-
-
-Here we're scaling simply by calculating the standard score (z-score).
-\itemize{
-\item mu: mean.
-\item sigma: standard deviation.
-\item x: raw score (e.g. count matrix).
-\item z: standard score (z-score).
-}\preformatted{z = (x - mu) / sigma
-}
-
-See also:
-\itemize{
-\item \code{pheatmap:::scale_rows}.
-\item \code{base::scale} for additional scaling approaches.
-}
-
-}
-
-\section{Hierarchical clustering}{
-
-
-
-Row- and column-wise hierarchical clustering is performed when \code{clusterRows}
-and/or \code{clusterCols} are set to \code{TRUE}. Internally, this calls \code{hclust},
-and defaults to the Ward method.
-
-Automatic hierarchical clustering of rows and/or columns can error for some
-datasets. When this occurs, you'll likely see this error:\preformatted{Error in hclust(d, method = method) :
-NA/NaN/Inf in foreign function call
-}
-
-In this case, either set \code{clusterRows} and/or \code{clusterCols} to \code{FALSE}, or
-you can attempt to pass an \code{hclust} object to these arguments. This is
-recommended as an alternate approach to be used with \code{pheatmap::pheatmap},
-which is called internally by our plotting code. Here's how this can be
-accomplished:\preformatted{mat <- assay(mat)
-dist <- dist(mat)
-hclust <- hclust(dist, method = "ward.D2")
-}
-
-}
-
 \examples{
 data(deseq)
 
 ## DESeqAnalysis ====
 plotDEGHeatmap(deseq, results = 1L)
-}
-\seealso{
-\itemize{
-\item \code{pheatmap::pheatmap}.
-\item \code{RColorBrewer::brewer.pal}.
-}
-
-\itemize{
-\item \code{pheatmap::pheatmap}.
-\item \code{stats::cor}.
-\item \code{stats::hclust}.
-}
 }

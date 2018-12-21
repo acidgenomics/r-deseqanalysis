@@ -1,17 +1,17 @@
 #' @name alphaSummary
 #' @author Michael Steinbaugh, Lorena Patano
-#' @inherit basejump::alphaSummary
+#' @inherit bioverbs::alphaSummary
+#' @inheritParams DESeq2::results
+#' @inheritParams basejump::params
 #'
 #' @details
 #' Use either `contrast` or `name` to specify the desired contrast.
 #'
-#' @inheritParams DESeq2::results
-#' @inheritParams basejump::params
 #' @param alpha `numeric`. Multiple alpha cutoffs.
 #'
 #' @seealso
-#' - `DESeq2::results`.
-#' - `DESeq2::resultsNames`.
+#' - `DESeq2::results()`.
+#' - `DESeq2::resultsNames()`.
 #'
 #' @examples
 #' data(deseq)
@@ -27,10 +27,10 @@ NULL
 
 
 
-#' @importFrom basejump alphaSummary
+#' @importFrom bioverbs alphaSummary
 #' @aliases NULL
 #' @export
-basejump::alphaSummary
+bioverbs::alphaSummary
 
 
 

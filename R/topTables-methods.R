@@ -1,9 +1,10 @@
 #' @name topTables
-#' @inherit basejump::topTables
+#' @inherit bioverbs::topTables
 #' @inheritParams basejump::params
 #' @inheritParams params
 #'
-#' @param n `integer(1)`. Number of genes (per direction) to report.
+#' @param n `integer(1)`.
+#'   Number of genes (per direction) to report.
 #'
 #' @examples
 #' data(deseq)
@@ -14,10 +15,10 @@ NULL
 
 
 
-#' @importFrom basejump topTables
+#' @importFrom bioverbs topTables
 #' @aliases NULL
 #' @export
-basejump::topTables
+bioverbs::topTables
 
 
 

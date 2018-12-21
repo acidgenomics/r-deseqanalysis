@@ -3,7 +3,7 @@
 
 
 #' @name plotDEGHeatmap
-#' @inherit basejump::plotHeatmap
+#' @inherit bioverbs::plotDEGHeatmap
 #' @inheritParams basejump::params
 #' @inheritParams params
 #'
@@ -16,10 +16,10 @@ NULL
 
 
 
-#' @importFrom basejump plotDEGHeatmap
+#' @importFrom bioverbs plotDEGHeatmap
 #' @aliases NULL
 #' @export
-basejump::plotDEGHeatmap
+bioverbs::plotDEGHeatmap
 
 
 

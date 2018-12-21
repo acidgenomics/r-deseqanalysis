@@ -4,7 +4,7 @@
 \name{plotGene}
 \alias{plotGene}
 \alias{plotGene,DESeqAnalysis-method}
-\title{Plot Gene Expression}
+\title{Plot gene expression}
 \usage{
 \S4method{plotGene}{DESeqAnalysis}(object, genes,
   interestingGroups = NULL, medianLine = TRUE,
@@ -31,7 +31,7 @@ sample name.}
 \item{color}{\code{ScaleDiscrete}.
 Desired ggplot2 color scale. Must supply discrete values. When set \code{NULL},
 the default ggplot2 color palette will be used. If manual color definitions
-are desired, we recommend using \code{ggplot2::scale_color_manual}.
+are desired, we recommend using \code{\link[ggplot2:scale_color_manual]{ggplot2::scale_color_manual()}}.
 
 To set the discrete color palette globally, use:\preformatted{options(basejump.color.discrete = ggplot2::scale_color_viridis_d())
 }}
@@ -43,8 +43,6 @@ Show plot legend.}
 Plot style.}
 }
 \value{
-\code{ggplot}.
-
 \itemize{
 \item \code{style = "facet"}: \code{ggplot} grouped by \code{sampleName}, with
 \code{ggplot2::facet_wrap} applied to panel the samples.
@@ -52,7 +50,7 @@ Plot style.}
 }
 }
 \description{
-Plot Gene Expression
+Plot gene expression
 }
 \examples{
 data(deseq)
