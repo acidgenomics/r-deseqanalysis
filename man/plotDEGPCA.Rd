@@ -17,12 +17,13 @@
 \arguments{
 \item{object}{Object.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
-\code{DESeqResults}.}
+\item{results}{\code{character(1)} or \code{integer(1)}.
+Name or positive of \code{DESeqResults}.}
 
-\item{contrastSamples}{\code{logical(1)}. \strong{Experimental}. Only include the samples
-used to define the contrast passed to \code{DESeq2::results}. This setting
-will break for complex DESeq2 contrasts (e.g. interaction effect).}
+\item{contrastSamples}{\code{logical(1)}.
+\strong{Experimental}. Only include the samples used to define the contrast
+passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
+contrasts (e.g. interaction effect).}
 
 \item{direction}{\code{character(1)}.
 Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
