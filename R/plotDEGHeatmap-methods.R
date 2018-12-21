@@ -4,7 +4,7 @@
 
 #' @name plotDEGHeatmap
 #' @inherit bioverbs::plotDEGHeatmap
-#' @inheritParams basejump::params
+#' @inheritParams basejump::plotHeatmap
 #' @inheritParams params
 #'
 #' @examples
