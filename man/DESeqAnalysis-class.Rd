@@ -5,8 +5,9 @@
 \alias{DESeqAnalysis-class}
 \title{DESeq2 differential expression analysis}
 \value{
-\code{DESeqAnalysis}, which contains a \code{DESeqDataSet}, \code{DESeqTransform},
-and corresponding \code{DESeqResults}.
+\code{DESeqAnalysis}.
+Contains a \code{DESeqDataSet}, \code{DESeqTransform}, and corresponding
+\code{DESeqResults} list.
 }
 \description{
 Class containing all elements generated during differential expression
@@ -21,18 +22,29 @@ to ensure \code{DESeqTransform} and \code{DESeqResults} correspond to the
 
 \item{\code{transform}}{\code{DESeqTransform}.}
 
-\item{\code{results}}{\code{list}. One or more unshrunken \code{DESeqResults}.}
+\item{\code{results}}{\code{list}.
+One or more unshrunken \code{DESeqResults}.}
 
-\item{\code{lfcShrink}}{\code{list}. One or more shrunken \code{DESeqResults}.}
+\item{\code{lfcShrink}}{\code{list}.
+\emph{Optional}. One or more shrunken \code{DESeqResults}. If set, must correspond to
+those defined in \code{results}.}
 }}
 
 \section{DESeqDataSet}{
 
 
 We recommend generating the \code{DESeqDataSet} by coercion from \code{bcbioRNASeq}
-object using \code{as(dds, "bcbioRNASeq")}. Don't use the \code{DESeq2::DESeqDataSet}
+object using \code{as(dds, "bcbioRNASeq")}. Don't use the \code{\link[DESeq2:DESeqDataSet]{DESeq2::DESeqDataSet()}}
 or \code{DESeq2::DESeqDataSetFromMatrix()} constructors to generate the
 \code{DESeqDataSet} object.
+}
+
+\section{DESeqTransform}{
+
+
+Object containing variance-stabilized counts. We recommend slotting the
+return from either \code{\link[DESeq2:varianceStabilizingTransformation]{DESeq2::varianceStabilizingTransformation()}} or
+\code{\link[DESeq2:rlog]{DESeq2::rlog()}}.
 }
 
 \section{DESeqResults}{
@@ -44,7 +56,7 @@ care of this automatically in supported methods.
 }
 
 \seealso{
-\code{DESeqAnalysis}.
+\code{\link[=DESeqAnalysis]{DESeqAnalysis()}}.
 }
 \author{
 Michael Steinbaugh

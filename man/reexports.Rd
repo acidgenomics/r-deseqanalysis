@@ -14,11 +14,9 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{basejump}{\code{\link[basejump]{export}}, \code{\link[basejump]{markdown}}, \code{\link[basejump]{plotGene}}}
-
   \item{BiocGenerics}{\code{\link[BiocGenerics]{plotMA}}}
 
-  \item{bioverbs}{\code{\link[bioverbs]{alphaSummary}}, \code{\link[bioverbs]{contrastName}}, \code{\link[bioverbs]{contrastSamples}}, \code{\link[bioverbs]{deg}}, \code{\link[bioverbs]{plotDEGHeatmap}}, \code{\link[bioverbs]{plotDEGPCA}}, \code{\link[bioverbs]{plotVolcano}}, \code{\link[bioverbs]{resultsTables}}, \code{\link[bioverbs]{topTables}}}
+  \item{bioverbs}{\code{\link[bioverbs]{alphaSummary}}, \code{\link[bioverbs]{contrastName}}, \code{\link[bioverbs]{contrastSamples}}, \code{\link[bioverbs]{deg}}, \code{\link[bioverbs]{export}}, \code{\link[bioverbs]{markdown}}, \code{\link[bioverbs]{plotDEGHeatmap}}, \code{\link[bioverbs]{plotDEGPCA}}, \code{\link[bioverbs]{plotGene}}, \code{\link[bioverbs]{plotVolcano}}, \code{\link[bioverbs]{resultsTables}}, \code{\link[bioverbs]{topTables}}}
 
   \item{methods}{\code{\link[methods]{show}}}
 }}

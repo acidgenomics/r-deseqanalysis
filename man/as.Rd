@@ -6,7 +6,7 @@
 \alias{coerce,DESeqAnalysis,DESeqDataSet-method}
 \alias{coerce,DESeqAnalysis,DESeqTransform-method}
 \alias{coerce,DESeqAnalysis,DESeqResults-method}
-\title{Force an Object to Belong to a Class}
+\title{Force an object to belong to a class}
 \description{
 Coerce an object to a given class.
 }
@@ -19,7 +19,7 @@ Supported coercion methods will extract any of these internal objects:
 \item \code{DESeqTransform}.
 \item \code{DESeqResults}. Extracts the first results slotted. Note that this
 corresponds to results containing log2 fold change (LFC) values that
-\emph{have not been shrunken} using \code{DESeq2::lfcShrink}.
+\emph{have not been shrunken} using \code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}}.
 }
 }
 

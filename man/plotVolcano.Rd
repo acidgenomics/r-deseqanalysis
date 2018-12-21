@@ -15,10 +15,11 @@
 \arguments{
 \item{object}{Object.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
-\code{DESeqResults}.}
+\item{results}{\code{character(1)} or \code{integer(1)}.
+Name or positive of \code{DESeqResults}.}
 
-\item{lfcShrink}{\code{logical(1)}. Use shrunken log2 fold change (LFC) values.}
+\item{lfcShrink}{\code{logical(1)}.
+Use shrunken log2 fold change (LFC) values.}
 
 \item{ylim}{\code{numeric(1)}.
 Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets

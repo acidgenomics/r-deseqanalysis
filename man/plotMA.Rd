@@ -17,10 +17,11 @@
     A data object, typically containing count values from an RNA-Seq experiment or microarray intensity values.
   }
 
-\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
-\code{DESeqResults}.}
+\item{results}{\code{character(1)} or \code{integer(1)}.
+Name or positive of \code{DESeqResults}.}
 
-\item{lfcShrink}{\code{logical(1)}. Use shrunken log2 fold change (LFC) values.}
+\item{lfcShrink}{\code{logical(1)}.
+Use shrunken log2 fold change (LFC) values.}
 
 \item{genes}{\code{character}.
 Gene identifiers. It is considered better practice to input the stable gene
