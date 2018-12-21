@@ -1,6 +1,6 @@
 #' @name export
-#' @inherit basejump::export
-#' @inheritParams basejump::params
+#' @inherit bioverbs::export
+#' @inheritParams basejump::export
 #' @inheritParams params
 #' @examples
 #' data(deseq)
@@ -11,10 +11,10 @@ NULL
 
 
 
-#' @importFrom basejump export
+#' @importFrom bioverbs export
 #' @aliases NULL
 #' @export
-basejump::export
+bioverbs::export
 
 
 

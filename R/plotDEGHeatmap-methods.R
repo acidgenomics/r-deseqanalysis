@@ -55,7 +55,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
             matchInterestingGroups(dt, interestingGroups)
 
         alpha <- metadata(res)[["alpha"]]
-        assert(containsAlpha(alpha))
+        assert(isAlpha(alpha))
 
         lfcThreshold <- metadata(res)[["lfcThreshold"]]
         assert(

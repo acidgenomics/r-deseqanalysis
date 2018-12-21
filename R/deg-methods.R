@@ -34,7 +34,7 @@ deg.DESeqResults <-  # nolint
         } else {
             warning("Applying a post hoc alpha cutoff is not recommended.")
         }
-        assert(containsAlpha(alpha))
+        assert(isAlpha(alpha))
         if (is.null(lfcThreshold)) {
             lfcThreshold <- metadata(object)[["lfcThreshold"]]
         } else {

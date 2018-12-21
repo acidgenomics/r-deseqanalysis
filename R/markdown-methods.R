@@ -10,10 +10,10 @@ NULL
 
 
 
-#' @importFrom basejump markdown
+#' @importFrom bioverbs markdown
 #' @aliases NULL
 #' @export
-basejump::markdown
+bioverbs::markdown
 
 
 

@@ -1,10 +1,12 @@
+#' Force an object to belong to a class
+#'
 #' @name as
 #' @aliases coerce
+#' @author Michael Steinbaugh
+#' @exportMethod coerce
 #' @importFrom methods coerce
 #' @inherit methods::as
 #' @inheritParams coerce
-#' @exportMethod coerce
-#' @author Michael Steinbaugh
 #'
 #' @section DESeqAnalysis:
 #'

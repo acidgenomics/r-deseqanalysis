@@ -82,7 +82,7 @@ plotVolcano.DESeqResults <-  # nolint
     ) {
         validObject(object)
         alpha <- metadata(object)[["alpha"]]
-        assert(containsAlpha(alpha))
+        assert(isAlpha(alpha))
         lfcThreshold <- metadata(object)[["lfcThreshold"]]
         assert(
             isNumber(lfcThreshold),
