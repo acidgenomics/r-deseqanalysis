@@ -36,7 +36,7 @@ bioverbs::export
 .exportDESeqTransform <- function(x, dir, compress, humanize) {
     # Using the inherited SummarizedExperiment method here.
     assert(is(x, "DESeqAnalysis"))
-    message("Exporting DESeqTransform.")
+    message("\nExporting DESeqTransform.")
     export(
         x = as(x, "DESeqTransform"),
         name = "transform",
@@ -80,7 +80,7 @@ bioverbs::export
         return(NULL)
     }
 
-    message(paste0("Exporting ", slotName, "."))
+    message(paste0("\nExporting ", slotName, "."))
     mapply(
         name = names(list),
         x = list,
@@ -112,6 +112,7 @@ bioverbs::export
 # NOTE: This step picks shrunken LFCs over unshrunken if slotted.
 # NOTE: We don't need to support humanize here because `geneName` is required.
 .exportResultsTables <- function(x, dir, compress) {
+    message("\nExporting results tables.")
     assert(is(x, "DESeqAnalysis"))
     dir <- file.path(dir, "resultsTables")
     resultsNames <- names(x@results)
