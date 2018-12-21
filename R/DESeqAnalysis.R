@@ -3,10 +3,13 @@
 #'
 #' @param data `DESeqDataSet`.
 #' @param transform `DESeqTransform`.
-#' @param results `list`. One or more unshrunken `DESeqResults`. Assign the
-#'   `DESeq2::results` return here.
-#' @param lfcShrink `list`. One or more shrunken `DESeqResults`. Assign the
-#'   `DESeq2::lfcShrink` return here.
+#'   [DESeq2::varianceStabilizingTransformation()] recommended by default.
+#' @param results `list`.
+#'   One or more unshrunken `DESeqResults`.
+#'   Assign the [DESeq2::results()] return here.
+#' @param lfcShrink `list`.
+#'   One or more shrunken `DESeqResults`.
+#'   Assign the [DESeq2::lfcShrink()] return here.
 #'
 #' @examples
 #' library(DESeq2)
