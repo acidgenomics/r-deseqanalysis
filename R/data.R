@@ -1,4 +1,4 @@
-#' DESeq2 Example Analysis
+#' DESeq2 example analysis
 #'
 #' Minimal DESeq2 differential expression analysis.
 #'

@@ -1,14 +1,8 @@
-# FIXME Need to slot DESeqAnalysis package version in object...
+# TODO Need to slot DESeqAnalysis package version in object...
 # Define a `metadata` list and slot prototype metadata.
-
-# Consider taking out the `DESeqResultsTables` S4 object. I'm not sure this
-# makes sense, and makes the package more complicated...
 
 # TODO Add a tighter assert check to ensure that `lfcShrink` contains
 # shrunken values. Can use `priorInfo` to test for this.
-
-# FIXME Require `results` slot to be named. This makes downstream programming
-# easier.
 
 
 
@@ -22,9 +16,15 @@
 #' @section DESeqDataSet:
 #'
 #' We recommend generating the `DESeqDataSet` by coercion from `bcbioRNASeq`
-#' object using `as(dds, "bcbioRNASeq")`. Don't use the `DESeq2::DESeqDataSet`
+#' object using `as(dds, "bcbioRNASeq")`. Don't use the [DESeq2::DESeqDataSet()]
 #' or `DESeq2::DESeqDataSetFromMatrix()` constructors to generate the
 #' `DESeqDataSet` object.
+#'
+#' @section DESeqTransform:
+#'
+#' Object containing variance-stabilized counts. We recommend slotting the
+#' return from either [DESeq2::varianceStabilizingTransformation()] or
+#' [DESeq2::rlog()].
 #'
 #' @section DESeqResults:
 #'
@@ -36,14 +36,19 @@
 #' @export
 #'
 #' @slot data `DESeqDataSet`.
+#'
 #' @slot transform `DESeqTransform`.
-#' @slot results `list`. One or more unshrunken `DESeqResults`.
-#' @slot lfcShrink `list`. One or more shrunken `DESeqResults`.
+#' @slot results `list`.
+#'   One or more unshrunken `DESeqResults`.
+#' @slot lfcShrink `list`.
+#'   *Optional*. One or more shrunken `DESeqResults`. If set, must correspond to
+#'   those defined in `results`.
 #'
-#' @seealso `DESeqAnalysis`.
+#' @seealso [DESeqAnalysis()].
 #'
-#' @return `DESeqAnalysis`, which contains a `DESeqDataSet`, `DESeqTransform`,
-#'   and corresponding `DESeqResults`.
+#' @return `DESeqAnalysis`.
+#'   Contains a `DESeqDataSet`, `DESeqTransform`, and corresponding
+#'   `DESeqResults` list.
 setClass(
     Class = "DESeqAnalysis",
     slots = c(
@@ -52,46 +57,36 @@ setClass(
         results = "list",
         lfcShrink = "list"
     ),
-    prototype = list(
+    prototype = prototype(
         lfcShrink = list()
-    )
-)
-setValidity(
-    Class = "DESeqAnalysis",
-    method = function(object) {
-        # FIXME
-        return(true)
-
-        valid <- list()
-
+    ),
+    validity = function(object) {
         data <- slot(object, "data")
         transform <- slot(object, "transform")
         results <- slot(object, "results")
         lfcShrink <- slot(object, "lfcShrink")
 
-        # Require that dimnames are valid.
-        valid[["dimnames"]] <- validate(hasValidDimnames(data))
-
-        # Ensure that all objects slotted are matched.
-        valid[["matched"]] <- validate(
-            # DESeqDataSet and DESeqTransform.
+        ok <- validate(
+            # Require that dimnames are valid.
+            hasValidDimnames(data),
+            # DESeqDataSet and DESeqTransform must correspond.
             identical(dimnames(data), dimnames(transform)),
-            # DESeqDataSet and DESeqResults.
-            all(vapply(
+            # DESeqDataSet and DESeqResults must correspond.
+            all(bapply(
                 X = results,
                 FUN = function(x) {
                     identical(rownames(x), rownames(data))
-                },
-                FUN.VALUE = logical(1L)
-            ))
+                }
+            )),
+            # DESeqResults list must be named.
+            hasNames(results)
         )
+        if (!isTRUE(ok)) return(ok)
 
-        # Require that the DESeqResults list is named.
-        valid[["results"]] <- validate(hasNames(results))
-
-        # Unshrunken and shrunken DESeqResults.
+        # Unshrunken and shrunken DESeqResults must correspond, if shrunken
+        # values are optionally defined.
         if (length(lfcShrink) > 0L) {
-            valid[["lfcShrink"]] <- validate(
+            ok <- validate(
                 all(mapply(
                     unshrunken = results,
                     shrunken = lfcShrink,
@@ -101,8 +96,9 @@ setValidity(
                     SIMPLIFY = TRUE
                 ))
             )
+            if (!isTRUE(ok)) return(ok)
         }
 
-        validateS4(valid)
+        TRUE
     }
 )

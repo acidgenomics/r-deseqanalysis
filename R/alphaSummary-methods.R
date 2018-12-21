@@ -44,10 +44,10 @@ alphaSummary.DESeqDataSet <-  # nolint
         validObject(object)
         assert(
             is.numeric(alpha),
-            # containsAlpha requires scalar, so let's apply here.
+            # isAlpha requires scalar, so let's apply here.
             all(vapply(
                 X = alpha,
-                FUN = containsAlpha,
+                FUN = isAlpha,
                 FUN.VALUE = logical(1L)
             )),
             isAny(contrast, classes = c("character", "NULL")),
