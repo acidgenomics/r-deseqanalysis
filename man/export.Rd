@@ -11,7 +11,7 @@
 }
 \arguments{
 \item{x}{\code{ANY}.
-An object supporting \code{dim} to be written to disk.}
+An object supporting \link[base:dim]{dim} to be written to disk.}
 
 \item{name}{\code{character(1)}.
 Name to use on disk. If \code{NULL}, will use the name of the object instead.}
@@ -23,8 +23,8 @@ Directory path.}
 Apply gzip compression to all files.}
 
 \item{humanize}{\code{logical(1)}.
-Automatically convert gene IDs to gene symbols in the \code{rownames} and sample
-IDs to sample names in the \code{colnames}.}
+Automatically convert gene IDs to gene symbols in the row names and sample
+IDs to sample names in the column names.}
 }
 \value{
 Invisible \code{character}.
@@ -34,19 +34,19 @@ File path(s).
 Export data out of R and write to disk.
 }
 \details{
-This is a wrapper for \code{rio::export} that adds support for additional S4
+This is a wrapper for \code{\link[rio:export]{rio::export()}} that adds support for additional S4
 classes in Bioconductor.
 }
 \section{Row names}{
 
 
 
-The standard \code{rio::export} call will drop rownames when exporting to CSV. The
-readr family of functions also never write rownames. This is a \emph{really poor}
-default setting for handling genomic data, which often contain gene
-identifiers in the rownames. Here we're performing any internal tibble
-coercion step to ensure rownames are always moved to a "\code{rowname}" column in
-the CSV export.
+Some export utilities in R have a tendency to drop row names when writing to
+disk in CSV format. For example, the \href{{https://readr.tidyverse.org/}{readr}} family of functions never
+write row names by design. This is a \emph{really poor} default setting for
+handling genomic data, which often contain gene identifiers in the row names.
+Here we're performing any internal tibble coercion step to ensure row names
+are always moved to a "\code{rowname}" column in the CSV export.
 
 }
 

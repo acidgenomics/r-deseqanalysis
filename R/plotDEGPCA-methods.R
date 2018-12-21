@@ -3,7 +3,7 @@
 
 
 #' @name plotDEGPCA
-#' @inherit basejump::plotDEGPCA
+#' @inherit bioverbs::plotDEGPCA
 #' @inheritParams basejump::plotPCA
 #' @inheritParams basejump::params
 #' @inheritParams params
@@ -17,10 +17,10 @@ NULL
 
 
 
-#' @importFrom basejump plotDEGPCA
+#' @importFrom bioverbs plotDEGPCA
 #' @aliases NULL
 #' @export
-basejump::plotDEGPCA
+bioverbs::plotDEGPCA
 
 
 

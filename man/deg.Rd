@@ -5,7 +5,7 @@
 \alias{deg}
 \alias{deg,DESeqResults-method}
 \alias{deg,DESeqAnalysis-method}
-\title{Differentially Expressed Genes}
+\title{Differentially expressed genes}
 \usage{
 \S4method{deg}{DESeqResults}(object, alpha = NULL, lfcThreshold = NULL,
   direction = c("both", "up", "down"))
@@ -35,7 +35,7 @@ Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 Gene identifiers.
 }
 \description{
-Differentially Expressed Genes
+Differentially expressed genes
 }
 \examples{
 data(deseq)

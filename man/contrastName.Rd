@@ -5,7 +5,7 @@
 \alias{contrastName}
 \alias{contrastName,DESeqResults-method}
 \alias{contrastName,DESeqAnalysis-method}
-\title{Contrast Name}
+\title{Contrast name}
 \usage{
 \S4method{contrastName}{DESeqResults}(object)
 
@@ -22,7 +22,7 @@
 Contrast name.
 }
 \description{
-Contrast Name
+Contrast name
 }
 \examples{
 data(deseq)
