@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Differentially Expressed Genes — deg • DESeqAnalysis</title>
+<title>Differentially expressed genes — deg • DESeqAnalysis</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Differentially Expressed Genes — deg" />
+<meta property="og:title" content="Differentially expressed genes — deg" />
 
-<meta property="og:description" content="Differentially Expressed Genes" />
+<meta property="og:description" content="Differentially expressed genes" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -104,14 +104,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Differentially Expressed Genes</h1>
+    <h1>Differentially expressed genes</h1>
     <small class="dont-index">Source: <a href='https://github.com/steinbaugh/DESeqAnalysis/blob/master/R/deg-methods.R'><code>R/deg-methods.R</code></a></small>
     <div class="hidden name"><code>deg.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Differentially Expressed Genes</p>
+    <p>Differentially expressed genes</p>
     
     </div>
 
@@ -149,8 +149,8 @@ Plot "<code>both</code>", "<code>up</code>", or "<code>down</code>" directions.<
     </tr>
     <tr>
       <th>results</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>. Name or positive of
-<code>DESeqResults</code>.</p></td>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>.
+Name or positive of <code>DESeqResults</code>.</p></td>
     </tr>
     </table>
     
@@ -164,31 +164,7 @@ Gene identifiers.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>deg</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt;   [1] "gene427" "gene419" "gene095" "gene334" "gene323" "gene494" "gene352"
-#&gt;   [8] "gene391" "gene145" "gene078" "gene403" "gene497" "gene248" "gene004"
-#&gt;  [15] "gene285" "gene489" "gene063" "gene023" "gene148" "gene448" "gene215"
-#&gt;  [22] "gene473" "gene412" "gene060" "gene105" "gene277" "gene298" "gene317"
-#&gt;  [29] "gene291" "gene363" "gene181" "gene097" "gene166" "gene217" "gene441"
-#&gt;  [36] "gene449" "gene456" "gene364" "gene001" "gene375" "gene085" "gene321"
-#&gt;  [43] "gene235" "gene198" "gene117" "gene405" "gene378" "gene366" "gene422"
-#&gt;  [50] "gene377" "gene395" "gene439" "gene057" "gene150" "gene491" "gene206"
-#&gt;  [57] "gene460" "gene320" "gene336" "gene116" "gene444" "gene374" "gene091"
-#&gt;  [64] "gene003" "gene360" "gene270" "gene495" "gene384" "gene376" "gene388"
-#&gt;  [71] "gene394" "gene299" "gene385" "gene250" "gene333" "gene338" "gene305"
-#&gt;  [78] "gene021" "gene365" "gene209" "gene272" "gene269" "gene223" "gene498"
-#&gt;  [85] "gene133" "gene469" "gene236" "gene415" "gene470" "gene231" "gene082"
-#&gt;  [92] "gene160" "gene090" "gene355" "gene300" "gene058" "gene396" "gene039"
-#&gt;  [99] "gene142" "gene176" "gene478" "gene122" "gene417" "gene500" "gene044"
-#&gt; [106] "gene208" "gene274" "gene140" "gene214" "gene156" "gene327" "gene149"
-#&gt; [113] "gene273" "gene067" "gene358" "gene483" "gene075" "gene304" "gene411"
-#&gt; [120] "gene045" "gene315" "gene292" "gene123" "gene111" "gene141" "gene408"
-#&gt; [127] "gene342" "gene340" "gene071" "gene399" "gene143" "gene167" "gene080"
-#&gt; [134] "gene496" "gene454" "gene012" "gene468" "gene204" "gene341" "gene035"
-#&gt; [141] "gene129" "gene393" "gene447" "gene014" "gene401" "gene252" "gene022"
-#&gt; [148] "gene261" "gene283" "gene329" "gene138" "gene186" "gene265" "gene354"
-#&gt; [155] "gene147" "gene325" "gene087" "gene175" "gene418" "gene369" "gene177"
-#&gt; [162] "gene301" "gene066" "gene295" "gene486" "gene114" "gene475" "gene069"
-#&gt; [169] "gene330" "gene350" "gene428"</div></pre>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>deg</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "gene427" "gene419" "gene095" "gene334" "gene323" "gene494"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
