@@ -51,7 +51,7 @@ alphaSummary.DESeqDataSet <-  # nolint
                 FUN.VALUE = logical(1L)
             )),
             isAny(contrast, classes = c("character", "NULL")),
-            isString(name) || is.null(name)
+            isString(name, nullOK = TRUE)
         )
 
         # Either `contrast` or `name`.
