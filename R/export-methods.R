@@ -159,7 +159,7 @@ export.DESeqAnalysis <-  # nolint
     ) {
         validObject(x)
         call <- standardizeCall()
-        assert(isString(name) || is.null(name))
+        assert(isString(name, nullOK = TRUE))
         if (is.null(name)) {
             name <- as.character(call[["x"]])
         }
