@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DESeq2 Analysis Container — DESeqAnalysis • DESeqAnalysis</title>
+<title>DESeq2 differential expression analysis — DESeqAnalysis • DESeqAnalysis</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,7 +32,7 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="DESeq2 Analysis Container — DESeqAnalysis" />
+<meta property="og:title" content="DESeq2 differential expression analysis — DESeqAnalysis" />
 
 <meta property="og:description" content="Class containing all elements generated during differential expression
 analysis with DESeq2. This class is essentially a list with validity checks
@@ -68,7 +68,7 @@ DESeqDataSet." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@ DESeqDataSet." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>DESeq2 Analysis Container</h1>
+    <h1>DESeq2 differential expression analysis</h1>
     <small class="dont-index">Source: <a href='https://github.com/steinbaugh/DESeqAnalysis/blob/master/R/DESeqAnalysis.R'><code>R/DESeqAnalysis.R</code></a></small>
     <div class="hidden name"><code>DESeqAnalysis.Rd</code></div>
     </div>
@@ -132,32 +132,43 @@ to ensure <code>DESeqTransform</code> and <code>DESeqResults</code> correspond t
     </tr>
     <tr>
       <th>transform</th>
-      <td><p><code>DESeqTransform</code>.</p></td>
+      <td><p><code>DESeqTransform</code>.
+<code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/varianceStabilizingTransformation'>DESeq2::varianceStabilizingTransformation()</a></code> recommended by default.</p></td>
     </tr>
     <tr>
       <th>results</th>
-      <td><p><code>list</code>. One or more unshrunken <code>DESeqResults</code>. Assign the
-<code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>DESeq2::results</a></code> return here.</p></td>
+      <td><p><code>list</code>.
+One or more unshrunken <code>DESeqResults</code>.
+Assign the <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>DESeq2::results()</a></code> return here.</p></td>
     </tr>
     <tr>
       <th>lfcShrink</th>
-      <td><p><code>list</code>. One or more shrunken <code>DESeqResults</code>. Assign the
-<code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/lfcShrink'>DESeq2::lfcShrink</a></code> return here.</p></td>
+      <td><p><code>list</code>.
+One or more shrunken <code>DESeqResults</code>.
+Assign the <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/lfcShrink'>DESeq2::lfcShrink()</a></code> return here.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>DESeqAnalysis</code>, which contains a <code>DESeqDataSet</code>, <code>DESeqTransform</code>,
-and corresponding <code>DESeqResults</code>.</p>
+    <p><code>DESeqAnalysis</code>.
+Contains a <code>DESeqDataSet</code>, <code>DESeqTransform</code>, and corresponding
+<code>DESeqResults</code> list.</p>
     
     <h2 class="hasAnchor" id="deseqdataset"><a class="anchor" href="#deseqdataset"></a>DESeqDataSet</h2>
 
     
     <p>We recommend generating the <code>DESeqDataSet</code> by coercion from <code>bcbioRNASeq</code>
-object using <code><a href='as.html'>as(dds, "bcbioRNASeq")</a></code>. Don't use the <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/DESeqDataSet'>DESeq2::DESeqDataSet</a></code>
-or <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/DESeqDataSet'>DESeq2::DESeqDataSetFromMatrix</a></code> constructors to generate the
+object using <code><a href='as.html'>as(dds, "bcbioRNASeq")</a></code>. Don't use the <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/DESeqDataSet'>DESeq2::DESeqDataSet()</a></code>
+or <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/DESeqDataSet'>DESeq2::DESeqDataSetFromMatrix()</a></code> constructors to generate the
 <code>DESeqDataSet</code> object.</p>
+    
+    <h2 class="hasAnchor" id="deseqtransform"><a class="anchor" href="#deseqtransform"></a>DESeqTransform</h2>
+
+    
+    <p>Object containing variance-stabilized counts. We recommend slotting the
+return from either <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/varianceStabilizingTransformation'>DESeq2::varianceStabilizingTransformation()</a></code> or
+<code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/rlog'>DESeq2::rlog()</a></code>.</p>
     
     <h2 class="hasAnchor" id="deseqresults"><a class="anchor" href="#deseqresults"></a>DESeqResults</h2>
 
@@ -168,7 +179,7 @@ care of this automatically in supported methods.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>DESeqAnalysis</code>.</p></div>
+    <div class='dont-index'><p><code>DESeqAnalysis()</code>.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -199,7 +210,7 @@ care of this automatically in supported methods.</p>
     <span class='kw'>results</span> <span class='kw'>=</span> <span class='no'>results</span>,
     <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='no'>lfcShrink</span>
 )
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; DESeqAnalysis 1.22.1
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; DESeqAnalysis 1.22.2
 #&gt; transform: vst
 #&gt; contrastNames: condition B vs A
 #&gt; class: DESeqDataSet 
@@ -219,6 +230,8 @@ care of this automatically in supported methods.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#deseqdataset">DESeqDataSet</a></li>
+
+      <li><a href="#deseqtransform">DESeqTransform</a></li>
 
       <li><a href="#deseqresults">DESeqResults</a></li>
 

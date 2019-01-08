@@ -3,7 +3,7 @@
 
 
 #' @name plotDEGPCA
-#' @inherit basejump::plotDEGPCA
+#' @inherit bioverbs::plotDEGPCA
 #' @inheritParams basejump::plotPCA
 #' @inheritParams basejump::params
 #' @inheritParams params
@@ -17,10 +17,10 @@ NULL
 
 
 
-#' @importFrom basejump plotDEGPCA
+#' @importFrom bioverbs plotDEGPCA
 #' @aliases NULL
 #' @export
-basejump::plotDEGPCA
+bioverbs::plotDEGPCA
 
 
 
@@ -49,7 +49,7 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
             matchInterestingGroups(dt, interestingGroups)
 
         alpha <- metadata(res)[["alpha"]]
-        assert(containsAlpha(alpha))
+        assert(isAlpha(alpha))
 
         lfcThreshold <- metadata(res)[["lfcThreshold"]]
         assert(
@@ -60,7 +60,7 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
         # Get the character vector of DEGs.
         deg <- deg(res, direction = direction)
         if (!hasLength(deg)) {
-            message("There are no DEGs to plot. Skipping.")
+            warning("There are no DEGs to plot. Skipping.", call. = FALSE)
             return(invisible())
         }
 

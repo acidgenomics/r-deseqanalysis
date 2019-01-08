@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Differential Expression Results Tables — resultsTables • DESeqAnalysis</title>
+<title>Results tables — resultsTables • DESeqAnalysis</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,10 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Differential Expression Results Tables — resultsTables" />
+<meta property="og:title" content="Results tables — resultsTables" />
 
-<meta property="og:description" content="Generate tables summarizing the differential expression, with subsets for
-differentially expressed genes (DEGs)." />
+<meta property="og:description" content="Results tables" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,7 +65,7 @@ differentially expressed genes (DEGs)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -105,21 +104,18 @@ differentially expressed genes (DEGs)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Differential Expression Results Tables</h1>
-    <small class="dont-index">Source: <a href='https://github.com/steinbaugh/DESeqAnalysis/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/steinbaugh/DESeqAnalysis/blob/master/R/resultsTables-methods.R'><code>R/resultsTables-methods.R</code></a></small>
+    <h1>Results tables</h1>
+    <small class="dont-index">Source: <a href='https://github.com/steinbaugh/DESeqAnalysis/blob/master/R/resultsTables-methods.R'><code>R/resultsTables-methods.R</code></a></small>
     <div class="hidden name"><code>resultsTables.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Generate tables summarizing the differential expression, with subsets for
-differentially expressed genes (DEGs).</p>
+    <p>Results tables</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>resultsTables</span>(<span class='no'>object</span>, <span class='no'>...</span>)
-
-<span class='co'># S4 method for DESeqAnalysis</span>
+    <pre class="usage"><span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>resultsTables</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>rowData</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>counts</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"tbl_df"</span>, <span class='st'>"DataFrameList"</span>))</pre>
     
@@ -131,38 +127,40 @@ differentially expressed genes (DEGs).</p>
       <td><p>Object.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Additional arguments.</p></td>
-    </tr>
-    <tr>
       <th>results</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>. Name or positive of
-<code>DESeqResults</code>.</p></td>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>.
+Name or positive of <code>DESeqResults</code>.</p></td>
     </tr>
     <tr>
       <th>rowData</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>. Join the row annotations.</p></td>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
+Join the row annotations.</p></td>
     </tr>
     <tr>
       <th>counts</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>. Join the size-factor adjusted normalized counts.</p></td>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
+Join the size-factor adjusted normalized counts.</p></td>
     </tr>
     <tr>
       <th>return</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>. Type of data frame to return in the list. Uses
-<code>match.arg</code>. Note that <code>DataFrame</code> option will return with rownames,
-whereas <code>tbl_df</code> option will return with <code>"rowname"</code> column.</p></td>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>.
+Type of data frame to return in the list. Uses
+<a href='https://www.rdocumentation.org/packages/base/topics/match.arg'>match.arg()</a>. Note that <code>DataFrame</code> option will return
+with row names, whereas <code>tbl_df</code> option will return with <code>"rowname"</code>
+column.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>list</code>. Named list containing subsets of <code>DESeqResults</code>.</p>
+    <p><code>list</code>.
+Named list containing subsets of <code>DESeqResults</code>.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>DEG tables (i.e. everything except the <code>all</code> table), are arranged by adjusted
-<em>P</em> value.</p>
+    <p>Generate tables summarizing the differential expression, with subsets for
+differentially expressed genes (DEGs). DEG tables (i.e. everything except the
+<code>all</code> table), are arranged by adjusted <em>P</em> value.</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
@@ -186,7 +184,7 @@ used for overrepresentation testing but should NOT be used for GSEA.</p></li>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsTables</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>84 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>87 downregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; $all
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsTables</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>84 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>87 downregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; $all
 #&gt; <span style='color: #949494;'># A tibble: 500 x 23</span><span>
 #&gt;    rowname baseMean log2FoldChange lfcSE   stat  pvalue    padj geneID geneName
 #&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   
@@ -200,7 +198,7 @@ used for overrepresentation testing but should NOT be used for GSEA.</p></li>
 #&gt; </span><span style='color: #BCBCBC;'> 8</span><span> gene008   64.1           0.605  0.394  1.53  1.25</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> 2.64</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> ENSG0… FUCA2   
 #&gt; </span><span style='color: #BCBCBC;'> 9</span><span> gene009    5.12          0.286  0.522  0.549 5.83</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> 7.41</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> ENSG0… GCLC    
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span> gene010    0.728        -</span><span style='color: #BB0000;'>0.052</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span> 0.376 -</span><span style='color: #BB0000;'>0.140</span><span> 8.88</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> 9.37</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> ENSG0… NFYA    
-#&gt; </span><span style='color: #949494;'># ... with 490 more rows, and 14 more variables: geneBiotype </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>,
+#&gt; </span><span style='color: #949494;'># … with 490 more rows, and 14 more variables: geneBiotype </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>,
 #&gt; #   broadClass </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>, sample01 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample02 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample03 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
 #&gt; #   sample04 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample05 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample06 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample07 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
 #&gt; #   sample08 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample09 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample10 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample11 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
@@ -220,7 +218,7 @@ used for overrepresentation testing but should NOT be used for GSEA.</p></li>
 #&gt; </span><span style='color: #BCBCBC;'> 8</span><span> gene403     47.9           1.69 0.321  5.25 1.55</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 7</span><span> 6.60</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-6</span><span> ENSG0… RUNX3   
 #&gt; </span><span style='color: #BCBCBC;'> 9</span><span> gene248    153.            1.30 0.252  5.16 2.47</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 7</span><span> 9.44</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-6</span><span> ENSG0… METTL13 
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span> gene489    155.            1.52 0.323  4.71 2.44</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 6</span><span> 7.59</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span> ENSG0… ARHGAP31
-#&gt; </span><span style='color: #949494;'># ... with 74 more rows, and 14 more variables: geneBiotype </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>,
+#&gt; </span><span style='color: #949494;'># … with 74 more rows, and 14 more variables: geneBiotype </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>,
 #&gt; #   broadClass </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>, sample01 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample02 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample03 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
 #&gt; #   sample04 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample05 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample06 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample07 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
 #&gt; #   sample08 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample09 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample10 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample11 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
@@ -240,7 +238,7 @@ used for overrepresentation testing but should NOT be used for GSEA.</p></li>
 #&gt; </span><span style='color: #BCBCBC;'> 8</span><span> gene148    238.           -</span><span style='color: #BB0000;'>1.12</span><span> 0.243 -</span><span style='color: #BB0000;'>4.62</span><span> 3.83</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 6</span><span> 1.00</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 4</span><span> ENSG0… TBXA2R  
 #&gt; </span><span style='color: #BCBCBC;'> 9</span><span> gene473     12.8          -</span><span style='color: #BB0000;'>2.11</span><span> 0.457 -</span><span style='color: #BB0000;'>4.53</span><span> 5.90</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 6</span><span> 1.33</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 4</span><span> ENSG0… SNX1    
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span> gene412    152.           -</span><span style='color: #BB0000;'>1.18</span><span> 0.265 -</span><span style='color: #BB0000;'>4.44</span><span> 8.94</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 6</span><span> 1.93</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 4</span><span> ENSG0… AQR     
-#&gt; </span><span style='color: #949494;'># ... with 77 more rows, and 14 more variables: geneBiotype </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>,
+#&gt; </span><span style='color: #949494;'># … with 77 more rows, and 14 more variables: geneBiotype </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>,
 #&gt; #   broadClass </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>, sample01 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample02 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample03 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
 #&gt; #   sample04 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample05 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample06 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample07 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
 #&gt; #   sample08 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample09 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample10 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample11 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
@@ -260,7 +258,7 @@ used for overrepresentation testing but should NOT be used for GSEA.</p></li>
 #&gt; </span><span style='color: #BCBCBC;'> 8</span><span> gene391    901.            1.58 0.257  6.16 7.30</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span><span> 4.54</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 8</span><span> ENSG0… PRDM11  
 #&gt; </span><span style='color: #BCBCBC;'> 9</span><span> gene145     93.3           2.00 0.351  5.68 1.36</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 8</span><span> 7.53</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 7</span><span> ENSG0… USH1C   
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span> gene078     87.0           1.66 0.300  5.51 3.50</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 8</span><span> 1.74</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 6</span><span> ENSG0… HOXA11  
-#&gt; </span><span style='color: #949494;'># ... with 161 more rows, and 14 more variables: geneBiotype </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>,
+#&gt; </span><span style='color: #949494;'># … with 161 more rows, and 14 more variables: geneBiotype </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>,
 #&gt; #   broadClass </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>, sample01 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample02 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample03 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
 #&gt; #   sample04 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample05 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample06 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample07 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
 #&gt; #   sample08 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample09 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample10 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample11 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,

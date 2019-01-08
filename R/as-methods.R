@@ -1,10 +1,12 @@
+#' Force an object to belong to a class
+#'
 #' @name as
 #' @aliases coerce
+#' @author Michael Steinbaugh
+#' @exportMethod coerce
 #' @importFrom methods coerce
 #' @inherit methods::as
 #' @inheritParams coerce
-#' @exportMethod coerce
-#' @author Michael Steinbaugh
 #'
 #' @section DESeqAnalysis:
 #'
@@ -12,9 +14,9 @@
 #'
 #' - `DESeqDataSet`.
 #' - `DESeqTransform`.
-#' - `DESeqResults`. Extracts the first results slotted. Note that this
-#'   corresponds to results containing log2 fold change (LFC) values that
-#'   *have not been shrunken* using `DESeq2::lfcShrink`.
+#' - `DESeqResults`. Extracts the first results slotted.
+#'   Note that this corresponds to results containing log2 fold change (LFC)
+#'   values that *have not been shrunken* using [DESeq2::lfcShrink()].
 #'
 #' @examples
 #' data(deseq)

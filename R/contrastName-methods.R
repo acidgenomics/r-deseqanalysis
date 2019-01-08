@@ -1,5 +1,5 @@
 #' @name contrastName
-#' @inherit basejump::contrastName
+#' @inherit bioverbs::contrastName
 #' @inheritParams basejump::params
 #' @inheritParams params
 #' @examples
@@ -15,10 +15,10 @@ NULL
 
 
 
-#' @importFrom basejump contrastName
+#' @importFrom bioverbs contrastName
 #' @aliases NULL
 #' @export
-basejump::contrastName
+bioverbs::contrastName
 
 
 

@@ -1,7 +1,29 @@
+# TODO Documentation will error if we attempt `inheritParams brio::export`
+# because of the link to `dim()`. Roxygen currently has problems inheriting Rd
+# files that contain links.
+# This is a bug in roxygen:
+# https://github.com/klutometis/roxygen/issues/778
+
+# FIXME Need to rethink the humanize support step here.
+# Make `humanize()` a separate function call, and add method support.
+# Dispatch onto SummarizedExperiment for DESeqDataSet and DESeqTransform.
+# Need to define an internal humanize method here for DESeqResults.
+
+
+
 #' @name export
-#' @inherit basejump::export
-#' @inheritParams basejump::params
+#' @inherit bioverbs::export
 #' @inheritParams params
+#' @inheritParams brio::export
+#'
+#' @param humanize `logical(1)`.
+#'   Make the gene and sample names human readable.
+#'
+#'   - Gene names require `geneName` column to be defined in
+#'     [`rowData()`][SummarizedExperiment::rowData].
+#'   - Sample names require `sampleName` column to be defined in
+#'     [`colData()`][SummarizedExperiment::colData].
+#'
 #' @examples
 #' data(deseq)
 #'
@@ -11,39 +33,42 @@ NULL
 
 
 
-#' @importFrom basejump export
+#' @importFrom bioverbs export
 #' @aliases NULL
 #' @export
-basejump::export
+bioverbs::export
 
 
 
 .exportDESeqDataSet <- function(x, dir, compress, humanize) {
-    # Using the inherited SummarizedExperiment method here.
-    assert(is(x, "DESeqAnalysis"))
-    message("Exporting DESeqDataSet.")
-    export(
-        x = as(x, "DESeqDataSet"),
-        name = "data",
-        dir = dir,
-        compress = compress,
-        humanize = humanize
+    assert(
+        is(x, "DESeqAnalysis"),
+        isFlag(humanize)
     )
+    message("Exporting DESeqDataSet.")
+    dds <- as(x, "DESeqDataSet")
+    if (isTRUE(humanize)) {
+        dds <- humanize(dds)
+    }
+    # Using the inherited SummarizedExperiment method here.
+    export(x = dds, name = "data", dir = dir, compress = compress)
 }
 
 
 
 .exportDESeqTransform <- function(x, dir, compress, humanize) {
     # Using the inherited SummarizedExperiment method here.
-    assert(is(x, "DESeqAnalysis"))
-    message("Exporting DESeqTransform.")
-    export(
-        x = as(x, "DESeqTransform"),
-        name = "transform",
-        dir = dir,
-        compress = compress,
-        humanize = humanize
+    assert(
+        is(x, "DESeqAnalysis"),
+        isFlag(humanize)
     )
+    # Note the extra line break in message.
+    message("\nExporting DESeqTransform.")
+    dt <- as(x, "DESeqDataSet")
+    if (isTRUE(humanize)) {
+        dt <- humanize(dt)
+    }
+    export(x = dt, name = "transform", dir = dir, compress = compress)
 }
 
 
@@ -80,7 +105,7 @@ basejump::export
         return(NULL)
     }
 
-    message(paste0("Exporting ", slotName, "."))
+    message(paste0("\nExporting ", slotName, "."))
     mapply(
         name = names(list),
         x = list,
@@ -112,6 +137,7 @@ basejump::export
 # NOTE: This step picks shrunken LFCs over unshrunken if slotted.
 # NOTE: We don't need to support humanize here because `geneName` is required.
 .exportResultsTables <- function(x, dir, compress) {
+    message("\nExporting results tables.")
     assert(is(x, "DESeqAnalysis"))
     dir <- file.path(dir, "resultsTables")
     resultsNames <- names(x@results)
@@ -158,7 +184,7 @@ export.DESeqAnalysis <-  # nolint
     ) {
         validObject(x)
         call <- standardizeCall()
-        assert(isString(name) || is.null(name))
+        assert(isString(name, nullOK = TRUE))
         if (is.null(name)) {
             name <- as.character(call[["x"]])
         }
