@@ -5,7 +5,7 @@
 \alias{deg}
 \alias{deg,DESeqResults-method}
 \alias{deg,DESeqAnalysis-method}
-\title{Differentially Expressed Genes}
+\title{Differentially expressed genes}
 \usage{
 \S4method{deg}{DESeqResults}(object, alpha = NULL, lfcThreshold = NULL,
   direction = c("both", "up", "down"))
@@ -27,19 +27,20 @@ the cutoff defined in the object.}
 \item{direction}{\code{character(1)}.
 Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
-\code{DESeqResults}.}
+\item{results}{\code{character(1)} or \code{integer(1)}.
+Name or positive of \code{DESeqResults}.}
 }
 \value{
 \code{character}.
 Gene identifiers.
 }
 \description{
-Differentially Expressed Genes
+Differentially expressed genes
 }
 \examples{
 data(deseq)
 
 ## DESeqAnalysis ====
-deg(deseq, results = 1L)
+x <- deg(deseq, results = 1L)
+head(x)
 }

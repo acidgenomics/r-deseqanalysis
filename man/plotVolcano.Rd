@@ -4,7 +4,7 @@
 \name{plotVolcano}
 \alias{plotVolcano}
 \alias{plotVolcano,DESeqAnalysis-method}
-\title{Plot Volcano}
+\title{Volcano plot}
 \usage{
 \S4method{plotVolcano}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
   ylim = 1e-10, genes = NULL, ntop = 0L, direction = c("both",
@@ -15,14 +15,15 @@
 \arguments{
 \item{object}{Object.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
-\code{DESeqResults}.}
+\item{results}{\code{character(1)} or \code{integer(1)}.
+Name or positive of \code{DESeqResults}.}
 
-\item{lfcShrink}{\code{logical(1)}. Use shrunken log2 fold change (LFC) values.}
+\item{lfcShrink}{\code{logical(1)}.
+Use shrunken log2 fold change (LFC) values.}
 
-\item{ylim}{\code{scalar numeric}. Upper boundary limit for y-axis. Helps preserve
-dynamic range for gene sets containing highly significant P values (e.g.
-\code{1e-100}).}
+\item{ylim}{\code{numeric(1)}.
+Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets
+containing highly significant P values (e.g. \code{1e-100}).}
 
 \item{genes}{\code{character}.
 Gene identifiers. It is considered better practice to input the stable gene
@@ -43,17 +44,19 @@ Color names for labeling upregulated and downregulated genes. Also supports
 a character string for labeling DEGs with the same color, regardless of
 direction.}
 
-\item{histograms}{\code{logical(1)}. Show LFC and P value histograms.}
+\item{histograms}{\code{logical(1)}.
+Show LFC and P value histograms.}
 
 \item{return}{\code{character(1)}.
-Return type. Uses \code{match.arg} internally and defaults to the first argument
-in the \code{character} vector.}
+Return type.
+Uses \link[base:match.arg]{match.arg()} internally and defaults to the first
+argument in the \code{character} vector.}
 }
 \value{
 \code{ggplot}.
 }
 \description{
-Plot Volcano
+Volcano plot
 }
 \examples{
 data(deseq)
@@ -101,8 +104,7 @@ plotVolcano(
 plotVolcano(deseq, results = 1L, genes = genes)
 }
 \seealso{
-This method is an updated variant of
-\code{CHBUtils::volcano_density_plot}.
+Modification of \code{CHBUtils::volcano_density_plot()}.
 }
 \author{
 Michael Steinbaugh, John Hutchinson, Lorena Pantano

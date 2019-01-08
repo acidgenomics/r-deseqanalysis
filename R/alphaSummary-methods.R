@@ -1,17 +1,17 @@
 #' @name alphaSummary
 #' @author Michael Steinbaugh, Lorena Patano
-#' @inherit basejump::alphaSummary
+#' @inherit bioverbs::alphaSummary
+#' @inheritParams DESeq2::results
+#' @inheritParams basejump::params
 #'
 #' @details
 #' Use either `contrast` or `name` to specify the desired contrast.
 #'
-#' @inheritParams basejump::params
-#' @inheritParams DESeq2::results
 #' @param alpha `numeric`. Multiple alpha cutoffs.
 #'
 #' @seealso
-#' - `DESeq2::results`.
-#' - `DESeq2::resultsNames`.
+#' - `DESeq2::results()`.
+#' - `DESeq2::resultsNames()`.
 #'
 #' @examples
 #' data(deseq)
@@ -27,10 +27,10 @@ NULL
 
 
 
-#' @importFrom basejump alphaSummary
+#' @importFrom bioverbs alphaSummary
 #' @aliases NULL
 #' @export
-basejump::alphaSummary
+bioverbs::alphaSummary
 
 
 
@@ -44,14 +44,14 @@ alphaSummary.DESeqDataSet <-  # nolint
         validObject(object)
         assert(
             is.numeric(alpha),
-            # containsAlpha requires scalar, so let's apply here.
+            # isAlpha requires scalar, so let's apply here.
             all(vapply(
                 X = alpha,
-                FUN = containsAlpha,
+                FUN = isAlpha,
                 FUN.VALUE = logical(1L)
             )),
             isAny(contrast, classes = c("character", "NULL")),
-            isString(name) || is.null(name)
+            isString(name, nullOK = TRUE)
         )
 
         # Either `contrast` or `name`.

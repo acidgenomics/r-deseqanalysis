@@ -3,7 +3,8 @@
 
 
 #' @name plotDEGHeatmap
-#' @inherit basejump::plotHeatmap
+#' @inherit bioverbs::plotDEGHeatmap
+#' @inheritParams basejump::plotHeatmap
 #' @inheritParams basejump::params
 #' @inheritParams params
 #'
@@ -16,10 +17,10 @@ NULL
 
 
 
-#' @importFrom basejump plotDEGHeatmap
+#' @importFrom bioverbs plotDEGHeatmap
 #' @aliases NULL
 #' @export
-basejump::plotDEGHeatmap
+bioverbs::plotDEGHeatmap
 
 
 
@@ -55,7 +56,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
             matchInterestingGroups(dt, interestingGroups)
 
         alpha <- metadata(res)[["alpha"]]
-        assert(containsAlpha(alpha))
+        assert(isAlpha(alpha))
 
         lfcThreshold <- metadata(res)[["lfcThreshold"]]
         assert(
@@ -66,7 +67,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         # Get the character vector of DEGs.
         deg <- deg(res, direction = direction)
         if (!hasLength(deg)) {
-            message("There are no DEGs to plot. Skipping.")
+            warning("There are no DEGs to plot. Skipping.", call. = FALSE)
             return(invisible())
         }
 

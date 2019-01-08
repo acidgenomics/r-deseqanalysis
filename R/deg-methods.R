@@ -1,13 +1,21 @@
 #' @name deg
-#' @inherit basejump::deg
+#' @inherit bioverbs::deg
 #' @inheritParams basejump::params
 #' @inheritParams params
 #' @examples
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' deg(deseq, results = 1L)
+#' x <- deg(deseq, results = 1L)
+#' head(x)
 NULL
+
+
+
+#' @importFrom bioverbs deg
+#' @aliases NULL
+#' @export
+bioverbs::deg
 
 
 
@@ -27,7 +35,7 @@ deg.DESeqResults <-  # nolint
         } else {
             warning("Applying a post hoc alpha cutoff is not recommended.")
         }
-        assert(containsAlpha(alpha))
+        assert(isAlpha(alpha))
         if (is.null(lfcThreshold)) {
             lfcThreshold <- metadata(object)[["lfcThreshold"]]
         } else {
@@ -69,20 +77,21 @@ deg.DESeqResults <-  # nolint
         data <- arrange(data, !!alphaCol)
 
         deg <- pull(data, "rowname")
+        status <- paste(
+            length(deg),
+            switch(
+                EXPR = direction,
+                up = "upregulated",
+                down = "downregulated",
+                both = "differentially expressed"
+            ),
+            "genes detected."
+        )
 
         if (!hasLength(deg)) {
-            warning("No significant DEGs detected.")
+            warning(status, call. = FALSE)
         } else {
-            message(paste(
-                length(deg),
-                switch(
-                    EXPR = direction,
-                    up = "upregulated",
-                    down = "downregulated",
-                    both = "differentially expressed"
-                ),
-                "genes detected."
-            ))
+            message(status)
         }
 
         deg

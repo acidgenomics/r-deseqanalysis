@@ -1,34 +1,40 @@
-#' Differential Expression Results Tables
+# FIXME Add a Filter step here to remove empty.
+
+
+#' @name resultsTables
+#' @inherit bioverbs::resultsTables
+#' @inheritParams basejump::params
+#' @inheritParams params
 #'
+#' @details
 #' Generate tables summarizing the differential expression, with subsets for
-#' differentially expressed genes (DEGs).
-#'
-#' DEG tables (i.e. everything except the `all` table), are arranged by adjusted
-#' *P* value.
+#' differentially expressed genes (DEGs). DEG tables (i.e. everything except the
+#' `all` table), are arranged by adjusted *P* value.
 #'
 #' @note Do not apply post hoc log fold change cutoffs.
 #'
 #' @section Tables:
 #'
 #' - `all`: All genes, including genes without an adjusted *P* value. This table
-#' is unmodified, and the rows have not been re-arranged or subset. It is
-#' suitable for gene set enrichment analysis (GSEA).
+#'   is unmodified, and the rows have not been re-arranged or subset. It is
+#'   suitable for gene set enrichment analysis (GSEA).
 #' - `up`: Upregulated genes.
 #' - `down`: Downregulated genes.
 #' - `both`: Bi-directional DEGs (up- and down-regulated). This table can be
 #'   used for overrepresentation testing but should NOT be used for GSEA.
 #'
-#' @name resultsTables
-#' @inheritParams basejump::params
-#' @inheritParams params
+#' @param rowData `logical(1)`.
+#'   Join the row annotations.
+#' @param counts `logical(1)`.
+#'   Join the size-factor adjusted normalized counts.
+#' @param return `character(1)`.
+#'   Type of data frame to return in the list. Uses
+#'   [match.arg()][base::match.arg]. Note that `DataFrame` option will return
+#'   with row names, whereas `tbl_df` option will return with `"rowname"`
+#'   column.
 #'
-#' @param rowData `logical(1)`. Join the row annotations.
-#' @param counts `logical(1)`. Join the size-factor adjusted normalized counts.
-#' @param return `character(1)`. Type of data frame to return in the list. Uses
-#'   `match.arg`. Note that `DataFrame` option will return with rownames,
-#'   whereas `tbl_df` option will return with `"rowname"` column.
-#'
-#' @return `list`. Named list containing subsets of `DESeqResults`.
+#' @return `list`.
+#' Named list containing subsets of `DESeqResults`.
 #'
 #' @examples
 #' data(deseq)
@@ -37,6 +43,13 @@
 #' x <- resultsTables(deseq, results = 1L)
 #' print(x)
 NULL
+
+
+
+#' @importFrom bioverbs resultsTables
+#' @aliases NULL
+#' @export
+bioverbs::resultsTables
 
 
 
@@ -62,9 +75,19 @@ resultsTables.DESeqAnalysis <-  # nolint
         dds <- convertSampleIDsToNames(dds)
 
         # Get the DEG character vectors, which we'll use against the rownames.
+        both <- deg(res, direction = "both")
+
+        # Early return with warning if there are not DEGs.
+        if (!hasLength(both)) {
+            warning(paste(
+                deparse(results),
+                "does not contain any DEGs. Skipping."
+            ), call. = FALSE)
+            return(invisible())
+        }
+
         up <- deg(res, direction = "up")
         down <- deg(res, direction = "down")
-        both <- deg(res, direction = "both")
 
         # Prepare all genes data using S4 DataFrame.
         all <- as(res, "DataFrame")
@@ -120,6 +143,9 @@ resultsTables.DESeqAnalysis <-  # nolint
             down = all[down, , drop = FALSE],
             both = all[both, , drop = FALSE]
         )
+
+        # Filter out empty up/down tibbles.
+        out <- Filter(hasRows, out)
 
         switch(
             EXPR = return,

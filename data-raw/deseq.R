@@ -2,14 +2,14 @@
 #' 2018-12-12
 
 # FIXME Name results...otherwise the object won't return valid.
-# Assign with `makeNames()`.
+# Assign with `makeNames`.
 
 library(pryr)
 library(basejump)
 library(DESeq2)
 
 # Restrict to 2 MB.
-# Use `pryr::object_size()` instead of `utils::object.size()`.
+# Use `pryr::object_size` instead of `utils::object.size`.
 limit <- structure(2e6, class = "object_size")
 
 # DESeqDataSet

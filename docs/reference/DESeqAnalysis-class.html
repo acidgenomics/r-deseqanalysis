@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DESeq2 Analysis Container — DESeqAnalysis-class • DESeqAnalysis</title>
+<title>DESeq2 differential expression analysis — DESeqAnalysis-class • DESeqAnalysis</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,7 +32,7 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="DESeq2 Analysis Container — DESeqAnalysis-class" />
+<meta property="og:title" content="DESeq2 differential expression analysis — DESeqAnalysis-class" />
 
 <meta property="og:description" content="Class containing all elements generated during differential expression
 analysis with DESeq2. This class is essentially a list with validity checks
@@ -68,7 +68,7 @@ DESeqDataSet." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@ DESeqDataSet." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>DESeq2 Analysis Container</h1>
+    <h1>DESeq2 differential expression analysis</h1>
     <small class="dont-index">Source: <a href='https://github.com/steinbaugh/DESeqAnalysis/blob/master/R/AllClasses.R'><code>R/AllClasses.R</code></a></small>
     <div class="hidden name"><code>DESeqAnalysis-class.Rd</code></div>
     </div>
@@ -124,8 +124,9 @@ to ensure <code>DESeqTransform</code> and <code>DESeqResults</code> correspond t
         
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>DESeqAnalysis</code>, which contains a <code>DESeqDataSet</code>, <code>DESeqTransform</code>,
-and corresponding <code>DESeqResults</code>.</p>
+    <p><code>DESeqAnalysis</code>.
+Contains a <code>DESeqDataSet</code>, <code>DESeqTransform</code>, and corresponding
+<code>DESeqResults</code> list.</p>
     
     <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
 
@@ -133,17 +134,27 @@ and corresponding <code>DESeqResults</code>.</p>
     <dl class='dl-horizontal'>
 <dt><code>data</code></dt><dd><p><code>DESeqDataSet</code>.</p></dd>
     <dt><code>transform</code></dt><dd><p><code>DESeqTransform</code>.</p></dd>
-    <dt><code>results</code></dt><dd><p><code>list</code>. One or more unshrunken <code>DESeqResults</code>.</p></dd>
-    <dt><code>lfcShrink</code></dt><dd><p><code>list</code>. One or more shrunken <code>DESeqResults</code>.</p></dd>
+    <dt><code>results</code></dt><dd><p><code>list</code>.
+One or more unshrunken <code>DESeqResults</code>.</p></dd>
+    <dt><code>lfcShrink</code></dt><dd><p><code>list</code>.
+<em>Optional</em>. One or more shrunken <code>DESeqResults</code>. If set, must correspond to
+those defined in <code>results</code>.</p></dd>
 </dl>
     
     <h2 class="hasAnchor" id="deseqdataset"><a class="anchor" href="#deseqdataset"></a>DESeqDataSet</h2>
 
     
     <p>We recommend generating the <code>DESeqDataSet</code> by coercion from <code>bcbioRNASeq</code>
-object using <code><a href='as.html'>as(dds, "bcbioRNASeq")</a></code>. Don't use the <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/DESeqDataSet'>DESeq2::DESeqDataSet</a></code>
-or <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/DESeqDataSet'>DESeq2::DESeqDataSetFromMatrix</a></code> constructors to generate the
+object using <code><a href='as.html'>as(dds, "bcbioRNASeq")</a></code>. Don't use the <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/DESeqDataSet'>DESeq2::DESeqDataSet()</a></code>
+or <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/DESeqDataSet'>DESeq2::DESeqDataSetFromMatrix()</a></code> constructors to generate the
 <code>DESeqDataSet</code> object.</p>
+    
+    <h2 class="hasAnchor" id="deseqtransform"><a class="anchor" href="#deseqtransform"></a>DESeqTransform</h2>
+
+    
+    <p>Object containing variance-stabilized counts. We recommend slotting the
+return from either <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/varianceStabilizingTransformation'>DESeq2::varianceStabilizingTransformation()</a></code> or
+<code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/rlog'>DESeq2::rlog()</a></code>.</p>
     
     <h2 class="hasAnchor" id="deseqresults"><a class="anchor" href="#deseqresults"></a>DESeqResults</h2>
 
@@ -154,7 +165,7 @@ care of this automatically in supported methods.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>DESeqAnalysis</code>.</p></div>
+    <div class='dont-index'><p><code><a href='DESeqAnalysis.html'>DESeqAnalysis()</a></code>.</p></div>
     
 
   </div>
@@ -167,6 +178,8 @@ care of this automatically in supported methods.</p>
       <li><a href="#slots">Slots</a></li>
 
       <li><a href="#deseqdataset">DESeqDataSet</a></li>
+
+      <li><a href="#deseqtransform">DESeqTransform</a></li>
 
       <li><a href="#deseqresults">DESeqResults</a></li>
 

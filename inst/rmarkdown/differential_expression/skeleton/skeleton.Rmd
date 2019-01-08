@@ -1,0 +1,144 @@
+---
+params:
+  title: "DESeq2 differential expression analysis"
+  object_file: "data/YYYY-MM-DD/object.rds"
+  data_dir: !r file.path("data", Sys.Date())
+  output_dir: !r file.path("results", Sys.Date(), "differential_expression")
+title: "`r params$title`"
+author: "`r getOption('author')`"
+date: "`r Sys.Date()`"
+bibliography: bibliography.bib
+---
+
+```{r setup, cache=FALSE, message=FALSE}
+# Last modified 2018-12-13
+library(DESeqAnalysis)
+prepareTemplate()
+source("_setup.R")
+```
+
+```{r header, child="_header.Rmd"}
+```
+
+```{r object}
+name <- basenameSansExt(params$object_file)
+object <- readRDS(file = params$object_file)
+stopifnot(is(object, "DESeqAnalysis"))
+invisible(validObject(object))
+print(object)
+```
+
+# Sample data
+
+```{r sample_data}
+object %>%
+    as("DESeqDataSet") %>%
+    sampleData() %>%
+    as.data.frame()
+```
+
+# MA plot {.tabset}
+
+An MA plot compares transformed counts on `M` (log ratio) and `A` (mean average) scales [@Yang2002-sx].
+
+```{r plot_ma}
+invisible(lapply(
+    X = seq_len(length(object@results)),
+    FUN = function(results, object) {
+        plotMA(object, results = results) %>% print()
+    },
+    object = object
+))
+```
+
+# Volcano plot {.tabset}
+
+A volcano plot compares significance (BH-adjusted *P* value) against fold change (log2) [@Cui2003-rn; @Li2014-ll]. Genes in the green box with text labels have an adjusted *P* value are likely to be the top candidate genes of interest.
+
+```{r plot_volcano}
+invisible(lapply(
+    X = seq_len(length(object@results)),
+    FUN = function(results, object) {
+        plotVolcano(object, results = results) %>% print()
+    },
+    object = object
+))
+```
+
+# PCA {.tabset}
+
+```{r plot_deg_pca}
+invisible(lapply(
+    X = seq_len(length(object@results)),
+    FUN = function(results, object) {
+        plotDEGPCA(
+            object = object,
+            results = results,
+            contrastSamples = TRUE
+        ) %>% print()
+    },
+    object = object
+))
+```
+
+# Heatmap {.tabset}
+
+This plot shows only differentially expressed genes on a per-sample basis. We have scaled the data by row (z-score) and used the `ward.D2` method for clustering [@Ward1963-xf].
+
+```{r plot_deg_heatmap}
+invisible(lapply(
+    X = seq_len(length(object@results)),
+    FUN = function(results, object) {
+        plotDEGHeatmap(
+            object = object,
+            results = results,
+            contrastSamples = TRUE
+        )
+    },
+    object = object
+))
+```
+
+# Top tables {.tabset}
+
+Only the top up- and down-regulated genes (arranged by log2 fold change) are shown.
+
+```{r top_tables, results="asis"}
+invisible(lapply(
+    X = seq_len(length(object@results)),
+    FUN = function(results, object) {
+        topTables(object, results = results)
+    },
+    object = object
+))
+```
+
+# Export
+
+Here we are exporting the data stored inside our `DESeqDataSet`, `DESeqTransform`, and `DESeqResults` objects (results = unshrunken LFC; lfcShrink = shrunken LFC), along with the differentially expressed gene (DEG) results tables (resultsTables).
+
+The DEG results tables are sorted by BH-adjusted P value (except for the "all" file, which is unmodified), and contain the following columns:
+
+- `baseMean`: Mean of the normalized counts per gene for all samples.
+- `log2FoldChange`: log2 fold change.
+- `lfcSE`: log2 standard error.
+- `stat`: Wald statistic.
+- `pvalue`: Walt test *P* value.
+- `padj`: BH adjusted Wald test *P* value (corrected for multiple comparisons; aka FDR).
+
+These files also contain genome annotation information and the size-factor adjusted normalized counts stored inside the `DESeqDataSet` used to perform the differential expression analysis.
+
+Note that `colData` files contain annotations corresponding to the columns (i.e. samples) and the `rowData` files contain annotations corresponding to the rows (i.e. genes). You can obtain gene-to-symbol mappings using this `rowData` file, for example.
+
+```{r export}
+export(
+    x = object,
+    name = name,
+    dir = params$output_dir,
+    compress = FALSE,
+    humanize = FALSE
+)
+```
+
+```{r footer, child="_footer.Rmd"}
+```

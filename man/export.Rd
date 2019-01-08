@@ -10,8 +10,7 @@
   compress = FALSE, humanize = FALSE)
 }
 \arguments{
-\item{x}{\code{ANY}.
-An object supporting \code{dim} to be written to disk.}
+\item{x}{Object.}
 
 \item{name}{\code{character(1)}.
 Name to use on disk. If \code{NULL}, will use the name of the object instead.}
@@ -23,39 +22,20 @@ Directory path.}
 Apply gzip compression to all files.}
 
 \item{humanize}{\code{logical(1)}.
-Automatically convert gene IDs to gene symbols in the \code{rownames} and sample
-IDs to sample names in the \code{colnames}.}
-}
-\value{
-Invisible \code{character}.
-File path(s).
+Make the gene and sample names human readable.
+\itemize{
+\item Gene names require \code{geneName} column to be defined in
+\code{\link[SummarizedExperiment:rowData]{rowData()}}.
+\item Sample names require \code{sampleName} column to be defined in
+\code{\link[SummarizedExperiment:colData]{colData()}}.
+}}
 }
 \description{
 Export data out of R and write to disk.
 }
-\details{
-This is a wrapper for \code{rio::export} that adds support for additional S4
-classes in Bioconductor.
-}
-\section{Row names}{
-
-
-
-The standard \code{rio::export} call will drop rownames when exporting to CSV. The
-readr family of functions also never write rownames. This is a \emph{really poor}
-default setting for handling genomic data, which often contain gene
-identifiers in the rownames. Here we're performing any internal tibble
-coercion step to ensure rownames are always moved to a "\code{rowname}" column in
-the CSV export.
-
-}
-
 \examples{
 data(deseq)
 
 ## DESeqAnalysis ====
 export(deseq, dir = "example")
-}
-\seealso{
-\code{rio::export}.
 }

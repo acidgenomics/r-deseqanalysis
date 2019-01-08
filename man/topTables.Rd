@@ -4,24 +4,25 @@
 \name{topTables}
 \alias{topTables}
 \alias{topTables,DESeqAnalysis-method}
-\title{Top Tables of Differential Expression Results}
+\title{Top tables of differentially expressed genes}
 \usage{
 \S4method{topTables}{DESeqAnalysis}(object, results, n = 10L)
 }
 \arguments{
 \item{object}{Object.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
-\code{DESeqResults}.}
+\item{results}{\code{character(1)} or \code{integer(1)}.
+Name or positive of \code{DESeqResults}.}
 
-\item{n}{\code{scalar integer}. Number of genes (per direction) to report.}
+\item{n}{\code{integer(1)}.
+Number of genes (per direction) to report.}
 }
 \value{
 \code{kable}.
 Markdown tables.
 }
 \description{
-Top Tables of Differential Expression Results
+Top tables of differentially expressed genes
 }
 \examples{
 data(deseq)

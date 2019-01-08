@@ -4,7 +4,7 @@
 \name{plotDEGHeatmap}
 \alias{plotDEGHeatmap}
 \alias{plotDEGHeatmap,DESeqAnalysis-method}
-\title{Plot Heatmap}
+\title{Differentially expressed gene heatmap}
 \usage{
 \S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results,
   contrastSamples = FALSE, direction = c("both", "up", "down"),
@@ -18,12 +18,13 @@
 \arguments{
 \item{object}{Object.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}. Name or positive of
-\code{DESeqResults}.}
+\item{results}{\code{character(1)} or \code{integer(1)}.
+Name or positive of \code{DESeqResults}.}
 
-\item{contrastSamples}{\code{logical(1)}. \strong{Experimental}. Only include the samples
-used to define the contrast passed to \code{DESeq2::results}. This setting
-will break for complex DESeq2 contrasts (e.g. interaction effect).}
+\item{contrastSamples}{\code{logical(1)}.
+\strong{Experimental}. Only include the samples used to define the contrast
+passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
+contrasts (e.g. interaction effect).}
 
 \item{direction}{\code{character(1)}.
 Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
@@ -63,10 +64,10 @@ Hexadecimal color function or values to use for plot.
 We generally recommend these hexadecimal functions from the viridis
 package:
 \itemize{
-\item \code{viridis::viridis} (\emph{default}).
-\item \code{viridis::inferno}.
-\item \code{viridis::magma}.
-\item \code{viridis::plasma}.
+\item \code{viridis::viridis()} (\emph{default}).
+\item \code{viridis::inferno()}.
+\item \code{viridis::magma()}.
+\item \code{viridis::plasma()}.
 }
 
 Alternatively, colors can be defined manually using hexadecimal values
@@ -85,85 +86,22 @@ Border color. Disabled by default for improved aesthetics.}
 \item{title}{\code{character(1)} or \code{NULL}.
 Plot title.}
 
-\item{...}{Passthrough arguments to \code{pheatmap::pheatmap}.
-The argument names must be formatted in camel case, not snake case.}
-}
-\value{
-\code{pheatmap}.
+\item{...}{Additional arguments.}
 }
 \description{
-Construct a simple heatmap.
+This function is an extension of \code{\link[=plotHeatmap]{plotHeatmap()}} that is optimized for
+automatic handling differentially expressed genes, rather than requiring
+manual input of a gene vector. All of the optional parameters for
+\code{\link[=plotHeatmap]{plotHeatmap()}} are also supported by this function.
 }
-\section{Methods (by class)}{
-
-\itemize{
-\item \code{SummarizedExperiment}: Construct a correlation heatmap comparing the columns
-of the matrix.
-
-\item \code{SummarizedExperiment}: Scale the heatmap by applying quantile breaks.
+\details{
+To adjust the annotation columns, modify the
+\code{\link[SummarizedExperiment:colData]{colData()}} of the \code{counts} argument, which
+must contain a \code{SummarizedExperiment}.
 }
-}
-
-\section{Scaling}{
-
-
-
-Here we're scaling simply by calculating the standard score (z-score).
-\itemize{
-\item mu: mean.
-\item sigma: standard deviation.
-\item x: raw score (e.g. count matrix).
-\item z: standard score (z-score).
-}\preformatted{z = (x - mu) / sigma
-}
-
-See also:
-\itemize{
-\item \code{pheatmap:::scale_rows}.
-\item \code{base::scale} for additional scaling approaches.
-}
-
-}
-
-\section{Hierarchical clustering}{
-
-
-
-Row- and column-wise hierarchical clustering is performed when \code{clusterRows}
-and/or \code{clusterCols} are set to \code{TRUE}. Internally, this calls \code{hclust},
-and defaults to the Ward method.
-
-Automatic hierarchical clustering of rows and/or columns can error for some
-datasets. When this occurs, you'll likely see this error:\preformatted{Error in hclust(d, method = method) :
-NA/NaN/Inf in foreign function call
-}
-
-In this case, either set \code{clusterRows} and/or \code{clusterCols} to \code{FALSE}, or
-you can attempt to pass an \code{hclust} object to these arguments. This is
-recommended as an alternate approach to be used with \code{pheatmap::pheatmap},
-which is called internally by our plotting code. Here's how this can be
-accomplished:\preformatted{mat <- assay(mat)
-dist <- dist(mat)
-hclust <- hclust(dist, method = "ward.D2")
-}
-
-}
-
 \examples{
 data(deseq)
 
 ## DESeqAnalysis ====
 plotDEGHeatmap(deseq, results = 1L)
-}
-\seealso{
-\itemize{
-\item \code{pheatmap::pheatmap}.
-\item \code{RColorBrewer::brewer.pal}.
-}
-
-\itemize{
-\item \code{pheatmap::pheatmap}.
-\item \code{stats::cor}.
-\item \code{stats::hclust}.
-}
 }

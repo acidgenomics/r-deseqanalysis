@@ -1,20 +1,18 @@
-#' Match the Samples Used to Define Contrast
+#' @name contrastSamples
+#' @inherit bioverbs::contrastSamples
+#' @inheritParams basejump::params
+#' @inheritParams params
 #'
+#' @details
 #' Match the samples in a `DESeqDataSet` used to define contrast in a
 #' corresponding `DESeqResults` object. Note that this only works for simple
 #' (e.g. pairwise) contrasts and will intentionally error for more complex
 #' comparisons.
 #'
-#' @note **EXPERIMENTAL METHOD**. This approach will error intentionally for
+#' @note **EXPERIMENTAL**. This approach will error intentionally for
 #'   `DESeqResults` objects generated with complex contrasts (e.g. interaction
-#'   effect or LRT). It may be removed in a future release if this approach
-#'   is too error-prone.
-#'
-#' @name contrastSamples
-#' @inheritParams basejump::params
-#' @inheritParams params
-#'
-#' @return `character`. Sample identifiers (corresponding to columns).
+#'   effect or LRT). It may be removed in a future release if this approach is
+#'   too error-prone.
 #'
 #' @examples
 #' data(deseq)
@@ -22,6 +20,13 @@
 #' ## DESeqAnalysis ====
 #' contrastSamples(deseq, results = 1L)
 NULL
+
+
+
+#' @importFrom bioverbs contrastSamples
+#' @aliases NULL
+#' @export
+bioverbs::contrastSamples
 
 
 

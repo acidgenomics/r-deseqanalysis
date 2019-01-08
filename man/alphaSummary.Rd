@@ -4,7 +4,7 @@
 \name{alphaSummary}
 \alias{alphaSummary}
 \alias{alphaSummary,DESeqDataSet-method}
-\title{Alpha Level Cutoff Summary Statistics}
+\title{Alpha level cutoff summary statistics}
 \usage{
 \S4method{alphaSummary}{DESeqDataSet}(object, alpha = c(0.1, 0.05, 0.01,
   0.001, 1e-06), contrast = NULL, name = NULL)
@@ -61,8 +61,8 @@ alphaSummary(dds, name = "condition_B_vs_A")
 }
 \seealso{
 \itemize{
-\item \code{DESeq2::results}.
-\item \code{DESeq2::resultsNames}.
+\item \code{DESeq2::results()}.
+\item \code{DESeq2::resultsNames()}.
 }
 }
 \author{
