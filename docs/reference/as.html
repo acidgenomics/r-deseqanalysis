@@ -122,9 +122,9 @@
     <p>Supported coercion methods will extract any of these internal objects:</p><ul>
 <li><p><code>DESeqDataSet</code>.</p></li>
 <li><p><code>DESeqTransform</code>.</p></li>
-<li><p><code>DESeqResults</code>. Extracts the first results slotted. Note that this
-corresponds to results containing log2 fold change (LFC) values that
-<em>have not been shrunken</em> using <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/lfcShrink'>DESeq2::lfcShrink()</a></code>.</p></li>
+<li><p><code>DESeqResults</code>. Extracts the first results slotted.
+Note that this corresponds to results containing log2 fold change (LFC)
+values that <em>have not been shrunken</em> using <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/lfcShrink'>DESeq2::lfcShrink()</a></code>.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="description"><a class="anchor" href="#description"></a>Description</h2>
@@ -190,7 +190,7 @@ corresponds to results containing log2 fold change (LFC) values that
 #&gt; colnames(12): sample01 sample02 ... sample11 sample12
 #&gt; colData names(2): condition sizeFactor</div><div class='input'><span class='co'>## Pulls the first results slotted.</span>
 <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqResults"</span>)
-<span class='fu'>contrastName</span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; [1] "condition B vs A"</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; 
+<span class='fu'><a href='contrastName.html'>contrastName</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; [1] "condition B vs A"</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; 
 #&gt; out of 499 with nonzero total read count
 #&gt; adjusted p-value &lt; 0.1
 #&gt; LFC &gt; 0 (up)       : 84, 17%
