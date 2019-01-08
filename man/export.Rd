@@ -21,6 +21,15 @@ Directory path.}
 
 \item{compress}{\code{logical(1)}.
 Apply gzip compression to all files.}
+
+\item{humanize}{\code{logical(1)}.
+Make the gene and sample names human readable.
+\itemize{
+\item Gene names require \code{geneName} column to be defined in
+\code{\link[SummarizedExperiment:rowData]{rowData()}}.
+\item Sample names require \code{sampleName} column to be defined in
+\code{\link[SummarizedExperiment:colData]{colData()}}.
+}}
 }
 \value{
 Invisible \code{character}.

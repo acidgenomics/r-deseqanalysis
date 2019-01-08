@@ -1,7 +1,26 @@
+# FIXME Need to rethink the humanize support step here.
+# Make `humanize()` a separate function call, and add method support.
+# Dispatch onto SummarizedExperiment for DESeqDataSet and DESeqTransform.
+# Need to define an internal humanize method here for DESeqResults.
+
+# FIXME Warning: bad markup (extra space?) at export.Rd:41:82
+# I think this is due to a link in the bioverbs documentation...
+
+
+
 #' @name export
 #' @inherit brio::export
 #' @inheritParams brio::export
 #' @inheritParams params
+#'
+#' @param humanize `logical(1)`.
+#'   Make the gene and sample names human readable.
+#'
+#'   - Gene names require `geneName` column to be defined in
+#'     [`rowData()`][SummarizedExperiment::rowData].
+#'   - Sample names require `sampleName` column to be defined in
+#'     [`colData()`][SummarizedExperiment::colData].
+#'
 #' @examples
 #' data(deseq)
 #'
@@ -19,31 +38,34 @@ bioverbs::export
 
 
 .exportDESeqDataSet <- function(x, dir, compress, humanize) {
-    # Using the inherited SummarizedExperiment method here.
-    assert(is(x, "DESeqAnalysis"))
-    message("Exporting DESeqDataSet.")
-    export(
-        x = as(x, "DESeqDataSet"),
-        name = "data",
-        dir = dir,
-        compress = compress,
-        humanize = humanize
+    assert(
+        is(x, "DESeqAnalysis"),
+        isFlag(humanize)
     )
+    message("Exporting DESeqDataSet.")
+    dds <- as(x, "DESeqDataSet")
+    if (isTRUE(humanize)) {
+        dds <- humanize(dds)
+    }
+    # Using the inherited SummarizedExperiment method here.
+    export(x = dds, name = "data", dir = dir, compress = compress)
 }
 
 
 
 .exportDESeqTransform <- function(x, dir, compress, humanize) {
     # Using the inherited SummarizedExperiment method here.
-    assert(is(x, "DESeqAnalysis"))
-    message("\nExporting DESeqTransform.")
-    export(
-        x = as(x, "DESeqTransform"),
-        name = "transform",
-        dir = dir,
-        compress = compress,
-        humanize = humanize
+    assert(
+        is(x, "DESeqAnalysis"),
+        isFlag(humanize)
     )
+    # Note the extra line break in message.
+    message("\nExporting DESeqTransform.")
+    dt <- as(x, "DESeqDataSet")
+    if (isTRUE(humanize)) {
+        dt <- humanize(dt)
+    }
+    export(x = dt, name = "transform", dir = dir, compress = compress)
 }
 
 

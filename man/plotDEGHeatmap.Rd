@@ -26,6 +26,9 @@ Name or positive of \code{DESeqResults}.}
 passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
 contrasts (e.g. interaction effect).}
 
+\item{direction}{\code{character(1)}.
+Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
+
 \item{scale}{\code{character(1)}.
 Whether the values should be centered and scaled in either the row or
 column direction ("\code{row}", "\code{column}"), or remain unscaled ("\code{none}").}
