@@ -59,13 +59,13 @@ argument in the \code{character} vector.}
 \item{...}{Additional arguments.}
 }
 \description{
-This function is an extension of [plotPCA()\link[BiocGenerics:plotPCA]{BiocGenerics::plotPCA} that is
+This function is an extension of \code{\link[BiocGenerics:plotPCA]{plotPCA()}} that is
 optimized for automatic handling of differentially expressed genes, rather
 than requiring manual input of a gene vector or subset object.
 }
 \details{
 To adjust the annotation columns, modify the
-\link[SummarizedExperiment:colData]{colData()} of the \code{counts} argument, which
+\code{\link[SummarizedExperiment:colData]{colData()}} of the \code{counts} argument, which
 must contain/extend a \code{SummarizedExperiment}.
 }
 \examples{

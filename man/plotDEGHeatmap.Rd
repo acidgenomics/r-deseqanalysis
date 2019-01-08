@@ -86,15 +86,15 @@ Plot title.}
 \item{...}{Additional arguments.}
 }
 \description{
-This function is an extension of \code{plotHeatmap} that is optimized
-for automatic handling differentially expressed genes, rather than requiring
+This function is an extension of \code{\link[=plotHeatmap]{plotHeatmap()}} that is optimized for
+automatic handling differentially expressed genes, rather than requiring
 manual input of a gene vector. All of the optional parameters for
-\code{plotHeatmap} are also supported by this function.
+\code{\link[=plotHeatmap]{plotHeatmap()}} are also supported by this function.
 }
 \details{
 To adjust the annotation columns, modify the
-\link[SummarizedExperiment:colData]{colData} of the \code{counts} argument, which must
-contain a \code{SummarizedExperiment}.
+\code{\link[SummarizedExperiment:colData]{colData()}} of the \code{counts} argument, which
+must contain a \code{SummarizedExperiment}.
 }
 \examples{
 data(deseq)

@@ -1,6 +1,6 @@
 #' @name export
-#' @inherit bioverbs::export
-#' @inheritParams basejump::export
+#' @inherit brio::export
+#' @inheritParams brio::export
 #' @inheritParams params
 #' @examples
 #' data(deseq)
