@@ -1,17 +1,20 @@
+# TODO Documentation will error if we attempt `inheritParams brio::export`
+# because of the link to `dim()`. Roxygen currently has problems inheriting Rd
+# files that contain links.
+# This is a bug in roxygen:
+# https://github.com/klutometis/roxygen/issues/778
+
 # FIXME Need to rethink the humanize support step here.
 # Make `humanize()` a separate function call, and add method support.
 # Dispatch onto SummarizedExperiment for DESeqDataSet and DESeqTransform.
 # Need to define an internal humanize method here for DESeqResults.
 
-# FIXME Warning: bad markup (extra space?) at export.Rd:41:82
-# I think this is due to a link in the bioverbs documentation...
-
 
 
 #' @name export
-#' @inherit brio::export
-#' @inheritParams brio::export
+#' @inherit bioverbs::export
 #' @inheritParams params
+#' @inheritParams brio::export
 #'
 #' @param humanize `logical(1)`.
 #'   Make the gene and sample names human readable.

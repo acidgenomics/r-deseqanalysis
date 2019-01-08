@@ -10,8 +10,7 @@
   compress = FALSE, humanize = FALSE)
 }
 \arguments{
-\item{x}{\code{ANY}.
-An object supporting \code{\link[base:dim]{dim()}}, to be written to disk.}
+\item{x}{Object.}
 
 \item{name}{\code{character(1)}.
 Name to use on disk. If \code{NULL}, will use the name of the object instead.}
@@ -31,36 +30,12 @@ Make the gene and sample names human readable.
 \code{\link[SummarizedExperiment:colData]{colData()}}.
 }}
 }
-\value{
-Invisible \code{character}.
-File path(s).
-}
 \description{
 Export data out of R and write to disk.
 }
-\details{
-This is a wrapper for \code{\link[rio:export]{rio::export()}} that adds support for additional S4
-classes in Bioconductor.
-}
-\section{Row names}{
-
-
-
-Some export utilities in R have a tendency to drop row names when writing to
-disk in CSV format. For example, the \href{{https://readr.tidyverse.org/}{readr}} family of functions never
-write row names by design. This is a \emph{really poor} default setting for
-handling genomic data, which often contain gene identifiers in the row names.
-Here we're performing any internal tibble coercion step to ensure row names
-are always moved to a "\code{rowname}" column in the CSV export.
-
-}
-
 \examples{
 data(deseq)
 
 ## DESeqAnalysis ====
 export(deseq, dir = "example")
-}
-\seealso{
-\code{\link[rio:export]{rio::export()}}.
 }
