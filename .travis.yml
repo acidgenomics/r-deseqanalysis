@@ -1,13 +1,8 @@
 # Travis-CI configuration for Bioconductor packages
 # https://docs.travis-ci.com/user/languages/r
 
-# Temporarily enable when caching package library.
-# script: true
-
 language: r
 cache: packages
-sudo: false
-bioc_required: true
 
 matrix:
   include:
