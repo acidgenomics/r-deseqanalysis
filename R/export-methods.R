@@ -1,16 +1,3 @@
-# TODO Documentation will error if we attempt `inheritParams brio::export`
-# because of the link to `dim()`. Roxygen currently has problems inheriting Rd
-# files that contain links.
-# This is a bug in roxygen:
-# https://github.com/klutometis/roxygen/issues/778
-
-# FIXME Need to rethink the humanize support step here.
-# Make `humanize()` a separate function call, and add method support.
-# Dispatch onto SummarizedExperiment for DESeqDataSet and DESeqTransform.
-# Need to define an internal humanize method here for DESeqResults.
-
-
-
 #' @name export
 #' @inherit bioverbs::export
 #' @inheritParams params
@@ -29,6 +16,9 @@
 #'
 #' ## DESeqAnalysis ====
 #' export(deseq, dir = "example")
+#'
+#' ## Clean up.
+#' unlink("example", recursive = TRUE)
 NULL
 
 
@@ -132,10 +122,9 @@ bioverbs::export
 
 
 
-# TODO Improve the messages here.
 # Here we are looping across each contrast and writing out DEG tables.
-# NOTE: This step picks shrunken LFCs over unshrunken if slotted.
-# NOTE: We don't need to support humanize here because `geneName` is required.
+# Note: This step picks shrunken LFCs over unshrunken if slotted.
+# Note: We don't need to support humanize here because `geneName` is required.
 .exportResultsTables <- function(x, dir, compress) {
     message("\nExporting results tables.")
     assert(is(x, "DESeqAnalysis"))
