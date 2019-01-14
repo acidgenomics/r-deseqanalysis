@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
       </span>
     </div>
 
@@ -173,9 +173,11 @@ Plot style.</p></td>
 
     
 <ul>
-<li><p><code>style = "facet"</code>: <code>ggplot</code> grouped by <code>sampleName</code>, with
-<code><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>ggplot2::facet_wrap</a></code> applied to panel the samples.</p></li>
-<li><p><code>style = "wide"</code>: <code>ggplot</code> in wide format, with genes on the x-axis.</p></li>
+<li><p><code>style = "facet"</code>:
+<code>ggplot</code> grouped by <code>sampleName</code>, with
+<code><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>ggplot2::facet_wrap()</a></code> applied to panel the samples.</p></li>
+<li><p><code>style = "wide"</code>:
+<code>ggplot</code> in wide format, with genes on the x-axis.</p></li>
 </ul>
 
     
@@ -184,7 +186,7 @@ Plot style.</p></td>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## Get genes from DESeqDataSet.</span>
-<span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.html'>as</a></span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
+<span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
 <span class='no'>genes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>rownames</a></span>(<span class='no'>dds</span>))
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>genes</span>)</div><div class='output co'>#&gt; [1] "gene001" "gene002" "gene003" "gene004" "gene005" "gene006"</div><div class='input'>
 <span class='co'>## DESeqAnalysis ====</span>
