@@ -38,4 +38,7 @@ data(deseq)
 
 ## DESeqAnalysis ====
 export(deseq, dir = "example")
+
+## Clean up.
+unlink("example", recursive = TRUE)
 }

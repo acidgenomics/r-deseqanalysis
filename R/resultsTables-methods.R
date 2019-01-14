@@ -1,6 +1,7 @@
 # FIXME Add a Filter step here to remove empty.
 
 
+
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
 #' @inheritParams basejump::params
