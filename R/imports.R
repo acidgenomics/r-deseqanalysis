@@ -3,7 +3,7 @@
 #'   SummarizedExperiment
 #' @importClassesFrom basejump Tx2Gene
 #'
-#' @importMethodsFrom S4Transformer coerce
+#' @importMethodsFrom basejump coerce
 #'
 #' @importFrom DESeq2 results resultsNames
 #' @importFrom IRanges DataFrameList

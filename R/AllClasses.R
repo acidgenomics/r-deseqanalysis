@@ -1,11 +1,3 @@
-# TODO Need to slot DESeqAnalysis package version in object...
-# Define a `metadata` list and slot prototype metadata.
-
-# TODO Add a tighter assert check to ensure that `lfcShrink` contains
-# shrunken values. Can use `priorInfo` to test for this.
-
-
-
 #' DESeq2 differential expression analysis
 #'
 #' Class containing all elements generated during differential expression
@@ -17,7 +9,7 @@
 #'
 #' We recommend generating the `DESeqDataSet` by coercion from `bcbioRNASeq`
 #' object using `as(dds, "bcbioRNASeq")`. Don't use the [DESeq2::DESeqDataSet()]
-#' or `DESeq2::DESeqDataSetFromMatrix()` constructors to generate the
+#' or [DESeq2::DESeqDataSetFromMatrix()] constructors to generate the
 #' `DESeqDataSet` object.
 #'
 #' @section DESeqTransform:
