@@ -34,7 +34,7 @@ Whether the values should be centered and scaled in either the row or
 column direction ("\code{row}", "\code{column}"), or remain unscaled ("\code{none}").}
 
 \item{clusteringMethod}{\code{character(1)}.
-Clustering method. Accepts the same values as \code{stats::hclust}.}
+Clustering method. Accepts the same values as \code{\link[stats:hclust]{stats::hclust()}}.}
 
 \item{clusterRows}{\code{logical(1)}.
 Arrange with hierarchical clustering.}
