@@ -1,4 +1,4 @@
-#' @inherit DESeqAnalysis-class
+#' @rdname DESeqAnalysis-class
 #' @export
 #'
 #' @param data `DESeqDataSet`.
