@@ -6,6 +6,7 @@
 ) {
     assert(
         is(object, "DESeqAnalysis"),
+        !missing(results),
         isScalar(results),
         isFlag(lfcShrink)
     )
