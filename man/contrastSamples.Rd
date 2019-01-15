@@ -6,7 +6,7 @@
 \alias{contrastSamples,DESeqAnalysis-method}
 \title{Samples corresponding to a differential expression contrast}
 \usage{
-\S4method{contrastSamples}{DESeqAnalysis}(object, results = 1L)
+\S4method{contrastSamples}{DESeqAnalysis}(object, results)
 }
 \arguments{
 \item{object}{Object.}
