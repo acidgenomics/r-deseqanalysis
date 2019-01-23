@@ -13,8 +13,8 @@
 #'   convertSampleIDsToNames decode humanize initDir interestingGroups<-
 #'   makeNames mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
 #'   matchInterestingGroups matchesGene2Symbol methodFormals plotGene
-#'   plotHeatmap plotPCA relevelColData removeNA sanitizeRowData showSlotInfo
-#'   snake standardizeCall
+#'   plotHeatmap plotPCA relevelColData removeNA showSlotInfo snake
+#'   standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom dplyr arrange desc everything filter left_join mutate mutate_all
 #'   pull rename row_number select
@@ -34,5 +34,7 @@
 #' @importFrom tidyselect starts_with
 #' @importFrom utils capture.output globalVariables packageVersion
 NULL
+
+
 
 globalVariables(".")
