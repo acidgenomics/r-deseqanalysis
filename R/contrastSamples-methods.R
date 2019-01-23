@@ -31,7 +31,7 @@ bioverbs::contrastSamples
 
 
 contrastSamples.DESeqAnalysis <-  # nolint
-    function(object, results = 1L) {
+    function(object, results) {
         validObject(object)
         results <- .matchResults(object, results)
         contrast <- snake(contrastName(results))
