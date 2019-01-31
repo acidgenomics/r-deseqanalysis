@@ -34,8 +34,29 @@ contrastSamples.DESeqAnalysis <-  # nolint
     function(object, results) {
         validObject(object)
         results <- .matchResults(object, results)
-        contrast <- snake(contrastName(results))
+
+        # If we've defined a subset of samples for the contrast, stash them
+        # in DESeqResults metadata. Otherwise, there's no way to trace this
+        # back to a match in DESeqDataSet.
+        samples <- metadata(results)[["samples"]]
+        if (hasLength(samples)) {
+            return(samples)
+        }
+
+        contrast <- makeNames(contrastName(results))
         assert(grepl("_vs_", contrast))
+
+        # Inform if the contrast doesn't exist in DESeqDataSet resultsNames.
+        # Note that this can happen for complex contrasts, so don't warn.
+        resultsNames <- resultsNames(object@data)
+        if (!contrast %in% resultsNames) {
+            message(paste0(
+                "Note: ", contrast, " not defined in resultsNames.\n",
+                "This can happen with complex contrasts ",
+                "and is safe to ignore.\n",
+                printString(resultsNames)
+            ))
+        }
 
         # Figure out which column was used to define the pairwise contrast.
         match <- str_match(contrast, "^([[:alnum:]]+)_(.+)_vs_(.+)$")
@@ -49,17 +70,19 @@ contrastSamples.DESeqAnalysis <-  # nolint
 
         assert(isSubset(factor, colnames(colData)))
         message(paste("Factor column:", factor))
-        factor <- snake(colData[[factor]])
+        factor <- colData[[factor]]
         assert(is.factor(factor))
 
         numerator <- match[1L, 3L]
         assert(isSubset(numerator, factor))
         numerator <- samples[factor %in% numerator]
+        assert(hasLength(numerator))
         message(paste("Numerator samples:", toString(numerator)))
 
         denominator <- match[1L, 4L]
         assert(isSubset(denominator, factor))
         denominator <- samples[factor %in% denominator]
+        assert(hasLength(denominator))
         message(paste("Denominator samples:", toString(denominator)))
 
         c(numerator, denominator)
