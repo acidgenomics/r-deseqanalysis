@@ -34,6 +34,7 @@ contrastSamples.DESeqAnalysis <-  # nolint
     function(object, results) {
         validObject(object)
         results <- .matchResults(object, results)
+
         contrast <- makeNames(contrastName(results))
         assert(grepl("_vs_", contrast))
 
@@ -64,14 +65,27 @@ contrastSamples.DESeqAnalysis <-  # nolint
         factor <- colData[[factor]]
         assert(is.factor(factor))
 
+        # If we've defined a subset of samples for the contrast, stash them
+        # in DESeqResults metadata. Otherwise, there's no way to trace this
+        # back to a match in DESeqDataSet.
+        samplesStash <- metadata(results)[["samples"]]
+
         numerator <- match[1L, 3L]
         assert(isSubset(numerator, factor))
         numerator <- samples[factor %in% numerator]
+        if (hasLength(samplesStash)) {
+            numerator <- intersect(numerator, samplesStash)
+        }
+        assert(hasLength(numerator))
         message(paste("Numerator samples:", toString(numerator)))
 
         denominator <- match[1L, 4L]
         assert(isSubset(denominator, factor))
         denominator <- samples[factor %in% denominator]
+        if (hasLength(samplesStash)) {
+            denominator <- intersect(denominator, samplesStash)
+        }
+        assert(hasLength(denominator))
         message(paste("Denominator samples:", toString(denominator)))
 
         c(numerator, denominator)
