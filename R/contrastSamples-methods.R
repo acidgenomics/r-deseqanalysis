@@ -34,8 +34,20 @@ contrastSamples.DESeqAnalysis <-  # nolint
     function(object, results) {
         validObject(object)
         results <- .matchResults(object, results)
-        contrast <- snake(contrastName(results))
+        contrast <- makeNames(contrastName(results))
         assert(grepl("_vs_", contrast))
+
+        # Inform if the contrast doesn't exist in DESeqDataSet resultsNames.
+        # Note that this can happen for complex contrasts, so don't warn.
+        resultsNames <- resultsNames(object@data)
+        if (!contrast %in% resultsNames) {
+            message(paste0(
+                "Note: ", contrast, " not defined in resultsNames.\n",
+                "This can happen with complex contrasts ",
+                "and is safe to ignore.\n",
+                printString(resultsNames)
+            ))
+        }
 
         # Figure out which column was used to define the pairwise contrast.
         match <- str_match(contrast, "^([[:alnum:]]+)_(.+)_vs_(.+)$")
@@ -49,7 +61,7 @@ contrastSamples.DESeqAnalysis <-  # nolint
 
         assert(isSubset(factor, colnames(colData)))
         message(paste("Factor column:", factor))
-        factor <- snake(colData[[factor]])
+        factor <- colData[[factor]]
         assert(is.factor(factor))
 
         numerator <- match[1L, 3L]
