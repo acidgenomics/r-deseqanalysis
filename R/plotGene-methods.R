@@ -1,3 +1,7 @@
+# FIXME Switch to `plotCounts()`. Export that generic in basejump.
+
+
+
 #' @name plotGene
 #' @inherit basejump::plotGene
 #' @examples

@@ -1,3 +1,7 @@
+# FIXME Add a `results = "all"` mode here?
+
+
+
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
 #' @inheritParams basejump::params

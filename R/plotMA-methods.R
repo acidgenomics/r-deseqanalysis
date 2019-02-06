@@ -1,3 +1,7 @@
+# FIXME Add a `results = "all"` mode here?
+
+
+
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA

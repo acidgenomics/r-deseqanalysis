@@ -31,10 +31,7 @@ print(object)
 # Sample data
 
 ```{r sample_data}
-object %>%
-    as("DESeqDataSet") %>%
-    sampleData() %>%
-    as.data.frame()
+sampleData(object)
 ```
 
 # MA plot {.tabset}
