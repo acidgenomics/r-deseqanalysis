@@ -18,27 +18,27 @@ methods::show
 
 
 
-.showHeader <- function(object, version = NULL) {
-    cat(paste(class(object), version), sep = "\n")
-}
-
-
-
 show.DESeqAnalysis <-  # nolint
     function(object) {
         validObject(object)
         data <- slot(object, "data")
         transform <- slot(object, "transform")
-        .showHeader(
-            object = object,
-            version = metadata(data)[["version"]]
-        )
+
+        cat(paste0(
+            class(object), " ", metadata(object)[["version"]], "; ",
+            "DESeq2 ", metadata(data)[["version"]]
+        ), sep = "\n")
+
         contrastNames <- .contrastNames(object)
         showSlotInfo(list(
             transform = .transformType(transform),
             contrastNames = contrastNames
         ))
-        cat(capture.output(show(data)), sep = "\n")
+
+        # Show information about the DESeqDataSet.
+        dataInfo <- capture.output(show(data))[-1L]
+        dataInfo <- paste0("  ", dataInfo)
+        cat("dataSet:", dataInfo, sep = "\n")
     }
 
 
