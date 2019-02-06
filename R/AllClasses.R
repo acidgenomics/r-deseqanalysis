@@ -72,7 +72,7 @@ setClass(
                 }
             )),
             # DESeqResults list must be named.
-            hasNames(results),
+            hasValidNames(results),
             # Require package version in metadata.
             is(metadata(object)[["version"]], "package_version")
         )
@@ -91,21 +91,10 @@ setClass(
 
         # Note that `lfcShrink` slot is currently optional, but that may change
         # in a future update.
-        if (length(lfcShrink) > 0L) {
-            # Ensure that DESeqResults slotted into `lfcShrink` is actually
-            # shrunken using the `lfcShrink()` function. This also checks to
-            # ensure that the same method was used for all contrasts.
-            shrinkTypes <- vapply(
-                X = lfcShrink,
-                FUN = .lfcShrinkType,
-                FUN.VALUE = character(1L)
-            )
-            ok <- validate(length(unique(shrinkTypes)) == 1L)
-            if (!isTRUE(ok)) return(ok)
-
-            # Unshrunken and shrunken DESeqResults must correspond, if shrunken
-            # values are optionally defined.
+        if (hasLength(lfcShrink)) {
+            # Unshrunken and shrunken DESeqResults must correspond.
             ok <- validate(
+                identical(names(results), names(lfcShrink)),
                 all(mapply(
                     unshrunken = results,
                     shrunken = lfcShrink,
@@ -115,6 +104,17 @@ setClass(
                     SIMPLIFY = TRUE
                 ))
             )
+            if (!isTRUE(ok)) return(ok)
+
+            # Ensure that DESeqResults slotted into `lfcShrink` is actually
+            # shrunken using the `lfcShrink()` function. This also checks to
+            # ensure that the same method was used for all contrasts.
+            shrinkTypes <- vapply(
+                X = lfcShrink,
+                FUN = .lfcShrinkType,
+                FUN.VALUE = character(1L)
+            )
+            ok <- validate(length(unique(shrinkTypes)) == 1L)
             if (!isTRUE(ok)) return(ok)
 
             # lfcShrink alpha must match the results alpha.
