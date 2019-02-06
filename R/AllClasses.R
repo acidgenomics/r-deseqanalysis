@@ -35,7 +35,9 @@
 #'   *Optional*. One or more shrunken `DESeqResults`. If set, must correspond to
 #'   those defined in `results`.
 #'
-#' @seealso `showClass("Annotated")`.
+#' @seealso
+#' - `help(topic = "Annotated-class", package = "S4Vectors")`.
+#' - `showClass("Annotated")`.
 setClass(
     Class = "DESeqAnalysis",
     contains = "Annotated",
