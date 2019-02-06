@@ -1,0 +1,2 @@
+globalVariables(".")
+.version <- packageVersion("DESeqAnalysis")
