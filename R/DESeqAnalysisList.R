@@ -2,12 +2,24 @@
 #' @param ... `DESeqAnalysis` objects.
 #' @export
 DESeqAnalysisList <- function(...) {
-    datasets <- list(...)
-    # Here we're capturing the object names if the user doesn't pass the
-    # arguments in as named key value pairs.
-    if (is.null(names(datasets))) {
-        names <- as.character(match.call(expand.dots = FALSE)$...)
-        names(datasets) <- names
+    mc <- match.call(expand.dots = FALSE)
+    dots <- list(...)
+
+    # Look to see if the user passed in a list.
+    if (
+        hasLength(dots, n = 1L) &&
+        is.list(dots[[1L]])
+    ) {
+        data <- dots[[1L]]
+    } else {
+        data <- dots
+        # Here we're capturing the object names if the user doesn't pass the
+        # arguments in as named key value pairs.
+        if (is.null(names(data))) {
+            dotsNames <- as.character(mc$...)
+            names(data) <- dotsNames
+        }
     }
-    new(Class = "DESeqAnalysisList", datasets)
+
+    new(Class = "DESeqAnalysisList", data)
 }
