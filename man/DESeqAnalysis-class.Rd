@@ -104,7 +104,10 @@ x <- DESeqAnalysis(
 print(x)
 }
 \seealso{
-\code{showClass("Annotated")}.
+\itemize{
+\item \code{help(topic = "Annotated-class", package = "S4Vectors")}.
+\item \code{showClass("Annotated")}.
+}
 }
 \author{
 Michael Steinbaugh
