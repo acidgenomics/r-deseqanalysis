@@ -69,7 +69,9 @@ setClass(
                 }
             )),
             # DESeqResults list must be named.
-            hasNames(results)
+            hasNames(results),
+            # Require package version in metadata.
+            is(metadata(object)[["version"]], "package_version")
         )
         if (!isTRUE(ok)) return(ok)
 
