@@ -11,6 +11,10 @@
 #'   One or more shrunken `DESeqResults`.
 #'   Assign the [DESeq2::lfcShrink()] return here.
 #'
+#' @return `DESeqAnalysis`.
+#'   Contains a `DESeqDataSet`, `DESeqTransform`, and corresponding
+#'   `DESeqResults` list.
+#'
 #' @examples
 #' library(DESeq2)
 #'
