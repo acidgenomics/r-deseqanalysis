@@ -4,7 +4,7 @@
 %   R/export-methods.R, R/markdown-methods.R, R/plotDEGHeatmap-methods.R,
 %   R/plotDEGPCA-methods.R, R/plotGene-methods.R, R/plotMA-methods.R,
 %   R/plotVolcano-methods.R, R/resultsTables-methods.R, R/show-methods.R,
-%   R/topTables-methods.R
+%   R/topTables-methods.R, R/updateObject-methods.R
 \docType{import}
 \name{reexports}
 \title{Objects exported from other packages}
@@ -14,7 +14,7 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{BiocGenerics}{\code{\link[BiocGenerics]{plotMA}}}
+  \item{BiocGenerics}{\code{\link[BiocGenerics]{plotMA}}, \code{\link[BiocGenerics]{updateObject}}}
 
   \item{bioverbs}{\code{\link[bioverbs]{alphaSummary}}, \code{\link[bioverbs]{contrastName}}, \code{\link[bioverbs]{contrastSamples}}, \code{\link[bioverbs]{deg}}, \code{\link[bioverbs]{export}}, \code{\link[bioverbs]{markdown}}, \code{\link[bioverbs]{plotDEGHeatmap}}, \code{\link[bioverbs]{plotDEGPCA}}, \code{\link[bioverbs]{plotGene}}, \code{\link[bioverbs]{plotVolcano}}, \code{\link[bioverbs]{resultsTables}}, \code{\link[bioverbs]{topTables}}}
 

@@ -34,7 +34,3 @@
 #' @importFrom tidyselect starts_with
 #' @importFrom utils capture.output globalVariables packageVersion
 NULL
-
-
-
-globalVariables(".")
