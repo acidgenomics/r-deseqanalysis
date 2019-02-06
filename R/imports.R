@@ -7,7 +7,7 @@
 #'
 #' @importFrom DESeq2 results resultsNames
 #' @importFrom IRanges DataFrameList
-#' @importFrom S4Vectors as.data.frame head mcols mcols<- metadata
+#' @importFrom S4Vectors SimpleList as.data.frame head mcols mcols<- metadata
 #' @importFrom SummarizedExperiment colData colData<-
 #' @importFrom basejump Gene2Symbol as_tibble basejump_geom_label_repel camel
 #'   convertSampleIDsToNames decode humanize initDir interestingGroups<-
