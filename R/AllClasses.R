@@ -61,6 +61,9 @@ setClass(
             hasValidDimnames(data),
             # DESeqDataSet and DESeqTransform must correspond.
             identical(dimnames(data), dimnames(transform)),
+            # results and lfcShrink must be list.
+            is.list(results),
+            is.list(lfcShrink),
             # DESeqDataSet and DESeqResults must correspond.
             all(bapply(
                 X = results,
@@ -86,9 +89,22 @@ setClass(
         ok <- validate(length(unique(alphas)) == 1L)
         if (!isTRUE(ok)) return(ok)
 
-        # Unshrunken and shrunken DESeqResults must correspond, if shrunken
-        # values are optionally defined.
+        # Note that `lfcShrink` slot is currently optional, but that may change
+        # in a future update.
         if (length(lfcShrink) > 0L) {
+            # Ensure that DESeqResults slotted into `lfcShrink` is actually
+            # shrunken using the `lfcShrink()` function. This also checks to
+            # ensure that the same method was used for all contrasts.
+            shrinkTypes <- vapply(
+                X = lfcShrink,
+                FUN = .lfcShrinkType,
+                FUN.VALUE = character(1L)
+            )
+            ok <- validate(length(unique(shrinkTypes)) == 1L)
+            if (!isTRUE(ok)) return(ok)
+
+            # Unshrunken and shrunken DESeqResults must correspond, if shrunken
+            # values are optionally defined.
             ok <- validate(
                 all(mapply(
                     unshrunken = results,
