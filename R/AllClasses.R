@@ -28,19 +28,12 @@
 #' @export
 #'
 #' @slot data `DESeqDataSet`.
-#'
 #' @slot transform `DESeqTransform`.
 #' @slot results `list`.
 #'   One or more unshrunken `DESeqResults`.
 #' @slot lfcShrink `list`.
 #'   *Optional*. One or more shrunken `DESeqResults`. If set, must correspond to
 #'   those defined in `results`.
-#'
-#' @seealso [DESeqAnalysis()].
-#'
-#' @return `DESeqAnalysis`.
-#'   Contains a `DESeqDataSet`, `DESeqTransform`, and corresponding
-#'   `DESeqResults` list.
 setClass(
     Class = "DESeqAnalysis",
     slots = c(
@@ -90,6 +83,25 @@ setClass(
             )
             if (!isTRUE(ok)) return(ok)
         }
+
+        TRUE
+    }
+)
+
+
+
+#' List containing related DESeq2 analyses
+#'
+#' @author Michael Steinbaugh
+#' @export
+setClass(
+    Class = "DESeqAnalysisList",
+    contains = "SimpleList",
+    validity = function(object) {
+        ok <- validate(
+            hasValidNames(object)
+        )
+        if (!isTRUE(ok)) return(ok)
 
         TRUE
     }
