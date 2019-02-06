@@ -104,7 +104,7 @@ x <- DESeqAnalysis(
 print(x)
 }
 \seealso{
-\code{\link[=DESeqAnalysis]{DESeqAnalysis()}}.
+\code{showClass("Annotated")}.
 }
 \author{
 Michael Steinbaugh
