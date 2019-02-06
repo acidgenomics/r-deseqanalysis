@@ -5,7 +5,7 @@
 #'
 #' @importMethodsFrom basejump coerce
 #'
-#' @importFrom DESeq2 results resultsNames
+#' @importFrom DESeq2 priorInfo results resultsNames
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors SimpleList as.data.frame head mcols mcols<- metadata
 #' @importFrom SummarizedExperiment colData colData<-
@@ -13,7 +13,7 @@
 #'   convertSampleIDsToNames decode humanize initDir interestingGroups<-
 #'   makeNames mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
 #'   matchInterestingGroups matchesGene2Symbol methodFormals plotGene
-#'   plotHeatmap plotPCA relevelColData removeNA showSlotInfo snake
+#'   plotHeatmap plotPCA printString relevelColData removeNA showSlotInfo snake
 #'   standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom dplyr arrange desc everything filter left_join mutate mutate_all
@@ -28,6 +28,7 @@
 #' @importFrom knitr kable
 #' @importFrom magrittr %>%
 #' @importFrom methods as is new prototype setClass slot slot<- validObject
+#'   .hasSlot
 #' @importFrom rlang := UQ sym syms
 #' @importFrom scales pretty_breaks
 #' @importFrom stringr str_match str_trunc
