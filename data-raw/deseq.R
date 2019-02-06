@@ -5,13 +5,14 @@ library(pryr)
 library(basejump)
 library(DESeq2)
 
+data(rse, package = "basejump")
+
 # Restrict to 2 MB.
 # Use `pryr::object_size` instead of `utils::object.size`.
 limit <- structure(2e6, class = "object_size")
 
 # DESeqDataSet
 # Consider updating the example RSE in basejump to include more genes.
-data(rse, package = "basejump")
 dds <- DESeqDataSet(se = rse, design = ~ condition)
 dds <- DESeq(dds)
 validObject(dds)
@@ -31,17 +32,11 @@ shrink <- lfcShrink(
 )
 
 # Package up the analysis into a DESeqAnalysis object.
-res_list <- list(res)
-names(res_list) <- contrast
-
-shrink_list <- list(shrink)
-names(shrink_list) <- names(res_list)
-
 deseq <- DESeqAnalysis(
     data = dds,
     transform = dt,
-    results = res_list,
-    lfcShrink = shrink_list
+    results = res,
+    lfcShrink = shrink
 )
 
 # Report the size of each slot in bytes.

@@ -4,10 +4,10 @@
 #' @param data `DESeqDataSet`.
 #' @param transform `DESeqTransform`.
 #'   [DESeq2::varianceStabilizingTransformation()] recommended by default.
-#' @param results `list`.
+#' @param results `list` or single `DESeqResults`.
 #'   One or more unshrunken `DESeqResults`.
 #'   Assign the [DESeq2::results()] return here.
-#' @param lfcShrink `list`.
+#' @param lfcShrink `list`or single `DESeqResults`.
 #'   One or more shrunken `DESeqResults`.
 #'   Assign the [DESeq2::lfcShrink()] return here.
 #'
@@ -52,6 +52,15 @@ DESeqAnalysis <-  # nolint
         lfcShrink
     ) {
         metadata <- list(version = .version)
+
+        # Allow input of single `DESeqResults`.
+        if (is(results, "DESeqResults")) {
+            results <- .coerceResultsToList(results)
+        }
+        if (is(lfcShrink, "DESeqResults")) {
+            lfcShrink <- .coerceResultsToList(lfcShrink)
+        }
+
         new(
             Class = "DESeqAnalysis",
             data = data,
@@ -61,6 +70,16 @@ DESeqAnalysis <-  # nolint
             metadata = metadata
         )
     }
+
+
+
+# Note that this will automatically assign name.
+.coerceResultsToList <- function(from) {
+    assert(is(from, "DESeqResults"))
+    to <- list(from)
+    names(to) <- makeNames(contrastName(from))
+    to
+}
 
 
 
