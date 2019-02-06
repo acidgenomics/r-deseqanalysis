@@ -34,8 +34,11 @@
 #' @slot lfcShrink `list`.
 #'   *Optional*. One or more shrunken `DESeqResults`. If set, must correspond to
 #'   those defined in `results`.
+#'
+#' @seealso `showClass("Annotated")`.
 setClass(
     Class = "DESeqAnalysis",
+    contains = "Annotated",
     slots = c(
         data = "DESeqDataSet",
         transform = "DESeqTransform",
@@ -68,6 +71,17 @@ setClass(
         )
         if (!isTRUE(ok)) return(ok)
 
+        # Alpha levels in the slotted results must be identical.
+        alphas <- vapply(
+            X = results,
+            FUN = function(x) {
+                metadata(x)[["alpha"]]
+            },
+            FUN.VALUE = numeric(1L)
+        )
+        ok <- validate(length(unique(alphas)) == 1L)
+        if (!isTRUE(ok)) return(ok)
+
         # Unshrunken and shrunken DESeqResults must correspond, if shrunken
         # values are optionally defined.
         if (length(lfcShrink) > 0L) {
@@ -80,6 +94,27 @@ setClass(
                     },
                     SIMPLIFY = TRUE
                 ))
+            )
+            if (!isTRUE(ok)) return(ok)
+
+            # lfcShrink alpha must match the results alpha.
+            ok <- validate(
+                identical(
+                    vapply(
+                        X = results,
+                        FUN = function(x) {
+                            metadata(x)[["alpha"]]
+                        },
+                        FUN.VALUE = numeric(1L)
+                    ),
+                    vapply(
+                        X = lfcShrink,
+                        FUN = function(x) {
+                            metadata(x)[["alpha"]]
+                        },
+                        FUN.VALUE = numeric(1L)
+                    )
+                )
             )
             if (!isTRUE(ok)) return(ok)
         }
@@ -98,9 +133,17 @@ setClass(
     Class = "DESeqAnalysisList",
     contains = "SimpleList",
     validity = function(object) {
+        # Currently allowing an empty list.
+        if (!hasLength(object)) return(TRUE)
+
+        # Require that all objects in list are named.
         ok <- validate(
             hasValidNames(object)
         )
+        if (!isTRUE(ok)) return(ok)
+
+        # Ensure that all slotted DESeqAnalysis objects are valid.
+        ok <- validate(all(bapply(object, validObject)))
         if (!isTRUE(ok)) return(ok)
 
         TRUE
