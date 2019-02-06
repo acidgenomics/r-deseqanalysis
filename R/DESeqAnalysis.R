@@ -51,12 +51,14 @@ DESeqAnalysis <-  # nolint
         results,
         lfcShrink
     ) {
+        metadata <- list(version = .version)
         new(
             Class = "DESeqAnalysis",
             data = data,
             transform = transform,
             results = results,
-            lfcShrink = lfcShrink
+            lfcShrink = lfcShrink,
+            metadata = metadata
         )
     }
 
