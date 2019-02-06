@@ -157,12 +157,20 @@ setClass(
         if (!hasLength(object)) return(TRUE)
 
         # Require that all objects in list are named.
-        ok <- validate(
-            hasValidNames(object)
-        )
+        ok <- validate(hasValidNames(object))
+        if (!isTRUE(ok)) return(ok)
+
+        # Check that all of the elements in the list are DESeqAnalysis.
+        ok <- validate(all(bapply(
+            X = object,
+            FUN = function(object) {
+                is(object, "DESeqAnalysis")
+            }
+        )))
         if (!isTRUE(ok)) return(ok)
 
         # Ensure that all slotted DESeqAnalysis objects are valid.
+        # This step can be slow for large objects.
         ok <- validate(all(bapply(object, validObject)))
         if (!isTRUE(ok)) return(ok)
 
