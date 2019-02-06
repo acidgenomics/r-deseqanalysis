@@ -1,3 +1,7 @@
+# FIXME Add a `results = "all"` mode here?
+
+
+
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano

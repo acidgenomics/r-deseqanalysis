@@ -1,3 +1,7 @@
+# Defining generic methods for: results resultsNames
+
+
+
 #' @importClassesFrom DESeq2 DESeqDataSet DESeqTransform
 #' @importClassesFrom SummarizedExperiment RangedSummarizedExperiment
 #'   SummarizedExperiment
@@ -5,7 +9,7 @@
 #'
 #' @importMethodsFrom basejump coerce
 #'
-#' @importFrom DESeq2 priorInfo results resultsNames
+#' @importFrom DESeq2 priorInfo
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors SimpleList as.data.frame head mcols mcols<- metadata
 #' @importFrom SummarizedExperiment colData colData<-
