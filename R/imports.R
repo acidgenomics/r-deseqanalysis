@@ -22,9 +22,9 @@
 #'   geom_hline geom_point geom_vline ggplot guides labs scale_color_manual
 #'   scale_x_continuous scale_y_continuous theme
 #' @importFrom goalie areDisjointSets assert bapply hasLength hasNames hasLength
-#'   hasRows hasRownames hasValidDimnames isAlpha isAny isCharacter isFlag
-#'   isHeaderLevel isInRange isInt isNonEmpty isNonNegative isNumber isPositive
-#'   isScalar isString isSubset validate
+#'   hasRows hasRownames hasValidDimnames hasValidNames isAlpha isAny
+#'   isCharacter isFlag isHeaderLevel isInRange isInt isNonEmpty isNonNegative
+#'   isNumber isPositive isScalar isString isSubset validate
 #' @importFrom knitr kable
 #' @importFrom magrittr %>%
 #' @importFrom methods as is new prototype setClass slot slot<- validObject
