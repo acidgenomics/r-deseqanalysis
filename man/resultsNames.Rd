@@ -7,20 +7,21 @@
 \alias{resultsNames,DESeqAnalysis-method}
 \title{Results names}
 \usage{
-resultsNames(object, ...)
-
 \S4method{resultsNames}{DESeqDataSet}(object)
 
 \S4method{resultsNames}{DESeqAnalysis}(object)
 }
 \arguments{
 \item{object}{Object.}
-
-\item{...}{Additional arguments}
+}
+\value{
+\code{character}.
 }
 \description{
 Results names
 }
 \seealso{
-\code{\link[DESeq2:resultsNames]{DESeq2::resultsNames()}}.
+\itemize{
+\item \code{DESeq2::resultsNames()}.
+}
 }
