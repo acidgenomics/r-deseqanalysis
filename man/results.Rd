@@ -14,6 +14,10 @@ results(object, ...)
 \S4method{results}{DESeqAnalysis}(object, results, lfcShrink = TRUE)
 }
 \arguments{
+\item{object}{Object.}
+
+\item{...}{Additional arguments}
+
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or positive of \code{DESeqResults}.}
 

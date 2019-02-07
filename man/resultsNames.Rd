@@ -13,6 +13,11 @@ resultsNames(object, ...)
 
 \S4method{resultsNames}{DESeqAnalysis}(object)
 }
+\arguments{
+\item{object}{Object.}
+
+\item{...}{Additional arguments}
+}
 \description{
 Results names
 }
