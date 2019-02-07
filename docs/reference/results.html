@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Top tables — topTables • DESeqAnalysis</title>
+<title>Results — results • DESeqAnalysis</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Top tables — topTables" />
+<meta property="og:title" content="Results — results" />
 
-<meta property="og:description" content="Top tables of differentially expressed genes." />
+<meta property="og:description" content="Results" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -104,19 +104,22 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Top tables</h1>
-    <small class="dont-index">Source: <a href='https://github.com/steinbaugh/DESeqAnalysis/blob/master/R/topTables-methods.R'><code>R/topTables-methods.R</code></a></small>
-    <div class="hidden name"><code>topTables.Rd</code></div>
+    <h1>Results</h1>
+    <small class="dont-index">Source: <a href='https://github.com/steinbaugh/DESeqAnalysis/blob/master/R/results-methods.R'><code>R/results-methods.R</code></a></small>
+    <div class="hidden name"><code>results.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Top tables of differentially expressed genes.</p>
+    <p>Results</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>)</pre>
+    <pre class="usage"><span class='co'># S4 method for DESeqDataSet</span>
+<span class='fu'>results</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+
+<span class='co'># S4 method for DESeqAnalysis</span>
+<span class='fu'>results</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -126,55 +129,28 @@
       <td><p>Object.</p></td>
     </tr>
     <tr>
+      <th>...</th>
+      <td><p>Additional arguments.</p></td>
+    </tr>
+    <tr>
       <th>results</th>
       <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>.
 Name or positive of <code>DESeqResults</code>.</p></td>
     </tr>
     <tr>
-      <th>n</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>.
-Number of genes (per direction) to report.</p></td>
+      <th>lfcShrink</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
+Use shrunken log2 fold change (LFC) values.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>kable</code>.
-Markdown tables.</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
-
-<span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>84 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>87 downregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; 
-#&gt; 
-#&gt; |geneID          |geneName |baseMean |lfc  |padj     |geneBiotype    |
-#&gt; |:---------------|:--------|:--------|:----|:--------|:--------------|
-#&gt; |ENSG00000005381 |MPO      |123      |2.36 |1.86e-09 |protein_coding |
-#&gt; |ENSG00000013392 |RWDD2A   |72       |2.85 |4.57e-09 |protein_coding |
-#&gt; |ENSG00000012963 |UBR7     |195      |1.99 |5.64e-09 |protein_coding |
-#&gt; |ENSG00000032389 |EIPR1    |113      |1.76 |6.55e-09 |protein_coding |
-#&gt; |ENSG00000019485 |PRDM11   |901      |1.62 |4.54e-08 |protein_coding |
-#&gt; 
-#&gt; 
-#&gt; |geneID          |geneName |baseMean |lfc   |padj     |geneBiotype    |
-#&gt; |:---------------|:--------|:--------|:-----|:--------|:--------------|
-#&gt; |ENSG00000023318 |ERP44    |44       |-2.90 |3.20e-14 |protein_coding |
-#&gt; |ENSG00000022567 |SLC45A4  |28       |-2.99 |3.75e-11 |protein_coding |
-#&gt; |ENSG00000014824 |SLC30A9  |26       |-2.86 |4.53e-08 |protein_coding |
-#&gt; |ENSG00000033011 |ALG1     |48       |-2.17 |6.60e-06 |protein_coding |
-#&gt; |ENSG00000000457 |SCYL3    |81       |-1.94 |2.77e-05 |protein_coding |</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>
