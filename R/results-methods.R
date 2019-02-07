@@ -1,25 +1,9 @@
-# FIXME Export this in bioverbs.
-
-
-
-#' Results
-#'
 #' @name results
-#' @inheritParams params
-#'
-#' @seealso [DESeq2::results()].
-NULL
-
-
-
-#' @rdname results
 #' @export
-setGeneric(
-    name = "results",
-    def = function(object, ...) {
-        standardGeneric("results")
-    }
-)
+#' @importFrom bioverbs results
+#' @inherit bioverbs::results
+#' @inheritParams params
+NULL
 
 
 

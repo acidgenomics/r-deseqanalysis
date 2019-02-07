@@ -137,13 +137,13 @@ to ensure <code>DESeqTransform</code> and <code>DESeqResults</code> correspond t
     </tr>
     <tr>
       <th>results</th>
-      <td><p><code>list</code>.
+      <td><p><code>list</code> or single <code>DESeqResults</code>.
 One or more unshrunken <code>DESeqResults</code>.
 Assign the <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>DESeq2::results()</a></code> return here.</p></td>
     </tr>
     <tr>
       <th>lfcShrink</th>
-      <td><p><code>list</code>.
+      <td><p><code>list</code>or single <code>DESeqResults</code>.
 One or more shrunken <code>DESeqResults</code>.
 Assign the <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/lfcShrink'>DESeq2::lfcShrink()</a></code> return here.</p></td>
     </tr>
@@ -208,8 +208,8 @@ care of this automatically in supported methods.</p>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='no'>transform</span>)</div><div class='output co'>#&gt; [1] "DESeqTransform"
 #&gt; attr(,"package")
 #&gt; [1] "DESeq2"</div><div class='input'>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>resultsNames</a></span>(<span class='no'>data</span>)</div><div class='output co'>#&gt; [1] "Intercept"        "condition_B_vs_A"</div><div class='input'><span class='no'>name</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>resultsNames</a></span>(<span class='no'>data</span>)<span class='kw'>[[</span><span class='fl'>2L</span>]]
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>results</a></span>(<span class='no'>data</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='no'>name</span>)
+<span class='fu'><a href='resultsNames.html'>resultsNames</a></span>(<span class='no'>data</span>)</div><div class='output co'>#&gt; [1] "Intercept"        "condition_B_vs_A"</div><div class='input'><span class='no'>name</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsNames.html'>resultsNames</a></span>(<span class='no'>data</span>)<span class='kw'>[[</span><span class='fl'>2L</span>]]
+<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>data</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='no'>name</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='no'>results</span>)</div><div class='output co'>#&gt; [1] "DESeqResults"
 #&gt; attr(,"package")
 #&gt; [1] "DESeq2"</div><div class='input'>
