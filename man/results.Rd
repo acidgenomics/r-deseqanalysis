@@ -7,8 +7,6 @@
 \alias{results,DESeqAnalysis-method}
 \title{Results}
 \usage{
-results(object, ...)
-
 \S4method{results}{DESeqDataSet}(object, ...)
 
 \S4method{results}{DESeqAnalysis}(object, results, lfcShrink = TRUE)
@@ -16,7 +14,7 @@ results(object, ...)
 \arguments{
 \item{object}{Object.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or positive of \code{DESeqResults}.}
@@ -26,7 +24,4 @@ Use shrunken log2 fold change (LFC) values.}
 }
 \description{
 Results
-}
-\seealso{
-\code{\link[DESeq2:results]{DESeq2::results()}}.
 }
