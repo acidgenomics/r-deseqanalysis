@@ -1,20 +1,18 @@
 #' Example DESeq2 differential expression analysis
-#' 2018-12-12
-
-# FIXME Name results...otherwise the object won't return valid.
-# Assign with `makeNames`.
+#' 2019-02-06
 
 library(pryr)
 library(basejump)
 library(DESeq2)
+
+data(rse, package = "basejump")
 
 # Restrict to 2 MB.
 # Use `pryr::object_size` instead of `utils::object.size`.
 limit <- structure(2e6, class = "object_size")
 
 # DESeqDataSet
-# Consider having the example RSE in basejump include more genes.
-data(rse, package = "basejump")
+# Consider updating the example RSE in basejump to include more genes.
 dds <- DESeqDataSet(se = rse, design = ~ condition)
 dds <- DESeq(dds)
 validObject(dds)
@@ -25,19 +23,21 @@ dt <- varianceStabilizingTransformation(dds)
 # DESeqResults
 contrast <- resultsNames(dds)[[2L]]
 res <- results(dds, name = contrast)
-
 # Shrink log2 fold changes.
-res_shrunken <- lfcShrink(dds = dds, coef = contrast, res = res)
-validObject(res_shrunken)
+shrink <- lfcShrink(
+    dds = dds,
+    res = res,
+    coef = contrast,
+    type = "apeglm"
+)
 
+# Package up the analysis into a DESeqAnalysis object.
 deseq <- DESeqAnalysis(
     data = dds,
     transform = dt,
-    results = list(res),
-    lfcShrink = list(res_shrunken)
+    results = res,
+    lfcShrink = shrink
 )
-validObject(deseq)
-print(deseq)
 
 # Report the size of each slot in bytes.
 vapply(

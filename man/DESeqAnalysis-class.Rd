@@ -14,11 +14,11 @@ DESeqAnalysis(data, transform, results, lfcShrink)
 \item{transform}{\code{DESeqTransform}.
 \code{\link[DESeq2:varianceStabilizingTransformation]{DESeq2::varianceStabilizingTransformation()}} recommended by default.}
 
-\item{results}{\code{list}.
+\item{results}{\code{list} or single \code{DESeqResults}.
 One or more unshrunken \code{DESeqResults}.
 Assign the \code{\link[DESeq2:results]{DESeq2::results()}} return here.}
 
-\item{lfcShrink}{\code{list}.
+\item{lfcShrink}{\code{list}or single \code{DESeqResults}.
 One or more shrunken \code{DESeqResults}.
 Assign the \code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}} return here.}
 }
@@ -104,7 +104,10 @@ x <- DESeqAnalysis(
 print(x)
 }
 \seealso{
-\code{\link[=DESeqAnalysis]{DESeqAnalysis()}}.
+\itemize{
+\item \code{help(topic = "Annotated-class", package = "S4Vectors")}.
+\item \code{showClass("Annotated")}.
+}
 }
 \author{
 Michael Steinbaugh
