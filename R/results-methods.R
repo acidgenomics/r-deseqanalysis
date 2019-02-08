@@ -1,9 +1,15 @@
 #' @name results
-#' @export
-#' @importFrom bioverbs results
 #' @inherit bioverbs::results
+#' @inheritParams basejump::params
 #' @inheritParams params
 NULL
+
+
+
+#' @importFrom bioverbs results
+#' @aliases NULL
+#' @export
+bioverbs::results
 
 
 
