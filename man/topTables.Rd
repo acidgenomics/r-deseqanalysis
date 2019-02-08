@@ -4,7 +4,7 @@
 \name{topTables}
 \alias{topTables}
 \alias{topTables,DESeqAnalysis-method}
-\title{Top tables of differentially expressed genes}
+\title{Top tables}
 \usage{
 \S4method{topTables}{DESeqAnalysis}(object, results, n = 10L)
 }
@@ -22,7 +22,7 @@ Number of genes (per direction) to report.}
 Markdown tables.
 }
 \description{
-Top tables of differentially expressed genes
+Top tables of differentially expressed genes.
 }
 \examples{
 data(deseq)

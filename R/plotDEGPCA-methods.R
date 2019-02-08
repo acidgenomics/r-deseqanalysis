@@ -1,3 +1,4 @@
+# FIXME Add a `results = "all"` mode here?
 # Do not allow post hoc alpha or lfcThreshold cutoffs here.
 
 
