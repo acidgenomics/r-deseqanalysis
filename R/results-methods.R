@@ -13,9 +13,10 @@ bioverbs::results
 
 
 
-results.DESeqDataSet <- function(object, ...) {
-    DESeq2::results(object, ...)
-}
+results.DESeqDataSet <-  # nolint
+    function(object, ...) {
+        DESeq2::results(object, ...)
+    }
 
 
 
@@ -29,9 +30,14 @@ setMethod(
 
 
 
-results.DESeqAnalysis <- function(object, results, lfcShrink = TRUE) {
-    .matchResults(object = object, results = results, lfcShrink = lfcShrink)
-}
+results.DESeqAnalysis <-  # nolint
+    function(object, results, lfcShrink = TRUE) {
+        .matchResults(
+            object = object,
+            results = results,
+            lfcShrink = lfcShrink
+        )
+    }
 
 
 

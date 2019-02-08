@@ -13,9 +13,10 @@ bioverbs::resultsNames
 
 
 
-resultsNames.DESeqDataSet <- function(object) {
-    DESeq2::resultsNames(object)
-}
+resultsNames.DESeqDataSet <-  # nolint
+    function(object) {
+        DESeq2::resultsNames(object)
+    }
 
 
 
@@ -29,9 +30,10 @@ setMethod(
 
 
 
-resultsNames.DESeqAnalysis <- function(object) {
-    names(object@results)
-}
+resultsNames.DESeqAnalysis <-  # nolint
+    function(object) {
+        names(object@results)
+    }
 
 
 

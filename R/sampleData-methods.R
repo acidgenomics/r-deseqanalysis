@@ -6,11 +6,12 @@ NULL
 
 
 
-sampleData.DESeqAnalysis <- function(object) {
-    object %>%
-        as("DESeqDataSet") %>%
-        sampleData()
-}
+sampleData.DESeqAnalysis <-  # nolint
+    function(object) {
+        object %>%
+            as("DESeqDataSet") %>%
+            sampleData()
+    }
 
 
 

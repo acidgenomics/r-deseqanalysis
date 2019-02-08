@@ -25,15 +25,16 @@ bioverbs::plotCounts
 
 
 # Note that we need to remap "object" to "dds" here.
-plotCounts.DESeqDataSet <- function(object, ...) {
-    do.call(
-        what = DESeq2::plotCounts,
-        args = matchArgsToDoCall(
-            args = list(dds = object),
-            removeFormals = "object"
+plotCounts.DESeqDataSet <-  # nolint
+    function(object, ...) {
+        do.call(
+            what = DESeq2::plotCounts,
+            args = matchArgsToDoCall(
+                args = list(dds = object),
+                removeFormals = "object"
+            )
         )
-    )
-}
+    }
 
 f <- formals(DESeq2::plotCounts)
 names(f)[[1L]] <- "object"
