@@ -1,7 +1,3 @@
-# Defining generic methods for: results resultsNames
-
-
-
 #' @importClassesFrom DESeq2 DESeqDataSet DESeqTransform
 #' @importClassesFrom SummarizedExperiment RangedSummarizedExperiment
 #'   SummarizedExperiment
@@ -16,7 +12,7 @@
 #' @importFrom basejump Gene2Symbol as_tibble basejump_geom_label_repel camel
 #'   convertSampleIDsToNames decode humanize initDir interestingGroups<-
 #'   makeNames mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
-#'   matchInterestingGroups matchesGene2Symbol methodFormals plotGene
+#'   matchInterestingGroups matchesGene2Symbol methodFormals plotCounts
 #'   plotHeatmap plotPCA printString relevelColData removeNA showSlotInfo snake
 #'   standardizeCall
 #' @importFrom cowplot draw_plot ggdraw

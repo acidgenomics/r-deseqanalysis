@@ -7,8 +7,6 @@
 #'   contrasts (e.g. interaction effect).
 #' @param lfcShrink `logical(1)`.
 #'   Use shrunken log2 fold change (LFC) values.
-#' @param object Object.
 #' @param results `character(1)` or `integer(1)`.
 #'   Name or positive of `DESeqResults`.
-#' @param ... Additional arguments
 NULL
