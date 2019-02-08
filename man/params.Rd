@@ -12,12 +12,8 @@ contrasts (e.g. interaction effect).}
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
 
-\item{object}{Object.}
-
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or positive of \code{DESeqResults}.}
-
-\item{...}{Additional arguments}
 }
 \value{
 No value.
