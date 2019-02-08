@@ -42,6 +42,7 @@ formals(plotCounts.DESeqDataSet) <- f
 
 
 #' @rdname plotCounts
+#' @usage NULL
 #' @export
 setMethod(
     f = "plotCounts",

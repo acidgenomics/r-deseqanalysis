@@ -7,10 +7,6 @@
 \alias{plotCounts,DESeqAnalysis-method}
 \title{Plot counts}
 \usage{
-\S4method{plotCounts}{DESeqDataSet}(object, gene, intgroup = "condition",
-  normalized = TRUE, transform = TRUE, main, xlab = "group",
-  returnData = FALSE, replaced = FALSE, pc, ...)
-
 \S4method{plotCounts}{DESeqAnalysis}(object, genes,
   interestingGroups = NULL, medianLine = TRUE,
   color = getOption("basejump.discrete.color", NULL),
