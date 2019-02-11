@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.1.8
-Date: 2019-02-08
+Version: 0.1.9
+Date: 2019-02-11
 Authors@R: c(
     person(
         given = "Michael",
@@ -83,10 +83,10 @@ Encoding: UTF-8
 LazyData: false
 Depends:
     R (>= 3.5),
-    basejump (>= 0.9.7),
+    basejump (>= 0.9.9),
     DESeq2 (>= 1.20)
 Imports:
-    bioverbs (>= 0.1.6), brio (>= 0.1.4), goalie (>= 0.2.6),
+    bioverbs (>= 0.1.6), brio (>= 0.1.6), goalie (>= 0.2.8),
     BiocGenerics, IRanges, S4Vectors, SummarizedExperiment,
     cowplot (>= 0.9), dplyr (>= 0.7), ggplot2 (>= 3.1), knitr (>= 1.21),
         magrittr (>= 1.5), rlang (>= 0.3), stringr (>= 1.3),
