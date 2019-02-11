@@ -102,8 +102,11 @@ resultsTables.DESeqAnalysis <-  # nolint
         # S4 Rle columns from the Genomic Ranges.
         if (isTRUE(rowData)) {
             message("Joining row annotations.")
-            rowData <- decode(rowData(dds))
-            assert(hasRownames(rowData))
+            rowData <- rowData(dds)
+            # SummarizedExperiment inconsistently handles rownames on rowData.
+            # Ensure they are set here before continuing.
+            rownames(rowData) <- rownames(dds)
+            rowData <- decode(rowData)
             keep <- vapply(
                 X = rowData,
                 FUN = function(x) {
