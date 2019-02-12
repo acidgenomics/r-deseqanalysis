@@ -68,7 +68,7 @@ DESeqDataSet." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9</span>
       </span>
     </div>
 
@@ -172,7 +172,7 @@ those defined in <code>results</code>.</p></dd>
 
     
     <p>We recommend generating the <code>DESeqDataSet</code> by coercion from <code>bcbioRNASeq</code>
-object using <code>as(dds, "bcbioRNASeq")</code>. Don't use the <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/DESeqDataSet'>DESeq2::DESeqDataSet()</a></code>
+object using <code><a href='as.html'>as(dds, "bcbioRNASeq")</a></code>. Don't use the <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/DESeqDataSet'>DESeq2::DESeqDataSet()</a></code>
 or <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/DESeqDataSet'>DESeq2::DESeqDataSetFromMatrix()</a></code> constructors to generate the
 <code>DESeqDataSet</code> object.</p>
     
@@ -208,8 +208,8 @@ care of this automatically in supported methods.</p>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='no'>transform</span>)</div><div class='output co'>#&gt; [1] "DESeqTransform"
 #&gt; attr(,"package")
 #&gt; [1] "DESeq2"</div><div class='input'>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>resultsNames</a></span>(<span class='no'>data</span>)</div><div class='output co'>#&gt; [1] "Intercept"        "condition_B_vs_A"</div><div class='input'><span class='no'>name</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>resultsNames</a></span>(<span class='no'>data</span>)<span class='kw'>[[</span><span class='fl'>2L</span>]]
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>results</a></span>(<span class='no'>data</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='no'>name</span>)
+<span class='fu'><a href='resultsNames.html'>resultsNames</a></span>(<span class='no'>data</span>)</div><div class='output co'>#&gt; [1] "Intercept"        "condition_B_vs_A"</div><div class='input'><span class='no'>name</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsNames.html'>resultsNames</a></span>(<span class='no'>data</span>)<span class='kw'>[[</span><span class='fl'>2L</span>]]
+<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>data</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='no'>name</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='no'>results</span>)</div><div class='output co'>#&gt; [1] "DESeqResults"
 #&gt; attr(,"package")
 #&gt; [1] "DESeq2"</div><div class='input'>
@@ -226,7 +226,7 @@ care of this automatically in supported methods.</p>
     <span class='kw'>results</span> <span class='kw'>=</span> <span class='no'>results</span>,
     <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='no'>lfcShrink</span>
 )
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; DESeqAnalysis 0.1.8; DESeq2 1.22.2
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; DESeqAnalysis 0.1.9; DESeq2 1.22.2
 #&gt; data:
 #&gt;   dim: 1000 12 
 #&gt;   metadata(1): version
