@@ -130,12 +130,6 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         object,
         results,
         contrastSamples = FALSE
-        # These are defined in DESeqResults method.
-        # direction = c("both", "up", "down"),
-        # scale = c("row", "column", "none"),
-        # clusteringMethod = "ward.D2",
-        # clusterRows = TRUE,
-        # clusterCols = TRUE
     ) {
         validObject(object)
         assert(isFlag(contrastSamples))
