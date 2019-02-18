@@ -18,7 +18,7 @@
 \item{object}{Object.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
-Name or positive of \code{DESeqResults}.}
+Name or position of \code{DESeqResults}.}
 
 \item{contrastSamples}{\code{logical(1)}.
 \strong{Experimental}. Only include the samples used to define the contrast

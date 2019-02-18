@@ -23,7 +23,7 @@ with row names, whereas \code{tbl_df} option will return with \code{"rowname"}
 column.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
-Name or positive of \code{DESeqResults}.}
+Name or position of \code{DESeqResults}.}
 
 \item{rowData}{\code{logical(1)}.
 Join the row annotations.}

@@ -51,7 +51,7 @@ Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defau
 to the first argument in the \code{character} vector.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
-Name or positive of \code{DESeqResults}.}
+Name or position of \code{DESeqResults}.}
 
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
