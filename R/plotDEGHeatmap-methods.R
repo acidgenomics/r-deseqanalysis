@@ -1,4 +1,3 @@
-# FIXME Add a `results = "all"` mode here?
 # Do not allow post hoc alpha or lfcThreshold cutoffs here.
 
 
@@ -25,6 +24,107 @@ bioverbs::plotDEGHeatmap
 
 
 
+# This method is used in F1000 paper and needs to be included.
+# Note that in newer versions of the package, this step won't work because
+# we've slotted the rlog/vst counts in as a matrix instead of DESeqTransform.
+# plotDEGHeatmap(res, counts = assays(bcb)[["vst"]])
+plotDEGHeatmap.DESeqResults <-  # nolint
+    function(
+        object,
+        counts,
+        direction = c("both", "up", "down"),
+        scale = c("row", "column", "none"),
+        clusteringMethod = "ward.D2",
+        clusterRows = TRUE,
+        clusterCols = TRUE
+    ) {
+        validObject(object)
+        validObject(counts)
+        assert(
+            is(object, "DESeqResults"),
+            # Technically we could make this work on `SummarizedExperiment` and
+            # allow `DESeqDataSet` here, but variance-stabilized counts defined
+            # in `DESeqTransform` are recommended instead.
+            is(counts, "DESeqTransform"),
+            identical(rownames(object), rownames(counts)),
+            isString(clusteringMethod)
+        )
+        direction <- match.arg(direction)
+        scale <- match.arg(scale)
+
+        # Rename objects internally to make the code more readable.
+        res <- object
+        dt <- counts
+
+        interestingGroups(dt) <- matchInterestingGroups(dt, interestingGroups)
+        alpha <- metadata(res)[["alpha"]]
+        assert(isAlpha(alpha))
+        lfcThreshold <- metadata(res)[["lfcThreshold"]]
+        assert(
+            isNumber(lfcThreshold),
+            isNonNegative(lfcThreshold)
+        )
+
+        # Get the character vector of DEGs.
+        deg <- deg(res, direction = direction)
+        if (!hasLength(deg)) {
+            warning("There are no DEGs to plot. Skipping.", call. = FALSE)
+            return(invisible())
+        }
+
+        # Subset to only include the DEGs.
+        dt <- dt[deg, , drop = FALSE]
+
+        # Title
+        title <- paste0(
+            contrastName(res), "\n",
+            length(deg), " genes; ",
+            "alpha < ", alpha
+        )
+        if (lfcThreshold > 0L) {
+            title <- paste0(title, "; lfc > ", lfcThreshold)
+        }
+
+        # Using SummarizedExperiment method defined in basejump here.
+        rse <- as(dt, "RangedSummarizedExperiment")
+        do.call(
+            what = plotHeatmap,
+            args = matchArgsToDoCall(
+                args = list(
+                    object = rse,
+                    scale = scale,
+                    title = title
+                ),
+                removeFormals = c(
+                    "counts",
+                    "direction"
+                )
+            )
+        )
+    }
+
+f1 <- formals(plotDEGHeatmap.DESeqResults)
+f2 <- methodFormals(
+    f = "plotHeatmap",
+    signature = "SummarizedExperiment",
+    package = "basejump"
+)
+f2 <- f2[setdiff(names(f2), c(names(f1), "object", "assay"))]
+f <- c(f1, f2)
+formals(plotDEGHeatmap.DESeqResults) <- f
+
+
+
+#' @rdname plotDEGHeatmap
+#' @export
+setMethod(
+    f = "plotDEGHeatmap",
+    signature = signature("DESeqResults"),
+    definition = plotDEGHeatmap.DESeqResults
+)
+
+
+
 plotDEGHeatmap.DESeqAnalysis <-  # nolint
     function(
         object,
@@ -47,33 +147,9 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         res <- .matchResults(object, results)
         validObject(res)
 
-        # We're using the variance-stabilized counts for visualization.
+        # We're using the variance-stabilized counts for visualization here.
         dt <- as(object, "DESeqTransform")
         validObject(dt)
-
-        assert(identical(rownames(res), rownames(dt)))
-
-        interestingGroups(dt) <-
-            matchInterestingGroups(dt, interestingGroups)
-
-        alpha <- metadata(res)[["alpha"]]
-        assert(isAlpha(alpha))
-
-        lfcThreshold <- metadata(res)[["lfcThreshold"]]
-        assert(
-            isNumber(lfcThreshold),
-            isNonNegative(lfcThreshold)
-        )
-
-        # Get the character vector of DEGs.
-        deg <- deg(res, direction = direction)
-        if (!hasLength(deg)) {
-            warning("There are no DEGs to plot. Skipping.", call. = FALSE)
-            return(invisible())
-        }
-
-        # Subset to only include the DEGs.
-        dt <- dt[deg, , drop = FALSE]
 
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, results = results)
@@ -82,35 +158,10 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
             colData(dt) <- relevelColData(colData(dt))
         }
 
-        # Title
-        title <- paste0(
-            contrastName(res), "\n",
-            length(deg), " genes; ",
-            "alpha < ", alpha
-        )
-        if (lfcThreshold > 0L) {
-            title <- paste0(title, "; lfc > ", lfcThreshold)
-        }
+        stop("FIXME")
 
-        # Using SummarizedExperiment method here.
-        do.call(
-            what = plotHeatmap,
-            args = matchArgsToDoCall(
-                args = list(
-                    object = as(dt, "RangedSummarizedExperiment"),
-                    scale = scale,
-                    title = title
-                ),
-                removeFormals = c(
-                    "alpha",
-                    "contrastSamples",
-                    "counts",
-                    "direction",
-                    "lfcThreshold",
-                    "results"
-                )
-            )
-        )
+        # direction
+        # contrastSamples
     }
 
 f1 <- formals(plotDEGHeatmap.DESeqAnalysis)
