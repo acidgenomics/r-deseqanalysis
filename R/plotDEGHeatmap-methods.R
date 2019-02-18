@@ -8,6 +8,10 @@
 #' @inheritParams basejump::params
 #' @inheritParams params
 #'
+#' @param counts `DESeqTransform`.
+#'   Variance-stabilized counts suitable for heatmap.
+#'   Object rownames must be identical to corresponding `DESeqResults`.
+#'
 #' @examples
 #' data(deseq)
 #'
@@ -130,6 +134,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         object,
         results,
         contrastSamples = FALSE,
+        # These are defined in DESeqResults method.
         direction = c("both", "up", "down"),
         scale = c("row", "column", "none"),
         clusteringMethod = "ward.D2",
@@ -137,10 +142,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         clusterCols = TRUE
     ) {
         validObject(object)
-        assert(
-            isFlag(contrastSamples),
-            isString(clusteringMethod)
-        )
+        assert(isFlag(contrastSamples))
         direction <- match.arg(direction)
         scale <- match.arg(scale)
 
@@ -151,6 +153,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         dt <- as(object, "DESeqTransform")
         validObject(dt)
 
+        # Subset the DESeqTransform, if necessary.
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, results = results)
             assert(isSubset(samples, colnames(dt)))
@@ -158,10 +161,22 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
             colData(dt) <- relevelColData(colData(dt))
         }
 
-        stop("FIXME")
-
-        # direction
-        # contrastSamples
+        # Passing to DESeqResults/DESeqTransform method.
+        do.call(
+            what = plotDEGHeatmap,
+            args = matchArgsToDoCall(
+                args = list(
+                    object = res,
+                    counts = dt,
+                    direction = direction,
+                    scale = scale
+                ),
+                removeFormals = c(
+                    "results",
+                    "contrastSamples"
+                )
+            )
+        )
     }
 
 f1 <- formals(plotDEGHeatmap.DESeqAnalysis)
