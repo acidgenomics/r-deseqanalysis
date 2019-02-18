@@ -27,8 +27,9 @@
 \arguments{
 \item{object}{Object.}
 
-\item{counts}{\code{matrix}.
-Count matrix. Normalized counts are recommended.}
+\item{counts}{\code{DESeqTransform}.
+Variance-stabilized counts suitable for heatmap.
+Object rownames must be identical to corresponding \code{DESeqResults}.}
 
 \item{direction}{\code{character(1)}.
 Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
@@ -93,7 +94,7 @@ Plot title.}
 \item{...}{Additional arguments.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
-Name or positive of \code{DESeqResults}.}
+Name or position of \code{DESeqResults}.}
 
 \item{contrastSamples}{\code{logical(1)}.
 \strong{Experimental}. Only include the samples used to define the contrast
