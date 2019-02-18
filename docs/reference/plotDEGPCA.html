@@ -67,7 +67,7 @@ than requiring manual input of a gene vector or subset object." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.10</span>
       </span>
     </div>
 
@@ -119,9 +119,17 @@ than requiring manual input of a gene vector or subset object.</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for DESeqAnalysis</span>
+    <pre class="usage"><span class='co'># S4 method for DESeqResults</span>
+<span class='fu'>plotDEGPCA</span>(<span class='no'>object</span>, <span class='no'>counts</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>,
+  <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='no'>object</span>, <span class='kw'>assay</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"basejump.label"</span>, <span class='fl'>FALSE</span>),
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"basejump.color.discrete"</span>, <span class='kw'>NULL</span>),
+  <span class='kw'>pointSize</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"basejump.point.size"</span>, <span class='fl'>3L</span>),
+  <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"ggplot"</span>, <span class='st'>"DataFrame"</span>), <span class='no'>...</span>)
+
+<span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>plotDEGPCA</span>(<span class='no'>object</span>, <span class='no'>results</span>,
-  <span class='kw'>contrastSamples</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='no'>object</span>,
+  <span class='kw'>contrastSamples</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
   <span class='kw'>assay</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"basejump.label"</span>, <span class='fl'>FALSE</span>),
   <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"basejump.color.discrete"</span>, <span class='kw'>NULL</span>),
@@ -136,16 +144,10 @@ than requiring manual input of a gene vector or subset object.</p>
       <td><p>Object.</p></td>
     </tr>
     <tr>
-      <th>results</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>.
-Name or positive of <code>DESeqResults</code>.</p></td>
-    </tr>
-    <tr>
-      <th>contrastSamples</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
-<strong>Experimental</strong>. Only include the samples used to define the contrast
-passed to <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>DESeq2::results()</a></code>. This setting will break for complex DESeq2
-contrasts (e.g. interaction effect).</p></td>
+      <th>counts</th>
+      <td><p><code>DESeqTransform</code>.
+Variance-stabilized counts suitable for heatmap.
+Object rownames must be identical to corresponding <code>DESeqResults</code>.</p></td>
     </tr>
     <tr>
       <th>direction</th>
@@ -173,12 +175,20 @@ Superimpose sample text labels on the plot.</p></td>
     </tr>
     <tr>
       <th>color</th>
-      <td><p><code>ScaleDiscrete</code>.
-Desired ggplot2 color scale. Must supply discrete values. When set <code>NULL</code>,
-the default ggplot2 color palette will be used. If manual color definitions
-are desired, we recommend using <code><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>ggplot2::scale_color_manual()</a></code>.</p>
-<p>To set the discrete color palette globally, use:</p><pre>options(basejump.color.discrete = ggplot2::scale_color_viridis_d())
-</pre></td>
+      <td><p><code>function</code>, <code>character</code>, or <code>NULL</code>.
+Hexadecimal color function or values to use for plot.</p>
+<p>We generally recommend these hexadecimal functions from the viridis
+package:</p><ul>
+<li><p><code><a href='https://www.rdocumentation.org/packages/viridis/topics/reexports'>viridis::viridis()</a></code> (<em>default</em>).</p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/viridis/topics/reexports'>viridis::inferno()</a></code>.</p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/viridis/topics/reexports'>viridis::magma()</a></code>.</p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/viridis/topics/reexports'>viridis::plasma()</a></code>.</p></li>
+</ul>
+
+<p>Alternatively, colors can be defined manually using hexadecimal values
+(e.g. <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("#FF0000", "#0000FF")</a></code>), but this is not generally recommended.
+Refer to the RColorBrewer package for hexadecimal color palettes that may
+be suitable. If set <code>NULL</code>, will use the default pheatmap colors.</p></td>
     </tr>
     <tr>
       <th>pointSize</th>
@@ -194,6 +204,18 @@ to the first argument in the <code>character</code> vector.</p></td>
     <tr>
       <th>...</th>
       <td><p>Additional arguments.</p></td>
+    </tr>
+    <tr>
+      <th>results</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>.
+Name or position of <code>DESeqResults</code>.</p></td>
+    </tr>
+    <tr>
+      <th>contrastSamples</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
+<strong>Experimental</strong>. Only include the samples used to define the contrast
+passed to <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>DESeq2::results()</a></code>. This setting will break for complex DESeq2
+contrasts (e.g. interaction effect).</p></td>
     </tr>
     </table>
     
