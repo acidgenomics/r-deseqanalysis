@@ -28,10 +28,9 @@ bioverbs::plotDEGHeatmap
 
 
 
-# This method is used in F1000 paper and needs to be included.
-# Note that in newer versions of the package, this step won't work because
-# we've slotted the rlog/vst counts in as a matrix instead of DESeqTransform.
-# plotDEGHeatmap(res, counts = assays(bcb)[["vst"]])
+# This method is used in F1000 paper and needs to be included. Note that in
+# newer versions of bcbioRNASeq, this step won't work because we've slotted the
+# rlog/vst counts in as a matrix instead of DESeqTransform.
 plotDEGHeatmap.DESeqResults <-  # nolint
     function(
         object,
