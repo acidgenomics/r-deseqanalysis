@@ -86,41 +86,67 @@ bioverbs::topTables
 
 
 
-topTables.DESeqAnalysis <-  # nolint
-    function(object, results, n = 10L) {
-        # Suppress the message about which results we're matching here,
-        # otherwise it will be duplicated in the `resultsTables()` call.
-        suppressMessages(
-            contrast <- contrastName(object, results = results)
+.topTables.resultsTables <-  # nolint
+    function(object, contrast, n) {
+        assert(
+            is.list(object),
+            isString(contrast),
+            isInt(n)
         )
-        list <- resultsTables(
-            object = object,
-            results = results,
-            rowData = TRUE,
-            counts = FALSE,
-            return = "tbl_df"
-        )
-
         # Upregulated genes.
-        up <- list[["up"]]
+        up <- object[["up"]]
         if (hasLength(up)) {
             show(kable(
                 x = .topTable(up, n = n),
                 caption = paste(contrast, "(upregulated)")
             ))
         }
-
         # Downregulated genes.
-        down <- list[["down"]]
+        down <- object[["down"]]
         if (hasLength(down)) {
             show(kable(
                 x = .topTable(down, n = n),
                 caption = paste(contrast, "(downregulated)")
             ))
         }
-
         # Invisibly return list containing the subsets.
         invisible(list(up = up, down = down))
+    }
+
+
+
+# This is used in bcbioRNASeq F1000 paper.
+topTables.DESeqResults <-  # nolint
+    function(object, n = 10L) {
+        list <- resultsTables(object)
+        contrast <- contrastName(object)
+        .topTables.resultsTables(
+            object = list,
+            contrast = contrast,
+            n = n
+        )
+    }
+
+
+
+topTables.DESeqAnalysis <-  # nolint
+    function(object, results, n = 10L) {
+        list <- resultsTables(
+            object = object,
+            results = results,
+            rowData = TRUE,
+            counts = FALSE
+        )
+        # Suppressing the message about the contrast name we're matching here,
+        # since it will be shown in `resultsTables()` call above.
+        suppressMessages(
+            contrast <- contrastName(object, results = results)
+        )
+        .topTables.resultsTables(
+            object = list,
+            contrast = contrast,
+            n = n
+        )
     }
 
 
