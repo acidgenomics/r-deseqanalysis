@@ -45,9 +45,6 @@ plotDEGHeatmap.DESeqResults <-  # nolint
         validObject(counts)
         assert(
             is(object, "DESeqResults"),
-            # Technically we could make this work on `SummarizedExperiment` and
-            # allow `DESeqDataSet` here, but variance-stabilized counts defined
-            # in `DESeqTransform` are recommended instead.
             is(counts, "DESeqTransform"),
             identical(rownames(object), rownames(counts)),
             isString(clusteringMethod)
@@ -132,18 +129,16 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
     function(
         object,
         results,
-        contrastSamples = FALSE,
+        contrastSamples = FALSE
         # These are defined in DESeqResults method.
-        direction = c("both", "up", "down"),
-        scale = c("row", "column", "none"),
-        clusteringMethod = "ward.D2",
-        clusterRows = TRUE,
-        clusterCols = TRUE
+        # direction = c("both", "up", "down"),
+        # scale = c("row", "column", "none"),
+        # clusteringMethod = "ward.D2",
+        # clusterRows = TRUE,
+        # clusterCols = TRUE
     ) {
         validObject(object)
         assert(isFlag(contrastSamples))
-        direction <- match.arg(direction)
-        scale <- match.arg(scale)
 
         res <- .matchResults(object, results)
         validObject(res)
@@ -166,9 +161,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
             args = matchArgsToDoCall(
                 args = list(
                     object = res,
-                    counts = dt,
-                    direction = direction,
-                    scale = scale
+                    counts = dt
                 ),
                 removeFormals = c(
                     "results",
@@ -179,12 +172,8 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
     }
 
 f1 <- formals(plotDEGHeatmap.DESeqAnalysis)
-f2 <- methodFormals(
-    f = "plotHeatmap",
-    signature = "SummarizedExperiment",
-    package = "basejump"
-)
-f2 <- f2[setdiff(names(f2), c(names(f1), "object", "assay"))]
+f2 <- formals(plotDEGHeatmap.DESeqResults)
+f2 <- f2[setdiff(names(f2), c(names(f1), "counts"))]
 f <- c(f1, f2)
 formals(plotDEGHeatmap.DESeqAnalysis) <- f
 
