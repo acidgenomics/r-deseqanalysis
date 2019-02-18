@@ -1,31 +1,199 @@
+## DESeqAnalysis 0.1.10 (2019-02-18)
+
+### Major changes
+
+- `plotDEGHeatmap`, `plotDEGPCA`: Reworked internal code to export
+  `DESeqResults` method that maintains backward compatibility with approach
+  used in bcbioRNASeq F1000 paper.
+- Exported additional legacy `DESeqResults` method support for `plotMA`,
+  `plotVolcano`, `resultsTables`, and `topTables`, to maintain backward
+  compatibility with bcbioRNASeq R package.
+
+### Minor changes
+
+- Updated NEWS to include information on all previous releases.
+
+
+
+## DESeqAnalysis 0.1.9 (2019-02-12)
+
+### Minor changes
+
+- R 3.4 compatibility fix for `resultsTables`, which needs to assign rownames
+  on `rowData` return.
+
+
+
 ## DESeqAnalysis 0.1.8 (2019-02-08)
+
+This release reworks the S4 class structure and adds `DESeqAnalysisList`. Note
+that objects previously saved prior to the v0.1.8 release will no longer return
+valid when checked using `validObject`. They can be updated using
+`updateObject`.
+
+### New classes
+
+- `DESeqAnalysisList`: extends `SimpleList`, and enables saving of multiple
+  analyses (e.g. per patient clinical data) in a single object. This class makes
+  it much easier to report on multiple complex contrasts.
+
+### Major changes
+
+- `DESeqAnalysis` now inherits from `Annotated` class. This enables support for
+  `metadata` slot, which can be used to store package version.
+- Improved checks in `DESeqAnalysis` validity method.
+
+### Minor changes
+
+- Added support for `plotCounts` generic, in favor of now deprecated `plotGene`.
+- Added support for `results` and `resultsNames` generics.
+- Added internal code to check `lfcShrink` type (e.g. apeglm).
+- Added `sampleData` method support for `DESeqAnalysis`, thereby simplying
+  the `sample_data` chunk in differential expression R Markdown template.
+- Updated and improved `show` method for `DESeqAnalysis`. This now will return
+  the version of DESeqAnalysis and not just DESeq2.
+- Updated `deseq` example object.
+
 
 
 ## DESeqAnalysis 0.1.7 (2019-01-31)
 
 ### Minor changes
 
-- `contrastSamples()`: Improved internal sample and contrast name handling.
+- `contrastSamples`: Improved internal sample and contrast name handling.
+  No longer attempting to force snake case formatting.
+- Pinned lintr check package to steinbaugh fork.
+
 
 
 ## DESeqAnalysis 0.1.6 (2019-01-23)
 
+### Minor changes
+
+- Finish requiring `results` argument for all `DESeqAnalysis` methods, where
+  applicable. For example, refer to `contrastSamples` in this release.
+- Removed `sanitizeRowData` from imports.
+- Draft update to internal `.matchResults` assert check, looking for `missing`
+  results argument.
+
+
 
 ## DESeqAnalysis 0.1.5 (2019-01-14)
+
+### Major changes
+
+- Importing `DataFrame` to `tbl_df` coercion methods directly from [basejump][]
+  instead of the [transformer][] package. Note that S4Transfomer package was
+  renamed simply to transformer at this date.
+
+### Minor changes
+
+- Improved documentation for `DESeqAnalysis-class` and the corresponding
+  generator function. Refer to the roxygen syntax (e.g. `rdname`) on how to
+  accomplish this, since it is useful across packages that define S4 class.
+- Improved working examples and removed todo/fixme comments.
+- Tightened up [Travis CI][] and [AppVeyor CI][] config, which now only checks
+  against master branch (e.g. for pull requests). This reduces the overall CI
+  burden, so that pushes to develop branch don't trigger CI builds.
+
 
 
 ## DESeqAnalysis 0.1.4 (2019-01-08)
 
+### Major changes
+
+- Added new R Markdown template designed for a `DESeqAnalysis` object.
+
+### Minor changes
+
+- Switched to reexporting generics from [bioverbs][] instead of [basejump][],
+  where applicable. For example, moved `contrastSamples` and `resultsTables`
+  generics (verbs) to [bioverbs][].
+- Removed internal `validateS4` code, instead relying upon `goalie::validate`.
+- Simplified [Travis CI][] configuration to only test against `bioc-release`.
+- Simplified internal asserts using `nullOK = TRUE`, where applicable. This was
+  added in the corresponding release update to [goalie][].
+- Now using `isAlpha` instead of `containsAlpha` for assert check.
+- Split out NAMESPACE imports into a separate `imports.R` file.
+
+
 
 ## DESeqAnalysis 0.1.3 (2018-12-13)
+
+### Major changes
+
+- No longer using `results = 1L` by default in `DESeqAnalysis` methods for
+  functions that support pulling a `DESeqResults` object. This can result in
+  unwanted behavior, and we shouldn't assume use of first slotted contrast.
+  Now the user must request the desired contrast explicitly.
+
+### Minor changes
+
+- Improved internal code for `plotDEGHeatmap`, `plotDEGPCA`,
+- Code cleanup to pass lintr checks.
+- Miscellaneous documentation (primarily working example) improvements.
+
 
 
 ## DESeqAnalysis 0.1.2 (2018-12-12)
 
+### New functions
+
+- `contrastSamples`: **Experimental**. Return the samples used to generate a
+  corresponding `DESeqResults` object. May revise this approach to simply
+  store the sample names directly in the `DESeqResults` in the future.
+- `deg`: Utility function to obtain DEG gene vector.
+- `resultsTables`: Migrated from [bcbioRNASeq][]. Enables easy output of
+  directional DEG tables from `DESeqResults` object.
+
+### Major changes
+
+- Added new `.matchResults` internal utility to match `DESeqResults`.
+- Reworked internal code for `export`.
+- Removed `DESeqResultsTables` class.
+- No longer exporting `DESeqResults` method for `plotDEGHeatmap`, `plotDEGPCA`.
+  May add this back in a future release to maintain compatibility with
+  [bcbioRNASeq][] workflow paper.
+
+### Minor changes
+
+- Miscellaneous documentation and assert check (using [goalie][]) fixes.
+- Improved internal S4 validity checks using `goalie::validate` instead of
+  `assertthat::validate_that`.
+- Updated example `DESeqAnalysis` S4 data set (`deseq`).
+- Reorganized and improved unit tests.
+- Added a placeholder for `updateObject`, which must be added in future update.
+
+
 
 ## DESeqAnalysis 0.1.1 (2018-12-01)
+
+### Major changes
+
+- Improved `show` method for `DESeqResultsTables` class.
+
+### Minor changes
+
+- Miscellaneous documentation and working example improvements.
+- Initial set up of [testthat][] unit tests.
+- Added lintr check support.
+- Enabled [Travis CI][] and [AppVeyor CI][] build checks.
+- Added CI badges to README.
+
 
 
 ## DESeqAnalysis 0.1.0 (2018-11-19)
 
-Initial release.
+Initial release. Some of the functions defined in this package have been
+migrated from my [bcbioRNASeq][] R package.
+
+
+
+[AppVeyor CI]: https://www.appveyor.com/
+[basejump]: https://steinbaugh.com/basejump/
+[bcbioRNASeq]: https://bioinformatics.sph.harvard.edu/bcbioRNASeq/
+[bioverbs]: https://steinbaugh.com/bioverbs/
+[goalie]: https://steinbaugh.com/goalie/
+[testthat]: http://testthat.r-lib.org/
+[transformer]: https://steinbaugh.com/transformer/
+[Travis CI]: https://travis-ci.com/
