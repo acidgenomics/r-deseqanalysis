@@ -89,6 +89,16 @@ resultsTables.DESeqResults <-  # nolint
 
 
 
+#' @rdname resultsTables
+#' @export
+setMethod(
+    f = "resultsTables",
+    signature = signature("DESeqResults"),
+    definition = resultsTables.DESeqResults
+)
+
+
+
 resultsTables.DESeqAnalysis <-  # nolint
     function(
         object,
@@ -157,7 +167,10 @@ resultsTables.DESeqAnalysis <-  # nolint
             res <- cbind(res, counts)
         }
 
-        # Using DESeqResults method.
+        # Using DESeqResults method. Note that join operations above will coerce
+        # from DESeqResults to DataFrame, so we need to coerce back before
+        # `resultsTables()` call.
+        res <- as(res, "DESeqResults")
         resultsTables(object = res, return = return)
     }
 
