@@ -3,9 +3,12 @@
 \docType{methods}
 \name{plotDEGHeatmap}
 \alias{plotDEGHeatmap}
+\alias{plotDEGHeatmap,DESeqResults-method}
 \alias{plotDEGHeatmap,DESeqAnalysis-method}
 \title{Differentially expressed gene heatmap}
 \usage{
+\S4method{plotDEGHeatmap}{DESeqResults}(object, counts)
+
 \S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results,
   contrastSamples = FALSE, direction = c("both", "up", "down"),
   scale = c("row", "column", "none"), clusteringMethod = "ward.D2",
@@ -17,6 +20,9 @@
 }
 \arguments{
 \item{object}{Object.}
+
+\item{counts}{\code{matrix}.
+Count matrix. Normalized counts are recommended.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or positive of \code{DESeqResults}.}
