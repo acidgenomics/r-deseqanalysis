@@ -3,9 +3,18 @@
 \docType{methods}
 \name{plotDEGHeatmap}
 \alias{plotDEGHeatmap}
+\alias{plotDEGHeatmap,DESeqResults-method}
 \alias{plotDEGHeatmap,DESeqAnalysis-method}
 \title{Differentially expressed gene heatmap}
 \usage{
+\S4method{plotDEGHeatmap}{DESeqResults}(object, counts,
+  direction = c("both", "up", "down"), scale = c("row", "column",
+  "none"), clusteringMethod = "ward.D2", clusterRows = TRUE,
+  clusterCols = TRUE, interestingGroups = NULL, showRownames = FALSE,
+  showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
+  color = viridis::viridis, legendColor = viridis::viridis,
+  borderColor = NULL, title = NULL, ...)
+
 \S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results,
   contrastSamples = FALSE, direction = c("both", "up", "down"),
   scale = c("row", "column", "none"), clusteringMethod = "ward.D2",
@@ -18,13 +27,9 @@
 \arguments{
 \item{object}{Object.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}.
-Name or positive of \code{DESeqResults}.}
-
-\item{contrastSamples}{\code{logical(1)}.
-\strong{Experimental}. Only include the samples used to define the contrast
-passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
-contrasts (e.g. interaction effect).}
+\item{counts}{\code{DESeqTransform}.
+Variance-stabilized counts suitable for heatmap.
+Object rownames must be identical to corresponding \code{DESeqResults}.}
 
 \item{direction}{\code{character(1)}.
 Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
@@ -87,6 +92,14 @@ Border color. Disabled by default for improved aesthetics.}
 Plot title.}
 
 \item{...}{Additional arguments.}
+
+\item{results}{\code{character(1)} or \code{integer(1)}.
+Name or position of \code{DESeqResults}.}
+
+\item{contrastSamples}{\code{logical(1)}.
+\strong{Experimental}. Only include the samples used to define the contrast
+passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
+contrasts (e.g. interaction effect).}
 }
 \description{
 This function is an extension of \code{\link[=plotHeatmap]{plotHeatmap()}} that is optimized for

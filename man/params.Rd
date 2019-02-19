@@ -13,7 +13,7 @@ contrasts (e.g. interaction effect).}
 Use shrunken log2 fold change (LFC) values.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
-Name or positive of \code{DESeqResults}.}
+Name or position of \code{DESeqResults}.}
 }
 \value{
 No value.

@@ -3,11 +3,19 @@
 \docType{methods}
 \name{plotDEGPCA}
 \alias{plotDEGPCA}
+\alias{plotDEGPCA,DESeqResults-method}
 \alias{plotDEGPCA,DESeqAnalysis-method}
 \title{Plot differentially expressed gene principal component analysis}
 \usage{
+\S4method{plotDEGPCA}{DESeqResults}(object, counts, direction = c("both",
+  "up", "down"), object, assay = 1L, interestingGroups = NULL,
+  label = getOption("basejump.label", FALSE),
+  color = getOption("basejump.color.discrete", NULL),
+  pointSize = getOption("basejump.point.size", 3L),
+  return = c("ggplot", "DataFrame"), ...)
+
 \S4method{plotDEGPCA}{DESeqAnalysis}(object, results,
-  contrastSamples = FALSE, direction = c("both", "up", "down"), object,
+  contrastSamples = FALSE, direction = c("both", "up", "down"),
   assay = 1L, interestingGroups = NULL,
   label = getOption("basejump.label", FALSE),
   color = getOption("basejump.color.discrete", NULL),
@@ -17,13 +25,9 @@
 \arguments{
 \item{object}{Object.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}.
-Name or positive of \code{DESeqResults}.}
-
-\item{contrastSamples}{\code{logical(1)}.
-\strong{Experimental}. Only include the samples used to define the contrast
-passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
-contrasts (e.g. interaction effect).}
+\item{counts}{\code{DESeqTransform}.
+Variance-stabilized counts suitable for heatmap.
+Object rownames must be identical to corresponding \code{DESeqResults}.}
 
 \item{direction}{\code{character(1)}.
 Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
@@ -41,13 +45,22 @@ Groups of interest that define the samples. If left unset, defaults to
 \item{label}{\code{logical(1)}.
 Superimpose sample text labels on the plot.}
 
-\item{color}{\code{ScaleDiscrete}.
-Desired ggplot2 color scale. Must supply discrete values. When set \code{NULL},
-the default ggplot2 color palette will be used. If manual color definitions
-are desired, we recommend using \code{\link[ggplot2:scale_color_manual]{ggplot2::scale_color_manual()}}.
+\item{color}{\code{function}, \code{character}, or \code{NULL}.
+Hexadecimal color function or values to use for plot.
 
-To set the discrete color palette globally, use:\preformatted{options(basejump.color.discrete = ggplot2::scale_color_viridis_d())
-}}
+We generally recommend these hexadecimal functions from the viridis
+package:
+\itemize{
+\item \code{viridis::viridis()} (\emph{default}).
+\item \code{viridis::inferno()}.
+\item \code{viridis::magma()}.
+\item \code{viridis::plasma()}.
+}
+
+Alternatively, colors can be defined manually using hexadecimal values
+(e.g. \code{c("#FF0000", "#0000FF")}), but this is not generally recommended.
+Refer to the RColorBrewer package for hexadecimal color palettes that may
+be suitable. If set \code{NULL}, will use the default pheatmap colors.}
 
 \item{pointSize}{\code{numeric(1)}.
 Point size for dots in the plot.}
@@ -57,6 +70,14 @@ Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defau
 to the first argument in the \code{character} vector.}
 
 \item{...}{Additional arguments.}
+
+\item{results}{\code{character(1)} or \code{integer(1)}.
+Name or position of \code{DESeqResults}.}
+
+\item{contrastSamples}{\code{logical(1)}.
+\strong{Experimental}. Only include the samples used to define the contrast
+passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
+contrasts (e.g. interaction effect).}
 }
 \description{
 This function is an extension of \code{\link[BiocGenerics:plotPCA]{plotPCA()}} that is

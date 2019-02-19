@@ -1,7 +1,12 @@
 ---
 params:
   title: "DESeq2 differential expression analysis"
-  object_file: "data/YYYY-MM-DD/object.rds"
+  # DESeqAnalysis object file on disk.
+  # Either RDS or RDA file format is supported.
+  object: "data/YYYY-MM-DD/object.rds"
+  # Uncomment these when looping multiple objects using `render()`.
+  # object: !r object
+  # name: "object_name"
   data_dir: !r file.path("data", Sys.Date())
   output_dir: !r file.path("results", Sys.Date(), "differential_expression")
 title: "`r params$title`"
@@ -11,7 +16,7 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, cache=FALSE, message=FALSE}
-# Last modified 2018-12-13
+# Last modified 2019-02-18
 library(DESeqAnalysis)
 prepareTemplate()
 source("_setup.R")
@@ -21,9 +26,22 @@ source("_setup.R")
 ```
 
 ```{r object}
-name <- basenameSansExt(params$object_file)
-object <- readRDS(file = params$object_file)
-stopifnot(is(object, "DESeqAnalysis"))
+if (is.character(params$object)) {
+    if (fileExt(object) == "rds") {
+        object <- readRDS(file = params$object)
+        name <- basenameSansExt(params$object)
+    } else if (fileExt(object) == "rda") {
+        name <- load(params$object)
+        object <- get(name, inherits = FALSE)
+    }
+} else {
+    object <- params$object
+    name <- params$name
+}
+stopifnot(
+    is(object, "DESeqAnalysis"),
+    isString(name)
+)
 invisible(validObject(object))
 print(object)
 ```
@@ -40,11 +58,20 @@ An MA plot compares transformed counts on `M` (log ratio) and `A` (mean average)
 
 ```{r plot_ma}
 invisible(lapply(
-    X = seq_len(length(object@results)),
+    X = resultsNames(object),
+    object = object,
     FUN = function(results, object) {
-        plotMA(object, results = results) %>% print()
-    },
-    object = object
+        plotMA(
+            object = object,
+            results = results,
+            lfcShrink = FALSE
+        ) %>% print()
+        plotMA(
+            object = object,
+            results = results,
+            lfcShrink = TRUE
+        ) %>% print()
+    }
 ))
 ```
 
@@ -54,11 +81,15 @@ A volcano plot compares significance (BH-adjusted *P* value) against fold change
 
 ```{r plot_volcano}
 invisible(lapply(
-    X = seq_len(length(object@results)),
+    X = resultsNames(object),
+    object = object,
     FUN = function(results, object) {
-        plotVolcano(object, results = results) %>% print()
-    },
-    object = object
+        plotVolcano(
+            object = object,
+            results = results,
+            lfcShrink = TRUE
+        ) %>% print()
+    }
 ))
 ```
 
@@ -66,15 +97,15 @@ invisible(lapply(
 
 ```{r plot_deg_pca}
 invisible(lapply(
-    X = seq_len(length(object@results)),
+    X = resultsNames(object),
+    object = object,
     FUN = function(results, object) {
         plotDEGPCA(
             object = object,
             results = results,
             contrastSamples = TRUE
         ) %>% print()
-    },
-    object = object
+    }
 ))
 ```
 
@@ -84,15 +115,15 @@ This plot shows only differentially expressed genes on a per-sample basis. We ha
 
 ```{r plot_deg_heatmap}
 invisible(lapply(
-    X = seq_len(length(object@results)),
+    X = resultsNames(object),
+    object = object,
     FUN = function(results, object) {
         plotDEGHeatmap(
             object = object,
             results = results,
             contrastSamples = TRUE
         )
-    },
-    object = object
+    }
 ))
 ```
 
@@ -102,7 +133,7 @@ Only the top up- and down-regulated genes (arranged by log2 fold change) are sho
 
 ```{r top_tables, results="asis"}
 invisible(lapply(
-    X = seq_len(length(object@results)),
+    X = resultsNames(object),
     FUN = function(results, object) {
         topTables(object, results = results)
     },
@@ -132,8 +163,7 @@ export(
     x = object,
     name = name,
     dir = params$output_dir,
-    compress = FALSE,
-    humanize = FALSE
+    compress = FALSE
 )
 ```
 

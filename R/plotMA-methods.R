@@ -1,7 +1,3 @@
-# FIXME Add a `results = "all"` mode here?
-
-
-
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
@@ -262,6 +258,16 @@ plotMA.DESeqResults <-  # nolint
 
 
 
+#' @rdname plotMA
+#' @export
+setMethod(
+    f = "plotMA",
+    signature = signature("DESeqResults"),
+    definition = plotMA.DESeqResults
+)
+
+
+
 plotMA.DESeqAnalysis <-  # nolint
     function(
         object,
@@ -304,10 +310,10 @@ setMethod(
 
 
 
+# This is soft deprecated, since the function is used in F1000 paper.
 #' @rdname plotMA
 #' @usage NULL
 #' @export
 plotMeanAverage <- function(...) {
-    # This function is soft deprecated.
     plotMA(...)
 }

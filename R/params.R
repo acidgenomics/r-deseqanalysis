@@ -8,5 +8,5 @@
 #' @param lfcShrink `logical(1)`.
 #'   Use shrunken log2 fold change (LFC) values.
 #' @param results `character(1)` or `integer(1)`.
-#'   Name or positive of `DESeqResults`.
+#'   Name or position of `DESeqResults`.
 NULL
