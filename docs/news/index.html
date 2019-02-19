@@ -62,7 +62,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.10</span>
       </span>
     </div>
 
@@ -105,50 +105,223 @@
       <small>Source: <a href='https://github.com/steinbaugh/DESeqAnalysis/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="deseqanalysis-0-1-8-2019-02-08" class="section level2">
+    <div id="deseqanalysis-0-1-10-2019-02-18" class="section level2">
 <h2 class="hasAnchor">
-<a href="#deseqanalysis-0-1-8-2019-02-08" class="anchor"></a>DESeqAnalysis 0.1.8 (2019-02-08)</h2>
+<a href="#deseqanalysis-0-1-10-2019-02-18" class="anchor"></a>DESeqAnalysis 0.1.10 (2019-02-18)</h2>
+<div id="major-changes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#major-changes" class="anchor"></a>Major changes</h3>
+<ul>
+<li>
+<code>plotDEGHeatmap</code>, <code>plotDEGPCA</code>: Reworked internal code to export <code>DESeqResults</code> method that maintains backward compatibility with approach used in bcbioRNASeq F1000 paper.</li>
+<li>Exported additional legacy <code>DESeqResults</code> method support for <code>plotMA</code>, <code>plotVolcano</code>, <code>resultsTables</code>, and <code>topTables</code>, to maintain backward compatibility with bcbioRNASeq R package.</li>
+</ul>
 </div>
-    <div id="deseqanalysis-0-1-7-2019-01-31" class="section level2">
-<h2 class="hasAnchor">
-<a href="#deseqanalysis-0-1-7-2019-01-31" class="anchor"></a>DESeqAnalysis 0.1.7 (2019-01-31)</h2>
 <div id="minor-changes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#minor-changes" class="anchor"></a>Minor changes</h3>
 <ul>
+<li>Updated NEWS to include information on all previous releases.</li>
+</ul>
+</div>
+</div>
+    <div id="deseqanalysis-0-1-9-2019-02-12" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deseqanalysis-0-1-9-2019-02-12" class="anchor"></a>DESeqAnalysis 0.1.9 (2019-02-12)</h2>
+<div id="minor-changes-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-changes-1" class="anchor"></a>Minor changes</h3>
+<ul>
+<li>R 3.4 compatibility fix for <code>resultsTables</code>, which needs to assign rownames on <code>rowData</code> return.</li>
+</ul>
+</div>
+</div>
+    <div id="deseqanalysis-0-1-8-2019-02-08" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deseqanalysis-0-1-8-2019-02-08" class="anchor"></a>DESeqAnalysis 0.1.8 (2019-02-08)</h2>
+<p>This release reworks the S4 class structure and adds <code>DESeqAnalysisList</code>. Note that objects previously saved prior to the v0.1.8 release will no longer return valid when checked using <code>validObject</code>. They can be updated using <code>updateObject</code>.</p>
+<div id="new-classes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#new-classes" class="anchor"></a>New classes</h3>
+<ul>
 <li>
-<code><a href="../reference/contrastSamples.html">contrastSamples()</a></code>: Improved internal sample and contrast name handling.</li>
+<code>DESeqAnalysisList</code>: extends <code>SimpleList</code>, and enables saving of multiple analyses (e.g. per patient clinical data) in a single object. This class makes it much easier to report on multiple complex contrasts.</li>
+</ul>
+</div>
+<div id="major-changes-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#major-changes-1" class="anchor"></a>Major changes</h3>
+<ul>
+<li>
+<code>DESeqAnalysis</code> now inherits from <code>Annotated</code> class. This enables support for <code>metadata</code> slot, which can be used to store package version.</li>
+<li>Improved checks in <code>DESeqAnalysis</code> validity method.</li>
+</ul>
+</div>
+<div id="minor-changes-2" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-changes-2" class="anchor"></a>Minor changes</h3>
+<ul>
+<li>Added support for <code>plotCounts</code> generic, in favor of now deprecated <code>plotGene</code>.</li>
+<li>Added support for <code>results</code> and <code>resultsNames</code> generics.</li>
+<li>Added internal code to check <code>lfcShrink</code> type (e.g. apeglm).</li>
+<li>Added <code>sampleData</code> method support for <code>DESeqAnalysis</code>, thereby simplying the <code>sample_data</code> chunk in differential expression R Markdown template.</li>
+<li>Updated and improved <code>show</code> method for <code>DESeqAnalysis</code>. This now will return the version of DESeqAnalysis and not just DESeq2.</li>
+<li>Updated <code>deseq</code> example object.</li>
+</ul>
+</div>
+</div>
+    <div id="deseqanalysis-0-1-7-2019-01-31" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deseqanalysis-0-1-7-2019-01-31" class="anchor"></a>DESeqAnalysis 0.1.7 (2019-01-31)</h2>
+<div id="minor-changes-3" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-changes-3" class="anchor"></a>Minor changes</h3>
+<ul>
+<li>
+<code>contrastSamples</code>: Improved internal sample and contrast name handling. No longer attempting to force snake case formatting.</li>
+<li>Pinned lintr check package to steinbaugh fork.</li>
 </ul>
 </div>
 </div>
     <div id="deseqanalysis-0-1-6-2019-01-23" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-6-2019-01-23" class="anchor"></a>DESeqAnalysis 0.1.6 (2019-01-23)</h2>
+<div id="minor-changes-4" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-changes-4" class="anchor"></a>Minor changes</h3>
+<ul>
+<li>Finish requiring <code>results</code> argument for all <code>DESeqAnalysis</code> methods, where applicable. For example, refer to <code>contrastSamples</code> in this release.</li>
+<li>Removed <code>sanitizeRowData</code> from imports.</li>
+<li>Draft update to internal <code>.matchResults</code> assert check, looking for <code>missing</code> results argument.</li>
+</ul>
+</div>
 </div>
     <div id="deseqanalysis-0-1-5-2019-01-14" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-5-2019-01-14" class="anchor"></a>DESeqAnalysis 0.1.5 (2019-01-14)</h2>
+<div id="major-changes-2" class="section level3">
+<h3 class="hasAnchor">
+<a href="#major-changes-2" class="anchor"></a>Major changes</h3>
+<ul>
+<li>Importing <code>DataFrame</code> to <code>tbl_df</code> coercion methods directly from <a href="https://steinbaugh.com/basejump/">basejump</a> instead of the <a href="https://steinbaugh.com/transformer/">transformer</a> package. Note that S4Transfomer package was renamed simply to transformer at this date.</li>
+</ul>
+</div>
+<div id="minor-changes-5" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-changes-5" class="anchor"></a>Minor changes</h3>
+<ul>
+<li>Improved documentation for <code>DESeqAnalysis-class</code> and the corresponding generator function. Refer to the roxygen syntax (e.g. <code>rdname</code>) on how to accomplish this, since it is useful across packages that define S4 class.</li>
+<li>Improved working examples and removed todo/fixme comments.</li>
+<li>Tightened up <a href="https://travis-ci.com/">Travis CI</a> and <a href="https://www.appveyor.com/">AppVeyor CI</a> config, which now only checks against master branch (e.g. for pull requests). This reduces the overall CI burden, so that pushes to develop branch don’t trigger CI builds.</li>
+</ul>
+</div>
 </div>
     <div id="deseqanalysis-0-1-4-2019-01-08" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-4-2019-01-08" class="anchor"></a>DESeqAnalysis 0.1.4 (2019-01-08)</h2>
+<div id="major-changes-3" class="section level3">
+<h3 class="hasAnchor">
+<a href="#major-changes-3" class="anchor"></a>Major changes</h3>
+<ul>
+<li>Added new R Markdown template designed for a <code>DESeqAnalysis</code> object.</li>
+</ul>
+</div>
+<div id="minor-changes-6" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-changes-6" class="anchor"></a>Minor changes</h3>
+<ul>
+<li>Switched to reexporting generics from <a href="https://steinbaugh.com/bioverbs/">bioverbs</a> instead of <a href="https://steinbaugh.com/basejump/">basejump</a>, where applicable. For example, moved <code>contrastSamples</code> and <code>resultsTables</code> generics (verbs) to <a href="https://steinbaugh.com/bioverbs/">bioverbs</a>.</li>
+<li>Removed internal <code>validateS4</code> code, instead relying upon <code><a href="https://www.rdocumentation.org/packages/goalie/topics/validate">goalie::validate</a></code>.</li>
+<li>Simplified <a href="https://travis-ci.com/">Travis CI</a> configuration to only test against <code>bioc-release</code>.</li>
+<li>Simplified internal asserts using <code>nullOK = TRUE</code>, where applicable. This was added in the corresponding release update to <a href="https://steinbaugh.com/goalie/">goalie</a>.</li>
+<li>Now using <code>isAlpha</code> instead of <code>containsAlpha</code> for assert check.</li>
+<li>Split out NAMESPACE imports into a separate <code>imports.R</code> file.</li>
+</ul>
+</div>
 </div>
     <div id="deseqanalysis-0-1-3-2018-12-13" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-3-2018-12-13" class="anchor"></a>DESeqAnalysis 0.1.3 (2018-12-13)</h2>
+<div id="major-changes-4" class="section level3">
+<h3 class="hasAnchor">
+<a href="#major-changes-4" class="anchor"></a>Major changes</h3>
+<ul>
+<li>No longer using <code>results = 1L</code> by default in <code>DESeqAnalysis</code> methods for functions that support pulling a <code>DESeqResults</code> object. This can result in unwanted behavior, and we shouldn’t assume use of first slotted contrast. Now the user must request the desired contrast explicitly.</li>
+</ul>
+</div>
+<div id="minor-changes-7" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-changes-7" class="anchor"></a>Minor changes</h3>
+<ul>
+<li>Improved internal code for <code>plotDEGHeatmap</code>, <code>plotDEGPCA</code>,</li>
+<li>Code cleanup to pass lintr checks.</li>
+<li>Miscellaneous documentation (primarily working example) improvements.</li>
+</ul>
+</div>
 </div>
     <div id="deseqanalysis-0-1-2-2018-12-12" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-2-2018-12-12" class="anchor"></a>DESeqAnalysis 0.1.2 (2018-12-12)</h2>
+<div id="new-functions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#new-functions" class="anchor"></a>New functions</h3>
+<ul>
+<li>
+<code>contrastSamples</code>: <strong>Experimental</strong>. Return the samples used to generate a corresponding <code>DESeqResults</code> object. May revise this approach to simply store the sample names directly in the <code>DESeqResults</code> in the future.</li>
+<li>
+<code>deg</code>: Utility function to obtain DEG gene vector.</li>
+<li>
+<code>resultsTables</code>: Migrated from <a href="https://bioinformatics.sph.harvard.edu/bcbioRNASeq/">bcbioRNASeq</a>. Enables easy output of directional DEG tables from <code>DESeqResults</code> object.</li>
+</ul>
+</div>
+<div id="major-changes-5" class="section level3">
+<h3 class="hasAnchor">
+<a href="#major-changes-5" class="anchor"></a>Major changes</h3>
+<ul>
+<li>Added new <code>.matchResults</code> internal utility to match <code>DESeqResults</code>.</li>
+<li>Reworked internal code for <code>export</code>.</li>
+<li>Removed <code>DESeqResultsTables</code> class.</li>
+<li>No longer exporting <code>DESeqResults</code> method for <code>plotDEGHeatmap</code>, <code>plotDEGPCA</code>. May add this back in a future release to maintain compatibility with <a href="https://bioinformatics.sph.harvard.edu/bcbioRNASeq/">bcbioRNASeq</a> workflow paper.</li>
+</ul>
+</div>
+<div id="minor-changes-8" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-changes-8" class="anchor"></a>Minor changes</h3>
+<ul>
+<li>Miscellaneous documentation and assert check (using <a href="https://steinbaugh.com/goalie/">goalie</a>) fixes.</li>
+<li>Improved internal S4 validity checks using <code><a href="https://www.rdocumentation.org/packages/goalie/topics/validate">goalie::validate</a></code> instead of <code><a href="https://www.rdocumentation.org/packages/assertthat/topics/validate_that">assertthat::validate_that</a></code>.</li>
+<li>Updated example <code>DESeqAnalysis</code> S4 data set (<code>deseq</code>).</li>
+<li>Reorganized and improved unit tests.</li>
+<li>Added a placeholder for <code>updateObject</code>, which must be added in future update.</li>
+</ul>
+</div>
 </div>
     <div id="deseqanalysis-0-1-1-2018-12-01" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-1-2018-12-01" class="anchor"></a>DESeqAnalysis 0.1.1 (2018-12-01)</h2>
+<div id="major-changes-6" class="section level3">
+<h3 class="hasAnchor">
+<a href="#major-changes-6" class="anchor"></a>Major changes</h3>
+<ul>
+<li>Improved <code>show</code> method for <code>DESeqResultsTables</code> class.</li>
+</ul>
+</div>
+<div id="minor-changes-9" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-changes-9" class="anchor"></a>Minor changes</h3>
+<ul>
+<li>Miscellaneous documentation and working example improvements.</li>
+<li>Initial set up of <a href="http://testthat.r-lib.org/">testthat</a> unit tests.</li>
+<li>Added lintr check support.</li>
+<li>Enabled <a href="https://travis-ci.com/">Travis CI</a> and <a href="https://www.appveyor.com/">AppVeyor CI</a> build checks.</li>
+<li>Added CI badges to README.</li>
+</ul>
+</div>
 </div>
     <div id="deseqanalysis-0-1-0-2018-11-19" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-0-2018-11-19" class="anchor"></a>DESeqAnalysis 0.1.0 (2018-11-19)</h2>
-<p>Initial release.</p>
+<p>Initial release. Some of the functions defined in this package have been migrated from my <a href="https://bioinformatics.sph.harvard.edu/bcbioRNASeq/">bcbioRNASeq</a> R package.</p>
 </div>
   </div>
 
@@ -156,6 +329,8 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#deseqanalysis-0-1-10-2019-02-18">0.1.10</a></li>
+        <li><a href="#deseqanalysis-0-1-9-2019-02-12">0.1.9</a></li>
         <li><a href="#deseqanalysis-0-1-8-2019-02-08">0.1.8</a></li>
         <li><a href="#deseqanalysis-0-1-7-2019-01-31">0.1.7</a></li>
         <li><a href="#deseqanalysis-0-1-6-2019-01-23">0.1.6</a></li>

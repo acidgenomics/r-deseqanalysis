@@ -1,7 +1,3 @@
-# FIXME Add a `results = "all"` mode here?
-
-
-
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
 #' @inheritParams basejump::params
@@ -54,6 +50,55 @@ bioverbs::resultsTables
 
 
 
+# Note that this method is used in bcbioRNASeq F1000 paper.
+resultsTables.DESeqResults <-  # nolint
+    function(object, return = c("tbl_df", "DataFrameList")) {
+        validObject(object)
+        return <- match.arg(return)
+
+        # Get the DEG character vectors, which we'll use against the rownames.
+        both <- deg(object, direction = "both")
+        # Early return with warning if there are not DEGs.
+        if (!hasLength(both)) {
+            warning(paste(
+                deparse(results),
+                "does not contain any DEGs. Skipping."
+            ), call. = FALSE)
+            return(invisible())
+        }
+        up <- deg(object, direction = "up")
+        down <- deg(object, direction = "down")
+
+        # Prepare the return list.
+        out <- list(
+            all = object,
+            up = object[up, , drop = FALSE],
+            down = object[down, , drop = FALSE],
+            both = object[both, , drop = FALSE]
+        )
+
+        # Filter out empty up/down tables.
+        out <- Filter(f = hasRows, x = out)
+
+        switch(
+            EXPR = return,
+            DataFrameList = DataFrameList(out),
+            tbl_df = lapply(out, as_tibble)
+        )
+    }
+
+
+
+#' @rdname resultsTables
+#' @export
+setMethod(
+    f = "resultsTables",
+    signature = signature("DESeqResults"),
+    definition = resultsTables.DESeqResults
+)
+
+
+
 resultsTables.DESeqAnalysis <-  # nolint
     function(
         object,
@@ -68,30 +113,12 @@ resultsTables.DESeqAnalysis <-  # nolint
         # Note that this will use the shrunken LFC values, if slotted.
         res <- .matchResults(object, results)
 
-        # Get the DESeqDataSet, and humanize the sample na.
+        # Get the DESeqDataSet, and humanize the sample names.
         dds <- as(object, "DESeqDataSet")
         # Always attempt to use human-friendly sample names, defined by the
         # `sampleName` column in `colData`. We're using this downstream when
         # joining the normalized counts.
         dds <- convertSampleIDsToNames(dds)
-
-        # Get the DEG character vectors, which we'll use against the rownames.
-        both <- deg(res, direction = "both")
-
-        # Early return with warning if there are not DEGs.
-        if (!hasLength(both)) {
-            warning(paste(
-                deparse(results),
-                "does not contain any DEGs. Skipping."
-            ), call. = FALSE)
-            return(invisible())
-        }
-
-        up <- deg(res, direction = "up")
-        down <- deg(res, direction = "down")
-
-        # Prepare all genes data using S4 DataFrame.
-        all <- as(res, "DataFrame")
 
         # Join the row annotations. DESeq2 includes additional columns in
         # `rowData` that aren't informative for a user, and doesn't need to be
@@ -122,10 +149,10 @@ resultsTables.DESeqAnalysis <-  # nolint
                     FUN.VALUE = logical(1L)
                 )),
                 isNonEmpty(rowData),
-                identical(rownames(all), rownames(rowData)),
-                areDisjointSets(colnames(all), colnames(rowData))
+                identical(rownames(res), rownames(rowData)),
+                areDisjointSets(colnames(res), colnames(rowData))
             )
-            all <- cbind(all, rowData)
+            res <- cbind(res, rowData)
         }
 
         # Join the normalized counts.
@@ -134,28 +161,17 @@ resultsTables.DESeqAnalysis <-  # nolint
             # We're using the size factor adjusted normalized counts here.
             counts <- counts(dds, normalized = TRUE)
             assert(
-                identical(rownames(all), rownames(counts)),
-                areDisjointSets(colnames(all), colnames(counts))
+                identical(rownames(res), rownames(counts)),
+                areDisjointSets(colnames(res), colnames(counts))
             )
-            all <- cbind(all, counts)
+            res <- cbind(res, counts)
         }
 
-        # Prepare the return list.
-        out <- list(
-            all = all,
-            up = all[up, , drop = FALSE],
-            down = all[down, , drop = FALSE],
-            both = all[both, , drop = FALSE]
-        )
-
-        # Filter out empty up/down tibbles.
-        out <- Filter(hasRows, out)
-
-        switch(
-            EXPR = return,
-            DataFrameList = DataFrameList(out),
-            tbl_df = lapply(out, as_tibble)
-        )
+        # Using DESeqResults method. Note that join operations above will coerce
+        # from DESeqResults to DataFrame, so we need to coerce back before
+        # `resultsTables()` call.
+        res <- as(res, "DESeqResults")
+        resultsTables(object = res, return = return)
     }
 
 

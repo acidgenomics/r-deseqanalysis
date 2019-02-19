@@ -1,13 +1,9 @@
-# FIXME Add a `results = "all"` mode here?
-
-
-
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
 #' @inheritParams basejump::params
 #' @inheritParams params
-
+#'
 #' @param ylim `numeric(1)`.
 #'   Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets
 #'   containing highly significant P values (e.g. `1e-100`).
@@ -312,6 +308,16 @@ plotVolcano.DESeqResults <-  # nolint
             p
         }
     }
+
+
+
+#' @rdname plotVolcano
+#' @export
+setMethod(
+    f = "plotVolcano",
+    signature = signature("DESeqResults"),
+    definition = plotVolcano.DESeqResults
+)
 
 
 

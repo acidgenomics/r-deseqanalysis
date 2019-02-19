@@ -4,9 +4,16 @@
     results,
     lfcShrink = TRUE
 ) {
+    if (missing(results)) {
+        stop(paste(
+            "Failed to match results.",
+            "Required `results` argument is missing.",
+            "Specify as either name or position scalar.",
+            sep = "\n"
+        ))
+    }
     assert(
         is(object, "DESeqAnalysis"),
-        !missing(results),
         isScalar(results),
         isFlag(lfcShrink)
     )
