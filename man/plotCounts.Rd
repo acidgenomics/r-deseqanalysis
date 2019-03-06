@@ -3,7 +3,6 @@
 \docType{methods}
 \name{plotCounts}
 \alias{plotCounts}
-\alias{plotCounts,DESeqDataSet-method}
 \alias{plotCounts,DESeqAnalysis-method}
 \title{Plot counts}
 \usage{
@@ -15,8 +14,6 @@
 }
 \arguments{
 \item{object}{Object.}
-
-\item{...}{Additional arguments.}
 
 \item{genes}{\code{character}.
 Gene identifiers. It is considered better practice to input the stable gene

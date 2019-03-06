@@ -24,32 +24,8 @@ bioverbs::plotCounts
 
 
 
-# Note that we need to remap "object" to "dds" here.
-plotCounts.DESeqDataSet <-  # nolint
-    function(object, ...) {
-        do.call(
-            what = DESeq2::plotCounts,
-            args = matchArgsToDoCall(
-                args = list(dds = object),
-                removeFormals = "object"
-            )
-        )
-    }
-
-f <- formals(DESeq2::plotCounts)
-names(f)[[1L]] <- "object"
-formals(plotCounts.DESeqDataSet) <- f
-
-
-
-#' @rdname plotCounts
-#' @export
-#' @usage NULL
-setMethod(
-    f = "plotCounts",
-    signature = signature("DESeqDataSet"),
-    definition = plotCounts.DESeqDataSet
-)
+# Note that DESeqDataSet is supported in basejump SummarizedExperiment method.
+# That will detect the object and plot normalized counts automatically.
 
 
 
