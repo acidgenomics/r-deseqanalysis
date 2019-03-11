@@ -3,7 +3,6 @@
 \docType{methods}
 \name{plotCounts}
 \alias{plotCounts}
-\alias{plotCounts,DESeqDataSet-method}
 \alias{plotCounts,DESeqAnalysis-method}
 \title{Plot counts}
 \usage{
@@ -15,8 +14,6 @@
 }
 \arguments{
 \item{object}{Object.}
-
-\item{...}{Additional arguments.}
 
 \item{genes}{\code{character}.
 Gene identifiers. It is considered better practice to input the stable gene
@@ -47,11 +44,9 @@ Plot style.}
 }
 \value{
 \itemize{
-\item \code{style = "facet"}:
-\code{ggplot} grouped by \code{sampleName}, with
+\item \code{style = "facet"}: \code{ggplot} grouped by \code{sampleName}, with
 \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}} applied to panel the samples.
-\item \code{style = "wide"}:
-\code{ggplot} in wide format, with genes on the x-axis.
+\item \code{style = "wide"}: \code{ggplot} in wide format, with genes on the x-axis.
 }
 }
 \description{
