@@ -1,3 +1,14 @@
+## DESeqAnalysis 0.1.11 (2019-03-11)
+
+### Minor changes
+
+- `plotCounts`: Removed `DESeqDataSet` method support, which is now covered
+  inside `SummarizedExperiment` method support in [basejump][].
+- Updated differential expression R Markdown template to improve
+  parameterization support.
+
+
+
 ## DESeqAnalysis 0.1.10 (2019-02-18)
 
 ### Major changes
