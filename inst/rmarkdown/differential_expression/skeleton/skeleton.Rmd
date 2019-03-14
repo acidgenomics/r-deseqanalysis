@@ -30,10 +30,10 @@ source("_setup.R")
 
 ```{r object}
 if (is.character(params$object)) {
-    if (fileExt(object) == "rds") {
+    if (fileExt(params$object) == "rds") {
         object <- readRDS(file = params$object)
         name <- basenameSansExt(params$object)
-    } else if (fileExt(object) == "rda") {
+    } else if (fileExt(params$object) == "rda") {
         name <- load(params$object)
         object <- get(name, inherits = FALSE)
     }
