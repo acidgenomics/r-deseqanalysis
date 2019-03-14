@@ -9,7 +9,7 @@ params:
   # `name` param is only necessary when passing in object directly.
   name: !r NULL
   
-  data_dir: !r file.path("data", Sys.Date())
+  data_dir: !r file.path("rds", Sys.Date())
   output_dir: !r file.path("results", Sys.Date(), "differential_expression")
 
 title: "`r params$title`"
