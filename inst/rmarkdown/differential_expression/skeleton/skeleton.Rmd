@@ -43,7 +43,7 @@ if (is.character(params$object)) {
 }
 stopifnot(
     is(object, "DESeqAnalysis"),
-    isString(name)
+    is.character(name)
 )
 invisible(validObject(object))
 print(object)
