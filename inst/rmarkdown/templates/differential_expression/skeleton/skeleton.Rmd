@@ -9,7 +9,7 @@ params:
   
   # The `name` param is only necessary when passing in object directly, during
   # an `rmarkdown::render()` call. See `object` param.
-  # name: !r NULL
+  # name: "object_name"
   
   output_dir: !r file.path("results", Sys.Date(), "differential_expression")
 
