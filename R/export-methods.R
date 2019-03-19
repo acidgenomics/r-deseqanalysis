@@ -1,3 +1,8 @@
+# DESeqTransform can inherit from SummarizedExperiment without modification.
+# DESeqResults can inherit from DataFrame without modification.
+
+
+
 #' @name export
 #' @inherit bioverbs::export
 #' @inheritParams params
@@ -21,98 +26,12 @@ bioverbs::export
 
 
 
-# Only export the raw and normalized counts.
-# Skip exporting other assays, including mu, H, cooks.
-# Using the inherited SummarizedExperiment method here.
-.exportDESeqDataSet <- function(x, dir, compress) {
-    assert(is(x, "DESeqAnalysis"))
-    message("Exporting DESeqDataSet.")
-    dds <- as(x, "DESeqDataSet")
-    rse <- as(dds, "RangedSummarizedExperiment")
-    assays(rse)[["normalized"]] <- counts(dds, normalized = TRUE)
-    assays(rse) <- assays(rse)[c("counts", "normalized")]
-    export(x = rse, name = "DESeqDataSet", dir = dir, compress = compress)
-}
-
-
-
-# Using the inherited SummarizedExperiment method here.
-# Note the extra line break in message.
-.exportDESeqTransform <- function(x, dir, compress) {
-    assert(is(x, "DESeqAnalysis"))
-    message("\nExporting DESeqTransform.")
-    dt <- as(x, "DESeqTransform")
-    rse <- as(dt, "RangedSummarizedExperiment")
-    export(x = rse, name = "DESeqTransform", dir = dir, compress = compress)
-}
-
-
-
-# Here we are defining an internal function that works on both unshrunken
-# (results) and shrunken (lfcShrink) results. We're using inherited global
-# variables here for more compact code.
-.exportDESeqResultsList <- function(
-    x,
-    slotName = c("results", "lfcShrink"),
-    dir,
-    compress
-) {
-    assert(is(x, "DESeqAnalysis"))
-    slotName <- match.arg(slotName)
-
-    # Get the DESeqDataSet.
-    data <- as(x, "DESeqDataSet")
-    # Humanize rownames and colnames, if desired.
-    if (isTRUE(humanize)) {
-        data <- humanize(data)
-    }
-    dimnames <- dimnames(data)
-
-    # Get the DESeqResults list.
-    list <- slot(x, name = slotName)
-    assert(is.list(list))
-    if (!is(list[[1L]], "DESeqResults")) {
-        message(paste(
-            slotName, "does not contain DESeqResults.",
-            "Skipping export."
-        ))
-        return(NULL)
-    }
-
-    message(paste0("\nExporting ", slotName, "."))
-    mapply(
-        name = names(list),
-        x = list,
-        MoreArgs = list(
-            dir = file.path(dir, slotName),
-            compress = compress,
-            humanize = humanize
-        ),
-        FUN = function(name, x, dir, compress, humanize) {
-            file <- file.path(dir, paste0(name, ".csv"))
-            if (isTRUE(compress)) {
-                file <- paste0(file, ".gz")
-            }
-            if (isTRUE(humanize)) {
-                x[["geneID"]] <- rownames(x)
-                rownames(x) <- dimnames[[1L]]
-            }
-            export(x, file = file)
-        },
-        SIMPLIFY = TRUE,
-        USE.NAMES = TRUE
-    )
-}
-
-
-
+# Internal helpers =============================================================
 # Here we are looping across each contrast and writing out DEG tables.
 # Note: This step picks shrunken LFCs over unshrunken if slotted.
 # Note: We don't need to support humanize here because `geneName` is required.
-.exportResultsTables <- function(x, dir, compress) {
-    message("\nExporting results tables.")
+.exportResultsTables <- function(x, dir = ".", compress = FALSE) {
     assert(is(x, "DESeqAnalysis"))
-    dir <- file.path(dir, "resultsTables")
     resultsNames <- names(x@results)
     out <- lapply(
         X = resultsNames,
@@ -124,11 +43,7 @@ bioverbs::export
                 counts = TRUE,
                 return = "tbl_df"
             )
-            files <- file.path(
-                dir,
-                results,
-                paste0(names(resTbl), ".csv")
-            )
+            files <- file.path(dir, results, paste0(names(resTbl), ".csv"))
             if (isTRUE(compress)) {
                 files <- paste0(files, ".gz")
             }
@@ -147,79 +62,87 @@ bioverbs::export
 
 
 
-export.DESeqAnalysis <-  # nolint
-    function(
-        x,
-        name = NULL,
-        dir = ".",
-        compress = FALSE,
-        humanize = FALSE
-    ) {
+# Exported methods =============================================================
+# Inheriting the SummarizedExperiment method internally here.
+# Only export the raw and normalized counts.
+# Skip exporting other assays, including mu, H, cooks.
+export.DESeqDataSet <-  # nolint
+    function(x, name = NULL, dir = ".", compress = FALSE) {
         validObject(x)
+
         call <- standardizeCall()
         assert(isString(name, nullOK = TRUE))
         if (is.null(name)) {
             name <- as.character(call[["x"]])
         }
+
+        normalized <- counts(x, normalized = TRUE)
+
+        rse <- as(x, "RangedSummarizedExperiment")
+        assays(rse)[["normalized"]] <- normalized
+        assays(rse) <- assays(rse)[c("counts", "normalized")]
+
+        export(x = rse, name = name, dir = dir, compress = compress)
+    }
+
+
+
+#' @rdname export
+#' @export
+setMethod(
+    f = "export",
+    signature = signature("DESeqDataSet"),
+    definition = export.DESeqDataSet
+)
+
+
+
+export.DESeqAnalysis <-  # nolint
+    function(
+        x,
+        name = NULL,
+        dir = ".",
+        compress = FALSE
+    ) {
+        validObject(x)
+
+        call <- standardizeCall()
+        assert(isString(name, nullOK = TRUE))
+        if (is.null(name)) {
+            name <- as.character(call[["x"]])
+        }
+
         # Note that we're combining the dir with name, so we can set
         # subdirectories for each slotted data type (e.g. DESeqDataSet).
         dir <- initDir(file.path(dir, name))
         rm(name)
+
         files <- list()
 
         # DESeqDataSet.
-        files[["data"]] <- do.call(
-            what = .exportDESeqDataSet,
-            args = list(
-                x = x,
-                dir = dir,
-                compress = compress,
-                humanize = humanize
-            )
+        message("Exporting DESeqDataSet.")
+        files[["data"]] <- export(
+            x = as(x, "DESeqDataSet"),
+            name = "data",
+            dir = dir,
+            compress = compress
         )
 
         # DESeqTransform.
-        files[["transform"]] <- do.call(
-            what = .exportDESeqTransform,
-            args = list(
-                x = x,
-                dir = dir,
-                compress = compress,
-                humanize = humanize
-            )
-        )
-
-        # DESeqResults.
-        # Here we are writing out both the unshrunken and shrunken values.
-        files[["results"]] <- do.call(
-            what = .exportDESeqResultsList,
-            args = list(
-                x = x,
-                slotName = "results",
-                dir = dir,
-                compress = compress,
-                humanize = humanize
-            )
-        )
-        files[["lfcShrink"]] <- do.call(
-            what = .exportDESeqResultsList,
-            args = list(
-                x = x,
-                slotName = "lfcShrink",
-                dir = dir,
-                compress = compress,
-                humanize = humanize
-            )
+        message("Exporting DESeqTransform.")
+        files[["transform"]] <- export(
+            x = as(x, "DESeqTransform"),
+            name = "transform",
+            dir = dir,
+            compress = compress
         )
 
         # DEG results tables.
-        files[["resultsTables"]] <- do.call(
-            what = .exportResultsTables,
-            args = list(
-                x = x,
-                dir = dir,
-                compress = compress
-            )
+        message("Exporting DESeqResults tables.")
+        files[["resultsTables"]] <- .exportResultsTables(
+            x = x,
+            dir = file.path(dir, "resultsTables"),
+            compress = compress
         )
 
         invisible(files)
