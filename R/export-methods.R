@@ -2,15 +2,6 @@
 #' @inherit bioverbs::export
 #' @inheritParams params
 #' @inheritParams brio::export
-#'
-#' @param humanize `logical(1)`.
-#'   Make the gene and sample names human readable.
-#'
-#'   - Gene names require `geneName` column to be defined in
-#'     [`rowData()`][SummarizedExperiment::rowData].
-#'   - Sample names require `sampleName` column to be defined in
-#'     [`colData()`][SummarizedExperiment::colData].
-#'
 #' @examples
 #' data(deseq)
 #'
@@ -30,48 +21,41 @@ bioverbs::export
 
 
 
-.exportDESeqDataSet <- function(x, dir, compress, humanize) {
-    assert(
-        is(x, "DESeqAnalysis"),
-        isFlag(humanize)
-    )
+# Only export the raw and normalized counts.
+# Skip exporting other assays, including mu, H, cooks.
+# Using the inherited SummarizedExperiment method here.
+.exportDESeqDataSet <- function(x, dir, compress) {
+    assert(is(x, "DESeqAnalysis"))
     message("Exporting DESeqDataSet.")
     dds <- as(x, "DESeqDataSet")
-    if (isTRUE(humanize)) {
-        dds <- humanize(dds)
-    }
-    # Using the inherited SummarizedExperiment method here.
-    export(x = dds, name = "data", dir = dir, compress = compress)
+    rse <- as(dds, "RangedSummarizedExperiment")
+    assays(rse)[["normalized"]] <- counts(dds, normalized = TRUE)
+    assays(rse) <- assays(rse)[c("counts", "normalized")]
+    export(x = rse, name = "DESeqDataSet", dir = dir, compress = compress)
 }
 
 
 
-.exportDESeqTransform <- function(x, dir, compress, humanize) {
-    # Using the inherited SummarizedExperiment method here.
-    assert(
-        is(x, "DESeqAnalysis"),
-        isFlag(humanize)
-    )
-    # Note the extra line break in message.
+# Using the inherited SummarizedExperiment method here.
+# Note the extra line break in message.
+.exportDESeqTransform <- function(x, dir, compress) {
+    assert(is(x, "DESeqAnalysis"))
     message("\nExporting DESeqTransform.")
-    dt <- as(x, "DESeqDataSet")
-    if (isTRUE(humanize)) {
-        dt <- humanize(dt)
-    }
-    export(x = dt, name = "transform", dir = dir, compress = compress)
+    dt <- as(x, "DESeqTransform")
+    rse <- as(dt, "RangedSummarizedExperiment")
+    export(x = rse, name = "DESeqTransform", dir = dir, compress = compress)
 }
 
 
 
-# Here we are defining an internal function that works on both
-# unshrunken (results) and shrunken (lfcShrink) results. We're using
-# inherited global variables here for more compact code.
+# Here we are defining an internal function that works on both unshrunken
+# (results) and shrunken (lfcShrink) results. We're using inherited global
+# variables here for more compact code.
 .exportDESeqResultsList <- function(
     x,
     slotName = c("results", "lfcShrink"),
     dir,
-    compress,
-    humanize
+    compress
 ) {
     assert(is(x, "DESeqAnalysis"))
     slotName <- match.arg(slotName)
