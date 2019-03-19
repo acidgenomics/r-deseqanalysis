@@ -3,13 +3,14 @@ params:
   title: "Differential expression analysis using DESeq2"
   
   # Use DESeqAnalysis object as input.
-  # Basic: Load from file on disk, either RDS or RDA.
-  # Advanced: Loop across multiple objects using `rmarkdown::render()`.
+  # - Standard: Load from file on disk, either RDS or RDA.
+  # - Advanced: Loop across multiple objects using `rmarkdown::render()`.
   object: "rds/YYYY-MM-DD/DESeqAnalysis.rds"
-  # `name` param is only necessary when passing in object directly.
-  name: !r NULL
   
-  data_dir: !r file.path("data", Sys.Date())
+  # The `name` param is only necessary when passing in object directly, during
+  # an `rmarkdown::render()` call. See `object` param.
+  # name: "object_name"
+  
   output_dir: !r file.path("results", Sys.Date(), "differential_expression")
 
 title: "`r params$title`"
@@ -19,7 +20,7 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, cache=FALSE, message=FALSE}
-# Last modified 2019-03-11
+# Last modified 2019-03-18
 library(DESeqAnalysis)
 prepareTemplate()
 source("_setup.R")
@@ -30,10 +31,10 @@ source("_setup.R")
 
 ```{r object}
 if (is.character(params$object)) {
-    if (fileExt(object) == "rds") {
+    if (fileExt(params$object) == "rds") {
         object <- readRDS(file = params$object)
         name <- basenameSansExt(params$object)
-    } else if (fileExt(object) == "rda") {
+    } else if (fileExt(params$object) == "rda") {
         name <- load(params$object)
         object <- get(name, inherits = FALSE)
     }
@@ -43,7 +44,7 @@ if (is.character(params$object)) {
 }
 stopifnot(
     is(object, "DESeqAnalysis"),
-    isString(name)
+    is.character(name)
 )
 invisible(validObject(object))
 print(object)
