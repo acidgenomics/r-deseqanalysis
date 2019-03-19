@@ -10,8 +10,8 @@
 #' @importFrom S4Vectors SimpleList as.data.frame head mcols mcols<- metadata
 #' @importFrom SummarizedExperiment colData colData<-
 #' @importFrom basejump Gene2Symbol as_tibble basejump_geom_label_repel camel
-#'   convertSampleIDsToNames decode humanize initDir interestingGroups<-
-#'   makeNames mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
+#'   convertSampleIDsToNames decode initDir interestingGroups<- makeNames
+#'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
 #'   matchInterestingGroups matchesGene2Symbol methodFormals plotCounts
 #'   plotHeatmap plotPCA printString relevelColData removeNA showSlotInfo snake
 #'   standardizeCall
