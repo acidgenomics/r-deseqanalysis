@@ -6,7 +6,7 @@
 \alias{plotCounts,DESeqAnalysis-method}
 \title{Plot counts}
 \usage{
-\S4method{plotCounts}{DESeqAnalysis}(object, genes,
+\S4method{plotCounts}{DESeqAnalysis}(object, genes, transform = FALSE,
   interestingGroups = NULL, medianLine = TRUE,
   color = getOption("basejump.discrete.color", NULL),
   legend = getOption("basejump.legend", TRUE), style = c("facet",
@@ -19,6 +19,10 @@
 Gene identifiers. It is considered better practice to input the stable gene
 identifiers from Ensembl (e.g. "ENSG00000000003") and not the (HGNC) gene
 symbols (e.g. "TSPN6"), if possible.}
+
+\item{transform}{\code{logical(1)}.
+Visualize using \code{DESeqTransform} log2 variance-stabilized counts, rather
+than \code{DESeqDataSet} size-factor normalized counts.}
 
 \item{interestingGroups}{\code{character}.
 Groups of interest that define the samples. If left unset, defaults to
