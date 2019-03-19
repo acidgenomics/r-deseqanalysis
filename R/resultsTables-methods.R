@@ -114,6 +114,8 @@ resultsTables.DESeqAnalysis <-  # nolint
         res <- .matchResults(object, results)
 
         # Get the DESeqDataSet, and humanize the sample names.
+        # Note that we're not calling `humanize()` here on the DESeqDataSet,
+        # because we want to keep the gene identifiers in the row names.
         dds <- as(object, "DESeqDataSet")
         # Always attempt to use human-friendly sample names, defined by the
         # `sampleName` column in `colData`. We're using this downstream when
