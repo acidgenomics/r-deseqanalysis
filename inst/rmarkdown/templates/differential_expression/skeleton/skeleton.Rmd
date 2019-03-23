@@ -20,10 +20,13 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, cache=FALSE, message=FALSE}
-# Last modified 2019-03-18
+# Last modified 2019-03-23
 library(DESeqAnalysis)
 prepareTemplate()
 source("_setup.R")
+```
+
+```{r links, child="_links.Rmd"}
 ```
 
 ```{r header, child="_header.Rmd"}
