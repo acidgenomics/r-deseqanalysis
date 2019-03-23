@@ -1,3 +1,11 @@
+## DESeqAnalysis 0.1.12 (2019-03-23)
+
+### Minor changes
+
+- Migrated code to [Acid Genomics][].
+
+
+
 ## DESeqAnalysis 0.1.11 (2019-03-11)
 
 ### Minor changes
@@ -200,11 +208,12 @@ migrated from my [bcbioRNASeq][] R package.
 
 
 
+[Acid Genomics]: https://acidgenomics.com/
 [AppVeyor CI]: https://www.appveyor.com/
-[basejump]: https://steinbaugh.com/basejump/
+[basejump]: https://basejump.acidgenomics.com/
 [bcbioRNASeq]: https://bioinformatics.sph.harvard.edu/bcbioRNASeq/
-[bioverbs]: https://steinbaugh.com/bioverbs/
-[goalie]: https://steinbaugh.com/goalie/
+[bioverbs]: https://bioverbs.acidgenomics.com/
+[goalie]: https://goalie.steinbaugh.com/
 [testthat]: http://testthat.r-lib.org/
-[transformer]: https://steinbaugh.com/transformer/
+[transformer]: https://transformer.acidgenomics.com/
 [Travis CI]: https://travis-ci.com/

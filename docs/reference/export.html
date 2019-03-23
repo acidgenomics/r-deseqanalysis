@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.14</span>
       </span>
     </div>
 
@@ -87,7 +87,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/steinbaugh/DESeqAnalysis">
+  <a href="https://github.com/acidgenomics/DESeqAnalysis">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -105,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Export</h1>
-    <small class="dont-index">Source: <a href='https://github.com/steinbaugh/DESeqAnalysis/blob/master/R/export-methods.R'><code>R/export-methods.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/export-methods.R'><code>R/export-methods.R</code></a></small>
     <div class="hidden name"><code>export.Rd</code></div>
     </div>
 
@@ -115,9 +115,13 @@
     
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for DESeqAnalysis</span>
+    <pre class="usage"><span class='co'># S4 method for DESeqDataSet</span>
 <span class='fu'>export</span>(<span class='no'>x</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"."</span>,
-  <span class='kw'>compress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>humanize</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>compress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># S4 method for DESeqAnalysis</span>
+<span class='fu'>export</span>(<span class='no'>x</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>compress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,16 +145,6 @@ Directory path.</p></td>
       <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
 Apply gzip compression to all files.</p></td>
     </tr>
-    <tr>
-      <th>humanize</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
-Make the gene and sample names human readable.</p><ul>
-<li><p>Gene names require <code>geneName</code> column to be defined in
-<code><a href='https://www.rdocumentation.org/packages/SummarizedExperiment/topics/SummarizedExperiment-class'>rowData()</a></code>.</p></li>
-<li><p>Sample names require <code>sampleName</code> column to be defined in
-<code><a href='https://www.rdocumentation.org/packages/SummarizedExperiment/topics/SummarizedExperiment-class'>colData()</a></code>.</p></li>
-</ul></td>
-    </tr>
     </table>
     
 
@@ -158,13 +152,9 @@ Make the gene and sample names human readable.</p><ul>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>export</span>(<span class='no'>deseq</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"example"</span>)</div><div class='output co'>#&gt; <span class='message'>Exporting DESeqDataSet.</span></div><div class='output co'>#&gt; <span class='message'>Exporting assays: counts, mu, H, cooks</span></div><div class='output co'>#&gt; <span class='message'>Exported counts.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported mu.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported H.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported cooks.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported colData.csv.</span></div><div class='output co'>#&gt; <span class='message'>Dropping non-atomic columns:</span>
-#&gt; <span class='message'>entrezID</span></div><div class='output co'>#&gt; <span class='message'>Exported rowData.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported data to /data00/home/michael.steinbaugh/git/DESeqAnalysis/docs/reference/example/deseq/data.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Exporting DESeqTransform.</span></div><div class='output co'>#&gt; <span class='message'>Exporting assays: counts, mu, H, cooks</span></div><div class='output co'>#&gt; <span class='message'>Exported counts.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported mu.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported H.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported cooks.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported colData.csv.</span></div><div class='output co'>#&gt; <span class='message'>Dropping non-atomic columns:</span>
-#&gt; <span class='message'>entrezID</span></div><div class='output co'>#&gt; <span class='message'>Exported rowData.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported transform to /data00/home/michael.steinbaugh/git/DESeqAnalysis/docs/reference/example/deseq/transform.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Exporting results.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_B_vs_A.csv.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Exporting lfcShrink.</span></div><div class='output co'>#&gt; <span class='message'>Exported condition_B_vs_A.csv.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Exporting results tables.</span></div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>84 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>87 downregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>Exported all.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported up.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported down.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported both.csv.</span></div><div class='input'>
+<span class='fu'>export</span>(<span class='no'>deseq</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"example"</span>)</div><div class='output co'>#&gt; <span class='message'>Exporting DESeqDataSet.</span></div><div class='output co'>#&gt; <span class='message'>Exporting assays: counts, normalized</span></div><div class='output co'>#&gt; <span class='message'>Exported counts.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported normalized.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported colData.csv.</span></div><div class='output co'>#&gt; <span class='message'>Dropping non-atomic columns:</span>
+#&gt; <span class='message'>entrezID</span></div><div class='output co'>#&gt; <span class='message'>Exported rowData.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported data to /Users/mike/git/packages/DESeqAnalysis/docs/reference/example/deseq/data.</span></div><div class='output co'>#&gt; <span class='message'>Exporting DESeqTransform.</span></div><div class='output co'>#&gt; <span class='message'>Exporting assays: assay</span></div><div class='output co'>#&gt; <span class='message'>Exported assay.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported colData.csv.</span></div><div class='output co'>#&gt; <span class='message'>Dropping non-atomic columns:</span>
+#&gt; <span class='message'>entrezID</span></div><div class='output co'>#&gt; <span class='message'>Exported rowData.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported transform to /Users/mike/git/packages/DESeqAnalysis/docs/reference/example/deseq/transform.</span></div><div class='output co'>#&gt; <span class='message'>Exporting DESeqResults tables.</span></div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>84 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>87 downregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>Exported all.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported up.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported down.csv.</span></div><div class='output co'>#&gt; <span class='message'>Exported both.csv.</span></div><div class='input'>
 <span class='co'>## Clean up.</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"example"</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
   </div>
@@ -181,7 +171,7 @@ Make the gene and sample names human readable.</p><ul>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='/'>Michael Steinbaugh</a>.</p>
+  <p>Developed by <a href='/'>Michael Steinbaugh</a>, Acid Genomics.</p>
 </div>
 
 <div class="pkgdown">

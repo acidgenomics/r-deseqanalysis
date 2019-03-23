@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.14</span>
       </span>
     </div>
 
@@ -87,7 +87,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/steinbaugh/DESeqAnalysis">
+  <a href="https://github.com/acidgenomics/DESeqAnalysis">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -105,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot counts</h1>
-    <small class="dont-index">Source: <a href='https://github.com/steinbaugh/DESeqAnalysis/blob/master/R/plotCounts-methods.R'><code>R/plotCounts-methods.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/plotCounts-methods.R'><code>R/plotCounts-methods.R</code></a></small>
     <div class="hidden name"><code>plotCounts.Rd</code></div>
     </div>
 
@@ -116,7 +116,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotCounts</span>(<span class='no'>object</span>, <span class='no'>genes</span>,
+<span class='fu'>plotCounts</span>(<span class='no'>object</span>, <span class='no'>genes</span>, <span class='kw'>transform</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>medianLine</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"basejump.discrete.color"</span>, <span class='kw'>NULL</span>),
   <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"basejump.legend"</span>, <span class='fl'>TRUE</span>), <span class='kw'>style</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"facet"</span>,
@@ -137,6 +137,12 @@ identifiers from Ensembl (e.g. "ENSG00000000003") and not the (HGNC) gene
 symbols (e.g. "TSPN6"), if possible.</p></td>
     </tr>
     <tr>
+      <th>transform</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
+Visualize using <code>DESeqTransform</code> log2 variance-stabilized counts, rather
+than <code>DESeqDataSet</code> size-factor normalized counts.</p></td>
+    </tr>
+    <tr>
       <th>interestingGroups</th>
       <td><p><code>character</code>.
 Groups of interest that define the samples. If left unset, defaults to
@@ -153,7 +159,7 @@ sample name.</p></td>
       <td><p><code>ScaleDiscrete</code>.
 Desired ggplot2 color scale. Must supply discrete values. When set <code>NULL</code>,
 the default ggplot2 color palette will be used. If manual color definitions
-are desired, we recommend using <code><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>ggplot2::scale_color_manual()</a></code>.</p>
+are desired, we recommend using <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/scale_manual'>ggplot2::scale_color_manual()</a></code>.</p>
 <p>To set the discrete color palette globally, use:</p><pre>options(basejump.color.discrete = ggplot2::scale_color_viridis_d())
 </pre></td>
     </tr>
@@ -174,7 +180,7 @@ Plot style.</p></td>
     
 <ul>
 <li><p><code>style = "facet"</code>: <code>ggplot</code> grouped by <code>sampleName</code>, with
-<code><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>ggplot2::facet_wrap()</a></code> applied to panel the samples.</p></li>
+<code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>ggplot2::facet_wrap()</a></code> applied to panel the samples.</p></li>
 <li><p><code>style = "wide"</code>: <code>ggplot</code> in wide format, with genes on the x-axis.</p></li>
 </ul>
 
@@ -194,7 +200,7 @@ Plot style.</p></td>
 <span class='no'>genes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>rownames</a></span>(<span class='no'>dds</span>))
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>genes</span>)</div><div class='output co'>#&gt; [1] "gene001" "gene002" "gene003" "gene004" "gene005" "gene006"</div><div class='input'>
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotCounts</span>(<span class='no'>deseq</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>genes</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"facet"</span>)</div><div class='img'><img src='plotCounts-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotCounts</span>(<span class='no'>deseq</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>genes</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"wide"</span>)</div><div class='img'><img src='plotCounts-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plotCounts</span>(<span class='no'>deseq</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>genes</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"facet"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: restarting interrupted promise evaluation</span></div><div class='output co'>#&gt; <span class='warning'>Warning: restarting interrupted promise evaluation</span></div><div class='output co'>#&gt; <span class='warning'>Warning: restarting interrupted promise evaluation</span></div><div class='output co'>#&gt; <span class='warning'>Warning: restarting interrupted promise evaluation</span></div><div class='output co'>#&gt; <span class='error'>Error in isAny(args, classes = c("list", "NULL")): object 'countsAxisLabel' not found</span></div><div class='input'><span class='fu'>plotCounts</span>(<span class='no'>deseq</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>genes</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"wide"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: restarting interrupted promise evaluation</span></div><div class='output co'>#&gt; <span class='warning'>Warning: restarting interrupted promise evaluation</span></div><div class='output co'>#&gt; <span class='warning'>Warning: restarting interrupted promise evaluation</span></div><div class='output co'>#&gt; <span class='warning'>Warning: restarting interrupted promise evaluation</span></div><div class='output co'>#&gt; <span class='error'>Error in isAny(args, classes = c("list", "NULL")): object 'countsAxisLabel' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -213,7 +219,7 @@ Plot style.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='/'>Michael Steinbaugh</a>.</p>
+  <p>Developed by <a href='/'>Michael Steinbaugh</a>, Acid Genomics.</p>
 </div>
 
 <div class="pkgdown">
