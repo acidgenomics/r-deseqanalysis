@@ -2,6 +2,11 @@
 #' @inherit basejump::plotCounts
 #' @inheritParams basejump::params
 #' @inheritParams params
+#'
+#' @param transform `logical(1)`.
+#'   Visualize using `DESeqTransform` log2 variance-stabilized counts, rather
+#'   than `DESeqDataSet` size-factor normalized counts.
+#'
 #' @examples
 #' data(deseq)
 #'
@@ -26,37 +31,47 @@ bioverbs::plotCounts
 
 # Note that DESeqDataSet is supported in basejump SummarizedExperiment method.
 # That will detect the object and plot normalized counts automatically.
-
-
-
 plotCounts.DESeqAnalysis <-  # nolint
-    function(object) {
+    function(object, genes, transform = FALSE) {
         validObject(object)
-        # Using DESeqTransform data here.
-        dt <- slot(object, "transform")
-        if ("rlogIntercept" %in% colnames(dt)) {
-            countsAxisLabel <- "rlog counts (log2)"
+        assert(
+            isCharacter(genes),
+            isFlag(transform)
+        )
+
+        if (isTRUE(transform)) {
+            object <- as(object, "DESeqTransform")
+            if ("rlogIntercept" %in% colnames(mcols(object))) {
+                countsAxisLabel <- "rlog counts (log2)"
+            } else {
+                countsAxisLabel <- "vst counts (log2)"
+            }
         } else {
-            countsAxisLabel <- "vst counts (log2)"
+            object <- as(object, "DESeqDataSet")
+            countsAxisLabel <- "normalized counts"
         }
+
         do.call(
             what = plotCounts,
             args = matchArgsToDoCall(
                 args = list(
-                    object = dt,
+                    object = object,
                     genes = genes,
                     countsAxisLabel = countsAxisLabel
-                )
+                ),
+                removeFormals = "transform"
             )
         )
     }
 
-f <- methodFormals(
+f1 <- formals(plotCounts.DESeqAnalysis)
+f2 <- methodFormals(
     f = "plotCounts",
     signature = "SummarizedExperiment",
     package = "basejump"
 )
-f <- f[setdiff(names(f), c("assay", "countsAxisLabel"))]
+f2 <- f2[setdiff(names(f2), c(names(f1), "assay", "countsAxisLabel"))]
+f <- c(f1, f2)
 formals(plotCounts.DESeqAnalysis) <- f
 
 
