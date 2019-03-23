@@ -1,6 +1,3 @@
-# Travis-CI configuration for Bioconductor packages
-# https://docs.travis-ci.com/user/languages/r
-
 language: r
 cache: packages
 
@@ -25,25 +22,22 @@ env:
   global:
     - LINTR_COMMENT_BOT=true
 
-# Skipping vignettes, which can cause the build to time out.
-r_build_args: "--no-build-vignettes --no-manual"
-r_check_args: "--no-build-vignettes --no-manual --timings"
-
 r_packages:
   - covr
 bioc_packages:
   - BiocCheck
   - GenomeInfoDbData
 r_github_packages:
-  - steinbaugh/lintr
+  - acidgenomics/lintr
 
 after_success:
   - R CMD BiocCheck .
-  # Only check lints and coverage against linux bioc-release.
   - test $TRAVIS_OS_NAME = 'linux' && $TRAVIS_R_VERSION_STRING = 'bioc-release' && Rscript -e 'lintr::lint_package()'
   - test $TRAVIS_OS_NAME = 'linux' && $TRAVIS_R_VERSION_STRING = 'bioc-release' && Rscript -e 'covr::codecov()'
 
 notifications:
   email:
+    recipients:
+      - mike@steinbaugh.com
     on_success: change
     on_failure: change
