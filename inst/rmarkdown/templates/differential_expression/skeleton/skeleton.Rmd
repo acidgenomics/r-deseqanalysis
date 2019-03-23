@@ -3,13 +3,14 @@ params:
   title: "Differential expression analysis using DESeq2"
   
   # Use DESeqAnalysis object as input.
-  # Basic: Load from file on disk, either RDS or RDA.
-  # Advanced: Loop across multiple objects using `rmarkdown::render()`.
+  # - Standard: Load from file on disk, either RDS or RDA.
+  # - Advanced: Loop across multiple objects using `rmarkdown::render()`.
   object: "rds/YYYY-MM-DD/DESeqAnalysis.rds"
-  # `name` param is only necessary when passing in object directly.
-  name: !r NULL
   
-  data_dir: !r file.path("rds", Sys.Date())
+  # The `name` param is only necessary when passing in object directly, during
+  # an `rmarkdown::render()` call. See `object` param.
+  # name: "object_name"
+  
   output_dir: !r file.path("results", Sys.Date(), "differential_expression")
 
 title: "`r params$title`"
@@ -19,10 +20,13 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, cache=FALSE, message=FALSE}
-# Last modified 2019-03-11
+# Last modified 2019-03-23
 library(DESeqAnalysis)
 prepareTemplate()
 source("_setup.R")
+```
+
+```{r links, child="_links.Rmd"}
 ```
 
 ```{r header, child="_header.Rmd"}

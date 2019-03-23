@@ -3,11 +3,15 @@
 \docType{methods}
 \name{export}
 \alias{export}
+\alias{export,DESeqDataSet-method}
 \alias{export,DESeqAnalysis-method}
 \title{Export}
 \usage{
+\S4method{export}{DESeqDataSet}(x, name = NULL, dir = ".",
+  compress = FALSE)
+
 \S4method{export}{DESeqAnalysis}(x, name = NULL, dir = ".",
-  compress = FALSE, humanize = FALSE)
+  compress = FALSE)
 }
 \arguments{
 \item{x}{Object.}
@@ -20,15 +24,6 @@ Directory path.}
 
 \item{compress}{\code{logical(1)}.
 Apply gzip compression to all files.}
-
-\item{humanize}{\code{logical(1)}.
-Make the gene and sample names human readable.
-\itemize{
-\item Gene names require \code{geneName} column to be defined in
-\code{\link[SummarizedExperiment:rowData]{rowData()}}.
-\item Sample names require \code{sampleName} column to be defined in
-\code{\link[SummarizedExperiment:colData]{colData()}}.
-}}
 }
 \description{
 Export data out of R and write to disk.
