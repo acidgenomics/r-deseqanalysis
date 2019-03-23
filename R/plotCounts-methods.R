@@ -34,7 +34,10 @@ bioverbs::plotCounts
 plotCounts.DESeqAnalysis <-  # nolint
     function(object, genes, transform = FALSE) {
         validObject(object)
-        assert(isFlag(transform))
+        assert(
+            isCharacter(genes),
+            isFlag(transform)
+        )
 
         if (isTRUE(transform)) {
             object <- as(object, "DESeqTransform")
@@ -45,6 +48,7 @@ plotCounts.DESeqAnalysis <-  # nolint
             }
         } else {
             object <- as(object, "DESeqDataSet")
+            countsAxisLabel <- "normalized counts"
         }
 
         do.call(
