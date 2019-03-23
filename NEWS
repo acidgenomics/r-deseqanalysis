@@ -1,8 +1,16 @@
-## DESeqAnalysis 0.1.12 (2019-03-23)
+## DESeqAnalysis 0.1.13 (2019-03-23)
 
 ### Minor changes
 
 - Migrated code to [Acid Genomics][].
+
+
+
+## DESeqAnalysis 0.1.12 (2019-03-18)
+
+### Minor changes
+
+- Updated differential expression template and dependencies.
 
 
 
