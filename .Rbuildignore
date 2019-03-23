@@ -3,6 +3,7 @@
 ^.*\.pdf$
 ^\.Rprofile$
 ^\.Rproj\.user$
+^\.git$
 ^\.httr-oauth$
 ^\.lintr$
 ^\.travis\.yml$
