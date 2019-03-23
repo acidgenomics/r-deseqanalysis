@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.14</span>
       </span>
     </div>
 
@@ -52,7 +52,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/steinbaugh/DESeqAnalysis">
+  <a href="https://github.com/acidgenomics/DESeqAnalysis">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -72,20 +72,20 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#deseqanalysis" class="anchor"></a>DESeqAnalysis</h1></div>
 
-<p>Toolkit for performing differential expression with DESeq2.</p>
+<p>Toolkit for performing differential expression with <a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>This is an <a href="https://www.r-project.org">R</a> package.</p>
+<p>This is an <a href="https://www.r-project.org/">R</a> package.</p>
 <div id="bioconductor-method" class="section level3">
 <h3 class="hasAnchor">
-<a href="#bioconductor-method" class="anchor"></a><a href="https://bioconductor.org">Bioconductor</a> method</h3>
+<a href="#bioconductor-method" class="anchor"></a><a href="https://bioconductor.org/">Bioconductor</a> method</h3>
 <p>We recommend installing the package with <a href="https://cran.r-project.org/package=BiocManager">BiocManager</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">require</a></span>(<span class="st">"BiocManager"</span>)) {
     <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"BiocManager"</span>)
 }
 BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"remotes"</span>)
-BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"steinbaugh/DESeqAnalysis"</span>)</code></pre></div>
+BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"acidgenomics/DESeqAnalysis"</span>)</code></pre></div>
 </div>
 </div>
 </div>
@@ -95,9 +95,9 @@ BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocu
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/steinbaugh/DESeqAnalysis">https://​github.com/​steinbaugh/​DESeqAnalysis</a>
+<li>Browse source code at <br><a href="https://github.com/acidgenomics/DESeqAnalysis">https://​github.com/​acidgenomics/​DESeqAnalysis</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/steinbaugh/DESeqAnalysis/issues/">https://​github.com/​steinbaugh/​DESeqAnalysis/​issues/​</a>
+<li>Report a bug at <br><a href="https://github.com/acidgenomics/DESeqAnalysis/issues/">https://​github.com/​acidgenomics/​DESeqAnalysis/​issues/​</a>
 </li>
 </ul>
 </div>
@@ -114,6 +114,7 @@ BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocu
 <ul class="list-unstyled">
 <li>
 <a href="/">Michael Steinbaugh</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-2403-2221" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<li>Acid Genomics <br><small class="roles"> Copyright holder, funder </small>  </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
@@ -121,9 +122,9 @@ BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocu
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.com/steinbaugh/DESeqAnalysis"><img src="https://travis-ci.com/steinbaugh/DESeqAnalysis.svg?branch=master" alt="Travis CI"></a></li>
+<li><a href="https://travis-ci.com/acidgenomics/DESeqAnalysis"><img src="https://travis-ci.com/acidgenomics/DESeqAnalysis.svg?branch=master" alt="Travis CI"></a></li>
 <li><a href="https://ci.appveyor.com/project/mjsteinbaugh/deseqanalysis"><img src="https://ci.appveyor.com/api/projects/status/s5evl37t3vjkfjct?svg=true" alt="AppVeyor CI"></a></li>
-<li><a href="https://codecov.io/gh/steinbaugh/DESeqAnalysis"><img src="https://codecov.io/gh/steinbaugh/DESeqAnalysis/branch/master/graph/badge.svg" alt="Codecov"></a></li>
+<li><a href="https://codecov.io/gh/acidgenomics/DESeqAnalysis"><img src="https://codecov.io/gh/acidgenomics/DESeqAnalysis/branch/master/graph/badge.svg" alt="Codecov"></a></li>
 <li><a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
 </ul>
 </div>
@@ -131,7 +132,7 @@ BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocu
 </div>
 
       <footer><div class="copyright">
-  <p>Developed by <a href="/">Michael Steinbaugh</a>.</p>
+  <p>Developed by <a href="/">Michael Steinbaugh</a>, Acid Genomics.</p>
 </div>
 
 <div class="pkgdown">

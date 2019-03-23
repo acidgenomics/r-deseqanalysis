@@ -10,9 +10,9 @@ Toolkit for performing differential expression with
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://steinbaugh.com/DESeqAnalysis/}
-  \item \url{https://github.com/steinbaugh/DESeqAnalysis/}
-  \item Report bugs at \url{https://github.com/steinbaugh/DESeqAnalysis/issues/}
+  \item \url{https://deseqanalysis.acidgenomics.com/}
+  \item \url{https://github.com/acidgenomics/DESeqAnalysis/}
+  \item Report bugs at \url{https://github.com/acidgenomics/DESeqAnalysis/issues/}
 }
 
 }
@@ -21,6 +21,7 @@ Useful links:
 
 Other contributors:
 \itemize{
+  \item Acid Genomics [copyright holder, funder]
   \item Lorena Pantano \email{lorena.pantano@gmail.com} (0000-0002-3859-3249) [contributor]
   \item Rory Kirchner \email{roryk@alum.mit.edu} (0000-0003-4814-5885) [contributor]
   \item Victor Barrera \email{barrera.vic@gmail.com} (0000-0003-0590-4634) [contributor]
