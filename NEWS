@@ -1,3 +1,17 @@
+## DESeqAnalysis 0.1.14 (2019-03-29)
+
+### Minor changes
+
+- Compatibility update for basejump v0.10 release. Some plotting code
+  dependencies have been split out to firestarter and minimalism packages.
+  We have updated the internal code dependencies to reflect these changes.
+  This includes `plotCounts`, `plotDEGHeatmap` (i.e. `plotHeatmap`), and
+  `plotDEGPCA` (i.e. `plotPCA`).
+- Updated documentation on global formals, which now use `acid` prefix instead
+  of `basejump`.
+
+
+
 ## DESeqAnalysis 0.1.13 (2019-03-23)
 
 ### Minor changes
