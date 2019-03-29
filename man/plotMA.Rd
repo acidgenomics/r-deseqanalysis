@@ -112,7 +112,7 @@ plotMA(deseq, results = 1L, direction = "down", ntop = 5L)
 plotMA(deseq, results = 1L, genes = genes)
 }
 \seealso{
-\code{DESeq2::plotMA}.
+\code{\link[DESeq2:plotMA]{DESeq2::plotMA()}}.
 }
 \author{
 Michael Steinbaugh, Rory Kirchner

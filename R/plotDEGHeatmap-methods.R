@@ -4,7 +4,7 @@
 
 #' @name plotDEGHeatmap
 #' @inherit bioverbs::plotDEGHeatmap
-#' @inheritParams basejump::plotHeatmap
+#' @inheritParams firestarter::plotHeatmap
 #' @inheritParams basejump::params
 #' @inheritParams params
 #'
@@ -107,7 +107,7 @@ f1 <- formals(plotDEGHeatmap.DESeqResults)
 f2 <- methodFormals(
     f = "plotHeatmap",
     signature = "SummarizedExperiment",
-    package = "basejump"
+    package = "firestarter"
 )
 f2 <- f2[setdiff(names(f2), c(names(f1), "object", "assay"))]
 f <- c(f1, f2)

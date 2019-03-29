@@ -9,11 +9,22 @@
 passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
 contrasts (e.g. interaction effect).}
 
+\item{direction}{\code{character(1)}.
+Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
+
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or position of \code{DESeqResults}.}
+
+\item{pointColor}{\code{character(1)}.
+Default point color for the plot.}
+
+\item{sigPointColor}{\code{character}.
+Color names for labeling upregulated and downregulated genes. Also supports
+a character string for labeling DEGs with the same color, regardless of
+direction.}
 }
 \value{
 No value.
