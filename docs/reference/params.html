@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.14</span>
       </span>
     </div>
 
@@ -120,6 +120,12 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>alpha</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric(1)</a></code>.
+Adjusted P value ("alpha") cutoff. If left <code>NULL</code>, will use the cutoff
+defined in the object.</p></td>
+    </tr>
+    <tr>
       <th>contrastSamples</th>
       <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
 <strong>Experimental</strong>. Only include the samples used to define the contrast
@@ -127,14 +133,37 @@ passed to <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/r
 contrasts (e.g. interaction effect).</p></td>
     </tr>
     <tr>
+      <th>direction</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>.
+Plot "<code>both</code>", "<code>up</code>", or "<code>down</code>" directions.</p></td>
+    </tr>
+    <tr>
       <th>lfcShrink</th>
       <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
 Use shrunken log2 fold change (LFC) values.</p></td>
     </tr>
     <tr>
+      <th>lfcThreshold</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric(1)</a></code>.
+Log fold change ratio (base 2) cutoff threshold. If left <code>NULL</code>, will use
+the cutoff defined in the object.</p></td>
+    </tr>
+    <tr>
       <th>results</th>
       <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>.
 Name or position of <code>DESeqResults</code>.</p></td>
+    </tr>
+    <tr>
+      <th>pointColor</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>.
+Default point color for the plot.</p></td>
+    </tr>
+    <tr>
+      <th>sigPointColor</th>
+      <td><p><code>character</code>.
+Color names for labeling upregulated and downregulated genes. Also supports
+a character string for labeling DEGs with the same color, regardless of
+direction.</p></td>
     </tr>
     </table>
     
