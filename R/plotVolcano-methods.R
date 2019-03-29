@@ -275,7 +275,7 @@ plotVolcano.DESeqResults <-  # nolint
                 .[match(x = rownames, table = .[["rowname"]]), ] %>%
                 left_join(as(gene2symbol, "tbl_df"), by = "rowname")
             p <- p +
-                basejump_geom_label_repel(
+                acid_geom_label_repel(
                     data = labelData,
                     mapping = aes(
                         x = !!sym(lfcCol),
