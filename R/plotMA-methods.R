@@ -14,7 +14,7 @@
 #'
 #' @return `ggplot`.
 #'
-#' @seealso `DESeq2::plotMA`.
+#' @seealso [DESeq2::plotMA()].
 #'
 #' @examples
 #' data(deseq)
@@ -242,7 +242,7 @@ plotMA.DESeqResults <-  # nolint
                 left_join(as(gene2symbol, "tbl_df"), by = "rowname")
 
             p <- p +
-                basejump_geom_label_repel(
+                acid_geom_label_repel(
                     data = labelData,
                     mapping = aes(
                         x = !!sym("baseMean"),
