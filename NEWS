@@ -1,3 +1,13 @@
+## DESeqAnalysis 0.1.15 (2019-04-02)
+
+### New functions
+
+- `resultsMatrix`: Utility function that quickly aggregates `DESeqResults`
+  values for multiple contrasts into a single `matrix`. Currently supports
+  return of `log2FoldChange`, `stat`, or `padj` values.
+
+
+
 ## DESeqAnalysis 0.1.14 (2019-03-29)
 
 ### Minor changes
