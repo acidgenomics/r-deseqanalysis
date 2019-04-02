@@ -18,7 +18,9 @@
 #' @return `matrix`.
 #'
 #' @examples
-#' stop("NOT SUPPORTED YET")
+#' data(deseq)
+#' x <- resultsMatrix(deseq)
+#' head(x)
 resultsMatrix <- function(
     object,
     value = c("log2FoldChange", "stat", "padj")
@@ -27,10 +29,60 @@ resultsMatrix <- function(
     value <- match.arg(value)
 
     # Get appropriate list of `DESeqResults`.
-    if (value == "log2FoldChange") {
-        # Use shrunken LFC values, if defined.
+    # Use shrunken LFC values, if defined.
+    # Otherwise, just pull values from `results()` return.
+    if (
+        value == "log2FoldChange" &&
+        is.list(slot(object, "lfcShrink"))
+    ) {
+        slotName <- "lfcShrink"
     } else {
-        # Otherwise, just pull values from `results()` return.
+        slotName <- "results"
     }
 
+    message(paste(
+        "Generating results matrix from",
+        slotName, "slot using", value, "column."
+    ))
+
+    results <- slot(object, name = slotName)
+    assert(
+        is.list(results),
+        hasValidNames(results)
+    )
+
+    list <- lapply(
+        X = results,
+        col = value,
+        FUN = function(data, col) data[[col]]
+    )
+    unlist <- unlist(list, recursive = FALSE, use.names = FALSE)
+    mat <- matrix(
+        data = unlist,
+        ncol = length(list),
+        byrow = FALSE,
+        dimnames = list(
+            rownames(results[[1L]]),
+            names(list)
+        )
+    )
+
+    # Double check that our unlist operation is correct.
+    assert(
+        identical(
+            unname(results[[1L]][[value]]),
+            unname(mat[, 1L, drop = TRUE])
+        )
+    )
+
+    # Stash useful metadata in the object.
+    attr(mat, which = "DESeqAnalysis") <-
+        list(
+            version = packageVersion("DESeqAnalysis"),
+            date = Sys.Date(),
+            slotName = slotName,
+            value = value
+        )
+
+    mat
 }
