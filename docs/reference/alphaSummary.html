@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.15</span>
       </span>
     </div>
 
@@ -142,12 +142,12 @@ and the name of the denominator level for the fold change
 <li><p>a list of 2 character vectors: the names of the fold changes
 for the numerator, and the names of the fold changes
 for the denominator.
-these names should be elements of <code>resultsNames(object)</code>.
+these names should be elements of <code><a href='resultsNames.html'>resultsNames(object)</a></code>.
 if the list is length 1, a second element is added which is the
 empty character vector, <code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character()</a></code>.
 (more general case, can be to combine interaction terms and main effects)</p></li>
 <li><p>a numeric contrast vector with one element
-for each element in <code>resultsNames(object)</code> (most general case)</p></li>
+for each element in <code><a href='resultsNames.html'>resultsNames(object)</a></code> (most general case)</p></li>
 </ul><p>If specified, the <code>name</code> argument is ignored.</p></td>
     </tr>
     <tr>
@@ -155,7 +155,7 @@ for each element in <code>resultsNames(object)</code> (most general case)</p></l
       <td><p>the name of the individual effect (coefficient) for
 building a results table. Use this argument rather than <code>contrast</code>
 for continuous variables, individual effects or for individual interaction terms.
-The value provided to <code>name</code> must be an element of <code>resultsNames(object)</code>.</p></td>
+The value provided to <code>name</code> must be an element of <code><a href='resultsNames.html'>resultsNames(object)</a></code>.</p></td>
     </tr>
     </table>
     
@@ -179,8 +179,8 @@ The value provided to <code>name</code> must be an element of <code>resultsNames
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqDataSet ====</span>
-<span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
-<span class='fu'>design</span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; ~condition</div><div class='input'><span class='fu'>resultsNames</span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; [1] "Intercept"        "condition_B_vs_A"</div><div class='input'><span class='fu'>alphaSummary</span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; <span class='message'>Intercept</span>
+<span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.html'>as</a></span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
+<span class='fu'>design</span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; ~condition</div><div class='input'><span class='fu'><a href='resultsNames.html'>resultsNames</a></span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; [1] "Intercept"        "condition_B_vs_A"</div><div class='input'><span class='fu'>alphaSummary</span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; <span class='message'>Intercept</span>
 #&gt; <span class='message'>Alpha cutoffs: 0.1, 0.05, 0.01, 0.001, 1e-06</span></div><div class='output co'>#&gt;                0.1 0.05 0.01 0.001 1e-06
 #&gt; LFC &gt; 0 (up)    84   69   42    23     6
 #&gt; LFC &lt; 0 (down)  87   68   31    16     3
