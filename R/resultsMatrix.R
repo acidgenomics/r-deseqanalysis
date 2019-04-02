@@ -1,7 +1,3 @@
-# Consider warning/erroring if object only contains a single results contrast.
-
-
-
 #' DESeqResults matrix
 #'
 #' Generate an aggregate matrix of DESeqResults values.
