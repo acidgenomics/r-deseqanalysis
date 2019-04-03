@@ -20,7 +20,7 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, cache=FALSE, message=FALSE}
-# Last modified 2019-03-23
+# Last modified 2019-04-02
 library(DESeqAnalysis)
 prepareTemplate()
 source("_setup.R")
