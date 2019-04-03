@@ -2,6 +2,8 @@
 #'
 #' Generate an aggregate matrix of DESeqResults values.
 #'
+#' @export
+#'
 #' @param object `DESeqAnalysis`.
 #' @param value `character(1)`.
 #'   Value type to return. Corresponds to supported `DESeqResults` column:
