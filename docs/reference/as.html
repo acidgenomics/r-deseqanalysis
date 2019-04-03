@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.15</span>
       </span>
     </div>
 
@@ -190,7 +190,7 @@ values that <em>have not been shrunken</em> using <code><a href='https://www.rdo
 #&gt; colnames(12): sample01 sample02 ... sample11 sample12
 #&gt; colData names(2): condition sizeFactor</div><div class='input'><span class='co'>## Pulls the first results slotted.</span>
 <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqResults"</span>)
-<span class='fu'>contrastName</span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; [1] "condition B vs A"</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; 
+<span class='fu'><a href='contrastName.html'>contrastName</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; [1] "condition B vs A"</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; 
 #&gt; out of 499 with nonzero total read count
 #&gt; adjusted p-value &lt; 0.1
 #&gt; LFC &gt; 0 (up)       : 84, 17%
