@@ -27,11 +27,10 @@ prepareTemplate()
 source("_setup.R")
 ```
 
-```{r links, child="_links.Rmd"}
-```
-
 ```{r header, child="_header.Rmd"}
 ```
+
+# Load DESeqAnalysis object
 
 ```{r object}
 if (is.character(params$object)) {
@@ -194,4 +193,7 @@ export(
 ```
 
 ```{r footer, child="_footer.Rmd"}
+```
+
+```{r links, child="_links.Rmd"}
 ```
