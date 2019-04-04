@@ -310,7 +310,7 @@ setMethod(
 
 
 
-# This is soft deprecated, since the function is used in F1000 paper.
+# Soft deprecated, since this is used in bcbioRNASeq F1000 paper.
 #' @rdname plotMA
 #' @usage NULL
 #' @export
