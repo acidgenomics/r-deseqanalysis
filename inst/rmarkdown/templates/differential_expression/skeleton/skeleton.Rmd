@@ -25,9 +25,7 @@ library(basejump)
 library(DESeqAnalysis)
 basejump::prepareTemplate()
 source("_setup.R")
-```
-
-```{r links, child="_links.Rmd"}
+knitr::opts_chunk[["set"]](message = FALSE)
 ```
 
 ```{r header, child="_header.Rmd"}
@@ -66,16 +64,13 @@ sampleData(object)
 
 An MA plot compares transformed counts on `M` (log ratio) and `A` (mean average) scales [@Yang2002-sx].
 
-```{r plot-ma}
+```{r plot-ma, results="asis"}
 invisible(mapply(
     results = resultsNames(object),
     MoreArgs = list(object = object),
     FUN = function(object, results) {
-        markdownHeader(results, level = 2L, tabset = TRUE)
-        markdownHeader("shrunken", level = 3L)
+        markdownHeader(results, level = 2L, asis = TRUE)
         print(plotMA(object, results = results, lfcShrink = TRUE))
-        markdownHeader("unshrunken", level = 3L)
-        print(plotMA(object, results = results, lfcShrink = FALSE))
     },
     SIMPLIFY = FALSE,
     USE.NAMES = TRUE
@@ -86,16 +81,13 @@ invisible(mapply(
 
 A volcano plot compares significance (BH-adjusted *P* value) against fold change (log2) [@Cui2003-rn; @Li2014-ll]. Genes in the green box with text labels have an adjusted *P* value are likely to be the top candidate genes of interest.
 
-```{r plot-volcano}
+```{r plot-volcano, results="asis"}
 invisible(mapply(
     results = resultsNames(object),
     MoreArgs = list(object = object),
     FUN = function(object, results) {
-        markdownHeader(results, level = 2L, tabset = TRUE)
-        markdownHeader("shrunken", level = 3L)
+        markdownHeader(results, level = 2L, asis = TRUE)
         print(plotVolcano(object, results = results, lfcShrink = TRUE))
-        markdownHeader("shrunken", level = 3L)
-        print(plotVolcano(object, results = results, lfcShrink = FALSE))
     },
     SIMPLIFY = FALSE,
     USE.NAMES = TRUE
@@ -104,7 +96,7 @@ invisible(mapply(
 
 # PCA {.tabset}
 
-```{r plot-deg-pca}
+```{r plot-deg-pca, results="asis"}
 invisible(mapply(
     results = resultsNames(object),
     MoreArgs = list(
@@ -112,6 +104,7 @@ invisible(mapply(
         contrastSamples = TRUE
     ),
     FUN = function(object, results, contrastSamples) {
+        markdownHeader(results, level = 2L, asis = TRUE)
         print(plotDEGPCA(
             object = object,
             results = results,
@@ -127,7 +120,7 @@ invisible(mapply(
 
 This plot shows only differentially expressed genes on a per-sample basis. We have scaled the data by row (z-score) and used the `ward.D2` method for clustering [@Ward1963-xf].
 
-```{r plot-deg-heatmap}
+```{r plot-deg-heatmap, results="asis"}
 invisible(mapply(
     results = resultsNames(object),
     MoreArgs = list(
@@ -135,6 +128,7 @@ invisible(mapply(
         contrastSamples = TRUE
     ),
     FUN = function(object, results, contrastSamples) {
+        markdownHeader(results, level = 2L, asis = TRUE)
         plotDEGHeatmap(
             object = object,
             results = results,
@@ -155,9 +149,10 @@ invisible(mapply(
     results = resultsNames(object),
     MoreArgs = list(
         object = object,
-        n = 50L
+        n = 25L
     ),
     FUN = function(object, results, n) {
+        markdownHeader(results, level = 2L, asis = TRUE)
         topTables(
             object = object,
             results = results,
@@ -196,4 +191,7 @@ export(
 ```
 
 ```{r footer, child="_footer.Rmd"}
+```
+
+```{r links, child="_links.Rmd"}
 ```
