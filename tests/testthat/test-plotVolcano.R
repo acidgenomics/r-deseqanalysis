@@ -1,12 +1,13 @@
 context("plotVolcano")
 
-test_that("plotVolcano", {
-    args <- list(object = deseq, results = 1L)
+args <- list(object = deseq, results = 1L)
 
+test_that("plotVolcano", {
     x <- do.call(plotVolcano, args)
     expect_is(x, "ggplot")
+})
 
-    # Enable histograms.
+test_that("Enable histograms", {
     x <- do.call(
         what = plotVolcano,
         args = c(
@@ -15,16 +16,14 @@ test_that("plotVolcano", {
         )
     )
     expect_is(x, "ggplot")
+})
 
-    # Directional support.
+test_that("Directional support", {
     x <- do.call(
         what = plotVolcano,
         args = c(
             args,
-            list(
-                direction = "up",
-                sigPointColor = "red"
-            )
+            list(direction = "up")
         )
     )
     expect_is(x, "ggplot")
@@ -32,15 +31,13 @@ test_that("plotVolcano", {
         what = plotVolcano,
         args = c(
             args,
-            list(
-                direction = "down",
-                sigPointColor = "green"
-            )
+            list(direction = "down")
         )
     )
     expect_is(x, "ggplot")
+})
 
-    # Label the top genes.
+test_that("Label the top genes", {
     x <- do.call(
         what = plotVolcano,
         args = c(
@@ -49,8 +46,9 @@ test_that("plotVolcano", {
         )
     )
     expect_is(x, "ggplot")
+})
 
-    # Label specific genes.
+test_that("Label specific genes", {
     x <- do.call(
         what = plotVolcano,
         args = c(
