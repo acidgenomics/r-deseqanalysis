@@ -5,13 +5,13 @@ params:
   # Use DESeqAnalysis object as input.
   # - Standard: Load from file on disk, either RDS or RDA.
   # - Advanced: Loop across multiple objects using `rmarkdown::render()`.
-  object: "rds/YYYY-MM-DD/DESeqAnalysis.rds"
+  object: "rds/YYYY-MM-DD/deseqanalysis.rds"
   
   # The `name` param is only necessary when passing in object directly, during
   # an `rmarkdown::render()` call. See `object` param.
   # name: "object_name"
   
-  output_dir: !r file.path("results", Sys.Date(), "differential_expression")
+  output_dir: !r file.path("results", Sys.Date(), "differential-expression")
 
 title: "`r params$title`"
 author: "`r getOption('author')`"
@@ -20,17 +20,18 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, cache=FALSE, message=FALSE}
-# Last modified 2019-04-02
+# Last modified 2019-04-04
+library(basejump)
 library(DESeqAnalysis)
-prepareTemplate()
+basejump::prepareTemplate()
 source("_setup.R")
-```
-
-```{r links, child="_links.Rmd"}
+knitr::opts_chunk[["set"]](message = FALSE)
 ```
 
 ```{r header, child="_header.Rmd"}
 ```
+
+# Load DESeqAnalysis object
 
 ```{r object}
 if (is.character(params$object)) {
@@ -55,7 +56,7 @@ print(object)
 
 # Sample data
 
-```{r sample_data}
+```{r sample-data}
 sampleData(object)
 ```
 
@@ -63,22 +64,16 @@ sampleData(object)
 
 An MA plot compares transformed counts on `M` (log ratio) and `A` (mean average) scales [@Yang2002-sx].
 
-```{r plot_ma}
-invisible(lapply(
-    X = resultsNames(object),
-    object = object,
-    FUN = function(results, object) {
-        plotMA(
-            object = object,
-            results = results,
-            lfcShrink = FALSE
-        ) %>% print()
-        plotMA(
-            object = object,
-            results = results,
-            lfcShrink = TRUE
-        ) %>% print()
-    }
+```{r plot-ma, results="asis"}
+invisible(mapply(
+    results = resultsNames(object),
+    MoreArgs = list(object = object),
+    FUN = function(object, results) {
+        markdownHeader(results, level = 2L, asis = TRUE)
+        print(plotMA(object, results = results, lfcShrink = TRUE))
+    },
+    SIMPLIFY = FALSE,
+    USE.NAMES = TRUE
 ))
 ```
 
@@ -86,33 +81,38 @@ invisible(lapply(
 
 A volcano plot compares significance (BH-adjusted *P* value) against fold change (log2) [@Cui2003-rn; @Li2014-ll]. Genes in the green box with text labels have an adjusted *P* value are likely to be the top candidate genes of interest.
 
-```{r plot_volcano}
-invisible(lapply(
-    X = resultsNames(object),
-    object = object,
-    FUN = function(results, object) {
-        plotVolcano(
-            object = object,
-            results = results,
-            lfcShrink = TRUE
-        ) %>% print()
-    }
+```{r plot-volcano, results="asis"}
+invisible(mapply(
+    results = resultsNames(object),
+    MoreArgs = list(object = object),
+    FUN = function(object, results) {
+        markdownHeader(results, level = 2L, asis = TRUE)
+        print(plotVolcano(object, results = results, lfcShrink = TRUE))
+    },
+    SIMPLIFY = FALSE,
+    USE.NAMES = TRUE
 ))
 ```
 
 # PCA {.tabset}
 
-```{r plot_deg_pca}
-invisible(lapply(
-    X = resultsNames(object),
-    object = object,
-    FUN = function(results, object) {
-        plotDEGPCA(
+```{r plot-deg-pca, results="asis"}
+invisible(mapply(
+    results = resultsNames(object),
+    MoreArgs = list(
+        object = object,
+        contrastSamples = TRUE
+    ),
+    FUN = function(object, results, contrastSamples) {
+        markdownHeader(results, level = 2L, asis = TRUE)
+        print(plotDEGPCA(
             object = object,
             results = results,
-            contrastSamples = TRUE
-        ) %>% print()
-    }
+            contrastSamples = contrastSamples
+        ))
+    },
+    SIMPLIFY = FALSE,
+    USE.NAMES = TRUE
 ))
 ```
 
@@ -120,17 +120,23 @@ invisible(lapply(
 
 This plot shows only differentially expressed genes on a per-sample basis. We have scaled the data by row (z-score) and used the `ward.D2` method for clustering [@Ward1963-xf].
 
-```{r plot_deg_heatmap}
-invisible(lapply(
-    X = resultsNames(object),
-    object = object,
-    FUN = function(results, object) {
+```{r plot-deg-heatmap, results="asis"}
+invisible(mapply(
+    results = resultsNames(object),
+    MoreArgs = list(
+        object = object,
+        contrastSamples = TRUE
+    ),
+    FUN = function(object, results, contrastSamples) {
+        markdownHeader(results, level = 2L, asis = TRUE)
         plotDEGHeatmap(
             object = object,
             results = results,
-            contrastSamples = TRUE
+            contrastSamples = contrastSamples
         )
-    }
+    },
+    SIMPLIFY = FALSE,
+    USE.NAMES = TRUE
 ))
 ```
 
@@ -138,13 +144,23 @@ invisible(lapply(
 
 Only the top up- and down-regulated genes (arranged by log2 fold change) are shown.
 
-```{r top_tables, results="asis"}
-invisible(lapply(
-    X = resultsNames(object),
-    FUN = function(results, object) {
-        topTables(object, results = results)
+```{r top-tables, results="asis"}
+invisible(mapply(
+    results = resultsNames(object),
+    MoreArgs = list(
+        object = object,
+        n = 25L
+    ),
+    FUN = function(object, results, n) {
+        markdownHeader(results, level = 2L, asis = TRUE)
+        topTables(
+            object = object,
+            results = results,
+            n = n
+        )
     },
-    object = object
+    SIMPLIFY = FALSE,
+    USE.NAMES = TRUE
 ))
 ```
 
@@ -175,4 +191,7 @@ export(
 ```
 
 ```{r footer, child="_footer.Rmd"}
+```
+
+```{r links, child="_links.Rmd"}
 ```

@@ -31,15 +31,10 @@
 #' plotMA(
 #'     object = deseq,
 #'     results = 1L,
-#'     pointColor = "black",
-#'     sigPointColor = "purple"
-#' )
-#' plotMA(
-#'     object = deseq,
-#'     results = 1L,
-#'     sigPointColor = c(
-#'         upregulated = "green",
-#'         downregulated = "red"
+#'     pointColor = c(
+#'         downregulated = "red",
+#'         nonsignificant = "black",
+#'         upregulated = "green"
 #'     )
 #' )
 #'
@@ -68,21 +63,32 @@ plotMA.DESeqResults <-  # nolint
         gene2symbol = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
-        pointColor = "gray50",
-        sigPointColor = c(upregulated = "purple", downregulated = "orange"),
+        pointColor = c(
+            downregulated = "orange",
+            nonsignificant = "gray50",
+            upregulated = "purple"
+        ),
+        pointSize = 2L,
+        pointAlpha = 0.7,
         return = c("ggplot", "DataFrame")
     ) {
         validObject(object)
         alpha <- metadata(object)[["alpha"]]
-        assert(isAlpha(alpha))
         lfcThreshold <- metadata(object)[["lfcThreshold"]]
         assert(
+            isAlpha(alpha),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
             isAny(genes, classes = c("character", "NULL")),
             isAny(gene2symbol, classes = c("Gene2Symbol", "NULL")),
-            isString(pointColor),
-            isCharacter(sigPointColor),
+            isCharacter(pointColor),
+            areSetEqual(
+                x = names(pointColor),
+                y = c("downregulated", "nonsignificant", "upregulated")
+            ),
+            isNumber(pointSize),
+            isNonNegative(pointSize),
+            isPercentage(pointAlpha),
             isInt(ntop),
             isNonNegative(ntop)
         )
@@ -90,17 +96,8 @@ plotMA.DESeqResults <-  # nolint
         return <- match.arg(return)
 
         if (!is.null(genes) && ntop > 0L) {
-            stop("Specify either `genes` or `ntop`.", call. = FALSE)
+            stop("Specify either `genes` or `ntop`.")
         }
-
-        # Automatically handle monochromatic coloring by significance.
-        if (isString(sigPointColor)) {
-            sigPointColor <- c(
-                upregulated = sigPointColor,
-                downregulated = sigPointColor
-            )
-        }
-        assert(hasLength(sigPointColor, n = 2L))
 
         # Check to see if we should use `sval` column instead of `padj`.
         if ("svalue" %in% names(object)) {
@@ -168,15 +165,19 @@ plotMA.DESeqResults <-  # nolint
             mapping = aes(
                 x = !!sym("baseMean"),
                 y = !!sym(lfcCol),
-                color = !!sym("isDE")
+                colour = !!sym("isDE")
             )
         ) +
             geom_hline(
                 yintercept = 0L,
                 size = 0.5,
-                color = pointColor
+                colour = pointColor[["nonsignificant"]]
             ) +
-            geom_point(size = 1L) +
+            geom_point(
+                alpha = pointAlpha,
+                size = pointSize,
+                stroke = 0L
+            ) +
             scale_x_continuous(
                 breaks = xBreaks,
                 limits = c(1L, NA),
@@ -184,7 +185,7 @@ plotMA.DESeqResults <-  # nolint
             ) +
             scale_y_continuous(breaks = pretty_breaks()) +
             annotation_logticks(sides = "b") +
-            guides(color = FALSE) +
+            guides(colour = FALSE) +
             labs(
                 title = contrastName(object),
                 subtitle = paste("alpha", "<", alpha),
@@ -194,16 +195,13 @@ plotMA.DESeqResults <-  # nolint
 
         # Color the significant points.
         # Note that we're using direction-specific coloring by default.
-        if (isString(pointColor) && is.character(sigPointColor)) {
+        if (isCharacter(pointColor)) {
             p <- p +
-                scale_color_manual(
+                scale_colour_manual(
                     values = c(
-                        # nonsignificant
-                        "0" = pointColor,
-                        # upregulated
-                        "1" = sigPointColor[[1L]],
-                        # downregulated
-                        "-1" = sigPointColor[[2L]]
+                        "-1" = pointColor[["downregulated"]],
+                        "0" = pointColor[["nonsignificant"]],
+                        "1" = pointColor[["upregulated"]]
                     )
                 )
         }
@@ -275,6 +273,15 @@ plotMA.DESeqAnalysis <-  # nolint
         lfcShrink = TRUE
     ) {
         validObject(object)
+        assert(
+            isScalar(results),
+            isFlag(lfcShrink)
+        )
+        # Return `NULL` for objects that don't contain gene symbol mappings.
+        gene2symbol <- tryCatch(
+            expr = Gene2Symbol(slot(object, "data")),
+            error = function(e) NULL
+        )
         do.call(
             what = plotMA.DESeqResults,
             args = matchArgsToDoCall(
@@ -285,7 +292,7 @@ plotMA.DESeqAnalysis <-  # nolint
                         lfcShrink = lfcShrink
                     ),
                     genes = genes,
-                    gene2symbol = Gene2Symbol(slot(object, "data"))
+                    gene2symbol = gene2symbol
                 ),
                 removeFormals = c("results", "lfcShrink")
             )
@@ -310,7 +317,7 @@ setMethod(
 
 
 
-# This is soft deprecated, since the function is used in F1000 paper.
+# Soft deprecated, since this is used in bcbioRNASeq F1000 paper.
 #' @rdname plotMA
 #' @usage NULL
 #' @export

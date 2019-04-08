@@ -20,12 +20,13 @@
 #'   pull rename row_number select
 #' @importFrom firestarter plotHeatmap
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_density
-#'   geom_hline geom_point geom_vline ggplot guides labs scale_color_manual
+#'   geom_hline geom_point geom_vline ggplot guides labs scale_colour_manual
 #'   scale_x_continuous scale_y_continuous theme
-#' @importFrom goalie areDisjointSets assert bapply hasLength hasNames hasLength
-#'   hasRows hasRownames hasValidDimnames hasValidNames isAlpha isAny
-#'   isCharacter isFlag isHeaderLevel isInRange isInt isNonEmpty isNonNegative
-#'   isNumber isPositive isScalar isString isSubset validate
+#' @importFrom goalie areDisjointSets areSetEqual assert bapply hasLength
+#'   hasNames hasLength hasRows hasRownames hasValidDimnames hasValidNames
+#'   isAlpha isAny isCharacter isFlag isHeaderLevel isInRange isInt isNonEmpty
+#'   isNonNegative isNumber isPercentage isPositive isScalar isString isSubset
+#'   validate
 #' @importFrom knitr kable
 #' @importFrom magrittr %>%
 #' @importFrom methods as is new prototype setClass slot slot<- validObject
