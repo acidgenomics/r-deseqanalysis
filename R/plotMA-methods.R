@@ -84,8 +84,7 @@ plotMA.DESeqResults <-  # nolint
             isAny(genes, classes = c("character", "NULL")),
             isAny(gene2symbol, classes = c("Gene2Symbol", "NULL")),
             isNumber(pointSize),
-            # FIXME Consider reworking goalie `isAlpha()` to allow 1.
-            isNumber(pointAlpha),
+            isAlpha(pointAlpha),
             isString(pointColor),
             isCharacter(sigPointColor),
             isInt(ntop),
