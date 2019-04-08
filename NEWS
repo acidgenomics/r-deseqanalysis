@@ -1,3 +1,17 @@
+## DESeqAnalysis 0.1.17 (2019-04-08)
+
+Bug fixes to improve handling of `DESeqDataSet` generated using RefSeq gene
+annotations.
+
+### Minor changes
+
+- `contrastNames`: Improved internal regular expression matching to properly
+  detect a contrast factor prefix that contains an underscore. This now works
+  by checking against the column names of `colData` internally.
+- `topTables`: `geneID`, `geneName`, and `geneBiotype` are now optional columns.
+
+
+
 ## DESeqAnalysis 0.1.16 (2019-04-08)
 
 ### Major changes
