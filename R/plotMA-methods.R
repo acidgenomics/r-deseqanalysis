@@ -268,6 +268,7 @@ setMethod(
 
 
 
+# [2019-04-08] Code now perofrms better when object doesn't contain Gene2Symbol.
 plotMA.DESeqAnalysis <-  # nolint
     function(
         object,
@@ -275,6 +276,15 @@ plotMA.DESeqAnalysis <-  # nolint
         lfcShrink = TRUE
     ) {
         validObject(object)
+        assert(
+            isScalar(results),
+            isFlag(lfcShrink)
+        )
+        # Return `NULL` for objects that don't contain gene symbol mappings.
+        gene2symbol <- tryCatch(
+            expr = Gene2Symbol(slot(object, "data")),
+            error = function(e) NULL
+        )
         do.call(
             what = plotMA.DESeqResults,
             args = matchArgsToDoCall(
@@ -285,7 +295,7 @@ plotMA.DESeqAnalysis <-  # nolint
                         lfcShrink = lfcShrink
                     ),
                     genes = genes,
-                    gene2symbol = Gene2Symbol(slot(object, "data"))
+                    gene2symbol = gene2symbol
                 ),
                 removeFormals = c("results", "lfcShrink")
             )
