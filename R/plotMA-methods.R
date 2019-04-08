@@ -68,10 +68,13 @@ plotMA.DESeqResults <-  # nolint
         gene2symbol = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
+        pointColor = c(
+            downregulated = "orange",
+            nonsignificant = "gray50",
+            upregulated = "purple"
+        ),
         pointSize = 2L,
         pointAlpha = 0.7,
-        pointColor = "gray50",
-        sigPointColor = c(upregulated = "purple", downregulated = "orange"),
         return = c("ggplot", "DataFrame")
     ) {
         validObject(object)
@@ -86,8 +89,11 @@ plotMA.DESeqResults <-  # nolint
             isNumber(pointSize),
             isNonNegative(pointSize),
             isPercentage(pointAlpha),
-            isString(pointColor),
-            isCharacter(sigPointColor),
+            isCharacter(pointColor),
+            areSetEqual(
+                x = names(pointColor),
+                y = c("downregulated", "nonsignificant", "upregulated")
+            ),
             isInt(ntop),
             isNonNegative(ntop)
         )
@@ -95,17 +101,8 @@ plotMA.DESeqResults <-  # nolint
         return <- match.arg(return)
 
         if (!is.null(genes) && ntop > 0L) {
-            stop("Specify either `genes` or `ntop`.", call. = FALSE)
+            stop("Specify either `genes` or `ntop`.")
         }
-
-        # Automatically handle monochromatic coloring by significance.
-        if (isString(sigPointColor)) {
-            sigPointColor <- c(
-                upregulated = sigPointColor,
-                downregulated = sigPointColor
-            )
-        }
-        assert(hasLength(sigPointColor, n = 2L))
 
         # Check to see if we should use `sval` column instead of `padj`.
         if ("svalue" %in% names(object)) {
@@ -173,13 +170,13 @@ plotMA.DESeqResults <-  # nolint
             mapping = aes(
                 x = !!sym("baseMean"),
                 y = !!sym(lfcCol),
-                color = !!sym("isDE")
+                colour = !!sym("isDE")
             )
         ) +
             geom_hline(
                 yintercept = 0L,
                 size = 0.5,
-                color = pointColor
+                colour = "gray50"
             ) +
             geom_point(
                 alpha = pointAlpha,
@@ -193,7 +190,7 @@ plotMA.DESeqResults <-  # nolint
             ) +
             scale_y_continuous(breaks = pretty_breaks()) +
             annotation_logticks(sides = "b") +
-            guides(color = FALSE) +
+            guides(colour = FALSE) +
             labs(
                 title = contrastName(object),
                 subtitle = paste("alpha", "<", alpha),
@@ -203,16 +200,13 @@ plotMA.DESeqResults <-  # nolint
 
         # Color the significant points.
         # Note that we're using direction-specific coloring by default.
-        if (isString(pointColor) && is.character(sigPointColor)) {
+        if (isCharacter(pointColor)) {
             p <- p +
-                scale_color_manual(
+                scale_colour_manual(
                     values = c(
-                        # nonsignificant
-                        "0" = pointColor,
-                        # upregulated
-                        "1" = sigPointColor[[1L]],
-                        # downregulated
-                        "-1" = sigPointColor[[2L]]
+                        "-1" = pointColor[["downregulated"]],
+                        "0" = pointColor[["nonsignificant"]],
+                        "1" = pointColor[["upregulated"]]
                     )
                 )
         }
@@ -277,7 +271,6 @@ setMethod(
 
 
 
-# [2019-04-08] Code now perofrms better when object doesn't contain Gene2Symbol.
 plotMA.DESeqAnalysis <-  # nolint
     function(
         object,
