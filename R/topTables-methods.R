@@ -30,17 +30,25 @@ bioverbs::topTables
             isPositive(n)
         )
 
+        # Ensure columns are in camel case.
+        object <- camel(object)
+
         # Select minimal columns of interest.
         required <- c(
-            "geneID",
-            "geneName",
+            "rowname",
             "baseMean",
             "log2FoldChange",
-            "padj",
-            "geneBiotype"
+            "padj"
         )
         assert(isSubset(required, colnames(object)))
-        optional <- "description"
+
+        # Also include optional informative columns.
+        optional <- c(
+            "geneID",
+            "geneName",
+            "geneBiotype",
+            "description"
+        )
         keep <- intersect(
             x = c(required, optional),
             y = colnames(object)
