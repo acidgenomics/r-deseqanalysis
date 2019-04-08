@@ -68,19 +68,24 @@ plotMA.DESeqResults <-  # nolint
         gene2symbol = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
+        pointSize = 2L,
+        pointAlpha = 0.7,
         pointColor = "gray50",
         sigPointColor = c(upregulated = "purple", downregulated = "orange"),
         return = c("ggplot", "DataFrame")
     ) {
         validObject(object)
         alpha <- metadata(object)[["alpha"]]
-        assert(isAlpha(alpha))
         lfcThreshold <- metadata(object)[["lfcThreshold"]]
         assert(
+            isAlpha(alpha),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
             isAny(genes, classes = c("character", "NULL")),
             isAny(gene2symbol, classes = c("Gene2Symbol", "NULL")),
+            isNumber(pointSize),
+            # FIXME Consider reworking goalie `isAlpha()` to allow 1.
+            isNumber(pointAlpha),
             isString(pointColor),
             isCharacter(sigPointColor),
             isInt(ntop),
@@ -176,7 +181,11 @@ plotMA.DESeqResults <-  # nolint
                 size = 0.5,
                 color = pointColor
             ) +
-            geom_point(size = 1L) +
+            geom_point(
+                alpha = pointAlpha,
+                size = pointSize,
+                stroke = 0L
+            ) +
             scale_x_continuous(
                 breaks = xBreaks,
                 limits = c(1L, NA),
