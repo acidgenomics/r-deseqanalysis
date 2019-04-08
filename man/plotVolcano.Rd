@@ -46,6 +46,12 @@ Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 \item{pointColor}{\code{character(1)}.
 Default point color for the plot.}
 
+\item{pointSize}{\code{numeric(1)}.
+Point size. In the range of 1-3 is generally recommended.}
+
+\item{pointAlpha}{\code{numeric(1)}.
+Alpha transparency level. Must be a proportion (0-1).}
+
 \item{histograms}{\code{logical(1)}.
 Show LFC and P value histograms.}
 

@@ -26,8 +26,14 @@ the cutoff defined in the object.}
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or position of \code{DESeqResults}.}
 
+\item{pointAlpha}{\code{numeric(1)}.
+Alpha transparency level. Must be a proportion (0-1).}
+
 \item{pointColor}{\code{character(1)}.
 Default point color for the plot.}
+
+\item{pointSize}{\code{numeric(1)}.
+Point size. In the range of 1-3 is generally recommended.}
 
 \item{sigPointColor}{\code{character}.
 Color names for labeling upregulated and downregulated genes. Also supports

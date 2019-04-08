@@ -22,8 +22,12 @@
 #'   the cutoff defined in the object.
 #' @param results `character(1)` or `integer(1)`.
 #'   Name or position of `DESeqResults`.
+#' @param pointAlpha `numeric(1)`.
+#'   Alpha transparency level. Must be a proportion (0-1).
 #' @param pointColor `character(1)`.
 #'   Default point color for the plot.
+#' @param pointSize `numeric(1)`.
+#'   Point size. In the range of 1-3 is generally recommended.
 #' @param sigPointColor `character`.
 #'   Color names for labeling upregulated and downregulated genes. Also supports
 #'   a character string for labeling DEGs with the same color, regardless of
