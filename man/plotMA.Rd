@@ -89,17 +89,8 @@ plotMA(
     object = deseq,
     results = 1L,
     pointColor = c(
-        downregulated = "purple",
-        nonsignificant = "black",
-        upregulated = "purple"
-    )
-)
-plotMA(
-    object = deseq,
-    results = 1L,
-    pointColor = c(
         downregulated = "red",
-        nonsignificant = "gray50",
+        nonsignificant = "black",
         upregulated = "green"
     )
 )
