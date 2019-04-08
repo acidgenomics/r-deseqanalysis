@@ -9,15 +9,17 @@
 \usage{
 \S4method{plotVolcano}{DESeqResults}(object, ylim = 1e-10,
   genes = NULL, gene2symbol = NULL, ntop = 0L,
-  direction = c("both", "up", "down"), pointColor = "gray50",
-  sigPointColor = c(upregulated = "purple", downregulated = "orange"),
-  histograms = FALSE, return = c("ggplot", "DataFrame"))
+  direction = c("both", "up", "down"), pointColor = c(downregulated =
+  "orange", nonsignificant = "gray50", upregulated = "purple"),
+  pointSize = 2L, pointAlpha = 0.7, histograms = FALSE,
+  return = c("ggplot", "DataFrame"))
 
 \S4method{plotVolcano}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
   ylim = 1e-10, genes = NULL, ntop = 0L, direction = c("both",
-  "up", "down"), pointColor = "gray50", sigPointColor = c(upregulated =
-  "purple", downregulated = "orange"), histograms = FALSE,
-  return = c("ggplot", "DataFrame"))
+  "up", "down"), pointColor = c(downregulated = "orange", nonsignificant
+  = "gray50", upregulated = "purple"), pointSize = 2L,
+  pointAlpha = 0.7, histograms = FALSE, return = c("ggplot",
+  "DataFrame"))
 }
 \arguments{
 \item{object}{Object.}
@@ -43,11 +45,6 @@ Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 
 \item{pointColor}{\code{character(1)}.
 Default point color for the plot.}
-
-\item{sigPointColor}{\code{character}.
-Color names for labeling upregulated and downregulated genes. Also supports
-a character string for labeling DEGs with the same color, regardless of
-direction.}
 
 \item{histograms}{\code{logical(1)}.
 Show LFC and P value histograms.}
@@ -83,15 +80,10 @@ plotVolcano(deseq, results = 1L)
 plotVolcano(
     object = deseq,
     results = 1L,
-    pointColor = "black",
-    sigPointColor = "purple"
-)
-plotVolcano(
-    object = deseq,
-    results = 1L,
-    sigPointColor = c(
-        upregulated = "green",
-        downregulated = "red"
+    pointColor = c(
+        downregulated = "red",
+        nonsignificant = "black",
+        upregulated = "green"
     )
 )
 

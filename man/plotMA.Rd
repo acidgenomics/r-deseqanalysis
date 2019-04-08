@@ -10,14 +10,14 @@
 \usage{
 \S4method{plotMA}{DESeqResults}(object, genes = NULL,
   gene2symbol = NULL, ntop = 0L, direction = c("both", "up", "down"),
-  pointSize = 2L, pointAlpha = 0.7, pointColor = "gray50",
-  sigPointColor = c(upregulated = "purple", downregulated = "orange"),
+  pointColor = c(downregulated = "orange", nonsignificant = "gray50",
+  upregulated = "purple"), pointSize = 2L, pointAlpha = 0.7,
   return = c("ggplot", "DataFrame"))
 
 \S4method{plotMA}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
   genes = NULL, ntop = 0L, direction = c("both", "up", "down"),
-  pointSize = 2L, pointAlpha = 0.7, pointColor = "gray50",
-  sigPointColor = c(upregulated = "purple", downregulated = "orange"),
+  pointColor = c(downregulated = "orange", nonsignificant = "gray50",
+  upregulated = "purple"), pointSize = 2L, pointAlpha = 0.7,
   return = c("ggplot", "DataFrame"))
 }
 \arguments{
@@ -42,11 +42,6 @@ Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 
 \item{pointColor}{\code{character(1)}.
 Default point color for the plot.}
-
-\item{sigPointColor}{\code{character}.
-Color names for labeling upregulated and downregulated genes. Also supports
-a character string for labeling DEGs with the same color, regardless of
-direction.}
 
 \item{return}{\code{character(1)}.
 Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
@@ -93,15 +88,19 @@ plotMA(deseq, results = 1L)
 plotMA(
     object = deseq,
     results = 1L,
-    pointColor = "black",
-    sigPointColor = "purple"
+    pointColor = c(
+        downregulated = "purple",
+        nonsignificant = "black",
+        upregulated = "purple"
+    )
 )
 plotMA(
     object = deseq,
     results = 1L,
-    sigPointColor = c(
-        upregulated = "green",
-        downregulated = "red"
+    pointColor = c(
+        downregulated = "red",
+        nonsignificant = "gray50",
+        upregulated = "green"
     )
 )
 
