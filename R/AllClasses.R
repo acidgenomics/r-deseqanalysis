@@ -57,8 +57,6 @@ setClass(
         lfcShrink <- slot(object, "lfcShrink")
 
         ok <- validate(
-            # Require that dimnames are valid.
-            hasValidDimnames(data),
             # DESeqDataSet and DESeqTransform must correspond.
             identical(dimnames(data), dimnames(transform)),
             # results and lfcShrink must be list.
