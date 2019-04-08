@@ -43,6 +43,12 @@ Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 \item{pointColor}{\code{character(1)}.
 Default point color for the plot.}
 
+\item{pointSize}{\code{numeric(1)}.
+Point size. In the range of 1-3 is generally recommended.}
+
+\item{pointAlpha}{\code{numeric(1)}.
+Alpha transparency level. Must be a proportion (0-1).}
+
 \item{return}{\code{character(1)}.
 Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
 to the first argument in the \code{character} vector.}
