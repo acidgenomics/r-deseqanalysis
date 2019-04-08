@@ -31,15 +31,19 @@
 #' plotMA(
 #'     object = deseq,
 #'     results = 1L,
-#'     pointColor = "black",
-#'     sigPointColor = "purple"
+#'     pointColor = c(
+#'         downregulated = "purple",
+#'         nonsignificant = "black",
+#'         upregulated = "purple"
+#'     )
 #' )
 #' plotMA(
 #'     object = deseq,
 #'     results = 1L,
-#'     sigPointColor = c(
-#'         upregulated = "green",
-#'         downregulated = "red"
+#'     pointColor = c(
+#'         downregulated = "red",
+#'         nonsignificant = "gray50",
+#'         upregulated = "green"
 #'     )
 #' )
 #'
@@ -86,14 +90,14 @@ plotMA.DESeqResults <-  # nolint
             isNonNegative(lfcThreshold),
             isAny(genes, classes = c("character", "NULL")),
             isAny(gene2symbol, classes = c("Gene2Symbol", "NULL")),
-            isNumber(pointSize),
-            isNonNegative(pointSize),
-            isPercentage(pointAlpha),
             isCharacter(pointColor),
             areSetEqual(
                 x = names(pointColor),
                 y = c("downregulated", "nonsignificant", "upregulated")
             ),
+            isNumber(pointSize),
+            isNonNegative(pointSize),
+            isPercentage(pointAlpha),
             isInt(ntop),
             isNonNegative(ntop)
         )
