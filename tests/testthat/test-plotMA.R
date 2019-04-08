@@ -35,10 +35,7 @@ test_that("Directional support", {
         what = plotMA,
         args = c(
             args,
-            list(
-                direction = "up",
-                sigPointColor = "red"
-            )
+            list(direction = "up")
         )
     )
     expect_is(x, "ggplot")
@@ -46,10 +43,7 @@ test_that("Directional support", {
         what = plotMA,
         args = c(
             args,
-            list(
-                direction = "down",
-                sigPointColor = "green"
-            )
+            list(direction = "down")
         )
     )
     expect_is(x, "ggplot")

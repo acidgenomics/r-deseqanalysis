@@ -1,3 +1,20 @@
+## DESeqAnalysis 0.1.16 (2019-04-08)
+
+### Major changes
+
+- `export`: Removed `humanize` argument.
+- `plotCounts`: Removed `transform` argument.
+- `plotDEGHeatmap`, `plotDEGPCA`: Removed `counts` argument.
+- `plotMA`, `plotVolcano`: Improved color support and gene-to-symbol handling.
+
+### Minor changes
+
+- `topTables`: Simplifed internal method code for `DESeqAnalysis` class.
+- Consistently importing British spelling variants for ggplot2 functions.
+- Updated unit tests for plotting functions.
+
+
+
 ## DESeqAnalysis 0.1.15 (2019-04-03)
 
 ### New functions

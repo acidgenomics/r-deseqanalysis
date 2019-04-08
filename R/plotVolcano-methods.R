@@ -27,15 +27,10 @@
 #' plotVolcano(
 #'     object = deseq,
 #'     results = 1L,
-#'     pointColor = "black",
-#'     sigPointColor = "purple"
-#' )
-#' plotVolcano(
-#'     object = deseq,
-#'     results = 1L,
-#'     sigPointColor = c(
-#'         upregulated = "green",
-#'         downregulated = "red"
+#'     pointColor = c(
+#'         downregulated = "red",
+#'         nonsignificant = "black",
+#'         upregulated = "green"
 #'     )
 #' )
 #'
@@ -75,37 +70,39 @@ plotVolcano.DESeqResults <-  # nolint
         gene2symbol = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
-        pointColor = "gray50",
-        sigPointColor = c(upregulated = "purple", downregulated = "orange"),
+        pointColor = c(
+            downregulated = "orange",
+            nonsignificant = "gray50",
+            upregulated = "purple"
+        ),
+        pointSize = 2L,
+        pointAlpha = 0.7,
         histograms = FALSE,
         return = c("ggplot", "DataFrame")
     ) {
         validObject(object)
         alpha <- metadata(object)[["alpha"]]
-        assert(isAlpha(alpha))
         lfcThreshold <- metadata(object)[["lfcThreshold"]]
         assert(
+            isAlpha(alpha),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
             isNumber(ylim),
             isInRange(ylim, lower = 1e-100, upper = 1e-3),
             isInt(ntop),
             isNonNegative(ntop),
-            isString(pointColor),
-            isCharacter(sigPointColor),
+            isCharacter(pointColor),
+            areSetEqual(
+                x = names(pointColor),
+                y = c("downregulated", "nonsignificant", "upregulated")
+            ),
+            isNumber(pointSize),
+            isNonNegative(pointSize),
+            isPercentage(pointAlpha),
             isFlag(histograms)
         )
         direction <- match.arg(direction)
         return <- match.arg(return)
-
-        # Automatically handle monochromatic coloring by significance.
-        if (isString(sigPointColor)) {
-            sigPointColor <- c(
-                upregulated = sigPointColor,
-                downregulated = sigPointColor
-            )
-        }
-        assert(hasLength(sigPointColor, n = 2L))
 
         # Check to see if we should use `sval` instead of `padj`
         if ("svalue" %in% names(object)) {
@@ -161,8 +158,8 @@ plotVolcano.DESeqResults <-  # nolint
             mapping = aes(x = !!sym(lfcCol))
         ) +
             geom_density(
-                color = NA,
-                fill = pointColor
+                colour = NA,
+                fill = pointColor[["nonsignificant"]]
             ) +
             scale_x_continuous(
                 breaks = pretty_breaks(),
@@ -186,8 +183,8 @@ plotVolcano.DESeqResults <-  # nolint
             mapping = aes(x = !!sym(negLogTestCol))
         ) +
             geom_density(
-                color = NA,
-                fill = pointColor
+                colour = NA,
+                fill = pointColor[["nonsignificant"]]
             ) +
             scale_x_continuous(
                 breaks = pretty_breaks(),
@@ -211,18 +208,22 @@ plotVolcano.DESeqResults <-  # nolint
             mapping = aes(
                 x = !!sym(lfcCol),
                 y = !!sym(negLogTestCol),
-                color = !!sym("isDE")
+                colour = !!sym("isDE")
             )
         ) +
             geom_vline(
                 xintercept = 0L,
                 size = 0.5,
-                color = pointColor
+                colour = pointColor[["nonsignificant"]]
             ) +
-            geom_point() +
+            geom_point(
+                alpha = pointAlpha,
+                size = pointSize,
+                stroke = 0L
+            ) +
             scale_x_continuous(breaks = pretty_breaks()) +
             scale_y_continuous(breaks = pretty_breaks()) +
-            guides(color = FALSE) +
+            guides(colour = FALSE) +
             labs(
                 title = contrastName(object),
                 subtitle = paste("alpha", "<", alpha),
@@ -230,16 +231,13 @@ plotVolcano.DESeqResults <-  # nolint
                 y = "-log10 adj p value"
             )
 
-        if (isString(pointColor) && is.character(sigPointColor)) {
+        if (isCharacter(pointColor)) {
             p <- p +
-                scale_color_manual(
+                scale_colour_manual(
                     values = c(
-                        # nonsignificant
-                        "0" = pointColor,
-                        # upregulated
-                        "1" = sigPointColor[[1L]],
-                        # downregulated
-                        "-1" = sigPointColor[[2L]]
+                        "-1" = pointColor[["downregulated"]],
+                        "0" = pointColor[["nonsignificant"]],
+                        "1" = pointColor[["upregulated"]]
                     )
                 )
         }
@@ -328,6 +326,15 @@ plotVolcano.DESeqAnalysis <-  # nolint
         lfcShrink = TRUE
     ) {
         validObject(object)
+        assert(
+            isScalar(results),
+            isFlag(lfcShrink)
+        )
+        # Return `NULL` for objects that don't contain gene symbol mappings.
+        gene2symbol <- tryCatch(
+            expr = Gene2Symbol(slot(object, "data")),
+            error = function(e) NULL
+        )
         do.call(
             what = plotVolcano.DESeqResults,
             args = matchArgsToDoCall(
@@ -338,7 +345,7 @@ plotVolcano.DESeqAnalysis <-  # nolint
                         lfcShrink = lfcShrink
                     ),
                     genes = genes,
-                    gene2symbol = Gene2Symbol(slot(object, "data"))
+                    gene2symbol = gene2symbol
                 ),
                 removeFormals = c("results", "lfcShrink")
             )
