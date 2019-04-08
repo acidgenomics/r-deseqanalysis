@@ -32,17 +32,8 @@
 #'     object = deseq,
 #'     results = 1L,
 #'     pointColor = c(
-#'         downregulated = "purple",
-#'         nonsignificant = "black",
-#'         upregulated = "purple"
-#'     )
-#' )
-#' plotMA(
-#'     object = deseq,
-#'     results = 1L,
-#'     pointColor = c(
 #'         downregulated = "red",
-#'         nonsignificant = "gray50",
+#'         nonsignificant = "black",
 #'         upregulated = "green"
 #'     )
 #' )
@@ -180,7 +171,7 @@ plotMA.DESeqResults <-  # nolint
             geom_hline(
                 yintercept = 0L,
                 size = 0.5,
-                colour = "gray50"
+                colour = pointColor[["nonsignificant"]]
             ) +
             geom_point(
                 alpha = pointAlpha,
