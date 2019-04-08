@@ -23,7 +23,7 @@ bibliography: bibliography.bib
 # Last modified 2019-04-04
 library(basejump)
 library(DESeqAnalysis)
-prepareTemplate()
+basejump::prepareTemplate()
 source("_setup.R")
 ```
 
@@ -32,6 +32,8 @@ source("_setup.R")
 
 ```{r header, child="_header.Rmd"}
 ```
+
+# Load DESeqAnalysis object
 
 ```{r object}
 if (is.character(params$object)) {
