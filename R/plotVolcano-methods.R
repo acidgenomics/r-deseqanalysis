@@ -214,7 +214,7 @@ plotVolcano.DESeqResults <-  # nolint
             geom_vline(
                 xintercept = 0L,
                 size = 0.5,
-                colour = "gray50"
+                colour = pointColor[["nonsignificant"]]
             ) +
             geom_point(
                 alpha = pointAlpha,
