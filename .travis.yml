@@ -1,6 +1,8 @@
 language: r
 cache: packages
 
+script: true
+
 matrix:
   include:
     - os: linux
@@ -26,7 +28,6 @@ r_packages:
   - covr
 bioc_packages:
   - BiocCheck
-  - GenomeInfoDbData
 r_github_packages:
   - acidgenomics/lintr
 
