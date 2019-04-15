@@ -5,7 +5,7 @@ params:
   # Use DESeqAnalysis object as input.
   # - Standard: Load from file on disk, either RDS or RDA.
   # - Advanced: Loop across multiple objects using `rmarkdown::render()`.
-  object: "rds/YYYY-MM-DD/deseqanalysis.rds"
+  object: "rds/YYYY-MM-DD/object.rds"
   
   # The `name` param is only necessary when passing in object directly, during
   # an `rmarkdown::render()` call. See `object` param.
@@ -20,7 +20,7 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, cache=FALSE, message=FALSE}
-# Last modified 2019-04-04
+# Last modified 2019-04-15
 library(basejump)
 library(DESeqAnalysis)
 basejump::prepareTemplate()
