@@ -1,39 +1,14 @@
-language: r
-cache: packages
+language: general
 
-matrix:
-  include:
-    - os: linux
-      r: bioc-release
-    - os: linux
-      r: bioc-devel
-    - os: osx
-      r: bioc-release
-  allow_failures:
-    - os: osx
-    - r: bioc-devel
-  fast_finish: true
+services:
+  - docker
 
-branches:
-  only:
-    - master
+before_install:
+  - docker pull acidgenomics/rnaseq
+  - docker images
 
-env:
-  global:
-    - LINTR_COMMENT_BOT=true
-
-r_packages:
-  - covr
-bioc_packages:
-  - BiocCheck
-  - GenomeInfoDbData
-r_github_packages:
-  - acidgenomics/lintr
-
-after_success:
-  - R CMD BiocCheck .
-  - Rscript -e 'lintr::lint_package()'
-  - Rscript -e 'covr::codecov()'
+script:
+  - docker run -ti --user="bioc" --volume="${PWD}:/DESeqAnalysis" --workdir="/DESeqAnalysis" acidgenomics/rnaseq Rscript -e 'source("travis-docker.R")'
 
 notifications:
   email:
