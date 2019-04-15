@@ -15,10 +15,11 @@ NULL
 
 
 
+#' @rdname contrastName
+#' @name contrastName
 #' @importFrom bioverbs contrastName
-#' @aliases NULL
 #' @export
-bioverbs::contrastName
+NULL
 
 
 

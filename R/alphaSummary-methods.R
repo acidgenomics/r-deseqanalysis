@@ -27,10 +27,11 @@ NULL
 
 
 
+#' @rdname alphaSummary
+#' @name alphaSummary
 #' @importFrom bioverbs alphaSummary
-#' @aliases NULL
 #' @export
-bioverbs::alphaSummary
+NULL
 
 
 

@@ -23,17 +23,18 @@ NULL
 
 
 
+#' @rdname contrastSamples
+#' @name contrastSamples
 #' @importFrom bioverbs contrastSamples
-#' @aliases NULL
 #' @export
-bioverbs::contrastSamples
+NULL
 
 
 
 contrastSamples.DESeqAnalysis <-  # nolint
     function(object, results) {
         validObject(object)
-        results <- .matchResults(object, results)
+        results <- .matchResults(object, results = results)
 
         # If we've defined a subset of samples for the contrast, stash them
         # in DESeqResults metadata. Otherwise, there's no way to trace this
@@ -46,9 +47,14 @@ contrastSamples.DESeqAnalysis <-  # nolint
         contrast <- makeNames(contrastName(results))
         assert(grepl("_vs_", contrast))
 
+        data <- as(object, "DESeqDataSet")
+        samples <- colnames(data)
+        colData <- colData(data)
+        assert(hasRownames(colData))
+
         # Inform if the contrast doesn't exist in DESeqDataSet resultsNames.
         # Note that this can happen for complex contrasts, so don't warn.
-        resultsNames <- resultsNames(object@data)
+        resultsNames <- resultsNames(data)
         if (!contrast %in% resultsNames) {
             message(paste0(
                 "Note: ", contrast, " not defined in resultsNames.\n",
@@ -58,30 +64,42 @@ contrastSamples.DESeqAnalysis <-  # nolint
             ))
         }
 
-        # Figure out which column was used to define the pairwise contrast.
-        match <- str_match(contrast, "^([[:alnum:]]+)_(.+)_vs_(.+)$")
-        factor <- match[1L, 2L]
-
-        data <- as(object, "DESeqDataSet")
-        samples <- colnames(data)
-
-        colData <- colData(data)
-        assert(hasRownames(colData))
-
-        assert(isSubset(factor, colnames(colData)))
-        message(paste("Factor column:", factor))
-        factor <- colData[[factor]]
+        # Loop across the colData column names and determine which column
+        # matches the prefix of the defined contrast.
+        match <- vapply(
+            X = colnames(colData),
+            FUN = function(col) {
+                any(grepl(pattern = paste0("^", col), x = contrast))
+            },
+            FUN.VALUE = logical(1L),
+            USE.NAMES = TRUE
+        )
+        assert(hasLength(sum(match), n = 1L))
+        factorCol <- names(match)[match]
+        message(paste("Factor column:", factorCol))
+        factor <- colData[[factorCol]]
         assert(is.factor(factor))
 
-        numerator <- match[1L, 3L]
-        assert(isSubset(numerator, factor))
-        numerator <- samples[factor %in% numerator]
+        # Now remove the factor prefix from our contrast.
+        contrastSansFactor <- sub(
+            pattern = paste0("^", factorCol, "_"),
+            replacement = "",
+            x = contrast
+        )
+        match <- str_match(
+            string = contrastSansFactor,
+            pattern = "^(.+)_vs_(.+)$"
+        )
+
+        numeratorCol <- match[1L, 2L]
+        assert(isSubset(numeratorCol, factor))
+        numerator <- samples[factor %in% numeratorCol]
         assert(hasLength(numerator))
         message(paste("Numerator samples:", toString(numerator)))
 
-        denominator <- match[1L, 4L]
-        assert(isSubset(denominator, factor))
-        denominator <- samples[factor %in% denominator]
+        denominatorCol <- match[1L, 3L]
+        assert(isSubset(denominatorCol, factor))
+        denominator <- samples[factor %in% denominatorCol]
         assert(hasLength(denominator))
         message(paste("Denominator samples:", toString(denominator)))
 
