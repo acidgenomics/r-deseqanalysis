@@ -23,10 +23,11 @@ NULL
 
 
 
+#' @rdname contrastSamples
+#' @name contrastSamples
 #' @importFrom bioverbs contrastSamples
-#' @aliases NULL
 #' @export
-bioverbs::contrastSamples
+NULL
 
 
 

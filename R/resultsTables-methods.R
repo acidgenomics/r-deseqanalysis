@@ -43,10 +43,11 @@ NULL
 
 
 
+#' @rdname resultsTables
+#' @name resultsTables
 #' @importFrom bioverbs resultsTables
-#' @aliases NULL
 #' @export
-bioverbs::resultsTables
+NULL
 
 
 

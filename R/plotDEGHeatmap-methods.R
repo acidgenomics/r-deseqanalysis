@@ -21,10 +21,11 @@ NULL
 
 
 
+#' @rdname plotDEGHeatmap
+#' @name plotDEGHeatmap
 #' @importFrom bioverbs plotDEGHeatmap
-#' @aliases NULL
 #' @export
-bioverbs::plotDEGHeatmap
+NULL
 
 
 

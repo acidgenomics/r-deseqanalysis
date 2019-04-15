@@ -16,10 +16,11 @@ NULL
 
 
 
+#' @rdname updateObject
+#' @name updateObject
 #' @importFrom BiocGenerics updateObject
-#' @aliases NULL
 #' @export
-BiocGenerics::updateObject
+NULL
 
 
 

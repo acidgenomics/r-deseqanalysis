@@ -18,10 +18,11 @@ NULL
 
 
 
+#' @rdname plotDEGPCA
+#' @name plotDEGPCA
 #' @importFrom bioverbs plotDEGPCA
-#' @aliases NULL
 #' @export
-bioverbs::plotDEGPCA
+NULL
 
 
 

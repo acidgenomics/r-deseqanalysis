@@ -14,7 +14,9 @@
   compress = FALSE)
 }
 \arguments{
-\item{x}{Object.}
+\item{x}{Object.
+An object supporting \code{\link[base:dim]{dim()}}, or a supported class capable
+of being coerced to \code{data.frame}, to be written to disk.}
 
 \item{name}{\code{character(1)}.
 Name to use on disk. If \code{NULL}, will use the name of the object instead.}
