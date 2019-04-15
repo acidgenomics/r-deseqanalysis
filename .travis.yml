@@ -6,6 +6,8 @@ services:
 before_install:
   - docker pull acidgenomics/rnaseq
   - docker images
+  # Prevent BiocCheck > checkCodingPractice > checkLogicalUseFiles error
+  - touch inst/rmarkdown/templates/differential-expression/skeleton/_{footer,header,links}.Rmd
 
 script:
   - docker run -ti --user="bioc" --volume="${PWD}:/DESeqAnalysis" --workdir="/DESeqAnalysis" acidgenomics/rnaseq Rscript -e 'source("travis-docker.R")'
