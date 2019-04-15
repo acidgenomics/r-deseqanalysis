@@ -2,7 +2,6 @@
 
 [![Travis CI](https://travis-ci.com/acidgenomics/DESeqAnalysis.svg?branch=master)](https://travis-ci.com/acidgenomics/DESeqAnalysis)
 [![AppVeyor CI](https://ci.appveyor.com/api/projects/status/s5evl37t3vjkfjct?svg=true)](https://ci.appveyor.com/project/mjsteinbaugh/deseqanalysis)
-[![Codecov](https://codecov.io/gh/acidgenomics/DESeqAnalysis/branch/master/graph/badge.svg)](https://codecov.io/gh/acidgenomics/DESeqAnalysis)
 [![Repo status: active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 Toolkit for performing differential expression with [DESeq2][].

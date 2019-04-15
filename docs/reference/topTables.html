@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.16</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.17</span>
       </span>
     </div>
 
@@ -149,22 +149,22 @@ Markdown tables.</p>
 <span class='co'>## DESeqAnalysis ====</span>
 <span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>84 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>87 downregulated genes detected.</span></div><div class='output co'>#&gt; 
 #&gt; 
-#&gt; |geneID          |geneName |baseMean |lfc  |padj     |geneBiotype    |
-#&gt; |:---------------|:--------|:--------|:----|:--------|:--------------|
-#&gt; |ENSG00000005381 |MPO      |123      |2.36 |1.86e-09 |protein_coding |
-#&gt; |ENSG00000013392 |RWDD2A   |72       |2.85 |4.57e-09 |protein_coding |
-#&gt; |ENSG00000012963 |UBR7     |195      |1.99 |5.64e-09 |protein_coding |
-#&gt; |ENSG00000032389 |EIPR1    |113      |1.76 |6.55e-09 |protein_coding |
-#&gt; |ENSG00000019485 |PRDM11   |901      |1.62 |4.54e-08 |protein_coding |
+#&gt; |rowname |baseMean |lfc  |padj     |geneID          |geneName |geneBiotype    |
+#&gt; |:-------|:--------|:----|:--------|:---------------|:--------|:--------------|
+#&gt; |gene095 |123      |2.36 |1.86e-09 |ENSG00000005381 |MPO      |protein_coding |
+#&gt; |gene334 |72       |2.85 |4.57e-09 |ENSG00000013392 |RWDD2A   |protein_coding |
+#&gt; |gene323 |195      |1.99 |5.64e-09 |ENSG00000012963 |UBR7     |protein_coding |
+#&gt; |gene494 |113      |1.76 |6.55e-09 |ENSG00000032389 |EIPR1    |protein_coding |
+#&gt; |gene391 |901      |1.62 |4.54e-08 |ENSG00000019485 |PRDM11   |protein_coding |
 #&gt; 
 #&gt; 
-#&gt; |geneID          |geneName |baseMean |lfc   |padj     |geneBiotype    |
-#&gt; |:---------------|:--------|:--------|:-----|:--------|:--------------|
-#&gt; |ENSG00000023318 |ERP44    |44       |-2.90 |3.20e-14 |protein_coding |
-#&gt; |ENSG00000022567 |SLC45A4  |28       |-2.99 |3.75e-11 |protein_coding |
-#&gt; |ENSG00000014824 |SLC30A9  |26       |-2.86 |4.53e-08 |protein_coding |
-#&gt; |ENSG00000033011 |ALG1     |48       |-2.17 |6.60e-06 |protein_coding |
-#&gt; |ENSG00000000457 |SCYL3    |81       |-1.94 |2.77e-05 |protein_coding |</div></pre>
+#&gt; |rowname |baseMean |lfc   |padj     |geneID          |geneName |geneBiotype    |
+#&gt; |:-------|:--------|:-----|:--------|:---------------|:--------|:--------------|
+#&gt; |gene427 |44       |-2.90 |3.20e-14 |ENSG00000023318 |ERP44    |protein_coding |
+#&gt; |gene419 |28       |-2.99 |3.75e-11 |ENSG00000022567 |SLC45A4  |protein_coding |
+#&gt; |gene352 |26       |-2.86 |4.53e-08 |ENSG00000014824 |SLC30A9  |protein_coding |
+#&gt; |gene497 |48       |-2.17 |6.60e-06 |ENSG00000033011 |ALG1     |protein_coding |
+#&gt; |gene004 |81       |-1.94 |2.77e-05 |ENSG00000000457 |SCYL3    |protein_coding |</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

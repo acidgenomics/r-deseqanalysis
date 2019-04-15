@@ -13,3 +13,4 @@
 ^doc$
 ^docs$
 ^pkgdown$
+^travis-docker\.R$

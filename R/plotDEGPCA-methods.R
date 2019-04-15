@@ -18,10 +18,11 @@ NULL
 
 
 
+#' @rdname plotDEGPCA
+#' @name plotDEGPCA
 #' @importFrom bioverbs plotDEGPCA
-#' @aliases NULL
 #' @export
-bioverbs::plotDEGPCA
+NULL
 
 
 
@@ -117,9 +118,12 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
         contrastSamples = FALSE
     ) {
         validObject(object)
-        assert(isFlag(contrastSamples))
+        assert(
+            isScalar(results),
+            isFlag(contrastSamples)
+        )
 
-        res <- .matchResults(object, results)
+        res <- .matchResults(object, results = results)
         validObject(res)
 
         # Using the variance-stabilized counts for visualization.

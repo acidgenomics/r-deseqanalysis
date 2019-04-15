@@ -6,10 +6,11 @@ NULL
 
 
 
+#' @rdname results
+#' @name results
 #' @importFrom bioverbs results
-#' @aliases NULL
 #' @export
-bioverbs::results
+NULL
 
 
 

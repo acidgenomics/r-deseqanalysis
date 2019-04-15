@@ -55,10 +55,11 @@ NULL
 
 
 
+#' @rdname plotVolcano
+#' @name plotVolcano
 #' @importFrom bioverbs plotVolcano
-#' @aliases NULL
 #' @export
-bioverbs::plotVolcano
+NULL
 
 
 

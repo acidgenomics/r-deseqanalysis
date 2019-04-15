@@ -12,10 +12,11 @@ NULL
 
 
 
+#' @rdname deg
+#' @name deg
 #' @importFrom bioverbs deg
-#' @aliases NULL
 #' @export
-bioverbs::deg
+NULL
 
 
 
