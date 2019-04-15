@@ -10,10 +10,11 @@ NULL
 
 
 
+#' @rdname markdown
+#' @name markdown
 #' @importFrom bioverbs markdown
-#' @aliases NULL
 #' @export
-bioverbs::markdown
+NULL
 
 
 

@@ -49,10 +49,11 @@ NULL
 
 
 
+#' @rdname plotMA
+#' @name plotMA
 #' @importFrom BiocGenerics plotMA
-#' @aliases NULL
 #' @export
-BiocGenerics::plotMA
+NULL
 
 
 

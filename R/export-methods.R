@@ -6,7 +6,17 @@
 #' @name export
 #' @inherit bioverbs::export
 #' @inheritParams params
-#' @inheritParams brio::export
+#'
+#' @param x Object.
+#'   An object supporting [`dim()`][base::dim], or a supported class capable
+#'   of being coerced to `data.frame`, to be written to disk.
+#' @param name `character(1)`.
+#'   Name to use on disk. If `NULL`, will use the name of the object instead.
+#' @param dir `character(1)`.
+#'   Directory path.
+#' @param compress `logical(1)`.
+#'   Apply gzip compression to all files.
+#'
 #' @examples
 #' data(deseq)
 #'
@@ -19,10 +29,11 @@ NULL
 
 
 
+#' @rdname export
+#' @name export
 #' @importFrom bioverbs export
-#' @aliases NULL
 #' @export
-bioverbs::export
+NULL
 
 
 

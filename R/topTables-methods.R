@@ -15,10 +15,11 @@ NULL
 
 
 
+#' @rdname topTables
+#' @name topTables
 #' @importFrom bioverbs topTables
-#' @aliases NULL
 #' @export
-bioverbs::topTables
+NULL
 
 
 
