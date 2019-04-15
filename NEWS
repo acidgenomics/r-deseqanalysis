@@ -9,6 +9,7 @@ annotations.
   detect a contrast factor prefix that contains an underscore. This now works
   by checking against the column names of `colData` internally.
 - `topTables`: `geneID`, `geneName`, and `geneBiotype` are now optional columns.
+- Updated Travis CI configuration to use rnaseq Docker image.
 
 
 
