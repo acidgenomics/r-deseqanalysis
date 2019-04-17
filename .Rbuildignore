@@ -1,6 +1,5 @@
 ^.*\.Rproj$
-^.*\.gz$
-^.*\.pdf$
+^Rplots\.pdf$
 ^\.Rprofile$
 ^\.Rproj\.user$
 ^\.git$
