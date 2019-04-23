@@ -4,9 +4,13 @@
 \name{resultsMatrix}
 \alias{resultsMatrix}
 \alias{resultsMatrix,DESeqAnalysis-method}
+\alias{resultsMatrix,DESeqAnalysisList-method}
 \title{DESeqResults matrix}
 \usage{
 \S4method{resultsMatrix}{DESeqAnalysis}(object,
+  value = c("log2FoldChange", "stat", "padj"))
+
+\S4method{resultsMatrix}{DESeqAnalysisList}(object,
   value = c("log2FoldChange", "stat", "padj"))
 }
 \arguments{
