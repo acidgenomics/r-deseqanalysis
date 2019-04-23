@@ -2,7 +2,7 @@
 #'
 #' Generate an aggregate matrix of DESeqResults values.
 #'
-#' @export
+#' @name resultsMatrix
 #'
 #' @param object `DESeqAnalysis`.
 #' @param value `character(1)`.
@@ -19,7 +19,19 @@
 #' data(deseq)
 #' x <- resultsMatrix(deseq)
 #' head(x)
-resultsMatrix <- function(
+NULL
+
+
+
+#' @rdname resultsMatrix
+#' @name resultsMatrix
+#' @importFrom bioverbs resultsMatrix
+#' @export
+NULL
+
+
+
+resultsMatrix.DESeqAnalysis <- function(
     object,
     value = c("log2FoldChange", "stat", "padj")
 ) {
@@ -84,3 +96,13 @@ resultsMatrix <- function(
 
     mat
 }
+
+
+
+#' @rdname resultsMatrix
+#' @export
+setMethod(
+    f = "resultsMatrix",
+    signature = signature("DESeqAnalysis"),
+    definition = resultsMatrix.DESeqAnalysis
+)
