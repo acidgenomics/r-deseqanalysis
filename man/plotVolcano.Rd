@@ -10,16 +10,16 @@
 \S4method{plotVolcano}{DESeqResults}(object, ylim = 1e-10,
   genes = NULL, gene2symbol = NULL, ntop = 0L,
   direction = c("both", "up", "down"), pointColor = c(downregulated =
-  "orange", nonsignificant = "gray50", upregulated = "purple"),
+  "darkorchid3", upregulated = "darkorange2", nonsignificant = "gray50"),
   pointSize = 2L, pointAlpha = 0.7, histograms = FALSE,
   return = c("ggplot", "DataFrame"))
 
 \S4method{plotVolcano}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
   ylim = 1e-10, genes = NULL, ntop = 0L, direction = c("both",
-  "up", "down"), pointColor = c(downregulated = "orange", nonsignificant
-  = "gray50", upregulated = "purple"), pointSize = 2L,
-  pointAlpha = 0.7, histograms = FALSE, return = c("ggplot",
-  "DataFrame"))
+  "up", "down"), pointColor = c(downregulated = "darkorchid3",
+  upregulated = "darkorange2", nonsignificant = "gray50"),
+  pointSize = 2L, pointAlpha = 0.7, histograms = FALSE,
+  return = c("ggplot", "DataFrame"))
 }
 \arguments{
 \item{object}{Object.}

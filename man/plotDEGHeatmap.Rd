@@ -12,7 +12,9 @@
   "none"), clusteringMethod = "ward.D2", clusterRows = TRUE,
   clusterCols = TRUE, interestingGroups = NULL, showRownames = FALSE,
   showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
-  color = viridis::viridis, legendColor = viridis::viridis,
+  color = getOption(x = "acid.heatmap.color", default =
+  acidplots::synesthesia), legendColor = getOption(x =
+  "acid.heatmap.color", default = acidplots::synesthesia),
   borderColor = NULL, title = NULL, ...)
 
 \S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results,
@@ -20,9 +22,10 @@
   scale = c("row", "column", "none"), clusteringMethod = "ward.D2",
   clusterRows = TRUE, clusterCols = TRUE, interestingGroups = NULL,
   showRownames = FALSE, showColnames = TRUE, treeheightRow = 50L,
-  treeheightCol = 50L, color = viridis::viridis,
-  legendColor = viridis::viridis, borderColor = NULL, title = NULL,
-  ...)
+  treeheightCol = 50L, color = getOption(x = "acid.heatmap.color",
+  default = acidplots::synesthesia), legendColor = getOption(x =
+  "acid.heatmap.color", default = acidplots::synesthesia),
+  borderColor = NULL, title = NULL, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -67,9 +70,9 @@ Size of the row and column dendrograms. Use \code{0} to disable.}
 Hexadecimal color function or values to use for plot.
 
 We generally recommend these hexadecimal functions from the viridis
-package:
+package, in addition to our \code{\link[=synesthesia]{synesthesia()}} palette:
 \itemize{
-\item \code{viridis::viridis()} (\emph{default}).
+\item \code{viridis::viridis()}.
 \item \code{viridis::inferno()}.
 \item \code{viridis::magma()}.
 \item \code{viridis::plasma()}.
@@ -88,7 +91,7 @@ colors.}
 \item{borderColor}{\code{character(1)} or \code{NULL}.
 Border color. Disabled by default for improved aesthetics.}
 
-\item{title}{\code{character(1)} or \code{NULL}.
+\item{title}{\code{character(1)}.
 Plot title.}
 
 \item{...}{Additional arguments.}

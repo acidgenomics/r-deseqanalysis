@@ -5,7 +5,7 @@
 #' @name plotDEGPCA
 #' @inherit bioverbs::plotDEGPCA
 #' @inheritParams plotDEGHeatmap
-#' @inheritParams minimalism::plotPCA
+#' @inheritParams acidplots::plotPCA
 #' @inheritParams basejump::params
 #' @inheritParams params
 #'
@@ -93,7 +93,7 @@ f1 <- formals(plotDEGPCA.DESeqResults)
 f2 <- methodFormals(
     f = "plotPCA",
     signature = "SummarizedExperiment",
-    package = "minimalism"
+    package = "acidplots"
 )
 f2 <- f2[setdiff(names(f2), c("ntop", "subtitle", "title"))]
 f <- c(f1, f2)

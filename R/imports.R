@@ -18,7 +18,7 @@
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom dplyr arrange desc everything filter left_join mutate mutate_all
 #'   pull rename row_number select
-#' @importFrom firestarter plotHeatmap
+#' @importFrom acidplots plotHeatmap
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_density
 #'   geom_hline geom_point geom_vline ggplot guides labs scale_colour_manual
 #'   scale_x_continuous scale_y_continuous theme
@@ -31,7 +31,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom methods as is new prototype setClass slot slot<- validObject
 #'   .hasSlot
-#' @importFrom minimalism acid_geom_label_repel plotCounts plotPCA
+#' @importFrom acidplots acid_geom_label_repel plotCounts plotPCA
 #' @importFrom rlang := UQ sym syms
 #' @importFrom scales pretty_breaks
 #' @importFrom stringr str_match str_trunc

@@ -1,5 +1,5 @@
 #' @name plotCounts
-#' @inherit minimalism::plotCounts
+#' @inherit acidplots::plotCounts
 #' @inheritParams basejump::params
 #' @inheritParams params
 #'
@@ -69,7 +69,7 @@ f1 <- formals(plotCounts.DESeqAnalysis)
 f2 <- methodFormals(
     f = "plotCounts",
     signature = "SummarizedExperiment",
-    package = "minimalism"
+    package = "acidplots"
 )
 f2 <- f2[setdiff(names(f2), c(names(f1), "assay", "countsAxisLabel"))]
 f <- c(f1, f2)
