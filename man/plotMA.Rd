@@ -10,15 +10,15 @@
 \usage{
 \S4method{plotMA}{DESeqResults}(object, genes = NULL,
   gene2symbol = NULL, ntop = 0L, direction = c("both", "up", "down"),
-  pointColor = c(downregulated = "orange", nonsignificant = "gray50",
-  upregulated = "purple"), pointSize = 2L, pointAlpha = 0.7,
-  return = c("ggplot", "DataFrame"))
+  pointColor = c(downregulated = "darkorchid3", upregulated =
+  "darkorange2", nonsignificant = "gray50"), pointSize = 2L,
+  pointAlpha = 0.7, return = c("ggplot", "DataFrame"))
 
 \S4method{plotMA}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
   genes = NULL, ntop = 0L, direction = c("both", "up", "down"),
-  pointColor = c(downregulated = "orange", nonsignificant = "gray50",
-  upregulated = "purple"), pointSize = 2L, pointAlpha = 0.7,
-  return = c("ggplot", "DataFrame"))
+  pointColor = c(downregulated = "darkorchid3", upregulated =
+  "darkorange2", nonsignificant = "gray50"), pointSize = 2L,
+  pointAlpha = 0.7, return = c("ggplot", "DataFrame"))
 }
 \arguments{
 \item{object}{
