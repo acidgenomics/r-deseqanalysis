@@ -7,10 +7,11 @@
 \title{Plot counts}
 \usage{
 \S4method{plotCounts}{DESeqAnalysis}(object, genes, transform = FALSE,
-  interestingGroups = NULL, medianLine = TRUE,
-  color = getOption("basejump.discrete.color", NULL),
-  legend = getOption("basejump.legend", TRUE), style = c("facet",
-  "wide"))
+  interestingGroups = NULL, trans = c("identity", "log2", "log10"),
+  medianLine = TRUE, color = getOption(x = "acid.color.discrete",
+  default = acidplots::scale_colour_synesthesia_d()),
+  legend = getOption(x = "acid.legend", default = TRUE),
+  style = c("facet", "wide"))
 }
 \arguments{
 \item{object}{Object.}
@@ -27,6 +28,12 @@ than \code{DESeqDataSet} size-factor normalized counts.}
 \item{interestingGroups}{\code{character}.
 Groups of interest that define the samples. If left unset, defaults to
 \code{sampleName}.}
+
+\item{trans}{\code{character(1)}.
+Name of the axis scale transformation to apply.
+
+For more information:\preformatted{help(topic = "scale_x_continuous", package = "ggplot2")
+}}
 
 \item{medianLine}{\code{logical(1)}.
 Include median line for each group. Disabled if samples are colored by
