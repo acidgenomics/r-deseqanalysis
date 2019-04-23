@@ -65,9 +65,9 @@ plotMA.DESeqResults <-  # nolint
         ntop = 0L,
         direction = c("both", "up", "down"),
         pointColor = c(
-            downregulated = "orange",
-            nonsignificant = "gray50",
-            upregulated = "purple"
+            downregulated = "darkorchid3",
+            upregulated = "darkorange2",
+            nonsignificant = "gray50"
         ),
         pointSize = 2L,
         pointAlpha = 0.7,
