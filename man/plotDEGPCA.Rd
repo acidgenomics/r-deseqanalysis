@@ -9,18 +9,20 @@
 \usage{
 \S4method{plotDEGPCA}{DESeqResults}(object, counts, direction = c("both",
   "up", "down"), object, assay = 1L, interestingGroups = NULL,
-  label = getOption("acid.label", default = FALSE),
-  color = getOption("acid.color.discrete", default = NULL),
-  pointSize = getOption("acid.point.size", default = 3L),
-  return = c("ggplot", "DataFrame"), ...)
+  label = getOption(x = "acid.label", default = FALSE),
+  color = getOption(x = "acid.color.discrete", default =
+  acidplots::scale_colour_synesthesia_d()), pointSize = getOption(x =
+  "acid.point.size", default = 3L), return = c("ggplot", "DataFrame"),
+  ...)
 
 \S4method{plotDEGPCA}{DESeqAnalysis}(object, results,
   contrastSamples = FALSE, direction = c("both", "up", "down"),
-  assay = 1L, interestingGroups = NULL,
-  label = getOption("acid.label", default = FALSE),
-  color = getOption("acid.color.discrete", default = NULL),
-  pointSize = getOption("acid.point.size", default = 3L),
-  return = c("ggplot", "DataFrame"), ...)
+  assay = 1L, interestingGroups = NULL, label = getOption(x =
+  "acid.label", default = FALSE), color = getOption(x =
+  "acid.color.discrete", default =
+  acidplots::scale_colour_synesthesia_d()), pointSize = getOption(x =
+  "acid.point.size", default = 3L), return = c("ggplot", "DataFrame"),
+  ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -49,9 +51,9 @@ Superimpose sample text labels on the plot.}
 Hexadecimal color function or values to use for plot.
 
 We generally recommend these hexadecimal functions from the viridis
-package:
+package, in addition to our \code{\link[=synesthesia]{synesthesia()}} palette:
 \itemize{
-\item \code{viridis::viridis()} (\emph{default}).
+\item \code{viridis::viridis()}.
 \item \code{viridis::inferno()}.
 \item \code{viridis::magma()}.
 \item \code{viridis::plasma()}.
