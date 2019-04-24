@@ -26,11 +26,14 @@ NULL
 contrastName.DESeqResults <-  # nolint
     function(object) {
         validObject(object)
-        contrast <- mcols(object)[2L, "description"]
-        assert(isCharacter(contrast))
-        contrast %>%
-            gsub("^.*:\\s", "", .) %>%
-            gsub("_", " ", .) %>%
+        x <- mcols(object)[2L, "description"]
+        assert(isCharacter(x))
+        x %>%
+            # Strip prefix, e.g. log2 fold change (MLE).
+            sub("^.*:\\s", "", .) %>%
+            # Pad the first space with as a colon.
+            sub("\\s", " : ", .) %>%
+            sub("\\svs\\s", " vs. ", .) %>%
             # Improve appearance for difference of differences.
             gsub("\\+", " \\+\n    ", .)
     }
