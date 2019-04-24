@@ -1,3 +1,20 @@
+## DESeqAnalysis 0.1.19 (2019-04-23)
+
+### Minor changes
+
+- Converted `resultsMatrix` to an S4 generic and added initial support for
+  `DESeqAnalysis` and `DESeqAnalysisList` class objects.
+
+
+
+## DESeqAnalysis 0.1.18 (2019-04-23)
+
+### Minor changes
+
+- NAMESPACE and documentation updates, incorporating new [acidplots][] package.
+
+
+
 ## DESeqAnalysis 0.1.17 (2019-04-08)
 
 Bug fixes to improve handling of `DESeqDataSet` generated using RefSeq gene
@@ -276,6 +293,7 @@ migrated from my [bcbioRNASeq][] R package.
 
 
 
+[acidplots]: https://acidplots.acidgenomics.com/
 [Acid Genomics]: https://acidgenomics.com/
 [AppVeyor CI]: https://www.appveyor.com/
 [basejump]: https://basejump.acidgenomics.com/

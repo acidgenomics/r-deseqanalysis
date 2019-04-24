@@ -20,7 +20,7 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, cache=FALSE, message=FALSE}
-# Last modified 2019-04-15
+# Last modified 2019-04-23
 library(basejump)
 library(DESeqAnalysis)
 basejump::prepareTemplate()
