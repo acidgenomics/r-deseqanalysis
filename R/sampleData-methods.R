@@ -1,3 +1,9 @@
+#' @name sampleData
+#' @inherit bioverbs::sampleData
+NULL
+
+
+
 sampleData.DESeqAnalysis <-  # nolint
     function(object) {
         object %>%

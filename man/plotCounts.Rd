@@ -54,6 +54,8 @@ Show plot legend.}
 
 \item{style}{\code{character(1)}.
 Plot style.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \itemize{

@@ -40,6 +40,8 @@ If specified, the \code{name} argument is ignored.}
 building a results table. Use this argument rather than \code{contrast}
 for continuous variables, individual effects or for individual interaction terms.
 The value provided to \code{name} must be an element of \code{resultsNames(object)}.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{integer matrix}.

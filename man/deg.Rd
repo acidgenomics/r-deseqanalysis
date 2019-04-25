@@ -31,6 +31,8 @@ Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or position of \code{DESeqResults}.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{character}.

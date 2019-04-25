@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.18</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.20</span>
       </span>
     </div>
 
@@ -105,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Volcano plot</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/plotVolcano-methods.R'><code>R/plotVolcano-methods.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/plotVolcano-methods.R'><code>R/plotVolcano-methods.R</code></a></small>
     <div class="hidden name"><code>plotVolcano.Rd</code></div>
     </div>
 
@@ -115,7 +115,9 @@
     
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for DESeqResults</span>
+    <pre class="usage"><span class='fu'>plotVolcano</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+
+<span class='co'># S4 method for DESeqResults</span>
 <span class='fu'>plotVolcano</span>(<span class='no'>object</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
   <span class='kw'>genes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>gene2symbol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
   <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='kw'>pointColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='kw'>downregulated</span> <span class='kw'>=</span>
@@ -222,7 +224,7 @@ Use shrunken log2 fold change (LFC) values.</p></td>
 <span class='no'>genes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>rownames</a></span>(<span class='no'>dds</span>))
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>genes</span>)</div><div class='output co'>#&gt; [1] "gene001" "gene002" "gene003" "gene004" "gene005" "gene006"</div><div class='input'>
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Customize the colors.</span>
 <span class='fu'>plotVolcano</span>(
     <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
@@ -232,22 +234,22 @@ Use shrunken log2 fold change (LFC) values.</p></td>
         <span class='kw'>nonsignificant</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
         <span class='kw'>upregulated</span> <span class='kw'>=</span> <span class='st'>"green"</span>
     )
-)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-2.png' alt='' width='700' height='433' /></div><div class='input'>
+)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Directional support (up or down).</span>
 <span class='fu'>plotVolcano</span>(
     <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
     <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
     <span class='kw'>direction</span> <span class='kw'>=</span> <span class='st'>"up"</span>,
     <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>5L</span>
-)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotVolcano</span>(
+)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotVolcano</span>(
     <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
     <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
     <span class='kw'>direction</span> <span class='kw'>=</span> <span class='st'>"down"</span>,
     <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>5L</span>
-)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-4.png' alt='' width='700' height='433' /></div><div class='input'>
+)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Label genes manually.</span>
 <span class='co'>## Note that either gene IDs or names (symbols) are supported.</span>
-<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>genes</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-5.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>genes</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-5.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

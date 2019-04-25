@@ -1,7 +1,7 @@
 #' Variance-stabilizing transformation type
 #'
 #' @name transformType
-#' @inheritParams params
+#' @inheritParams basejump::params
 #'
 #' @seealso [DESeq2::DESeqTransform()].
 NULL

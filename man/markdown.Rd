@@ -12,6 +12,8 @@ markdown(object, ...)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 Markdown output.

@@ -68,7 +68,7 @@ plotHeatmap() are also supported by this function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.18</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.20</span>
       </span>
     </div>
 
@@ -108,7 +108,7 @@ plotHeatmap() are also supported by this function." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Differentially expressed gene heatmap</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/plotDEGHeatmap-methods.R'><code>R/plotDEGHeatmap-methods.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/plotDEGHeatmap-methods.R'><code>R/plotDEGHeatmap-methods.R</code></a></small>
     <div class="hidden name"><code>plotDEGHeatmap.Rd</code></div>
     </div>
 
@@ -121,25 +121,32 @@ manual input of a gene vector. All of the optional parameters for
     
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for DESeqResults</span>
+    <pre class="usage"><span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+
+<span class='co'># S4 method for DESeqResults</span>
 <span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>counts</span>,
   <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"row"</span>, <span class='st'>"column"</span>,
   <span class='st'>"none"</span>), <span class='kw'>clusteringMethod</span> <span class='kw'>=</span> <span class='st'>"ward.D2"</span>, <span class='kw'>clusterRows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>clusterCols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>showRownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>clusterCols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> -<span class='fl'>2L</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.25</span>),
+  <span class='kw'>legendBreaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> -<span class='fl'>2L</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>1L</span>),
+  <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>showRownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>showColnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>treeheightRow</span> <span class='kw'>=</span> <span class='fl'>50L</span>, <span class='kw'>treeheightCol</span> <span class='kw'>=</span> <span class='fl'>50L</span>,
   <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"acid.heatmap.color"</span>, <span class='kw'>default</span> <span class='kw'>=</span>
-  <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/acidplots/topics/synesthesia'>synesthesia</a></span>), <span class='kw'>legendColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span>
+  <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/acidplots/topics/gradient'>blueYellow</a></span>), <span class='kw'>legendColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span>
   <span class='st'>"acid.heatmap.color"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/acidplots/topics/synesthesia'>synesthesia</a></span>),
   <span class='kw'>borderColor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>results</span>,
-  <span class='kw'>contrastSamples</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"row"</span>, <span class='st'>"column"</span>, <span class='st'>"none"</span>), <span class='kw'>clusteringMethod</span> <span class='kw'>=</span> <span class='st'>"ward.D2"</span>,
-  <span class='kw'>clusterRows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>clusterCols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>showRownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>showColnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>treeheightRow</span> <span class='kw'>=</span> <span class='fl'>50L</span>,
-  <span class='kw'>treeheightCol</span> <span class='kw'>=</span> <span class='fl'>50L</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"acid.heatmap.color"</span>,
-  <span class='kw'>default</span> <span class='kw'>=</span> <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/acidplots/topics/synesthesia'>synesthesia</a></span>), <span class='kw'>legendColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span>
+  <span class='kw'>contrastSamples</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>,
+  <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"row"</span>, <span class='st'>"column"</span>, <span class='st'>"none"</span>),
+  <span class='kw'>clusteringMethod</span> <span class='kw'>=</span> <span class='st'>"ward.D2"</span>, <span class='kw'>clusterRows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>clusterCols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> -<span class='fl'>2L</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.25</span>),
+  <span class='kw'>legendBreaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> -<span class='fl'>2L</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>1L</span>),
+  <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>showRownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>showColnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>treeheightRow</span> <span class='kw'>=</span> <span class='fl'>50L</span>, <span class='kw'>treeheightCol</span> <span class='kw'>=</span> <span class='fl'>50L</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"acid.heatmap.color"</span>, <span class='kw'>default</span> <span class='kw'>=</span>
+  <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/acidplots/topics/gradient'>blueYellow</a></span>), <span class='kw'>legendColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span>
   <span class='st'>"acid.heatmap.color"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/acidplots/topics/synesthesia'>synesthesia</a></span>),
   <span class='kw'>borderColor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
@@ -170,7 +177,7 @@ column direction ("<code>row</code>", "<code>column</code>"), or remain unscaled
     <tr>
       <th>clusteringMethod</th>
       <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>.
-Clustering method. Accepts the same values as <code><a href='https://www.rdocumentation.org/packages/stats/topics/hclust'>stats::hclust()</a></code>.</p></td>
+Clustering method. Accepts the same values as <code><a href='https://www.rdocumentation.org/packages/stats/topics/hclust'>hclust()</a></code>.</p></td>
     </tr>
     <tr>
       <th>clusterRows</th>
@@ -181,6 +188,18 @@ Arrange with hierarchical clustering.</p></td>
       <th>clusterCols</th>
       <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
 Arrange with hierarchical clustering.</p></td>
+    </tr>
+    <tr>
+      <th>breaks</th>
+      <td><p><code>numeric</code> or <code>NULL</code>.
+A sequence of numbers that covers the range of values in the matrix. Must
+be 1 element longer than the color vector, which is handled internally
+automatically, differing from the behavior in pheatmap.</p></td>
+    </tr>
+    <tr>
+      <th>legendBreaks</th>
+      <td><p><code>numeric</code> or <code>NULL</code>.
+Numeric vector of breakpoints for the color legend.</p></td>
     </tr>
     <tr>
       <th>interestingGroups</th>
@@ -258,6 +277,11 @@ Name or position of <code>DESeqResults</code>.</p></td>
 passed to <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/results'>DESeq2::results()</a></code>. This setting will break for complex DESeq2
 contrasts (e.g. interaction effect).</p></td>
     </tr>
+    <tr>
+      <th>lfcShrink</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
+Use shrunken log2 fold change (LFC) values.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -271,7 +295,7 @@ must contain a <code>SummarizedExperiment</code>.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotDEGHeatmap</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>Scaling matrix per row (z-score).</span></div><div class='output co'>#&gt; <span class='message'>Performing hierarchical clustering.</span>
+<span class='fu'>plotDEGHeatmap</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>Scaling matrix per row (z-score).</span></div><div class='output co'>#&gt; <span class='message'>Performing hierarchical clustering.</span>
 #&gt; <span class='message'>Using stats::hclust(method = "ward.D2").</span></div><div class='output co'>#&gt; <span class='message'>Arranging rows using hclust().</span></div><div class='output co'>#&gt; <span class='message'>Arranging columns using hclust().</span></div><div class='img'><img src='plotDEGHeatmap-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

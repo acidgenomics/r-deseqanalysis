@@ -36,6 +36,8 @@ Join the row annotations.}
 
 \item{counts}{\code{logical(1)}.
 Join the size-factor adjusted normalized counts.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{list}.
