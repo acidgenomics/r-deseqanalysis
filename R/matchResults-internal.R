@@ -34,7 +34,8 @@
         stop(paste(
             "Shrunken LFC values were requested,",
             "but object does not contain DESeqResults",
-            "defined in `lfcShrink` slot."
+            "defined in `lfcShrink` slot.",
+            "Set `lfcShrink = FALSE`."
         ))
     }
 
