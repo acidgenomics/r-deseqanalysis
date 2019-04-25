@@ -1,4 +1,5 @@
 # Do not allow post hoc alpha or lfcThreshold cutoffs here.
+# FIXME Ensure axis is symmetric here.
 
 
 
@@ -40,7 +41,9 @@ plotDEGHeatmap.DESeqResults <-  # nolint
         scale = c("row", "column", "none"),
         clusteringMethod = "ward.D2",
         clusterRows = TRUE,
-        clusterCols = TRUE
+        clusterCols = TRUE,
+        breaks = seq(from = -4L, to = 4L, by = 0.5),
+        legendBreaks = seq(from = -4L, to = 4L, by = 2L)
     ) {
         validObject(object)
         validObject(counts)
@@ -48,7 +51,8 @@ plotDEGHeatmap.DESeqResults <-  # nolint
             is(object, "DESeqResults"),
             is(counts, "DESeqTransform"),
             identical(rownames(object), rownames(counts)),
-            isString(clusteringMethod)
+            isString(clusteringMethod),
+            is.numeric(legendBreaks)
         )
         direction <- match.arg(direction)
         scale <- match.arg(scale)
@@ -112,6 +116,13 @@ f2 <- methodFormals(
 )
 f2 <- f2[setdiff(names(f2), c(names(f1), "object", "assay"))]
 f <- c(f1, f2)
+# Use `purpleOrange` instead of `synesthesia` here by default.
+f[["color"]] <- quote(
+    getOption(
+        x = "acid.heatmap.color",
+        default = acidplots::purpleOrange
+    )
+)
 formals(plotDEGHeatmap.DESeqResults) <- f
 
 
@@ -130,12 +141,20 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
     function(
         object,
         results,
-        contrastSamples = FALSE
+        contrastSamples = FALSE,
+        lfcShrink = TRUE
     ) {
         validObject(object)
-        assert(isFlag(contrastSamples))
+        assert(
+            isFlag(contrastSamples),
+            isFlag(lfcShrink)
+        )
 
-        res <- .matchResults(object, results)
+        res <- .matchResults(
+            object = object,
+            results = results,
+            lfcShrink = lfcShrink
+        )
         validObject(res)
 
         # We're using the variance-stabilized counts for visualization here.
@@ -160,7 +179,8 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
                 ),
                 removeFormals = c(
                     "results",
-                    "contrastSamples"
+                    "contrastSamples",
+                    "lfcShrink"
                 )
             )
         )

@@ -10,20 +10,25 @@
 \S4method{plotDEGHeatmap}{DESeqResults}(object, counts,
   direction = c("both", "up", "down"), scale = c("row", "column",
   "none"), clusteringMethod = "ward.D2", clusterRows = TRUE,
-  clusterCols = TRUE, interestingGroups = NULL, showRownames = FALSE,
+  clusterCols = TRUE, breaks = seq(from = -4L, to = 4L, by = 0.5),
+  legendBreaks = seq(from = -4L, to = 4L, by = 2L),
+  interestingGroups = NULL, showRownames = FALSE,
   showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
   color = getOption(x = "acid.heatmap.color", default =
-  acidplots::synesthesia), legendColor = getOption(x =
+  acidplots::purpleOrange), legendColor = getOption(x =
   "acid.heatmap.color", default = acidplots::synesthesia),
   borderColor = NULL, title = NULL, ...)
 
 \S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results,
-  contrastSamples = FALSE, direction = c("both", "up", "down"),
-  scale = c("row", "column", "none"), clusteringMethod = "ward.D2",
-  clusterRows = TRUE, clusterCols = TRUE, interestingGroups = NULL,
-  showRownames = FALSE, showColnames = TRUE, treeheightRow = 50L,
-  treeheightCol = 50L, color = getOption(x = "acid.heatmap.color",
-  default = acidplots::synesthesia), legendColor = getOption(x =
+  contrastSamples = FALSE, lfcShrink = TRUE, direction = c("both",
+  "up", "down"), scale = c("row", "column", "none"),
+  clusteringMethod = "ward.D2", clusterRows = TRUE,
+  clusterCols = TRUE, breaks = seq(from = -4L, to = 4L, by = 0.5),
+  legendBreaks = seq(from = -4L, to = 4L, by = 2L),
+  interestingGroups = NULL, showRownames = FALSE,
+  showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
+  color = getOption(x = "acid.heatmap.color", default =
+  acidplots::purpleOrange), legendColor = getOption(x =
   "acid.heatmap.color", default = acidplots::synesthesia),
   borderColor = NULL, title = NULL, ...)
 }
@@ -103,6 +108,9 @@ Name or position of \code{DESeqResults}.}
 \strong{Experimental}. Only include the samples used to define the contrast
 passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
 contrasts (e.g. interaction effect).}
+
+\item{lfcShrink}{\code{logical(1)}.
+Use shrunken log2 fold change (LFC) values.}
 }
 \description{
 This function is an extension of \code{\link[=plotHeatmap]{plotHeatmap()}} that is optimized for
