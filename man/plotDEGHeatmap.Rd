@@ -17,9 +17,9 @@ plotDEGHeatmap(object, ...)
   interestingGroups = NULL, showRownames = FALSE,
   showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
   color = getOption(x = "acid.heatmap.color", default =
-  viridis::viridis), legendColor = getOption(x = "acid.heatmap.color",
-  default = acidplots::synesthesia), borderColor = NULL, title = NULL,
-  ...)
+  acidplots::blueYellow), legendColor = getOption(x =
+  "acid.heatmap.color", default = acidplots::synesthesia),
+  borderColor = NULL, title = NULL, ...)
 
 \S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results,
   contrastSamples = FALSE, lfcShrink = TRUE, direction = c("both",
@@ -30,9 +30,9 @@ plotDEGHeatmap(object, ...)
   interestingGroups = NULL, showRownames = FALSE,
   showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
   color = getOption(x = "acid.heatmap.color", default =
-  viridis::viridis), legendColor = getOption(x = "acid.heatmap.color",
-  default = acidplots::synesthesia), borderColor = NULL, title = NULL,
-  ...)
+  acidplots::blueYellow), legendColor = getOption(x =
+  "acid.heatmap.color", default = acidplots::synesthesia),
+  borderColor = NULL, title = NULL, ...)
 }
 \arguments{
 \item{object}{Object.}
