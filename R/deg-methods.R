@@ -117,7 +117,7 @@ deg.DESeqAnalysis <-  # nolint
         results,
         direction = c("both", "up", "down")
     ) {
-        results <- .matchResults(object = object, results = results)
+        results <- results(object = object, results = results)
         direction <- match.arg(direction)
         deg(object = results, direction = direction)
     }

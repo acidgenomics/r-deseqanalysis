@@ -56,7 +56,7 @@ plotDEGPCA.DESeqResults <-  # nolint
         )
 
         # Get the character vector of DEGs.
-        deg <- deg(res, direction = direction)
+        deg <- deg(object = res, direction = direction)
         if (!hasLength(deg)) {
             warning("There are no DEGs to plot. Skipping.", call. = FALSE)
             return(invisible())
@@ -123,7 +123,9 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
             isFlag(contrastSamples)
         )
 
-        res <- .matchResults(object, results = results)
+        # Note that LFC values aren't used for this plot, just the DEGs, which
+        # are used to subset the DESeqTransform counts.
+        res <- results(object, results = results, lfcShrink = FALSE)
         validObject(res)
 
         # Using the variance-stabilized counts for visualization.

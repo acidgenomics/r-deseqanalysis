@@ -149,11 +149,9 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
             isFlag(lfcShrink)
         )
 
-        res <- .matchResults(
-            object = object,
-            results = results,
-            lfcShrink = lfcShrink
-        )
+        # Note use of `res` here instead of `results`, since we need to check
+        # the original `results` input below in `contrastSamples()` call.
+        res <- results(object, results = results, lfcShrink = lfcShrink)
         validObject(res)
 
         # We're using the variance-stabilized counts for visualization here.

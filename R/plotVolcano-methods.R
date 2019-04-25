@@ -63,6 +63,8 @@ NULL
 
 
 
+# FIXME Inform the user when shrunken LFC values are shown.
+
 plotVolcano.DESeqResults <-  # nolint
     function(
         object,
@@ -336,15 +338,12 @@ plotVolcano.DESeqAnalysis <-  # nolint
             expr = Gene2Symbol(slot(object, "data")),
             error = function(e) NULL
         )
+        results <- results(object, results = results, lfcShrink = lfcShrink)
         do.call(
             what = plotVolcano.DESeqResults,
             args = matchArgsToDoCall(
                 args = list(
-                    object = .matchResults(
-                        object = object,
-                        results = results,
-                        lfcShrink = lfcShrink
-                    ),
+                    object = results,
                     genes = genes,
                     gene2symbol = gene2symbol
                 ),
