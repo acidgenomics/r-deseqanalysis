@@ -4,13 +4,14 @@
 
 #' @name plotDEGHeatmap
 #' @inherit bioverbs::plotDEGHeatmap
+#'
 #' @inheritParams acidplots::plotHeatmap
 #' @inheritParams basejump::params
 #' @inheritParams params
-#'
 #' @param counts `DESeqTransform`.
 #'   Variance-stabilized counts suitable for heatmap.
 #'   Object rownames must be identical to corresponding `DESeqResults`.
+#' @param ... Additional arguments.
 #'
 #' @examples
 #' data(deseq)

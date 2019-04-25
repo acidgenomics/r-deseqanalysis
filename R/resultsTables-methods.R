@@ -1,7 +1,9 @@
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
+#'
 #' @inheritParams basejump::params
 #' @inheritParams params
+#' @param ... Additional arguments.
 #'
 #' @details
 #' Generate tables summarizing the differential expression, with subsets for

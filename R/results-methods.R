@@ -1,7 +1,14 @@
 #' @name results
 #' @inherit bioverbs::results
+#'
 #' @inheritParams basejump::params
 #' @inheritParams params
+#' @param ... Additional arguments.
+#'
+#' @examples
+#' data(deseq)
+#' x <- results(deseq, results = 1L)
+#' class(x)
 NULL
 
 

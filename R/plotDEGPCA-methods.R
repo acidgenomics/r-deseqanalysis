@@ -4,10 +4,12 @@
 
 #' @name plotDEGPCA
 #' @inherit bioverbs::plotDEGPCA
+#'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams acidplots::plotPCA
 #' @inheritParams basejump::params
 #' @inheritParams params
+#' @param ... Additional arguments.
 #'
 #' @examples
 #' data(deseq)

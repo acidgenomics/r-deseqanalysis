@@ -23,8 +23,8 @@ Value type to return. Corresponds to supported \code{DESeqResults} column:
 \itemize{
 \item \code{log2FoldChange}: log2 fold change. This will return \emph{shrunken} LFC
 values if they are slotted in the \code{DESeqAnalysis} object.
-\item \code{stat}: Wald test statistic
-\item \code{padj}: BH adjusted \emph{P} value
+\item \code{stat}: Wald test statistic.
+\item \code{padj}: BH adjusted \emph{P} value.
 }}
 
 \item{...}{Additional arguments.}

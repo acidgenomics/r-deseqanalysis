@@ -1,7 +1,9 @@
 #' @name plotCounts
 #' @inherit acidplots::plotCounts
+#'
 #' @inheritParams basejump::params
 #' @inheritParams params
+#' @param ... Additional arguments.
 #'
 #' @param transform `logical(1)`.
 #'   Visualize using `DESeqTransform` log2 variance-stabilized counts, rather

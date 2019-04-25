@@ -5,8 +5,8 @@
 
 #' @name export
 #' @inherit bioverbs::export
-#' @inheritParams params
 #'
+#' @inheritParams params
 #' @param x Object.
 #'   An object supporting [`dim()`][base::dim], or a supported class capable
 #'   of being coerced to `data.frame`, to be written to disk.
@@ -16,6 +16,7 @@
 #'   Directory path.
 #' @param compress `logical(1)`.
 #'   Apply gzip compression to all files.
+#' @param ... Additional arguments.
 #'
 #' @examples
 #' data(deseq)
@@ -35,7 +36,6 @@ NULL
 .exportResultsTables <- function(x, dir, compress, lfcShrink) {
     assert(
         is(x, "DESeqAnalysis"),
-        isADirectory(dir),
         isFlag(compress),
         isFlag(lfcShrink)
     )
