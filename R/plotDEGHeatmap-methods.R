@@ -1,5 +1,6 @@
 # Do not allow post hoc alpha or lfcThreshold cutoffs here.
-# FIXME Ensure axis is symmetric here.
+
+# FIXME Auto-calculate symmetric breaks by default in `plotHeatmap()` method.
 
 
 
@@ -43,7 +44,7 @@ plotDEGHeatmap.DESeqResults <-  # nolint
         clusterRows = TRUE,
         clusterCols = TRUE,
         breaks = seq(from = -4L, to = 4L, by = 0.5),
-        legendBreaks = seq(from = -4L, to = 4L, by = 2L)
+        legendBreaks = seq(from = -10L, to = 10L, by = 2L)
     ) {
         validObject(object)
         validObject(counts)

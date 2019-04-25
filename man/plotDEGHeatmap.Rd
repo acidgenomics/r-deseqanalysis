@@ -11,7 +11,7 @@
   direction = c("both", "up", "down"), scale = c("row", "column",
   "none"), clusteringMethod = "ward.D2", clusterRows = TRUE,
   clusterCols = TRUE, breaks = seq(from = -4L, to = 4L, by = 0.5),
-  legendBreaks = seq(from = -4L, to = 4L, by = 2L),
+  legendBreaks = seq(from = -10L, to = 10L, by = 2L),
   interestingGroups = NULL, showRownames = FALSE,
   showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
   color = getOption(x = "acid.heatmap.color", default =
@@ -24,7 +24,7 @@
   "up", "down"), scale = c("row", "column", "none"),
   clusteringMethod = "ward.D2", clusterRows = TRUE,
   clusterCols = TRUE, breaks = seq(from = -4L, to = 4L, by = 0.5),
-  legendBreaks = seq(from = -4L, to = 4L, by = 2L),
+  legendBreaks = seq(from = -10L, to = 10L, by = 2L),
   interestingGroups = NULL, showRownames = FALSE,
   showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
   color = getOption(x = "acid.heatmap.color", default =
