@@ -7,8 +7,8 @@
 #' @param results `list` or single `DESeqResults`.
 #'   One or more unshrunken `DESeqResults`.
 #'   Assign the [DESeq2::results()] return here.
-#' @param lfcShrink `list`or single `DESeqResults`.
-#'   One or more shrunken `DESeqResults`.
+#' @param lfcShrink `list`, single `DESeqResults`, or `NULL`.
+#'   *Optional*. One or more shrunken `DESeqResults`.
 #'   Assign the [DESeq2::lfcShrink()] return here.
 #'
 #' @return `DESeqAnalysis`.
@@ -33,8 +33,10 @@
 #'
 #' results <- list(results)
 #' names(results) <- name
+#'
 #' lfcShrink <- list(lfcShrink)
 #' names(lfcShrink) <- name
+#'
 #' identical(names(results), names(lfcShrink))
 #'
 #' x <- DESeqAnalysis(
@@ -49,7 +51,7 @@ DESeqAnalysis <-  # nolint
         data,
         transform,
         results,
-        lfcShrink
+        lfcShrink = NULL
     ) {
         metadata <- list(version = .version)
 
@@ -59,6 +61,11 @@ DESeqAnalysis <-  # nolint
         }
         if (is(lfcShrink, "DESeqResults")) {
             lfcShrink <- .coerceResultsToList(lfcShrink)
+        }
+
+        # Automatically convert `lfcShrink = NULL` to empty list.
+        if (is.null(lfcShrink)) {
+            lfcShrink <- list()
         }
 
         new(

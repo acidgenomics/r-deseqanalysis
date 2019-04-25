@@ -44,7 +44,7 @@ show.DESeqAnalysis <-  # nolint
         ))
 
         # Show information about lfcShrink method, if slotted.
-        if (!is.null(lfcShrink)) {
+        if (hasLength(lfcShrink)) {
             showSlotInfo(list(
                 lfcShrink = .lfcShrinkType(lfcShrink[[1L]])
             ))

@@ -1,3 +1,13 @@
+## DESeqAnalysis 0.1.20 (2019-04-24)
+
+### Minor changes
+
+- Slotting `lfcShrink` into object is now optional again.
+- Added `lfcShrink` argument support to `plotDEGHeatmap`, `topTables`, and
+  `export`.
+
+
+
 ## DESeqAnalysis 0.1.19 (2019-04-23)
 
 ### Minor changes
