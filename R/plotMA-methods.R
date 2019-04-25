@@ -1,6 +1,7 @@
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
+#' @inheritParams DESeq2::plotMA
 #' @inheritParams basejump::params
 #' @inheritParams params
 #'
@@ -11,6 +12,12 @@
 #' (mean average) scales, then plotting these values.
 #'
 #' @note We are not allowing post hoc `alpha` or `lfcThreshold` cutoffs here.
+#'
+#' @section plotMA2 aliases:
+#'
+#' Aliased methods for original [DESeq2::plotMA()] S4 methods, which us
+#' geneplotter instead of ggplot2. I prefer using ggplot2 instead, so the
+#' primary methods defined here in the package mask DESeq2.
 #'
 #' @return `ggplot`.
 #'
@@ -45,14 +52,6 @@
 #' ## Label genes manually.
 #' ## Note that either gene IDs or names (symbols) are supported.
 #' plotMA(deseq, results = 1L, genes = genes)
-NULL
-
-
-
-#' @rdname plotMA
-#' @name plotMA
-#' @importFrom BiocGenerics plotMA
-#' @export
 NULL
 
 
@@ -282,12 +281,14 @@ plotMA.DESeqAnalysis <-  # nolint
         )
         # Return `NULL` for objects that don't contain gene symbol mappings.
         gene2symbol <- tryCatch(
-            expr = Gene2Symbol(slot(object, "data")),
+            expr = suppressMessages(
+                Gene2Symbol(as(object, "DESeqDataSet"))
+            ),
             error = function(e) NULL
         )
         results <- results(object, results = results, lfcShrink = lfcShrink)
         do.call(
-            what = plotMA.DESeqResults,
+            what = plotMA,
             args = matchArgsToDoCall(
                 args = list(
                     object = results,
@@ -317,6 +318,44 @@ setMethod(
 
 
 
+# plotMA2 ======================================================================
+plotMA2.DESeqDataSet <- getMethod(
+    f = "plotMA",
+    signature = "DESeqDataSet",
+    where = "DESeq2"
+)
+
+
+
+#' @rdname plotMA
+#' @export
+setMethod(
+    f = "plotMA2",
+    signature = signature("DESeqDataSet"),
+    definition = plotMA2.DESeqDataSet
+)
+
+
+
+plotMA2.DESeqResults <- getMethod(
+    f = "plotMA",
+    signature = "DESeqResults",
+    where = "DESeq2"
+)
+
+
+
+#' @rdname plotMA
+#' @export
+setMethod(
+    f = "plotMA2",
+    signature = signature("DESeqResults"),
+    definition = plotMA2.DESeqResults
+)
+
+
+
+# Aliases ======================================================================
 # Soft deprecated, since this is used in bcbioRNASeq F1000 paper.
 #' @rdname plotMA
 #' @usage NULL
