@@ -1,4 +1,5 @@
 # Can use `priorInfo()` to inform the user about `lfcShrink` slot.
+
 .matchResults <- function(
     object,
     results,
@@ -17,15 +18,26 @@
         isScalar(results),
         isFlag(lfcShrink)
     )
-    # Match shrunken results by default.
-    if (
+
+    # Match the results.
+    if (identical(lfcShrink, FALSE)) {
+        slotName <- "results"
+    } else if (
         isTRUE(lfcShrink) &&
-        length(object@lfcShrink) > 0L
+        hasLength(object@lfcShrink)
     ) {
         slotName <- "lfcShrink"
-    } else {
-        slotName <- "results"
+    } else if (
+        isTRUE(lfcShrink) &&
+        !hasLength(object@lfcShrink)
+    ) {
+        stop(paste(
+            "Shrunken LFC values were requested,",
+            "but object does not contain DESeqResults",
+            "defined in `lfcShrink` slot."
+        ))
     }
+
     results <- slot(object, name = slotName)[[results]]
     assert(is(results, "DESeqResults"))
 
