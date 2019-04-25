@@ -1,7 +1,9 @@
 #' @name contrastSamples
 #' @inherit bioverbs::contrastSamples
+#'
 #' @inheritParams basejump::params
 #' @inheritParams params
+#' @param ... Additional arguments.
 #'
 #' @details
 #' Match the samples in a `DESeqDataSet` used to define contrast in a

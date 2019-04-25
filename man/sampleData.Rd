@@ -28,3 +28,8 @@ for accessing sample metadata for datasets where multiple items in the
 columns map to a single sample (e.g. cells for a single-cell RNA-seq
 experiment).
 }
+\examples{
+data(deseq)
+x <- sampleData(deseq)
+head(x)
+}

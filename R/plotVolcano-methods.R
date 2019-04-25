@@ -1,14 +1,15 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
+#'
 #' @inheritParams basejump::params
 #' @inheritParams params
-#'
 #' @param ylim `numeric(1)`.
 #'   Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets
 #'   containing highly significant P values (e.g. `1e-100`).
 #' @param histograms `logical(1)`.
 #'   Show LFC and P value histograms.
+#' @param ... Additional arguments.
 #'
 #' @seealso Modification of `CHBUtils::volcano_density_plot()`.
 #'

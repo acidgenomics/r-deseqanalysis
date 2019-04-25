@@ -25,9 +25,9 @@
 #'   scale_x_continuous scale_y_continuous theme
 #' @importFrom goalie areDisjointSets areSetEqual assert bapply hasLength
 #'   hasNames hasLength hasRows hasRownames hasValidDimnames hasValidNames
-#'   isADirectory isAlpha isAny isCharacter isFlag isHeaderLevel isInRange isInt
-#'   isNonEmpty isNonNegative isNumber isPercentage isPositive isScalar isString
-#'   isSubset validate
+#'   isAlpha isAny isCharacter isFlag isHeaderLevel isInRange isInt isNonEmpty
+#'   isNonNegative isNumber isPercentage isPositive isScalar isString isSubset
+#'   validate
 #' @importFrom knitr kable
 #' @importFrom magrittr %>%
 #' @importFrom methods as is new prototype setClass show slot slot<- validObject

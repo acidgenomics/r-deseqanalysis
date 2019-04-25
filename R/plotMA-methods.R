@@ -1,9 +1,11 @@
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
+#'
 #' @inheritParams DESeq2::plotMA
 #' @inheritParams basejump::params
 #' @inheritParams params
+#' @param ... Additional arguments.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual representation

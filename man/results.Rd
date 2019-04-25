@@ -27,3 +27,8 @@ Use shrunken log2 fold change (LFC) values.}
 \description{
 Results
 }
+\examples{
+data(deseq)
+x <- results(deseq, results = 1L)
+class(x)
+}

@@ -1,7 +1,10 @@
 #' @name deg
 #' @inherit bioverbs::deg
+#'
 #' @inheritParams basejump::params
 #' @inheritParams params
+#' @param ... Additional arguments.
+#'
 #' @examples
 #' data(deseq)
 #'

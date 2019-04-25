@@ -24,6 +24,10 @@ resultsNames(object, ...)
 \description{
 Results names
 }
+\examples{
+data(deseq)
+resultsNames(deseq)
+}
 \seealso{
 \itemize{
 \item \code{DESeq2::resultsNames()}.

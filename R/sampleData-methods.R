@@ -1,5 +1,11 @@
 #' @name sampleData
 #' @inherit bioverbs::sampleData
+#' @param ... Additional arguments.
+#'
+#' @examples
+#' data(deseq)
+#' x <- sampleData(deseq)
+#' head(x)
 NULL
 
 

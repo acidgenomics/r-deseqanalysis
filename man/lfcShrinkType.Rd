@@ -13,6 +13,11 @@ lfcShrinkType(object, ...)
 
 \S4method{lfcShrinkType}{DESeqAnalysis}(object)
 }
+\arguments{
+\item{object}{Object.}
+
+\item{...}{Additional arguments.}
+}
 \description{
 Shrunken log2 fold change (LFC) type
 }

@@ -1,14 +1,15 @@
 #' @name contrastName
 #' @inherit bioverbs::contrastName
+#'
 #' @inheritParams basejump::params
 #' @inheritParams params
-#'
 #' @param format `character(1)`.
 #'   Name format to return:
 #'
 #'   - `resultsNames`: Attempt to matching the conventions in
 #'     [`resultsNames()`][DESeq2::resultsNames].
 #'   - `title`: Human readable, for plot titles and/or table captions.
+#' @param ... Additional arguments.
 #'
 #' @seealso [`resultsNames()`][DESeq2::resultsNames].
 #'

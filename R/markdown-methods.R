@@ -1,6 +1,9 @@
 #' @name markdown
 #' @inherit basejump::markdown
+#'
 #' @inheritParams basejump::params
+#' @param ... Additional arguments.
+#'
 #' @examples
 #' data(deseq)
 #'

@@ -2,7 +2,6 @@
 #' @name alphaSummary
 #' @importFrom bioverbs alphaSummary
 #' @usage alphaSummary(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -12,7 +11,6 @@ NULL
 #' @name contrastName
 #' @importFrom bioverbs contrastName
 #' @usage contrastName(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -22,7 +20,6 @@ NULL
 #' @name contrastSamples
 #' @importFrom bioverbs contrastSamples
 #' @usage contrastSamples(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -32,7 +29,6 @@ NULL
 #' @name deg
 #' @importFrom bioverbs deg
 #' @usage deg(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -42,7 +38,6 @@ NULL
 #' @name export
 #' @importFrom bioverbs export
 #' @usage export(x, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -63,7 +58,6 @@ setGeneric(
 #' @name markdown
 #' @importFrom bioverbs markdown
 #' @usage markdown(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -73,7 +67,6 @@ NULL
 #' @name plotCounts
 #' @importFrom bioverbs plotCounts
 #' @usage plotCounts(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -83,7 +76,6 @@ NULL
 #' @name plotDEGHeatmap
 #' @importFrom bioverbs plotDEGHeatmap
 #' @usage plotDEGHeatmap(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -93,7 +85,6 @@ NULL
 #' @name plotDEGPCA
 #' @importFrom bioverbs plotDEGPCA
 #' @usage plotDEGPCA(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -103,7 +94,6 @@ NULL
 #' @name plotMA
 #' @importFrom BiocGenerics plotMA
 #' @usage plotMA(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -124,7 +114,6 @@ setGeneric(
 #' @name plotVolcano
 #' @importFrom bioverbs plotVolcano
 #' @usage plotVolcano(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -134,7 +123,6 @@ NULL
 #' @name results
 #' @importFrom bioverbs results
 #' @usage results(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -144,7 +132,6 @@ NULL
 #' @name resultsMatrix
 #' @importFrom bioverbs resultsMatrix
 #' @usage resultsMatrix(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -154,7 +141,6 @@ NULL
 #' @name resultsNames
 #' @importFrom bioverbs resultsNames
 #' @usage resultsNames(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -164,7 +150,6 @@ NULL
 #' @name resultsTables
 #' @importFrom bioverbs resultsTables
 #' @usage resultsTables(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -174,7 +159,6 @@ NULL
 #' @name sampleData
 #' @importFrom bioverbs sampleData
 #' @usage sampleData(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
@@ -184,7 +168,6 @@ NULL
 #' @name topTables
 #' @importFrom bioverbs topTables
 #' @usage topTables(object, ...)
-#' @param ... Additional arguments.
 #' @export
 NULL
 
