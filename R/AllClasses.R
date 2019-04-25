@@ -33,7 +33,7 @@
 #'   One or more unshrunken `DESeqResults`.
 #' @slot lfcShrink `list`.
 #'   *Optional*. One or more shrunken `DESeqResults`. If set, must correspond to
-#'   those defined in `results`.
+#'   those defined in `results`. Otherwise, can set as empty list (`list()`).
 #'
 #' @seealso
 #' - `help(topic = "Annotated-class", package = "S4Vectors")`.
