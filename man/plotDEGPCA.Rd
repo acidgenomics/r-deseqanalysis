@@ -7,6 +7,8 @@
 \alias{plotDEGPCA,DESeqAnalysis-method}
 \title{Plot differentially expressed gene principal component analysis}
 \usage{
+plotDEGPCA(object, ...)
+
 \S4method{plotDEGPCA}{DESeqResults}(object, counts, direction = c("both",
   "up", "down"), object, assay = 1L, interestingGroups = NULL,
   label = getOption(x = "acid.label", default = FALSE),

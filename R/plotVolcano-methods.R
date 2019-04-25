@@ -1,14 +1,15 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
+#'
 #' @inheritParams basejump::params
 #' @inheritParams params
-#'
 #' @param ylim `numeric(1)`.
 #'   Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets
 #'   containing highly significant P values (e.g. `1e-100`).
 #' @param histograms `logical(1)`.
 #'   Show LFC and P value histograms.
+#' @param ... Additional arguments.
 #'
 #' @seealso Modification of `CHBUtils::volcano_density_plot()`.
 #'
@@ -58,6 +59,7 @@ NULL
 #' @rdname plotVolcano
 #' @name plotVolcano
 #' @importFrom bioverbs plotVolcano
+#' @usage plotVolcano(object, ...)
 #' @export
 NULL
 
@@ -84,10 +86,12 @@ plotVolcano.DESeqResults <-  # nolint
         validObject(object)
         alpha <- metadata(object)[["alpha"]]
         lfcThreshold <- metadata(object)[["lfcThreshold"]]
+        lfcShrinkType <- lfcShrinkType(object)
         assert(
             isAlpha(alpha),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
+            isString(lfcShrinkType),
             isNumber(ylim),
             isInRange(ylim, lower = 1e-100, upper = 1e-3),
             isInt(ntop),
@@ -227,7 +231,11 @@ plotVolcano.DESeqResults <-  # nolint
             guides(colour = FALSE) +
             labs(
                 title = contrastName(object),
-                subtitle = paste("alpha", "<", alpha),
+                subtitle = paste0(
+                    "alpha: ", alpha, ";  ",
+                    "lfcThreshold: ", lfcThreshold, ";  ",
+                    "lfcShrink: ", lfcShrinkType
+                ),
                 x = "log2 fold change",
                 y = "-log10 adj p value"
             )
@@ -333,18 +341,17 @@ plotVolcano.DESeqAnalysis <-  # nolint
         )
         # Return `NULL` for objects that don't contain gene symbol mappings.
         gene2symbol <- tryCatch(
-            expr = Gene2Symbol(slot(object, "data")),
+            expr = suppressMessages(
+                Gene2Symbol(as(object, "DESeqDataSet"))
+            ),
             error = function(e) NULL
         )
+        results <- results(object, results = results, lfcShrink = lfcShrink)
         do.call(
             what = plotVolcano.DESeqResults,
             args = matchArgsToDoCall(
                 args = list(
-                    object = .matchResults(
-                        object = object,
-                        results = results,
-                        lfcShrink = lfcShrink
-                    ),
+                    object = results,
                     genes = genes,
                     gene2symbol = gene2symbol
                 ),

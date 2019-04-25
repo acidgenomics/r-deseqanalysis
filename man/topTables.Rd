@@ -6,6 +6,8 @@
 \alias{topTables,DESeqAnalysis-method}
 \title{Top tables}
 \usage{
+topTables(object, ...)
+
 \S4method{topTables}{DESeqAnalysis}(object, results, n = 10L)
 }
 \arguments{
@@ -16,6 +18,8 @@ Name or position of \code{DESeqResults}.}
 
 \item{n}{\code{integer(1)}.
 Number of genes (per direction) to report.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{kable}.

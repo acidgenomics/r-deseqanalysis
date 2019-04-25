@@ -1,6 +1,9 @@
 #' @name markdown
 #' @inherit basejump::markdown
+#'
 #' @inheritParams basejump::params
+#' @param ... Additional arguments.
+#'
 #' @examples
 #' data(deseq)
 #'
@@ -13,6 +16,7 @@ NULL
 #' @rdname markdown
 #' @name markdown
 #' @importFrom bioverbs markdown
+#' @usage markdown(object, ...)
 #' @export
 NULL
 

@@ -1,8 +1,10 @@
 #' @name alphaSummary
 #' @author Michael Steinbaugh, Lorena Patano
 #' @inherit bioverbs::alphaSummary
+#'
 #' @inheritParams DESeq2::results
 #' @inheritParams basejump::params
+#' @param ... Additional arguments.
 #'
 #' @details
 #' Use either `contrast` or `name` to specify the desired contrast.
@@ -30,6 +32,7 @@ NULL
 #' @rdname alphaSummary
 #' @name alphaSummary
 #' @importFrom bioverbs alphaSummary
+#' @usage alphaSummary(object, ...)
 #' @export
 NULL
 

@@ -7,23 +7,30 @@
 \alias{plotDEGHeatmap,DESeqAnalysis-method}
 \title{Differentially expressed gene heatmap}
 \usage{
+plotDEGHeatmap(object, ...)
+
 \S4method{plotDEGHeatmap}{DESeqResults}(object, counts,
   direction = c("both", "up", "down"), scale = c("row", "column",
   "none"), clusteringMethod = "ward.D2", clusterRows = TRUE,
-  clusterCols = TRUE, interestingGroups = NULL, showRownames = FALSE,
+  clusterCols = TRUE, breaks = seq(from = -2L, to = 2L, by = 0.25),
+  legendBreaks = seq(from = -2L, to = 2L, by = 1L),
+  interestingGroups = NULL, showRownames = FALSE,
   showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
   color = getOption(x = "acid.heatmap.color", default =
-  acidplots::synesthesia), legendColor = getOption(x =
+  acidplots::blueYellow), legendColor = getOption(x =
   "acid.heatmap.color", default = acidplots::synesthesia),
   borderColor = NULL, title = NULL, ...)
 
 \S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results,
-  contrastSamples = FALSE, direction = c("both", "up", "down"),
-  scale = c("row", "column", "none"), clusteringMethod = "ward.D2",
-  clusterRows = TRUE, clusterCols = TRUE, interestingGroups = NULL,
-  showRownames = FALSE, showColnames = TRUE, treeheightRow = 50L,
-  treeheightCol = 50L, color = getOption(x = "acid.heatmap.color",
-  default = acidplots::synesthesia), legendColor = getOption(x =
+  contrastSamples = FALSE, lfcShrink = TRUE, direction = c("both",
+  "up", "down"), scale = c("row", "column", "none"),
+  clusteringMethod = "ward.D2", clusterRows = TRUE,
+  clusterCols = TRUE, breaks = seq(from = -2L, to = 2L, by = 0.25),
+  legendBreaks = seq(from = -2L, to = 2L, by = 1L),
+  interestingGroups = NULL, showRownames = FALSE,
+  showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
+  color = getOption(x = "acid.heatmap.color", default =
+  acidplots::blueYellow), legendColor = getOption(x =
   "acid.heatmap.color", default = acidplots::synesthesia),
   borderColor = NULL, title = NULL, ...)
 }
@@ -42,13 +49,21 @@ Whether the values should be centered and scaled in either the row or
 column direction ("\code{row}", "\code{column}"), or remain unscaled ("\code{none}").}
 
 \item{clusteringMethod}{\code{character(1)}.
-Clustering method. Accepts the same values as \code{\link[stats:hclust]{stats::hclust()}}.}
+Clustering method. Accepts the same values as \code{\link[stats:hclust]{hclust()}}.}
 
 \item{clusterRows}{\code{logical(1)}.
 Arrange with hierarchical clustering.}
 
 \item{clusterCols}{\code{logical(1)}.
 Arrange with hierarchical clustering.}
+
+\item{breaks}{\code{numeric} or \code{NULL}.
+A sequence of numbers that covers the range of values in the matrix. Must
+be 1 element longer than the color vector, which is handled internally
+automatically, differing from the behavior in pheatmap.}
+
+\item{legendBreaks}{\code{numeric} or \code{NULL}.
+Numeric vector of breakpoints for the color legend.}
 
 \item{interestingGroups}{\code{character}.
 Groups of interest that define the samples. If left unset, defaults to
@@ -103,6 +118,9 @@ Name or position of \code{DESeqResults}.}
 \strong{Experimental}. Only include the samples used to define the contrast
 passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
 contrasts (e.g. interaction effect).}
+
+\item{lfcShrink}{\code{logical(1)}.
+Use shrunken log2 fold change (LFC) values.}
 }
 \description{
 This function is an extension of \code{\link[=plotHeatmap]{plotHeatmap()}} that is optimized for

@@ -6,10 +6,14 @@
 \alias{markdown,DESeqAnalysis-method}
 \title{Markdown}
 \usage{
+markdown(object, ...)
+
 \S4method{markdown}{DESeqAnalysis}(object)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 Markdown output.

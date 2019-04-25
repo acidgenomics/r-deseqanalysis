@@ -6,6 +6,8 @@
 \alias{alphaSummary,DESeqDataSet-method}
 \title{Alpha level cutoff summary statistics}
 \usage{
+alphaSummary(object, ...)
+
 \S4method{alphaSummary}{DESeqDataSet}(object, alpha = c(0.1, 0.05, 0.01,
   0.001, 1e-06), contrast = NULL, name = NULL)
 }
@@ -38,6 +40,8 @@ If specified, the \code{name} argument is ignored.}
 building a results table. Use this argument rather than \code{contrast}
 for continuous variables, individual effects or for individual interaction terms.
 The value provided to \code{name} must be an element of \code{resultsNames(object)}.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{integer matrix}.

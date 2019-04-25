@@ -6,6 +6,8 @@
 \alias{contrastSamples,DESeqAnalysis-method}
 \title{Samples corresponding to a differential expression contrast}
 \usage{
+contrastSamples(object, ...)
+
 \S4method{contrastSamples}{DESeqAnalysis}(object, results)
 }
 \arguments{
@@ -13,6 +15,8 @@
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or position of \code{DESeqResults}.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{character}.

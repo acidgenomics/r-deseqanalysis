@@ -11,14 +11,6 @@ NULL
 
 
 
-#' @rdname show
-#' @name show
-#' @importFrom methods show
-#' @export
-NULL
-
-
-
 show.DESeqAnalysis <-  # nolint
     function(object) {
         validObject(object)
@@ -26,7 +18,6 @@ show.DESeqAnalysis <-  # nolint
         data <- slot(object, "data")
         transform <- slot(object, "transform")
         results <- slot(object, "results")
-        lfcShrink <- slot(object, "lfcShrink")
 
         cat(paste0(
             class(object), " ", metadata(object)[["version"]], "; ",
@@ -39,16 +30,14 @@ show.DESeqAnalysis <-  # nolint
         cat("data:", dataInfo, sep = "\n")
 
         showSlotInfo(list(
-            transform = .transformType(transform),
+            transform = transformType(transform),
             results = names(results)
         ))
 
         # Show information about lfcShrink method, if slotted.
-        if (!is.null(lfcShrink)) {
-            showSlotInfo(list(
-                lfcShrink = .lfcShrinkType(lfcShrink[[1L]])
-            ))
-        }
+        showSlotInfo(list(
+            lfcShrink = lfcShrinkType(object)
+        ))
     }
 
 

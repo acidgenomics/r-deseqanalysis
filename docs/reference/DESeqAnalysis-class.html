@@ -68,7 +68,7 @@ DESeqDataSet." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.18</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.20</span>
       </span>
     </div>
 
@@ -121,7 +121,7 @@ to ensure <code>DESeqTransform</code> and <code>DESeqResults</code> correspond t
     
     </div>
 
-    <pre class="usage"><span class='fu'>DESeqAnalysis</span>(<span class='no'>data</span>, <span class='no'>transform</span>, <span class='no'>results</span>, <span class='no'>lfcShrink</span>)</pre>
+    <pre class="usage"><span class='fu'>DESeqAnalysis</span>(<span class='no'>data</span>, <span class='no'>transform</span>, <span class='no'>results</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,8 +143,8 @@ Assign the <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/
     </tr>
     <tr>
       <th>lfcShrink</th>
-      <td><p><code>list</code>or single <code>DESeqResults</code>.
-One or more shrunken <code>DESeqResults</code>.
+      <td><p><code>list</code>, single <code>DESeqResults</code>, or <code>NULL</code>.
+<em>Optional</em>. One or more shrunken <code>DESeqResults</code>.
 Assign the <code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/lfcShrink'>DESeq2::lfcShrink()</a></code> return here.</p></td>
     </tr>
     </table>
@@ -165,7 +165,7 @@ Contains a <code>DESeqDataSet</code>, <code>DESeqTransform</code>, and correspon
 One or more unshrunken <code>DESeqResults</code>.</p></dd>
     <dt><code>lfcShrink</code></dt><dd><p><code>list</code>.
 <em>Optional</em>. One or more shrunken <code>DESeqResults</code>. If set, must correspond to
-those defined in <code>results</code>.</p></dd>
+those defined in <code>results</code>. Otherwise, can set as empty list (<code><a href='https://www.rdocumentation.org/packages/base/topics/list'>list()</a></code>).</p></dd>
 </dl>
     
     <h2 class="hasAnchor" id="deseqdataset"><a class="anchor" href="#deseqdataset"></a>DESeqDataSet</h2>
@@ -217,8 +217,10 @@ care of this automatically in supported methods.</p>
 #&gt; <span class='message'>additional priors are available via the 'type' argument, see ?lfcShrink for details</span></div><div class='input'>
 <span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='no'>results</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>results</span>) <span class='kw'>&lt;-</span> <span class='no'>name</span>
+
 <span class='no'>lfcShrink</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='no'>lfcShrink</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>lfcShrink</span>) <span class='kw'>&lt;-</span> <span class='no'>name</span>
+
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/identical'>identical</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>results</span>), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>lfcShrink</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>DESeqAnalysis</span>(
     <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>data</span>,
@@ -226,7 +228,7 @@ care of this automatically in supported methods.</p>
     <span class='kw'>results</span> <span class='kw'>=</span> <span class='no'>results</span>,
     <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='no'>lfcShrink</span>
 )
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; DESeqAnalysis 0.1.18; DESeq2 1.22.2
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; DESeqAnalysis 0.1.20; DESeq2 1.22.2
 #&gt; data:
 #&gt;   dim: 1000 12 
 #&gt;   metadata(1): version

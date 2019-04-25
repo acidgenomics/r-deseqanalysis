@@ -7,9 +7,11 @@
 \alias{results,DESeqAnalysis-method}
 \title{Results}
 \usage{
+results(object, ...)
+
 \S4method{results}{DESeqDataSet}(object, ...)
 
-\S4method{results}{DESeqAnalysis}(object, results, lfcShrink = TRUE)
+\S4method{results}{DESeqAnalysis}(object, results, lfcShrink = FALSE)
 }
 \arguments{
 \item{object}{Object.}
@@ -24,4 +26,9 @@ Use shrunken log2 fold change (LFC) values.}
 }
 \description{
 Results
+}
+\examples{
+data(deseq)
+x <- results(deseq, results = 1L)
+class(x)
 }

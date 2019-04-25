@@ -6,10 +6,14 @@
 \alias{sampleData,DESeqAnalysis-method}
 \title{Sample data}
 \usage{
+sampleData(object, ...)
+
 \S4method{sampleData}{DESeqAnalysis}(object)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{DataFrame}.
@@ -23,4 +27,9 @@ This is a complement to the standard
 for accessing sample metadata for datasets where multiple items in the
 columns map to a single sample (e.g. cells for a single-cell RNA-seq
 experiment).
+}
+\examples{
+data(deseq)
+x <- sampleData(deseq)
+head(x)
 }

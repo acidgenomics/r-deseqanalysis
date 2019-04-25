@@ -7,6 +7,8 @@
 \alias{plotVolcano,DESeqAnalysis-method}
 \title{Volcano plot}
 \usage{
+plotVolcano(object, ...)
+
 \S4method{plotVolcano}{DESeqResults}(object, ylim = 1e-10,
   genes = NULL, gene2symbol = NULL, ntop = 0L,
   direction = c("both", "up", "down"), pointColor = c(downregulated =
@@ -64,6 +66,8 @@ Name or position of \code{DESeqResults}.}
 
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{ggplot}.

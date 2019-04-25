@@ -1,7 +1,10 @@
 #' @name deg
 #' @inherit bioverbs::deg
+#'
 #' @inheritParams basejump::params
 #' @inheritParams params
+#' @param ... Additional arguments.
+#'
 #' @examples
 #' data(deseq)
 #'
@@ -15,6 +18,7 @@ NULL
 #' @rdname deg
 #' @name deg
 #' @importFrom bioverbs deg
+#' @usage deg(object, ...)
 #' @export
 NULL
 
@@ -117,7 +121,7 @@ deg.DESeqAnalysis <-  # nolint
         results,
         direction = c("both", "up", "down")
     ) {
-        results <- .matchResults(object = object, results = results)
+        results <- results(object = object, results = results)
         direction <- match.arg(direction)
         deg(object = results, direction = direction)
     }

@@ -49,25 +49,6 @@
 
 
 
-.lfcShrinkType <- function(object) {
-    assert(is(object, "DESeqResults"))
-    priorInfo(object)[["type"]]
-}
-
-
-
 .transformCountsAxisLabel <- function(object) {
-    paste(.transformType(object), "counts (log2)")
-}
-
-
-
-.transformType <- function(object) {
-    assert(is(object, "DESeqTransform"))
-    if ("rlogIntercept" %in% colnames(mcols(object))) {
-        "rlog"
-    } else {
-        # Abbreviated as "vst" in bcbioRNASeq package formals.
-        "varianceStabilizingTransformation"
-    }
+    paste(transformType(object), "counts (log2)")
 }

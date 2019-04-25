@@ -6,7 +6,7 @@
 \alias{DESeqAnalysis}
 \title{DESeq2 differential expression analysis}
 \usage{
-DESeqAnalysis(data, transform, results, lfcShrink)
+DESeqAnalysis(data, transform, results, lfcShrink = NULL)
 }
 \arguments{
 \item{data}{\code{DESeqDataSet}.}
@@ -18,8 +18,8 @@ DESeqAnalysis(data, transform, results, lfcShrink)
 One or more unshrunken \code{DESeqResults}.
 Assign the \code{\link[DESeq2:results]{DESeq2::results()}} return here.}
 
-\item{lfcShrink}{\code{list}or single \code{DESeqResults}.
-One or more shrunken \code{DESeqResults}.
+\item{lfcShrink}{\code{list}, single \code{DESeqResults}, or \code{NULL}.
+\emph{Optional}. One or more shrunken \code{DESeqResults}.
 Assign the \code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}} return here.}
 }
 \value{
@@ -45,7 +45,7 @@ One or more unshrunken \code{DESeqResults}.}
 
 \item{\code{lfcShrink}}{\code{list}.
 \emph{Optional}. One or more shrunken \code{DESeqResults}. If set, must correspond to
-those defined in \code{results}.}
+those defined in \code{results}. Otherwise, can set as empty list (\code{list()}).}
 }}
 
 \section{DESeqDataSet}{
@@ -91,8 +91,10 @@ lfcShrink <- lfcShrink(dds = data, res = results, coef = 2L)
 
 results <- list(results)
 names(results) <- name
+
 lfcShrink <- list(lfcShrink)
 names(lfcShrink) <- name
+
 identical(names(results), names(lfcShrink))
 
 x <- DESeqAnalysis(

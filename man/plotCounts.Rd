@@ -6,6 +6,8 @@
 \alias{plotCounts,DESeqAnalysis-method}
 \title{Plot counts}
 \usage{
+plotCounts(object, ...)
+
 \S4method{plotCounts}{DESeqAnalysis}(object, genes, transform = FALSE,
   interestingGroups = NULL, trans = c("identity", "log2", "log10"),
   medianLine = TRUE, color = getOption(x = "acid.color.discrete",
@@ -52,6 +54,8 @@ Show plot legend.}
 
 \item{style}{\code{character(1)}.
 Plot style.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \itemize{

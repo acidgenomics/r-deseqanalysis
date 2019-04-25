@@ -1,7 +1,20 @@
 #' @name sampleData
-#' @export
-#' @importFrom bioverbs sampleData
 #' @inherit bioverbs::sampleData
+#' @param ... Additional arguments.
+#'
+#' @examples
+#' data(deseq)
+#' x <- sampleData(deseq)
+#' head(x)
+NULL
+
+
+
+#' @rdname sampleData
+#' @name sampleData
+#' @importFrom bioverbs sampleData
+#' @usage sampleData(object, ...)
+#' @export
 NULL
 
 
