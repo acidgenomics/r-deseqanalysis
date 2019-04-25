@@ -5,6 +5,7 @@
 #'
 #' @importMethodsFrom basejump coerce
 #'
+#' @importFrom BiocGenerics updateObject
 #' @importFrom DESeq2 counts priorInfo
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors SimpleList as.data.frame head mcols mcols<- metadata
@@ -29,7 +30,7 @@
 #'   isSubset validate
 #' @importFrom knitr kable
 #' @importFrom magrittr %>%
-#' @importFrom methods as is new prototype setClass slot slot<- validObject
+#' @importFrom methods as is new prototype setClass show slot slot<- validObject
 #'   .hasSlot
 #' @importFrom acidplots acid_geom_label_repel plotCounts plotPCA
 #' @importFrom rlang := UQ sym syms

@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.18</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.20</span>
       </span>
     </div>
 
@@ -105,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Top tables</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/topTables-methods.R'><code>R/topTables-methods.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/topTables-methods.R'><code>R/topTables-methods.R</code></a></small>
     <div class="hidden name"><code>topTables.Rd</code></div>
     </div>
 
@@ -115,7 +115,9 @@
     
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for DESeqAnalysis</span>
+    <pre class="usage"><span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+
+<span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -147,7 +149,7 @@ Markdown tables.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>84 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>87 downregulated genes detected.</span></div><div class='output co'>#&gt; 
+<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>84 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>87 downregulated genes detected.</span></div><div class='output co'>#&gt; 
 #&gt; 
 #&gt; |rowname |baseMean |lfc  |padj     |geneID          |geneName |geneBiotype    |
 #&gt; |:-------|:--------|:----|:--------|:---------------|:--------|:--------------|

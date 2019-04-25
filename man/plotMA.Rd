@@ -38,9 +38,7 @@ plotMA2(object, ...)
     A data object, typically containing count values from an RNA-Seq experiment or microarray intensity values.
   }
 
-\item{...}{
-    Additional arguments, for use in specific methods.
-  }
+\item{...}{Additional arguments.}
 
 \item{genes}{\code{character}.
 Gene identifiers. It is considered better practice to input the stable gene

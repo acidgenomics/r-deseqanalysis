@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.18</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.20</span>
       </span>
     </div>
 
@@ -105,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>DESeqResults matrix</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/resultsMatrix.R'><code>R/resultsMatrix.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/resultsMatrix-methods.R'><code>R/resultsMatrix-methods.R</code></a></small>
     <div class="hidden name"><code>resultsMatrix.Rd</code></div>
     </div>
 
@@ -115,7 +115,15 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>resultsMatrix</span>(<span class='no'>object</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>))</pre>
+    <pre class="usage"><span class='fu'>resultsMatrix</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+
+<span class='co'># S4 method for DESeqAnalysis</span>
+<span class='fu'>resultsMatrix</span>(<span class='no'>object</span>,
+  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>))
+
+<span class='co'># S4 method for DESeqAnalysisList</span>
+<span class='fu'>resultsMatrix</span>(<span class='no'>object</span>,
+  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

@@ -18,6 +18,8 @@ Name or position of \code{DESeqResults}.}
 
 \item{n}{\code{integer(1)}.
 Number of genes (per direction) to report.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{kable}.

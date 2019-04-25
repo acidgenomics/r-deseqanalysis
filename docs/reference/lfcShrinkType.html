@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Differentially expressed genes — deg • DESeqAnalysis</title>
+<title>Shrunken log2 fold change (LFC) type — lfcShrinkType • DESeqAnalysis</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Differentially expressed genes — deg" />
+<meta property="og:title" content="Shrunken log2 fold change (LFC) type — lfcShrinkType" />
 
-<meta property="og:description" content="Differentially expressed genes" />
+<meta property="og:description" content="Shrunken log2 fold change (LFC) type" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -104,79 +104,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Differentially expressed genes</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/deg-methods.R'><code>R/deg-methods.R</code></a></small>
-    <div class="hidden name"><code>deg.Rd</code></div>
+    <h1>Shrunken log2 fold change (LFC) type</h1>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/lfcShrinkType-methods.R'><code>R/lfcShrinkType-methods.R</code></a></small>
+    <div class="hidden name"><code>lfcShrinkType.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Differentially expressed genes</p>
+    <p>Shrunken log2 fold change (LFC) type</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>deg</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>lfcShrinkType</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>deg</span>(<span class='no'>object</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>))
+<span class='fu'>lfcShrinkType</span>(<span class='no'>object</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>deg</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"both"</span>,
-  <span class='st'>"up"</span>, <span class='st'>"down"</span>))</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>object</th>
-      <td><p>Object.</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric(1)</a></code>.
-Adjusted P value ("alpha") cutoff. If left <code>NULL</code>, will use the cutoff
-defined in the object.</p></td>
-    </tr>
-    <tr>
-      <th>lfcThreshold</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric(1)</a></code>.
-Log fold change ratio (base 2) cutoff threshold. If left <code>NULL</code>, will use
-the cutoff defined in the object.</p></td>
-    </tr>
-    <tr>
-      <th>direction</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>.
-Plot "<code>both</code>", "<code>up</code>", or "<code>down</code>" directions.</p></td>
-    </tr>
-    <tr>
-      <th>results</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>.
-Name or position of <code>DESeqResults</code>.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+<span class='fu'>lfcShrinkType</span>(<span class='no'>object</span>)</pre>
+        
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code>character</code>.
-Gene identifiers.</p>
+    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/lfcShrink'>DESeq2::lfcShrink()</a></code>.</p></div>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
-
-<span class='co'>## DESeqAnalysis ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>deg</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "gene427" "gene419" "gene095" "gene334" "gene323" "gene494"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>

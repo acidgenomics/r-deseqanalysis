@@ -31,6 +31,8 @@ Apply gzip compression to all files.}
 
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
+
+\item{...}{Additional arguments.}
 }
 \description{
 Export data out of R and write to disk.

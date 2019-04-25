@@ -26,6 +26,8 @@ values if they are slotted in the \code{DESeqAnalysis} object.
 \item \code{stat}: Wald test statistic
 \item \code{padj}: BH adjusted \emph{P} value
 }}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{matrix}.
