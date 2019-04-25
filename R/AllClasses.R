@@ -109,7 +109,7 @@ setClass(
             # ensure that the same method was used for all contrasts.
             shrinkTypes <- vapply(
                 X = lfcShrink,
-                FUN = .lfcShrinkType,
+                FUN = lfcShrinkType,
                 FUN.VALUE = character(1L)
             )
             ok <- validate(length(unique(shrinkTypes)) == 1L)
