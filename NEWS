@@ -1,4 +1,8 @@
-## DESeqAnalysis 0.1.20 (2019-04-24)
+## DESeqAnalysis 0.1.20 (2019-04-25)
+
+### Major changes
+
+- `plotDEGHeatmap`: Improved default color breaks.
 
 ### Minor changes
 
