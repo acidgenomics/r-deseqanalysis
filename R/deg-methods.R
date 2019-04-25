@@ -12,14 +12,6 @@ NULL
 
 
 
-#' @rdname deg
-#' @name deg
-#' @importFrom bioverbs deg
-#' @export
-NULL
-
-
-
 # Get differential expressed genes (DEGs) from DESeqResults table.
 # Note that we're not sorting the identifiers here by LFC or P value.
 # It's just performing a simple subset to get the identifiers as a character.

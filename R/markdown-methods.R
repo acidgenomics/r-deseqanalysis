@@ -10,14 +10,6 @@ NULL
 
 
 
-#' @rdname markdown
-#' @name markdown
-#' @importFrom bioverbs markdown
-#' @export
-NULL
-
-
-
 markdown.DESeqAnalysis <-  # nolint
     function(object) {
         show(markdownHeader("Contrast names"))

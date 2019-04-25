@@ -55,14 +55,6 @@ NULL
 
 
 
-#' @rdname plotVolcano
-#' @name plotVolcano
-#' @importFrom bioverbs plotVolcano
-#' @export
-NULL
-
-
-
 # FIXME Inform the user when shrunken LFC values are shown.
 
 plotVolcano.DESeqResults <-  # nolint
@@ -335,7 +327,9 @@ plotVolcano.DESeqAnalysis <-  # nolint
         )
         # Return `NULL` for objects that don't contain gene symbol mappings.
         gene2symbol <- tryCatch(
-            expr = Gene2Symbol(slot(object, "data")),
+            expr = suppressMessages(
+                Gene2Symbol(as(object, "DESeqDataSet"))
+            ),
             error = function(e) NULL
         )
         results <- results(object, results = results, lfcShrink = lfcShrink)

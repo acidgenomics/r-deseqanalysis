@@ -25,14 +25,6 @@ NULL
 
 
 
-#' @rdname contrastName
-#' @name contrastName
-#' @importFrom bioverbs contrastName
-#' @export
-NULL
-
-
-
 contrastName.DESeqResults <-  # nolint
     function(object, format = c("resultsNames", "title")) {
         validObject(object)

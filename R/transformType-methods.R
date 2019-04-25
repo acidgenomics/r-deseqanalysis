@@ -1,4 +1,4 @@
-#' Transformation type
+#' Variance-stabilizing transformation type
 #'
 #' @name transformType
 #' @inheritParams params

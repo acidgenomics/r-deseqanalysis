@@ -5,7 +5,7 @@
 \alias{transformType}
 \alias{transformType,DESeqTransform-method}
 \alias{transformType,DESeqAnalysis-method}
-\title{Transformation type}
+\title{Variance-stabilizing transformation type}
 \usage{
 transformType(object, ...)
 
@@ -14,7 +14,7 @@ transformType(object, ...)
 \S4method{transformType}{DESeqAnalysis}(object)
 }
 \description{
-Transformation type
+Variance-stabilizing transformation type
 }
 \seealso{
 \code{\link[DESeq2:DESeqTransform]{DESeq2::DESeqTransform()}}.
