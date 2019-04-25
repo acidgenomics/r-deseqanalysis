@@ -106,7 +106,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>MA-plot: plot differences versus averages for high-throughput data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/plotMA-methods.R'><code>R/plotMA-methods.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/plotMA-methods.R'><code>R/plotMA-methods.R</code></a></small>
     <div class="hidden name"><code>plotMA.Rd</code></div>
     </div>
 
@@ -118,8 +118,6 @@
     </div>
 
     <pre class="usage"><span class='fu'>plotMA</span>(<span class='no'>object</span>, <span class='no'>...</span>)
-
-<span class='fu'>plotMA2</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqResults</span>
 <span class='fu'>plotMA</span>(<span class='no'>object</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -135,6 +133,8 @@
   <span class='st'>"darkorange2"</span>, <span class='kw'>nonsignificant</span> <span class='kw'>=</span> <span class='st'>"gray50"</span>), <span class='kw'>pointSize</span> <span class='kw'>=</span> <span class='fl'>2L</span>,
   <span class='kw'>pointAlpha</span> <span class='kw'>=</span> <span class='fl'>0.7</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"ggplot"</span>, <span class='st'>"DataFrame"</span>))
 
+<span class='fu'>plotMA2</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+
 <span class='co'># S4 method for DESeqDataSet</span>
 <span class='fu'>plotMA2</span>(<span class='no'>object</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>""</span>,
   <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"mean of normalized counts"</span>, <span class='no'>ylim</span>, <span class='kw'>MLE</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
@@ -149,10 +149,6 @@
     <tr>
       <th>object</th>
       <td><p>A data object, typically containing count values from an RNA-Seq experiment or microarray intensity values.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments.</p></td>
     </tr>
     <tr>
       <th>genes</th>
@@ -207,6 +203,10 @@ Name or position of <code>DESeqResults</code>.</p></td>
       <th>lfcShrink</th>
       <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
 Use shrunken log2 fold change (LFC) values.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments.</p></td>
     </tr>
     <tr>
       <th>alpha</th>

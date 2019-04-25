@@ -24,6 +24,15 @@ NULL
 
 
 
+#' @rdname resultsMatrix
+#' @name resultsMatrix
+#' @importFrom bioverbs resultsMatrix
+#' @usage resultsMatrix(object, ...)
+#' @export
+NULL
+
+
+
 resultsMatrix.DESeqAnalysis <-  # nolint
     function(
         object,

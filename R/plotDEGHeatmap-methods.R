@@ -22,6 +22,15 @@ NULL
 
 
 
+#' @rdname plotDEGHeatmap
+#' @name plotDEGHeatmap
+#' @importFrom bioverbs plotDEGHeatmap
+#' @usage plotDEGHeatmap(object, ...)
+#' @export
+NULL
+
+
+
 # This method is used in F1000 paper and needs to be included. Note that in
 # newer versions of bcbioRNASeq, this step won't work because we've slotted the
 # rlog/vst counts in as a matrix instead of DESeqTransform.

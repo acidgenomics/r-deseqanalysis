@@ -58,6 +58,15 @@ NULL
 
 
 
+#' @rdname plotMA
+#' @name plotMA
+#' @importFrom BiocGenerics plotMA
+#' @usage plotMA(object, ...)
+#' @export
+NULL
+
+
+
 plotMA.DESeqResults <-  # nolint
     function(
         object,
@@ -325,6 +334,17 @@ setMethod(
 
 
 # plotMA2 ======================================================================
+#' @rdname plotMA
+#' @export
+setGeneric(
+    name = "plotMA2",
+    def = function(object, ...) {
+        standardGeneric("plotMA2")
+    }
+)
+
+
+
 plotMA2.DESeqDataSet <- getMethod(
     f = "plotMA",
     signature = "DESeqDataSet",

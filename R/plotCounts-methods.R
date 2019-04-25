@@ -24,6 +24,15 @@ NULL
 
 
 
+#' @rdname plotCounts
+#' @name plotCounts
+#' @importFrom bioverbs plotCounts
+#' @usage plotCounts(object, ...)
+#' @export
+NULL
+
+
+
 # Note that DESeqDataSet is supported in basejump SummarizedExperiment method.
 # That will detect the object and plot normalized counts automatically.
 plotCounts.DESeqAnalysis <-  # nolint

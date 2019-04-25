@@ -12,6 +12,15 @@ NULL
 
 
 
+#' @rdname resultsNames
+#' @name resultsNames
+#' @importFrom bioverbs resultsNames
+#' @usage resultsNames(object, ...)
+#' @export
+NULL
+
+
+
 resultsNames.DESeqDataSet <-  # nolint
     function(object) {
         DESeq2::resultsNames(object)

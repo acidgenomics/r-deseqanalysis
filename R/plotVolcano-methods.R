@@ -56,6 +56,15 @@ NULL
 
 
 
+#' @rdname plotVolcano
+#' @name plotVolcano
+#' @importFrom bioverbs plotVolcano
+#' @usage plotVolcano(object, ...)
+#' @export
+NULL
+
+
+
 plotVolcano.DESeqResults <-  # nolint
     function(
         object,

@@ -25,6 +25,15 @@ NULL
 
 
 
+#' @rdname contrastSamples
+#' @name contrastSamples
+#' @importFrom bioverbs contrastSamples
+#' @usage contrastSamples(object, ...)
+#' @export
+NULL
+
+
+
 contrastSamples.DESeqAnalysis <-  # nolint
     function(object, results) {
         validObject(object)

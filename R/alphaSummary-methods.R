@@ -29,6 +29,15 @@ NULL
 
 
 
+#' @rdname alphaSummary
+#' @name alphaSummary
+#' @importFrom bioverbs alphaSummary
+#' @usage alphaSummary(object, ...)
+#' @export
+NULL
+
+
+
 alphaSummary.DESeqDataSet <-  # nolint
     function(
         object,
