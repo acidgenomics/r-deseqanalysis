@@ -54,10 +54,9 @@ contrastSamples.DESeqAnalysis <-  # nolint
         resultsNames <- resultsNames(data)
         if (!contrast %in% resultsNames) {
             message(paste0(
-                "Note: ", contrast, " not defined in resultsNames.\n",
-                "This can happen with complex contrasts ",
-                "and is safe to ignore.\n",
-                printString(resultsNames)
+                "Note: ", contrast, " is not defined in resultsNames.\n",
+                "This can happen with complex contrasts, ",
+                "and is generally safe to ignore."
             ))
         }
 
