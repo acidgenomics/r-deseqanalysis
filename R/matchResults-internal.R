@@ -3,7 +3,7 @@
 .matchResults <- function(
     object,
     results,
-    lfcShrink = TRUE
+    lfcShrink = FALSE
 ) {
     if (missing(results)) {
         stop(paste(
