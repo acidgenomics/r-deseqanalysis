@@ -52,11 +52,12 @@ setMethod(
 
 contrastName.DESeqAnalysis <-  # nolint
     function(object, results) {
+        suppressMessages(
+            results <- results(object = object, results = results)
+        )
         do.call(
             what = contrastName,
-            args = list(
-                object = .matchResults(object, results)
-            )
+            args = list(object = results)
         )
     }
 
