@@ -73,9 +73,10 @@ plotDEGHeatmap.DESeqResults <-  # nolint
 
         # Title
         title <- paste0(
-            contrastName(res), "\n",
-            length(deg), " genes; ",
-            "alpha < ", alpha
+            contrastName(res, format = "title"), "\n",
+            length(deg), " genes;  ",
+            "alpha: ", alpha, ";  ",
+            "lfcThreshold: ", lfcThreshold
         )
         if (lfcThreshold > 0L) {
             title <- paste0(title, "; lfc > ", lfcThreshold)
@@ -107,11 +108,10 @@ f2 <- methodFormals(
 )
 f2 <- f2[setdiff(names(f2), c(names(f1), "object", "assay"))]
 f <- c(f1, f2)
-# Use `purpleOrange` instead of `synesthesia` here by default.
 f[["color"]] <- quote(
     getOption(
         x = "acid.heatmap.color",
-        default = viridis::viridis
+        default = acidplots::blueYellow
     )
 )
 formals(plotDEGHeatmap.DESeqResults) <- f
