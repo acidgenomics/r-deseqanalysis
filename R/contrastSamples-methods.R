@@ -34,7 +34,9 @@ NULL
 contrastSamples.DESeqAnalysis <-  # nolint
     function(object, results) {
         validObject(object)
-        results <- .matchResults(object, results = results)
+        suppressMessages(
+            results <- results(object = object, results = results)
+        )
 
         # If we've defined a subset of samples for the contrast, stash them
         # in DESeqResults metadata. Otherwise, there's no way to trace this
@@ -44,8 +46,11 @@ contrastSamples.DESeqAnalysis <-  # nolint
             return(samples)
         }
 
-        contrast <- makeNames(contrastName(results))
-        assert(grepl("_vs_", contrast))
+        contrast <- contrastName(results, format = "resultsNames")
+        assert(
+            isString(contrast),
+            assert(grepl("_vs_", contrast))
+        )
 
         data <- as(object, "DESeqDataSet")
         samples <- colnames(data)
