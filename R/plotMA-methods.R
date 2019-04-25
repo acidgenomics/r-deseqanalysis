@@ -77,10 +77,12 @@ plotMA.DESeqResults <-  # nolint
         validObject(object)
         alpha <- metadata(object)[["alpha"]]
         lfcThreshold <- metadata(object)[["lfcThreshold"]]
+        lfcShrinkType <- lfcShrinkType(object)
         assert(
             isAlpha(alpha),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
+            isString(lfcShrinkType),
             isAny(genes, classes = c("character", "NULL")),
             isAny(gene2symbol, classes = c("Gene2Symbol", "NULL")),
             isCharacter(pointColor),
@@ -190,7 +192,11 @@ plotMA.DESeqResults <-  # nolint
             guides(colour = FALSE) +
             labs(
                 title = contrastName(object),
-                subtitle = paste("alpha", "<", alpha),
+                subtitle = paste0(
+                    "alpha: ", alpha, ";  ",
+                    "lfcThreshold: ", lfcThreshold, ";  ",
+                    "lfcShrink: ", lfcShrinkType
+                ),
                 x = "mean expression across all samples",
                 y = "log2 fold change"
             )
