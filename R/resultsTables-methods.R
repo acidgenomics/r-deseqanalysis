@@ -1,7 +1,9 @@
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
+#'
 #' @inheritParams basejump::params
 #' @inheritParams params
+#' @param ... Additional arguments.
 #'
 #' @details
 #' Generate tables summarizing the differential expression, with subsets for
@@ -46,6 +48,7 @@ NULL
 #' @rdname resultsTables
 #' @name resultsTables
 #' @importFrom bioverbs resultsTables
+#' @usage resultsTables(object, ...)
 #' @export
 NULL
 
@@ -104,15 +107,21 @@ resultsTables.DESeqAnalysis <-  # nolint
     function(
         object,
         results,
+        lfcShrink = TRUE,
         rowData = TRUE,
         counts = TRUE,
         return = c("tbl_df", "DataFrameList")
     ) {
         validObject(object)
+        assert(
+            isFlag(lfcShrink),
+            isFlag(rowData),
+            isFlag(counts)
+        )
         return <- match.arg(return)
 
         # Note that this will use the shrunken LFC values, if slotted.
-        res <- .matchResults(object, results)
+        res <- results(object, results = results, lfcShrink = lfcShrink)
 
         # Get the DESeqDataSet, and humanize the sample names.
         # Note that we're not calling `humanize()` here on the DESeqDataSet,

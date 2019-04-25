@@ -4,10 +4,12 @@
 
 #' @name plotDEGPCA
 #' @inherit bioverbs::plotDEGPCA
+#'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams acidplots::plotPCA
 #' @inheritParams basejump::params
 #' @inheritParams params
+#' @param ... Additional arguments.
 #'
 #' @examples
 #' data(deseq)
@@ -21,6 +23,7 @@ NULL
 #' @rdname plotDEGPCA
 #' @name plotDEGPCA
 #' @importFrom bioverbs plotDEGPCA
+#' @usage plotDEGPCA(object, ...)
 #' @export
 NULL
 
@@ -48,15 +51,15 @@ plotDEGPCA.DESeqResults <-  # nolint
 
         interestingGroups(dt) <- matchInterestingGroups(dt, interestingGroups)
         alpha <- metadata(res)[["alpha"]]
-        assert(isAlpha(alpha))
         lfcThreshold <- metadata(res)[["lfcThreshold"]]
         assert(
+            isAlpha(alpha),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold)
         )
 
         # Get the character vector of DEGs.
-        deg <- deg(res, direction = direction)
+        deg <- deg(object = res, direction = direction)
         if (!hasLength(deg)) {
             warning("There are no DEGs to plot. Skipping.", call. = FALSE)
             return(invisible())
@@ -67,10 +70,11 @@ plotDEGPCA.DESeqResults <-  # nolint
 
         # Titles.
         title <- contrastName(res)
-        subtitle <- paste0(length(deg), " genes; alpha < ", alpha)
-        if (lfcThreshold > 0L) {
-            subtitle <- paste0(subtitle, "; lfc > ", lfcThreshold)
-        }
+        subtitle <- paste0(
+            length(deg), " genes", ";  ",
+            "alpha: ", alpha, ";  ",
+            "lfcThreshold: ", lfcThreshold
+        )
 
         # Using SummarizedExperiment method here.
         rse <- as(dt, "RangedSummarizedExperiment")
@@ -123,7 +127,9 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
             isFlag(contrastSamples)
         )
 
-        res <- .matchResults(object, results = results)
+        # Note that LFC values aren't used for this plot, just the DEGs, which
+        # are used to subset the DESeqTransform counts.
+        res <- results(object, results = results, lfcShrink = FALSE)
         validObject(res)
 
         # Using the variance-stabilized counts for visualization.

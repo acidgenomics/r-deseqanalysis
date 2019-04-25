@@ -1,8 +1,11 @@
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
+#'
+#' @inheritParams DESeq2::plotMA
 #' @inheritParams basejump::params
 #' @inheritParams params
+#' @param ... Additional arguments.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual representation
@@ -11,6 +14,12 @@
 #' (mean average) scales, then plotting these values.
 #'
 #' @note We are not allowing post hoc `alpha` or `lfcThreshold` cutoffs here.
+#'
+#' @section plotMA2 aliases:
+#'
+#' Aliased methods for original [DESeq2::plotMA()] S4 methods, which us
+#' geneplotter instead of ggplot2. I prefer using ggplot2 instead, so the
+#' primary methods defined here in the package mask DESeq2.
 #'
 #' @return `ggplot`.
 #'
@@ -52,6 +61,7 @@ NULL
 #' @rdname plotMA
 #' @name plotMA
 #' @importFrom BiocGenerics plotMA
+#' @usage plotMA(object, ...)
 #' @export
 NULL
 
@@ -76,10 +86,12 @@ plotMA.DESeqResults <-  # nolint
         validObject(object)
         alpha <- metadata(object)[["alpha"]]
         lfcThreshold <- metadata(object)[["lfcThreshold"]]
+        lfcShrinkType <- lfcShrinkType(object)
         assert(
             isAlpha(alpha),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
+            isString(lfcShrinkType),
             isAny(genes, classes = c("character", "NULL")),
             isAny(gene2symbol, classes = c("Gene2Symbol", "NULL")),
             isCharacter(pointColor),
@@ -189,7 +201,11 @@ plotMA.DESeqResults <-  # nolint
             guides(colour = FALSE) +
             labs(
                 title = contrastName(object),
-                subtitle = paste("alpha", "<", alpha),
+                subtitle = paste0(
+                    "alpha: ", alpha, ";  ",
+                    "lfcThreshold: ", lfcThreshold, ";  ",
+                    "lfcShrink: ", lfcShrinkType
+                ),
                 x = "mean expression across all samples",
                 y = "log2 fold change"
             )
@@ -280,18 +296,17 @@ plotMA.DESeqAnalysis <-  # nolint
         )
         # Return `NULL` for objects that don't contain gene symbol mappings.
         gene2symbol <- tryCatch(
-            expr = Gene2Symbol(slot(object, "data")),
+            expr = suppressMessages(
+                Gene2Symbol(as(object, "DESeqDataSet"))
+            ),
             error = function(e) NULL
         )
+        results <- results(object, results = results, lfcShrink = lfcShrink)
         do.call(
-            what = plotMA.DESeqResults,
+            what = plotMA,
             args = matchArgsToDoCall(
                 args = list(
-                    object = .matchResults(
-                        object = object,
-                        results = results,
-                        lfcShrink = lfcShrink
-                    ),
+                    object = results,
                     genes = genes,
                     gene2symbol = gene2symbol
                 ),
@@ -318,6 +333,55 @@ setMethod(
 
 
 
+# plotMA2 ======================================================================
+#' @rdname plotMA
+#' @export
+setGeneric(
+    name = "plotMA2",
+    def = function(object, ...) {
+        standardGeneric("plotMA2")
+    }
+)
+
+
+
+plotMA2.DESeqDataSet <- getMethod(
+    f = "plotMA",
+    signature = "DESeqDataSet",
+    where = "DESeq2"
+)
+
+
+
+#' @rdname plotMA
+#' @export
+setMethod(
+    f = "plotMA2",
+    signature = signature("DESeqDataSet"),
+    definition = plotMA2.DESeqDataSet
+)
+
+
+
+plotMA2.DESeqResults <- getMethod(
+    f = "plotMA",
+    signature = "DESeqResults",
+    where = "DESeq2"
+)
+
+
+
+#' @rdname plotMA
+#' @export
+setMethod(
+    f = "plotMA2",
+    signature = signature("DESeqResults"),
+    definition = plotMA2.DESeqResults
+)
+
+
+
+# Aliases ======================================================================
 # Soft deprecated, since this is used in bcbioRNASeq F1000 paper.
 #' @rdname plotMA
 #' @usage NULL

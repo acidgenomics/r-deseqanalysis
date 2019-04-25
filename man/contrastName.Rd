@@ -7,15 +7,28 @@
 \alias{contrastName,DESeqAnalysis-method}
 \title{Contrast name}
 \usage{
-\S4method{contrastName}{DESeqResults}(object)
+contrastName(object, ...)
+
+\S4method{contrastName}{DESeqResults}(object, format = c("resultsNames",
+  "title"))
 
 \S4method{contrastName}{DESeqAnalysis}(object, results)
 }
 \arguments{
 \item{object}{Object.}
 
+\item{format}{\code{character(1)}.
+Name format to return:
+\itemize{
+\item \code{resultsNames}: Attempt to matching the conventions in
+\code{\link[DESeq2:resultsNames]{resultsNames()}}.
+\item \code{title}: Human readable, for plot titles and/or table captions.
+}}
+
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or position of \code{DESeqResults}.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{character(1)}.
@@ -33,4 +46,7 @@ contrastName(object)
 
 ## DESeqAnalysis ====
 contrastName(deseq, results = 1L)
+}
+\seealso{
+\code{\link[DESeq2:resultsNames]{resultsNames()}}.
 }

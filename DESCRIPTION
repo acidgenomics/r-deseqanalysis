@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.1.19
-Date: 2019-04-23
+Version: 0.1.20
+Date: 2019-04-25
 Authors@R: c(
     person(
         given = "Michael",
@@ -97,7 +97,9 @@ Imports:
         tidyselect (>= 0.2),
     methods, scales, utils
 Suggests:
-    BiocStyle, patrick, roxygen2, testthat, viridis
+    BiocStyle, roxygen2,
+    patrick, testthat,
+    viridis
 Remotes:
     acidgenomics/acidplots,
     acidgenomics/basejump,

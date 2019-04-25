@@ -7,11 +7,14 @@
 \alias{resultsTables,DESeqAnalysis-method}
 \title{Results tables}
 \usage{
+resultsTables(object, ...)
+
 \S4method{resultsTables}{DESeqResults}(object, return = c("tbl_df",
   "DataFrameList"))
 
-\S4method{resultsTables}{DESeqAnalysis}(object, results, rowData = TRUE,
-  counts = TRUE, return = c("tbl_df", "DataFrameList"))
+\S4method{resultsTables}{DESeqAnalysis}(object, results,
+  lfcShrink = TRUE, rowData = TRUE, counts = TRUE,
+  return = c("tbl_df", "DataFrameList"))
 }
 \arguments{
 \item{object}{Object.}
@@ -25,11 +28,16 @@ column.}
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or position of \code{DESeqResults}.}
 
+\item{lfcShrink}{\code{logical(1)}.
+Use shrunken log2 fold change (LFC) values.}
+
 \item{rowData}{\code{logical(1)}.
 Join the row annotations.}
 
 \item{counts}{\code{logical(1)}.
 Join the size-factor adjusted normalized counts.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{list}.

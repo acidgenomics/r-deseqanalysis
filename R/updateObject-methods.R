@@ -16,14 +16,6 @@ NULL
 
 
 
-#' @rdname updateObject
-#' @name updateObject
-#' @importFrom BiocGenerics updateObject
-#' @export
-NULL
-
-
-
 updateObject.DESeqAnalysis <-  # nolint
     function(object) {
         if (!isTRUE(.hasSlot(object, "metadata"))) {

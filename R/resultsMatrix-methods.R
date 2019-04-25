@@ -10,8 +10,9 @@
 #'
 #'   - `log2FoldChange`: log2 fold change. This will return *shrunken* LFC
 #'     values if they are slotted in the `DESeqAnalysis` object.
-#'   - `stat`: Wald test statistic
-#'   - `padj`: BH adjusted *P* value
+#'   - `stat`: Wald test statistic.
+#'   - `padj`: BH adjusted *P* value.
+#' @param ... Additional arguments.
 #'
 #' @return `matrix`.
 #'
@@ -26,6 +27,7 @@ NULL
 #' @rdname resultsMatrix
 #' @name resultsMatrix
 #' @importFrom bioverbs resultsMatrix
+#' @usage resultsMatrix(object, ...)
 #' @export
 NULL
 

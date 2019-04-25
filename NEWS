@@ -1,3 +1,28 @@
+## DESeqAnalysis 0.1.20 (2019-04-25)
+
+### New functions
+
+- Now exporting `lfcShrinkType`, and `transformType`, which were previously used
+  internally but are generally useful.
+
+### Major changes
+
+- `plotDEGHeatmap`: Improved default color breaks. Now defaults to
+  blue-black-yellow default color scheme (see `acidplots::blueYellow`).
+- Removed internal `.matchResults` function in favor of consistently using
+  `results` instead throughout the package.
+
+### Minor changes
+
+- Slotting `lfcShrink` into object is now optional again.
+- Added `lfcShrink` argument support to `plotDEGHeatmap`, `topTables`, and
+  `export`.
+- `plotMA`, `plotVolcano`: Now suppressing duplicate gene message returned by
+  internal `Gene2Symbol` call, which isn't informative here.
+- Added `lfcThreshold` and `lfcShrink` information on plots, where applicable.
+
+
+
 ## DESeqAnalysis 0.1.19 (2019-04-23)
 
 ### Minor changes

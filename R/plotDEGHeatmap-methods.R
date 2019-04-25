@@ -4,13 +4,14 @@
 
 #' @name plotDEGHeatmap
 #' @inherit bioverbs::plotDEGHeatmap
+#'
 #' @inheritParams acidplots::plotHeatmap
 #' @inheritParams basejump::params
 #' @inheritParams params
-#'
 #' @param counts `DESeqTransform`.
 #'   Variance-stabilized counts suitable for heatmap.
 #'   Object rownames must be identical to corresponding `DESeqResults`.
+#' @param ... Additional arguments.
 #'
 #' @examples
 #' data(deseq)
@@ -24,6 +25,7 @@ NULL
 #' @rdname plotDEGHeatmap
 #' @name plotDEGHeatmap
 #' @importFrom bioverbs plotDEGHeatmap
+#' @usage plotDEGHeatmap(object, ...)
 #' @export
 NULL
 
@@ -40,7 +42,9 @@ plotDEGHeatmap.DESeqResults <-  # nolint
         scale = c("row", "column", "none"),
         clusteringMethod = "ward.D2",
         clusterRows = TRUE,
-        clusterCols = TRUE
+        clusterCols = TRUE,
+        breaks = seq(from = -2L, to = 2L, by = 0.25),
+        legendBreaks = seq(from = -2L, to = 2L, by = 1L)
     ) {
         validObject(object)
         validObject(counts)
@@ -48,7 +52,8 @@ plotDEGHeatmap.DESeqResults <-  # nolint
             is(object, "DESeqResults"),
             is(counts, "DESeqTransform"),
             identical(rownames(object), rownames(counts)),
-            isString(clusteringMethod)
+            isString(clusteringMethod),
+            is.numeric(legendBreaks)
         )
         direction <- match.arg(direction)
         scale <- match.arg(scale)
@@ -58,12 +63,15 @@ plotDEGHeatmap.DESeqResults <-  # nolint
         dt <- counts
 
         interestingGroups(dt) <- matchInterestingGroups(dt, interestingGroups)
+
         alpha <- metadata(res)[["alpha"]]
-        assert(isAlpha(alpha))
         lfcThreshold <- metadata(res)[["lfcThreshold"]]
+        lfcShrinkType <- lfcShrinkType(object)
         assert(
+            isAlpha(alpha),
             isNumber(lfcThreshold),
-            isNonNegative(lfcThreshold)
+            isNonNegative(lfcThreshold),
+            isString(lfcShrinkType)
         )
 
         # Get the character vector of DEGs.
@@ -78,9 +86,11 @@ plotDEGHeatmap.DESeqResults <-  # nolint
 
         # Title
         title <- paste0(
-            contrastName(res), "\n",
-            length(deg), " genes; ",
-            "alpha < ", alpha
+            contrastName(res, format = "title"), "\n",
+            length(deg), " genes;  ",
+            "alpha: ", alpha, ";  ",
+            "lfcThreshold: ", lfcThreshold, ";  ",
+            "lfcShrink: ", lfcShrinkType
         )
         if (lfcThreshold > 0L) {
             title <- paste0(title, "; lfc > ", lfcThreshold)
@@ -112,6 +122,12 @@ f2 <- methodFormals(
 )
 f2 <- f2[setdiff(names(f2), c(names(f1), "object", "assay"))]
 f <- c(f1, f2)
+f[["color"]] <- quote(
+    getOption(
+        x = "acid.heatmap.color",
+        default = acidplots::blueYellow
+    )
+)
 formals(plotDEGHeatmap.DESeqResults) <- f
 
 
@@ -130,12 +146,18 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
     function(
         object,
         results,
-        contrastSamples = FALSE
+        contrastSamples = FALSE,
+        lfcShrink = TRUE
     ) {
         validObject(object)
-        assert(isFlag(contrastSamples))
+        assert(
+            isFlag(contrastSamples),
+            isFlag(lfcShrink)
+        )
 
-        res <- .matchResults(object, results)
+        # Note use of `res` here instead of `results`, since we need to check
+        # the original `results` input below in `contrastSamples()` call.
+        res <- results(object, results = results, lfcShrink = lfcShrink)
         validObject(res)
 
         # We're using the variance-stabilized counts for visualization here.
@@ -160,7 +182,8 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
                 ),
                 removeFormals = c(
                     "results",
-                    "contrastSamples"
+                    "contrastSamples",
+                    "lfcShrink"
                 )
             )
         )

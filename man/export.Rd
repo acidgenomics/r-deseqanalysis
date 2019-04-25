@@ -7,11 +7,13 @@
 \alias{export,DESeqAnalysis-method}
 \title{Export}
 \usage{
+export(x, ...)
+
 \S4method{export}{DESeqDataSet}(x, name = NULL, dir = ".",
   compress = FALSE)
 
 \S4method{export}{DESeqAnalysis}(x, name = NULL, dir = ".",
-  compress = FALSE)
+  compress = FALSE, lfcShrink = TRUE)
 }
 \arguments{
 \item{x}{Object.
@@ -26,6 +28,11 @@ Directory path.}
 
 \item{compress}{\code{logical(1)}.
 Apply gzip compression to all files.}
+
+\item{lfcShrink}{\code{logical(1)}.
+Use shrunken log2 fold change (LFC) values.}
+
+\item{...}{Additional arguments.}
 }
 \description{
 Export data out of R and write to disk.

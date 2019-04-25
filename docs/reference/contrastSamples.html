@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.18</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.20</span>
       </span>
     </div>
 
@@ -115,7 +115,9 @@
     
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for DESeqAnalysis</span>
+    <pre class="usage"><span class='fu'>contrastSamples</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+
+<span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>contrastSamples</span>(<span class='no'>object</span>, <span class='no'>results</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -129,6 +131,10 @@
       <th>results</th>
       <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>.
 Name or position of <code>DESeqResults</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments.</p></td>
     </tr>
     </table>
     
@@ -156,7 +162,7 @@ too error-prone.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>contrastSamples</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqResults: condition B vs A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Factor column: condition</span></div><div class='output co'>#&gt; <span class='message'>Numerator samples: sample07, sample08, sample09, sample10, sample11, sample12</span></div><div class='output co'>#&gt; <span class='message'>Denominator samples: sample01, sample02, sample03, sample04, sample05, sample06</span></div><div class='output co'>#&gt;  [1] "sample07" "sample08" "sample09" "sample10" "sample11" "sample12"
+<span class='fu'>contrastSamples</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>Factor column: condition</span></div><div class='output co'>#&gt; <span class='message'>Numerator samples: sample07, sample08, sample09, sample10, sample11, sample12</span></div><div class='output co'>#&gt; <span class='message'>Denominator samples: sample01, sample02, sample03, sample04, sample05, sample06</span></div><div class='output co'>#&gt;  [1] "sample07" "sample08" "sample09" "sample10" "sample11" "sample12"
 #&gt;  [7] "sample01" "sample02" "sample03" "sample04" "sample05" "sample06"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -5,9 +5,14 @@
 \alias{plotMA}
 \alias{plotMA,DESeqResults-method}
 \alias{plotMA,DESeqAnalysis-method}
+\alias{plotMA2}
+\alias{plotMA2,DESeqDataSet-method}
+\alias{plotMA2,DESeqResults-method}
 \alias{plotMeanAverage}
 \title{MA-plot: plot differences versus averages for high-throughput data}
 \usage{
+plotMA(object, ...)
+
 \S4method{plotMA}{DESeqResults}(object, genes = NULL,
   gene2symbol = NULL, ntop = 0L, direction = c("both", "up", "down"),
   pointColor = c(downregulated = "darkorchid3", upregulated =
@@ -19,6 +24,14 @@
   pointColor = c(downregulated = "darkorchid3", upregulated =
   "darkorange2", nonsignificant = "gray50"), pointSize = 2L,
   pointAlpha = 0.7, return = c("ggplot", "DataFrame"))
+
+plotMA2(object, ...)
+
+\S4method{plotMA2}{DESeqDataSet}(object, alpha = 0.1, main = "",
+  xlab = "mean of normalized counts", ylim, MLE = FALSE, ...)
+
+\S4method{plotMA2}{DESeqResults}(object, alpha, main = "",
+  xlab = "mean of normalized counts", ylim, MLE = FALSE, ...)
 }
 \arguments{
 \item{object}{
@@ -59,9 +72,22 @@ Name or position of \code{DESeqResults}.}
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
 
-\item{...}{
-    Additional arguments, for use in specific methods.
-  }
+\item{...}{Additional arguments.}
+
+\item{alpha}{the significance level for thresholding adjusted p-values}
+
+\item{main}{optional title for the plot}
+
+\item{xlab}{optional defaults to "mean of normalized counts"}
+
+\item{ylim}{optional y limits}
+
+\item{MLE}{if \code{betaPrior=TRUE} was used,
+whether to plot the MLE (unshrunken estimates), defaults to FALSE.
+Requires that \code{\link{results}} was run with \code{addMLE=TRUE}.
+Note that the MLE will be plotted regardless of this argument,
+if DESeq() was run with \code{betaPrior=FALSE}. See \code{\link{lfcShrink}}
+for examples on how to plot shrunken log2 fold changes.}
 }
 \value{
 \code{ggplot}.
@@ -79,6 +105,14 @@ taken in two samples, by transforming the data onto M (log ratio) and A
 \note{
 We are not allowing post hoc \code{alpha} or \code{lfcThreshold} cutoffs here.
 }
+\section{plotMA2 aliases}{
+
+
+Aliased methods for original \code{\link[DESeq2:plotMA]{DESeq2::plotMA()}} S4 methods, which us
+geneplotter instead of ggplot2. I prefer using ggplot2 instead, so the
+primary methods defined here in the package mask DESeq2.
+}
+
 \examples{
 data(deseq)
 

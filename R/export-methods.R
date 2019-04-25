@@ -5,8 +5,8 @@
 
 #' @name export
 #' @inherit bioverbs::export
-#' @inheritParams params
 #'
+#' @inheritParams params
 #' @param x Object.
 #'   An object supporting [`dim()`][base::dim], or a supported class capable
 #'   of being coerced to `data.frame`, to be written to disk.
@@ -16,6 +16,7 @@
 #'   Directory path.
 #' @param compress `logical(1)`.
 #'   Apply gzip compression to all files.
+#' @param ... Additional arguments.
 #'
 #' @examples
 #' data(deseq)
@@ -32,6 +33,7 @@ NULL
 #' @rdname export
 #' @name export
 #' @importFrom bioverbs export
+#' @usage export(x, ...)
 #' @export
 NULL
 
@@ -39,17 +41,21 @@ NULL
 
 # Internal helpers =============================================================
 # Here we are looping across each contrast and writing out DEG tables.
-# Note: This step picks shrunken LFCs over unshrunken if slotted.
-# Note: We don't need to support humanize here because `geneName` is required.
-.exportResultsTables <- function(x, dir = ".", compress = FALSE) {
-    assert(is(x, "DESeqAnalysis"))
-    resultsNames <- names(x@results)
+# Note: We don't need to support humanize mode because `geneName` is required.
+.exportResultsTables <- function(x, dir, compress, lfcShrink) {
+    assert(
+        is(x, "DESeqAnalysis"),
+        isFlag(compress),
+        isFlag(lfcShrink)
+    )
+    resultsNames <- resultsNames(x)
     out <- lapply(
         X = resultsNames,
         FUN = function(results) {
             resTbl <- resultsTables(
                 object = x,
                 results = results,
+                lfcShrink = lfcShrink,
                 rowData = TRUE,
                 counts = TRUE,
                 return = "tbl_df"
@@ -113,9 +119,15 @@ export.DESeqAnalysis <-  # nolint
         x,
         name = NULL,
         dir = ".",
-        compress = FALSE
+        compress = FALSE,
+        lfcShrink = TRUE
     ) {
         validObject(x)
+        assert(
+            isString(name, nullOK = TRUE),
+            isFlag(compress),
+            isFlag(lfcShrink)
+        )
 
         call <- standardizeCall()
         assert(isString(name, nullOK = TRUE))
@@ -132,29 +144,33 @@ export.DESeqAnalysis <-  # nolint
 
         # DESeqDataSet.
         message("Exporting DESeqDataSet.")
-        files[["data"]] <- export(
-            x = as(x, "DESeqDataSet"),
-            name = "data",
-            dir = dir,
-            compress = compress
-        )
+        files[["data"]] <-
+            export(
+                x = as(x, "DESeqDataSet"),
+                name = "data",
+                dir = dir,
+                compress = compress
+            )
 
         # DESeqTransform.
         message("Exporting DESeqTransform.")
-        files[["transform"]] <- export(
-            x = as(x, "DESeqTransform"),
-            name = "transform",
-            dir = dir,
-            compress = compress
-        )
+        files[["transform"]] <-
+            export(
+                x = as(x, "DESeqTransform"),
+                name = "transform",
+                dir = dir,
+                compress = compress
+            )
 
         # DEG results tables.
         message("Exporting DESeqResults tables.")
-        files[["resultsTables"]] <- .exportResultsTables(
-            x = x,
-            dir = file.path(dir, "resultsTables"),
-            compress = compress
-        )
+        files[["resultsTables"]] <-
+            .exportResultsTables(
+                x = x,
+                dir = file.path(dir, "resultsTables"),
+                compress = compress,
+                lfcShrink = lfcShrink
+            )
 
         invisible(files)
     }
