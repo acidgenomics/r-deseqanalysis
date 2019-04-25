@@ -12,13 +12,11 @@ lfcShrinkType.DESeqResults <-  # nolint
     function(object) {
         validObject(object)
         pi <- priorInfo(object)
-        if (!isSubset("type", names(pi))) {
-            stop(paste(
-                "This DESeqResults object appears to be unshrunken.",
-                "priorInfo() does not contain `type`."
-            ))
+        if (isSubset("type", names(pi))) {
+            type <- pi[["type"]]
+        } else {
+            type <- "unshrunken"
         }
-        type <- pi[["type"]]
         assert(isString(type))
         type
     }
