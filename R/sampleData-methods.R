@@ -10,6 +10,15 @@ NULL
 
 
 
+#' @rdname sampleData
+#' @name sampleData
+#' @importFrom bioverbs sampleData
+#' @usage sampleData(object, ...)
+#' @export
+NULL
+
+
+
 sampleData.DESeqAnalysis <-  # nolint
     function(object) {
         object %>%

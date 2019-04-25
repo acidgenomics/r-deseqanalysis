@@ -20,6 +20,15 @@ NULL
 
 
 
+#' @rdname plotDEGPCA
+#' @name plotDEGPCA
+#' @importFrom bioverbs plotDEGPCA
+#' @usage plotDEGPCA(object, ...)
+#' @export
+NULL
+
+
+
 plotDEGPCA.DESeqResults <-  # nolint
     function(
         object,

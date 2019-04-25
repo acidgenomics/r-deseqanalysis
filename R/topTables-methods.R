@@ -17,6 +17,15 @@ NULL
 
 
 
+#' @rdname topTables
+#' @name topTables
+#' @importFrom bioverbs topTables
+#' @usage topTables(object, ...)
+#' @export
+NULL
+
+
+
 .topTable <-  # nolint
     function(object, n = 10L) {
         assert(
