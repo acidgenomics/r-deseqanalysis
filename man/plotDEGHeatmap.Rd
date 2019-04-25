@@ -47,13 +47,21 @@ Whether the values should be centered and scaled in either the row or
 column direction ("\code{row}", "\code{column}"), or remain unscaled ("\code{none}").}
 
 \item{clusteringMethod}{\code{character(1)}.
-Clustering method. Accepts the same values as \code{\link[stats:hclust]{stats::hclust()}}.}
+Clustering method. Accepts the same values as \code{\link[stats:hclust]{hclust()}}.}
 
 \item{clusterRows}{\code{logical(1)}.
 Arrange with hierarchical clustering.}
 
 \item{clusterCols}{\code{logical(1)}.
 Arrange with hierarchical clustering.}
+
+\item{breaks}{\code{numeric} or \code{NULL}.
+A sequence of numbers that covers the range of values in the matrix. Must
+be 1 element longer than the color vector, which is handled internally
+automatically, differing from the behavior in pheatmap.}
+
+\item{legendBreaks}{\code{numeric} or \code{NULL}.
+Numeric vector of breakpoints for the color legend.}
 
 \item{interestingGroups}{\code{character}.
 Groups of interest that define the samples. If left unset, defaults to

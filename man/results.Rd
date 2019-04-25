@@ -9,7 +9,7 @@
 \usage{
 \S4method{results}{DESeqDataSet}(object, ...)
 
-\S4method{results}{DESeqAnalysis}(object, results, lfcShrink = TRUE)
+\S4method{results}{DESeqAnalysis}(object, results, lfcShrink = FALSE)
 }
 \arguments{
 \item{object}{Object.}
