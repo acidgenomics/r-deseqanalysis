@@ -10,8 +10,8 @@
 \S4method{plotDEGHeatmap}{DESeqResults}(object, counts,
   direction = c("both", "up", "down"), scale = c("row", "column",
   "none"), clusteringMethod = "ward.D2", clusterRows = TRUE,
-  clusterCols = TRUE, breaks = seq(from = -4L, to = 4L, by = 0.5),
-  legendBreaks = seq(from = -10L, to = 10L, by = 2L),
+  clusterCols = TRUE, breaks = seq(from = -2L, to = 2L, by = 0.25),
+  legendBreaks = seq(from = -2L, to = 2L, by = 1L),
   interestingGroups = NULL, showRownames = FALSE,
   showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
   color = getOption(x = "acid.heatmap.color", default =
@@ -23,8 +23,8 @@
   contrastSamples = FALSE, lfcShrink = TRUE, direction = c("both",
   "up", "down"), scale = c("row", "column", "none"),
   clusteringMethod = "ward.D2", clusterRows = TRUE,
-  clusterCols = TRUE, breaks = seq(from = -4L, to = 4L, by = 0.5),
-  legendBreaks = seq(from = -10L, to = 10L, by = 2L),
+  clusterCols = TRUE, breaks = seq(from = -2L, to = 2L, by = 0.25),
+  legendBreaks = seq(from = -2L, to = 2L, by = 1L),
   interestingGroups = NULL, showRownames = FALSE,
   showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
   color = getOption(x = "acid.heatmap.color", default =
