@@ -57,6 +57,8 @@ NULL
 
 
 
+# FIXME Inform the user if shrunken LFC values are shown.
+
 plotMA.DESeqResults <-  # nolint
     function(
         object,
@@ -283,15 +285,12 @@ plotMA.DESeqAnalysis <-  # nolint
             expr = Gene2Symbol(slot(object, "data")),
             error = function(e) NULL
         )
+        results <- results(object, results = results, lfcShrink = lfcShrink)
         do.call(
             what = plotMA.DESeqResults,
             args = matchArgsToDoCall(
                 args = list(
-                    object = .matchResults(
-                        object = object,
-                        results = results,
-                        lfcShrink = lfcShrink
-                    ),
+                    object = results,
                     genes = genes,
                     gene2symbol = gene2symbol
                 ),
