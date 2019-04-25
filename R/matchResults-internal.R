@@ -42,9 +42,11 @@
     assert(is(results, "DESeqResults"))
 
     # Inform the user about which data we're using.
-    msg <- paste("DESeqResults:", contrastName(results))
+    msg <- contrastName(results)
     if (isTRUE(lfcShrink)) {
         msg <- paste(msg, "(shrunken LFC)")
+    } else {
+        msg <- paste(msg, "(unshrunken LFC)")
     }
     message(msg)
 
