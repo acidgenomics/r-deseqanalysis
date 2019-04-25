@@ -56,8 +56,6 @@ NULL
 
 
 
-# FIXME Inform the user if shrunken LFC values are shown.
-
 plotMA.DESeqResults <-  # nolint
     function(
         object,

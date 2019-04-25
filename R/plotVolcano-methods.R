@@ -55,8 +55,6 @@ NULL
 
 
 
-# FIXME Inform the user when shrunken LFC values are shown.
-
 plotVolcano.DESeqResults <-  # nolint
     function(
         object,
@@ -78,10 +76,12 @@ plotVolcano.DESeqResults <-  # nolint
         validObject(object)
         alpha <- metadata(object)[["alpha"]]
         lfcThreshold <- metadata(object)[["lfcThreshold"]]
+        lfcShrinkType <- lfcShrinkType(object)
         assert(
             isAlpha(alpha),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
+            isString(lfcShrinkType),
             isNumber(ylim),
             isInRange(ylim, lower = 1e-100, upper = 1e-3),
             isInt(ntop),
@@ -221,7 +221,11 @@ plotVolcano.DESeqResults <-  # nolint
             guides(colour = FALSE) +
             labs(
                 title = contrastName(object),
-                subtitle = paste("alpha", "<", alpha),
+                subtitle = paste0(
+                    "alpha: ", alpha, ";  ",
+                    "lfcThreshold: ", lfcThreshold, ";  ",
+                    "lfcShrink: ", lfcShrinkType
+                ),
                 x = "log2 fold change",
                 y = "-log10 adj p value"
             )
