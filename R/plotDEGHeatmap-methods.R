@@ -53,12 +53,15 @@ plotDEGHeatmap.DESeqResults <-  # nolint
         dt <- counts
 
         interestingGroups(dt) <- matchInterestingGroups(dt, interestingGroups)
+
         alpha <- metadata(res)[["alpha"]]
-        assert(isAlpha(alpha))
         lfcThreshold <- metadata(res)[["lfcThreshold"]]
+        lfcShrinkType <- lfcShrinkType(object)
         assert(
+            isAlpha(alpha),
             isNumber(lfcThreshold),
-            isNonNegative(lfcThreshold)
+            isNonNegative(lfcThreshold),
+            isString(lfcShrinkType)
         )
 
         # Get the character vector of DEGs.
@@ -76,7 +79,8 @@ plotDEGHeatmap.DESeqResults <-  # nolint
             contrastName(res, format = "title"), "\n",
             length(deg), " genes;  ",
             "alpha: ", alpha, ";  ",
-            "lfcThreshold: ", lfcThreshold
+            "lfcThreshold: ", lfcThreshold, ";  ",
+            "lfcShrink: ", lfcShrinkType
         )
         if (lfcThreshold > 0L) {
             title <- paste0(title, "; lfc > ", lfcThreshold)
