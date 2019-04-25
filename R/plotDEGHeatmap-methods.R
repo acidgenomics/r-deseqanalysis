@@ -119,7 +119,7 @@ f <- c(f1, f2)
 f[["color"]] <- quote(
     getOption(
         x = "acid.heatmap.color",
-        default = acidplots::purpleOrange
+        default = viridis::viridis
     )
 )
 formals(plotDEGHeatmap.DESeqResults) <- f
