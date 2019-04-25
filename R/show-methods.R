@@ -11,14 +11,6 @@ NULL
 
 
 
-#' @rdname show
-#' @name show
-#' @importFrom methods show
-#' @export
-NULL
-
-
-
 show.DESeqAnalysis <-  # nolint
     function(object) {
         validObject(object)

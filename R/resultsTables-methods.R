@@ -43,14 +43,6 @@ NULL
 
 
 
-#' @rdname resultsTables
-#' @name resultsTables
-#' @importFrom bioverbs resultsTables
-#' @export
-NULL
-
-
-
 # Note that this method is used in bcbioRNASeq F1000 paper.
 resultsTables.DESeqResults <-  # nolint
     function(object, return = c("tbl_df", "DataFrameList")) {

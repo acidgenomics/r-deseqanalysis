@@ -29,14 +29,6 @@ NULL
 
 
 
-#' @rdname export
-#' @name export
-#' @importFrom bioverbs export
-#' @export
-NULL
-
-
-
 # Internal helpers =============================================================
 # Here we are looping across each contrast and writing out DEG tables.
 # Note: We don't need to support humanize mode because `geneName` is required.
