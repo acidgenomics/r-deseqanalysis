@@ -10,6 +10,8 @@
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors SimpleList as.data.frame head mcols mcols<- metadata
 #' @importFrom SummarizedExperiment assays assays<- colData colData<-
+#' @importFrom UpSetR fromList
+#' @importFrom acidplots plotHeatmap upset
 #' @importFrom basejump Gene2Symbol as_tibble camel
 #'   convertSampleIDsToNames decode initDir interestingGroups<- makeNames
 #'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
@@ -19,7 +21,6 @@
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom dplyr arrange desc everything filter left_join mutate mutate_all
 #'   pull rename row_number select
-#' @importFrom acidplots plotHeatmap
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_density
 #'   geom_hline geom_point geom_vline ggplot guides labs scale_colour_manual
 #'   scale_x_continuous scale_y_continuous theme
