@@ -1,13 +1,22 @@
-#' UpSet plot of directional DEG intersections across contrasts
-#'
 #' @name plotDEGUpset
+#' @inherit bioverbs::plotDEGUpset
 #'
+#' @inheritParams basejump::params
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'
 #' @examples
 #' data(deseq)
 #' plotDEGUpset(deseq)
+NULL
+
+
+
+#' @rdname plotDEGUpset
+#' @name plotDEGUpset
+#' @importFrom bioverbs plotDEGUpset
+#' @usage plotDEGUpset(object, ...)
+#' @export
 NULL
 
 
@@ -25,9 +34,13 @@ plotDEGUpset.DESeqAnalysis <- function(object) {
         USE.NAMES = TRUE
     )
     listInput <- do.call(what = c, args = degPerContrast)
-    # Use "_" instead of "." for name concatenation.
+    # Using "_" instead of "." for name concatenation.
     names(listInput) %<>% makeNames(unique = TRUE)
-    upset(data = fromList(listInput))
+    # Suppressing message about single contrast not having up/down DEG overlap:
+    # geom_path: Each group consists of only one observation.
+    suppressMessages(
+        upset(data = fromList(listInput))
+    )
 }
 
 
