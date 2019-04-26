@@ -9,6 +9,17 @@ setGeneric(
 
 
 
+#' @rdname plotDEGUpset
+#' @export
+setGeneric(
+    name = "plotDEGUpset",
+    def = function(object, ...) {
+        standardGeneric("plotDEGUpset")
+    }
+)
+
+
+
 #' @rdname transformType
 #' @export
 setGeneric(
