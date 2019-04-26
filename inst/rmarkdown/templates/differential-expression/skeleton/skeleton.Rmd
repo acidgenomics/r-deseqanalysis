@@ -11,6 +11,10 @@ params:
   # an `rmarkdown::render()` call. See `object` param.
   # name: "object_name"
   
+  # Use log2 fold change values with adaptive shrinkage applied.
+  # Recommended by default. Refer to `DESeq2::lfcShrink()` for details.
+  lfc_shrink: TRUE
+  
   output_dir: !r file.path("results", Sys.Date(), "differential-expression")
 
 title: "`r params$title`"
@@ -20,7 +24,7 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, cache=FALSE, message=FALSE}
-# Last modified 2019-04-23
+# Last modified 2019-04-26
 library(basejump)
 library(DESeqAnalysis)
 basejump::prepareTemplate()
@@ -70,7 +74,11 @@ invisible(mapply(
     MoreArgs = list(object = object),
     FUN = function(object, results) {
         markdownHeader(results, level = 2L, asis = TRUE)
-        print(plotMA(object, results = results, lfcShrink = TRUE))
+        print(plotMA(
+            object = object,
+            results = results,
+            lfcShrink = params$lfc_shrink
+        ))
     },
     SIMPLIFY = FALSE,
     USE.NAMES = TRUE
@@ -87,7 +95,11 @@ invisible(mapply(
     MoreArgs = list(object = object),
     FUN = function(object, results) {
         markdownHeader(results, level = 2L, asis = TRUE)
-        print(plotVolcano(object, results = results, lfcShrink = TRUE))
+        print(plotVolcano(
+            object = object,
+            results = results,
+            lfcShrink = params$lfc_shrink
+        ))
     },
     SIMPLIFY = FALSE,
     USE.NAMES = TRUE
@@ -132,7 +144,8 @@ invisible(mapply(
         plotDEGHeatmap(
             object = object,
             results = results,
-            contrastSamples = contrastSamples
+            contrastSamples = contrastSamples,
+            lfcShrink = params$lfc_shrink
         )
     },
     SIMPLIFY = FALSE,
@@ -156,7 +169,8 @@ invisible(mapply(
         topTables(
             object = object,
             results = results,
-            n = n
+            n = n,
+            lfcShrink = params$lfc_shrink
         )
     },
     SIMPLIFY = FALSE,
@@ -186,7 +200,8 @@ export(
     x = object,
     name = name,
     dir = params$output_dir,
-    compress = FALSE
+    compress = FALSE,
+    lfcShrink = params$lfc_shrink
 )
 ```
 
