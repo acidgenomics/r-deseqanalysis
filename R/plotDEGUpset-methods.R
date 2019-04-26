@@ -35,7 +35,7 @@ plotDEGUpset.DESeqAnalysis <- function(object) {
     )
     listInput <- do.call(what = c, args = degPerContrast)
     # Using "_" instead of "." for name concatenation.
-    names(listInput) %<>% makeNames(unique = TRUE)
+    names(listInput) <- makeNames(names(listInput), unique = TRUE)
     # Suppressing message about single contrast not having up/down DEG overlap:
     # geom_path: Each group consists of only one observation.
     suppressMessages(
