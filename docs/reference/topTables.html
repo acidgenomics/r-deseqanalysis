@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.20</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.21</span>
       </span>
     </div>
 
@@ -118,7 +118,8 @@
     <pre class="usage"><span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>)</pre>
+<span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>,
+  <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -136,6 +137,11 @@ Name or position of <code>DESeqResults</code>.</p></td>
       <th>n</th>
       <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>.
 Number of genes (per direction) to report.</p></td>
+    </tr>
+    <tr>
+      <th>lfcShrink</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
+Use shrunken log2 fold change (LFC) values.</p></td>
     </tr>
     <tr>
       <th>...</th>
