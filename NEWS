@@ -1,3 +1,17 @@
+## DESeqAnalysis 0.1.21 (2019-04-26)
+
+### New functions
+
+- `plotDEGUpset`: Support for easily plotting bidirectional (up/down) DEG
+  intersections across contrasts, using the UpSetR package.
+
+### Minor changes
+
+- Improved `show` method to include `alpha` and `lfcThreshold` information.
+- `topTables`: Added `lfcShrink` support.
+
+
+
 ## DESeqAnalysis 0.1.20 (2019-04-25)
 
 ### New functions

@@ -68,7 +68,7 @@ DESeqDataSet." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.20</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.21</span>
       </span>
     </div>
 
@@ -228,7 +228,7 @@ care of this automatically in supported methods.</p>
     <span class='kw'>results</span> <span class='kw'>=</span> <span class='no'>results</span>,
     <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='no'>lfcShrink</span>
 )
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; DESeqAnalysis 0.1.20; DESeq2 1.22.2
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; DESeqAnalysis 0.1.21; DESeq2 1.22.2
 #&gt; data:
 #&gt;   dim: 1000 12 
 #&gt;   metadata(1): version
@@ -237,9 +237,11 @@ care of this automatically in supported methods.</p>
 #&gt;   rowData names(25): trueIntercept trueBeta ... deviance maxCooks
 #&gt;   colnames(12): sample1 sample2 ... sample11 sample12
 #&gt;   colData names(2): condition sizeFactor
-#&gt; transform: varianceStabilizingTransformation
-#&gt; results: condition_B_vs_A
-#&gt; lfcShrink: normal</div></pre>
+#&gt; transformType: varianceStabilizingTransformation
+#&gt; resultsNames: condition_B_vs_A
+#&gt; alpha: 0.1
+#&gt; lfcThreshold: 0
+#&gt; lfcShrinkType: normal</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

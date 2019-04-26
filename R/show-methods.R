@@ -14,29 +14,28 @@ NULL
 show.DESeqAnalysis <-  # nolint
     function(object) {
         validObject(object)
-
-        data <- slot(object, "data")
-        transform <- slot(object, "transform")
-        results <- slot(object, "results")
+        dds <- as(object, "DESeqDataSet")
 
         cat(paste0(
             class(object), " ", metadata(object)[["version"]], "; ",
-            "DESeq2 ", metadata(data)[["version"]]
+            "DESeq2 ", metadata(dds)[["version"]]
         ), sep = "\n")
 
         # Show information about the DESeqDataSet.
-        dataInfo <- capture.output(show(data))[-1L]
-        dataInfo <- paste0("  ", dataInfo)
-        cat("data:", dataInfo, sep = "\n")
+        ddsInfo <- paste0("  ", capture.output(show(dds))[-1L])
+        cat("data:", ddsInfo, sep = "\n")
+
+
+        res <- as(object, "DESeqResults")
+        alpha <- metadata(res)[["alpha"]]
+        lfcThreshold <- metadata(res)[["lfcThreshold"]]
 
         showSlotInfo(list(
-            transform = transformType(transform),
-            results = names(results)
-        ))
-
-        # Show information about lfcShrink method, if slotted.
-        showSlotInfo(list(
-            lfcShrink = lfcShrinkType(object)
+            transformType = transformType(object),
+            resultsNames = resultsNames(object),
+            alpha = alpha,
+            lfcThreshold = lfcThreshold,
+            lfcShrinkType = lfcShrinkType(object)
         ))
     }
 
