@@ -3,10 +3,9 @@
 #'
 #' @inheritParams basejump::params
 #' @inheritParams params
-#' @param ... Additional arguments.
-#'
 #' @param n `integer(1)`.
 #'   Number of genes (per direction) to report.
+#' @param ... Additional arguments.
 #'
 #' @examples
 #' data(deseq)

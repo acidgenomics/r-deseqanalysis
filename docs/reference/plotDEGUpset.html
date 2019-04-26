@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Markdown — markdown • DESeqAnalysis</title>
+<title>UpSet plot of directional DEG intersections across contrasts — plotDEGUpset • DESeqAnalysis</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Markdown — markdown" />
+<meta property="og:title" content="UpSet plot of directional DEG intersections across contrasts — plotDEGUpset" />
 
-<meta property="og:description" content="Markdown" />
+<meta property="og:description" content="UpSet plot of directional DEG intersections across contrasts" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -104,21 +104,21 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Markdown</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/markdown-methods.R'><code>R/markdown-methods.R</code></a></small>
-    <div class="hidden name"><code>markdown.Rd</code></div>
+    <h1>UpSet plot of directional DEG intersections across contrasts</h1>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/plotDEGUpset-methods.R'><code>R/plotDEGUpset-methods.R</code></a></small>
+    <div class="hidden name"><code>plotDEGUpset.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Markdown</p>
+    <p>UpSet plot of directional DEG intersections across contrasts</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>markdown</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>plotDEGUpset</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>markdown</span>(<span class='no'>object</span>)</pre>
+<span class='fu'>plotDEGUpset</span>(<span class='no'>object</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -133,45 +133,16 @@
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Markdown output.</p>
-    
-    <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
-
-    <ul>
-<li><p><code>DESeqAnalysis</code>: List of contrast names.</p></li>
-</ul>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
-
-<span class='co'># DESeqAnalysis ====</span>
-<span class='fu'>markdown</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; [1] "## Contrast names\n"
-#&gt; attr(,"format")
-#&gt; [1] "markdown"
-#&gt; attr(,"class")
-#&gt; [1] "knit_asis"
-#&gt; attr(,"knit_cacheable")
-#&gt; [1] NA
-#&gt; [1] "- condition_B_vs_A\n"
-#&gt; attr(,"format")
-#&gt; [1] "markdown"
-#&gt; attr(,"class")
-#&gt; [1] "knit_asis"
-#&gt; attr(,"knit_cacheable")
-#&gt; [1] NA</div></pre>
+<span class='fu'>plotDEGUpset</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>87 downregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>84 upregulated genes detected.</span></div><div class='img'><img src='plotDEGUpset-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#methods-by-class-">Methods (by class)</a></li>
-      
+            
       <li><a href="#examples">Examples</a></li>
     </ul>
 
