@@ -142,10 +142,16 @@ topTables.DESeqResults <-  # nolint
 
 
 topTables.DESeqAnalysis <-  # nolint
-    function(object, results, n = 10L) {
+    function(
+        object,
+        results,
+        n = 10L,
+        lfcShrink = TRUE
+    ) {
         list <- resultsTables(
             object = object,
             results = results,
+            lfcShrink = lfcShrink,
             rowData = TRUE,
             counts = FALSE
         )

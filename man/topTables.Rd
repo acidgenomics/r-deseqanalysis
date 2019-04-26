@@ -8,7 +8,8 @@
 \usage{
 topTables(object, ...)
 
-\S4method{topTables}{DESeqAnalysis}(object, results, n = 10L)
+\S4method{topTables}{DESeqAnalysis}(object, results, n = 10L,
+  lfcShrink = TRUE)
 }
 \arguments{
 \item{object}{Object.}
@@ -18,6 +19,9 @@ Name or position of \code{DESeqResults}.}
 
 \item{n}{\code{integer(1)}.
 Number of genes (per direction) to report.}
+
+\item{lfcShrink}{\code{logical(1)}.
+Use shrunken log2 fold change (LFC) values.}
 
 \item{...}{Additional arguments.}
 }
