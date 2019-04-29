@@ -1,3 +1,17 @@
+## DESeqAnalysis 0.1.22 (2019-04-28)
+
+### New functions
+
+- `plotPCA`: Added improved method support for `DESeqTransform`, masking the
+  method exported in DESeq2. Also added corresponding method support for
+  `DESeqAnalysis` class, which uses `DESeqTransform` method internally.
+
+### Minor changes
+
+- Removed `plotMA2` export, which keeps DESeq2 `plotMA` method as an alias.
+
+
+
 ## DESeqAnalysis 0.1.21 (2019-04-26)
 
 ### New functions

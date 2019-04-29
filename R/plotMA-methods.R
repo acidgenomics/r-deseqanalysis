@@ -333,54 +333,6 @@ setMethod(
 
 
 
-# plotMA2 ======================================================================
-#' @rdname plotMA
-#' @export
-setGeneric(
-    name = "plotMA2",
-    def = function(object, ...) {
-        standardGeneric("plotMA2")
-    }
-)
-
-
-
-plotMA2.DESeqDataSet <- getMethod(
-    f = "plotMA",
-    signature = "DESeqDataSet",
-    where = "DESeq2"
-)
-
-
-
-#' @rdname plotMA
-#' @export
-setMethod(
-    f = "plotMA2",
-    signature = signature("DESeqDataSet"),
-    definition = plotMA2.DESeqDataSet
-)
-
-
-
-plotMA2.DESeqResults <- getMethod(
-    f = "plotMA",
-    signature = "DESeqResults",
-    where = "DESeq2"
-)
-
-
-
-#' @rdname plotMA
-#' @export
-setMethod(
-    f = "plotMA2",
-    signature = signature("DESeqResults"),
-    definition = plotMA2.DESeqResults
-)
-
-
-
 # Aliases ======================================================================
 # Soft deprecated, since this is used in bcbioRNASeq F1000 paper.
 #' @rdname plotMA
