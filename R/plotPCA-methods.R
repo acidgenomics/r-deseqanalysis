@@ -13,6 +13,15 @@ NULL
 
 
 
+#' @rdname plotPCA
+#' @name plotPCA
+#' @importFrom BiocGenerics plotPCA
+#' @usage plotPCA(object, ...)
+#' @export
+NULL
+
+
+
 plotPCA.DESeqTransform <-  # nolint
     getMethod(
         f = "plotPCA",
