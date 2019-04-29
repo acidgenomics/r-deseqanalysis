@@ -5,9 +5,6 @@
 \alias{plotMA}
 \alias{plotMA,DESeqResults-method}
 \alias{plotMA,DESeqAnalysis-method}
-\alias{plotMA2}
-\alias{plotMA2,DESeqDataSet-method}
-\alias{plotMA2,DESeqResults-method}
 \alias{plotMeanAverage}
 \title{MA-plot: plot differences versus averages for high-throughput data}
 \usage{
@@ -24,14 +21,6 @@ plotMA(object, ...)
   pointColor = c(downregulated = "darkorchid3", upregulated =
   "darkorange2", nonsignificant = "gray50"), pointSize = 2L,
   pointAlpha = 0.7, return = c("ggplot", "DataFrame"))
-
-plotMA2(object, ...)
-
-\S4method{plotMA2}{DESeqDataSet}(object, alpha = 0.1, main = "",
-  xlab = "mean of normalized counts", ylim, MLE = FALSE, ...)
-
-\S4method{plotMA2}{DESeqResults}(object, alpha, main = "",
-  xlab = "mean of normalized counts", ylim, MLE = FALSE, ...)
 }
 \arguments{
 \item{object}{
@@ -73,21 +62,6 @@ Name or position of \code{DESeqResults}.}
 Use shrunken log2 fold change (LFC) values.}
 
 \item{...}{Additional arguments.}
-
-\item{alpha}{the significance level for thresholding adjusted p-values}
-
-\item{main}{optional title for the plot}
-
-\item{xlab}{optional defaults to "mean of normalized counts"}
-
-\item{ylim}{optional y limits}
-
-\item{MLE}{if \code{betaPrior=TRUE} was used,
-whether to plot the MLE (unshrunken estimates), defaults to FALSE.
-Requires that \code{\link{results}} was run with \code{addMLE=TRUE}.
-Note that the MLE will be plotted regardless of this argument,
-if DESeq() was run with \code{betaPrior=FALSE}. See \code{\link{lfcShrink}}
-for examples on how to plot shrunken log2 fold changes.}
 }
 \value{
 \code{ggplot}.
