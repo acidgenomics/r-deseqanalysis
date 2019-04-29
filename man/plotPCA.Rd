@@ -4,6 +4,7 @@
 \name{plotPCA}
 \alias{plotPCA}
 \alias{plotPCA,DESeqTransform-method}
+\alias{plotPCA,DESeqAnalysis-method}
 \title{Principal component analysis plot}
 \usage{
 \S4method{plotPCA}{DESeqTransform}(object, assay = 1L,
@@ -13,6 +14,8 @@
   acidplots::scale_colour_synesthesia_d()), pointSize = getOption(x =
   "acid.point.size", default = 3L), title = "PCA", subtitle = NULL,
   return = c("ggplot", "DataFrame"), ...)
+
+\S4method{plotPCA}{DESeqAnalysis}(object, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -77,9 +80,14 @@ a way to look at how samples are clustering.
 }
 
 \examples{
-data(rse, package = "acidtest")
-plotPCA(rse, label = FALSE)
-plotPCA(rse, label = TRUE)
+data(deseq)
+
+## DESeqAnalysis
+plotPCA(deseq)
+
+## DESeqTransform
+dt <- as(deseq, "DESeqTransform")
+plotPCA(dt)
 }
 \references{
 Jolliffe, et al., 2002.
