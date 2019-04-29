@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot counts — plotCounts • DESeqAnalysis</title>
+<title>Principal component analysis plot — plotPCA • DESeqAnalysis</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Plot counts — plotCounts" />
+<meta property="og:title" content="Principal component analysis plot — plotPCA" />
 
-<meta property="og:description" content="Plot counts" />
+<meta property="og:description" content="Principal component analysis plot" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -104,26 +104,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot counts</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/plotCounts-methods.R'><code>R/plotCounts-methods.R</code></a></small>
-    <div class="hidden name"><code>plotCounts.Rd</code></div>
+    <h1>Principal component analysis plot</h1>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/plotPCA-methods.R'><code>R/plotPCA-methods.R</code></a></small>
+    <div class="hidden name"><code>plotPCA.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Plot counts</p>
+    <p>Principal component analysis plot</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>plotCounts</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='co'># S4 method for DESeqTransform</span>
+<span class='fu'>plotPCA</span>(<span class='no'>object</span>, <span class='kw'>assay</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
+  <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>500L</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span>
+  <span class='st'>"acid.label"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span>
+  <span class='st'>"acid.color.discrete"</span>, <span class='kw'>default</span> <span class='kw'>=</span>
+  <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/acidplots/topics/synesthesia'>scale_colour_synesthesia_d</a></span>()), <span class='kw'>pointSize</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span>
+  <span class='st'>"acid.point.size"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>3L</span>), <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"PCA"</span>, <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"ggplot"</span>, <span class='st'>"DataFrame"</span>), <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotCounts</span>(<span class='no'>object</span>, <span class='no'>genes</span>, <span class='kw'>transform</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trans</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"identity"</span>, <span class='st'>"log2"</span>, <span class='st'>"log10"</span>),
-  <span class='kw'>medianLine</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"acid.color.discrete"</span>,
-  <span class='kw'>default</span> <span class='kw'>=</span> <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/acidplots/topics/synesthesia'>scale_colour_synesthesia_d</a></span>()),
-  <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"acid.legend"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-  <span class='kw'>style</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"facet"</span>, <span class='st'>"wide"</span>))</pre>
+<span class='fu'>plotPCA</span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -133,17 +135,12 @@
       <td><p>Object.</p></td>
     </tr>
     <tr>
-      <th>genes</th>
-      <td><p><code>character</code>.
-Gene identifiers. It is considered better practice to input the stable gene
-identifiers from Ensembl (e.g. "ENSG00000000003") and not the (HGNC) gene
-symbols (e.g. "TSPN6"), if possible.</p></td>
-    </tr>
-    <tr>
-      <th>transform</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
-Visualize using <code>DESeqTransform</code> log2 variance-stabilized counts, rather
-than <code>DESeqDataSet</code> size-factor normalized counts.</p></td>
+      <th>assay</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/vector'>vector(1)</a></code>.
+Name or index of count matrix slotted in
+<code><a href='https://www.rdocumentation.org/packages/SummarizedExperiment/topics/SummarizedExperiment-class'>assays()</a></code>. When passing in a string, the
+name must be defined in
+<code><a href='https://www.rdocumentation.org/packages/SummarizedExperiment/topics/SummarizedExperiment-class'>assayNames()</a></code>.</p></td>
     </tr>
     <tr>
       <th>interestingGroups</th>
@@ -152,17 +149,15 @@ Groups of interest that define the samples. If left unset, defaults to
 <code>sampleName</code>.</p></td>
     </tr>
     <tr>
-      <th>trans</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>.
-Name of the axis scale transformation to apply.</p>
-<p>For more information:</p><pre>help(topic = "scale_x_continuous", package = "ggplot2")
-</pre></td>
+      <th>ntop</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code> or <code>Inf</code>.
+Number of most variable genes to plot.
+Use <code>Inf</code> to include all genes (<em>not recommended</em>).</p></td>
     </tr>
     <tr>
-      <th>medianLine</th>
+      <th>label</th>
       <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
-Include median line for each group. Disabled if samples are colored by
-sample name.</p></td>
+Superimpose sample text labels on the plot.</p></td>
     </tr>
     <tr>
       <th>color</th>
@@ -174,14 +169,25 @@ are desired, we recommend using <code><a href='https://www.rdocumentation.org/pa
 </pre></td>
     </tr>
     <tr>
-      <th>legend</th>
-      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/logical'>logical(1)</a></code>.
-Show plot legend.</p></td>
+      <th>pointSize</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric(1)</a></code>.
+Point size for dots in the plot.</p></td>
     </tr>
     <tr>
-      <th>style</th>
+      <th>title</th>
       <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>.
-Plot style.</p></td>
+Plot title.</p></td>
+    </tr>
+    <tr>
+      <th>subtitle</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>.
+Plot subtitle.</p></td>
+    </tr>
+    <tr>
+      <th>return</th>
+      <td><p><code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code>.
+Return type. Uses <code><a href='https://www.rdocumentation.org/packages/base/topics/match.arg'>match.arg()</a></code> internally and defaults
+to the first argument in the <code>character</code> vector.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -191,30 +197,41 @@ Plot style.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p><code>ggplot</code> or <code>DataFrame</code>.</p>
     
-<ul>
-<li><p><code>style = "facet"</code>: <code>ggplot</code> grouped by <code>sampleName</code>, with
-<code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>ggplot2::facet_wrap()</a></code> applied to panel the samples.</p></li>
-<li><p><code>style = "wide"</code>: <code>ggplot</code> in wide format, with genes on the x-axis.</p></li>
-</ul>
+    <h2 class="hasAnchor" id="principal-component-analysis"><a class="anchor" href="#principal-component-analysis"></a>Principal component analysis</h2>
 
+    
+    <p>PCA (Jolliffe, et al., 2002) is a multivariate technique that allows us to
+summarize the systematic patterns of variations in the data. PCA takes the
+expression levels for genes and transforms it in principal component space,
+reducing each sample into one point. Thereby, we can separate samples by
+expression variation, and identify potential sample outliers. The PCA plot is
+a way to look at how samples are clustering.</p>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Jolliffe, et al., 2002.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><ul>
-<li><p><code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/plotCounts'>DESeq2::plotCounts()</a></code>.</p></li>
-</ul></div>
+    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/DESeq2/topics/plotPCA'>DESeq2::plotPCA()</a></code>.</p>
+<p>We're using a modified version of the <code>DESeqTransform</code> method here.</p><pre>methodFunction(
+    f = "plotPCA",
+    signature = "DESeqTransform",
+    package = "DESeq2"
+)
+</pre></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>deseq</span>)
 
-<span class='co'>## Get genes from DESeqDataSet.</span>
-<span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.html'>as</a></span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
-<span class='no'>genes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>rownames</a></span>(<span class='no'>dds</span>))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>genes</span>)</div><div class='output co'>#&gt; [1] "gene001" "gene002" "gene003" "gene004" "gene005" "gene006"</div><div class='input'>
-<span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotCounts</span>(<span class='no'>deseq</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>genes</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"facet"</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqDataSet detected. Using normalized counts.</span></div><div class='img'><img src='plotCounts-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotCounts</span>(<span class='no'>deseq</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>genes</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"wide"</span>)</div><div class='output co'>#&gt; <span class='message'>DESeqDataSet detected. Using normalized counts.</span></div><div class='img'><img src='plotCounts-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='co'>## DESeqAnalysis</span>
+<span class='fu'>plotPCA</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>Using DESeqTransform counts.</span></div><div class='output co'>#&gt; <span class='message'>Plotting PCA using 500 genes.</span></div><div class='img'><img src='plotPCA-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'>## DESeqTransform</span>
+<span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.html'>as</a></span>(<span class='no'>deseq</span>, <span class='st'>"DESeqTransform"</span>)
+<span class='fu'>plotPCA</span>(<span class='no'>dt</span>)</div><div class='output co'>#&gt; <span class='message'>Plotting PCA using 500 genes.</span></div><div class='img'><img src='plotPCA-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -222,6 +239,10 @@ Plot style.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#principal-component-analysis">Principal component analysis</a></li>
+
+      <li><a href="#references">References</a></li>
 
       <li><a href="#see-also">See also</a></li>
       
