@@ -37,7 +37,7 @@ knitr::opts_chunk[["set"]](message = FALSE)
 
 # Load DESeqAnalysis object
 
-```{r object}
+```{r load-object}
 if (is.character(params$object)) {
     if (fileExt(params$object) == "rds") {
         object <- readRDS(file = params$object)
