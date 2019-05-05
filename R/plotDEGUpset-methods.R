@@ -21,6 +21,9 @@ NULL
 
 
 
+# FIXME Rethink this approach, using `enriched()?`? Consider referring
+# to method support in pfgsea, for example.
+
 plotDEGUpset.DESeqAnalysis <- function(object) {
     degPerContrast <- mapply(
         results = resultsNames(object),
