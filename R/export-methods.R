@@ -6,16 +6,7 @@
 #' @name export
 #' @inherit bioverbs::export
 #'
-#' @inheritParams params
-#' @param x Object.
-#'   An object supporting [`dim()`][base::dim], or a supported class capable
-#'   of being coerced to `data.frame`, to be written to disk.
-#' @param name `character(1)`.
-#'   Name to use on disk. If `NULL`, will use the name of the object instead.
-#' @param dir `character(1)`.
-#'   Directory path.
-#' @param compress `logical(1)`.
-#'   Apply gzip compression to all files.
+#' @inheritParams brio::export
 #' @param ... Additional arguments.
 #'
 #' @examples
@@ -33,7 +24,7 @@ NULL
 #' @rdname export
 #' @name export
 #' @importFrom bioverbs export
-#' @usage export(x, ...)
+#' @usage export(object, ...)
 #' @export
 NULL
 
@@ -42,18 +33,18 @@ NULL
 # Internal helpers =============================================================
 # Here we are looping across each contrast and writing out DEG tables.
 # Note: We don't need to support humanize mode because `geneName` is required.
-.exportResultsTables <- function(x, dir, compress, lfcShrink) {
+.exportResultsTables <- function(object, dir, compress, lfcShrink) {
     assert(
-        is(x, "DESeqAnalysis"),
+        is(object, "DESeqAnalysis"),
         isFlag(compress),
         isFlag(lfcShrink)
     )
-    resultsNames <- resultsNames(x)
+    resultsNames <- resultsNames(object)
     out <- lapply(
         X = resultsNames,
         FUN = function(results) {
             resTbl <- resultsTables(
-                object = x,
+                object = object,
                 results = results,
                 lfcShrink = lfcShrink,
                 rowData = TRUE,
@@ -65,7 +56,7 @@ NULL
                 files <- paste0(files, ".gz")
             }
             mapply(
-                x = resTbl,
+                object = resTbl,
                 file = files,
                 FUN = export,
                 SIMPLIFY = TRUE,
@@ -84,22 +75,27 @@ NULL
 # Only export the raw and normalized counts.
 # Skip exporting other assays, including mu, H, cooks.
 export.DESeqDataSet <-  # nolint
-    function(x, name = NULL, dir = ".", compress = FALSE) {
-        validObject(x)
+    function(
+        object,
+        name = NULL,
+        dir = ".",
+        compress = FALSE
+    ) {
+        validObject(object)
 
         call <- standardizeCall()
         assert(isString(name, nullOK = TRUE))
         if (is.null(name)) {
-            name <- as.character(call[["x"]])
+            name <- as.character(call[["object"]])
         }
 
-        normalized <- counts(x, normalized = TRUE)
+        normalized <- counts(object, normalized = TRUE)
 
-        rse <- as(x, "RangedSummarizedExperiment")
+        rse <- as(object, "RangedSummarizedExperiment")
         assays(rse)[["normalized"]] <- normalized
         assays(rse) <- assays(rse)[c("counts", "normalized")]
 
-        export(x = rse, name = name, dir = dir, compress = compress)
+        export(object = rse, name = name, dir = dir, compress = compress)
     }
 
 
@@ -116,13 +112,13 @@ setMethod(
 
 export.DESeqAnalysis <-  # nolint
     function(
-        x,
+        object,
         name = NULL,
         dir = ".",
         compress = FALSE,
         lfcShrink = TRUE
     ) {
-        validObject(x)
+        validObject(object)
         assert(
             isString(name, nullOK = TRUE),
             isFlag(compress),
@@ -132,7 +128,7 @@ export.DESeqAnalysis <-  # nolint
         call <- standardizeCall()
         assert(isString(name, nullOK = TRUE))
         if (is.null(name)) {
-            name <- as.character(call[["x"]])
+            name <- as.character(call[["object"]])
         }
 
         # Note that we're combining the dir with name, so we can set
@@ -146,7 +142,7 @@ export.DESeqAnalysis <-  # nolint
         message("Exporting DESeqDataSet.")
         files[["data"]] <-
             export(
-                x = as(x, "DESeqDataSet"),
+                object = as(object, "DESeqDataSet"),
                 name = "data",
                 dir = dir,
                 compress = compress
@@ -156,7 +152,7 @@ export.DESeqAnalysis <-  # nolint
         message("Exporting DESeqTransform.")
         files[["transform"]] <-
             export(
-                x = as(x, "DESeqTransform"),
+                object = as(object, "DESeqTransform"),
                 name = "transform",
                 dir = dir,
                 compress = compress
@@ -166,7 +162,7 @@ export.DESeqAnalysis <-  # nolint
         message("Exporting DESeqResults tables.")
         files[["resultsTables"]] <-
             .exportResultsTables(
-                x = x,
+                object = object,
                 dir = file.path(dir, "resultsTables"),
                 compress = compress,
                 lfcShrink = lfcShrink
