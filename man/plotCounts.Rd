@@ -80,7 +80,5 @@ plotCounts(deseq, genes = genes, style = "facet")
 plotCounts(deseq, genes = genes, style = "wide")
 }
 \seealso{
-\itemize{
-\item \code{DESeq2::plotCounts()}.
-}
+\code{DESeq2::plotCounts()}.
 }

@@ -122,6 +122,9 @@ contrasts (e.g. interaction effect).}
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
 }
+\value{
+Plot.
+}
 \description{
 This function is an extension of \code{\link[=plotHeatmap]{plotHeatmap()}} that is optimized for
 automatic handling differentially expressed genes, rather than requiring
