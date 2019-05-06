@@ -83,6 +83,9 @@ Name or position of \code{DESeqResults}.}
 passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
 contrasts (e.g. interaction effect).}
 }
+\value{
+Plot.
+}
 \description{
 This function is an extension of \code{\link[BiocGenerics:plotPCA]{plotPCA()}} that is
 optimized for automatic handling of differentially expressed genes, rather
