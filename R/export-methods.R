@@ -7,6 +7,7 @@
 #' @inherit bioverbs::export
 #'
 #' @inheritParams brio::export
+#' @inheritParams params
 #' @param ... Additional arguments.
 #'
 #' @examples
