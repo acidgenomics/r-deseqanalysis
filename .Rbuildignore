@@ -1,8 +1,10 @@
-^CONTRIBUTING\.md$
-^Meta$
+^.*\.Rproj$
 ^[-._a-zA-Z0-9]+\.(R|html|pdf|png|sh|txt|yaml|yml)$
 ^[._][-._a-zA-Z0-9]+$
+^\.Rproj\.user$
+^CONTRIBUTING\.md$
 ^data-raw$
 ^doc(s)?$
+^Meta$
 ^pkgdown$
 ^vignettes/\.$
