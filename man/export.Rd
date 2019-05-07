@@ -7,18 +7,16 @@
 \alias{export,DESeqAnalysis-method}
 \title{Export}
 \usage{
-export(x, ...)
+export(object, ...)
 
-\S4method{export}{DESeqDataSet}(x, name = NULL, dir = ".",
+\S4method{export}{DESeqDataSet}(object, name = NULL, dir = ".",
   compress = FALSE)
 
-\S4method{export}{DESeqAnalysis}(x, name = NULL, dir = ".",
+\S4method{export}{DESeqAnalysis}(object, name = NULL, dir = ".",
   compress = FALSE, lfcShrink = TRUE)
 }
 \arguments{
-\item{x}{Object.
-An object supporting \code{\link[base:dim]{dim()}}, or a supported class capable
-of being coerced to \code{data.frame}, to be written to disk.}
+\item{object}{Object.}
 
 \item{name}{\code{character(1)}.
 Name to use on disk. If \code{NULL}, will use the name of the object instead.}
@@ -33,6 +31,9 @@ Apply gzip compression to all files.}
 Use shrunken log2 fold change (LFC) values.}
 
 \item{...}{Additional arguments.}
+}
+\value{
+Invisibily return file paths, either as \code{list} or \code{character}.
 }
 \description{
 Export data out of R and write to disk.
