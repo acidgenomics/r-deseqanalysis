@@ -39,7 +39,9 @@ contrastName.DESeqResults <-  # nolint
     function(object, format = c("resultsNames", "title")) {
         validObject(object)
         format <- match.arg(format)
-        x <- mcols(object)["log2FoldChange", "description", drop = TRUE]
+        # Previously, Bioc <= 3.7 set `use.names = FALSE` by default.
+        x <- mcols(object, use.names = TRUE)
+        x <- x["log2FoldChange", "description", drop = TRUE]
         assert(isCharacter(x))
         # Always strip prefix, e.g. log2 fold change (MLE).
         x <- sub("^.*:\\s", "", x)
