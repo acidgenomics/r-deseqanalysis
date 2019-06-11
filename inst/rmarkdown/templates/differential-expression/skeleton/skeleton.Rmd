@@ -24,8 +24,7 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, cache=FALSE, message=FALSE}
-# Last modified 2019-05-30
-library(basejump)
+# Last modified 2019-06-06
 library(DESeqAnalysis)
 prepareTemplate()
 source("_setup.R")
@@ -43,6 +42,7 @@ if (is.character(params$object)) {
     file <- params$object
     object <- import(file)
     name <- basenameSansExt(file)
+    rm(file)
 } else {
     object <- params$object
     name <- params$name
