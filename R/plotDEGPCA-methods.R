@@ -1,4 +1,4 @@
-# Do not allow post hoc alpha or lfcThreshold cutoffs here.
+## Do not allow post hoc alpha or lfcThreshold cutoffs here.
 
 
 
@@ -45,7 +45,7 @@ plotDEGPCA.DESeqResults <-  # nolint
         direction <- match.arg(direction)
         return <- match.arg(return)
 
-        # Rename objects internally to make the code more readable.
+        ## Rename objects internally to make the code more readable.
         res <- object
         dt <- counts
 
@@ -58,17 +58,17 @@ plotDEGPCA.DESeqResults <-  # nolint
             isNonNegative(lfcThreshold)
         )
 
-        # Get the character vector of DEGs.
+        ## Get the character vector of DEGs.
         deg <- deg(object = res, direction = direction)
         if (!hasLength(deg)) {
             warning("There are no DEGs to plot. Skipping.", call. = FALSE)
             return(invisible())
         }
 
-        # Subset to only include the DEGs.
+        ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
 
-        # Titles.
+        ## Titles.
         title <- contrastName(res)
         subtitle <- paste0(
             length(deg), " genes", ";  ",
@@ -76,14 +76,14 @@ plotDEGPCA.DESeqResults <-  # nolint
             "lfcThreshold: ", lfcThreshold
         )
 
-        # Using SummarizedExperiment method here.
+        ## Using SummarizedExperiment method here.
         rse <- as(dt, "RangedSummarizedExperiment")
         do.call(
             what = plotPCA,
             args = list(
                 object = rse,
                 interestingGroups = interestingGroups,
-                # We're using our DEGs instead of top (500) variable genes.
+                ## We're using our DEGs instead of top (500) variable genes.
                 ntop = Inf,
                 label = label,
                 title = title,
@@ -127,16 +127,16 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
             isFlag(contrastSamples)
         )
 
-        # Note that LFC values aren't used for this plot, just the DEGs, which
-        # are used to subset the DESeqTransform counts.
+        ## Note that LFC values aren't used for this plot, just the DEGs, which
+        ## are used to subset the DESeqTransform counts.
         res <- results(object, results = results, lfcShrink = FALSE)
         validObject(res)
 
-        # Using the variance-stabilized counts for visualization.
+        ## Using the variance-stabilized counts for visualization.
         dt <- as(object, "DESeqTransform")
         validObject(dt)
 
-        # Subset the DESeqTransform, if necessary.
+        ## Subset the DESeqTransform, if necessary.
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, results = results)
             assert(isSubset(samples, colnames(dt)))
@@ -144,7 +144,7 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
             colData(dt) <- relevelColData(colData(dt))
         }
 
-        # Passing through to DESeqResults/DESeqTransform method here.
+        ## Passing through to DESeqResults/DESeqTransform method here.
         do.call(
             what = plotDEGPCA,
             args = matchArgsToDoCall(

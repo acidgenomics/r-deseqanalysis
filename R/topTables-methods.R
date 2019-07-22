@@ -33,10 +33,10 @@ NULL
             isPositive(n)
         )
 
-        # Ensure columns are in camel case.
+        ## Ensure columns are in camel case.
         object <- camel(object)
 
-        # Select minimal columns of interest.
+        ## Select minimal columns of interest.
         required <- c(
             "rowname",
             "baseMean",
@@ -45,7 +45,7 @@ NULL
         )
         assert(isSubset(required, colnames(object)))
 
-        # Also include optional informative columns.
+        ## Also include optional informative columns.
         optional <- c(
             "geneID",
             "geneName",
@@ -58,24 +58,24 @@ NULL
         )
         object <- object[, keep, drop = FALSE]
 
-        # Get the top rows.
+        ## Get the top rows.
         object <- head(object, n = n)
 
-        # Sanitize optional columns first.
+        ## Sanitize optional columns first.
         if ("description" %in% colnames(object)) {
             object[["description"]] <- object[["description"]] %>%
                 as.character() %>%
-                # Remove symbol information in brackets.
+                ## Remove symbol information in brackets.
                 sub(
                     pattern = " \\[.+\\]$",
                     replacement = "",
                     x = .
                 ) %>%
-                # Truncate to max 50 characters.
+                ## Truncate to max 50 characters.
                 str_trunc(width = 50L, side = "right")
         }
 
-        # Now we can standardize using dplyr and return.
+        ## Now we can standardize using dplyr and return.
         object %>%
             mutate(
                 baseMean = round(!!sym("baseMean"), digits = 0L),
@@ -90,7 +90,7 @@ NULL
                     scientific = TRUE
                 )
             ) %>%
-            # Shorten `log2FoldChange` to `lfc` to keep column width compact.
+            ## Shorten `log2FoldChange` to `lfc` to keep column width compact.
             rename(lfc = !!sym("log2FoldChange")) %>%
             mutate_all(as.character)
     }
@@ -104,7 +104,7 @@ NULL
             isString(contrast),
             isInt(n)
         )
-        # Upregulated genes.
+        ## Upregulated genes.
         up <- object[["up"]]
         if (hasLength(up)) {
             show(kable(
@@ -112,7 +112,7 @@ NULL
                 caption = paste(contrast, "(upregulated)")
             ))
         }
-        # Downregulated genes.
+        ## Downregulated genes.
         down <- object[["down"]]
         if (hasLength(down)) {
             show(kable(
@@ -120,13 +120,13 @@ NULL
                 caption = paste(contrast, "(downregulated)")
             ))
         }
-        # Invisibly return list containing the subsets.
+        ## Invisibly return list containing the subsets.
         invisible(list(up = up, down = down))
     }
 
 
 
-# This is used in bcbioRNASeq F1000 paper.
+## This is used in bcbioRNASeq F1000 paper.
 topTables.DESeqResults <-  # nolint
     function(object, n = 10L) {
         list <- resultsTables(object)
@@ -154,8 +154,8 @@ topTables.DESeqAnalysis <-  # nolint
             rowData = TRUE,
             counts = FALSE
         )
-        # Suppressing the message about the contrast name we're matching here,
-        # since it will be shown in `resultsTables()` call above.
+        ## Suppressing the message about the contrast name we're matching here,
+        ## since it will be shown in `resultsTables()` call above.
         suppressMessages(
             contrast <- contrastName(object, results = results)
         )

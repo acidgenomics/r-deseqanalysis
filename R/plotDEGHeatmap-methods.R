@@ -1,4 +1,4 @@
-# Do not allow post hoc alpha or lfcThreshold cutoffs here.
+## Do not allow post hoc alpha or lfcThreshold cutoffs here.
 
 
 
@@ -31,9 +31,9 @@ NULL
 
 
 
-# This method is used in F1000 paper and needs to be included. Note that in
-# newer versions of bcbioRNASeq, this step won't work because we've slotted the
-# rlog/vst counts in as a matrix instead of DESeqTransform.
+## This method is used in F1000 paper and needs to be included. Note that in
+## newer versions of bcbioRNASeq, this step won't work because we've slotted the
+## rlog/vst counts in as a matrix instead of DESeqTransform.
 plotDEGHeatmap.DESeqResults <-  # nolint
     function(
         object,
@@ -58,7 +58,7 @@ plotDEGHeatmap.DESeqResults <-  # nolint
         direction <- match.arg(direction)
         scale <- match.arg(scale)
 
-        # Rename objects internally to make the code more readable.
+        ## Rename objects internally to make the code more readable.
         res <- object
         dt <- counts
 
@@ -74,17 +74,17 @@ plotDEGHeatmap.DESeqResults <-  # nolint
             isString(lfcShrinkType)
         )
 
-        # Get the character vector of DEGs.
+        ## Get the character vector of DEGs.
         deg <- deg(res, direction = direction)
         if (!hasLength(deg)) {
             warning("There are no DEGs to plot. Skipping.", call. = FALSE)
             return(invisible())
         }
 
-        # Subset to only include the DEGs.
+        ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
 
-        # Title
+        ## Title
         title <- paste0(
             contrastName(res, format = "title"), "\n",
             length(deg), " genes;  ",
@@ -96,7 +96,7 @@ plotDEGHeatmap.DESeqResults <-  # nolint
             title <- paste0(title, "; lfc > ", lfcThreshold)
         }
 
-        # Using SummarizedExperiment method defined in basejump here.
+        ## Using SummarizedExperiment method defined in basejump here.
         rse <- as(dt, "RangedSummarizedExperiment")
         do.call(
             what = plotHeatmap,
@@ -155,16 +155,16 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
             isFlag(lfcShrink)
         )
 
-        # Note use of `res` here instead of `results`, since we need to check
-        # the original `results` input below in `contrastSamples()` call.
+        ## Note use of `res` here instead of `results`, since we need to check
+        ## the original `results` input below in `contrastSamples()` call.
         res <- results(object, results = results, lfcShrink = lfcShrink)
         validObject(res)
 
-        # We're using the variance-stabilized counts for visualization here.
+        ## We're using the variance-stabilized counts for visualization here.
         dt <- as(object, "DESeqTransform")
         validObject(dt)
 
-        # Subset the DESeqTransform, if necessary.
+        ## Subset the DESeqTransform, if necessary.
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, results = results)
             assert(isSubset(samples, colnames(dt)))
@@ -172,7 +172,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
             colData(dt) <- relevelColData(colData(dt))
         }
 
-        # Passing to DESeqResults/DESeqTransform method.
+        ## Passing to DESeqResults/DESeqTransform method.
         do.call(
             what = plotDEGHeatmap,
             args = matchArgsToDoCall(

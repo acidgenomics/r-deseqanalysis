@@ -24,9 +24,9 @@ NULL
 
 
 
-# Get differential expressed genes (DEGs) from DESeqResults table.
-# Note that we're not sorting the identifiers here by LFC or P value.
-# It's just performing a simple subset to get the identifiers as a character.
+## Get differential expressed genes (DEGs) from DESeqResults table.
+## Note that we're not sorting the identifiers here by LFC or P value.
+## It's just performing a simple subset to get the identifiers as a character.
 deg.DESeqResults <-  # nolint
     function(
         object,
@@ -52,18 +52,18 @@ deg.DESeqResults <-  # nolint
         )
         direction <- match.arg(direction)
 
-        # Define symbols to use in dplyr calls below.
+        ## Define symbols to use in dplyr calls below.
         alphaCol <- sym("padj")
         lfcCol <- sym("log2FoldChange")
 
-        # Coerce to minimal tibble.
+        ## Coerce to minimal tibble.
         data <- as(object, "tbl_df")
         data <- select(data, !!!syms(c("rowname", "log2FoldChange", "padj")))
 
-        # Apply alpha cutoff.
+        ## Apply alpha cutoff.
         data <- filter(data, !!alphaCol < !!alpha)
 
-        # Apply LFC threshold cutoff.
+        ## Apply LFC threshold cutoff.
         if (lfcThreshold > 0L) {
             data <- filter(
                 data,
@@ -71,14 +71,14 @@ deg.DESeqResults <-  # nolint
             )
         }
 
-        # Apply directional filtering.
+        ## Apply directional filtering.
         if (direction == "up") {
             data <- filter(data, !!lfcCol > 0L)
         } else if (direction == "down") {
             data <- filter(data, !!lfcCol < 0L)
         }
 
-        # Arrange table by adjusted P value.
+        ## Arrange table by adjusted P value.
         data <- arrange(data, !!alphaCol)
 
         deg <- pull(data, "rowname")

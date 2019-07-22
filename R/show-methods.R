@@ -21,7 +21,7 @@ show.DESeqAnalysis <-  # nolint
             "DESeq2 ", metadata(dds)[["version"]]
         ), sep = "\n")
 
-        # Show information about the DESeqDataSet.
+        ## Show information about the DESeqDataSet.
         ddsInfo <- paste0("  ", capture.output(show(dds))[-1L])
         cat("data:", ddsInfo, sep = "\n")
 

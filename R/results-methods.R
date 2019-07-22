@@ -55,7 +55,7 @@ results.DESeqAnalysis <-  # nolint
             isFlag(lfcShrink)
         )
 
-        # Match the results.
+        ## Match the results.
         if (identical(lfcShrink, FALSE)) {
             slotName <- "results"
         } else if (
@@ -78,7 +78,7 @@ results.DESeqAnalysis <-  # nolint
         results <- slot(object, name = slotName)[[results]]
         assert(is(results, "DESeqResults"))
 
-        # Inform the user about which data we're using.
+        ## Inform the user about which data we're using.
         msg <- contrastName(results)
         if (isTRUE(lfcShrink)) {
             msg <- paste(msg, "(shrunken LFC)")

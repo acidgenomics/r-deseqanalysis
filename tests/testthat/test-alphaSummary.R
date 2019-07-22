@@ -7,14 +7,14 @@ test_that("Default, no contrast specified.", {
     expect_equal(
         object = object,
         expected = matrix(
-            # nolint start
+            ## nolint start
             data = c(
                 84, 69,  42,  23, 6,
                 87, 68,  31,  16, 3,
                  2,  2,   2,   2, 2,
                  0, 77, 125, 115, 0
             ),
-            # nolint end
+            ## nolint end
             nrow = 4L,
             ncol = 5L,
             byrow = TRUE,
