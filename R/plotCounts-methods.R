@@ -33,8 +33,8 @@ NULL
 
 
 
-# Note that DESeqDataSet is supported in basejump SummarizedExperiment method.
-# That will detect the object and plot normalized counts automatically.
+## Note that DESeqDataSet is supported in basejump SummarizedExperiment method.
+## That will detect the object and plot normalized counts automatically.
 plotCounts.DESeqAnalysis <-  # nolint
     function(object, genes, transform = FALSE) {
         validObject(object)

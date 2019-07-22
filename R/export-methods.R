@@ -1,5 +1,5 @@
-# DESeqTransform can inherit from SummarizedExperiment without modification.
-# DESeqResults can inherit from DataFrame without modification.
+## DESeqTransform can inherit from SummarizedExperiment without modification.
+## DESeqResults can inherit from DataFrame without modification.
 
 
 
@@ -31,9 +31,9 @@ NULL
 
 
 
-# Internal helpers =============================================================
-# Here we are looping across each contrast and writing out DEG tables.
-# Note: We don't need to support humanize mode because `geneName` is required.
+## Internal helpers =============================================================
+## Here we are looping across each contrast and writing out DEG tables.
+## Note: We don't need to support humanize mode because `geneName` is required.
 .exportResultsTables <- function(object, dir, compress, lfcShrink) {
     assert(
         is(object, "DESeqAnalysis"),
@@ -71,10 +71,10 @@ NULL
 
 
 
-# Exported methods =============================================================
-# Inheriting the SummarizedExperiment method internally here.
-# Only export the raw and normalized counts.
-# Skip exporting other assays, including mu, H, cooks.
+## Exported methods =============================================================
+## Inheriting the SummarizedExperiment method internally here.
+## Only export the raw and normalized counts.
+## Skip exporting other assays, including mu, H, cooks.
 export.DESeqDataSet <-  # nolint
     function(
         object,
@@ -132,14 +132,14 @@ export.DESeqAnalysis <-  # nolint
             name <- as.character(call[["object"]])
         }
 
-        # Note that we're combining the dir with name, so we can set
-        # subdirectories for each slotted data type (e.g. DESeqDataSet).
+        ## Note that we're combining the dir with name, so we can set
+        ## subdirectories for each slotted data type (e.g. DESeqDataSet).
         dir <- initDir(file.path(dir, name))
         rm(name)
 
         files <- list()
 
-        # DESeqDataSet.
+        ## DESeqDataSet.
         message("Exporting DESeqDataSet.")
         files[["data"]] <-
             export(
@@ -149,7 +149,7 @@ export.DESeqAnalysis <-  # nolint
                 compress = compress
             )
 
-        # DESeqTransform.
+        ## DESeqTransform.
         message("Exporting DESeqTransform.")
         files[["transform"]] <-
             export(
@@ -159,7 +159,7 @@ export.DESeqAnalysis <-  # nolint
                 compress = compress
             )
 
-        # DEG results tables.
+        ## DEG results tables.
         message("Exporting DESeqResults tables.")
         files[["resultsTables"]] <-
             .exportResultsTables(

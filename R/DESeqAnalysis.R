@@ -55,7 +55,7 @@ DESeqAnalysis <-  # nolint
     ) {
         metadata <- list(version = .version)
 
-        # Allow input of single `DESeqResults`.
+        ## Allow input of single `DESeqResults`.
         if (is(results, "DESeqResults")) {
             results <- .coerceResultsToList(results)
         }
@@ -63,7 +63,7 @@ DESeqAnalysis <-  # nolint
             lfcShrink <- .coerceResultsToList(lfcShrink)
         }
 
-        # Automatically convert `lfcShrink = NULL` to empty list.
+        ## Automatically convert `lfcShrink = NULL` to empty list.
         if (is.null(lfcShrink)) {
             lfcShrink <- list()
         }
@@ -80,7 +80,7 @@ DESeqAnalysis <-  # nolint
 
 
 
-# Note that this will automatically assign name.
+## Note that this will automatically assign name.
 .coerceResultsToList <- function(from) {
     assert(is(from, "DESeqResults"))
     to <- list(from)

@@ -7,23 +7,23 @@ library(DESeq2)
 
 data(rse, package = "basejump")
 
-# Restrict to 2 MB.
-# Use `pryr::object_size` instead of `utils::object.size`.
+## Restrict to 2 MB.
+## Use `pryr::object_size` instead of `utils::object.size`.
 limit <- structure(2e6, class = "object_size")
 
-# DESeqDataSet
-# Consider updating the example RSE in basejump to include more genes.
+## DESeqDataSet
+## Consider updating the example RSE in basejump to include more genes.
 dds <- DESeqDataSet(se = rse, design = ~ condition)
 dds <- DESeq(dds)
 validObject(dds)
 
-# DESeqTransform
+## DESeqTransform
 dt <- varianceStabilizingTransformation(dds)
 
-# DESeqResults
+## DESeqResults
 contrast <- resultsNames(dds)[[2L]]
 res <- results(dds, name = contrast)
-# Shrink log2 fold changes.
+## Shrink log2 fold changes.
 shrink <- lfcShrink(
     dds = dds,
     res = res,
@@ -31,7 +31,7 @@ shrink <- lfcShrink(
     type = "apeglm"
 )
 
-# Package up the analysis into a DESeqAnalysis object.
+## Package up the analysis into a DESeqAnalysis object.
 deseq <- DESeqAnalysis(
     data = dds,
     transform = dt,
@@ -39,7 +39,7 @@ deseq <- DESeqAnalysis(
     lfcShrink = shrink
 )
 
-# Report the size of each slot in bytes.
+## Report the size of each slot in bytes.
 vapply(
     X = coerceS4ToList(deseq),
     FUN = object_size,
@@ -48,7 +48,7 @@ vapply(
 object_size(deseq)
 stopifnot(object_size(deseq) < limit)
 
-# Check that object is valid.
+## Check that object is valid.
 stopifnot(is(deseq, "DESeqAnalysis"))
 validObject(deseq)
 

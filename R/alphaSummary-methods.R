@@ -48,7 +48,7 @@ alphaSummary.DESeqDataSet <-  # nolint
         validObject(object)
         assert(
             is.numeric(alpha),
-            # isAlpha requires scalar, so let's apply here.
+            ## isAlpha requires scalar, so let's apply here.
             all(vapply(
                 X = alpha,
                 FUN = isAlpha,
@@ -58,13 +58,13 @@ alphaSummary.DESeqDataSet <-  # nolint
             isString(name, nullOK = TRUE)
         )
 
-        # Either `contrast` or `name`.
-        # If neither are defined, we're checking the intercept.
+        ## Either `contrast` or `name`.
+        ## If neither are defined, we're checking the intercept.
         if (!is.null(contrast) && !is.null(name)) {
             stop("Specify either `contrast` or `name`.", call. = FALSE)
         }
 
-        # Generate an automatic caption.
+        ## Generate an automatic caption.
         if (!is.null(contrast)) {
             caption <- paste(contrast, collapse = " ")
         } else if (!is.null(name)) {
@@ -91,10 +91,10 @@ alphaSummary.DESeqDataSet <-  # nolint
                 args <- Filter(Negate(is.null), args)
                 results <- do.call(what = results, args = args)
                 output <- capture.output(summary(results))
-                # Subset the lines of interest from summary.
-                # Keep only the summary lines that contain a colon.
+                ## Subset the lines of interest from summary.
+                ## Keep only the summary lines that contain a colon.
                 output <- output[grepl(" : ", output)]
-                # Extract the values after the colon in summary.
+                ## Extract the values after the colon in summary.
                 match <- str_match(
                     string = output,
                     pattern = "^(.+)\\s\\:\\s([[:digit:]]+).*$"

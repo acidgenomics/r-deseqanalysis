@@ -21,8 +21,8 @@ NULL
 
 
 
-# FIXME Rethink this approach, using `enriched()?`? Consider referring
-# to method support in pfgsea, for example.
+## FIXME Rethink this approach, using `enriched()?`? Consider referring
+## to method support in pfgsea, for example.
 
 plotDEGUpset.DESeqAnalysis <- function(object) {
     degPerContrast <- mapply(
@@ -37,10 +37,10 @@ plotDEGUpset.DESeqAnalysis <- function(object) {
         USE.NAMES = TRUE
     )
     listInput <- do.call(what = c, args = degPerContrast)
-    # Using "_" instead of "." for name concatenation.
+    ## Using "_" instead of "." for name concatenation.
     names(listInput) <- makeNames(names(listInput), unique = TRUE)
-    # Suppressing message about single contrast not having up/down DEG overlap:
-    # geom_path: Each group consists of only one observation.
+    ## Suppressing message about single contrast not having up/down DEG overlap:
+    ## geom_path: Each group consists of only one observation.
     suppressMessages(
         upset(data = fromList(listInput))
     )
