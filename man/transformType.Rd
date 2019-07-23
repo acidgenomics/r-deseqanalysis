@@ -13,11 +13,6 @@ transformType(object, ...)
 
 \S4method{transformType}{DESeqAnalysis}(object)
 }
-\arguments{
-\item{object}{Object.}
-
-\item{...}{Additional arguments.}
-}
 \description{
 Variance-stabilizing transformation type
 }
