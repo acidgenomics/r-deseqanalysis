@@ -55,7 +55,8 @@ NULL
 
 
 ## Note that this method is used in bcbioRNASeq F1000 paper.
-resultsTables.DESeqResults <-  # nolint
+## Updated 2019-07-23.
+`resultsTables,DESeqResults` <-  # nolint
     function(object, return = c("tbl_df", "DataFrameList")) {
         validObject(object)
         return <- match.arg(return)
@@ -98,12 +99,13 @@ resultsTables.DESeqResults <-  # nolint
 setMethod(
     f = "resultsTables",
     signature = signature("DESeqResults"),
-    definition = resultsTables.DESeqResults
+    definition = `resultsTables,DESeqResults`
 )
 
 
 
-resultsTables.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`resultsTables,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
@@ -136,9 +138,9 @@ resultsTables.DESeqAnalysis <-  # nolint
         ## `rowData` that aren't informative for a user, and doesn't need to be
         ## included in the tables. Instead, only keep informative columns that
         ## are character or factor. Be sure to drop complex, non-atomic columns
-        ## (e.g. list, S4) that are allowed in GRanges/DataFrame but will fail to
-        ## write to disk as CSV. Note that we're using `decode` here to handle
-        ## S4 Rle columns from the Genomic Ranges.
+        ## (e.g. list, S4) that are allowed in GRanges/DataFrame but will fail
+        ## to write to disk as CSV. Note that we're using `decode` here to
+        ## handle S4 Rle columns from the Genomic Ranges.
         if (isTRUE(rowData)) {
             message("Joining row annotations.")
             rowData <- rowData(dds)
@@ -179,9 +181,9 @@ resultsTables.DESeqAnalysis <-  # nolint
             res <- cbind(res, counts)
         }
 
-        ## Using DESeqResults method. Note that join operations above will coerce
-        ## from DESeqResults to DataFrame, so we need to coerce back before
-        ## `resultsTables()` call.
+        ## Using DESeqResults method. Note that join operations above will
+        ## coerce from DESeqResults to DataFrame, so we need to coerce back
+        ## before `resultsTables()` call.
         res <- as(res, "DESeqResults")
         resultsTables(object = res, return = return)
     }
@@ -193,5 +195,5 @@ resultsTables.DESeqAnalysis <-  # nolint
 setMethod(
     f = "resultsTables",
     signature = signature("DESeqAnalysis"),
-    definition = resultsTables.DESeqAnalysis
+    definition = `resultsTables,DESeqAnalysis`
 )

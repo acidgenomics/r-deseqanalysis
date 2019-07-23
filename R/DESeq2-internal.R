@@ -1,7 +1,8 @@
-## Calculate a numeric vector to define the colors
-## -1: downregulated
-##  0: not significant
-##  1: upregulated
+## Calculate a numeric vector to define the colors.
+## - -1: downregulated
+## -  0: not significant
+## - +1: upregulated
+## Updated 2019-07-23.
 .addIsDECol <- function(
     data,
     testCol = "padj",
@@ -40,6 +41,7 @@
 
 
 
+## Updated 2019-07-23.
 .ddsMsg <- function() {
     message(paste0(
         "Generating DESeqDataSet with DESeq2 ",
@@ -49,6 +51,7 @@
 
 
 
+## Updated 2019-07-23.
 .transformCountsAxisLabel <- function(object) {
     paste(transformType(object), "counts (log2)")
 }

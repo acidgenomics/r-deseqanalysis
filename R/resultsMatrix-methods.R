@@ -33,7 +33,8 @@ NULL
 
 
 
-resultsMatrix.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`resultsMatrix,DESeqAnalysis` <-  # nolint
     function(
         object,
         value = c("log2FoldChange", "stat", "padj")
@@ -107,14 +108,15 @@ resultsMatrix.DESeqAnalysis <-  # nolint
 setMethod(
     f = "resultsMatrix",
     signature = signature("DESeqAnalysis"),
-    definition = resultsMatrix.DESeqAnalysis
+    definition = `resultsMatrix,DESeqAnalysis`
 )
 
 
 
 ## Loop across the nested DESeqAnalysis objects and get the corresponding
 ## result matrices.
-resultsMatrix.DESeqAnalysisList <-  # nolint
+## Updated 2019-07-23.
+`resultsMatrix,DESeqAnalysisList` <-  # nolint
     function(
         object,
         value = c("log2FoldChange", "stat", "padj")
@@ -149,5 +151,5 @@ resultsMatrix.DESeqAnalysisList <-  # nolint
 setMethod(
     f = "resultsMatrix",
     signature = signature("DESeqAnalysisList"),
-    definition = resultsMatrix.DESeqAnalysisList
+    definition = `resultsMatrix,DESeqAnalysisList`
 )

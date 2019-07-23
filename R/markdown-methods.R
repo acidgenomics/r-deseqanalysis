@@ -22,7 +22,8 @@ NULL
 
 
 
-markdown.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`markdown,DESeqAnalysis` <-  # nolint
     function(object) {
         show(markdownHeader("Contrast names"))
         show(markdownList(.contrastNames(object)))
@@ -35,5 +36,5 @@ markdown.DESeqAnalysis <-  # nolint
 setMethod(
     f = "markdown",
     signature = signature("DESeqAnalysis"),
-    definition = markdown.DESeqAnalysis
+    definition = `markdown,DESeqAnalysis`
 )

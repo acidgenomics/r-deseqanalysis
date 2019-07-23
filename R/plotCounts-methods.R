@@ -35,7 +35,8 @@ NULL
 
 ## Note that DESeqDataSet is supported in basejump SummarizedExperiment method.
 ## That will detect the object and plot normalized counts automatically.
-plotCounts.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`plotCounts,DESeqAnalysis` <-  # nolint
     function(object, genes, transform = FALSE) {
         validObject(object)
         assert(
@@ -68,7 +69,7 @@ plotCounts.DESeqAnalysis <-  # nolint
         )
     }
 
-f1 <- formals(plotCounts.DESeqAnalysis)
+f1 <- formals(`plotCounts,DESeqAnalysis`)
 f2 <- methodFormals(
     f = "plotCounts",
     signature = "SummarizedExperiment",
@@ -76,7 +77,7 @@ f2 <- methodFormals(
 )
 f2 <- f2[setdiff(names(f2), c(names(f1), "assay", "countsAxisLabel"))]
 f <- c(f1, f2)
-formals(plotCounts.DESeqAnalysis) <- f
+formals(`plotCounts,DESeqAnalysis`) <- f
 
 
 
@@ -85,5 +86,5 @@ formals(plotCounts.DESeqAnalysis) <- f
 setMethod(
     f = "plotCounts",
     signature = signature("DESeqAnalysis"),
-    definition = plotCounts.DESeqAnalysis
+    definition = `plotCounts,DESeqAnalysis`
 )

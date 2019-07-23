@@ -22,7 +22,8 @@ NULL
 
 
 
-plotPCA.DESeqTransform <-  # nolint
+## Updated 2019-07-23.
+`plotPCA,DESeqTransform` <-  # nolint
     getMethod(
         f = "plotPCA",
         signature = "SummarizedExperiment",
@@ -36,12 +37,13 @@ plotPCA.DESeqTransform <-  # nolint
 setMethod(
     f = "plotPCA",
     signature = signature("DESeqTransform"),
-    definition = plotPCA.DESeqTransform
+    definition = `plotPCA,DESeqTransform`
 )
 
 
 
-plotPCA.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`plotPCA,DESeqAnalysis` <-  # nolint
     function(object, ...) {
         validObject(object)
         message("Using DESeqTransform counts.")
@@ -56,5 +58,5 @@ plotPCA.DESeqAnalysis <-  # nolint
 setMethod(
     f = "plotPCA",
     signature = signature("DESeqAnalysis"),
-    definition = plotPCA.DESeqAnalysis
+    definition = `plotPCA,DESeqAnalysis`
 )

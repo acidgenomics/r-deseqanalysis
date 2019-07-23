@@ -67,7 +67,8 @@ NULL
 
 
 
-plotMA.DESeqResults <-  # nolint
+## Updated 2019-07-23.
+`plotMA,DESeqResults` <-  # nolint
     function(
         object,
         genes = NULL,
@@ -167,7 +168,7 @@ plotMA.DESeqResults <-  # nolint
             return(as(data, "DataFrame"))
         }
 
-        ## MA plot --------------------------------------------------------------
+        ## MA plot -------------------------------------------------------------
         log10BaseMean <- log10(data[["baseMean"]])
         floor <- min(floor(log10BaseMean))
         ceiling <- max(ceiling(log10BaseMean))
@@ -223,7 +224,7 @@ plotMA.DESeqResults <-  # nolint
                 )
         }
 
-        ## Gene text labels -----------------------------------------------------
+        ## Gene text labels ----------------------------------------------------
         ## Get the genes to visualize when `ntop` is declared.
         if (ntop > 0L) {
             assert(
@@ -267,7 +268,7 @@ plotMA.DESeqResults <-  # nolint
                 )
         }
 
-        ## Return ---------------------------------------------------------------
+        ## Return --------------------------------------------------------------
         p
     }
 
@@ -278,12 +279,13 @@ plotMA.DESeqResults <-  # nolint
 setMethod(
     f = "plotMA",
     signature = signature("DESeqResults"),
-    definition = plotMA.DESeqResults
+    definition = `plotMA,DESeqResults`
 )
 
 
 
-plotMA.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`plotMA,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
@@ -315,11 +317,11 @@ plotMA.DESeqAnalysis <-  # nolint
         )
     }
 
-f1 <- formals(plotMA.DESeqAnalysis)
-f2 <- formals(plotMA.DESeqResults)
+f1 <- formals(`plotMA,DESeqAnalysis`)
+f2 <- formals(`plotMA,DESeqResults`)
 f2 <- f2[setdiff(names(f2), c(names(f1), "gene2symbol"))]
 f <- c(f1, f2)
-formals(plotMA.DESeqAnalysis) <- f
+formals(`plotMA,DESeqAnalysis`) <- f
 
 
 
@@ -328,12 +330,12 @@ formals(plotMA.DESeqAnalysis) <- f
 setMethod(
     f = "plotMA",
     signature = signature("DESeqAnalysis"),
-    definition = plotMA.DESeqAnalysis
+    definition = `plotMA,DESeqAnalysis`
 )
 
 
 
-## Aliases ======================================================================
+## Aliases =====================================================================
 ## Soft deprecated, since this is used in bcbioRNASeq F1000 paper.
 #' @rdname plotMA
 #' @usage NULL

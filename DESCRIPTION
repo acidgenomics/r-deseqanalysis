@@ -43,7 +43,9 @@ Imports:
     rlang (>= 0.4),
     stringr (>= 1.4),
     tidyselect (>= 0.2),
-    methods, scales, utils
+    methods,
+    scales,
+    utils
 Suggests:
     BiocStyle,
     roxygen2 (>= 6.1),

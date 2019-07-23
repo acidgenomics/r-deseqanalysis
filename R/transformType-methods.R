@@ -8,7 +8,8 @@ NULL
 
 
 
-transformType.DESeqTransform <-  # nolint
+## Updated 2019-07-23.
+`transformType,DESeqTransform` <-  # nolint
     function(object) {
         validObject(object)
         if ("rlogIntercept" %in% colnames(mcols(object))) {
@@ -25,12 +26,13 @@ transformType.DESeqTransform <-  # nolint
 setMethod(
     f = "transformType",
     signature = signature("DESeqTransform"),
-    definition = transformType.DESeqTransform
+    definition = `transformType,DESeqTransform`
 )
 
 
 
-transformType.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`transformType,DESeqAnalysis` <-  # nolint
     function(object) {
         validObject(object)
         dt <- as(object, "DESeqTransform")
@@ -44,5 +46,5 @@ transformType.DESeqAnalysis <-  # nolint
 setMethod(
     f = "transformType",
     signature = signature("DESeqAnalysis"),
-    definition = transformType.DESeqAnalysis
+    definition = `transformType,DESeqAnalysis`
 )

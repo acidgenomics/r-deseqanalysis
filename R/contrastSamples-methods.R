@@ -34,7 +34,8 @@ NULL
 
 
 
-contrastSamples.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`contrastSamples,DESeqAnalysis` <-  # nolint
     function(object, results) {
         validObject(object)
         suppressMessages(
@@ -120,5 +121,5 @@ contrastSamples.DESeqAnalysis <-  # nolint
 setMethod(
     f = "contrastSamples",
     signature = signature("DESeqAnalysis"),
-    definition = contrastSamples.DESeqAnalysis
+    definition = `contrastSamples,DESeqAnalysis`
 )

@@ -31,9 +31,10 @@ NULL
 
 
 
-## Internal helpers =============================================================
+## Internal helpers ============================================================
 ## Here we are looping across each contrast and writing out DEG tables.
 ## Note: We don't need to support humanize mode because `geneName` is required.
+## Updated 2019-07-23.
 .exportResultsTables <- function(object, dir, compress, lfcShrink) {
     assert(
         is(object, "DESeqAnalysis"),
@@ -71,11 +72,12 @@ NULL
 
 
 
-## Exported methods =============================================================
+## Exported methods ============================================================
 ## Inheriting the SummarizedExperiment method internally here.
 ## Only export the raw and normalized counts.
 ## Skip exporting other assays, including mu, H, cooks.
-export.DESeqDataSet <-  # nolint
+## Updated 2019-07-23.
+`export,DESeqDataSet` <-  # nolint
     function(
         object,
         name = NULL,
@@ -106,12 +108,13 @@ export.DESeqDataSet <-  # nolint
 setMethod(
     f = "export",
     signature = signature("DESeqDataSet"),
-    definition = export.DESeqDataSet
+    definition = `export,DESeqDataSet`
 )
 
 
 
-export.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`export,DESeqAnalysis` <-  # nolint
     function(
         object,
         name = NULL,
@@ -179,5 +182,5 @@ export.DESeqAnalysis <-  # nolint
 setMethod(
     f = "export",
     signature = signature("DESeqAnalysis"),
-    definition = export.DESeqAnalysis
+    definition = `export,DESeqAnalysis`
 )

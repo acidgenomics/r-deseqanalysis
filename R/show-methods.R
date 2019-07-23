@@ -11,7 +11,8 @@ NULL
 
 
 
-show.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`show,DESeqAnalysis` <-  # nolint
     function(object) {
         validObject(object)
         dds <- as(object, "DESeqDataSet")
@@ -46,5 +47,5 @@ show.DESeqAnalysis <-  # nolint
 setMethod(
     f = "show",
     signature = signature("DESeqAnalysis"),
-    definition = show.DESeqAnalysis
+    definition = `show,DESeqAnalysis`
 )
