@@ -1,7 +1,7 @@
 ## Calculate a numeric vector to define the colors.
-## - -1: downregulated
-## -  0: not significant
-## - +1: upregulated
+## - `-1`: downregulated
+## -  `0`: not significant
+## - `+1`: upregulated
 ## Updated 2019-07-23.
 .addIsDECol <- function(
     data,
