@@ -16,7 +16,7 @@
 #'   decode initDir interestingGroups<- makeNames mapGenesToRownames
 #'   markdownHeader markdownList matchArgsToDoCall matchInterestingGroups
 #'   matchesGene2Symbol methodFormals printString relevel removeNA showSlotInfo
-#'   snakeCase standardizeCall
+#'   standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom dplyr arrange desc everything filter left_join mutate mutate_all
 #'   pull rename row_number select

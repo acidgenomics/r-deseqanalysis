@@ -124,7 +124,7 @@ plotMA.DESeqResults <-  # nolint
 
         data <- object %>%
             as_tibble(rownames = "rowname") %>%
-            camel() %>%
+            camelCase() %>%
             ## Remove genes with very low expression.
             filter(!!sym("baseMean") >= 1L) %>%
             mutate(rankScore = abs(!!sym("log2FoldChange"))) %>%
