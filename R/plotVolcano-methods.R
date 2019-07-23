@@ -350,7 +350,7 @@ setMethod(
         )
         results <- results(object, results = results, lfcShrink = lfcShrink)
         do.call(
-            what = plotVolcano.DESeqResults,
+            what = `plotVolcano,DESeqResults`,
             args = matchArgsToDoCall(
                 args = list(
                     object = results,
