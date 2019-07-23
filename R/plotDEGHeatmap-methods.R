@@ -169,7 +169,7 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
             samples <- contrastSamples(object, results = results)
             assert(isSubset(samples, colnames(dt)))
             dt <- dt[, samples, drop = FALSE]
-            colData(dt) <- relevelColData(colData(dt))
+            colData(dt) <- relevel(colData(dt))
         }
 
         ## Passing to DESeqResults/DESeqTransform method.

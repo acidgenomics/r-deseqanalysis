@@ -12,12 +12,11 @@
 #' @importFrom SummarizedExperiment assays assays<- colData colData<-
 #' @importFrom UpSetR fromList
 #' @importFrom acidplots plotHeatmap upset
-#' @importFrom basejump Gene2Symbol as_tibble camel
-#'   convertSampleIDsToNames decode initDir interestingGroups<- makeNames
-#'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
-#'   matchInterestingGroups matchesGene2Symbol methodFormals
-#'   printString relevelColData removeNA showSlotInfo snake
-#'   standardizeCall
+#' @importFrom basejump Gene2Symbol as_tibble camelCase convertSampleIDsToNames
+#'   decode initDir interestingGroups<- makeNames mapGenesToRownames
+#'   markdownHeader markdownList matchArgsToDoCall matchInterestingGroups
+#'   matchesGene2Symbol methodFormals printString relevel removeNA showSlotInfo
+#'   snakeCase standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom dplyr arrange desc everything filter left_join mutate mutate_all
 #'   pull rename row_number select
