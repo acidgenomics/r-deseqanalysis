@@ -8,7 +8,8 @@ NULL
 
 
 
-lfcShrinkType.DESeqResults <-  # nolint
+## Updated 2019-07-23.
+`lfcShrinkType,DESeqResults` <-  # nolint
     function(object) {
         validObject(object)
         pi <- priorInfo(object)
@@ -28,12 +29,13 @@ lfcShrinkType.DESeqResults <-  # nolint
 setMethod(
     f = "lfcShrinkType",
     signature = signature("DESeqResults"),
-    definition = lfcShrinkType.DESeqResults
+    definition = `lfcShrinkType,DESeqResults`
 )
 
 
 
-lfcShrinkType.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`lfcShrinkType,DESeqAnalysis` <-  # nolint
     function(object) {
         validObject(object)
         lfcShrink <- slot(object, "lfcShrink")
@@ -48,5 +50,5 @@ lfcShrinkType.DESeqAnalysis <-  # nolint
 setMethod(
     f = "lfcShrinkType",
     signature = signature("DESeqAnalysis"),
-    definition = lfcShrinkType.DESeqAnalysis
+    definition = `lfcShrinkType,DESeqAnalysis`
 )

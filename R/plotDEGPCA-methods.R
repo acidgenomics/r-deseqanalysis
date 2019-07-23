@@ -29,7 +29,8 @@ NULL
 
 
 
-plotDEGPCA.DESeqResults <-  # nolint
+## Updated 2019-07-23.
+`plotDEGPCA,DESeqResults` <-  # nolint
     function(
         object,
         counts,
@@ -93,7 +94,7 @@ plotDEGPCA.DESeqResults <-  # nolint
         )
     }
 
-f1 <- formals(plotDEGPCA.DESeqResults)
+f1 <- formals(`plotDEGPCA,DESeqResults`)
 f2 <- methodFormals(
     f = "plotPCA",
     signature = "SummarizedExperiment",
@@ -101,7 +102,7 @@ f2 <- methodFormals(
 )
 f2 <- f2[setdiff(names(f2), c("ntop", "subtitle", "title"))]
 f <- c(f1, f2)
-formals(plotDEGPCA.DESeqResults) <- f
+formals(`plotDEGPCA,DESeqResults`) <- f
 
 
 
@@ -110,12 +111,13 @@ formals(plotDEGPCA.DESeqResults) <- f
 setMethod(
     f = "plotDEGPCA",
     signature = signature("DESeqResults"),
-    definition = plotDEGPCA.DESeqResults
+    definition = `plotDEGPCA,DESeqResults`
 )
 
 
 
-plotDEGPCA.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`plotDEGPCA,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
@@ -160,11 +162,11 @@ plotDEGPCA.DESeqAnalysis <-  # nolint
         )
     }
 
-f1 <- formals(plotDEGPCA.DESeqAnalysis)
-f2 <- formals(plotDEGPCA.DESeqResults)
+f1 <- formals(`plotDEGPCA,DESeqAnalysis`)
+f2 <- formals(`plotDEGPCA,DESeqResults`)
 f2 <- f2[setdiff(names(f2), c(names(f1), "counts"))]
 f <- c(f1, f2)
-formals(plotDEGPCA.DESeqAnalysis) <- f
+formals(`plotDEGPCA,DESeqAnalysis`) <- f
 
 
 
@@ -173,5 +175,5 @@ formals(plotDEGPCA.DESeqAnalysis) <- f
 setMethod(
     f = "plotDEGPCA",
     signature = signature("DESeqAnalysis"),
-    definition = plotDEGPCA.DESeqAnalysis
+    definition = `plotDEGPCA,DESeqAnalysis`
 )

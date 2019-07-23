@@ -22,7 +22,8 @@ NULL
 
 
 
-results.DESeqDataSet <-  # nolint
+## Updated 2019-07-23.
+`results,DESeqDataSet` <-  # nolint
     function(object, ...) {
         DESeq2::results(object, ...)
     }
@@ -34,12 +35,13 @@ results.DESeqDataSet <-  # nolint
 setMethod(
     f = "results",
     signature = signature("DESeqDataSet"),
-    definition = results.DESeqDataSet
+    definition = `results,DESeqDataSet`
 )
 
 
 
-results.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`results,DESeqAnalysis` <-  # nolint
     function(object, results, lfcShrink = FALSE) {
         if (missing(results)) {
             stop(paste(
@@ -97,5 +99,5 @@ results.DESeqAnalysis <-  # nolint
 setMethod(
     f = "results",
     signature = signature("DESeqAnalysis"),
-    definition = results.DESeqAnalysis
+    definition = `results,DESeqAnalysis`
 )

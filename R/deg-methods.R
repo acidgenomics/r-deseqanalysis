@@ -27,7 +27,8 @@ NULL
 ## Get differential expressed genes (DEGs) from DESeqResults table.
 ## Note that we're not sorting the identifiers here by LFC or P value.
 ## It's just performing a simple subset to get the identifiers as a character.
-deg.DESeqResults <-  # nolint
+## Updated 2019-07-23.
+`deg,DESeqResults` <-  # nolint
     function(
         object,
         alpha = NULL,
@@ -109,13 +110,13 @@ deg.DESeqResults <-  # nolint
 setMethod(
     f = "deg",
     signature = signature("DESeqResults"),
-    definition = deg.DESeqResults
+    definition = `deg,DESeqResults`
 )
 
 
 
-
-deg.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`deg,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
@@ -133,5 +134,5 @@ deg.DESeqAnalysis <-  # nolint
 setMethod(
     f = "deg",
     signature = signature("DESeqAnalysis"),
-    definition = deg.DESeqAnalysis
+    definition = `deg,DESeqAnalysis`
 )

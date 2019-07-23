@@ -34,7 +34,8 @@ NULL
 ## This method is used in F1000 paper and needs to be included. Note that in
 ## newer versions of bcbioRNASeq, this step won't work because we've slotted the
 ## rlog/vst counts in as a matrix instead of DESeqTransform.
-plotDEGHeatmap.DESeqResults <-  # nolint
+## Updated 2019-07-23.
+`plotDEGHeatmap,DESeqResults` <-  # nolint
     function(
         object,
         counts,
@@ -114,7 +115,7 @@ plotDEGHeatmap.DESeqResults <-  # nolint
         )
     }
 
-f1 <- formals(plotDEGHeatmap.DESeqResults)
+f1 <- formals(`plotDEGHeatmap,DESeqResults`)
 f2 <- methodFormals(
     f = "plotHeatmap",
     signature = "SummarizedExperiment",
@@ -128,7 +129,7 @@ f[["color"]] <- quote(
         default = acidplots::blueYellow
     )
 )
-formals(plotDEGHeatmap.DESeqResults) <- f
+formals(`plotDEGHeatmap,DESeqResults`) <- f
 
 
 
@@ -137,12 +138,13 @@ formals(plotDEGHeatmap.DESeqResults) <- f
 setMethod(
     f = "plotDEGHeatmap",
     signature = signature("DESeqResults"),
-    definition = plotDEGHeatmap.DESeqResults
+    definition = `plotDEGHeatmap,DESeqResults`
 )
 
 
 
-plotDEGHeatmap.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`plotDEGHeatmap,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
@@ -189,11 +191,11 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         )
     }
 
-f1 <- formals(plotDEGHeatmap.DESeqAnalysis)
-f2 <- formals(plotDEGHeatmap.DESeqResults)
+f1 <- formals(`plotDEGHeatmap,DESeqAnalysis`)
+f2 <- formals(`plotDEGHeatmap,DESeqResults`)
 f2 <- f2[setdiff(names(f2), c(names(f1), "counts"))]
 f <- c(f1, f2)
-formals(plotDEGHeatmap.DESeqAnalysis) <- f
+formals(`plotDEGHeatmap,DESeqAnalysis`) <- f
 
 
 
@@ -202,5 +204,5 @@ formals(plotDEGHeatmap.DESeqAnalysis) <- f
 setMethod(
     f = "plotDEGHeatmap",
     signature = signature("DESeqAnalysis"),
-    definition = plotDEGHeatmap.DESeqAnalysis
+    definition = `plotDEGHeatmap,DESeqAnalysis`
 )

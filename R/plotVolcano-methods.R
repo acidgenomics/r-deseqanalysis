@@ -65,7 +65,8 @@ NULL
 
 
 
-plotVolcano.DESeqResults <-  # nolint
+## Updated 2019-07-23.
+`plotVolcano,DESeqResults` <-  # nolint
     function(
         object,
         ylim = 1e-10,
@@ -157,7 +158,7 @@ plotVolcano.DESeqResults <-  # nolint
             return(as(data, "DataFrame"))
         }
 
-        ## LFC density ----------------------------------------------------------
+        ## LFC density ---------------------------------------------------------
         lfcHist <- ggplot(
             data = data,
             mapping = aes(x = !!sym(lfcCol))
@@ -182,7 +183,7 @@ plotVolcano.DESeqResults <-  # nolint
                 axis.ticks.y = element_blank()
             )
 
-        ## P value density ------------------------------------------------------
+        ## P value density -----------------------------------------------------
         pvalueHist <- ggplot(
             data = data,
             mapping = aes(x = !!sym(negLogTestCol))
@@ -207,7 +208,7 @@ plotVolcano.DESeqResults <-  # nolint
                 axis.ticks.y = element_blank()
             )
 
-        ## Volcano plot ---------------------------------------------------------
+        ## Volcano plot --------------------------------------------------------
         p <- ggplot(
             data = data,
             mapping = aes(
@@ -251,7 +252,7 @@ plotVolcano.DESeqResults <-  # nolint
                 )
         }
 
-        ## Gene text labels -----------------------------------------------------
+        ## Gene text labels ----------------------------------------------------
         ## Get the genes to visualize when `ntop` is declared.
         if (ntop > 0L) {
             assert(
@@ -292,7 +293,7 @@ plotVolcano.DESeqResults <-  # nolint
                 )
         }
 
-        ## Return ---------------------------------------------------------------
+        ## Return --------------------------------------------------------------
         if (isTRUE(histograms)) {
             ggdraw() +
                 ## Coordinates are relative to lower left corner
@@ -323,12 +324,13 @@ plotVolcano.DESeqResults <-  # nolint
 setMethod(
     f = "plotVolcano",
     signature = signature("DESeqResults"),
-    definition = plotVolcano.DESeqResults
+    definition = `plotVolcano,DESeqResults`
 )
 
 
 
-plotVolcano.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`plotVolcano,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
@@ -360,11 +362,11 @@ plotVolcano.DESeqAnalysis <-  # nolint
         )
     }
 
-f1 <- formals(plotVolcano.DESeqAnalysis)
-f2 <- formals(plotVolcano.DESeqResults)
+f1 <- formals(`plotVolcano,DESeqAnalysis`)
+f2 <- formals(`plotVolcano,DESeqResults`)
 f2 <- f2[setdiff(names(f2), c(names(f1), "gene2symbol"))]
 f <- c(f1, f2)
-formals(plotVolcano.DESeqAnalysis) <- f
+formals(`plotVolcano,DESeqAnalysis`) <- f
 
 
 
@@ -373,5 +375,5 @@ formals(plotVolcano.DESeqAnalysis) <- f
 setMethod(
     f = "plotVolcano",
     signature = signature("DESeqAnalysis"),
-    definition = plotVolcano.DESeqAnalysis
+    definition = `plotVolcano,DESeqAnalysis`
 )

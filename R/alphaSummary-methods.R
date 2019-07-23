@@ -38,7 +38,8 @@ NULL
 
 
 
-alphaSummary.DESeqDataSet <-  # nolint
+## Updated 2019-07-23.
+`alphaSummary,DESeqDataSet` <-  # nolint
     function(
         object,
         alpha = c(0.1, 0.05, 0.01, 1e-3, 1e-6),
@@ -118,5 +119,5 @@ alphaSummary.DESeqDataSet <-  # nolint
 setMethod(
     f = "alphaSummary",
     signature = signature("DESeqDataSet"),
-    definition = alphaSummary.DESeqDataSet
+    definition = `alphaSummary,DESeqDataSet`
 )

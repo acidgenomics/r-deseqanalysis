@@ -25,6 +25,7 @@ NULL
 
 
 
+## Updated 2019-07-23.
 .topTable <-  # nolint
     function(object, n = 10L) {
         assert(
@@ -97,7 +98,8 @@ NULL
 
 
 
-.topTables.resultsTables <-  # nolint
+## Updated 2019-07-23.
+.topTables <-  # nolint
     function(object, contrast, n) {
         assert(
             is.list(object),
@@ -127,11 +129,12 @@ NULL
 
 
 ## This is used in bcbioRNASeq F1000 paper.
-topTables.DESeqResults <-  # nolint
+## Updated 2019-07-23.
+`topTables,DESeqResults` <-  # nolint
     function(object, n = 10L) {
         list <- resultsTables(object)
         contrast <- contrastName(object)
-        .topTables.resultsTables(
+        .topTables(
             object = list,
             contrast = contrast,
             n = n
@@ -140,7 +143,8 @@ topTables.DESeqResults <-  # nolint
 
 
 
-topTables.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`topTables,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
@@ -159,7 +163,7 @@ topTables.DESeqAnalysis <-  # nolint
         suppressMessages(
             contrast <- contrastName(object, results = results)
         )
-        .topTables.resultsTables(
+        .topTables(
             object = list,
             contrast = contrast,
             n = n
@@ -173,5 +177,5 @@ topTables.DESeqAnalysis <-  # nolint
 setMethod(
     f = "topTables",
     signature = signature("DESeqAnalysis"),
-    definition = topTables.DESeqAnalysis
+    definition = `topTables,DESeqAnalysis`
 )

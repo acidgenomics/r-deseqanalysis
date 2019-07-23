@@ -46,6 +46,8 @@
 #'     lfcShrink = lfcShrink
 #' )
 #' print(x)
+
+## Updated 2019-07-23.
 DESeqAnalysis <-  # nolint
     function(
         data,
@@ -81,6 +83,7 @@ DESeqAnalysis <-  # nolint
 
 
 ## Note that this will automatically assign name.
+## Updated 2019-07-23.
 .coerceResultsToList <- function(from) {
     assert(is(from, "DESeqResults"))
     to <- list(from)
@@ -90,6 +93,7 @@ DESeqAnalysis <-  # nolint
 
 
 
+## Updated 2019-07-23.
 .contrastNames <- function(object) {
     assert(is(object, "DESeqAnalysis"))
     vapply(

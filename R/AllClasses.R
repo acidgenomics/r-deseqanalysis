@@ -38,6 +38,8 @@
 #' @seealso
 #' - `help(topic = "Annotated-class", package = "S4Vectors")`.
 #' - `showClass("Annotated")`.
+
+## Updated 2019-07-23.
 setClass(
     Class = "DESeqAnalysis",
     contains = "Annotated",
@@ -147,6 +149,8 @@ setClass(
 #'
 #' @author Michael Steinbaugh
 #' @export
+
+## Updated 2019-07-23.
 setClass(
     Class = "DESeqAnalysisList",
     contains = "SimpleList",

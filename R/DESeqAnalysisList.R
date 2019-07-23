@@ -5,6 +5,8 @@
 #' @rdname DESeqAnalysisList-class
 #' @param ... `DESeqAnalysis` objects.
 #' @export
+
+## Updated 2019-07-23.
 DESeqAnalysisList <- function(...) {  # nolint
     mc <- match.call(expand.dots = FALSE)
     dots <- list(...)

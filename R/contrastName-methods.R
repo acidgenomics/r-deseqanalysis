@@ -35,7 +35,8 @@ NULL
 
 
 
-contrastName.DESeqResults <-  # nolint
+## Updated 2019-07-23.
+`contrastName,DESeqResults` <-  # nolint
     function(object, format = c("resultsNames", "title")) {
         validObject(object)
         format <- match.arg(format)
@@ -66,12 +67,13 @@ contrastName.DESeqResults <-  # nolint
 setMethod(
     f = "contrastName",
     signature = signature("DESeqResults"),
-    definition = contrastName.DESeqResults
+    definition = `contrastName,DESeqResults`
 )
 
 
 
-contrastName.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`contrastName,DESeqAnalysis` <-  # nolint
     function(object, results) {
         suppressMessages(
             results <- results(object = object, results = results)
@@ -89,5 +91,5 @@ contrastName.DESeqAnalysis <-  # nolint
 setMethod(
     f = "contrastName",
     signature = signature("DESeqAnalysis"),
-    definition = contrastName.DESeqAnalysis
+    definition = `contrastName,DESeqAnalysis`
 )

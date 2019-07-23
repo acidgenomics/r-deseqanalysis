@@ -21,7 +21,8 @@ NULL
 
 
 
-resultsNames.DESeqDataSet <-  # nolint
+## Updated 2019-07-23.
+`resultsNames,DESeqDataSet` <-  # nolint
     function(object) {
         DESeq2::resultsNames(object)
     }
@@ -33,12 +34,13 @@ resultsNames.DESeqDataSet <-  # nolint
 setMethod(
     f = "resultsNames",
     signature = signature("DESeqDataSet"),
-    definition = resultsNames.DESeqDataSet
+    definition = `resultsNames,DESeqDataSet`
 )
 
 
 
-resultsNames.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`resultsNames,DESeqAnalysis` <-  # nolint
     function(object) {
         names(object@results)
     }
@@ -50,5 +52,5 @@ resultsNames.DESeqAnalysis <-  # nolint
 setMethod(
     f = "resultsNames",
     signature = signature("DESeqAnalysis"),
-    definition = resultsNames.DESeqAnalysis
+    definition = `resultsNames,DESeqAnalysis`
 )
