@@ -41,6 +41,12 @@
 #' ## DESeqAnalysis ====
 #' x <- resultsTables(deseq, results = 1L)
 #' print(x)
+#'
+#' ## DESeqResults ====
+#' Use of DESeqAnalysis is encouraged instead of this approach.
+#' res <- results(deseq, results = 1L)
+#' dds <- as(deseq, "DESeqDataSet")
+#' x <- resultsTables(object = res, counts = dds)
 NULL
 
 
@@ -54,12 +60,142 @@ NULL
 
 
 
+## Updated 2019-07-23.
+.joinCounts <- function(results, counts) {
+    assert(
+        is(results, "DESeqResults"),
+        isAny(counts, c("DESeqDataSet", "matrix"))
+    )
+    validObject(results)
+    validObject(counts)
+    if (is(counts, "DESeqDataSet")) {
+        message("Joining size factor adjusted normalized counts.")
+        counts <- counts(counts, normalized = TRUE)
+    } else {
+        message("Joining counts.")
+    }
+    assert(
+        is.matrix(counts),
+        identical(rownames(results), rownames(counts)),
+        areDisjointSets(colnames(results), colnames(counts))
+    )
+    out <- cbind(results, counts)
+    out <- as(out, "DESeqResults")
+    validObject(out)
+    out
+}
+
+
+
+## Updated 2019-07-23.
+.joinRowData <- function(results, rowData) {
+    assert(
+        is(results, "DESeqResults"),
+        isAny(rowData, c("SummarizedExperiment", "DataFrame"))
+    )
+    validObject(results)
+    validObject(rowData)
+    if (is(rowData, "SummarizedExperiment")) {
+        ## SummarizedExperiment inconsistently handles rownames on rowData.
+        ## Ensure they are set here before continuing.
+        rownames <- rownames(rowData)
+        rowData <- rowData(rowData)
+        rownames(rowData) <- rownames
+    }
+    message("Joining row annotations.")
+    rowData <- decode(rowData)
+    keep <- vapply(
+        X = rowData,
+        FUN = function(x) {
+            is.character(x) || is.factor(x)
+        },
+        FUN.VALUE = logical(1L)
+    )
+    rowData <- rowData[, keep, drop = FALSE]
+    assert(
+        all(vapply(
+            X = rowData,
+            FUN = is.atomic,
+            FUN.VALUE = logical(1L)
+        )),
+        isNonEmpty(rowData),
+        identical(rownames(results), rownames(rowData)),
+        areDisjointSets(colnames(results), colnames(rowData))
+    )
+    out <- cbind(results, rowData)
+    out <- as(out, "DESeqResults")
+    validObject(out)
+    out
+}
+
+
+
+## FIXME Add counts support
+## FIXME Inform the user about removal of Dropbox support.
+
+## FIXME Make the alpha mode automatic.
+## Detect it internally instead.
+
+## bcbioRNASeq v0.2 release series defaults:
+## https://github.com/hbc/bcbioRNASeq/blob/v0.2.10/R/resultsTables-methods.R
+## nolint start
+## - alpha
+## - lfcThreshold = 0L
+## - summary = TRUE
+## - write = FALSE
+## - headerLevel = 2L
+## - dir = "."
+## - dropboxDir = NULL
+## - rdsToken = NULL
+## nolint end
+
+## counts
+## matrix or DESeqDataSet
+
 ## Note that this method is used in bcbioRNASeq F1000 paper.
 ## Updated 2019-07-23.
 `resultsTables,DESeqResults` <-  # nolint
-    function(object, return = c("tbl_df", "DataFrameList")) {
+    function(
+        object,
+        counts = NULL,
+        return = c("tbl_df", "DataFrameList"),
+        ...
+    ) {
         validObject(object)
+        assert(isAny(counts, c("DESeqDataSet", "NULL")))
         return <- match.arg(return)
+
+        ## Legacy bcbioRNASeq arguments ----------------------------------------
+        call <- match.call()
+
+        ## alpha
+        if (isSubset("alpha", names(call))) {
+            error("Post-hoc alpha level filtering is no longer supported.")
+        }
+
+        ## lfcThreshold
+        if (isSubset("lfcThreshold", names(call))) {
+            error("Post-hoc LFC threshold filtering is no longer supported.")
+        }
+
+        ## summary
+
+        ## dir
+        ## write
+        ## FIXME Encourage export instead.
+
+        ## headerLevel
+
+        ## dropboxDir
+        ## rdsToken
+
+        ## Join row data and counts from DESeqDataSet.
+        if (is(counts, "DESeqDataSet")) {
+            object <- .joinRowData(results = object, rowData = counts)
+        }
+        if (!is.null(counts)) {
+            object <- .joinCounts(results = object, counts = counts)
+        }
 
         ## Get the DEG character vectors, which we'll use against the rownames.
         both <- deg(object, direction = "both")
@@ -135,56 +271,28 @@ setMethod(
         dds <- convertSampleIDsToNames(dds)
 
         ## Join the row annotations. DESeq2 includes additional columns in
-        ## `rowData` that aren't informative for a user, and doesn't need to be
-        ## included in the tables. Instead, only keep informative columns that
-        ## are character or factor. Be sure to drop complex, non-atomic columns
-        ## (e.g. list, S4) that are allowed in GRanges/DataFrame but will fail
-        ## to write to disk as CSV. Note that we're using `decode` here to
-        ## handle S4 Rle columns from the Genomic Ranges.
+        ## `rowData()` that aren't informative for a user, and doesn't need to
+        ## be included in the tables. Instead, only keep informative columns
+        ## that are character or factor. Be sure to drop complex, non-atomic
+        ## columns (e.g. list, S4) that are allowed in GRanges/DataFrame but
+        ## will fail to write to disk as CSV. Note that we're using `decode()`
+        ## here to handle S4 Rle columns from the Genomic Ranges.
         if (isTRUE(rowData)) {
-            message("Joining row annotations.")
-            rowData <- rowData(dds)
-            ## SummarizedExperiment inconsistently handles rownames on rowData.
-            ## Ensure they are set here before continuing.
-            rownames(rowData) <- rownames(dds)
-            rowData <- decode(rowData)
-            keep <- vapply(
-                X = rowData,
-                FUN = function(x) {
-                    is.character(x) || is.factor(x)
-                },
-                FUN.VALUE = logical(1L)
-            )
-            rowData <- rowData[, keep, drop = FALSE]
-            assert(
-                all(vapply(
-                    X = rowData,
-                    FUN = is.atomic,
-                    FUN.VALUE = logical(1L)
-                )),
-                isNonEmpty(rowData),
-                identical(rownames(res), rownames(rowData)),
-                areDisjointSets(colnames(res), colnames(rowData))
-            )
-            res <- cbind(res, rowData)
+            res <- .joinRowData(results = res, rowData = dds)
         }
 
         ## Join the normalized counts.
         if (isTRUE(counts)) {
-            message("Joining size factor adjusted normalized counts.")
-            ## We're using the size factor adjusted normalized counts here.
-            counts <- counts(dds, normalized = TRUE)
-            assert(
-                identical(rownames(res), rownames(counts)),
-                areDisjointSets(colnames(res), colnames(counts))
-            )
-            res <- cbind(res, counts)
+            res <- .joinCounts(results = res, counts = dds)
         }
 
         ## Using DESeqResults method. Note that join operations above will
         ## coerce from DESeqResults to DataFrame, so we need to coerce back
         ## before `resultsTables()` call.
-        res <- as(res, "DESeqResults")
+        assert(is(res, "DESeqResults"))
+        validObject(res)
+
+        ## FIXME Eliminate the join steps above...put it in the call here.
         resultsTables(object = res, return = return)
     }
 

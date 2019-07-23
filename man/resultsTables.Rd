@@ -9,8 +9,8 @@
 \usage{
 resultsTables(object, ...)
 
-\S4method{resultsTables}{DESeqResults}(object, return = c("tbl_df",
-  "DataFrameList"))
+\S4method{resultsTables}{DESeqResults}(object, counts = NULL,
+  return = c("tbl_df", "DataFrameList"), ...)
 
 \S4method{resultsTables}{DESeqAnalysis}(object, results,
   lfcShrink = TRUE, rowData = TRUE, counts = TRUE,
@@ -19,11 +19,16 @@ resultsTables(object, ...)
 \arguments{
 \item{object}{Object.}
 
+\item{counts}{\code{logical(1)}.
+Join the size-factor adjusted normalized counts.}
+
 \item{return}{\code{character(1)}.
 Type of data frame to return in the list. Uses
 \link[base:match.arg]{match.arg()}. Note that \code{DataFrame} option will return
 with row names, whereas \code{tbl_df} option will return with \code{"rowname"}
 column.}
+
+\item{...}{Additional arguments.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or position of \code{DESeqResults}.}
@@ -33,11 +38,6 @@ Use shrunken log2 fold change (LFC) values.}
 
 \item{rowData}{\code{logical(1)}.
 Join the row annotations.}
-
-\item{counts}{\code{logical(1)}.
-Join the size-factor adjusted normalized counts.}
-
-\item{...}{Additional arguments.}
 }
 \value{
 \code{list}.
@@ -73,4 +73,10 @@ data(deseq)
 ## DESeqAnalysis ====
 x <- resultsTables(deseq, results = 1L)
 print(x)
+
+## DESeqResults ====
+Use of DESeqAnalysis is encouraged instead of this approach.
+res <- results(deseq, results = 1L)
+dds <- as(deseq, "DESeqDataSet")
+x <- resultsTables(object = res, counts = dds)
 }
