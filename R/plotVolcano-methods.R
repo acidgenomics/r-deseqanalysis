@@ -118,11 +118,11 @@ plotVolcano.DESeqResults <-  # nolint
 
         ## Placeholder variable for matching the LFC column.
         lfcCol <- "log2FoldChange"
-        negLogTestCol <- camel(paste("neg", "log10", testCol))
+        negLogTestCol <- camelCase(paste("neg", "log10", testCol))
 
         data <- object %>%
             as_tibble(rownames = "rowname") %>%
-            camel() %>%
+            camelCase() %>%
             ## Select columns used for plots.
             select(!!!syms(c("rowname", "baseMean", lfcCol, testCol))) %>%
             ## Remove genes with NA adjusted P values.

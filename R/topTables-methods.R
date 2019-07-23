@@ -34,7 +34,7 @@ NULL
         )
 
         ## Ensure columns are in camel case.
-        object <- camel(object)
+        object <- camelCase(object)
 
         ## Select minimal columns of interest.
         required <- c(
