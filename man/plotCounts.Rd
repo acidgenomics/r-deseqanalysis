@@ -70,9 +70,9 @@ Plot counts
 \examples{
 data(deseq)
 
-## Get genes from DESeqDataSet.
-dds <- as(deseq, "DESeqDataSet")
-genes <- head(rownames(dds))
+## Get genes from working example.
+res <- results(deseq, results = 1L)
+genes <- head(rownames(res))
 print(genes)
 
 ## DESeqAnalysis ====
