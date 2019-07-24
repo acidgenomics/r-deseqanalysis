@@ -232,7 +232,7 @@ Use shrunken log2 fold change (LFC) values.</p></td>
 <span class='no'>genes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>dds</span>))
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>genes</span>)</div><div class='output co'>#&gt; [1] "gene001" "gene002" "gene003" "gene004" "gene005" "gene006"</div><div class='input'>
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='error'>Error in do.call(what = plotVolcano.DESeqResults, args = matchArgsToDoCall(args = list(object = results,     genes = genes, gene2symbol = gene2symbol), removeFormals = c("results",     "lfcShrink"))): object 'plotVolcano.DESeqResults' not found</span></div><div class='input'>
+<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Customize the colors.</span>
 <span class='fu'>plotVolcano</span>(
     <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
@@ -242,22 +242,22 @@ Use shrunken log2 fold change (LFC) values.</p></td>
         <span class='kw'>nonsignificant</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
         <span class='kw'>upregulated</span> <span class='kw'>=</span> <span class='st'>"green"</span>
     )
-)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='error'>Error in do.call(what = plotVolcano.DESeqResults, args = matchArgsToDoCall(args = list(object = results,     genes = genes, gene2symbol = gene2symbol), removeFormals = c("results",     "lfcShrink"))): object 'plotVolcano.DESeqResults' not found</span></div><div class='input'>
+)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Directional support (up or down).</span>
 <span class='fu'>plotVolcano</span>(
     <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
     <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
     <span class='kw'>direction</span> <span class='kw'>=</span> <span class='st'>"up"</span>,
     <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>5L</span>
-)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='error'>Error in do.call(what = plotVolcano.DESeqResults, args = matchArgsToDoCall(args = list(object = results,     genes = genes, gene2symbol = gene2symbol), removeFormals = c("results",     "lfcShrink"))): object 'plotVolcano.DESeqResults' not found</span></div><div class='input'><span class='fu'>plotVolcano</span>(
+)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotVolcano</span>(
     <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
     <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
     <span class='kw'>direction</span> <span class='kw'>=</span> <span class='st'>"down"</span>,
     <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>5L</span>
-)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='error'>Error in do.call(what = plotVolcano.DESeqResults, args = matchArgsToDoCall(args = list(object = results,     genes = genes, gene2symbol = gene2symbol), removeFormals = c("results",     "lfcShrink"))): object 'plotVolcano.DESeqResults' not found</span></div><div class='input'>
+)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Label genes manually.</span>
 <span class='co'>## Note that either gene IDs or names (symbols) are supported.</span>
-<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>genes</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='error'>Error in do.call(what = plotVolcano.DESeqResults, args = matchArgsToDoCall(args = list(object = results,     genes = genes, gene2symbol = gene2symbol), removeFormals = c("results",     "lfcShrink"))): object 'plotVolcano.DESeqResults' not found</span></div></pre>
+<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>genes</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-5.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
