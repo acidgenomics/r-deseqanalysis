@@ -22,7 +22,6 @@
 #' - `both`: Bidirectional DEGs (up- and down-regulated). This table can be
 #'   used for overrepresentation testing but should NOT be used for GSEA.
 #'
-#' @param DESeqDataSet `DESeqDataSet` or `NULL`.
 #' @param extra `logical(1)`.
 #'   Include row data and normalized counts from internal `DESeqDataSet`.
 #' @param return `character(1)`.
@@ -61,25 +60,27 @@ NULL
 
 
 ## Updated 2019-07-23.
-.joinCounts <- function(results, counts) {
+.joinCounts <- function(
+    DESeqResults,  # nolint
+    DESeqDataSet   # nolint
+) {
     assert(
-        is(results, "DESeqResults"),
-        isAny(counts, c("DESeqDataSet", "matrix"))
+        is(DESeqResults, "DESeqResults"),
+        is(DESeqDataSet, "DESeqDataSet"),
+        identical(
+            x = rownames(DESeqResults),
+            y = rownames(DESeqDataSet)
+        ),
+        areDisjointSets(
+            x = colnames(DESeqResults),
+            y = colnames(DESeqDataSet)
+        )
     )
-    validObject(results)
-    validObject(counts)
-    if (is(counts, "DESeqDataSet")) {
-        message("Joining size factor adjusted normalized counts.")
-        counts <- counts(counts, normalized = TRUE)
-    } else {
-        message("Joining counts.")
-    }
-    assert(
-        is.matrix(counts),
-        identical(rownames(results), rownames(counts)),
-        areDisjointSets(colnames(results), colnames(counts))
-    )
-    out <- cbind(results, counts)
+    validObject(DESeqResults)
+    validObject(DESeqDataSet)
+    message("Joining size factor adjusted normalized counts.")
+    counts <- counts(DESeqDataSet, normalized = TRUE)
+    out <- cbind(DESeqResults, counts)
     out <- as(out, "DESeqResults")
     validObject(out)
     out
@@ -94,21 +95,30 @@ NULL
 ## in GRanges/DataFrame but will fail to write to disk as CSV. Note that we're
 ## using `decode()` here to handle S4 Rle columns from the Genomic Ranges.
 ## Updated 2019-07-23.
-.joinRowData <- function(results, rowData) {
+.joinRowData <- function(
+    DESeqResults,  # nolint
+    DESeqDataSet   # nolint
+) {
     assert(
-        is(results, "DESeqResults"),
-        isAny(rowData, c("SummarizedExperiment", "DataFrame"))
+        is(DESeqResults, "DESeqResults"),
+        is(DESeqDataSet, "DESeqDataSet"),
+        identical(
+            x = rownames(DESeqResults),
+            y = rownames(DESeqDataSet)
+        ),
+        areDisjointSets(
+            x = colnames(DESeqResults),
+            y = colnames(DESeqDataSet)
+        )
     )
-    validObject(results)
-    validObject(rowData)
-    if (is(rowData, "SummarizedExperiment")) {
-        ## SummarizedExperiment inconsistently handles rownames on rowData.
-        ## Ensure they are set here before continuing.
-        rownames <- rownames(rowData)
-        rowData <- rowData(rowData)
-        rownames(rowData) <- rownames
-    }
+    validObject(DESeqResults)
+    validObject(DESeqDataSet)
     message("Joining row annotations.")
+    ## SummarizedExperiment inconsistently handles rownames on rowData.
+    ## Ensure they are set here before continuing.
+    rownames <- rownames(rowData)
+    rowData <- rowData(rowData)
+    rownames(rowData) <- rownames
     rowData <- decode(rowData)
     keep <- vapply(
         X = rowData,
@@ -125,10 +135,10 @@ NULL
             FUN.VALUE = logical(1L)
         )),
         isNonEmpty(rowData),
-        identical(rownames(results), rownames(rowData)),
-        areDisjointSets(colnames(results), colnames(rowData))
+        identical(rownames(DESeqResults), rownames(rowData)),
+        areDisjointSets(colnames(DESeqResults), colnames(rowData))
     )
-    out <- cbind(results, rowData)
+    out <- cbind(DESeqResults, rowData)
     out <- as(out, "DESeqResults")
     validObject(out)
     out
@@ -216,8 +226,14 @@ NULL
         ## Prepare results -----------------------------------------------------
         ## Join row data and counts from DESeqDataSet.
         if (is(DESeqDataSet, "DESeqDataSet")) {
-            object <- .joinRowData(results = object, rowData = DESeqDataSet)
-            object <- .joinCounts(results = object, counts = DESeqDataSet)
+            object <- .joinRowData(
+                DESeqResults = object,
+                DESeqDataSet = DESeqDataSet
+            )
+            object <- .joinCounts(
+                DESeqResults = object,
+                DESeqDataSet = DESeqDataSet
+            )
         }
         ## Get the DEG character vectors, which we'll use against the rownames.
         both <- deg(
