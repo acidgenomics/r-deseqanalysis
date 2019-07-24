@@ -70,7 +70,7 @@ is unmodified, and the rows have not been re-arranged or subset. It is
 suitable for gene set enrichment analysis (GSEA).
 \item \code{up}: Upregulated genes.
 \item \code{down}: Downregulated genes.
-\item \code{both}: Bi-directional DEGs (up- and down-regulated). This table can be
+\item \code{both}: Bidirectional DEGs (up- and down-regulated). This table can be
 used for overrepresentation testing but should NOT be used for GSEA.
 }
 }
@@ -80,11 +80,12 @@ data(deseq)
 
 ## DESeqAnalysis ====
 x <- resultsTables(deseq, results = 1L)
-print(x)
+names(x)
 
 ## DESeqResults ====
-Use of DESeqAnalysis is encouraged instead of this approach.
+## Use of DESeqAnalysis is encouraged instead of this approach.
 res <- results(deseq, results = 1L)
 dds <- as(deseq, "DESeqDataSet")
-x <- resultsTables(object = res, counts = dds)
+x <- resultsTables(object = res, DESeqDataSet = dds)
+names(x)
 }
