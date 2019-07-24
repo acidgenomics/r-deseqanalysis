@@ -142,7 +142,7 @@ NULL
 `resultsTables,DESeqResults` <-  # nolint
     function(
         object,
-        DESeqDataSet = NULL,
+        DESeqDataSet = NULL,  # nolint
         alpha = NULL,
         lfcThreshold = NULL,
         return = c("tbl_df", "DataFrameList"),
@@ -277,20 +277,20 @@ setMethod(
         )
         ## Include extra annotations, if desired.
         if (isTRUE(extra)) {
-            ## Get the DESeqDataSet, and humanize the sample names.
-            ## Note that we're not calling `humanize()` here on the DESeqDataSet,
-            ## because we want to keep the gene identifiers in the row names.
-            DESeqDataSet <- as(object, "DESeqDataSet")
+            ## Get the DESeqDataSet, and humanize the sample names. Note that
+            ## we're not calling `humanize()` here on the DESeqDataSet, because
+            ## we want to keep the gene identifiers in the row names.
+            dds <- as(object, "DESeqDataSet")
             ## Always attempt to use human-friendly sample names, defined by the
-            ## `sampleName` column in `colData`. We're using this downstream when
-            ## joining the normalized counts.
-            DESeqDataSet <- convertSampleIDsToNames(DESeqDataSet)
+            ## `sampleName` column in `colData`. We're using this downstream
+            ## when joining the normalized counts.
+            dds <- convertSampleIDsToNames(dds)
         } else {
-            DESeqDataSet <- NULL
+            dds <- NULL
         }
         resultsTables(
             object = results,
-            DESeqDataSet = DESeqDataSet,
+            DESeqDataSet = dds,
             alpha = alpha,
             lfcThreshold = lfcThreshold,
             return = return
