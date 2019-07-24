@@ -116,8 +116,8 @@ NULL
     message("Joining row annotations.")
     ## SummarizedExperiment inconsistently handles rownames on rowData.
     ## Ensure they are set here before continuing.
-    rownames <- rownames(rowData)
-    rowData <- rowData(rowData)
+    rownames <- rownames(DESeqDataSet)
+    rowData <- rowData(DESeqDataSet)
     rownames(rowData) <- rownames
     rowData <- decode(rowData)
     keep <- vapply(
