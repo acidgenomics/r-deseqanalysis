@@ -38,14 +38,10 @@ NULL
         validObject(object)
         if (is.null(alpha)) {
             alpha <- metadata(object)[["alpha"]]
-        } else {
-            warning("Applying a post hoc alpha cutoff is not recommended.")
         }
         assert(isAlpha(alpha))
         if (is.null(lfcThreshold)) {
             lfcThreshold <- metadata(object)[["lfcThreshold"]]
-        } else {
-            warning("Applying a post hoc LFC threshold is not recommended.")
         }
         assert(
             isNumber(lfcThreshold),
