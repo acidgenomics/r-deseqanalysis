@@ -37,12 +37,6 @@ NULL
 NULL
 
 
-# FIXME Need to import S3 method for summary.
-
-#' @importFrom DESeq2 summary.DESeqResults
-NULL
-
-
 
 ## Updated 2019-07-23.
 `alphaSummary,DESeqDataSet` <-  # nolint
@@ -95,18 +89,10 @@ NULL
                     name = name,
                     alpha = alpha
                 )
-                ## FIXME
-                print(names(args))
                 args <- Filter(Negate(is.null), args)
-                ## FIXME
-                print(names(args))
                 results <- do.call(what = results, args = args)
-                ## FIXME
-                print(results)
-                ## FIXME This isn't capturing correctly without DESeq2 attached.
+                ## This requires S3 `summary.DESeqResults` in NAMESPACE.
                 output <- capture.output(summary(results))
-                ## FIXME
-                print(output)
                 ## Subset the lines of interest from summary.
                 ## Keep only the summary lines that contain a colon.
                 output <- output[grepl(" : ", output)]
@@ -115,14 +101,8 @@ NULL
                     string = output,
                     pattern = "^(.+)\\s\\:\\s([[:digit:]]+).*$"
                 )
-                ## FIXME
-                print(match)
                 names <- gsub("\\s+$", "", match[, 2L])
-                ## FIXME
-                print(names)
                 values <- as.integer(match[, 3L])
-                ## FIXME
-                print(values)
                 names(values) <- names
                 values
             },

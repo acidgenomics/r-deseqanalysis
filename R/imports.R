@@ -6,7 +6,7 @@
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom BiocGenerics updateObject
-#' @importFrom DESeq2 counts priorInfo
+#' @importFrom DESeq2 counts priorInfo summary.DESeqResults
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors SimpleList as.data.frame head mcols mcols<- metadata
 #' @importFrom SummarizedExperiment assays assays<- colData colData<-
