@@ -1,4 +1,4 @@
-# Do not allow post hoc alpha or lfcThreshold cutoffs here.
+## Do not allow post hoc alpha or lfcThreshold cutoffs here.
 
 
 
@@ -8,9 +8,6 @@
 #' @inheritParams acidplots::plotHeatmap
 #' @inheritParams basejump::params
 #' @inheritParams params
-#' @param counts `DESeqTransform`.
-#'   Variance-stabilized counts suitable for heatmap.
-#'   Object rownames must be identical to corresponding `DESeqResults`.
 #' @param ... Additional arguments.
 #'
 #' @examples
@@ -31,13 +28,14 @@ NULL
 
 
 
-# This method is used in F1000 paper and needs to be included. Note that in
-# newer versions of bcbioRNASeq, this step won't work because we've slotted the
-# rlog/vst counts in as a matrix instead of DESeqTransform.
-plotDEGHeatmap.DESeqResults <-  # nolint
+## This method is used in F1000 paper and needs to be included. Note that in
+## newer versions of bcbioRNASeq, this step won't work because we've slotted the
+## rlog/vst counts in as a matrix instead of DESeqTransform.
+## Updated 2019-07-23.
+`plotDEGHeatmap,DESeqResults` <-  # nolint
     function(
         object,
-        counts,
+        DESeqTransform,  # nolint
         direction = c("both", "up", "down"),
         scale = c("row", "column", "none"),
         clusteringMethod = "ward.D2",
@@ -47,20 +45,20 @@ plotDEGHeatmap.DESeqResults <-  # nolint
         legendBreaks = seq(from = -2L, to = 2L, by = 1L)
     ) {
         validObject(object)
-        validObject(counts)
+        validObject(DESeqTransform)
         assert(
             is(object, "DESeqResults"),
-            is(counts, "DESeqTransform"),
-            identical(rownames(object), rownames(counts)),
+            is(DESeqTransform, "DESeqTransform"),
+            identical(rownames(object), rownames(DESeqTransform)),
             isString(clusteringMethod),
             is.numeric(legendBreaks)
         )
         direction <- match.arg(direction)
         scale <- match.arg(scale)
 
-        # Rename objects internally to make the code more readable.
+        ## Rename objects internally to make the code more readable.
         res <- object
-        dt <- counts
+        dt <- DESeqTransform
 
         interestingGroups(dt) <- matchInterestingGroups(dt, interestingGroups)
 
@@ -74,17 +72,17 @@ plotDEGHeatmap.DESeqResults <-  # nolint
             isString(lfcShrinkType)
         )
 
-        # Get the character vector of DEGs.
+        ## Get the character vector of DEGs.
         deg <- deg(res, direction = direction)
         if (!hasLength(deg)) {
             warning("There are no DEGs to plot. Skipping.", call. = FALSE)
             return(invisible())
         }
 
-        # Subset to only include the DEGs.
+        ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
 
-        # Title
+        ## Title
         title <- paste0(
             contrastName(res, format = "title"), "\n",
             length(deg), " genes;  ",
@@ -96,7 +94,7 @@ plotDEGHeatmap.DESeqResults <-  # nolint
             title <- paste0(title, "; lfc > ", lfcThreshold)
         }
 
-        # Using SummarizedExperiment method defined in basejump here.
+        ## Using SummarizedExperiment method defined in basejump here.
         rse <- as(dt, "RangedSummarizedExperiment")
         do.call(
             what = plotHeatmap,
@@ -107,14 +105,14 @@ plotDEGHeatmap.DESeqResults <-  # nolint
                     title = title
                 ),
                 removeFormals = c(
-                    "counts",
+                    "DESeqTransform",
                     "direction"
                 )
             )
         )
     }
 
-f1 <- formals(plotDEGHeatmap.DESeqResults)
+f1 <- formals(`plotDEGHeatmap,DESeqResults`)
 f2 <- methodFormals(
     f = "plotHeatmap",
     signature = "SummarizedExperiment",
@@ -128,7 +126,7 @@ f[["color"]] <- quote(
         default = acidplots::blueYellow
     )
 )
-formals(plotDEGHeatmap.DESeqResults) <- f
+formals(`plotDEGHeatmap,DESeqResults`) <- f
 
 
 
@@ -137,12 +135,13 @@ formals(plotDEGHeatmap.DESeqResults) <- f
 setMethod(
     f = "plotDEGHeatmap",
     signature = signature("DESeqResults"),
-    definition = plotDEGHeatmap.DESeqResults
+    definition = `plotDEGHeatmap,DESeqResults`
 )
 
 
 
-plotDEGHeatmap.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`plotDEGHeatmap,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
@@ -155,30 +154,30 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
             isFlag(lfcShrink)
         )
 
-        # Note use of `res` here instead of `results`, since we need to check
-        # the original `results` input below in `contrastSamples()` call.
+        ## Note use of `res` here instead of `results`, since we need to check
+        ## the original `results` input below in `contrastSamples()` call.
         res <- results(object, results = results, lfcShrink = lfcShrink)
         validObject(res)
 
-        # We're using the variance-stabilized counts for visualization here.
+        ## We're using the variance-stabilized counts for visualization here.
         dt <- as(object, "DESeqTransform")
         validObject(dt)
 
-        # Subset the DESeqTransform, if necessary.
+        ## Subset the DESeqTransform, if necessary.
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, results = results)
             assert(isSubset(samples, colnames(dt)))
             dt <- dt[, samples, drop = FALSE]
-            colData(dt) <- relevelColData(colData(dt))
+            colData(dt) <- relevel(colData(dt))
         }
 
-        # Passing to DESeqResults/DESeqTransform method.
+        ## Passing to DESeqResults/DESeqTransform method.
         do.call(
             what = plotDEGHeatmap,
             args = matchArgsToDoCall(
                 args = list(
                     object = res,
-                    counts = dt
+                    DESeqTransform = dt
                 ),
                 removeFormals = c(
                     "results",
@@ -189,11 +188,11 @@ plotDEGHeatmap.DESeqAnalysis <-  # nolint
         )
     }
 
-f1 <- formals(plotDEGHeatmap.DESeqAnalysis)
-f2 <- formals(plotDEGHeatmap.DESeqResults)
-f2 <- f2[setdiff(names(f2), c(names(f1), "counts"))]
+f1 <- formals(`plotDEGHeatmap,DESeqAnalysis`)
+f2 <- formals(`plotDEGHeatmap,DESeqResults`)
+f2 <- f2[setdiff(names(f2), c(names(f1), "DESeqTransform"))]
 f <- c(f1, f2)
-formals(plotDEGHeatmap.DESeqAnalysis) <- f
+formals(`plotDEGHeatmap,DESeqAnalysis`) <- f
 
 
 
@@ -202,5 +201,5 @@ formals(plotDEGHeatmap.DESeqAnalysis) <- f
 setMethod(
     f = "plotDEGHeatmap",
     signature = signature("DESeqAnalysis"),
-    definition = plotDEGHeatmap.DESeqAnalysis
+    definition = `plotDEGHeatmap,DESeqAnalysis`
 )

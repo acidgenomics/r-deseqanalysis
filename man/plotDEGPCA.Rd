@@ -9,10 +9,10 @@
 \usage{
 plotDEGPCA(object, ...)
 
-\S4method{plotDEGPCA}{DESeqResults}(object, counts, direction = c("both",
-  "up", "down"), object, assay = 1L, interestingGroups = NULL,
-  label = getOption(x = "acid.label", default = FALSE),
-  color = getOption(x = "acid.color.discrete", default =
+\S4method{plotDEGPCA}{DESeqResults}(object, DESeqTransform,
+  direction = c("both", "up", "down"), object, assay = 1L,
+  interestingGroups = NULL, label = getOption(x = "acid.label", default
+  = FALSE), color = getOption(x = "acid.color.discrete", default =
   acidplots::scale_colour_synesthesia_d()), pointSize = getOption(x =
   "acid.point.size", default = 3L), return = c("ggplot", "DataFrame"),
   ...)
@@ -29,9 +29,7 @@ plotDEGPCA(object, ...)
 \arguments{
 \item{object}{Object.}
 
-\item{counts}{\code{DESeqTransform}.
-Variance-stabilized counts suitable for heatmap.
-Object rownames must be identical to corresponding \code{DESeqResults}.}
+\item{DESeqTransform}{\code{DESeqTransform}.}
 
 \item{direction}{\code{character(1)}.
 Plot "\code{both}", "\code{up}", or "\code{down}" directions.}

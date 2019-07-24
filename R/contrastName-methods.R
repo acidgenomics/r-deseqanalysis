@@ -35,26 +35,27 @@ NULL
 
 
 
-contrastName.DESeqResults <-  # nolint
+## Updated 2019-07-23.
+`contrastName,DESeqResults` <-  # nolint
     function(object, format = c("resultsNames", "title")) {
         validObject(object)
         format <- match.arg(format)
-        # Previously, Bioc <= 3.7 set `use.names = FALSE` by default.
+        ## Previously, Bioc <= 3.7 set `use.names = FALSE` by default.
         x <- mcols(object, use.names = TRUE)
         x <- x["log2FoldChange", "description", drop = TRUE]
         assert(isCharacter(x))
-        # Always strip prefix, e.g. log2 fold change (MLE).
+        ## Always strip prefix, e.g. log2 fold change (MLE).
         x <- sub("^.*:\\s", "", x)
         if (format == "resultsNames") {
             makeNames(x)
         } else if (format == "title") {
             x %>%
-                # Strip prefix, e.g. log2 fold change (MLE).
+                ## Strip prefix, e.g. log2 fold change (MLE).
                 sub("^.*:\\s", "", .) %>%
-                # Pad the first space with as a colon.
+                ## Pad the first space with as a colon.
                 sub("\\s", " : ", .) %>%
                 sub("\\svs\\s", " vs. ", .) %>%
-                # Improve appearance for difference of differences.
+                ## Improve appearance for difference of differences.
                 gsub("\\+", " \\+\n    ", .)
         }
     }
@@ -66,12 +67,13 @@ contrastName.DESeqResults <-  # nolint
 setMethod(
     f = "contrastName",
     signature = signature("DESeqResults"),
-    definition = contrastName.DESeqResults
+    definition = `contrastName,DESeqResults`
 )
 
 
 
-contrastName.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`contrastName,DESeqAnalysis` <-  # nolint
     function(object, results) {
         suppressMessages(
             results <- results(object = object, results = results)
@@ -89,5 +91,5 @@ contrastName.DESeqAnalysis <-  # nolint
 setMethod(
     f = "contrastName",
     signature = signature("DESeqAnalysis"),
-    definition = contrastName.DESeqAnalysis
+    definition = `contrastName,DESeqAnalysis`
 )

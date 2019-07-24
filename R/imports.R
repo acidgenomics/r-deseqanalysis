@@ -6,17 +6,16 @@
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom BiocGenerics updateObject
-#' @importFrom DESeq2 counts priorInfo
+#' @importFrom DESeq2 counts priorInfo summary.DESeqResults
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors SimpleList as.data.frame head mcols mcols<- metadata
-#' @importFrom SummarizedExperiment assays assays<- colData colData<-
+#' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom UpSetR fromList
 #' @importFrom acidplots plotHeatmap upset
-#' @importFrom basejump Gene2Symbol as_tibble camel
-#'   convertSampleIDsToNames decode initDir interestingGroups<- makeNames
-#'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
-#'   matchInterestingGroups matchesGene2Symbol methodFormals
-#'   printString relevelColData removeNA showSlotInfo snake
+#' @importFrom basejump Gene2Symbol as_tibble camelCase convertSampleIDsToNames
+#'   decode initDir interestingGroups<- makeNames mapGenesToRownames
+#'   markdownHeader markdownList matchArgsToDoCall matchInterestingGroups
+#'   matchesGene2Symbol methodFormals printString relevel removeNA showSlotInfo
 #'   standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom dplyr arrange desc everything filter left_join mutate mutate_all

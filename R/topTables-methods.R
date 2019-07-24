@@ -25,6 +25,7 @@ NULL
 
 
 
+## Updated 2019-07-23.
 .topTable <-  # nolint
     function(object, n = 10L) {
         assert(
@@ -33,10 +34,10 @@ NULL
             isPositive(n)
         )
 
-        # Ensure columns are in camel case.
-        object <- camel(object)
+        ## Ensure columns are in camel case.
+        object <- camelCase(object)
 
-        # Select minimal columns of interest.
+        ## Select minimal columns of interest.
         required <- c(
             "rowname",
             "baseMean",
@@ -45,7 +46,7 @@ NULL
         )
         assert(isSubset(required, colnames(object)))
 
-        # Also include optional informative columns.
+        ## Also include optional informative columns.
         optional <- c(
             "geneID",
             "geneName",
@@ -58,24 +59,24 @@ NULL
         )
         object <- object[, keep, drop = FALSE]
 
-        # Get the top rows.
+        ## Get the top rows.
         object <- head(object, n = n)
 
-        # Sanitize optional columns first.
+        ## Sanitize optional columns first.
         if ("description" %in% colnames(object)) {
             object[["description"]] <- object[["description"]] %>%
                 as.character() %>%
-                # Remove symbol information in brackets.
+                ## Remove symbol information in brackets.
                 sub(
                     pattern = " \\[.+\\]$",
                     replacement = "",
                     x = .
                 ) %>%
-                # Truncate to max 50 characters.
+                ## Truncate to max 50 characters.
                 str_trunc(width = 50L, side = "right")
         }
 
-        # Now we can standardize using dplyr and return.
+        ## Now we can standardize using dplyr and return.
         object %>%
             mutate(
                 baseMean = round(!!sym("baseMean"), digits = 0L),
@@ -90,21 +91,22 @@ NULL
                     scientific = TRUE
                 )
             ) %>%
-            # Shorten `log2FoldChange` to `lfc` to keep column width compact.
+            ## Shorten `log2FoldChange` to `lfc` to keep column width compact.
             rename(lfc = !!sym("log2FoldChange")) %>%
             mutate_all(as.character)
     }
 
 
 
-.topTables.resultsTables <-  # nolint
+## Updated 2019-07-23.
+.topTables <-  # nolint
     function(object, contrast, n) {
         assert(
             is.list(object),
             isString(contrast),
             isInt(n)
         )
-        # Upregulated genes.
+        ## Upregulated genes.
         up <- object[["up"]]
         if (hasLength(up)) {
             show(kable(
@@ -112,7 +114,7 @@ NULL
                 caption = paste(contrast, "(upregulated)")
             ))
         }
-        # Downregulated genes.
+        ## Downregulated genes.
         down <- object[["down"]]
         if (hasLength(down)) {
             show(kable(
@@ -120,18 +122,19 @@ NULL
                 caption = paste(contrast, "(downregulated)")
             ))
         }
-        # Invisibly return list containing the subsets.
+        ## Invisibly return list containing the subsets.
         invisible(list(up = up, down = down))
     }
 
 
 
-# This is used in bcbioRNASeq F1000 paper.
-topTables.DESeqResults <-  # nolint
+## This is used in bcbioRNASeq F1000 paper.
+## Updated 2019-07-23.
+`topTables,DESeqResults` <-  # nolint
     function(object, n = 10L) {
         list <- resultsTables(object)
         contrast <- contrastName(object)
-        .topTables.resultsTables(
+        .topTables(
             object = list,
             contrast = contrast,
             n = n
@@ -140,7 +143,8 @@ topTables.DESeqResults <-  # nolint
 
 
 
-topTables.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`topTables,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
@@ -151,15 +155,14 @@ topTables.DESeqAnalysis <-  # nolint
             object = object,
             results = results,
             lfcShrink = lfcShrink,
-            rowData = TRUE,
-            counts = FALSE
+            extra = TRUE
         )
-        # Suppressing the message about the contrast name we're matching here,
-        # since it will be shown in `resultsTables()` call above.
+        ## Suppressing the message about the contrast name we're matching here,
+        ## since it will be shown in `resultsTables()` call above.
         suppressMessages(
             contrast <- contrastName(object, results = results)
         )
-        .topTables.resultsTables(
+        .topTables(
             object = list,
             contrast = contrast,
             n = n
@@ -173,5 +176,5 @@ topTables.DESeqAnalysis <-  # nolint
 setMethod(
     f = "topTables",
     signature = signature("DESeqAnalysis"),
-    definition = topTables.DESeqAnalysis
+    definition = `topTables,DESeqAnalysis`
 )

@@ -19,13 +19,11 @@
 #'   suitable for gene set enrichment analysis (GSEA).
 #' - `up`: Upregulated genes.
 #' - `down`: Downregulated genes.
-#' - `both`: Bi-directional DEGs (up- and down-regulated). This table can be
+#' - `both`: Bidirectional DEGs (up- and down-regulated). This table can be
 #'   used for overrepresentation testing but should NOT be used for GSEA.
 #'
-#' @param rowData `logical(1)`.
-#'   Join the row annotations.
-#' @param counts `logical(1)`.
-#'   Join the size-factor adjusted normalized counts.
+#' @param extra `logical(1)`.
+#'   Include row data and normalized counts from internal `DESeqDataSet`.
 #' @param return `character(1)`.
 #'   Type of data frame to return in the list. Uses
 #'   [match.arg()][base::match.arg]. Note that `DataFrame` option will return
@@ -40,7 +38,14 @@
 #'
 #' ## DESeqAnalysis ====
 #' x <- resultsTables(deseq, results = 1L)
-#' print(x)
+#' names(x)
+#'
+#' ## DESeqResults ====
+#' ## Use of DESeqAnalysis is encouraged instead of this approach.
+#' res <- results(deseq, results = 1L)
+#' dds <- as(deseq, "DESeqDataSet")
+#' x <- resultsTables(object = res, DESeqDataSet = dds)
+#' names(x)
 NULL
 
 
@@ -54,15 +59,190 @@ NULL
 
 
 
-# Note that this method is used in bcbioRNASeq F1000 paper.
-resultsTables.DESeqResults <-  # nolint
-    function(object, return = c("tbl_df", "DataFrameList")) {
+## Updated 2019-07-23.
+.joinCounts <- function(
+    DESeqResults,  # nolint
+    DESeqDataSet   # nolint
+) {
+    assert(
+        is(DESeqResults, "DESeqResults"),
+        is(DESeqDataSet, "DESeqDataSet"),
+        identical(
+            x = rownames(DESeqResults),
+            y = rownames(DESeqDataSet)
+        ),
+        areDisjointSets(
+            x = colnames(DESeqResults),
+            y = colnames(DESeqDataSet)
+        )
+    )
+    validObject(DESeqResults)
+    validObject(DESeqDataSet)
+    message("Joining size factor adjusted normalized counts.")
+    counts <- counts(DESeqDataSet, normalized = TRUE)
+    out <- cbind(DESeqResults, counts)
+    out <- as(out, "DESeqResults")
+    validObject(out)
+    out
+}
+
+
+
+## Join the row annotations. DESeq2 includes additional columns in `rowData()`
+## that aren't informative for a user, and doesn't need to be included in the
+## tables. Instead, only keep informative columns that are character or factor.
+## Be sure to drop complex, non-atomic columns (e.g. list, S4) that are allowed
+## in GRanges/DataFrame but will fail to write to disk as CSV. Note that we're
+## using `decode()` here to handle S4 Rle columns from the Genomic Ranges.
+## Updated 2019-07-23.
+.joinRowData <- function(
+    DESeqResults,  # nolint
+    DESeqDataSet   # nolint
+) {
+    assert(
+        is(DESeqResults, "DESeqResults"),
+        is(DESeqDataSet, "DESeqDataSet"),
+        identical(
+            x = rownames(DESeqResults),
+            y = rownames(DESeqDataSet)
+        ),
+        areDisjointSets(
+            x = colnames(DESeqResults),
+            y = colnames(DESeqDataSet)
+        )
+    )
+    validObject(DESeqResults)
+    validObject(DESeqDataSet)
+    message("Joining row annotations.")
+    ## SummarizedExperiment inconsistently handles rownames on rowData.
+    ## Ensure they are set here before continuing.
+    rownames <- rownames(DESeqDataSet)
+    rowData <- rowData(DESeqDataSet)
+    rownames(rowData) <- rownames
+    rowData <- decode(rowData)
+    keep <- vapply(
+        X = rowData,
+        FUN = function(x) {
+            is.character(x) || is.factor(x)
+        },
+        FUN.VALUE = logical(1L)
+    )
+    rowData <- rowData[, keep, drop = FALSE]
+    assert(
+        all(vapply(
+            X = rowData,
+            FUN = is.atomic,
+            FUN.VALUE = logical(1L)
+        )),
+        isNonEmpty(rowData),
+        identical(rownames(DESeqResults), rownames(rowData)),
+        areDisjointSets(colnames(DESeqResults), colnames(rowData))
+    )
+    out <- cbind(DESeqResults, rowData)
+    out <- as(out, "DESeqResults")
+    validObject(out)
+    out
+}
+
+
+## bcbioRNASeq v0.2 release series defaults:
+## https://github.com/hbc/bcbioRNASeq/blob/v0.2.10/R/resultsTables-methods.R
+
+## Note that this method is used in bcbioRNASeq F1000 paper.
+## Updated 2019-07-23.
+`resultsTables,DESeqResults` <-  # nolint
+    function(
+        object,
+        DESeqDataSet = NULL,  # nolint
+        alpha = NULL,
+        lfcThreshold = NULL,
+        return = c("tbl_df", "DataFrameList"),
+        ...
+    ) {
         validObject(object)
+        assert(isAny(DESeqDataSet, c("DESeqDataSet", "NULL")))
         return <- match.arg(return)
 
-        # Get the DEG character vectors, which we'll use against the rownames.
-        both <- deg(object, direction = "both")
-        # Early return with warning if there are not DEGs.
+        ## Legacy bcbioRNASeq arguments ----------------------------------------
+        call <- match.call()
+        ## dir
+        if (isSubset("dir", names(call))) {
+            stop(paste(
+                "`dir` argument is defunct.",
+                "Use `export()` instead."
+            ))
+        }
+        ## dropboxDir
+        if (isSubset("dropboxDir", names(call))) {
+            stop(paste(
+                "`dropboxDir` argument is defunct.",
+                "Use `copyToDropbox()` instead."
+            ))
+        }
+        ## headerLevel
+        if (isSubset("headerLevel", names(call))) {
+            stop("`headerLevel` argument is defunct.")
+        }
+        ## rdsToken
+        if (isSubset("rdsToken", names(call))) {
+            stop(paste(
+                "`rdsToken` argument is defunct.",
+                "Use `copyToDropbox()` instead."
+            ))
+        }
+        ## summary
+        if (isSubset("summary", names(call))) {
+            stop("`summary` argument is defunct.")
+        }
+        ## write
+        if (isSubset("write", names(call))) {
+            stop(paste(
+                "`write` argument is defunct.",
+                "Use `export()` instead."
+            ))
+        }
+        ## Check for invalid arguments.
+        diff <- setdiff(
+            x = setdiff(
+                x = names(call),
+                y = c("", "...")
+            ),
+            y = setdiff(
+                x = names(formals()),
+                y = "..."
+            )
+        )
+        if (hasLength(diff)) {
+            stop(sprintf(
+                fmt = ngettext(
+                    n = length(diff),
+                    msg1 = "unused argument (%s)\n",
+                    msg2 = "unused arguments (%s)\n"
+                ),
+                toString(diff)
+            ))
+        }
+
+        ## Prepare results -----------------------------------------------------
+        ## Join row data and counts from DESeqDataSet.
+        if (is(DESeqDataSet, "DESeqDataSet")) {
+            object <- .joinRowData(
+                DESeqResults = object,
+                DESeqDataSet = DESeqDataSet
+            )
+            object <- .joinCounts(
+                DESeqResults = object,
+                DESeqDataSet = DESeqDataSet
+            )
+        }
+        ## Get the DEG character vectors, which we'll use against the rownames.
+        both <- deg(
+            object = object,
+            alpha = alpha,
+            lfcThreshold = lfcThreshold,
+            direction = "both"
+        )
+        ## Early return with warning if there are not DEGs.
         if (!hasLength(both)) {
             warning(paste(
                 deparse(results),
@@ -70,20 +250,27 @@ resultsTables.DESeqResults <-  # nolint
             ), call. = FALSE)
             return(invisible())
         }
-        up <- deg(object, direction = "up")
-        down <- deg(object, direction = "down")
-
-        # Prepare the return list.
+        up <- deg(
+            object = object,
+            alpha = alpha,
+            lfcThreshold = lfcThreshold,
+            direction = "up"
+        )
+        down <- deg(
+            object = object,
+            alpha = alpha,
+            lfcThreshold = lfcThreshold,
+            direction = "down"
+        )
+        ## Prepare the return list.
         out <- list(
             all = object,
             up = object[up, , drop = FALSE],
             down = object[down, , drop = FALSE],
             both = object[both, , drop = FALSE]
         )
-
-        # Filter out empty up/down tables.
+        ## Filter out empty up/down tables.
         out <- Filter(f = hasRows, x = out)
-
         switch(
             EXPR = return,
             DataFrameList = DataFrameList(out),
@@ -98,92 +285,54 @@ resultsTables.DESeqResults <-  # nolint
 setMethod(
     f = "resultsTables",
     signature = signature("DESeqResults"),
-    definition = resultsTables.DESeqResults
+    definition = `resultsTables,DESeqResults`
 )
 
 
 
-resultsTables.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`resultsTables,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
         lfcShrink = TRUE,
-        rowData = TRUE,
-        counts = TRUE,
+        extra = TRUE,
+        alpha = NULL,
+        lfcThreshold = NULL,
         return = c("tbl_df", "DataFrameList")
     ) {
         validObject(object)
         assert(
             isFlag(lfcShrink),
-            isFlag(rowData),
-            isFlag(counts)
+            isFlag(extra)
         )
         return <- match.arg(return)
-
-        # Note that this will use the shrunken LFC values, if slotted.
-        res <- results(object, results = results, lfcShrink = lfcShrink)
-
-        # Get the DESeqDataSet, and humanize the sample names.
-        # Note that we're not calling `humanize()` here on the DESeqDataSet,
-        # because we want to keep the gene identifiers in the row names.
-        dds <- as(object, "DESeqDataSet")
-        # Always attempt to use human-friendly sample names, defined by the
-        # `sampleName` column in `colData`. We're using this downstream when
-        # joining the normalized counts.
-        dds <- convertSampleIDsToNames(dds)
-
-        # Join the row annotations. DESeq2 includes additional columns in
-        # `rowData` that aren't informative for a user, and doesn't need to be
-        # included in the tables. Instead, only keep informative columns that
-        # are character or factor. Be sure to drop complex, non-atomic columns
-        # (e.g. list, S4) that are allowed in GRanges/DataFrame but will fail to
-        # write to disk as CSV. Note that we're using `decode` here to handle
-        # S4 Rle columns from the Genomic Ranges.
-        if (isTRUE(rowData)) {
-            message("Joining row annotations.")
-            rowData <- rowData(dds)
-            # SummarizedExperiment inconsistently handles rownames on rowData.
-            # Ensure they are set here before continuing.
-            rownames(rowData) <- rownames(dds)
-            rowData <- decode(rowData)
-            keep <- vapply(
-                X = rowData,
-                FUN = function(x) {
-                    is.character(x) || is.factor(x)
-                },
-                FUN.VALUE = logical(1L)
-            )
-            rowData <- rowData[, keep, drop = FALSE]
-            assert(
-                all(vapply(
-                    X = rowData,
-                    FUN = is.atomic,
-                    FUN.VALUE = logical(1L)
-                )),
-                isNonEmpty(rowData),
-                identical(rownames(res), rownames(rowData)),
-                areDisjointSets(colnames(res), colnames(rowData))
-            )
-            res <- cbind(res, rowData)
+        ## Note that this will use the shrunken LFC values, if slotted.
+        results <- results(
+            object = object,
+            results = results,
+            lfcShrink = lfcShrink
+        )
+        ## Include extra annotations, if desired.
+        if (isTRUE(extra)) {
+            ## Get the DESeqDataSet, and humanize the sample names. Note that
+            ## we're not calling `humanize()` here on the DESeqDataSet, because
+            ## we want to keep the gene identifiers in the row names.
+            dds <- as(object, "DESeqDataSet")
+            ## Always attempt to use human-friendly sample names, defined by the
+            ## `sampleName` column in `colData`. We're using this downstream
+            ## when joining the normalized counts.
+            dds <- convertSampleIDsToNames(dds)
+        } else {
+            dds <- NULL
         }
-
-        # Join the normalized counts.
-        if (isTRUE(counts)) {
-            message("Joining size factor adjusted normalized counts.")
-            # We're using the size factor adjusted normalized counts here.
-            counts <- counts(dds, normalized = TRUE)
-            assert(
-                identical(rownames(res), rownames(counts)),
-                areDisjointSets(colnames(res), colnames(counts))
-            )
-            res <- cbind(res, counts)
-        }
-
-        # Using DESeqResults method. Note that join operations above will coerce
-        # from DESeqResults to DataFrame, so we need to coerce back before
-        # `resultsTables()` call.
-        res <- as(res, "DESeqResults")
-        resultsTables(object = res, return = return)
+        resultsTables(
+            object = results,
+            DESeqDataSet = dds,
+            alpha = alpha,
+            lfcThreshold = lfcThreshold,
+            return = return
+        )
     }
 
 
@@ -193,5 +342,5 @@ resultsTables.DESeqAnalysis <-  # nolint
 setMethod(
     f = "resultsTables",
     signature = signature("DESeqAnalysis"),
-    definition = resultsTables.DESeqAnalysis
+    definition = `resultsTables,DESeqAnalysis`
 )

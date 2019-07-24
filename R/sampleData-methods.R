@@ -19,7 +19,8 @@ NULL
 
 
 
-sampleData.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`sampleData,DESeqAnalysis` <-  # nolint
     function(object) {
         object %>%
             as("DESeqDataSet") %>%
@@ -33,5 +34,5 @@ sampleData.DESeqAnalysis <-  # nolint
 setMethod(
     f = "sampleData",
     signature = signature("DESeqAnalysis"),
-    definition = sampleData.DESeqAnalysis
+    definition = `sampleData,DESeqAnalysis`
 )

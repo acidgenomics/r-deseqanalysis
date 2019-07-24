@@ -1,4 +1,4 @@
-# Consider keeping `direction` exported in basejump.
+## Consider keeping `direction` exported in basejump.
 
 
 
@@ -6,6 +6,8 @@
 #' @inherit basejump::params
 #' @keywords internal
 #'
+#' @param DESeqDataSet `DESeqDataSet` or `NULL`.
+#' @param DESeqTransform `DESeqTransform`.
 #' @param alpha `numeric(1)`.
 #'   Adjusted P value ("alpha") cutoff. If left `NULL`, will use the cutoff
 #'   defined in the object.

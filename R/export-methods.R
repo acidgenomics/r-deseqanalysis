@@ -1,5 +1,5 @@
-# DESeqTransform can inherit from SummarizedExperiment without modification.
-# DESeqResults can inherit from DataFrame without modification.
+## DESeqTransform can inherit from SummarizedExperiment without modification.
+## DESeqResults can inherit from DataFrame without modification.
 
 
 
@@ -31,9 +31,10 @@ NULL
 
 
 
-# Internal helpers =============================================================
-# Here we are looping across each contrast and writing out DEG tables.
-# Note: We don't need to support humanize mode because `geneName` is required.
+## Internal helpers ============================================================
+## Here we are looping across each contrast and writing out DEG tables.
+## Note: We don't need to support humanize mode because `geneName` is required.
+## Updated 2019-07-23.
 .exportResultsTables <- function(object, dir, compress, lfcShrink) {
     assert(
         is(object, "DESeqAnalysis"),
@@ -48,8 +49,7 @@ NULL
                 object = object,
                 results = results,
                 lfcShrink = lfcShrink,
-                rowData = TRUE,
-                counts = TRUE,
+                extra = TRUE,
                 return = "tbl_df"
             )
             files <- file.path(dir, results, paste0(names(resTbl), ".csv"))
@@ -71,11 +71,12 @@ NULL
 
 
 
-# Exported methods =============================================================
-# Inheriting the SummarizedExperiment method internally here.
-# Only export the raw and normalized counts.
-# Skip exporting other assays, including mu, H, cooks.
-export.DESeqDataSet <-  # nolint
+## Exported methods ============================================================
+## Inheriting the SummarizedExperiment method internally here.
+## Only export the raw and normalized counts.
+## Skip exporting other assays, including mu, H, cooks.
+## Updated 2019-07-23.
+`export,DESeqDataSet` <-  # nolint
     function(
         object,
         name = NULL,
@@ -106,12 +107,13 @@ export.DESeqDataSet <-  # nolint
 setMethod(
     f = "export",
     signature = signature("DESeqDataSet"),
-    definition = export.DESeqDataSet
+    definition = `export,DESeqDataSet`
 )
 
 
 
-export.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`export,DESeqAnalysis` <-  # nolint
     function(
         object,
         name = NULL,
@@ -132,14 +134,14 @@ export.DESeqAnalysis <-  # nolint
             name <- as.character(call[["object"]])
         }
 
-        # Note that we're combining the dir with name, so we can set
-        # subdirectories for each slotted data type (e.g. DESeqDataSet).
+        ## Note that we're combining the dir with name, so we can set
+        ## subdirectories for each slotted data type (e.g. DESeqDataSet).
         dir <- initDir(file.path(dir, name))
         rm(name)
 
         files <- list()
 
-        # DESeqDataSet.
+        ## DESeqDataSet.
         message("Exporting DESeqDataSet.")
         files[["data"]] <-
             export(
@@ -149,7 +151,7 @@ export.DESeqAnalysis <-  # nolint
                 compress = compress
             )
 
-        # DESeqTransform.
+        ## DESeqTransform.
         message("Exporting DESeqTransform.")
         files[["transform"]] <-
             export(
@@ -159,7 +161,7 @@ export.DESeqAnalysis <-  # nolint
                 compress = compress
             )
 
-        # DEG results tables.
+        ## DEG results tables.
         message("Exporting DESeqResults tables.")
         files[["resultsTables"]] <-
             .exportResultsTables(
@@ -179,5 +181,5 @@ export.DESeqAnalysis <-  # nolint
 setMethod(
     f = "export",
     signature = signature("DESeqAnalysis"),
-    definition = export.DESeqAnalysis
+    definition = `export,DESeqAnalysis`
 )

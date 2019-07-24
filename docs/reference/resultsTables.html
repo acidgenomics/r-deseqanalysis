@@ -22,8 +22,9 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -50,6 +51,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -66,7 +68,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.22</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -100,6 +102,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -119,13 +122,14 @@
     <pre class="usage"><span class='fu'>resultsTables</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>resultsTables</span>(<span class='no'>object</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"tbl_df"</span>,
-  <span class='st'>"DataFrameList"</span>))
+<span class='fu'>resultsTables</span>(<span class='no'>object</span>, <span class='kw'>DESeqDataSet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"tbl_df"</span>,
+  <span class='st'>"DataFrameList"</span>), <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>resultsTables</span>(<span class='no'>object</span>, <span class='no'>results</span>,
-  <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rowData</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>counts</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"tbl_df"</span>, <span class='st'>"DataFrameList"</span>))</pre>
+  <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>extra</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"tbl_df"</span>, <span class='st'>"DataFrameList"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,12 +139,32 @@
       <td><p>Object.</p></td>
     </tr>
     <tr>
+      <th>DESeqDataSet</th>
+      <td><p><code>DESeqDataSet</code> or <code>NULL</code>.</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code>.
+Adjusted P value ("alpha") cutoff. If left <code>NULL</code>, will use the cutoff
+defined in the object.</p></td>
+    </tr>
+    <tr>
+      <th>lfcThreshold</th>
+      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code>.
+Log fold change ratio (base 2) cutoff threshold. If left <code>NULL</code>, will use
+the cutoff defined in the object.</p></td>
+    </tr>
+    <tr>
       <th>return</th>
       <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
 Type of data frame to return in the list. Uses
 <a href='https://rdrr.io/r/base/match.arg.html'>match.arg()</a>. Note that <code>DataFrame</code> option will return
 with row names, whereas <code>tbl_df</code> option will return with <code>"rowname"</code>
 column.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments.</p></td>
     </tr>
     <tr>
       <th>results</th>
@@ -153,18 +177,9 @@ Name or position of <code>DESeqResults</code>.</p></td>
 Use shrunken log2 fold change (LFC) values.</p></td>
     </tr>
     <tr>
-      <th>rowData</th>
+      <th>extra</th>
       <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
-Join the row annotations.</p></td>
-    </tr>
-    <tr>
-      <th>counts</th>
-      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
-Join the size-factor adjusted normalized counts.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments.</p></td>
+Include row data and normalized counts from internal <code>DESeqDataSet</code>.</p></td>
     </tr>
     </table>
     
@@ -186,101 +201,28 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
     <h2 class="hasAnchor" id="tables"><a class="anchor" href="#tables"></a>Tables</h2>
 
     
-    <ul>
+
+<ul>
 <li><p><code>all</code>: All genes, including genes without an adjusted <em>P</em> value. This table
 is unmodified, and the rows have not been re-arranged or subset. It is
 suitable for gene set enrichment analysis (GSEA).</p></li>
 <li><p><code>up</code>: Upregulated genes.</p></li>
 <li><p><code>down</code>: Downregulated genes.</p></li>
-<li><p><code>both</code>: Bi-directional DEGs (up- and down-regulated). This table can be
+<li><p><code>both</code>: Bidirectional DEGs (up- and down-regulated). This table can be
 used for overrepresentation testing but should NOT be used for GSEA.</p></li>
 </ul>
+
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsTables</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>84 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>87 downregulated genes detected.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; $all
-#&gt; <span style='color: #949494;'># A tibble: 500 x 22</span><span>
-#&gt;    rowname baseMean log2FoldChange lfcSE  pvalue    padj geneID geneName
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> gene001  148.            1.39   0.404 1.00</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-4</span><span> 1.27</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span> ENSG0… TSPAN6  
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> gene002   34.0          -</span><span style='color: #BB0000;'>0.178</span><span>  0.368 5.64</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> 7.24</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> ENSG0… TNMD    
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> gene003   10.6          -</span><span style='color: #BB0000;'>1.76</span><span>   0.684 9.93</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-4</span><span> 7.71</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span> ENSG0… DPM1    
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> gene004   81.2          -</span><span style='color: #BB0000;'>1.94</span><span>   0.433 7.80</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-7</span><span> 2.77</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span> ENSG0… SCYL3   
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> gene005   11.6           0.195  0.479 5.74</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> 7.34</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> ENSG0… C1orf112
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> gene006  252.           -</span><span style='color: #BB0000;'>0.029</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span> 0.265 9.02</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> 9.40</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> ENSG0… FGR     
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> gene007   81.1           0.088</span><span style='text-decoration: underline;'>0</span><span> 0.293 7.41</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> 8.48</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> ENSG0… CFH     
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> gene008   64.1           0.529  0.432 1.25</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> 2.64</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> ENSG0… FUCA2   
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> gene009    5.12          0.186  0.555 5.83</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> 7.41</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> ENSG0… GCLC    
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> gene010    0.728        -</span><span style='color: #BB0000;'>0.023</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span> 0.658 8.88</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> 9.37</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span> ENSG0… NFYA    
-#&gt; </span><span style='color: #949494;'># … with 490 more rows, and 14 more variables: geneBiotype </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>,
-#&gt; #   broadClass </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>, sample01 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample02 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample03 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   sample04 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample05 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample06 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample07 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   sample08 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample09 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample10 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample11 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   sample12 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; 
-#&gt; $up
-#&gt; </span><span style='color: #949494;'># A tibble: 84 x 22</span><span>
-#&gt;    rowname baseMean log2FoldChange lfcSE   pvalue    padj geneID geneName
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> gene095    123.            2.36 0.367 1.12</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span><span> 1.86</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span> ENSG0… MPO     
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> gene334     72.4           2.85 0.458 3.68</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span><span> 4.57</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span> ENSG0… RWDD2A  
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> gene323    195.            1.99 0.321 5.67</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span><span> 5.64</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span> ENSG0… UBR7    
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> gene494    113.            1.76 0.284 7.91</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span><span> 6.55</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span> ENSG0… EIPR1   
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> gene391    901.            1.62 0.276 7.30</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span><span> 4.54</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-8</span><span> ENSG0… PRDM11  
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> gene145     93.3           2.16 0.410 1.36</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 8</span><span> 7.53</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-7</span><span> ENSG0… USH1C   
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> gene078     87.0           1.72 0.334 3.50</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 8</span><span> 1.74</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-6</span><span> ENSG0… HOXA11  
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> gene403     47.9           1.77 0.364 1.55</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 7</span><span> 6.60</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-6</span><span> ENSG0… RUNX3   
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> gene248    153.            1.31 0.271 2.47</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 7</span><span> 9.44</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-6</span><span> ENSG0… METTL13 
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> gene489    155.            1.58 0.367 2.44</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 6</span><span> 7.59</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span> ENSG0… ARHGAP31
-#&gt; </span><span style='color: #949494;'># … with 74 more rows, and 14 more variables: geneBiotype </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>,
-#&gt; #   broadClass </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>, sample01 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample02 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample03 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   sample04 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample05 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample06 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample07 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   sample08 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample09 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample10 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample11 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   sample12 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; 
-#&gt; $down
-#&gt; </span><span style='color: #949494;'># A tibble: 87 x 22</span><span>
-#&gt;    rowname baseMean log2FoldChange lfcSE   pvalue     padj geneID geneName
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> gene427     44.0          -</span><span style='color: #BB0000;'>2.90</span><span> 0.359 6.44</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-17</span><span> 3.20</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-14</span><span> ENSG0… ERP44   
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> gene419     27.8          -</span><span style='color: #BB0000;'>2.99</span><span> 0.424 1.51</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-13</span><span> 3.75</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span><span> ENSG0… SLC45A4 
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> gene352     25.7          -</span><span style='color: #BB0000;'>2.86</span><span> 0.496 6.38</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span><span> 4.53</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 8</span><span> ENSG0… SLC30A9 
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> gene497     48.3          -</span><span style='color: #BB0000;'>2.17</span><span> 0.455 1.59</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 7</span><span> 6.60</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 6</span><span> ENSG0… ALG1    
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> gene004     81.2          -</span><span style='color: #BB0000;'>1.94</span><span> 0.433 7.80</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 7</span><span> 2.77</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 5</span><span> ENSG0… SCYL3   
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> gene285    116.           -</span><span style='color: #BB0000;'>1.35</span><span> 0.307 1.85</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 6</span><span> 6.13</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 5</span><span> ENSG0… ABHD5   
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> gene023     67.0          -</span><span style='color: #BB0000;'>1.25</span><span> 0.291 3.75</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 6</span><span> 1.00</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 4</span><span> ENSG0… LAP3    
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> gene148    238.           -</span><span style='color: #BB0000;'>1.12</span><span> 0.258 3.83</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 6</span><span> 1.00</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 4</span><span> ENSG0… TBXA2R  
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> gene473     12.8          -</span><span style='color: #BB0000;'>2.56</span><span> 0.648 5.90</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 6</span><span> 1.33</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 4</span><span> ENSG0… SNX1    
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> gene412    152.           -</span><span style='color: #BB0000;'>1.18</span><span> 0.287 8.94</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 6</span><span> 1.93</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 4</span><span> ENSG0… AQR     
-#&gt; </span><span style='color: #949494;'># … with 77 more rows, and 14 more variables: geneBiotype </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>,
-#&gt; #   broadClass </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>, sample01 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample02 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample03 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   sample04 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample05 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample06 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample07 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   sample08 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample09 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample10 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample11 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   sample12 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; 
-#&gt; $both
-#&gt; </span><span style='color: #949494;'># A tibble: 171 x 22</span><span>
-#&gt;    rowname baseMean log2FoldChange lfcSE   pvalue     padj geneID geneName
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> gene427     44.0          -</span><span style='color: #BB0000;'>2.90</span><span> 0.359 6.44</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-17</span><span> 3.20</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-14</span><span> ENSG0… ERP44   
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> gene419     27.8          -</span><span style='color: #BB0000;'>2.99</span><span> 0.424 1.51</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-13</span><span> 3.75</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span><span> ENSG0… SLC45A4 
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> gene095    123.            2.36 0.367 1.12</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span><span> 1.86</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 9</span><span> ENSG0… MPO     
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> gene334     72.4           2.85 0.458 3.68</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span><span> 4.57</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 9</span><span> ENSG0… RWDD2A  
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> gene323    195.            1.99 0.321 5.67</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span><span> 5.64</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 9</span><span> ENSG0… UBR7    
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> gene494    113.            1.76 0.284 7.91</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span><span> 6.55</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 9</span><span> ENSG0… EIPR1   
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> gene352     25.7          -</span><span style='color: #BB0000;'>2.86</span><span> 0.496 6.38</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span><span> 4.53</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 8</span><span> ENSG0… SLC30A9 
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> gene391    901.            1.62 0.276 7.30</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span><span> 4.54</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 8</span><span> ENSG0… PRDM11  
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> gene145     93.3           2.16 0.410 1.36</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 8</span><span> 7.53</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 7</span><span> ENSG0… USH1C   
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> gene078     87.0           1.72 0.334 3.50</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 8</span><span> 1.74</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 6</span><span> ENSG0… HOXA11  
-#&gt; </span><span style='color: #949494;'># … with 161 more rows, and 14 more variables: geneBiotype </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>,
-#&gt; #   broadClass </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>, sample01 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample02 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample03 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   sample04 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample05 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample06 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample07 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   sample08 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample09 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample10 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, sample11 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   sample12 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </div></span></pre>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsTables</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>84 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>87 downregulated genes detected.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "all"  "up"   "down" "both"</div><div class='input'>
+<span class='co'>## DESeqResults ====</span>
+<span class='co'>## Use of DESeqAnalysis is encouraged instead of this approach.</span>
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='input'><span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.html'>as</a></span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsTables</span>(<span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>res</span>, <span class='kw'>DESeqDataSet</span> <span class='kw'>=</span> <span class='no'>dds</span>)</div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>84 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>87 downregulated genes detected.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "all"  "up"   "down" "both"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -301,19 +243,23 @@ used for overrepresentation testing but should NOT be used for GSEA.</p></li>
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by <a href='https://steinbaugh.com/'>Michael Steinbaugh</a>, <a href='https://acidgenomics.com/'>Acid Genomics</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

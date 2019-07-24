@@ -67,7 +67,8 @@ NULL
 
 
 
-plotMA.DESeqResults <-  # nolint
+## Updated 2019-07-23.
+`plotMA,DESeqResults` <-  # nolint
     function(
         object,
         genes = NULL,
@@ -112,20 +113,20 @@ plotMA.DESeqResults <-  # nolint
             stop("Specify either `genes` or `ntop`.")
         }
 
-        # Check to see if we should use `sval` column instead of `padj`.
+        ## Check to see if we should use `sval` column instead of `padj`.
         if ("svalue" %in% names(object)) {
             testCol <- "svalue"  # nocov
         } else {
             testCol <- "padj"
         }
 
-        # Placeholder variable for matching the LFC column.
+        ## Placeholder variable for matching the LFC column.
         lfcCol <- "log2FoldChange"
 
         data <- object %>%
             as_tibble(rownames = "rowname") %>%
-            camel() %>%
-            # Remove genes with very low expression.
+            camelCase() %>%
+            ## Remove genes with very low expression.
             filter(!!sym("baseMean") >= 1L) %>%
             mutate(rankScore = abs(!!sym("log2FoldChange"))) %>%
             arrange(desc(!!sym("rankScore"))) %>%
@@ -149,25 +150,25 @@ plotMA.DESeqResults <-  # nolint
             y = colnames(data)
         ))
 
-        # Apply directional filtering, if desired.
+        ## Apply directional filtering, if desired.
         if (direction == "up") {
             data <- filter(data, !!sym(lfcCol) > 0L)
         } else if (direction == "down") {
             data <- filter(data, !!sym(lfcCol) < 0L)
         }
 
-        # Check for no genes passing cutoffs and early return.
+        ## Check for no genes passing cutoffs and early return.
         if (!nrow(data)) {
             warning("No genes passed cutoffs.")
             return(invisible())
         }
 
-        # Early return the data, if desired.
+        ## Early return the data, if desired.
         if (return == "DataFrame") {
             return(as(data, "DataFrame"))
         }
 
-        # MA plot --------------------------------------------------------------
+        ## MA plot -------------------------------------------------------------
         log10BaseMean <- log10(data[["baseMean"]])
         floor <- min(floor(log10BaseMean))
         ceiling <- max(ceiling(log10BaseMean))
@@ -210,8 +211,8 @@ plotMA.DESeqResults <-  # nolint
                 y = "log2 fold change"
             )
 
-        # Color the significant points.
-        # Note that we're using direction-specific coloring by default.
+        ## Color the significant points.
+        ## Note that we're using direction-specific coloring by default.
         if (isCharacter(pointColor)) {
             p <- p +
                 scale_colour_manual(
@@ -223,19 +224,19 @@ plotMA.DESeqResults <-  # nolint
                 )
         }
 
-        # Gene text labels -----------------------------------------------------
-        # Get the genes to visualize when `ntop` is declared.
+        ## Gene text labels ----------------------------------------------------
+        ## Get the genes to visualize when `ntop` is declared.
         if (ntop > 0L) {
             assert(
                 isSubset(c("rowname", "rank"), colnames(data)),
-                # Double check that data is arranged by `rank` column.
+                ## Double check that data is arranged by `rank` column.
                 identical(data[["rank"]], sort(data[["rank"]]))
             )
-            # Since we know the data is arranged by rank, simply take the head.
+            ## Since we know the data is arranged by rank, simply take the head.
             genes <- head(data[["rowname"]], n = ntop)
         }
 
-        # Visualize specific genes on the plot, if desired.
+        ## Visualize specific genes on the plot, if desired.
         if (!is.null(genes)) {
             validObject(gene2symbol)
             assert(matchesGene2Symbol(
@@ -244,14 +245,14 @@ plotMA.DESeqResults <-  # nolint
                 gene2symbol = gene2symbol
             ))
 
-            # Map the user-defined `genes` to `gene2symbol` rownames.
-            # We're using this to match back to the `DESeqResults` object.
+            ## Map the user-defined `genes` to `gene2symbol` rownames.
+            ## We're using this to match back to the `DESeqResults` object.
             rownames <- mapGenesToRownames(
                 object = gene2symbol,
                 genes = genes
             )
 
-            # Prepare the label data tibble.
+            ## Prepare the label data tibble.
             labelData <- data %>%
                 .[match(x = rownames, table = .[["rowname"]]), ] %>%
                 left_join(as(gene2symbol, "tbl_df"), by = "rowname")
@@ -267,7 +268,7 @@ plotMA.DESeqResults <-  # nolint
                 )
         }
 
-        # Return ---------------------------------------------------------------
+        ## Return --------------------------------------------------------------
         p
     }
 
@@ -278,12 +279,13 @@ plotMA.DESeqResults <-  # nolint
 setMethod(
     f = "plotMA",
     signature = signature("DESeqResults"),
-    definition = plotMA.DESeqResults
+    definition = `plotMA,DESeqResults`
 )
 
 
 
-plotMA.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`plotMA,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
@@ -294,7 +296,7 @@ plotMA.DESeqAnalysis <-  # nolint
             isScalar(results),
             isFlag(lfcShrink)
         )
-        # Return `NULL` for objects that don't contain gene symbol mappings.
+        ## Return `NULL` for objects that don't contain gene symbol mappings.
         gene2symbol <- tryCatch(
             expr = suppressMessages(
                 Gene2Symbol(as(object, "DESeqDataSet"))
@@ -315,11 +317,11 @@ plotMA.DESeqAnalysis <-  # nolint
         )
     }
 
-f1 <- formals(plotMA.DESeqAnalysis)
-f2 <- formals(plotMA.DESeqResults)
+f1 <- formals(`plotMA,DESeqAnalysis`)
+f2 <- formals(`plotMA,DESeqResults`)
 f2 <- f2[setdiff(names(f2), c(names(f1), "gene2symbol"))]
 f <- c(f1, f2)
-formals(plotMA.DESeqAnalysis) <- f
+formals(`plotMA,DESeqAnalysis`) <- f
 
 
 
@@ -328,13 +330,13 @@ formals(plotMA.DESeqAnalysis) <- f
 setMethod(
     f = "plotMA",
     signature = signature("DESeqAnalysis"),
-    definition = plotMA.DESeqAnalysis
+    definition = `plotMA,DESeqAnalysis`
 )
 
 
 
-# Aliases ======================================================================
-# Soft deprecated, since this is used in bcbioRNASeq F1000 paper.
+## Aliases =====================================================================
+## Soft deprecated, since this is used in bcbioRNASeq F1000 paper.
 #' @rdname plotMA
 #' @usage NULL
 #' @export

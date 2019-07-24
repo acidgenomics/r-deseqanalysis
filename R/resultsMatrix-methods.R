@@ -33,7 +33,8 @@ NULL
 
 
 
-resultsMatrix.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`resultsMatrix,DESeqAnalysis` <-  # nolint
     function(
         object,
         value = c("log2FoldChange", "stat", "padj")
@@ -41,9 +42,9 @@ resultsMatrix.DESeqAnalysis <-  # nolint
         validObject(object)
         value <- match.arg(value)
 
-        # Get appropriate list of `DESeqResults`.
-        # Use shrunken LFC values, if defined.
-        # Otherwise, just pull values from `results()` return.
+        ## Get appropriate list of `DESeqResults`.
+        ## Use shrunken LFC values, if defined.
+        ## Otherwise, just pull values from `results()` return.
         if (
             value == "log2FoldChange" &&
             is.list(slot(object, "lfcShrink"))
@@ -80,7 +81,7 @@ resultsMatrix.DESeqAnalysis <-  # nolint
             )
         )
 
-        # Double check that our unlist operation is correct.
+        ## Double check that our unlist operation is correct.
         assert(
             identical(
                 unname(results[[1L]][[value]]),
@@ -88,7 +89,7 @@ resultsMatrix.DESeqAnalysis <-  # nolint
             )
         )
 
-        # Stash useful metadata in the object.
+        ## Stash useful metadata in the object.
         attr(mat, which = "DESeqAnalysis") <-
             list(
                 version = packageVersion("DESeqAnalysis"),
@@ -107,14 +108,15 @@ resultsMatrix.DESeqAnalysis <-  # nolint
 setMethod(
     f = "resultsMatrix",
     signature = signature("DESeqAnalysis"),
-    definition = resultsMatrix.DESeqAnalysis
+    definition = `resultsMatrix,DESeqAnalysis`
 )
 
 
 
-# Loop across the nested DESeqAnalysis objects and get the corresponding
-# result matrices.
-resultsMatrix.DESeqAnalysisList <-  # nolint
+## Loop across the nested DESeqAnalysis objects and get the corresponding
+## result matrices.
+## Updated 2019-07-23.
+`resultsMatrix,DESeqAnalysisList` <-  # nolint
     function(
         object,
         value = c("log2FoldChange", "stat", "padj")
@@ -149,5 +151,5 @@ resultsMatrix.DESeqAnalysisList <-  # nolint
 setMethod(
     f = "resultsMatrix",
     signature = signature("DESeqAnalysisList"),
-    definition = resultsMatrix.DESeqAnalysisList
+    definition = `resultsMatrix,DESeqAnalysisList`
 )
