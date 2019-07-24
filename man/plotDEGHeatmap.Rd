@@ -9,7 +9,7 @@
 \usage{
 plotDEGHeatmap(object, ...)
 
-\S4method{plotDEGHeatmap}{DESeqResults}(object, counts,
+\S4method{plotDEGHeatmap}{DESeqResults}(object, DESeqTransform,
   direction = c("both", "up", "down"), scale = c("row", "column",
   "none"), clusteringMethod = "ward.D2", clusterRows = TRUE,
   clusterCols = TRUE, breaks = seq(from = -2L, to = 2L, by = 0.25),
@@ -37,9 +37,7 @@ plotDEGHeatmap(object, ...)
 \arguments{
 \item{object}{Object.}
 
-\item{counts}{\code{DESeqTransform}.
-Variance-stabilized counts suitable for heatmap.
-Object rownames must be identical to corresponding \code{DESeqResults}.}
+\item{DESeqTransform}{\code{DESeqTransform}.}
 
 \item{direction}{\code{character(1)}.
 Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
