@@ -16,12 +16,11 @@
 #'   `DESeqResults` list.
 #'
 #' @examples
-#' library(DESeq2)
-#'
-#' data <- DESeq(makeExampleDESeqDataSet())
+#' data <- DESeq2::makeExampleDESeqDataSet()
+#' data <- DESeq2::DESeq(data)
 #' class(data)
 #'
-#' transform <- varianceStabilizingTransformation(data)
+#' transform <- DESeq2::varianceStabilizingTransformation(data)
 #' class(transform)
 #'
 #' resultsNames(data)
@@ -29,7 +28,7 @@
 #' results <- results(data, name = name)
 #' class(results)
 #'
-#' lfcShrink <- lfcShrink(dds = data, res = results, coef = 2L)
+#' lfcShrink <- DESeq2::lfcShrink(dds = data, res = results, coef = 2L)
 #'
 #' results <- list(results)
 #' names(results) <- name
