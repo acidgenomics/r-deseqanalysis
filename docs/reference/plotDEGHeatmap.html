@@ -128,7 +128,7 @@ manual input of a gene vector. All of the optional parameters for
     <pre class="usage"><span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>counts</span>,
+<span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>DESeqTransform</span>,
   <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"row"</span>, <span class='st'>"column"</span>,
   <span class='st'>"none"</span>), <span class='kw'>clusteringMethod</span> <span class='kw'>=</span> <span class='st'>"ward.D2"</span>, <span class='kw'>clusterRows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>clusterCols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> -<span class='fl'>2L</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.25</span>),
@@ -162,10 +162,8 @@ manual input of a gene vector. All of the optional parameters for
       <td><p>Object.</p></td>
     </tr>
     <tr>
-      <th>counts</th>
-      <td><p><code>DESeqTransform</code>.
-Variance-stabilized counts suitable for heatmap.
-Object rownames must be identical to corresponding <code>DESeqResults</code>.</p></td>
+      <th>DESeqTransform</th>
+      <td><p><code>DESeqTransform</code>.</p></td>
     </tr>
     <tr>
       <th>direction</th>
