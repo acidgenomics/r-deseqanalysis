@@ -131,7 +131,19 @@ NULL
 ## This is used in bcbioRNASeq F1000 paper.
 ## Updated 2019-07-24.
 `topTables,DESeqResults` <-  # nolint
-    function(object, n = 10L) {
+    function(
+        object,
+        DESeqDataSet = NULL,  # nolint
+        n = 10L
+    ) {
+        validObject(object)
+        assert(isAny(DESeqDataSet, c("DESeqDataSet", "NULL")))
+        if (is(DESeqDataSet, "DESeqDataSet")) {
+            object <- .joinRowData(
+                DESeqResults = object,
+                DESeqDataSet = DESeqDataSet
+            )
+        }
         list <- resultsTables(object)
         contrast <- contrastName(object)
         .topTables(
