@@ -155,8 +155,7 @@ NULL
             object = object,
             results = results,
             lfcShrink = lfcShrink,
-            rowData = TRUE,
-            counts = FALSE
+            extra = TRUE
         )
         ## Suppressing the message about the contrast name we're matching here,
         ## since it will be shown in `resultsTables()` call above.

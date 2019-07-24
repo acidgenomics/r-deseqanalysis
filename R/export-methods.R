@@ -49,8 +49,7 @@ NULL
                 object = object,
                 results = results,
                 lfcShrink = lfcShrink,
-                rowData = TRUE,
-                counts = TRUE,
+                extra = TRUE,
                 return = "tbl_df"
             )
             files <- file.path(dir, results, paste0(names(resTbl), ".csv"))
