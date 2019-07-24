@@ -9,13 +9,16 @@
 \usage{
 topTables(object, ...)
 
-\S4method{topTables}{DESeqResults}(object, n = 10L)
+\S4method{topTables}{DESeqResults}(object, DESeqDataSet = NULL,
+  n = 10L)
 
 \S4method{topTables}{DESeqAnalysis}(object, results, n = 10L,
   lfcShrink = TRUE)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{DESeqDataSet}{\code{DESeqDataSet} or \code{NULL}.}
 
 \item{n}{\code{integer(1)}.
 Number of genes (per direction) to report.}
