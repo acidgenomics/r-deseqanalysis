@@ -19,7 +19,7 @@
 #'   suitable for gene set enrichment analysis (GSEA).
 #' - `up`: Upregulated genes.
 #' - `down`: Downregulated genes.
-#' - `both`: Bi-directional DEGs (up- and down-regulated). This table can be
+#' - `both`: Bidirectional DEGs (up- and down-regulated). This table can be
 #'   used for overrepresentation testing but should NOT be used for GSEA.
 #'
 #' @param DESeqDataSet `DESeqDataSet` or `NULL`.
@@ -39,13 +39,14 @@
 #'
 #' ## DESeqAnalysis ====
 #' x <- resultsTables(deseq, results = 1L)
-#' print(x)
+#' names(x)
 #'
 #' ## DESeqResults ====
-#' Use of DESeqAnalysis is encouraged instead of this approach.
+#' ## Use of DESeqAnalysis is encouraged instead of this approach.
 #' res <- results(deseq, results = 1L)
 #' dds <- as(deseq, "DESeqDataSet")
-#' x <- resultsTables(object = res, counts = dds)
+#' x <- resultsTables(object = res, DESeqDataSet = dds)
+#' names(x)
 NULL
 
 
@@ -188,6 +189,27 @@ NULL
             stop(paste(
                 "`write` argument is defunct.",
                 "Use `export()` instead."
+            ))
+        }
+        ## Check for invalid arguments.
+        diff <- setdiff(
+            x = setdiff(
+                x = names(call),
+                y = c("", "...")
+            ),
+            y = setdiff(
+                x = names(formals()),
+                y = "..."
+            )
+        )
+        if (hasLength(diff)) {
+            stop(sprintf(
+                fmt = ngettext(
+                    n = length(diff),
+                    msg1 = "unused argument (%s)\n",
+                    msg2 = "unused arguments (%s)\n"
+                ),
+                toString(diff)
             ))
         }
 
