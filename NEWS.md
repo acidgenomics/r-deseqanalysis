@@ -1,3 +1,7 @@
+## DESeqAnalysis 0.2.0 (2019-07-23)
+
+Version bump, reflecting change in basejump dependency.
+
 ## DESeqAnalysis 0.1.22 (2019-04-28)
 
 ### New functions

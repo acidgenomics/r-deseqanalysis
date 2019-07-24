@@ -65,7 +65,8 @@ NULL
 
 
 
-plotVolcano.DESeqResults <-  # nolint
+## Updated 2019-07-23.
+`plotVolcano,DESeqResults` <-  # nolint
     function(
         object,
         ylim = 1e-10,
@@ -109,30 +110,30 @@ plotVolcano.DESeqResults <-  # nolint
         direction <- match.arg(direction)
         return <- match.arg(return)
 
-        # Check to see if we should use `sval` instead of `padj`
+        ## Check to see if we should use `sval` instead of `padj`
         if ("svalue" %in% names(object)) {
             testCol <- "svalue"  # nocov
         } else {
             testCol <- "padj"
         }
 
-        # Placeholder variable for matching the LFC column.
+        ## Placeholder variable for matching the LFC column.
         lfcCol <- "log2FoldChange"
-        negLogTestCol <- camel(paste("neg", "log10", testCol))
+        negLogTestCol <- camelCase(paste("neg", "log10", testCol))
 
         data <- object %>%
             as_tibble(rownames = "rowname") %>%
-            camel() %>%
-            # Select columns used for plots.
+            camelCase() %>%
+            ## Select columns used for plots.
             select(!!!syms(c("rowname", "baseMean", lfcCol, testCol))) %>%
-            # Remove genes with NA adjusted P values.
+            ## Remove genes with NA adjusted P values.
             filter(!is.na(!!sym(testCol))) %>%
-            # Remove genes with zero counts.
+            ## Remove genes with zero counts.
             filter(!!sym("baseMean") > 0L) %>%
-            # Negative log10 transform the test values. Add `ylim` here to
-            # prevent `Inf` values resulting from log transformation.
-            # This will also define the upper bound of the y-axis.
-            # Then calculate the rank score, which is used for `ntop`.
+            ## Negative log10 transform the test values. Add `ylim` here to
+            ## prevent `Inf` values resulting from log transformation.
+            ## This will also define the upper bound of the y-axis.
+            ## Then calculate the rank score, which is used for `ntop`.
             mutate(
                 !!sym(negLogTestCol) := -log10(!!sym(testCol) + !!ylim),
                 rankScore = !!sym(negLogTestCol) * abs(!!sym(lfcCol))
@@ -145,19 +146,19 @@ plotVolcano.DESeqResults <-  # nolint
                 lfcThreshold = lfcThreshold
             )
 
-        # Apply directional filtering, if desired.
+        ## Apply directional filtering, if desired.
         if (direction == "up") {
             data <- filter(data, !!sym(lfcCol) > 0L)
         } else if (direction == "down") {
             data <- filter(data, !!sym(lfcCol) < 0L)
         }
 
-        # Early return the data, if desired.
+        ## Early return the data, if desired.
         if (return == "DataFrame") {
             return(as(data, "DataFrame"))
         }
 
-        # LFC density ----------------------------------------------------------
+        ## LFC density ---------------------------------------------------------
         lfcHist <- ggplot(
             data = data,
             mapping = aes(x = !!sym(lfcCol))
@@ -182,7 +183,7 @@ plotVolcano.DESeqResults <-  # nolint
                 axis.ticks.y = element_blank()
             )
 
-        # P value density ------------------------------------------------------
+        ## P value density -----------------------------------------------------
         pvalueHist <- ggplot(
             data = data,
             mapping = aes(x = !!sym(negLogTestCol))
@@ -207,7 +208,7 @@ plotVolcano.DESeqResults <-  # nolint
                 axis.ticks.y = element_blank()
             )
 
-        # Volcano plot ---------------------------------------------------------
+        ## Volcano plot --------------------------------------------------------
         p <- ggplot(
             data = data,
             mapping = aes(
@@ -251,19 +252,19 @@ plotVolcano.DESeqResults <-  # nolint
                 )
         }
 
-        # Gene text labels -----------------------------------------------------
-        # Get the genes to visualize when `ntop` is declared.
+        ## Gene text labels ----------------------------------------------------
+        ## Get the genes to visualize when `ntop` is declared.
         if (ntop > 0L) {
             assert(
                 isSubset(c("rowname", "rank"), colnames(data)),
-                # Double check that data is arranged by `rank` column.
+                ## Double check that data is arranged by `rank` column.
                 identical(data[["rank"]], sort(data[["rank"]]))
             )
-            # Since we know the data is arranged by rank, simply take the head.
+            ## Since we know the data is arranged by rank, simply take the head.
             genes <- head(data[["rowname"]], n = ntop)
         }
 
-        # Visualize specific genes on the plot, if desired.
+        ## Visualize specific genes on the plot, if desired.
         if (!is.null(genes)) {
             validObject(gene2symbol)
             assert(matchesGene2Symbol(
@@ -271,13 +272,13 @@ plotVolcano.DESeqResults <-  # nolint
                 genes = genes,
                 gene2symbol = gene2symbol
             ))
-            # Map the user-defined `genes` to `gene2symbol` rownames.
-            # We're using this to match back to the `DESeqResults` object.
+            ## Map the user-defined `genes` to `gene2symbol` rownames.
+            ## We're using this to match back to the `DESeqResults` object.
             rownames <- mapGenesToRownames(
                 object = gene2symbol,
                 genes = genes
             )
-            # Prepare the label data tibble.
+            ## Prepare the label data tibble.
             labelData <- data %>%
                 .[match(x = rownames, table = .[["rowname"]]), ] %>%
                 left_join(as(gene2symbol, "tbl_df"), by = "rowname")
@@ -292,10 +293,10 @@ plotVolcano.DESeqResults <-  # nolint
                 )
         }
 
-        # Return ---------------------------------------------------------------
+        ## Return --------------------------------------------------------------
         if (isTRUE(histograms)) {
             ggdraw() +
-                # Coordinates are relative to lower left corner
+                ## Coordinates are relative to lower left corner
                 draw_plot(
                     plot = p,
                     x = 0L, y = 0.2,
@@ -323,12 +324,13 @@ plotVolcano.DESeqResults <-  # nolint
 setMethod(
     f = "plotVolcano",
     signature = signature("DESeqResults"),
-    definition = plotVolcano.DESeqResults
+    definition = `plotVolcano,DESeqResults`
 )
 
 
 
-plotVolcano.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`plotVolcano,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
@@ -339,7 +341,7 @@ plotVolcano.DESeqAnalysis <-  # nolint
             isScalar(results),
             isFlag(lfcShrink)
         )
-        # Return `NULL` for objects that don't contain gene symbol mappings.
+        ## Return `NULL` for objects that don't contain gene symbol mappings.
         gene2symbol <- tryCatch(
             expr = suppressMessages(
                 Gene2Symbol(as(object, "DESeqDataSet"))
@@ -348,7 +350,7 @@ plotVolcano.DESeqAnalysis <-  # nolint
         )
         results <- results(object, results = results, lfcShrink = lfcShrink)
         do.call(
-            what = plotVolcano.DESeqResults,
+            what = `plotVolcano,DESeqResults`,
             args = matchArgsToDoCall(
                 args = list(
                     object = results,
@@ -360,11 +362,11 @@ plotVolcano.DESeqAnalysis <-  # nolint
         )
     }
 
-f1 <- formals(plotVolcano.DESeqAnalysis)
-f2 <- formals(plotVolcano.DESeqResults)
+f1 <- formals(`plotVolcano,DESeqAnalysis`)
+f2 <- formals(`plotVolcano,DESeqResults`)
 f2 <- f2[setdiff(names(f2), c(names(f1), "gene2symbol"))]
 f <- c(f1, f2)
-formals(plotVolcano.DESeqAnalysis) <- f
+formals(`plotVolcano,DESeqAnalysis`) <- f
 
 
 
@@ -373,5 +375,5 @@ formals(plotVolcano.DESeqAnalysis) <- f
 setMethod(
     f = "plotVolcano",
     signature = signature("DESeqAnalysis"),
-    definition = plotVolcano.DESeqAnalysis
+    definition = `plotVolcano,DESeqAnalysis`
 )

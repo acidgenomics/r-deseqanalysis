@@ -38,6 +38,8 @@
 #' @seealso
 #' - `help(topic = "Annotated-class", package = "S4Vectors")`.
 #' - `showClass("Annotated")`.
+
+## Updated 2019-07-23.
 setClass(
     Class = "DESeqAnalysis",
     contains = "Annotated",
@@ -57,26 +59,26 @@ setClass(
         lfcShrink <- slot(object, "lfcShrink")
 
         ok <- validate(
-            # DESeqDataSet and DESeqTransform must correspond.
+            ## DESeqDataSet and DESeqTransform must correspond.
             identical(dimnames(data), dimnames(transform)),
-            # results and lfcShrink must be list.
+            ## results and lfcShrink must be list.
             is.list(results),
             is.list(lfcShrink),
-            # DESeqDataSet and DESeqResults must correspond.
+            ## DESeqDataSet and DESeqResults must correspond.
             all(bapply(
                 X = results,
                 FUN = function(x) {
                     identical(rownames(x), rownames(data))
                 }
             )),
-            # DESeqResults list must be named.
+            ## DESeqResults list must be named.
             hasValidNames(results),
-            # Require package version in metadata.
+            ## Require package version in metadata.
             is(metadata(object)[["version"]], "package_version")
         )
         if (!isTRUE(ok)) return(ok)
 
-        # Alpha levels in the slotted results must be identical.
+        ## Alpha levels in the slotted results must be identical.
         alphas <- vapply(
             X = results,
             FUN = function(x) {
@@ -87,10 +89,10 @@ setClass(
         ok <- validate(length(unique(alphas)) == 1L)
         if (!isTRUE(ok)) return(ok)
 
-        # Note that `lfcShrink` slot is currently optional, but that may change
-        # in a future update.
+        ## Note that `lfcShrink` slot is currently optional, but that may change
+        ## in a future update.
         if (hasLength(lfcShrink)) {
-            # Unshrunken and shrunken DESeqResults must correspond.
+            ## Unshrunken and shrunken DESeqResults must correspond.
             ok <- validate(
                 identical(names(results), names(lfcShrink)),
                 all(mapply(
@@ -104,9 +106,9 @@ setClass(
             )
             if (!isTRUE(ok)) return(ok)
 
-            # Ensure that DESeqResults slotted into `lfcShrink` is actually
-            # shrunken using the `lfcShrink()` function. This also checks to
-            # ensure that the same method was used for all contrasts.
+            ## Ensure that DESeqResults slotted into `lfcShrink` is actually
+            ## shrunken using the `lfcShrink()` function. This also checks to
+            ## ensure that the same method was used for all contrasts.
             shrinkTypes <- vapply(
                 X = lfcShrink,
                 FUN = lfcShrinkType,
@@ -115,7 +117,7 @@ setClass(
             ok <- validate(length(unique(shrinkTypes)) == 1L)
             if (!isTRUE(ok)) return(ok)
 
-            # lfcShrink alpha must match the results alpha.
+            ## lfcShrink alpha must match the results alpha.
             ok <- validate(
                 identical(
                     vapply(
@@ -147,18 +149,20 @@ setClass(
 #'
 #' @author Michael Steinbaugh
 #' @export
+
+## Updated 2019-07-23.
 setClass(
     Class = "DESeqAnalysisList",
     contains = "SimpleList",
     validity = function(object) {
-        # Currently allowing an empty list.
+        ## Currently allowing an empty list.
         if (!hasLength(object)) return(TRUE)
 
-        # Require that all objects in list are named.
+        ## Require that all objects in list are named.
         ok <- validate(hasValidNames(object))
         if (!isTRUE(ok)) return(ok)
 
-        # Check that all of the elements in the list are DESeqAnalysis.
+        ## Check that all of the elements in the list are DESeqAnalysis.
         ok <- validate(all(bapply(
             X = object,
             FUN = function(object) {
@@ -167,8 +171,8 @@ setClass(
         )))
         if (!isTRUE(ok)) return(ok)
 
-        # Ensure that all slotted DESeqAnalysis objects are valid.
-        # This step can be slow for large objects.
+        ## Ensure that all slotted DESeqAnalysis objects are valid.
+        ## This step can be slow for large objects.
         ok <- validate(all(bapply(object, validObject)))
         if (!isTRUE(ok)) return(ok)
 

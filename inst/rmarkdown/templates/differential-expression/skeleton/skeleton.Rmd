@@ -24,11 +24,11 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, cache=FALSE, message=FALSE}
-# Last modified 2019-04-26
-library(basejump)
+# Updated 2019-07-11.
 library(DESeqAnalysis)
-basejump::prepareTemplate()
+prepareTemplate()
 source("_setup.R")
+# This is required for tabset R Markdown headers to work in `lapply()` call.
 knitr::opts_chunk[["set"]](message = FALSE)
 ```
 
@@ -39,13 +39,10 @@ knitr::opts_chunk[["set"]](message = FALSE)
 
 ```{r load-object}
 if (is.character(params$object)) {
-    if (fileExt(params$object) == "rds") {
-        object <- readRDS(file = params$object)
-        name <- basenameSansExt(params$object)
-    } else if (fileExt(params$object) == "rda") {
-        name <- load(params$object)
-        object <- get(name, inherits = FALSE)
-    }
+    file <- params$object
+    object <- import(file)
+    name <- basenameSansExt(file)
+    rm(file)
 } else {
     object <- params$object
     name <- params$name
@@ -197,7 +194,7 @@ Note that `colData` files contain annotations corresponding to the columns (i.e.
 
 ```{r export}
 export(
-    x = object,
+    object = object,
     name = name,
     dir = params$output_dir,
     compress = FALSE,

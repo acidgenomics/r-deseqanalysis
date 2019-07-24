@@ -16,12 +16,11 @@
 #'   `DESeqResults` list.
 #'
 #' @examples
-#' library(DESeq2)
-#'
-#' data <- DESeq(makeExampleDESeqDataSet())
+#' data <- DESeq2::makeExampleDESeqDataSet()
+#' data <- DESeq2::DESeq(data)
 #' class(data)
 #'
-#' transform <- varianceStabilizingTransformation(data)
+#' transform <- DESeq2::varianceStabilizingTransformation(data)
 #' class(transform)
 #'
 #' resultsNames(data)
@@ -29,7 +28,7 @@
 #' results <- results(data, name = name)
 #' class(results)
 #'
-#' lfcShrink <- lfcShrink(dds = data, res = results, coef = 2L)
+#' lfcShrink <- DESeq2::lfcShrink(dds = data, res = results, coef = 2L)
 #'
 #' results <- list(results)
 #' names(results) <- name
@@ -46,6 +45,8 @@
 #'     lfcShrink = lfcShrink
 #' )
 #' print(x)
+
+## Updated 2019-07-23.
 DESeqAnalysis <-  # nolint
     function(
         data,
@@ -55,7 +56,7 @@ DESeqAnalysis <-  # nolint
     ) {
         metadata <- list(version = .version)
 
-        # Allow input of single `DESeqResults`.
+        ## Allow input of single `DESeqResults`.
         if (is(results, "DESeqResults")) {
             results <- .coerceResultsToList(results)
         }
@@ -63,7 +64,7 @@ DESeqAnalysis <-  # nolint
             lfcShrink <- .coerceResultsToList(lfcShrink)
         }
 
-        # Automatically convert `lfcShrink = NULL` to empty list.
+        ## Automatically convert `lfcShrink = NULL` to empty list.
         if (is.null(lfcShrink)) {
             lfcShrink <- list()
         }
@@ -80,7 +81,8 @@ DESeqAnalysis <-  # nolint
 
 
 
-# Note that this will automatically assign name.
+## Note that this will automatically assign name.
+## Updated 2019-07-23.
 .coerceResultsToList <- function(from) {
     assert(is(from, "DESeqResults"))
     to <- list(from)
@@ -90,6 +92,7 @@ DESeqAnalysis <-  # nolint
 
 
 
+## Updated 2019-07-23.
 .contrastNames <- function(object) {
     assert(is(object, "DESeqAnalysis"))
     vapply(

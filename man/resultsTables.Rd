@@ -9,15 +9,26 @@
 \usage{
 resultsTables(object, ...)
 
-\S4method{resultsTables}{DESeqResults}(object, return = c("tbl_df",
-  "DataFrameList"))
+\S4method{resultsTables}{DESeqResults}(object, DESeqDataSet = NULL,
+  alpha = NULL, lfcThreshold = NULL, return = c("tbl_df",
+  "DataFrameList"), ...)
 
 \S4method{resultsTables}{DESeqAnalysis}(object, results,
-  lfcShrink = TRUE, rowData = TRUE, counts = TRUE,
-  return = c("tbl_df", "DataFrameList"))
+  lfcShrink = TRUE, extra = TRUE, alpha = NULL,
+  lfcThreshold = NULL, return = c("tbl_df", "DataFrameList"))
 }
 \arguments{
 \item{object}{Object.}
+
+\item{DESeqDataSet}{\code{DESeqDataSet} or \code{NULL}.}
+
+\item{alpha}{\code{numeric(1)}.
+Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
+defined in the object.}
+
+\item{lfcThreshold}{\code{numeric(1)}.
+Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
+the cutoff defined in the object.}
 
 \item{return}{\code{character(1)}.
 Type of data frame to return in the list. Uses
@@ -25,19 +36,16 @@ Type of data frame to return in the list. Uses
 with row names, whereas \code{tbl_df} option will return with \code{"rowname"}
 column.}
 
+\item{...}{Additional arguments.}
+
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or position of \code{DESeqResults}.}
 
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
 
-\item{rowData}{\code{logical(1)}.
-Join the row annotations.}
-
-\item{counts}{\code{logical(1)}.
-Join the size-factor adjusted normalized counts.}
-
-\item{...}{Additional arguments.}
+\item{extra}{\code{logical(1)}.
+Include row data and normalized counts from internal \code{DESeqDataSet}.}
 }
 \value{
 \code{list}.
@@ -62,7 +70,7 @@ is unmodified, and the rows have not been re-arranged or subset. It is
 suitable for gene set enrichment analysis (GSEA).
 \item \code{up}: Upregulated genes.
 \item \code{down}: Downregulated genes.
-\item \code{both}: Bi-directional DEGs (up- and down-regulated). This table can be
+\item \code{both}: Bidirectional DEGs (up- and down-regulated). This table can be
 used for overrepresentation testing but should NOT be used for GSEA.
 }
 }
@@ -72,5 +80,12 @@ data(deseq)
 
 ## DESeqAnalysis ====
 x <- resultsTables(deseq, results = 1L)
-print(x)
+names(x)
+
+## DESeqResults ====
+## Use of DESeqAnalysis is encouraged instead of this approach.
+res <- results(deseq, results = 1L)
+dds <- as(deseq, "DESeqDataSet")
+x <- resultsTables(object = res, DESeqDataSet = dds)
+names(x)
 }

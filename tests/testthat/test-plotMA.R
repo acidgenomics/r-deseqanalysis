@@ -6,7 +6,7 @@ test_that("DESeqAnalysis", {
     x <- do.call(plotMA, args)
     expect_is(x, "ggplot")
 
-    # Check geom classes.
+    ## Check geom classes.
     geomtype <- vapply(
         X = x[["layers"]],
         FUN = function(x) {
@@ -19,7 +19,7 @@ test_that("DESeqAnalysis", {
         expected = c("GeomHline", "GeomPoint", "GeomLogticks")
     )
 
-    # Check plot labels.
+    ## Check plot labels.
     expect_identical(
         object = x[["labels"]][["y"]],
         expected = "log2 fold change"

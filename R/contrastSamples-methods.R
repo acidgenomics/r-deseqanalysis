@@ -34,16 +34,17 @@ NULL
 
 
 
-contrastSamples.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`contrastSamples,DESeqAnalysis` <-  # nolint
     function(object, results) {
         validObject(object)
         suppressMessages(
             results <- results(object = object, results = results)
         )
 
-        # If we've defined a subset of samples for the contrast, stash them
-        # in DESeqResults metadata. Otherwise, there's no way to trace this
-        # back to a match in DESeqDataSet.
+        ## If we've defined a subset of samples for the contrast, stash them
+        ## in DESeqResults metadata. Otherwise, there's no way to trace this
+        ## back to a match in DESeqDataSet.
         samples <- metadata(results)[["samples"]]
         if (hasLength(samples)) {
             return(samples)
@@ -60,8 +61,8 @@ contrastSamples.DESeqAnalysis <-  # nolint
         colData <- colData(data)
         assert(hasRownames(colData))
 
-        # Inform if the contrast doesn't exist in DESeqDataSet resultsNames.
-        # Note that this can happen for complex contrasts, so don't warn.
+        ## Inform if the contrast doesn't exist in DESeqDataSet resultsNames.
+        ## Note that this can happen for complex contrasts, so don't warn.
         resultsNames <- resultsNames(data)
         if (!contrast %in% resultsNames) {
             message(paste0(
@@ -71,8 +72,8 @@ contrastSamples.DESeqAnalysis <-  # nolint
             ))
         }
 
-        # Loop across the colData column names and determine which column
-        # matches the prefix of the defined contrast.
+        ## Loop across the colData column names and determine which column
+        ## matches the prefix of the defined contrast.
         match <- vapply(
             X = colnames(colData),
             FUN = function(col) {
@@ -87,7 +88,7 @@ contrastSamples.DESeqAnalysis <-  # nolint
         factor <- colData[[factorCol]]
         assert(is.factor(factor))
 
-        # Now remove the factor prefix from our contrast.
+        ## Now remove the factor prefix from our contrast.
         contrastSansFactor <- sub(
             pattern = paste0("^", factorCol, "_"),
             replacement = "",
@@ -120,5 +121,5 @@ contrastSamples.DESeqAnalysis <-  # nolint
 setMethod(
     f = "contrastSamples",
     signature = signature("DESeqAnalysis"),
-    definition = contrastSamples.DESeqAnalysis
+    definition = `contrastSamples,DESeqAnalysis`
 )

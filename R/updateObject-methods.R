@@ -16,7 +16,8 @@ NULL
 
 
 
-updateObject.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`updateObject,DESeqAnalysis` <-  # nolint
     function(object) {
         if (!isTRUE(.hasSlot(object, "metadata"))) {
             message(paste0(
@@ -45,5 +46,5 @@ updateObject.DESeqAnalysis <-  # nolint
 setMethod(
     f = "updateObject",
     signature = signature("DESeqAnalysis"),
-    definition = updateObject.DESeqAnalysis
+    definition = `updateObject,DESeqAnalysis`
 )

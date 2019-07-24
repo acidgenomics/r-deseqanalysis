@@ -22,7 +22,8 @@ NULL
 
 
 
-results.DESeqDataSet <-  # nolint
+## Updated 2019-07-23.
+`results,DESeqDataSet` <-  # nolint
     function(object, ...) {
         DESeq2::results(object, ...)
     }
@@ -34,12 +35,13 @@ results.DESeqDataSet <-  # nolint
 setMethod(
     f = "results",
     signature = signature("DESeqDataSet"),
-    definition = results.DESeqDataSet
+    definition = `results,DESeqDataSet`
 )
 
 
 
-results.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`results,DESeqAnalysis` <-  # nolint
     function(object, results, lfcShrink = FALSE) {
         if (missing(results)) {
             stop(paste(
@@ -55,7 +57,7 @@ results.DESeqAnalysis <-  # nolint
             isFlag(lfcShrink)
         )
 
-        # Match the results.
+        ## Match the results.
         if (identical(lfcShrink, FALSE)) {
             slotName <- "results"
         } else if (
@@ -78,7 +80,7 @@ results.DESeqAnalysis <-  # nolint
         results <- slot(object, name = slotName)[[results]]
         assert(is(results, "DESeqResults"))
 
-        # Inform the user about which data we're using.
+        ## Inform the user about which data we're using.
         msg <- contrastName(results)
         if (isTRUE(lfcShrink)) {
             msg <- paste(msg, "(shrunken LFC)")
@@ -97,5 +99,5 @@ results.DESeqAnalysis <-  # nolint
 setMethod(
     f = "results",
     signature = signature("DESeqAnalysis"),
-    definition = results.DESeqAnalysis
+    definition = `results,DESeqAnalysis`
 )

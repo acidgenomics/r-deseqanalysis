@@ -36,6 +36,7 @@ NULL
 
 #' @rdname as
 #' @name coerce,DESeqAnalysis,DESeqDataSet-method
+## Updated 2019-07-23.
 setAs(
     from = "DESeqAnalysis",
     to = "DESeqDataSet",
@@ -51,6 +52,7 @@ setAs(
 
 #' @rdname as
 #' @name coerce,DESeqAnalysis,DESeqTransform-method
+## Updated 2019-07-23.
 setAs(
     from = "DESeqAnalysis",
     to = "DESeqTransform",
@@ -66,6 +68,7 @@ setAs(
 
 #' @rdname as
 #' @name coerce,DESeqAnalysis,DESeqResults-method
+## Updated 2019-07-23.
 setAs(
     from = "DESeqAnalysis",
     to = "DESeqResults",

@@ -11,7 +11,8 @@ NULL
 
 
 
-show.DESeqAnalysis <-  # nolint
+## Updated 2019-07-23.
+`show,DESeqAnalysis` <-  # nolint
     function(object) {
         validObject(object)
         dds <- as(object, "DESeqDataSet")
@@ -21,7 +22,7 @@ show.DESeqAnalysis <-  # nolint
             "DESeq2 ", metadata(dds)[["version"]]
         ), sep = "\n")
 
-        # Show information about the DESeqDataSet.
+        ## Show information about the DESeqDataSet.
         ddsInfo <- paste0("  ", capture.output(show(dds))[-1L])
         cat("data:", ddsInfo, sep = "\n")
 
@@ -46,5 +47,5 @@ show.DESeqAnalysis <-  # nolint
 setMethod(
     f = "show",
     signature = signature("DESeqAnalysis"),
-    definition = show.DESeqAnalysis
+    definition = `show,DESeqAnalysis`
 )

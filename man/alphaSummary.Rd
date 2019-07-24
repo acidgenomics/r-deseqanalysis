@@ -57,7 +57,6 @@ data(deseq)
 
 ## DESeqDataSet ====
 dds <- as(deseq, "DESeqDataSet")
-design(dds)
 resultsNames(dds)
 alphaSummary(dds)
 alphaSummary(dds, contrast = c("condition", "B", "A"))

@@ -58,7 +58,7 @@ test_that("Label specific genes", {
     )
     expect_is(x, "ggplot")
 
-    # Return DataFrame.
+    ## Return DataFrame.
     x <- do.call(
         what = plotVolcano,
         args = c(

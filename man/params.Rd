@@ -4,6 +4,10 @@
 \alias{params}
 \title{Parameters}
 \arguments{
+\item{DESeqDataSet}{\code{DESeqDataSet} or \code{NULL}.}
+
+\item{DESeqTransform}{\code{DESeqTransform}.}
+
 \item{alpha}{\code{numeric(1)}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}

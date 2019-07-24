@@ -22,8 +22,9 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -50,6 +51,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -66,7 +68,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.22</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -100,6 +102,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -120,18 +123,22 @@
     <h2 class="hasAnchor" id="deseqanalysis"><a class="anchor" href="#deseqanalysis"></a>DESeqAnalysis</h2>
 
     
-    <p>Supported coercion methods will extract any of these internal objects:</p><ul>
+
+
+<p>Supported coercion methods will extract any of these internal objects:</p><ul>
 <li><p><code>DESeqDataSet</code>.</p></li>
 <li><p><code>DESeqTransform</code>.</p></li>
-<li><p><code>DESeqResults</code>. Extracts the first results slotted.
-Note that this corresponds to results containing log2 fold change (LFC)
-values that <em>have not been shrunken</em> using <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>DESeq2::lfcShrink()</a></code>.</p></li>
+<li><p><code>DESeqResults</code>. Extracts the first results slotted. Note that this
+corresponds to results containing log2 fold change (LFC) values that <em>have
+not been shrunken</em> using <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>DESeq2::lfcShrink()</a></code>.</p></li>
 </ul>
+
     
     <h2 class="hasAnchor" id="description"><a class="anchor" href="#description"></a>Description</h2>
 
     
-    <p><code>as(object)</code>
+
+<p><code>as(object)</code>
       returns the version of this object coerced to be the given
       <code>Class</code>.  When used in the replacement form on the left of
       an assignment, the portion of the object corresponding to
@@ -147,11 +154,15 @@ values that <em>have not been shrunken</em> using <code><a href='https://rdrr.io
       documentation also for details of how coerce methods work. Use
       <code>showMethods(coerce)</code> for a list of all currently defined methods, as in the
       example below.</p>
+ 
+  
+
     
     <h2 class="hasAnchor" id="basic-coercion-methods"><a class="anchor" href="#basic-coercion-methods"></a>Basic Coercion Methods</h2>
 
     
-    <p>Methods are pre-defined for coercing any object to one of the basic
+
+<p>Methods are pre-defined for coercing any object to one of the basic
   datatypes.  For example, <code>as(x, "numeric")</code> uses the existing
   <code>as.numeric</code> function.  These and all other existing methods
   can be listed as shown in the example.</p>
@@ -191,17 +202,8 @@ values that <em>have not been shrunken</em> using <code><a href='https://rdrr.io
 #&gt; colnames(12): sample01 sample02 ... sample11 sample12
 #&gt; colData names(2): condition sizeFactor</div><div class='input'><span class='co'>## Pulls the first results slotted.</span>
 <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqResults"</span>)
-<span class='fu'><a href='contrastName.html'>contrastName</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; [1] "condition_B_vs_A"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; 
-#&gt; out of 499 with nonzero total read count
-#&gt; adjusted p-value &lt; 0.1
-#&gt; LFC &gt; 0 (up)       : 84, 17%
-#&gt; LFC &lt; 0 (down)     : 87, 17%
-#&gt; outliers [1]       : 2, 0.4%
-#&gt; low counts [2]     : 0, 0%
-#&gt; (mean count &lt; 0)
-#&gt; [1] see 'cooksCutoff' argument of ?results
-#&gt; [2] see 'independentFiltering' argument of ?results
-#&gt; </div></pre>
+<span class='fu'><a href='contrastName.html'>contrastName</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; [1] "condition_B_vs_A"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt;       Length        Class         Mode 
+#&gt;            6 DESeqResults           S4 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -225,19 +227,23 @@ values that <em>have not been shrunken</em> using <code><a href='https://rdrr.io
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by <a href='https://steinbaugh.com/'>Michael Steinbaugh</a>, <a href='https://acidgenomics.com/'>Acid Genomics</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
