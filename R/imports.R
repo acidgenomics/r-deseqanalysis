@@ -9,7 +9,7 @@
 #' @importFrom DESeq2 counts priorInfo summary.DESeqResults
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors SimpleList as.data.frame head mcols mcols<- metadata
-#' @importFrom SummarizedExperiment assays assays<- colData colData<-
+#' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom UpSetR fromList
 #' @importFrom acidplots plotHeatmap upset
 #' @importFrom basejump Gene2Symbol as_tibble camelCase convertSampleIDsToNames
