@@ -129,7 +129,7 @@ NULL
 
 
 ## This is used in bcbioRNASeq F1000 paper.
-## Updated 2019-07-23.
+## Updated 2019-07-24.
 `topTables,DESeqResults` <-  # nolint
     function(object, n = 10L) {
         list <- resultsTables(object)
@@ -140,6 +140,16 @@ NULL
             n = n
         )
     }
+
+
+
+#' @rdname topTables
+#' @export
+setMethod(
+    f = "topTables",
+    signature = signature("DESeqResults"),
+    definition = `topTables,DESeqResults`
+)
 
 
 

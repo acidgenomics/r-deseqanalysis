@@ -3,10 +3,13 @@
 \docType{methods}
 \name{topTables}
 \alias{topTables}
+\alias{topTables,DESeqResults-method}
 \alias{topTables,DESeqAnalysis-method}
 \title{Top tables}
 \usage{
 topTables(object, ...)
+
+\S4method{topTables}{DESeqResults}(object, n = 10L)
 
 \S4method{topTables}{DESeqAnalysis}(object, results, n = 10L,
   lfcShrink = TRUE)
@@ -14,11 +17,11 @@ topTables(object, ...)
 \arguments{
 \item{object}{Object.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}.
-Name or position of \code{DESeqResults}.}
-
 \item{n}{\code{integer(1)}.
 Number of genes (per direction) to report.}
+
+\item{results}{\code{character(1)} or \code{integer(1)}.
+Name or position of \code{DESeqResults}.}
 
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
