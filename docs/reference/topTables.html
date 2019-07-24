@@ -121,6 +121,9 @@
 
     <pre class="usage"><span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
+<span class='co'># S4 method for DESeqResults</span>
+<span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>)
+
 <span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>,
   <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
@@ -133,14 +136,14 @@
       <td><p>Object.</p></td>
     </tr>
     <tr>
-      <th>results</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> or <code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>.
-Name or position of <code>DESeqResults</code>.</p></td>
-    </tr>
-    <tr>
       <th>n</th>
       <td><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>.
 Number of genes (per direction) to report.</p></td>
+    </tr>
+    <tr>
+      <th>results</th>
+      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> or <code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>.
+Name or position of <code>DESeqResults</code>.</p></td>
     </tr>
     <tr>
       <th>lfcShrink</th>
