@@ -8,9 +8,6 @@
 #' @inheritParams acidplots::plotHeatmap
 #' @inheritParams basejump::params
 #' @inheritParams params
-#' @param counts `DESeqTransform`.
-#'   Variance-stabilized counts suitable for heatmap.
-#'   Object rownames must be identical to corresponding `DESeqResults`.
 #' @param ... Additional arguments.
 #'
 #' @examples
@@ -38,7 +35,7 @@ NULL
 `plotDEGHeatmap,DESeqResults` <-  # nolint
     function(
         object,
-        counts,
+        DESeqTransform,  # nolint
         direction = c("both", "up", "down"),
         scale = c("row", "column", "none"),
         clusteringMethod = "ward.D2",
@@ -48,11 +45,11 @@ NULL
         legendBreaks = seq(from = -2L, to = 2L, by = 1L)
     ) {
         validObject(object)
-        validObject(counts)
+        validObject(DESeqTransform)
         assert(
             is(object, "DESeqResults"),
-            is(counts, "DESeqTransform"),
-            identical(rownames(object), rownames(counts)),
+            is(DESeqTransform, "DESeqTransform"),
+            identical(rownames(object), rownames(DESeqTransform)),
             isString(clusteringMethod),
             is.numeric(legendBreaks)
         )
@@ -61,7 +58,7 @@ NULL
 
         ## Rename objects internally to make the code more readable.
         res <- object
-        dt <- counts
+        dt <- DESeqTransform
 
         interestingGroups(dt) <- matchInterestingGroups(dt, interestingGroups)
 
@@ -108,7 +105,7 @@ NULL
                     title = title
                 ),
                 removeFormals = c(
-                    "counts",
+                    "DESeqTransform",
                     "direction"
                 )
             )
@@ -180,7 +177,7 @@ setMethod(
             args = matchArgsToDoCall(
                 args = list(
                     object = res,
-                    counts = dt
+                    DESeqTransform = dt
                 ),
                 removeFormals = c(
                     "results",
@@ -193,7 +190,7 @@ setMethod(
 
 f1 <- formals(`plotDEGHeatmap,DESeqAnalysis`)
 f2 <- formals(`plotDEGHeatmap,DESeqResults`)
-f2 <- f2[setdiff(names(f2), c(names(f1), "counts"))]
+f2 <- f2[setdiff(names(f2), c(names(f1), "DESeqTransform"))]
 f <- c(f1, f2)
 formals(`plotDEGHeatmap,DESeqAnalysis`) <- f
 

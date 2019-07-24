@@ -33,22 +33,22 @@ NULL
 `plotDEGPCA,DESeqResults` <-  # nolint
     function(
         object,
-        counts,
+        DESeqTransform,  # nolint
         direction = c("both", "up", "down")
     ) {
         validObject(object)
-        validObject(counts)
+        validObject(DESeqTransform)
         assert(
             is(object, "DESeqResults"),
-            is(counts, "DESeqTransform"),
-            identical(rownames(object), rownames(counts))
+            is(DESeqTransform, "DESeqTransform"),
+            identical(rownames(object), rownames(DESeqTransform))
         )
         direction <- match.arg(direction)
         return <- match.arg(return)
 
         ## Rename objects internally to make the code more readable.
         res <- object
-        dt <- counts
+        dt <- DESeqTransform
 
         interestingGroups(dt) <- matchInterestingGroups(dt, interestingGroups)
         alpha <- metadata(res)[["alpha"]]
@@ -152,7 +152,7 @@ setMethod(
             args = matchArgsToDoCall(
                 args = list(
                     object = res,
-                    counts = dt
+                    DESeqTransform = dt
                 ),
                 removeFormals = c(
                     "results",
@@ -164,7 +164,7 @@ setMethod(
 
 f1 <- formals(`plotDEGPCA,DESeqAnalysis`)
 f2 <- formals(`plotDEGPCA,DESeqResults`)
-f2 <- f2[setdiff(names(f2), c(names(f1), "counts"))]
+f2 <- f2[setdiff(names(f2), c(names(f1), "DESeqTransform"))]
 f <- c(f1, f2)
 formals(`plotDEGPCA,DESeqAnalysis`) <- f
 
