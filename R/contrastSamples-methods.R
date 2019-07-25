@@ -111,7 +111,7 @@ NULL
         assert(hasLength(denominator))
         message(paste("Denominator samples:", toString(denominator)))
 
-        c(numerator, denominator)
+        sort(c(numerator, denominator))
     }
 
 
