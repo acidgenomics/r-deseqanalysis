@@ -6,6 +6,3 @@ test_that("DESeqAnalysis", {
         class = "pheatmap"
     )
 })
-
-
-
