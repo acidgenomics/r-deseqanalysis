@@ -1,6 +1,6 @@
 context("resultsMatrix")
 
-test_that("resultsMatrix", {
+test_that("DESeqAnalysis", {
     object <- deseq
     mat <- resultsMatrix(object, value = "log2FoldChange")
     expect_identical(
