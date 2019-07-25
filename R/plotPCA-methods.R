@@ -3,10 +3,10 @@
 #' @examples
 #' data(deseq)
 #'
-#' ## DESeqAnalysis
+#' ## DESeqAnalysis ====
 #' plotPCA(deseq)
 #'
-#' ## DESeqTransform
+#' ## DESeqTransform ====
 #' dt <- as(deseq, "DESeqTransform")
 #' plotPCA(dt)
 NULL

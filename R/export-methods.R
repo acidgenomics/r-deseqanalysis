@@ -1,5 +1,6 @@
 ## DESeqTransform can inherit from SummarizedExperiment without modification.
 ## DESeqResults can inherit from DataFrame without modification.
+## Need to add method for DESeqAnalysisList.
 
 
 

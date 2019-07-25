@@ -7,3 +7,5 @@ res <- as(deseq, "DESeqResults")
 g2s <- Gene2Symbol(dds)
 geneIDs <- head(g2s[["geneID"]])
 geneNames <- head(g2s[["geneName"]])
+
+realpath <- basejump::realpath
