@@ -247,7 +247,7 @@ NULL
             warning(paste(
                 deparse(results),
                 "does not contain any DEGs. Skipping."
-            ), call. = FALSE)
+            ))
             return(invisible())
         }
         up <- deg(
