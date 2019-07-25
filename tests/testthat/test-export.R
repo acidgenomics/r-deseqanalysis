@@ -53,4 +53,5 @@ test_that("DESeqAnalysis", {
             )
         )
     )
+    unlink("XXX", recursive = TRUE)
 })
