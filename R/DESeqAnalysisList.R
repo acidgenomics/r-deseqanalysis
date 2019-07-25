@@ -5,6 +5,11 @@
 #' @rdname DESeqAnalysisList-class
 #' @param ... `DESeqAnalysis` objects.
 #' @export
+#'
+#' @examples
+#' data(deseq)
+#' x <- DESeqAnalysisList(deseq)
+#' x
 
 ## Updated 2019-07-23.
 DESeqAnalysisList <- function(...) {  # nolint
