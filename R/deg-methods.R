@@ -91,7 +91,7 @@ NULL
         )
 
         if (!hasLength(deg)) {
-            warning(status, call. = FALSE)
+            warning(status)
         } else {
             message(status)
         }
