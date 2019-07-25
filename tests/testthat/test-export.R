@@ -1,8 +1,6 @@
 context("export")
 
 test_that("DESeqAnalysis", {
-    prefix <- realpath(file.path("XXX", "AAA"))
-    resultsPrefix <- file.path(prefix, "resultsTables", "condition_B_vs_A")
     x <- export(
         object = deseq,
         name = "AAA",
@@ -10,6 +8,8 @@ test_that("DESeqAnalysis", {
         compress = TRUE,
         lfcShrink = TRUE
     )
+    prefix <- realpath(file.path("XXX", "AAA"))
+    resultsPrefix <- file.path(prefix, "resultsTables", "condition_B_vs_A")
     expect_identical(
         object = x,
         expected = list(

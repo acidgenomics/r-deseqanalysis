@@ -84,10 +84,10 @@ a way to look at how samples are clustering.
 \examples{
 data(deseq)
 
-## DESeqAnalysis
+## DESeqAnalysis ====
 plotPCA(deseq)
 
-## DESeqTransform
+## DESeqTransform ====
 dt <- as(deseq, "DESeqTransform")
 plotPCA(dt)
 }

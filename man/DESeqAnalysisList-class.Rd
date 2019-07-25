@@ -14,6 +14,11 @@ DESeqAnalysisList(...)
 \description{
 List containing related DESeq2 analyses
 }
+\examples{
+data(deseq)
+x <- DESeqAnalysisList(deseq)
+x
+}
 \author{
 Michael Steinbaugh
 }
