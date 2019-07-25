@@ -75,7 +75,7 @@ NULL
         ## Get the character vector of DEGs.
         deg <- deg(res, direction = direction)
         if (!hasLength(deg)) {
-            warning("There are no DEGs to plot. Skipping.", call. = FALSE)
+            warning("There are no DEGs to plot. Skipping.")
             return(invisible())
         }
 
