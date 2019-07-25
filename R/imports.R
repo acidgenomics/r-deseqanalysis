@@ -6,7 +6,7 @@
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom BiocGenerics updateObject
-#' @importFrom DESeq2 counts priorInfo summary.DESeqResults
+#' @importFrom DESeq2 counts priorInfo
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors SimpleList as.data.frame head mcols mcols<- metadata
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
@@ -37,5 +37,7 @@
 #' @importFrom scales pretty_breaks
 #' @importFrom stringr str_match str_trunc
 #' @importFrom tidyselect starts_with
-#' @importFrom utils capture.output globalVariables packageVersion
+#' @importFrom utils capture.output getS3method globalVariables packageVersion
 NULL
+
+## Note that `summary.DESeqResults()` isn't currently exported in BioC 3.10.

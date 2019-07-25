@@ -91,6 +91,15 @@ NULL
                 args <- Filter(Negate(is.null), args)
                 results <- do.call(what = results, args = args)
                 ## This requires S3 `summary.DESeqResults` in NAMESPACE.
+                ## Currently, DESeq2 isn't exporting this S3 method in BioC
+                ## 3.10, so we're pulling the expected S3 method directly
+                ## instead. It is called when DESeq2 is attached, but we must
+                ## query the method directly when the package is not attached.
+                summary <- getS3method(
+                    f = "summary",
+                    class = "DESeqResults",
+                    envir = asNamespace("DESeq2")
+                )
                 output <- capture.output(summary(results))
                 ## Subset the lines of interest from summary.
                 ## Keep only the summary lines that contain a colon.
