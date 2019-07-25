@@ -16,14 +16,16 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-07-25.
 `updateObject,DESeqAnalysis` <-  # nolint
     function(object) {
         if (!isTRUE(.hasSlot(object, "metadata"))) {
+            ## nocov start
             message(paste0(
                 "Legacy object < 0.1.8 detected.\n",
                 "Updating to support metadata slot."
             ))
+            ## nocov end
         }
 
         data <- object@data
