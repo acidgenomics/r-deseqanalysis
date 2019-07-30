@@ -6,6 +6,7 @@ library(basejump)
 library(DESeq2)
 library(apeglm)
 
+stopifnot(packageVersion("acidtest") >= "0.2.1")
 data(RangedSummarizedExperiment, package = "acidtest")
 rse <- RangedSummarizedExperiment
 
