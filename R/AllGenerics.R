@@ -9,6 +9,17 @@ setGeneric(
 
 
 
+#' @rdname plotBaseMean
+#' @export
+setGeneric(
+    name = "plotBaseMean",
+    def = function(object, ...) {
+        standardGeneric("plotBaseMean")
+    }
+)
+
+
+
 #' @rdname transformType
 #' @export
 setGeneric(
