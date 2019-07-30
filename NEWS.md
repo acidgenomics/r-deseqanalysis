@@ -3,6 +3,8 @@
 ### Minor changes
 
 - Updated basejump dependencies.
+- Improved code coverage and documentation.
+- Updated example dataset, based on latest acidtest RangedSummarizedExperiment.
 
 ## DESeqAnalysis 0.2.0 (2019-07-23)
 
