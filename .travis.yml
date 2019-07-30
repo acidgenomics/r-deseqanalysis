@@ -18,6 +18,12 @@ jobs:
       name: "bioc-3.9"
       script: image="rnaseq" tag="bioc-3.9" ./docker.sh
     - stage: test
+      name: "bioc-3.8"
+      script: image="rnaseq" tag="bioc-3.8" ./docker.sh
+    - stage: test
+      name: "bioc-3.7"
+      script: image="rnaseq" tag="bioc-3.7" ./docker.sh
+    - stage: test
       name: "bioc-devel"
       script: image="rnaseq" tag="bioc-devel" ./docker.sh
 
