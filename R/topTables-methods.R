@@ -1,8 +1,3 @@
-## FIXME Impossible to include description currently.
-## FIXME Duplicate rowname and geneID is annoying.
-
-
-
 #' @name topTables
 #' @inherit bioverbs::topTables
 #' @note Updated 2019-07-30.
@@ -31,8 +26,9 @@ NULL
 
 
 
+## Internal functions ==========================================================
 ## Updated 2019-07-30.
-.topTable <-  # nolint
+.topTibble <-  # nolint
     function(object, n = 10L) {
         assert(
             is(object, "tbl_df"),
@@ -55,8 +51,8 @@ NULL
         ## Also include optional informative columns.
         ## Use of `broadClass` is cleaner than `biotype` here.
         optional <- c(
-            "geneName",
             "broadClass",
+            "geneName",
             "description"
         )
         keep <- intersect(
@@ -105,7 +101,7 @@ NULL
 
 
 ## Updated 2019-07-23.
-.topTables <-  # nolint
+.topKables <-  # nolint
     function(object, contrast, n) {
         assert(
             is.list(object),
@@ -116,7 +112,7 @@ NULL
         up <- object[["up"]]
         if (hasLength(up)) {
             show(kable(
-                x = .topTable(up, n = n),
+                x = .topTibble(up, n = n),
                 caption = paste(contrast, "(upregulated)")
             ))
         }
@@ -124,7 +120,7 @@ NULL
         down <- object[["down"]]
         if (hasLength(down)) {
             show(kable(
-                x = .topTable(down, n = n),
+                x = .topTibble(down, n = n),
                 caption = paste(contrast, "(downregulated)")
             ))
         }
@@ -134,8 +130,9 @@ NULL
 
 
 
+## DESeqResults ================================================================
 ## This is used in bcbioRNASeq F1000 paper.
-## Updated 2019-07-24.
+## Updated 2019-07-30.
 `topTables,DESeqResults` <-  # nolint
     function(
         object,
@@ -150,9 +147,9 @@ NULL
                 DESeqDataSet = DESeqDataSet
             )
         }
-        list <- resultsTables(object)
+        list <- resultsTables(object, return = "tbl_df")
         contrast <- contrastName(object)
-        .topTables(
+        .topKables(
             object = list,
             contrast = contrast,
             n = n
@@ -171,7 +168,8 @@ setMethod(
 
 
 
-## Updated 2019-07-23.
+## DESeqAnalysis ===============================================================
+## Updated 2019-07-30.
 `topTables,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -183,14 +181,15 @@ setMethod(
             object = object,
             results = results,
             lfcShrink = lfcShrink,
-            extra = TRUE
+            extra = TRUE,
+            return = "tbl_df"
         )
         ## Suppressing the message about the contrast name we're matching here,
         ## since it will be shown in `resultsTables()` call above.
         suppressMessages(
             contrast <- contrastName(object, results = results)
         )
-        .topTables(
+        .topKables(
             object = list,
             contrast = contrast,
             n = n
