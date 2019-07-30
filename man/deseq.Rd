@@ -11,11 +11,14 @@ deseq
 \description{
 Minimal DESeq2 differential expression analysis.
 }
+\note{
+Updated 2019-07-30.
+}
 \examples{
 data(deseq)
 deseq
 }
 \author{
-Michael Steinbaugh, Lorena Pantano
+Michael Steinbaugh
 }
 \keyword{datasets}

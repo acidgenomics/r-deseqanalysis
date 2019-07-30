@@ -1,5 +1,11 @@
+## FIXME Update return to include biotype, broadClass, and description.
+## FIXME Working example needs to include description.
+
+
+
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
+#' @note Updated 2019-07-30.
 #'
 #' @inheritParams basejump::params
 #' @inheritParams params

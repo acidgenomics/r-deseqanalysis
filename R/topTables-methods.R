@@ -1,5 +1,11 @@
+## FIXME Impossible to include description currently.
+## FIXME Duplicate rowname and geneID is annoying.
+
+
+
 #' @name topTables
 #' @inherit bioverbs::topTables
+#' @note Updated 2019-07-30.
 #'
 #' @inheritParams basejump::params
 #' @inheritParams params
@@ -25,7 +31,7 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-07-30.
 .topTable <-  # nolint
     function(object, n = 10L) {
         assert(
@@ -47,10 +53,10 @@ NULL
         assert(isSubset(required, colnames(object)))
 
         ## Also include optional informative columns.
+        ## Use of `broadClass` is cleaner than `biotype` here.
         optional <- c(
-            "geneID",
             "geneName",
-            "geneBiotype",
+            "broadClass",
             "description"
         )
         keep <- intersect(
