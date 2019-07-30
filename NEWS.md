@@ -1,3 +1,9 @@
+## DESeqAnalysis 0.2.2 (UNRELEASED)
+
+### New functions
+
+- `plotBaseMean`: Quickly visualize the count distribution across all samples.
+
 ## DESeqAnalysis 0.2.1 (2019-07-30)
 
 ### Minor changes
