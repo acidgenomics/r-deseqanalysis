@@ -68,7 +68,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -157,10 +157,11 @@ the cutoff defined in the object.</p></td>
     <tr>
       <th>return</th>
       <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
-Type of data frame to return in the list. Uses
-<a href='https://rdrr.io/r/base/match.arg.html'>match.arg()</a>. Note that <code>DataFrame</code> option will return
-with row names, whereas <code>tbl_df</code> option will return with <code>"rowname"</code>
-column.</p></td>
+Type of data frame to return as a list.
+Uses <a href='https://rdrr.io/r/base/match.arg.html'>match.arg()</a>.</p><ul>
+<li><p><code>tbl_df</code>: Returns <code>list</code> of <code>tbl_df</code> containing <code>"rowname"</code> column.</p></li>
+<li><p><code>DataFrameList</code>: Returns <code>DataFrameList</code> with row names.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>...</th>
@@ -196,7 +197,8 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Do not apply post hoc log fold change cutoffs.</p>
+    <p>Updated 2019-07-30.</p>
+<p>Do not apply post hoc log fold change cutoffs.</p>
     
     <h2 class="hasAnchor" id="tables"><a class="anchor" href="#tables"></a>Tables</h2>
 

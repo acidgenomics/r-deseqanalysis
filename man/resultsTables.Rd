@@ -31,10 +31,12 @@ Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
 the cutoff defined in the object.}
 
 \item{return}{\code{character(1)}.
-Type of data frame to return in the list. Uses
-\link[base:match.arg]{match.arg()}. Note that \code{DataFrame} option will return
-with row names, whereas \code{tbl_df} option will return with \code{"rowname"}
-column.}
+Type of data frame to return as a list.
+Uses \link[base:match.arg]{match.arg()}.
+\itemize{
+\item \code{tbl_df}: Returns \code{list} of \code{tbl_df} containing \code{"rowname"} column.
+\item \code{DataFrameList}: Returns \code{DataFrameList} with row names.
+}}
 
 \item{...}{Additional arguments.}
 
@@ -60,6 +62,8 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 \code{all} table), are arranged by adjusted \emph{P} value.
 }
 \note{
+Updated 2019-07-30.
+
 Do not apply post hoc log fold change cutoffs.
 }
 \section{Tables}{

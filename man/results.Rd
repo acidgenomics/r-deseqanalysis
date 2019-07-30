@@ -30,6 +30,9 @@ Varies, depending on the method.
 \description{
 Results
 }
+\note{
+Updated 2019-07-30.
+}
 \examples{
 data(deseq)
 x <- results(deseq, results = 1L)

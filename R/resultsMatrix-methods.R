@@ -3,6 +3,7 @@
 #' Generate an aggregate matrix of DESeqResults values.
 #'
 #' @name resultsMatrix
+#' @note Updated 2019-07-30.
 #'
 #' @param object `DESeqAnalysis`.
 #' @param value `character(1)`.
@@ -33,7 +34,7 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-07-30.
 `resultsMatrix,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -47,7 +48,7 @@ NULL
         ## Otherwise, just pull values from `results()` return.
         if (
             value == "log2FoldChange" &&
-            is.list(slot(object, "lfcShrink"))
+            length(slot(object, "lfcShrink")) > 0L
         ) {
             slotName <- "lfcShrink"
         } else {
@@ -62,6 +63,7 @@ NULL
         results <- slot(object, name = slotName)
         assert(
             is.list(results),
+            length(results) > 0L,
             hasValidNames(results)
         )
 

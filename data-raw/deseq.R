@@ -1,18 +1,26 @@
-#' Example DESeq2 differential expression analysis
-#' 2019-02-06
+#' Example DESeq2 differential expression analysis.
+#' Updated 2019-07-30.
 
 library(pryr)
 library(basejump)
 library(DESeq2)
+library(apeglm)
 
-data(rse, package = "basejump")
+stopifnot(packageVersion("acidtest") >= "0.2.1")
+data(RangedSummarizedExperiment, package = "acidtest")
+rse <- RangedSummarizedExperiment
 
 ## Restrict to 2 MB.
-## Use `pryr::object_size` instead of `utils::object.size`.
+## Use `pryr::object_size()` instead of `utils::object.size()`.
 limit <- structure(2e6, class = "object_size")
 
 ## DESeqDataSet
 ## Consider updating the example RSE in basejump to include more genes.
+
+## Requiring rich metadata to test `resultsTables()` and `topTables()`.
+stopifnot(all(c("broadClass", "description") %in% colnames(rowData(rse))))
+
+stopifnot("condition" %in% names(colData(rse)))
 dds <- DESeqDataSet(se = rse, design = ~ condition)
 dds <- DESeq(dds)
 validObject(dds)
@@ -39,12 +47,8 @@ deseq <- DESeqAnalysis(
     lfcShrink = shrink
 )
 
-## Report the size of each slot in bytes.
-vapply(
-    X = coerceS4ToList(deseq),
-    FUN = object_size,
-    FUN.VALUE = numeric(1L)
-)
+## Check the object size.
+lapply(coerceS4ToList(deseq), object_size)
 object_size(deseq)
 stopifnot(object_size(deseq) < limit)
 
