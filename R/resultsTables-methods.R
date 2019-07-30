@@ -1,8 +1,3 @@
-## FIXME Update return to include biotype, broadClass, and description.
-## FIXME Working example needs to include description.
-
-
-
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
 #' @note Updated 2019-07-30.
@@ -31,10 +26,11 @@
 #' @param extra `logical(1)`.
 #'   Include row data and normalized counts from internal `DESeqDataSet`.
 #' @param return `character(1)`.
-#'   Type of data frame to return in the list. Uses
-#'   [match.arg()][base::match.arg]. Note that `DataFrame` option will return
-#'   with row names, whereas `tbl_df` option will return with `"rowname"`
-#'   column.
+#'   Type of data frame to return as a list.
+#'   Uses [match.arg()][base::match.arg].
+#'
+#'   - `tbl_df`: Returns `list` of `tbl_df` containing `"rowname"` column.
+#'   - `DataFrameList`: Returns `DataFrameList` with row names.
 #'
 #' @return `list`.
 #' Named list containing subsets of `DESeqResults`.
