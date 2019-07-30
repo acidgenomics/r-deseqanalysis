@@ -24,9 +24,9 @@ test_that("Extra mode handling", {
 
     args[["extra"]] <- TRUE
     x <- do.call(what = resultsTables, args = args)
-    expect_true(all(colnames(deseq@data) %in% colnames(x[[1]])))
+    expect_true(all(colnames(deseq@data) %in% colnames(x[[1L]])))
 
     args[["extra"]] <- FALSE
     x <- do.call(what = resultsTables, args = args)
-    expect_false(all(colnames(deseq@data) %in% colnames(x[[1]])))
+    expect_false(all(colnames(deseq@data) %in% colnames(x[[1L]])))
 })

@@ -14,5 +14,29 @@ test_that("DESeqAnalysis", {
         object = mat[, 1L, drop = TRUE],
         expected = deseq@lfcShrink[[1L]][["log2FoldChange"]]
     )
+})
 
+test_that("Unshrunken values", {
+    object <- deseq
+    object@lfcShrink <- list()
+    mat <- resultsMatrix(object, value = "log2FoldChange")
+})
+
+value <- eval(formals(`resultsMatrix,DESeqAnalysis`)[["value"]])
+with_parameters_test_that(
+    "value argument", {
+        x <- resultsMatrix(deseq, value = value)
+        expect_is(x, "matrix")
+    },
+    value = value
+)
+
+test_that("DESeqAnalysisList", {
+    object <- DESeqAnalysisList(deseq)
+    x <- resultsMatrix(object)
+    expect_is(x, "matrix")
+    expect_identical(
+        object = colnames(x),
+        expected = "deseq_condition_B_vs_A"
+    )
 })
