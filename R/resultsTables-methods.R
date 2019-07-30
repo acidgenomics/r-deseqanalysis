@@ -1,5 +1,6 @@
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
+#' @note Updated 2019-07-30.
 #'
 #' @inheritParams basejump::params
 #' @inheritParams params
@@ -25,10 +26,11 @@
 #' @param extra `logical(1)`.
 #'   Include row data and normalized counts from internal `DESeqDataSet`.
 #' @param return `character(1)`.
-#'   Type of data frame to return in the list. Uses
-#'   [match.arg()][base::match.arg]. Note that `DataFrame` option will return
-#'   with row names, whereas `tbl_df` option will return with `"rowname"`
-#'   column.
+#'   Type of data frame to return as a list.
+#'   Uses [match.arg()][base::match.arg].
+#'
+#'   - `tbl_df`: Returns `list` of `tbl_df` containing `"rowname"` column.
+#'   - `DataFrameList`: Returns `DataFrameList` with row names.
 #'
 #' @return `list`.
 #' Named list containing subsets of `DESeqResults`.
@@ -149,7 +151,7 @@ NULL
 ## https://github.com/hbc/bcbioRNASeq/blob/v0.2.10/R/resultsTables-methods.R
 
 ## Note that this method is used in bcbioRNASeq F1000 paper.
-## Updated 2019-07-23.
+## Updated 2019-07-30.
 `resultsTables,DESeqResults` <-  # nolint
     function(
         object,
@@ -164,6 +166,7 @@ NULL
         return <- match.arg(return)
 
         ## Legacy bcbioRNASeq arguments ----------------------------------------
+        ## nocov start
         call <- match.call()
         ## dir
         if (isSubset("dir", names(call))) {
@@ -201,27 +204,13 @@ NULL
                 "Use `export()` instead."
             ))
         }
-        ## Check for invalid arguments.
-        diff <- setdiff(
-            x = setdiff(
-                x = names(call),
-                y = c("", "...")
-            ),
-            y = setdiff(
-                x = names(formals()),
-                y = "..."
-            )
-        )
-        if (hasLength(diff)) {
-            stop(sprintf(
-                fmt = ngettext(
-                    n = length(diff),
-                    msg1 = "unused argument (%s)\n",
-                    msg2 = "unused arguments (%s)\n"
-                ),
-                toString(diff)
-            ))
-        }
+        ## Error on unsupported arguments.
+        assert(isSubset(
+            x = setdiff(names(call), ""),
+            y = names(formals())
+        ))
+        rm(call)
+        ## nocov end
 
         ## Prepare results -----------------------------------------------------
         ## Join row data and counts from DESeqDataSet.
@@ -244,11 +233,13 @@ NULL
         )
         ## Early return with warning if there are not DEGs.
         if (!hasLength(both)) {
-            warning(paste(
-                deparse(results),
-                "does not contain any DEGs. Skipping."
+            ## nocov start
+            warning(sprintf(
+                "'%s' does not contain any DEGs. Skipping.",
+                deparse(results)
             ))
             return(invisible())
+            ## nocov end
         }
         up <- deg(
             object = object,

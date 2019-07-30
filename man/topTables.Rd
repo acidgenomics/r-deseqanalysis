@@ -38,6 +38,9 @@ Markdown tables.
 \description{
 Top tables of differentially expressed genes.
 }
+\note{
+Updated 2019-07-30.
+}
 \examples{
 data(deseq)
 

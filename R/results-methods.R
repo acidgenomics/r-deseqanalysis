@@ -1,5 +1,6 @@
 #' @name results
 #' @inherit bioverbs::results
+#' @note Updated 2019-07-30.
 #'
 #' @inheritParams basejump::params
 #' @inheritParams params
@@ -40,7 +41,7 @@ setMethod(
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-07-30.
 `results,DESeqAnalysis` <-  # nolint
     function(object, results, lfcShrink = FALSE) {
         if (missing(results)) {
@@ -56,6 +57,9 @@ setMethod(
             isScalar(results),
             isFlag(lfcShrink)
         )
+        if (isCharacter(results)) {
+            assert(isSubset(results, resultsNames(object)))
+        }
 
         ## Match the results.
         if (identical(lfcShrink, FALSE)) {
@@ -77,7 +81,8 @@ setMethod(
             ))
         }
 
-        results <- slot(object, name = slotName)[[results]]
+        resultsList <- slot(object, name = slotName)
+        results <- resultsList[[results]]
         assert(is(results, "DESeqResults"))
 
         ## Inform the user about which data we're using.

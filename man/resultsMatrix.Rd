@@ -35,6 +35,9 @@ values if they are slotted in the \code{DESeqAnalysis} object.
 \description{
 Generate an aggregate matrix of DESeqResults values.
 }
+\note{
+Updated 2019-07-30.
+}
 \examples{
 data(deseq)
 x <- resultsMatrix(deseq)
