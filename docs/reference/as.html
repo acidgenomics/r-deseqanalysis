@@ -68,7 +68,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
       </span>
     </div>
 
@@ -190,7 +190,7 @@ not been shrunken</em> using <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcSh
 #&gt; metadata(3): version date interestingGroups
 #&gt; assays(4): counts mu H cooks
 #&gt; rownames(500): gene001 gene002 ... gene499 gene500
-#&gt; rowData names(27): geneID geneName ... deviance maxCooks
+#&gt; rowData names(30): broadClass description ... deviance maxCooks
 #&gt; colnames(12): sample01 sample02 ... sample11 sample12
 #&gt; colData names(2): condition sizeFactor</div><div class='input'><span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqTransform"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>dt</span>)</div><div class='output co'>#&gt; class: DESeqTransform 
@@ -198,7 +198,7 @@ not been shrunken</em> using <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcSh
 #&gt; metadata(3): version date interestingGroups
 #&gt; assays(1): ''
 #&gt; rownames(500): gene001 gene002 ... gene499 gene500
-#&gt; rowData names(28): geneID geneName ... dispGeneIter.1 dispFit
+#&gt; rowData names(31): broadClass description ... dispGeneIter.1 dispFit
 #&gt; colnames(12): sample01 sample02 ... sample11 sample12
 #&gt; colData names(2): condition sizeFactor</div><div class='input'><span class='co'>## Pulls the first results slotted.</span>
 <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqResults"</span>)
