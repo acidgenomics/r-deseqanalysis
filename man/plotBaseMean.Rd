@@ -16,6 +16,11 @@ plotBaseMean(object, ...)
 
 \S4method{plotBaseMean}{DESeqAnalysis}(object)
 }
+\arguments{
+\item{object}{Object.}
+
+\item{...}{Additional arguments.}
+}
 \value{
 \code{ggplot}.
 }

@@ -6,6 +6,7 @@
 #' @name plotBaseMean
 #' @note Updated 2019-07-30.
 #'
+#' @inheritParams basejump::params
 #' @inheritParams params
 #'
 #' @seealso
