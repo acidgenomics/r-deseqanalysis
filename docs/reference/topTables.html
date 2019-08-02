@@ -68,7 +68,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
       </span>
     </div>
 
@@ -175,24 +175,24 @@ Markdown tables.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>171 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>84 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>87 downregulated genes detected.</span></div><div class='output co'>#&gt; 
+<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>156 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>81 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>75 downregulated genes detected.</span></div><div class='output co'>#&gt; 
 #&gt; 
-#&gt; |rowname |baseMean |lfc  |padj     |geneID          |geneName |geneBiotype    |
-#&gt; |:-------|:--------|:----|:--------|:---------------|:--------|:--------------|
-#&gt; |gene095 |123      |2.36 |1.86e-09 |ENSG00000005381 |MPO      |protein_coding |
-#&gt; |gene334 |72       |2.85 |4.57e-09 |ENSG00000013392 |RWDD2A   |protein_coding |
-#&gt; |gene323 |195      |1.99 |5.64e-09 |ENSG00000012963 |UBR7     |protein_coding |
-#&gt; |gene494 |113      |1.76 |6.55e-09 |ENSG00000032389 |EIPR1    |protein_coding |
-#&gt; |gene391 |901      |1.62 |4.54e-08 |ENSG00000019485 |PRDM11   |protein_coding |
+#&gt; |rowname |baseMean |lfc  |padj     |broadClass |geneName |description                         |
+#&gt; |:-------|:--------|:----|:--------|:----------|:--------|:-----------------------------------|
+#&gt; |gene278 |197      |2.60 |1.19e-14 |coding     |MRC2     |mannose receptor C type 2           |
+#&gt; |gene260 |1520     |2.26 |2.11e-13 |coding     |NISCH    |nischarin                           |
+#&gt; |gene339 |423      |2.07 |6.34e-08 |coding     |DNASE1L1 |deoxyribonuclease 1 like 1          |
+#&gt; |gene343 |92       |1.66 |6.34e-08 |coding     |MAMLD1   |mastermind like domain containing 1 |
+#&gt; |gene349 |51       |2.89 |6.34e-08 |coding     |CAPN1    |calpain 1                           |
 #&gt; 
 #&gt; 
-#&gt; |rowname |baseMean |lfc   |padj     |geneID          |geneName |geneBiotype    |
-#&gt; |:-------|:--------|:-----|:--------|:---------------|:--------|:--------------|
-#&gt; |gene427 |44       |-2.90 |3.20e-14 |ENSG00000023318 |ERP44    |protein_coding |
-#&gt; |gene419 |28       |-2.99 |3.75e-11 |ENSG00000022567 |SLC45A4  |protein_coding |
-#&gt; |gene352 |26       |-2.86 |4.53e-08 |ENSG00000014824 |SLC30A9  |protein_coding |
-#&gt; |gene497 |48       |-2.17 |6.60e-06 |ENSG00000033011 |ALG1     |protein_coding |
-#&gt; |gene004 |81       |-1.94 |2.77e-05 |ENSG00000000457 |SCYL3    |protein_coding |</div></pre>
+#&gt; |rowname |baseMean |lfc   |padj     |broadClass |geneName |description                      |
+#&gt; |:-------|:--------|:-----|:--------|:----------|:--------|:--------------------------------|
+#&gt; |gene079 |32       |-2.19 |4.28e-08 |coding     |POLR2J   |RNA polymerase II subunit J      |
+#&gt; |gene240 |117      |-1.93 |6.19e-08 |coding     |TRAF3IP3 |TRAF3 interacting protein 3      |
+#&gt; |gene456 |51       |-1.89 |2.39e-07 |coding     |RNASET2  |ribonuclease T2                  |
+#&gt; |gene427 |34       |-2.21 |2.72e-07 |coding     |ERP44    |endoplasmic reticulum protein 44 |
+#&gt; |gene050 |85       |-1.49 |3.33e-06 |coding     |AK2      |adenylate kinase 2               |</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
