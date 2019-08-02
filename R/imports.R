@@ -11,7 +11,7 @@
 #' @importFrom S4Vectors SimpleList as.data.frame head mcols mcols<- metadata
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom UpSetR fromList
-#' @importFrom acidplots plotHeatmap upset
+#' @importFrom acidplots plotHeatmap scale_colour_synesthesia_d upset
 #' @importFrom basejump Gene2Symbol as_tibble camelCase convertSampleIDsToNames
 #'   decode initDir interestingGroups<- makeNames mapGenesToRownames
 #'   markdownHeader markdownList matchArgsToDoCall matchInterestingGroups
@@ -33,8 +33,8 @@
 #' @importFrom methods as is new prototype setClass show slot slot<- validObject
 #'   .hasSlot
 #' @importFrom acidplots acid_geom_label_repel plotCounts plotPCA
-#' @importFrom rlang := UQ sym syms
-#' @importFrom scales pretty_breaks
+#' @importFrom rlang !! := UQ sym syms
+#' @importFrom scales log_breaks pretty_breaks
 #' @importFrom stringr str_match str_trunc
 #' @importFrom tidyselect starts_with
 #' @importFrom utils capture.output getS3method globalVariables packageVersion
