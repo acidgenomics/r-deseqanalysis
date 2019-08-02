@@ -1,8 +1,12 @@
-## DESeqAnalysis 0.2.2 (UNRELEASED)
+## DESeqAnalysis 0.2.2 (2019-08-02)
 
 ### New functions
 
 - `plotBaseMean`: Quickly visualize the count distribution across all samples.
+
+### Minor changes
+
+- Improved Dockerized Travis CI configuration, using new Rcheck repo.
 
 ## DESeqAnalysis 0.2.1 (2019-07-30)
 
