@@ -18,11 +18,11 @@ deg(object, ...)
 \arguments{
 \item{object}{Object.}
 
-\item{alpha}{\code{numeric(1)}.
+\item{alpha}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 
-\item{lfcThreshold}{\code{numeric(1)}.
+\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
 Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
 the cutoff defined in the object.}
 

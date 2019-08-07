@@ -6,7 +6,7 @@
 #' @inherit bioverbs::plotDEGHeatmap
 #'
 #' @inheritParams acidplots::plotHeatmap
-#' @inheritParams basejump::params
+#' @inheritParams acidroxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'

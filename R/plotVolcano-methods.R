@@ -2,7 +2,7 @@
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
 #'
-#' @inheritParams basejump::params
+#' @inheritParams acidroxygen::params
 #' @inheritParams params
 #' @param ylim `numeric(1)`.
 #'   Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets

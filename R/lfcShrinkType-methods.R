@@ -1,7 +1,7 @@
 #' Shrunken log2 fold change (LFC) type
 #'
 #' @name lfcShrinkType
-#' @inheritParams basejump::params
+#' @inheritParams acidroxygen::params
 #'
 #' @seealso [DESeq2::lfcShrink()].
 NULL

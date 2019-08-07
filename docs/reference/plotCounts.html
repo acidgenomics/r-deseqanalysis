@@ -68,7 +68,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -139,9 +139,7 @@
     <tr>
       <th>genes</th>
       <td><p><code>character</code>.
-Gene identifiers. It is considered better practice to input the stable gene
-identifiers from Ensembl (e.g. "ENSG00000000003") and not the (HGNC) gene
-symbols (e.g. "TSPN6"), if possible.</p></td>
+Gene identifiers.</p></td>
     </tr>
     <tr>
       <th>transform</th>
@@ -152,8 +150,8 @@ than <code>DESeqDataSet</code> size-factor normalized counts.</p></td>
     <tr>
       <th>interestingGroups</th>
       <td><p><code>character</code>.
-Groups of interest that define the samples. If left unset, defaults to
-<code>sampleName</code>.</p></td>
+Groups of interest to use for visualization.
+Corresponds to factors describing the columns of the object.</p></td>
     </tr>
     <tr>
       <th>trans</th>
@@ -180,7 +178,7 @@ are desired, we recommend using <code><a href='https://ggplot2.tidyverse.org/ref
     <tr>
       <th>legend</th>
       <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
-Show plot legend.</p></td>
+Include plot legend.</p></td>
     </tr>
     <tr>
       <th>style</th>

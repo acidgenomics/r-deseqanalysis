@@ -1,7 +1,7 @@
 #' @name deg
 #' @inherit bioverbs::deg
 #'
-#' @inheritParams basejump::params
+#' @inheritParams acidroxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'

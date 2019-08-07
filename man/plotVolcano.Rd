@@ -31,16 +31,14 @@ Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets
 containing highly significant P values (e.g. \code{1e-100}).}
 
 \item{genes}{\code{character}.
-Gene identifiers. It is considered better practice to input the stable gene
-identifiers from Ensembl (e.g. "ENSG00000000003") and not the (HGNC) gene
-symbols (e.g. "TSPN6"), if possible.}
+Gene identifiers.}
 
 \item{gene2symbol}{\code{Gene2Symbol}.
 Gene-to-symbol mappings. Must contain \code{geneID} and \code{geneName} columns. See
 \code{Gene2Symbol} for more information.}
 
 \item{ntop}{\code{integer(1)}.
-Number of top genes to label.}
+Number of top features to label.}
 
 \item{direction}{\code{character(1)}.
 Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
@@ -49,10 +47,11 @@ Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
 Default point color for the plot.}
 
 \item{pointSize}{\code{numeric(1)}.
-Point size. In the range of 1-3 is generally recommended.}
+Point size for dots in the plot.
+In the range of 1-3 is generally recommended.}
 
-\item{pointAlpha}{\code{numeric(1)}.
-Alpha transparency level. Must be a proportion (0-1).}
+\item{pointAlpha}{\code{numeric(1)} (\code{0}-\code{1}).
+Alpha transparency level.}
 
 \item{histograms}{\code{logical(1)}.
 Show LFC and P value histograms.}

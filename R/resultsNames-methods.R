@@ -1,7 +1,7 @@
 #' @name resultsNames
 #' @inherit bioverbs::resultsNames
 #'
-#' @inheritParams basejump::params
+#' @inheritParams acidroxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'
