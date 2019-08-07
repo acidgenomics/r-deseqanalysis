@@ -1,3 +1,11 @@
+## DESeqAnalysis 0.2.3 (2019-08-06)
+
+### Minor changes
+
+- Improved documentation consistency by using shared roxygen params from new
+  acidroxygen package.
+- Updated basejump dependency versions.
+
 ## DESeqAnalysis 0.2.2 (2019-08-02)
 
 ### New functions

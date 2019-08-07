@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.2.2
-Date: 2019-08-02
+Version: 0.2.3
+Date: 2019-08-06
 Authors@R: c(
     person(
         given = "Michael",
@@ -24,11 +24,11 @@ Encoding: UTF-8
 LazyData: false
 Depends:
     R (>= 3.5),
-    basejump (>= 0.11.3)
+    basejump (>= 0.11.4)
 Imports:
-    acidplots (>= 0.2.8),
-    bioverbs (>= 0.2),
-    goalie (>= 0.3),
+    acidplots (>= 0.2.10),
+    bioverbs (>= 0.2.1),
+    goalie (>= 0.3.1),
     BiocGenerics,
     DESeq2,
     IRanges,
@@ -47,6 +47,7 @@ Imports:
     scales,
     utils
 Suggests:
+    acidroxygen (>= 0.0.1),
     BiocStyle,
     roxygen2 (>= 6.1),
     patrick (>= 0.0.1),
@@ -54,6 +55,7 @@ Suggests:
     viridis (>= 0.5)
 Remotes:
     acidgenomics/acidplots,
+    acidgenomics/acidroxygen,
     acidgenomics/basejump,
     acidgenomics/bioverbs,
     acidgenomics/goalie
