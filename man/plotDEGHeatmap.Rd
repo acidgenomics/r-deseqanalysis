@@ -64,8 +64,8 @@ automatically, differing from the behavior in pheatmap.}
 Numeric vector of breakpoints for the color legend.}
 
 \item{interestingGroups}{\code{character}.
-Groups of interest that define the samples. If left unset, defaults to
-\code{sampleName}.}
+Groups of interest to use for visualization.
+Corresponds to factors describing the columns of the object.}
 
 \item{showRownames}{\code{logical(1)}.
 Show row or column names.}
@@ -102,10 +102,10 @@ values are not supported. If set \code{NULL}, will use the default pheatmap
 colors.}
 
 \item{borderColor}{\code{character(1)} or \code{NULL}.
-Border color. Disabled by default for improved aesthetics.}
+Border color.}
 
 \item{title}{\code{character(1)}.
-Plot title.}
+Title.}
 
 \item{...}{Additional arguments.}
 

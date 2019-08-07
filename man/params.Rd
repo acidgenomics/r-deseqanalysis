@@ -2,52 +2,27 @@
 % Please edit documentation in R/params.R
 \name{params}
 \alias{params}
-\title{Parameters}
+\title{Shared parameter documentation}
 \arguments{
 \item{DESeqDataSet}{\code{DESeqDataSet} or \code{NULL}.}
 
 \item{DESeqTransform}{\code{DESeqTransform}.}
-
-\item{alpha}{\code{numeric(1)}.
-Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
-defined in the object.}
 
 \item{contrastSamples}{\code{logical(1)}.
 \strong{Experimental}. Only include the samples used to define the contrast
 passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
 contrasts (e.g. interaction effect).}
 
-\item{direction}{\code{character(1)}.
-Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
-
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
 
-\item{lfcThreshold}{\code{numeric(1)}.
-Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
-the cutoff defined in the object.}
-
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or position of \code{DESeqResults}.}
-
-\item{pointAlpha}{\code{numeric(1)}.
-Alpha transparency level. Must be a proportion (0-1).}
-
-\item{pointColor}{\code{character(1)}.
-Default point color for the plot.}
-
-\item{pointSize}{\code{numeric(1)}.
-Point size. In the range of 1-3 is generally recommended.}
-
-\item{sigPointColor}{\code{character}.
-Color names for labeling upregulated and downregulated genes. Also supports
-a character string for labeling DEGs with the same color, regardless of
-direction.}
 }
 \value{
 No value.
 }
 \description{
-Parameters
+Shared parameter documentation
 }
 \keyword{internal}

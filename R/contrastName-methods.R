@@ -1,7 +1,7 @@
 #' @name contrastName
 #' @inherit bioverbs::contrastName
 #'
-#' @inheritParams basejump::params
+#' @inheritParams acidroxygen::params
 #' @inheritParams params
 #' @param format `character(1)`.
 #'   Name format to return:
