@@ -6,7 +6,7 @@
 #' @name plotDEGUpset
 #' @inherit bioverbs::plotDEGUpset
 #'
-#' @inheritParams basejump::params
+#' @inheritParams acidroxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'

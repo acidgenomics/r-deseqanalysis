@@ -2,7 +2,7 @@
 #' @inherit bioverbs::topTables
 #' @note Updated 2019-07-30.
 #'
-#' @inheritParams basejump::params
+#' @inheritParams acidroxygen::params
 #' @inheritParams params
 #' @param n `integer(1)`.
 #'   Number of genes (per direction) to report.

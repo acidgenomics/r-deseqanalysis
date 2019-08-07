@@ -7,7 +7,7 @@
 #'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams acidplots::plotPCA
-#' @inheritParams basejump::params
+#' @inheritParams acidroxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'
