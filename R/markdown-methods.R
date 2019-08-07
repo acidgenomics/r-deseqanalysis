@@ -1,7 +1,7 @@
 #' @name markdown
 #' @inherit basejump::markdown
 #'
-#' @inheritParams basejump::params
+#' @inheritParams acidroxygen::params
 #' @param ... Additional arguments.
 #'
 #' @examples

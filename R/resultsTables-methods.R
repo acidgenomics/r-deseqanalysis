@@ -2,7 +2,7 @@
 #' @inherit bioverbs::resultsTables
 #' @note Updated 2019-07-30.
 #'
-#' @inheritParams basejump::params
+#' @inheritParams acidroxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'

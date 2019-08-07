@@ -3,7 +3,7 @@
 #' @inherit bioverbs::alphaSummary
 #'
 #' @inheritParams DESeq2::results
-#' @inheritParams basejump::params
+#' @inheritParams acidroxygen::params
 #' @param ... Additional arguments.
 #'
 #' @details
