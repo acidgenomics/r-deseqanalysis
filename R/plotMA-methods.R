@@ -110,7 +110,7 @@ NULL
         return <- match.arg(return)
 
         if (!is.null(genes) && ntop > 0L) {
-            stop("Specify either `genes` or `ntop`.")
+            stop("Specify either 'genes' or 'ntop'.")
         }
 
         ## Check to see if we should use `sval` column instead of `padj`.

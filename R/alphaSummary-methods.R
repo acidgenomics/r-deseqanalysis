@@ -61,7 +61,7 @@ NULL
         ## Either `contrast` or `name`.
         ## If neither are defined, we're checking the intercept.
         if (!is.null(contrast) && !is.null(name)) {
-            stop("Specify either `contrast` or `name`.")
+            stop("Specify either 'contrast' or 'name'.")
         }
 
         ## Generate an automatic caption.
