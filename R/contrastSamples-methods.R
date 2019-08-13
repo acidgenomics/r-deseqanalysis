@@ -65,10 +65,13 @@ NULL
         ## Note that this can happen for complex contrasts, so don't warn.
         resultsNames <- resultsNames(data)
         if (!contrast %in% resultsNames) {
-            message(paste0(
-                "Note: ", contrast, " is not defined in resultsNames.\n",
-                "This can happen with complex contrasts, ",
-                "and is generally safe to ignore."
+            message(sprintf(
+                fmt = paste0(
+                    "Note: '%s' is not defined in 'resultsNames()'.\n",
+                    "This can happen with complex contrasts, ",
+                    "and is generally safe to ignore."
+                ),
+                contrast
             ))
         }
 
