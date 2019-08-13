@@ -45,12 +45,11 @@ setMethod(
 `results,DESeqAnalysis` <-  # nolint
     function(object, results, lfcShrink = FALSE) {
         if (missing(results)) {
-            stop(paste(
-                "Failed to match results.",
-                "Required `results` argument is missing.",
-                "Specify as either name or position scalar.",
-                sep = "\n"
-            ))
+            stop(
+                "Failed to match results.\n",
+                "Required 'results' argument is missing.\n",
+                "Specify as either name or position scalar."
+            )
         }
         assert(
             is(object, "DESeqAnalysis"),
@@ -73,12 +72,12 @@ setMethod(
             isTRUE(lfcShrink) &&
             !hasLength(object@lfcShrink)
         ) {
-            stop(paste(
-                "Shrunken LFC values were requested,",
-                "but object does not contain DESeqResults",
-                "defined in `lfcShrink` slot.",
-                "Set `lfcShrink = FALSE`."
-            ))
+            stop(
+                "Shrunken LFC values were requested, ",
+                "but object does not contain DESeqResults ",
+                "defined in 'lfcShrink' slot.\n",
+                "Set 'lfcShrink = FALSE'."
+            )
         }
 
         resultsList <- slot(object, name = slotName)

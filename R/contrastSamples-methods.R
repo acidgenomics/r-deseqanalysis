@@ -87,7 +87,7 @@ NULL
         )
         assert(hasLength(sum(match), n = 1L))
         factorCol <- names(match)[match]
-        message(paste("Factor column:", factorCol))
+        message(sprintf("Factor column: %s.", factorCol))
         factor <- colData[[factorCol]]
         assert(is.factor(factor))
 
@@ -106,13 +106,19 @@ NULL
         assert(isSubset(numeratorCol, factor))
         numerator <- samples[factor %in% numeratorCol]
         assert(hasLength(numerator))
-        message(paste("Numerator samples:", toString(numerator)))
+        message(sprintf(
+            "Numerator samples: %s.",
+            toString(numerator, width = 100L)
+        ))
 
         denominatorCol <- match[1L, 3L]
         assert(isSubset(denominatorCol, factor))
         denominator <- samples[factor %in% denominatorCol]
         assert(hasLength(denominator))
-        message(paste("Denominator samples:", toString(denominator)))
+        message(sprintf(
+            "Denominator samples: %s.",
+            toString(denominator, width = 100L)
+        ))
 
         sort(c(numerator, denominator))
     }

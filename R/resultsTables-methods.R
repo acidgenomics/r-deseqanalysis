@@ -170,17 +170,17 @@ NULL
         call <- match.call()
         ## dir
         if (isSubset("dir", names(call))) {
-            stop(paste(
-                "'dir' argument is defunct.",
+            stop(
+                "'dir' argument is defunct.\n",
                 "Use 'export()' instead."
-            ))
+            )
         }
         ## dropboxDir
         if (isSubset("dropboxDir", names(call))) {
-            stop(paste(
-                "'dropboxDir' argument is defunct.",
+            stop(
+                "'dropboxDir' argument is defunct.\n",
                 "Use 'copyToDropbox()' instead."
-            ))
+            )
         }
         ## headerLevel
         if (isSubset("headerLevel", names(call))) {
@@ -188,10 +188,10 @@ NULL
         }
         ## rdsToken
         if (isSubset("rdsToken", names(call))) {
-            stop(paste(
-                "'rdsToken' argument is defunct.",
+            stop(
+                "'rdsToken' argument is defunct.\n",
                 "Use 'copyToDropbox()' instead."
-            ))
+            )
         }
         ## summary
         if (isSubset("summary", names(call))) {
@@ -199,10 +199,10 @@ NULL
         }
         ## write
         if (isSubset("write", names(call))) {
-            stop(paste(
-                "'write' argument is defunct.",
+            stop(
+                "'write' argument is defunct.\n",
                 "Use 'export()' instead."
-            ))
+            )
         }
         ## Error on unsupported arguments.
         assert(isSubset(

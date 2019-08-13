@@ -54,6 +54,6 @@ test_that("Contrast name", {
 test_that("Contrast or name", {
     expect_error(
         alphaSummary(dds, contrast = "aaa", name = "bbb"),
-        "Specify either `contrast` or `name`."
+        "Specify either 'contrast' or 'name'."
     )
 })
