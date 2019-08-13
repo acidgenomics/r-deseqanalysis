@@ -171,37 +171,37 @@ NULL
         ## dir
         if (isSubset("dir", names(call))) {
             stop(paste(
-                "`dir` argument is defunct.",
-                "Use `export()` instead."
+                "'dir' argument is defunct.",
+                "Use 'export()' instead."
             ))
         }
         ## dropboxDir
         if (isSubset("dropboxDir", names(call))) {
             stop(paste(
-                "`dropboxDir` argument is defunct.",
-                "Use `copyToDropbox()` instead."
+                "'dropboxDir' argument is defunct.",
+                "Use 'copyToDropbox()' instead."
             ))
         }
         ## headerLevel
         if (isSubset("headerLevel", names(call))) {
-            stop("`headerLevel` argument is defunct.")
+            stop("'headerLevel' argument is defunct.")
         }
         ## rdsToken
         if (isSubset("rdsToken", names(call))) {
             stop(paste(
-                "`rdsToken` argument is defunct.",
-                "Use `copyToDropbox()` instead."
+                "'rdsToken' argument is defunct.",
+                "Use 'copyToDropbox()' instead."
             ))
         }
         ## summary
         if (isSubset("summary", names(call))) {
-            stop("`summary` argument is defunct.")
+            stop("'summary' argument is defunct.")
         }
         ## write
         if (isSubset("write", names(call))) {
             stop(paste(
-                "`write` argument is defunct.",
-                "Use `export()` instead."
+                "'write' argument is defunct.",
+                "Use 'export()' instead."
             ))
         }
         ## Error on unsupported arguments.
