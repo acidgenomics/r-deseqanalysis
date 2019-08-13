@@ -125,8 +125,9 @@ setMethod(
     ) {
         validObject(object)
         value <- match.arg(value)
-        message(paste0(
-            "Creating aggregate results matrix using ", value, ".\n",
+        message(sprintf(
+            "Creating aggregate results matrix using %s.\n%s",
+            value,
             printString(names(object))
         ))
         list <- mapply(
