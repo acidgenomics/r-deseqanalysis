@@ -73,10 +73,9 @@ NULL
             caption <- resultsNames(object)[[1L]]
         }
 
-        message(paste(
-            caption,
-            paste("Alpha cutoffs:", toString(alpha)),
-            sep = "\n"
+        message(sprintf(
+            "%s\nAlpha levels: %s",
+            caption, toString(alpha))
         ))
 
         data <- vapply(

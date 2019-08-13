@@ -55,9 +55,9 @@ NULL
             slotName <- "results"
         }
 
-        message(paste(
-            "Generating results matrix from",
-            slotName, "slot using", value, "column."
+        message(sprintf(
+            "Generating results matrix from '%s' slot using '%s' column.",
+            slotName, value
         ))
 
         results <- slot(object, name = slotName)
