@@ -143,7 +143,7 @@ setMethod(
             samples <- contrastSamples(object, results = results)
             assert(isSubset(samples, colnames(dt)))
             dt <- dt[, samples, drop = FALSE]
-            colData(dt) <- relevel(colData(dt))
+            dt <- droplevels(dt)
         }
 
         ## Passing through to DESeqResults/DESeqTransform method here.
