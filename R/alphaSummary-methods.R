@@ -75,7 +75,7 @@ NULL
 
         message(sprintf(
             "%s\nAlpha levels: %s",
-            caption, toString(alpha))
+            caption, toString(alpha)
         ))
 
         data <- vapply(
