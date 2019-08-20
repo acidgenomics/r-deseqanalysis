@@ -10,7 +10,7 @@
     testCol = "padj",
     alpha,
     lfcCol = "log2FoldChange",
-    lfcThreshold = 0L
+    lfcThreshold
 ) {
     ## test: P value or S value
     test <- data[[testCol]]
