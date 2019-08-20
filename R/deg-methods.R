@@ -1,5 +1,6 @@
 #' @name deg
 #' @inherit bioverbs::deg
+#' @note Updated 2019-08-20.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -25,9 +26,11 @@ NULL
 
 
 ## Get differential expressed genes (DEGs) from DESeqResults table.
+##
 ## Note that we're not sorting the identifiers here by LFC or P value.
 ## It's just performing a simple subset to get the identifiers as a character.
-## Updated 2019-07-23.
+##
+## Updated 2019-08-20.
 `deg,DESeqResults` <-  # nolint
     function(
         object,
@@ -48,38 +51,32 @@ NULL
             isNonNegative(lfcThreshold)
         )
         direction <- match.arg(direction)
-
+        data <- as(object, "DataFrame")
         ## Define symbols to use in dplyr calls below.
-        alphaCol <- sym("padj")
-        lfcCol <- sym("log2FoldChange")
-
-        ## Coerce to minimal tibble.
-        data <- as(object, "tbl_df")
-        data <- select(data, !!!syms(c("rowname", "log2FoldChange", "padj")))
-
+        alphaCol <- "padj"
+        lfcCol <- "log2FoldChange"
+        data <- data[, c(lfcCol, alphaCol)]
         ## Apply alpha cutoff.
-        data <- filter(data, !!alphaCol < !!alpha)
-
+        keep <- which(data[[alphaCol]] < alpha)
+        data <- data[keep, , drop = FALSE]
         ## Apply LFC threshold cutoff.
         if (lfcThreshold > 0L) {
-            data <- filter(
-                data,
-                !!lfcCol > UQ(lfcThreshold) | !!lfcCol < -UQ(lfcThreshold)
-            )
+            keep <- which(abs(data[[lfcCol]]) > lfcThreshold)
+            data <- data[keep, , drop = FALSE]
         }
-
         ## Apply directional filtering.
         if (direction == "up") {
-            data <- filter(data, !!lfcCol > 0L)
+            keep <- which(data[[lfcCol]] > 0L)
+            data <- data[keep, , drop = FALSE]
         } else if (direction == "down") {
-            data <- filter(data, !!lfcCol < 0L)
+            keep <- which(data[[lfcCol]] < 0L)
+            data <- data[keep, , drop = FALSE]
         }
-
         ## Arrange table by adjusted P value.
-        data <- arrange(data, !!alphaCol)
-
-        deg <- pull(data, "rowname")
-        status <- paste(
+        data <- data[order(data[[alphaCol]]), , drop = FALSE]
+        deg <- rownames(data)
+        status <- sprintf(
+            fmt = "%d %s %s detected.",
             length(deg),
             switch(
                 EXPR = direction,
@@ -87,15 +84,17 @@ NULL
                 down = "downregulated",
                 both = "differentially expressed"
             ),
-            "genes detected."
+            ngettext(
+                n = length(deg),
+                msg1 = "gene",
+                msg2 = "genes"
+            )
         )
-
         if (!hasLength(deg)) {
             warning(status)
         } else {
             message(status)
         }
-
         deg
     }
 
