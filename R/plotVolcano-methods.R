@@ -1,7 +1,3 @@
-## FIXME Rework ranking using statCol
-
-
-
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
