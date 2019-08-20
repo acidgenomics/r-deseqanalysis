@@ -163,6 +163,8 @@ NULL
         if (return == "DataFrame") {
             return(as(data, "DataFrame"))
         }
+
+        ## MA plot -------------------------------------------------------------
         log10BaseMean <- log10(data[["baseMean"]])
         floor <- min(floor(log10BaseMean))
         ceiling <- max(ceiling(log10BaseMean))
@@ -215,7 +217,8 @@ NULL
                     )
                 )
         }
-        ## Gene text labels.
+
+        ## Gene text labels ----------------------------------------------------
         ## Get the genes to visualize when `ntop` is declared.
         if (ntop > 0L) {
             assert(
@@ -256,7 +259,8 @@ NULL
                     )
                 )
         }
-        ## Return.
+
+        ## Return --------------------------------------------------------------
         p
     }
 
