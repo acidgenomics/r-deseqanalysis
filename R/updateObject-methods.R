@@ -1,5 +1,6 @@
 #' @name updateObject
 #' @inherit BiocGenerics::updateObject
+#' @note Updated 2019-08-20.
 #'
 #' @section `DESeqAnalysis`:
 #'
@@ -21,10 +22,10 @@ NULL
     function(object) {
         if (!isTRUE(.hasSlot(object, "metadata"))) {
             ## nocov start
-            message(paste0(
+            message(
                 "Legacy object < 0.1.8 detected.\n",
                 "Updating to support metadata slot."
-            ))
+            )
             ## nocov end
         }
 

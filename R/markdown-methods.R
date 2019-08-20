@@ -1,5 +1,6 @@
 #' @name markdown
 #' @inherit basejump::markdown
+#' @note Updated 2019-08-20.
 #'
 #' @inheritParams acidroxygen::params
 #' @param ... Additional arguments.

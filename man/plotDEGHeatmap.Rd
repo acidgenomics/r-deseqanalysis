@@ -40,11 +40,11 @@ plotDEGHeatmap(object, ...)
 \item{DESeqTransform}{\code{DESeqTransform}.}
 
 \item{direction}{\code{character(1)}.
-Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
+Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
 \item{scale}{\code{character(1)}.
 Whether the values should be centered and scaled in either the row or
-column direction ("\code{row}", "\code{column}"), or remain unscaled ("\code{none}").}
+column direction, or remain unscaled.}
 
 \item{clusteringMethod}{\code{character(1)}.
 Clustering method. Accepts the same values as \code{\link[stats:hclust]{hclust()}}.}
@@ -133,6 +133,9 @@ manual input of a gene vector. All of the optional parameters for
 To adjust the annotation columns, modify the
 \code{\link[SummarizedExperiment:colData]{colData()}} of the \code{counts} argument, which
 must contain a \code{SummarizedExperiment}.
+}
+\note{
+Updated 2019-08-20.
 }
 \examples{
 data(deseq)

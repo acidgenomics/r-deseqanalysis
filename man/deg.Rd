@@ -27,7 +27,7 @@ Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
 the cutoff defined in the object.}
 
 \item{direction}{\code{character(1)}.
-Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
+Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or position of \code{DESeqResults}.}
@@ -40,6 +40,9 @@ Gene identifiers.
 }
 \description{
 Differentially expressed genes
+}
+\note{
+Updated 2019-08-20.
 }
 \examples{
 data(deseq)
