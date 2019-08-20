@@ -29,7 +29,6 @@
 #'   isNonNegative isNumber isPercentage isPositive isScalar isString isSubset
 #'   validate
 #' @importFrom knitr kable
-#' @importFrom magrittr %>%
 #' @importFrom methods as is new prototype setClass show slot slot<- validObject
 #'   .hasSlot
 #' @importFrom acidplots acid_geom_label_repel plotCounts plotPCA

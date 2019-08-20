@@ -19,12 +19,11 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-08-20.
 `sampleData,DESeqAnalysis` <-  # nolint
     function(object) {
-        object %>%
-            as("DESeqDataSet") %>%
-            sampleData()
+        object <- as(object, "DESeqDataSet")
+        sampleData(object)
     }
 
 
