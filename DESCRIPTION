@@ -41,7 +41,6 @@ Imports:
     knitr (>= 1.21),
     rlang (>= 0.4),
     stringr (>= 1.4),
-    tidyselect (>= 0.2),
     methods,
     scales,
     utils

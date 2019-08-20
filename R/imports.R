@@ -13,14 +13,15 @@
 #' @importFrom DESeq2 counts priorInfo
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors SimpleList as.data.frame head mcols mcols<- metadata
+#'   na.omit
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom UpSetR fromList
 #' @importFrom acidplots plotHeatmap scale_colour_synesthesia_d upset
 #' @importFrom basejump Gene2Symbol as_tibble camelCase convertSampleIDsToNames
-#'   decode droplevels initDir interestingGroups<- makeNames mapGenesToRownames
-#'   markdownHeader markdownList matchArgsToDoCall matchInterestingGroups
-#'   matchesGene2Symbol methodFormals printString removeNA showSlotInfo
-#'   standardizeCall
+#'   decode droplevels initDir interestingGroups<- left_join makeNames
+#'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
+#'   matchInterestingGroups matchesGene2Symbol methodFormals printString
+#'   removeNA showSlotInfo standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_density
 #'   geom_hline geom_point geom_vline ggplot guides labs scale_colour_manual
@@ -43,5 +44,4 @@
 #' @importFrom dplyr arrange desc everything filter left_join mutate mutate_all
 #'   pull rename row_number select
 #' @importFrom rlang !! := UQ sym syms
-#' @importFrom tidyselect starts_with
 NULL
