@@ -119,12 +119,12 @@ NULL
         ## Placeholder variables.
         lfcCol <- "log2FoldChange"
         statCol <- "stat"
+        data <- as(object, "DataFrame")
+        data <- camelCase(data)
         assert(isSubset(
             x = c("baseMean", lfcCol, statCol, testCol),
             y = colnames(data)
         ))
-        data <- as(object, "DataFrame")
-        data <- camelCase(data)
         ## Select columns used for plots.
         data <- data[, c("baseMean", lfcCol, statCol, testCol)]
         ## Remove genes with NA adjusted P values.
