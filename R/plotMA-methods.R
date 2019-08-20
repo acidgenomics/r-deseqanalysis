@@ -163,12 +163,12 @@ NULL
             return(invisible())
         }
         ## Early return the data, if desired.
-        if (return == "DataFrame") {
-            return(as(data, "DataFrame"))
+        if (identical(return, "DataFrame")) {
+            return(data)
         }
+        data <- as_tibble(object, rownames = "rowname")
 
         ## MA plot -------------------------------------------------------------
-        data <- as_tibble(object, rownames = "rowname")
         log10BaseMean <- log10(data[["baseMean"]])
         floor <- min(floor(log10BaseMean))
         ceiling <- max(ceiling(log10BaseMean))
