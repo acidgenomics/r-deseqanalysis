@@ -128,11 +128,9 @@ NULL
         data <- as(object, "DataFrame")
         data <- camelCase(data)
         assert(isSubset(
-            x = c("baseMean", lfcCol, rankCol, testCol),
+            x = c("baseMean", lfcCol, testCol),
             y = colnames(data)
         ))
-        ## Select columns used for plots.
-        data <- data[, c("baseMean", lfcCol, rankCol, testCol)]
         ## Remove genes with NA adjusted P values.
         keep <- which(!is.na(data[[testCol]]))
         data <- data[keep, , drop = FALSE]
@@ -143,7 +141,6 @@ NULL
         ## `Inf` values resulting from log transformation. This will also define
         ## the upper bound of the y-axis. Then calculate the rank score, which
         ## is used for `ntop`.
-
         data[[negLogTestCol]] <- -log10(data[[testCol]] + ylim)
         data[["rankScore"]] <- abs(data[[rankCol]])
         data <- data[
