@@ -119,16 +119,25 @@ NULL
         } else {
             testCol <- "padj"
         }
-        ## Placeholder variable for matching the LFC column.
+        ## Placeholder variables.
         lfcCol <- "log2FoldChange"
-        ## Prepare the data tibble used for ggplot2.
-        data <- as_tibble(object, rownames = "rowname")
+        statCol <- "stat"
+        assert(isSubset(
+            x = c("baseMean", lfcCol, statCol, testCol),
+            y = colnames(data)
+        ))
+        data <- as(object, "DataFrame")
         data <- camelCase(data)
         ## Remove genes with very low expression.
-        data <- filter(data, !!sym("baseMean") >= 1L)
-        data <- mutate(data, rankScore = abs(!!sym("log2FoldChange")))
-        data <- arrange(data, desc(!!sym("rankScore")))
-        data <- mutate(data, rank = row_number())
+        keep <- which(data[["baseMean"]] >= 1L)
+        data <- data[keep, , drop = FALSE]
+        data[["rankScore"]] <- abs(data[[statCol]])
+        data <- data[
+            order(data[["rankScore"]], decreasing = TRUE),
+            ,
+            drop = FALSE
+            ]
+        data[["rank"]] <- seq_len(nrow(data))
         data <- .addIsDECol(
             data = data,
             testCol = testCol,
@@ -137,25 +146,19 @@ NULL
             lfcThreshold = lfcThreshold
         )
         assert(isSubset(
-            x = c(
-                "rowname",
-                "baseMean",
-                lfcCol,
-                testCol,
-                "rankScore",
-                "rank",
-                "isDE"
-            ),
+            x = c("isDE", "rank", "rankScore"),
             y = colnames(data)
         ))
         ## Apply directional filtering, if desired.
         if (direction == "up") {
-            data <- filter(data, !!sym(lfcCol) > 0L)
+            keep <- which(data[[lfcCol]] > 0L)
+            data <- data[keep, , drop = FALSE]
         } else if (direction == "down") {
-            data <- filter(data, !!sym(lfcCol) < 0L)
+            keep <- which(data[[lfcCol]] < 0L)
+            data <- data[keep, , drop = FALSE]
         }
         ## Check for no genes passing cutoffs and early return.
-        if (!nrow(data)) {
+        if (!hasRows(data)) {
             warning("No genes passed cutoffs.")
             return(invisible())
         }
@@ -165,6 +168,7 @@ NULL
         }
 
         ## MA plot -------------------------------------------------------------
+        data <- as_tibble(object, rownames = "rowname")
         log10BaseMean <- log10(data[["baseMean"]])
         floor <- min(floor(log10BaseMean))
         ceiling <- max(ceiling(log10BaseMean))
@@ -220,7 +224,7 @@ NULL
 
         ## Gene text labels ----------------------------------------------------
         ## Get the genes to visualize when `ntop` is declared.
-        if (ntop > 0L) {
+        if (isTRUE(ntop > 0L)) {
             assert(
                 isSubset(c("rowname", "rank"), colnames(data)),
                 ## Double check that data is arranged by `rank` column.
