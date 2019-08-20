@@ -41,6 +41,9 @@ Gene identifiers.
 \description{
 Differentially expressed genes
 }
+\note{
+Updated 2019-08-20.
+}
 \examples{
 data(deseq)
 

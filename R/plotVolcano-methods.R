@@ -1,3 +1,7 @@
+## FIXME Rework ranking using statCol
+
+
+
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
@@ -116,45 +120,59 @@ NULL
         } else {
             testCol <- "padj"
         }
-        ## Placeholder variable for matching the LFC column.
+        ## Placeholder variables.
         lfcCol <- "log2FoldChange"
-        negLogTestCol <- camelCase(paste("neg", "log10", testCol))
-        ## Prepare the data tibble for ggplot2.
-        data <- as_tibble(object, rownames = "rowname")
+        statCol <- "stat"
+        assert(isSubset(
+            x = c("baseMean", lfcCol, statCol, testCol),
+            y = colnames(data)
+        ))
+        data <- as(object, "DataFrame")
         data <- camelCase(data)
         ## Select columns used for plots.
-        data <- select(data, !!!syms(c("rowname", "baseMean", lfcCol, testCol)))
+        data <- data[, c("baseMean", lfcCol, statCol, testCol)]
         ## Remove genes with NA adjusted P values.
-        data <- filter(data, !is.na(!!sym(testCol)))
+        keep <- which(!is.na(data[[testCol]]))
+        data <- data[keep, , drop = FALSE]
         ## Remove genes with zero counts.
-        data <- filter(data, !!sym("baseMean") > 0L)
-        ## Negative log10 transform the test values. Add `ylim` here to
-        ## prevent `Inf` values resulting from log transformation.
-        ## This will also define the upper bound of the y-axis.
-        ## Then calculate the rank score, which is used for `ntop`.
-        data <- mutate(
-            data,
-            !!sym(negLogTestCol) := -log10(!!sym(testCol) + !!ylim),
-            rankScore = !!sym(negLogTestCol) * abs(!!sym(lfcCol))
-        )
-        data <- arrange(data, desc(!!sym("rankScore")))
-        data <- mutate(data, rank = row_number())
+        keep <- which(data[["baseMean"]] > 0L)
+        data <- data[keep, , drop = FALSE]
+        ## Negative log10 transform the test values. Add `ylim` here to prevent
+        ## `Inf` values resulting from log transformation. This will also define
+        ## the upper bound of the y-axis. Then calculate the rank score, which
+        ## is used for `ntop`.
+        negLogTestCol <- camelCase(paste("neg", "log10", testCol))
+        data[[negLogTestCol]] <- -log10(data[[testCol]] + ylim)
+        data[["rankScore"]] <- abs(data[[statCol]])
+        data <- data[
+            order(data[["rankScore"]], decreasing = TRUE),
+            ,
+            drop = FALSE
+            ]
+        data[["rank"]] <- seq_len(nrow(data))
         data <- .addIsDECol(
             data = data,
             testCol = testCol,
             alpha = alpha,
             lfcThreshold = lfcThreshold
         )
+        assert(isSubset(
+            x = c("isDE", "rank", "rankScore"),
+            y = colnames(data)
+        ))
         ## Apply directional filtering, if desired.
         if (direction == "up") {
-            data <- filter(data, !!sym(lfcCol) > 0L)
+            keep <- which(data[[lfcCol]] > 0L)
+            data <- data[keep, , drop = FALSE]
         } else if (direction == "down") {
-            data <- filter(data, !!sym(lfcCol) < 0L)
+            keep <- which(data[[lfcCol]] < 0L)
+            data <- data[keep, , drop = FALSE]
         }
         ## Early return the data, if desired.
-        if (return == "DataFrame") {
-            return(as(data, "DataFrame"))
+        if (identical(return, "DataFrame")) {
+            return(data)
         }
+        data <- as_tibble(object, rownames = "rowname")
 
         ## LFC density ---------------------------------------------------------
         lfcHist <- ggplot(
@@ -252,7 +270,7 @@ NULL
 
         ## Gene text labels ----------------------------------------------------
         ## Get the genes to visualize when `ntop` is declared.
-        if (ntop > 0L) {
+        if (isTRUE(ntop > 0L)) {
             assert(
                 isSubset(c("rowname", "rank"), colnames(data)),
                 ## Double check that data is arranged by `rank` column.

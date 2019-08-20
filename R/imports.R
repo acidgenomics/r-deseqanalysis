@@ -2,12 +2,6 @@
 
 
 
-## #' @importFrom dplyr arrange desc everything filter left_join mutate mutate_all
-## #'   pull rename row_number select
-## #' @importFrom rlang !! := UQ sym syms
-
-
-
 #' @importClassesFrom DESeq2 DESeqDataSet DESeqTransform
 #' @importClassesFrom SummarizedExperiment RangedSummarizedExperiment
 #'   SummarizedExperiment
@@ -41,6 +35,7 @@
 #' @importFrom methods as is new prototype setClass show slot slot<- validObject
 #'   .hasSlot
 #' @importFrom acidplots acid_geom_label_repel plotCounts plotPCA
+#' @importFrom rlang !! sym
 #' @importFrom scales log_breaks pretty_breaks
 #' @importFrom stringr str_match str_trunc
 #' @importFrom utils capture.output getS3method globalVariables packageVersion

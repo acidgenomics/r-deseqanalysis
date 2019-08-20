@@ -10,8 +10,8 @@
 resultsTables(object, ...)
 
 \S4method{resultsTables}{DESeqResults}(object, DESeqDataSet = NULL,
-  alpha = NULL, lfcThreshold = NULL, return = c("tbl_df",
-  "DataFrameList"), ...)
+  alpha = NULL, lfcThreshold = NULL, return = c("DataFrameList",
+  "tbl_df"), ...)
 
 \S4method{resultsTables}{DESeqAnalysis}(object, results,
   lfcShrink = TRUE, extra = TRUE, alpha = NULL,
@@ -34,8 +34,8 @@ the cutoff defined in the object.}
 Type of data frame to return as a list.
 Uses \link[base:match.arg]{match.arg()}.
 \itemize{
-\item \code{tbl_df}: Returns \code{list} of \code{tbl_df} containing \code{"rowname"} column.
 \item \code{DataFrameList}: Returns \code{DataFrameList} with row names.
+\item \code{tbl_df}: Returns \code{list} of \code{tbl_df} containing \code{"rowname"} column.
 }}
 
 \item{...}{Additional arguments.}
@@ -62,7 +62,7 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 \code{all} table), are arranged by adjusted \emph{P} value.
 }
 \note{
-Updated 2019-07-30.
+Updated 2019-08-20.
 
 Do not apply post hoc log fold change cutoffs.
 }
