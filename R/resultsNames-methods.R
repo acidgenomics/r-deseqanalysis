@@ -1,5 +1,6 @@
 #' @name resultsNames
 #' @inherit bioverbs::resultsNames
+#' @note Updated 2019-08-20.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params

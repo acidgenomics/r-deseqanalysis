@@ -26,6 +26,9 @@ Markdown
 \item \code{DESeqAnalysis}: List of contrast names.
 }}
 
+\note{
+Updated 2019-08-20.
+}
 \examples{
 data(deseq)
 

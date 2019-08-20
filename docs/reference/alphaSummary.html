@@ -177,6 +177,10 @@ The value provided to <code>name</code> must be an element of <code><a href='res
 
     <p>Use either <code>contrast</code> or <code>name</code> to specify the desired contrast.</p>
     
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Updated 2019-08-20.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'>
@@ -193,17 +197,17 @@ The value provided to <code>name</code> must be an element of <code><a href='res
 <span class='co'>## DESeqDataSet ====</span>
 <span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.html'>as</a></span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
 <span class='fu'><a href='resultsNames.html'>resultsNames</a></span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; [1] "Intercept"        "condition_B_vs_A"</div><div class='input'><span class='fu'>alphaSummary</span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; <span class='message'>Intercept</span>
-#&gt; <span class='message'>Alpha cutoffs: 0.1, 0.05, 0.01, 0.001, 1e-06</span></div><div class='output co'>#&gt;                0.1 0.05 0.01 0.001 1e-06
+#&gt; <span class='message'>Alpha levels: 0.1, 0.05, 0.01, 0.001, 1e-06</span></div><div class='output co'>#&gt;                0.1 0.05 0.01 0.001 1e-06
 #&gt; LFC &gt; 0 (up)    81   64   47    30     6
 #&gt; LFC &lt; 0 (down)  75   60   39    23     4
 #&gt; outliers [1]     2    2    2     2     2
 #&gt; low counts [2]   0    0   96   173     0</div><div class='input'><span class='fu'>alphaSummary</span>(<span class='no'>dds</span>, <span class='kw'>contrast</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"condition"</span>, <span class='st'>"B"</span>, <span class='st'>"A"</span>))</div><div class='output co'>#&gt; <span class='message'>condition B A</span>
-#&gt; <span class='message'>Alpha cutoffs: 0.1, 0.05, 0.01, 0.001, 1e-06</span></div><div class='output co'>#&gt;                0.1 0.05 0.01 0.001 1e-06
+#&gt; <span class='message'>Alpha levels: 0.1, 0.05, 0.01, 0.001, 1e-06</span></div><div class='output co'>#&gt;                0.1 0.05 0.01 0.001 1e-06
 #&gt; LFC &gt; 0 (up)    81   64   47    30     6
 #&gt; LFC &lt; 0 (down)  75   60   39    23     4
 #&gt; outliers [1]     2    2    2     2     2
 #&gt; low counts [2]   0    0   96   173     0</div><div class='input'><span class='fu'>alphaSummary</span>(<span class='no'>dds</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"condition_B_vs_A"</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A</span>
-#&gt; <span class='message'>Alpha cutoffs: 0.1, 0.05, 0.01, 0.001, 1e-06</span></div><div class='output co'>#&gt;                0.1 0.05 0.01 0.001 1e-06
+#&gt; <span class='message'>Alpha levels: 0.1, 0.05, 0.01, 0.001, 1e-06</span></div><div class='output co'>#&gt;                0.1 0.05 0.01 0.001 1e-06
 #&gt; LFC &gt; 0 (up)    81   64   47    30     6
 #&gt; LFC &lt; 0 (down)  75   60   39    23     4
 #&gt; outliers [1]     2    2    2     2     2
@@ -217,6 +221,8 @@ The value provided to <code>name</code> must be an element of <code><a href='res
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#note">Note</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

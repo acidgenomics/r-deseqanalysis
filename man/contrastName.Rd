@@ -37,6 +37,9 @@ Contrast name.
 \description{
 Contrast name
 }
+\note{
+Updated 2019-08-20.
+}
 \examples{
 data(deseq)
 

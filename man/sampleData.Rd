@@ -28,6 +28,9 @@ for accessing sample metadata for datasets where multiple items in the
 columns map to a single sample (e.g. cells for a single-cell RNA-seq
 experiment).
 }
+\note{
+Updated 2019-08-20.
+}
 \examples{
 data(deseq)
 x <- sampleData(deseq)

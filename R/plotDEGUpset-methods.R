@@ -5,6 +5,7 @@
 
 #' @name plotDEGUpset
 #' @inherit bioverbs::plotDEGUpset
+#' @note Updated 2019-08-20.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params

@@ -2,6 +2,8 @@
 #'
 #' @name show
 #' @inherit methods::show
+#' @note Updated 2019-08-20.
+#'
 #' @examples
 #' data(deseq)
 #'
