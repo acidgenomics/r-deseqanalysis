@@ -1,6 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
+#' @note Updated 2019-08-20.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -65,7 +66,7 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-08-20.
 `plotVolcano,DESeqResults` <-  # nolint
     function(
         object,
@@ -109,50 +110,47 @@ NULL
         )
         direction <- match.arg(direction)
         return <- match.arg(return)
-
         ## Check to see if we should use `sval` instead of `padj`
         if ("svalue" %in% names(object)) {
             testCol <- "svalue"  # nocov
         } else {
             testCol <- "padj"
         }
-
         ## Placeholder variable for matching the LFC column.
         lfcCol <- "log2FoldChange"
         negLogTestCol <- camelCase(paste("neg", "log10", testCol))
-
-        data <- object %>%
-            as_tibble(rownames = "rowname") %>%
-            camelCase() %>%
-            ## Select columns used for plots.
-            select(!!!syms(c("rowname", "baseMean", lfcCol, testCol))) %>%
-            ## Remove genes with NA adjusted P values.
-            filter(!is.na(!!sym(testCol))) %>%
-            ## Remove genes with zero counts.
-            filter(!!sym("baseMean") > 0L) %>%
-            ## Negative log10 transform the test values. Add `ylim` here to
-            ## prevent `Inf` values resulting from log transformation.
-            ## This will also define the upper bound of the y-axis.
-            ## Then calculate the rank score, which is used for `ntop`.
-            mutate(
-                !!sym(negLogTestCol) := -log10(!!sym(testCol) + !!ylim),
-                rankScore = !!sym(negLogTestCol) * abs(!!sym(lfcCol))
-            ) %>%
-            arrange(desc(!!sym("rankScore"))) %>%
-            mutate(rank = row_number()) %>%
-            .addIsDECol(
-                testCol = testCol,
-                alpha = alpha,
-                lfcThreshold = lfcThreshold
-            )
-
+        ## Prepare the data tibble for ggplot2.
+        data <- as_tibble(object, rownames = "rowname")
+        data <- camelCase(data)
+        ## Select columns used for plots.
+        data <- select(data, !!!syms(c("rowname", "baseMean", lfcCol, testCol)))
+        ## Remove genes with NA adjusted P values.
+        data <- filter(data, !is.na(!!sym(testCol)))
+        ## Remove genes with zero counts.
+        data <- filter(data, !!sym("baseMean") > 0L)
+        ## Negative log10 transform the test values. Add `ylim` here to
+        ## prevent `Inf` values resulting from log transformation.
+        ## This will also define the upper bound of the y-axis.
+        ## Then calculate the rank score, which is used for `ntop`.
+        data <- mutate(
+            data,
+            !!sym(negLogTestCol) := -log10(!!sym(testCol) + !!ylim),
+            rankScore = !!sym(negLogTestCol) * abs(!!sym(lfcCol))
+        )
+        data <- arrange(data, desc(!!sym("rankScore")))
+        data <- mutate(data, rank = row_number())
+        data <- .addIsDECol(
+            data = data,
+            testCol = testCol,
+            alpha = alpha,
+            lfcThreshold = lfcThreshold
+        )
         ## Apply directional filtering, if desired.
         if (direction == "up") {
             data <- filter(data, !!sym(lfcCol) > 0L)
         } else if (direction == "down") {
             data <- filter(data, !!sym(lfcCol) < 0L)
         }
-
         ## Early return the data, if desired.
         if (return == "DataFrame") {
             return(as(data, "DataFrame"))
@@ -263,7 +261,6 @@ NULL
             ## Since we know the data is arranged by rank, simply take the head.
             genes <- head(data[["rowname"]], n = ntop)
         }
-
         ## Visualize specific genes on the plot, if desired.
         if (!is.null(genes)) {
             validObject(gene2symbol)
@@ -274,14 +271,16 @@ NULL
             ))
             ## Map the user-defined `genes` to `gene2symbol` rownames.
             ## We're using this to match back to the `DESeqResults` object.
-            rownames <- mapGenesToRownames(
-                object = gene2symbol,
-                genes = genes
-            )
+            rownames <- mapGenesToRownames(object = gene2symbol, genes = genes)
             ## Prepare the label data tibble.
-            labelData <- data %>%
-                .[match(x = rownames, table = .[["rowname"]]), ] %>%
-                left_join(as(gene2symbol, "tbl_df"), by = "rowname")
+            keep <- na.omit(match(x = rownames, table = data[["rowname"]]))
+            assert(hasLength(keep))
+            labelData <- data[keep, , drop = FALSE]
+            labelData <- left_join(
+                x = labelData,
+                y = as_tibble(gene2symbol, rownames = "rowname"),
+                by = "rowname"
+            )
             p <- p +
                 acid_geom_label_repel(
                     data = labelData,
