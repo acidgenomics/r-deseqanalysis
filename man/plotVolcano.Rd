@@ -41,7 +41,7 @@ Gene-to-symbol mappings. Must contain \code{geneID} and \code{geneName} columns.
 Number of top features to label.}
 
 \item{direction}{\code{character(1)}.
-Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
+Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
 \item{pointColor}{\code{character(1)}.
 Default point color for the plot.}
@@ -73,6 +73,9 @@ Use shrunken log2 fold change (LFC) values.}
 }
 \description{
 Volcano plot
+}
+\note{
+Updated 2019-08-20.
 }
 \examples{
 data(deseq)

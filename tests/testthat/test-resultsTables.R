@@ -5,7 +5,12 @@ names <- c("all", "up", "down", "both")
 test_that("tbl_df return", {
     x <- resultsTables(deseq, results = 1L, return = "tbl_df")
     expect_type(x, "list")
-    expect_true(all(vapply(X = x, FUN = is_tibble, FUN.VALUE = logical(1L))))
+    expect_true(all(vapply(
+        X = x,
+        FUN = is,
+        class2 = "tbl_df",
+        FUN.VALUE = logical(1L)
+    )))
     expect_identical(names(x), names)
 })
 

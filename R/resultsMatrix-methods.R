@@ -55,9 +55,9 @@ NULL
             slotName <- "results"
         }
 
-        message(paste(
-            "Generating results matrix from",
-            slotName, "slot using", value, "column."
+        message(sprintf(
+            "Generating results matrix from '%s' slot using '%s' column.",
+            slotName, value
         ))
 
         results <- slot(object, name = slotName)
@@ -125,8 +125,9 @@ setMethod(
     ) {
         validObject(object)
         value <- match.arg(value)
-        message(paste0(
-            "Creating aggregate results matrix using ", value, ".\n",
+        message(sprintf(
+            "Creating aggregate results matrix using %s.\n%s",
+            value,
             printString(names(object))
         ))
         list <- mapply(

@@ -1,6 +1,7 @@
 #' @name alphaSummary
 #' @author Michael Steinbaugh, Lorena Patano
 #' @inherit bioverbs::alphaSummary
+#' @note Updated 2019-08-20.
 #'
 #' @inheritParams DESeq2::results
 #' @inheritParams acidroxygen::params
@@ -61,7 +62,7 @@ NULL
         ## Either `contrast` or `name`.
         ## If neither are defined, we're checking the intercept.
         if (!is.null(contrast) && !is.null(name)) {
-            stop("Specify either `contrast` or `name`.")
+            stop("Specify either 'contrast' or 'name'.")
         }
 
         ## Generate an automatic caption.
@@ -73,10 +74,9 @@ NULL
             caption <- resultsNames(object)[[1L]]
         }
 
-        message(paste(
-            caption,
-            paste("Alpha cutoffs:", toString(alpha)),
-            sep = "\n"
+        message(sprintf(
+            "%s\nAlpha levels: %s",
+            caption, toString(alpha)
         ))
 
         data <- vapply(

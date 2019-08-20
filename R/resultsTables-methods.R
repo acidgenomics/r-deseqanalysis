@@ -1,6 +1,6 @@
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
-#' @note Updated 2019-07-30.
+#' @note Updated 2019-08-20.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -29,8 +29,8 @@
 #'   Type of data frame to return as a list.
 #'   Uses [match.arg()][base::match.arg].
 #'
-#'   - `tbl_df`: Returns `list` of `tbl_df` containing `"rowname"` column.
 #'   - `DataFrameList`: Returns `DataFrameList` with row names.
+#'   - `tbl_df`: Returns `list` of `tbl_df` containing `"rowname"` column.
 #'
 #' @return `list`.
 #' Named list containing subsets of `DESeqResults`.
@@ -90,12 +90,15 @@ NULL
 
 
 
-## Join the row annotations. DESeq2 includes additional columns in `rowData()`
-## that aren't informative for a user, and doesn't need to be included in the
-## tables. Instead, only keep informative columns that are character or factor.
-## Be sure to drop complex, non-atomic columns (e.g. list, S4) that are allowed
-## in GRanges/DataFrame but will fail to write to disk as CSV. Note that we're
-## using `decode()` here to handle S4 Rle columns from the Genomic Ranges.
+## Join the row annotations.
+##
+## DESeq2 includes additional columns in `rowData()` that aren't informative for
+## a user, and doesn't need to be included in the tables. Instead, only keep
+## informative columns that are character or factor. Be sure to drop complex,
+## non-atomic columns (e.g. list, S4) that are allowed in GRanges/DataFrame but
+## will fail to write to disk as CSV. Note that we're using `decode()` here to
+## handle S4 Rle columns from the Genomic Ranges.
+##
 ## Updated 2019-07-23.
 .joinRowData <- function(
     DESeqResults,  # nolint
@@ -151,14 +154,14 @@ NULL
 ## https://github.com/hbc/bcbioRNASeq/blob/v0.2.10/R/resultsTables-methods.R
 
 ## Note that this method is used in bcbioRNASeq F1000 paper.
-## Updated 2019-07-30.
+## Updated 2019-08-20.
 `resultsTables,DESeqResults` <-  # nolint
     function(
         object,
         DESeqDataSet = NULL,  # nolint
         alpha = NULL,
         lfcThreshold = NULL,
-        return = c("tbl_df", "DataFrameList"),
+        return = c("DataFrameList", "tbl_df"),
         ...
     ) {
         validObject(object)
@@ -170,39 +173,39 @@ NULL
         call <- match.call()
         ## dir
         if (isSubset("dir", names(call))) {
-            stop(paste(
-                "`dir` argument is defunct.",
-                "Use `export()` instead."
-            ))
+            stop(
+                "'dir' argument is defunct.\n",
+                "Use 'export()' instead."
+            )
         }
         ## dropboxDir
         if (isSubset("dropboxDir", names(call))) {
-            stop(paste(
-                "`dropboxDir` argument is defunct.",
-                "Use `copyToDropbox()` instead."
-            ))
+            stop(
+                "'dropboxDir' argument is defunct.\n",
+                "Use 'copyToDropbox()' instead."
+            )
         }
         ## headerLevel
         if (isSubset("headerLevel", names(call))) {
-            stop("`headerLevel` argument is defunct.")
+            stop("'headerLevel' argument is defunct.")
         }
         ## rdsToken
         if (isSubset("rdsToken", names(call))) {
-            stop(paste(
-                "`rdsToken` argument is defunct.",
-                "Use `copyToDropbox()` instead."
-            ))
+            stop(
+                "'rdsToken' argument is defunct.\n",
+                "Use 'copyToDropbox()' instead."
+            )
         }
         ## summary
         if (isSubset("summary", names(call))) {
-            stop("`summary` argument is defunct.")
+            stop("'summary' argument is defunct.")
         }
         ## write
         if (isSubset("write", names(call))) {
-            stop(paste(
-                "`write` argument is defunct.",
-                "Use `export()` instead."
-            ))
+            stop(
+                "'write' argument is defunct.\n",
+                "Use 'export()' instead."
+            )
         }
         ## Error on unsupported arguments.
         assert(isSubset(
@@ -264,8 +267,8 @@ NULL
         out <- Filter(f = hasRows, x = out)
         switch(
             EXPR = return,
-            DataFrameList = DataFrameList(out),
-            tbl_df = lapply(out, as_tibble)
+            "DataFrameList" = DataFrameList(out),
+            "tbl_df" = lapply(out, as_tibble)
         )
     }
 

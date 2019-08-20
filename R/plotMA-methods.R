@@ -1,11 +1,8 @@
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
-#'
-#' @inheritParams DESeq2::plotMA
-#' @inheritParams acidroxygen::params
-#' @inheritParams params
-#' @param ... Additional arguments.
+#' @note We are not allowing post hoc `alpha` or `lfcThreshold` cutoffs here.
+#' @note Updated 2019-08-20.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual representation
@@ -13,13 +10,16 @@
 #' taken in two samples, by transforming the data onto M (log ratio) and A
 #' (mean average) scales, then plotting these values.
 #'
-#' @note We are not allowing post hoc `alpha` or `lfcThreshold` cutoffs here.
-#'
 #' @section plotMA2 aliases:
 #'
 #' Aliased methods for original [DESeq2::plotMA()] S4 methods, which us
 #' geneplotter instead of ggplot2. I prefer using ggplot2 instead, so the
 #' primary methods defined here in the package mask DESeq2.
+#'
+#' @inheritParams DESeq2::plotMA
+#' @inheritParams acidroxygen::params
+#' @inheritParams params
+#' @param ... Additional arguments.
 #'
 #' @return `ggplot`.
 #'
@@ -67,7 +67,7 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-08-20.
 `plotMA,DESeqResults` <-  # nolint
     function(
         object,
@@ -108,72 +108,75 @@ NULL
         )
         direction <- match.arg(direction)
         return <- match.arg(return)
-
+        ## Genes or ntop, but not both.
         if (!is.null(genes) && ntop > 0L) {
-            stop("Specify either `genes` or `ntop`.")
+            stop("Specify either 'genes' or 'ntop'.")
         }
-
         ## Check to see if we should use `sval` column instead of `padj`.
         if ("svalue" %in% names(object)) {
             testCol <- "svalue"  # nocov
         } else {
             testCol <- "padj"
         }
-
-        ## Placeholder variable for matching the LFC column.
+        ## Placeholder variables.
         lfcCol <- "log2FoldChange"
-
-        data <- object %>%
-            as_tibble(rownames = "rowname") %>%
-            camelCase() %>%
-            ## Remove genes with very low expression.
-            filter(!!sym("baseMean") >= 1L) %>%
-            mutate(rankScore = abs(!!sym("log2FoldChange"))) %>%
-            arrange(desc(!!sym("rankScore"))) %>%
-            mutate(rank = row_number()) %>%
-            .addIsDECol(
-                testCol = testCol,
-                alpha = alpha,
-                lfcCol = lfcCol,
-                lfcThreshold = lfcThreshold
-            )
+        ## Note that `lfcShrink()` doesn't return `stat` column.
+        if ("stat" %in% names(object)) {
+            rankCol <- "stat"
+        } else {
+            rankCol <- lfcCol
+        }
+        data <- as(object, "DataFrame")
+        data <- camelCase(data)
         assert(isSubset(
-            x = c(
-                "rowname",
-                "baseMean",
-                lfcCol,
-                testCol,
-                "rankScore",
-                "rank",
-                "isDE"
-            ),
+            x = c("baseMean", lfcCol, rankCol, testCol),
             y = colnames(data)
         ))
-
+        ## Remove genes with very low expression.
+        keep <- which(data[["baseMean"]] >= 1L)
+        data <- data[keep, , drop = FALSE]
+        data[["rankScore"]] <- abs(data[[rankCol]])
+        data <- data[
+            order(data[["rankScore"]], decreasing = TRUE),
+            ,
+            drop = FALSE
+            ]
+        data[["rank"]] <- seq_len(nrow(data))
+        data <- .addIsDECol(
+            data = data,
+            testCol = testCol,
+            alpha = alpha,
+            lfcCol = lfcCol,
+            lfcThreshold = lfcThreshold
+        )
+        assert(isSubset(
+            x = c("isDE", "rank", "rankScore"),
+            y = colnames(data)
+        ))
         ## Apply directional filtering, if desired.
         if (direction == "up") {
-            data <- filter(data, !!sym(lfcCol) > 0L)
+            keep <- which(data[[lfcCol]] > 0L)
+            data <- data[keep, , drop = FALSE]
         } else if (direction == "down") {
-            data <- filter(data, !!sym(lfcCol) < 0L)
+            keep <- which(data[[lfcCol]] < 0L)
+            data <- data[keep, , drop = FALSE]
         }
-
         ## Check for no genes passing cutoffs and early return.
-        if (!nrow(data)) {
+        if (!hasRows(data)) {
             warning("No genes passed cutoffs.")
             return(invisible())
         }
-
         ## Early return the data, if desired.
-        if (return == "DataFrame") {
-            return(as(data, "DataFrame"))
+        if (identical(return, "DataFrame")) {
+            return(data)
         }
+        data <- as_tibble(data, rownames = "rowname")
 
         ## MA plot -------------------------------------------------------------
         log10BaseMean <- log10(data[["baseMean"]])
         floor <- min(floor(log10BaseMean))
         ceiling <- max(ceiling(log10BaseMean))
         xBreaks <- 10L ^ seq(from = floor, to = ceiling, by = 1L)
-
         p <- ggplot(
             data = data,
             mapping = aes(
@@ -210,7 +213,6 @@ NULL
                 x = "mean expression across all samples",
                 y = "log2 fold change"
             )
-
         ## Color the significant points.
         ## Note that we're using direction-specific coloring by default.
         if (isCharacter(pointColor)) {
@@ -226,7 +228,7 @@ NULL
 
         ## Gene text labels ----------------------------------------------------
         ## Get the genes to visualize when `ntop` is declared.
-        if (ntop > 0L) {
+        if (isTRUE(ntop > 0L)) {
             assert(
                 isSubset(c("rowname", "rank"), colnames(data)),
                 ## Double check that data is arranged by `rank` column.
@@ -235,7 +237,6 @@ NULL
             ## Since we know the data is arranged by rank, simply take the head.
             genes <- head(data[["rowname"]], n = ntop)
         }
-
         ## Visualize specific genes on the plot, if desired.
         if (!is.null(genes)) {
             validObject(gene2symbol)
@@ -244,19 +245,18 @@ NULL
                 genes = genes,
                 gene2symbol = gene2symbol
             ))
-
             ## Map the user-defined `genes` to `gene2symbol` rownames.
             ## We're using this to match back to the `DESeqResults` object.
-            rownames <- mapGenesToRownames(
-                object = gene2symbol,
-                genes = genes
-            )
-
+            rownames <- mapGenesToRownames(object = gene2symbol, genes = genes)
             ## Prepare the label data tibble.
-            labelData <- data %>%
-                .[match(x = rownames, table = .[["rowname"]]), ] %>%
-                left_join(as(gene2symbol, "tbl_df"), by = "rowname")
-
+            keep <- na.omit(match(x = rownames, table = data[["rowname"]]))
+            assert(hasLength(keep))
+            labelData <- data[keep, , drop = FALSE]
+            labelData <- left_join(
+                x = labelData,
+                y = as_tibble(gene2symbol, rownames = "rowname"),
+                by = "rowname"
+            )
             p <- p +
                 acid_geom_label_repel(
                     data = labelData,
@@ -284,7 +284,7 @@ setMethod(
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-08-20.
 `plotMA,DESeqAnalysis` <-  # nolint
     function(
         object,

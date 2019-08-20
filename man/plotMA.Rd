@@ -38,7 +38,7 @@ Gene-to-symbol mappings. Must contain \code{geneID} and \code{geneName} columns.
 Number of top features to label.}
 
 \item{direction}{\code{character(1)}.
-Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
+Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
 \item{pointColor}{\code{character(1)}.
 Default point color for the plot.}
@@ -77,6 +77,8 @@ taken in two samples, by transforming the data onto M (log ratio) and A
 }
 \note{
 We are not allowing post hoc \code{alpha} or \code{lfcThreshold} cutoffs here.
+
+Updated 2019-08-20.
 }
 \section{plotMA2 aliases}{
 

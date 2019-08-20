@@ -70,7 +70,7 @@ than requiring manual input of a gene vector or subset object." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.4</span>
       </span>
     </div>
 
@@ -158,7 +158,7 @@ than requiring manual input of a gene vector or subset object.</p>
     <tr>
       <th>direction</th>
       <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
-Plot "<code>both</code>", "<code>up</code>", or "<code>down</code>" directions.</p></td>
+Plot <code>"both"</code>, <code>"up"</code>, or <code>"down"</code> directions.</p></td>
     </tr>
     <tr>
       <th>assay</th>
@@ -196,7 +196,8 @@ be suitable. If set <code>NULL</code>, will use the default pheatmap colors.</p>
     <tr>
       <th>pointSize</th>
       <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code>.
-Point size for dots in the plot.</p></td>
+Point size for dots in the plot.
+In the range of 1-3 is generally recommended.</p></td>
     </tr>
     <tr>
       <th>return</th>
@@ -232,6 +233,10 @@ contrasts (e.g. interaction effect).</p></td>
 <code><a href='https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html'>colData()</a></code> of the <code>counts</code> argument, which
 must contain/extend a <code>SummarizedExperiment</code>.</p>
     
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Updated 2019-08-20.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
@@ -247,6 +252,8 @@ must contain/extend a <code>SummarizedExperiment</code>.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#note">Note</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

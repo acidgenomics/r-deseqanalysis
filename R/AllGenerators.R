@@ -1,5 +1,6 @@
-#' @rdname DESeqAnalysis-class
+#' @inherit DESeqAnalysis-class title description return
 #' @export
+#' @note Updated 2019-08-20.
 #'
 #' @param data `DESeqDataSet`.
 #' @param transform `DESeqTransform`.
@@ -10,10 +11,6 @@
 #' @param lfcShrink `list`, single `DESeqResults`, or `NULL`.
 #'   *Optional*. One or more shrunken `DESeqResults`.
 #'   Assign the [DESeq2::lfcShrink()] return here.
-#'
-#' @return `DESeqAnalysis`.
-#'   Contains a `DESeqDataSet`, `DESeqTransform`, and corresponding
-#'   `DESeqResults` list.
 #'
 #' @examples
 #' data <- DESeq2::makeExampleDESeqDataSet()
@@ -45,8 +42,6 @@
 #'     lfcShrink = lfcShrink
 #' )
 #' print(x)
-
-## Updated 2019-07-23.
 DESeqAnalysis <-  # nolint
     function(
         data,
@@ -55,7 +50,6 @@ DESeqAnalysis <-  # nolint
         lfcShrink = NULL
     ) {
         metadata <- list(version = .version)
-
         ## Allow input of single `DESeqResults`.
         if (is(results, "DESeqResults")) {
             results <- .coerceResultsToList(results)
@@ -63,12 +57,10 @@ DESeqAnalysis <-  # nolint
         if (is(lfcShrink, "DESeqResults")) {
             lfcShrink <- .coerceResultsToList(lfcShrink)
         }
-
         ## Automatically convert `lfcShrink = NULL` to empty list.
         if (is.null(lfcShrink)) {
             lfcShrink <- list()
         }
-
         new(
             Class = "DESeqAnalysis",
             data = data,
@@ -100,4 +92,40 @@ DESeqAnalysis <-  # nolint
         FUN = contrastName,
         FUN.VALUE = character(1L)
     )
+}
+
+
+
+## How to get names of dot arguments.
+## https://stackoverflow.com/questions/51259346
+
+
+
+#' @inherit DESeqAnalysisList-class title description return
+#' @export
+#' @note Updated 2019-08-20.
+#' @param ... `DESeqAnalysis` objects.
+#' @examples
+#' data(deseq)
+#' x <- DESeqAnalysisList(deseq)
+#' x
+DESeqAnalysisList <- function(...) {  # nolint
+    mc <- match.call(expand.dots = FALSE)
+    dots <- list(...)
+    dotsNames <- as.character(mc[["..."]])
+    ## Look to see if the user passed in a list.
+    if (
+        hasLength(dots, n = 1L) &&
+        is.list(dots[[1L]])
+    ) {
+        data <- dots[[1L]]
+    } else {
+        data <- dots
+        ## Here we're capturing the object names if the user doesn't pass the
+        ## arguments in as named key value pairs.
+        if (is.null(names(data))) {
+            names(data) <- dotsNames
+        }
+    }
+    new(Class = "DESeqAnalysisList", data)
 }

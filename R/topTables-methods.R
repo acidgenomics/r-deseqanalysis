@@ -1,6 +1,6 @@
 #' @name topTables
 #' @inherit bioverbs::topTables
-#' @note Updated 2019-07-30.
+#' @note Updated 2019-08-20.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -27,27 +27,54 @@ NULL
 
 
 ## Internal functions ==========================================================
-## Updated 2019-07-30.
-.topTibble <-  # nolint
-    function(object, n = 10L) {
+## Updated 2019-08-20.
+.topKables <-  # nolint
+    function(object, contrast, n) {
         assert(
-            is(object, "tbl_df"),
+            is(object, "DataFrameList"),
+            isString(contrast),
             isInt(n),
             isPositive(n)
         )
+        ## Upregulated genes.
+        up <- object[["up"]]
+        if (hasLength(up)) {
+            show(kable(
+                x = as.data.frame(.topTable(up, n = n)),
+                caption = paste(contrast, "(upregulated)")
+            ))
+        }
+        ## Downregulated genes.
+        down <- object[["down"]]
+        if (hasLength(down)) {
+            show(kable(
+                x = as.data.frame(.topTable(down, n = n)),
+                caption = paste(contrast, "(downregulated)")
+            ))
+        }
+        ## Invisibly return list containing the subsets.
+        invisible(list(up = up, down = down))
+    }
 
+
+
+## Updated 2019-08-20.
+.topTable <-  # nolint
+    function(object, n = 10L) {
+        assert(
+            is(object, "DataFrame"),
+            isInt(n),
+            isPositive(n)
+        )
         ## Ensure columns are in camel case.
         object <- camelCase(object)
-
         ## Select minimal columns of interest.
         required <- c(
-            "rowname",
             "baseMean",
             "log2FoldChange",
             "padj"
         )
         assert(isSubset(required, colnames(object)))
-
         ## Also include optional informative columns.
         ## Use of `broadClass` is cleaner than `biotype` here.
         optional <- c(
@@ -60,79 +87,45 @@ NULL
             y = colnames(object)
         )
         object <- object[, keep, drop = FALSE]
-
         ## Get the top rows.
         object <- head(object, n = n)
-
         ## Sanitize optional columns first.
         if ("description" %in% colnames(object)) {
-            object[["description"]] <- object[["description"]] %>%
-                as.character() %>%
-                ## Remove symbol information in brackets.
-                sub(
-                    pattern = " \\[.+\\]$",
-                    replacement = "",
-                    x = .
-                ) %>%
-                ## Truncate to max 50 characters.
-                str_trunc(width = 50L, side = "right")
+            desc <- object[["description"]]
+            desc <- as.character(desc)
+            ## Remove symbol information in brackets.
+            desc <- sub(
+                pattern = " \\[.+\\]$",
+                replacement = "",
+                x = desc
+            )
+            ## Truncate to max 50 characters.
+            desc <- str_trunc(desc, width = 50L, side = "right")
+            object[["description"]] <- desc
         }
-
-        ## Now we can standardize using dplyr and return.
-        object %>%
-            mutate(
-                baseMean = round(!!sym("baseMean"), digits = 0L),
-                log2FoldChange = format(
-                    x = !!sym("log2FoldChange"),
-                    digits = 3L,
-                    scientific = FALSE
-                ),
-                padj = format(
-                    x = !!sym("padj"),
-                    digits = 3L,
-                    scientific = TRUE
-                )
-            ) %>%
-            ## Shorten `log2FoldChange` to `lfc` to keep column width compact.
-            rename(lfc = !!sym("log2FoldChange")) %>%
-            mutate_all(as.character)
-    }
-
-
-
-## Updated 2019-07-23.
-.topKables <-  # nolint
-    function(object, contrast, n) {
-        assert(
-            is.list(object),
-            isString(contrast),
-            isInt(n)
+        ## Improve number appearance.
+        object[["baseMean"]] <-
+            as.integer(round(object[["baseMean"]], digits = 0L))
+        object[["log2FoldChange"]] <- format(
+            x = object[["log2FoldChange"]],
+            digits = 3L,
+            scientific = FALSE
         )
-        ## Upregulated genes.
-        up <- object[["up"]]
-        if (hasLength(up)) {
-            show(kable(
-                x = .topTibble(up, n = n),
-                caption = paste(contrast, "(upregulated)")
-            ))
-        }
-        ## Downregulated genes.
-        down <- object[["down"]]
-        if (hasLength(down)) {
-            show(kable(
-                x = .topTibble(down, n = n),
-                caption = paste(contrast, "(downregulated)")
-            ))
-        }
-        ## Invisibly return list containing the subsets.
-        invisible(list(up = up, down = down))
+        object[["padj"]] <- format(
+            x = object[["padj"]],
+            digits = 3L,
+            scientific = TRUE
+        )
+        ## Shorten `log2FoldChange` to `lfc` to keep column width compact.
+        colnames(object)[colnames(object) == "log2FoldChange"] <- "lfc"
+        object
     }
 
 
 
 ## DESeqResults ================================================================
 ## This is used in bcbioRNASeq F1000 paper.
-## Updated 2019-07-30.
+## Updated 2019-08-20.
 `topTables,DESeqResults` <-  # nolint
     function(
         object,
@@ -147,7 +140,7 @@ NULL
                 DESeqDataSet = DESeqDataSet
             )
         }
-        list <- resultsTables(object, return = "tbl_df")
+        list <- resultsTables(object, return = "DataFrameList")
         contrast <- contrastName(object)
         .topKables(
             object = list,
@@ -182,7 +175,7 @@ setMethod(
             results = results,
             lfcShrink = lfcShrink,
             extra = TRUE,
-            return = "tbl_df"
+            return = "DataFrameList"
         )
         ## Suppressing the message about the contrast name we're matching here,
         ## since it will be shown in `resultsTables()` call above.

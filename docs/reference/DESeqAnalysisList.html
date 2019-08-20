@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Differentially expressed genes — deg • DESeqAnalysis</title>
+<title>List containing related DESeq2 analyses — DESeqAnalysisList • DESeqAnalysis</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -34,9 +34,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Differentially expressed genes — deg" />
+<meta property="og:title" content="List containing related DESeq2 analyses — DESeqAnalysisList" />
 
-<meta property="og:description" content="Differentially expressed genes" />
+<meta property="og:description" content="List containing related DESeq2 analyses" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,66 +108,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Differentially expressed genes</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/deg-methods.R'><code>R/deg-methods.R</code></a></small>
-    <div class="hidden name"><code>deg.Rd</code></div>
+    <h1>List containing related DESeq2 analyses</h1>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllGenerators.R'><code>R/AllGenerators.R</code></a></small>
+    <div class="hidden name"><code>DESeqAnalysisList.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Differentially expressed genes</p>
+    <p>List containing related DESeq2 analyses</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>deg</span>(<span class='no'>object</span>, <span class='no'>...</span>)
-
-<span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>deg</span>(<span class='no'>object</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>))
-
-<span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>deg</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>,
-  <span class='st'>"up"</span>, <span class='st'>"down"</span>))</pre>
+    <pre class="usage"><span class='fu'>DESeqAnalysisList</span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>Object.</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
-Adjusted P value ("alpha") cutoff. If left <code>NULL</code>, will use the cutoff
-defined in the object.</p></td>
-    </tr>
-    <tr>
-      <th>lfcThreshold</th>
-      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
-Log fold change ratio (base 2) cutoff threshold. If left <code>NULL</code>, will use
-the cutoff defined in the object.</p></td>
-    </tr>
-    <tr>
-      <th>direction</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
-Plot <code>"both"</code>, <code>"up"</code>, or <code>"down"</code> directions.</p></td>
-    </tr>
-    <tr>
-      <th>results</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> or <code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>.
-Name or position of <code>DESeqResults</code>.</p></td>
-    </tr>
-    <tr>
       <th>...</th>
-      <td><p>Additional arguments.</p></td>
+      <td><p><code>DESeqAnalysis</code> objects.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>character</code>.
-Gene identifiers.</p>
+    <p><code>DESeqAnalysisList</code>.</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
@@ -176,9 +141,9 @@ Gene identifiers.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
-
-<span class='co'>## DESeqAnalysis ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>deg</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>156 differentially expressed genes detected.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "gene278" "gene260" "gene079" "gene240" "gene339" "gene343"</div></pre>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>DESeqAnalysisList</span>(<span class='no'>deseq</span>)
+<span class='no'>x</span></div><div class='output co'>#&gt; DESeqAnalysisList of length 1
+#&gt; names(1): deseq</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

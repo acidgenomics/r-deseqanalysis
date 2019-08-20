@@ -21,6 +21,9 @@ lfcShrinkType(object, ...)
 \description{
 Shrunken log2 fold change (LFC) type
 }
+\note{
+Updated 2019-08-20.
+}
 \seealso{
 \code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}}.
 }

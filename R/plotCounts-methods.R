@@ -1,13 +1,13 @@
 #' @name plotCounts
 #' @inherit acidplots::plotCounts
+#' @note Updated 2019-08-20.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
-#' @param ... Additional arguments.
-#'
 #' @param transform `logical(1)`.
 #'   Visualize using `DESeqTransform` log2 variance-stabilized counts, rather
 #'   than `DESeqDataSet` size-factor normalized counts.
+#' @param ... Additional arguments.
 #'
 #' @examples
 #' data(deseq)

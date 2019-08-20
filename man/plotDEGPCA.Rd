@@ -32,7 +32,7 @@ plotDEGPCA(object, ...)
 \item{DESeqTransform}{\code{DESeqTransform}.}
 
 \item{direction}{\code{character(1)}.
-Plot "\code{both}", "\code{up}", or "\code{down}" directions.}
+Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
 \item{assay}{\code{vector(1)}.
 Assay name or index position.}
@@ -62,7 +62,8 @@ Refer to the RColorBrewer package for hexadecimal color palettes that may
 be suitable. If set \code{NULL}, will use the default pheatmap colors.}
 
 \item{pointSize}{\code{numeric(1)}.
-Point size for dots in the plot.}
+Point size for dots in the plot.
+In the range of 1-3 is generally recommended.}
 
 \item{return}{\code{character(1)}.
 Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
@@ -90,6 +91,9 @@ than requiring manual input of a gene vector or subset object.
 To adjust the annotation columns, modify the
 \code{\link[SummarizedExperiment:colData]{colData()}} of the \code{counts} argument, which
 must contain/extend a \code{SummarizedExperiment}.
+}
+\note{
+Updated 2019-08-20.
 }
 \examples{
 data(deseq)

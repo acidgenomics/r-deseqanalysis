@@ -10,6 +10,9 @@
 \description{
 Coerce an object to a given class.
 }
+\note{
+Updated 2019-08-20.
+}
 \section{DESeqAnalysis}{
 
 

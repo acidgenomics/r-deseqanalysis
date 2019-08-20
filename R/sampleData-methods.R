@@ -1,5 +1,7 @@
 #' @name sampleData
 #' @inherit bioverbs::sampleData
+#' @note Updated 2019-08-20.
+#'
 #' @param ... Additional arguments.
 #'
 #' @examples
@@ -19,12 +21,11 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-08-20.
 `sampleData,DESeqAnalysis` <-  # nolint
     function(object) {
-        object %>%
-            as("DESeqDataSet") %>%
-            sampleData()
+        object <- as(object, "DESeqDataSet")
+        sampleData(object)
     }
 
 

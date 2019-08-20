@@ -4,6 +4,7 @@
 
 #' @name plotDEGPCA
 #' @inherit bioverbs::plotDEGPCA
+#' @note Updated 2019-08-20.
 #'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams acidplots::plotPCA
@@ -143,7 +144,7 @@ setMethod(
             samples <- contrastSamples(object, results = results)
             assert(isSubset(samples, colnames(dt)))
             dt <- dt[, samples, drop = FALSE]
-            colData(dt) <- relevel(colData(dt))
+            dt <- droplevels(dt)
         }
 
         ## Passing through to DESeqResults/DESeqTransform method here.
