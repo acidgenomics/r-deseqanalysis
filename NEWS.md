@@ -6,6 +6,8 @@
   code using base R methods against `DataFrame` class instead of `tbl_df`.
 - Split out documentation on S4 generator functions into separate Rd files.
 - Updated basejump dependecy versions.
+- `topTables`: Now using `DataFrame`-oriented internal code to return the
+  `kable` output, rather than relying upon `tbl_df` with dplyr.
 
 ## DESeqAnalysis 0.2.3 (2019-08-06)
 
