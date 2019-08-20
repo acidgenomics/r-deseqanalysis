@@ -171,7 +171,7 @@ NULL
         if (identical(return, "DataFrame")) {
             return(data)
         }
-        data <- as_tibble(object, rownames = "rowname")
+        data <- as_tibble(data, rownames = "rowname")
 
         ## MA plot -------------------------------------------------------------
         log10BaseMean <- log10(data[["baseMean"]])
