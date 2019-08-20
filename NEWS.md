@@ -1,3 +1,12 @@
+## DESeqAnalysis 0.2.4 (2019-08-20)
+
+### Minor changes
+
+- Removed dplyr dependencies in `plotMA` and `plotVolcano`. Reworked internal
+  code using base R methods against `DataFrame` class instead of `tbl_df`.
+- Split out documentation on S4 generator functions into separate Rd files.
+- Updated basejump dependecy versions.
+
 ## DESeqAnalysis 0.2.3 (2019-08-06)
 
 ### Minor changes
