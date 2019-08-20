@@ -121,6 +121,7 @@ NULL
         }
         ## Placeholder variables.
         lfcCol <- "log2FoldChange"
+        ## Note that `lfcShrink()` doesn't return `stat` column.
         if ("stat" %in% names(object)) {
             rankCol <- "stat"
         } else {
