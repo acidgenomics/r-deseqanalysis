@@ -1,5 +1,6 @@
 #' @name plotPCA
 #' @inherit acidplots::plotPCA
+#' @note Updated 2019-08-20.
 #' @examples
 #' data(deseq)
 #'

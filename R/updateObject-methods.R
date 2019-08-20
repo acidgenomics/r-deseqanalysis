@@ -1,5 +1,6 @@
 #' @name updateObject
 #' @inherit BiocGenerics::updateObject
+#' @note Updated 2019-08-20.
 #'
 #' @section `DESeqAnalysis`:
 #'

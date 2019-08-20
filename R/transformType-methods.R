@@ -1,6 +1,8 @@
 #' Variance-stabilizing transformation type
 #'
 #' @name transformType
+#' @note Updated 2019-08-20.
+#'
 #' @inheritParams acidroxygen::params
 #'
 #' @seealso [DESeq2::DESeqTransform()].

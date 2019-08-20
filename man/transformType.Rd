@@ -21,6 +21,9 @@ transformType(object, ...)
 \description{
 Variance-stabilizing transformation type
 }
+\note{
+Updated 2019-08-20.
+}
 \seealso{
 \code{\link[DESeq2:DESeqTransform]{DESeq2::DESeqTransform()}}.
 }

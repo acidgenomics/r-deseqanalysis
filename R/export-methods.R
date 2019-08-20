@@ -6,6 +6,7 @@
 
 #' @name export
 #' @inherit bioverbs::export
+#' @note Updated 2019-08-20.
 #'
 #' @inheritParams brio::export
 #' @inheritParams params

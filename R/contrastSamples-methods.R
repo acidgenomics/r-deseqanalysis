@@ -1,5 +1,6 @@
 #' @name contrastSamples
 #' @inherit bioverbs::contrastSamples
+#' @note Updated 2019-08-20.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params

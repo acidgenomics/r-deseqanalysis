@@ -1,5 +1,7 @@
 #' @name sampleData
 #' @inherit bioverbs::sampleData
+#' @note Updated 2019-08-20.
+#'
 #' @param ... Additional arguments.
 #'
 #' @examples

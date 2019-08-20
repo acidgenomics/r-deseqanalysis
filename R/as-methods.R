@@ -7,6 +7,7 @@
 #' @importFrom methods coerce
 #' @inherit methods::as
 #' @inheritParams coerce
+#' @note Updated 2019-08-20.
 #'
 #' @section DESeqAnalysis:
 #'

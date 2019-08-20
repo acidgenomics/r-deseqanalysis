@@ -92,6 +92,9 @@ To adjust the annotation columns, modify the
 \code{\link[SummarizedExperiment:colData]{colData()}} of the \code{counts} argument, which
 must contain/extend a \code{SummarizedExperiment}.
 }
+\note{
+Updated 2019-08-20.
+}
 \examples{
 data(deseq)
 

@@ -32,6 +32,8 @@ corresponding \code{DESeqResults} object. Note that this only works for simple
 comparisons.
 }
 \note{
+Updated 2019-08-20.
+
 \strong{EXPERIMENTAL}. This approach will error intentionally for
 \code{DESeqResults} objects generated with complex contrasts (e.g. interaction
 effect or LRT). It may be removed in a future release if this approach is

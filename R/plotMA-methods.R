@@ -1,7 +1,6 @@
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
-#'
 #' @note We are not allowing post hoc `alpha` or `lfcThreshold` cutoffs here.
 #' @note Updated 2019-08-20.
 #'
