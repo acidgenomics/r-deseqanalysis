@@ -119,6 +119,7 @@ NULL
         ## Placeholder variables.
         lfcCol <- "log2FoldChange"
         negLogTestCol <- camelCase(paste("neg", "log10", testCol))
+        ## Note that `lfcShrink()` doesn't return `stat` column.
         if ("stat" %in% names(object)) {
             rankCol <- "stat"
         } else {
