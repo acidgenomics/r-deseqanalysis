@@ -26,6 +26,7 @@
 #'
 #' @author Michael Steinbaugh
 #' @export
+#' @note Updated 2019-07-23.
 #'
 #' @slot data `DESeqDataSet`.
 #' @slot transform `DESeqTransform`.
@@ -38,8 +39,8 @@
 #' @seealso
 #' - `help(topic = "Annotated-class", package = "S4Vectors")`.
 #' - `showClass("Annotated")`.
-
-## Updated 2019-07-23.
+#'
+#' @return `DESeqAnalysis`.
 setClass(
     Class = "DESeqAnalysis",
     contains = "Annotated",
@@ -57,7 +58,6 @@ setClass(
         transform <- slot(object, "transform")
         results <- slot(object, "results")
         lfcShrink <- slot(object, "lfcShrink")
-
         ok <- validate(
             ## DESeqDataSet and DESeqTransform must correspond.
             identical(dimnames(data), dimnames(transform)),
@@ -77,7 +77,6 @@ setClass(
             is(metadata(object)[["version"]], "package_version")
         )
         if (!isTRUE(ok)) return(ok)
-
         ## Alpha levels in the slotted results must be identical.
         alphas <- vapply(
             X = results,
@@ -88,7 +87,6 @@ setClass(
         )
         ok <- validate(length(unique(alphas)) == 1L)
         if (!isTRUE(ok)) return(ok)
-
         ## Note that `lfcShrink` slot is currently optional, but that may change
         ## in a future update.
         if (hasLength(lfcShrink)) {
@@ -105,7 +103,6 @@ setClass(
                 ))
             )
             if (!isTRUE(ok)) return(ok)
-
             ## Ensure that DESeqResults slotted into `lfcShrink` is actually
             ## shrunken using the `lfcShrink()` function. This also checks to
             ## ensure that the same method was used for all contrasts.
@@ -116,7 +113,6 @@ setClass(
             )
             ok <- validate(length(unique(shrinkTypes)) == 1L)
             if (!isTRUE(ok)) return(ok)
-
             ## lfcShrink alpha must match the results alpha.
             ok <- validate(
                 identical(
@@ -138,7 +134,6 @@ setClass(
             )
             if (!isTRUE(ok)) return(ok)
         }
-
         TRUE
     }
 )
@@ -149,19 +144,17 @@ setClass(
 #'
 #' @author Michael Steinbaugh
 #' @export
-
-## Updated 2019-07-23.
+#' @note Updated 2019-07-23.
+#' @return `DESeqAnalysisList`.
 setClass(
     Class = "DESeqAnalysisList",
     contains = "SimpleList",
     validity = function(object) {
         ## Currently allowing an empty list.
         if (!hasLength(object)) return(TRUE)
-
         ## Require that all objects in list are named.
         ok <- validate(hasValidNames(object))
         if (!isTRUE(ok)) return(ok)
-
         ## Check that all of the elements in the list are DESeqAnalysis.
         ok <- validate(all(bapply(
             X = object,
@@ -170,12 +163,10 @@ setClass(
             }
         )))
         if (!isTRUE(ok)) return(ok)
-
         ## Ensure that all slotted DESeqAnalysis objects are valid.
         ## This step can be slow for large objects.
         ok <- validate(all(bapply(object, validObject)))
         if (!isTRUE(ok)) return(ok)
-
         TRUE
     }
 )
