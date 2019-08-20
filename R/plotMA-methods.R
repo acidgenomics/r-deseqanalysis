@@ -121,17 +121,21 @@ NULL
         }
         ## Placeholder variables.
         lfcCol <- "log2FoldChange"
-        statCol <- "stat"
+        if ("stat" %in% names(object)) {
+            rankCol <- "stat"
+        } else {
+            rankCol <- lfcCol
+        }
         data <- as(object, "DataFrame")
         data <- camelCase(data)
         assert(isSubset(
-            x = c("baseMean", lfcCol, statCol, testCol),
+            x = c("baseMean", lfcCol, rankCol, testCol),
             y = colnames(data)
         ))
         ## Remove genes with very low expression.
         keep <- which(data[["baseMean"]] >= 1L)
         data <- data[keep, , drop = FALSE]
-        data[["rankScore"]] <- abs(data[[statCol]])
+        data[["rankScore"]] <- abs(data[[rankCol]])
         data <- data[
             order(data[["rankScore"]], decreasing = TRUE),
             ,

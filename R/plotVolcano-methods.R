@@ -118,15 +118,20 @@ NULL
         }
         ## Placeholder variables.
         lfcCol <- "log2FoldChange"
-        statCol <- "stat"
+        negLogTestCol <- camelCase(paste("neg", "log10", testCol))
+        if ("stat" %in% names(object)) {
+            rankCol <- "stat"
+        } else {
+            rankCol <- negLogTestCol
+        }
         data <- as(object, "DataFrame")
         data <- camelCase(data)
         assert(isSubset(
-            x = c("baseMean", lfcCol, statCol, testCol),
+            x = c("baseMean", lfcCol, rankCol, testCol),
             y = colnames(data)
         ))
         ## Select columns used for plots.
-        data <- data[, c("baseMean", lfcCol, statCol, testCol)]
+        data <- data[, c("baseMean", lfcCol, rankCol, testCol)]
         ## Remove genes with NA adjusted P values.
         keep <- which(!is.na(data[[testCol]]))
         data <- data[keep, , drop = FALSE]
@@ -137,9 +142,9 @@ NULL
         ## `Inf` values resulting from log transformation. This will also define
         ## the upper bound of the y-axis. Then calculate the rank score, which
         ## is used for `ntop`.
-        negLogTestCol <- camelCase(paste("neg", "log10", testCol))
+
         data[[negLogTestCol]] <- -log10(data[[testCol]] + ylim)
-        data[["rankScore"]] <- abs(data[[statCol]])
+        data[["rankScore"]] <- abs(data[[rankCol]])
         data <- data[
             order(data[["rankScore"]], decreasing = TRUE),
             ,
