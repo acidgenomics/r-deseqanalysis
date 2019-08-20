@@ -71,7 +71,7 @@ DESeqDataSet." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.4</span>
       </span>
     </div>
 
@@ -112,7 +112,7 @@ DESeqDataSet." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>DESeq2 differential expression analysis</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllClasses.R'><code>R/AllClasses.R</code></a>, <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/DESeqAnalysis.R'><code>R/DESeqAnalysis.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllClasses.R'><code>R/AllClasses.R</code></a></small>
     <div class="hidden name"><code>DESeqAnalysis-class.Rd</code></div>
     </div>
 
@@ -125,39 +125,10 @@ to ensure <code>DESeqTransform</code> and <code>DESeqResults</code> correspond t
     
     </div>
 
-    <pre class="usage"><span class='fu'>DESeqAnalysis</span>(<span class='no'>data</span>, <span class='no'>transform</span>, <span class='no'>results</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>data</th>
-      <td><p><code>DESeqDataSet</code>.</p></td>
-    </tr>
-    <tr>
-      <th>transform</th>
-      <td><p><code>DESeqTransform</code>.
-<code><a href='https://rdrr.io/pkg/DESeq2/man/varianceStabilizingTransformation.html'>DESeq2::varianceStabilizingTransformation()</a></code> recommended by default.</p></td>
-    </tr>
-    <tr>
-      <th>results</th>
-      <td><p><code>list</code> or single <code>DESeqResults</code>.
-One or more unshrunken <code>DESeqResults</code>.
-Assign the <code><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>DESeq2::results()</a></code> return here.</p></td>
-    </tr>
-    <tr>
-      <th>lfcShrink</th>
-      <td><p><code>list</code>, single <code>DESeqResults</code>, or <code>NULL</code>.
-<em>Optional</em>. One or more shrunken <code>DESeqResults</code>.
-Assign the <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>DESeq2::lfcShrink()</a></code> return here.</p></td>
-    </tr>
-    </table>
-    
+        
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>DESeqAnalysis</code>.
-Contains a <code>DESeqDataSet</code>, <code>DESeqTransform</code>, and corresponding
-<code>DESeqResults</code> list.</p>
+    <p><code>DESeqAnalysis</code>.</p>
     
     <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
 
@@ -175,6 +146,10 @@ One or more unshrunken <code>DESeqResults</code>.</p></dd>
 <em>Optional</em>. One or more shrunken <code>DESeqResults</code>. If set, must correspond to
 those defined in <code>results</code>. Otherwise, can set as empty list (<code><a href='https://rdrr.io/r/base/list.html'>list()</a></code>).</p></dd>
 </dl>
+    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Updated 2019-07-23.</p>
     
     <h2 class="hasAnchor" id="deseqdataset"><a class="anchor" href="#deseqdataset"></a>DESeqDataSet</h2>
 
@@ -214,61 +189,16 @@ care of this automatically in supported methods.</p>
 </div>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>DESeq2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DESeq2/man/makeExampleDESeqDataSet.html'>makeExampleDESeqDataSet</a></span>()
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>DESeq2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DESeq2/man/DESeq.html'>DESeq</a></span>(<span class='no'>data</span>)</div><div class='output co'>#&gt; <span class='message'>estimating size factors</span></div><div class='output co'>#&gt; <span class='message'>estimating dispersions</span></div><div class='output co'>#&gt; <span class='message'>gene-wise dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>mean-dispersion relationship</span></div><div class='output co'>#&gt; <span class='message'>final dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>fitting model and testing</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>data</span>)</div><div class='output co'>#&gt; [1] "DESeqDataSet"
-#&gt; attr(,"package")
-#&gt; [1] "DESeq2"</div><div class='input'>
-<span class='no'>transform</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>DESeq2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DESeq2/man/varianceStabilizingTransformation.html'>varianceStabilizingTransformation</a></span>(<span class='no'>data</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>transform</span>)</div><div class='output co'>#&gt; [1] "DESeqTransform"
-#&gt; attr(,"package")
-#&gt; [1] "DESeq2"</div><div class='input'>
-<span class='fu'><a href='resultsNames.html'>resultsNames</a></span>(<span class='no'>data</span>)</div><div class='output co'>#&gt; [1] "Intercept"        "condition_B_vs_A"</div><div class='input'><span class='no'>name</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsNames.html'>resultsNames</a></span>(<span class='no'>data</span>)<span class='kw'>[[</span><span class='fl'>2L</span>]]
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>data</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='no'>name</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>results</span>)</div><div class='output co'>#&gt; [1] "DESeqResults"
-#&gt; attr(,"package")
-#&gt; [1] "DESeq2"</div><div class='input'>
-<span class='no'>lfcShrink</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>DESeq2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>lfcShrink</a></span>(<span class='kw'>dds</span> <span class='kw'>=</span> <span class='no'>data</span>, <span class='kw'>res</span> <span class='kw'>=</span> <span class='no'>results</span>, <span class='kw'>coef</span> <span class='kw'>=</span> <span class='fl'>2L</span>)</div><div class='output co'>#&gt; <span class='message'>using 'normal' for LFC shrinkage, the Normal prior from Love et al (2014).</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>Note that type='apeglm' and type='ashr' have shown to have less bias than type='normal'.</span>
-#&gt; <span class='message'>See ?lfcShrink for more details on shrinkage type, and the DESeq2 vignette.</span>
-#&gt; <span class='message'>Reference: https://doi.org/10.1093/bioinformatics/bty895</span></div><div class='input'>
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>results</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>results</span>) <span class='kw'>&lt;-</span> <span class='no'>name</span>
-
-<span class='no'>lfcShrink</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>lfcShrink</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>lfcShrink</span>) <span class='kw'>&lt;-</span> <span class='no'>name</span>
-
-<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>results</span>), <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>lfcShrink</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>DESeqAnalysis</span>(
-    <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>data</span>,
-    <span class='kw'>transform</span> <span class='kw'>=</span> <span class='no'>transform</span>,
-    <span class='kw'>results</span> <span class='kw'>=</span> <span class='no'>results</span>,
-    <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='no'>lfcShrink</span>
-)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; DESeqAnalysis 0.2.2; DESeq2 1.24.0
-#&gt; data:
-#&gt;   dim: 1000 12 
-#&gt;   metadata(1): version
-#&gt;   assays(4): counts mu H cooks
-#&gt;   rownames(1000): gene1 gene2 ... gene999 gene1000
-#&gt;   rowData names(25): trueIntercept trueBeta ... deviance maxCooks
-#&gt;   colnames(12): sample1 sample2 ... sample11 sample12
-#&gt;   colData names(2): condition sizeFactor
-#&gt; transformType: varianceStabilizingTransformation
-#&gt; resultsNames: condition_B_vs_A
-#&gt; alpha: 0.1
-#&gt; lfcThreshold: 0
-#&gt; lfcShrinkType: normal</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
 
       <li><a href="#slots">Slots</a></li>
+
+      <li><a href="#note">Note</a></li>
 
       <li><a href="#deseqdataset">DESeqDataSet</a></li>
 
@@ -277,9 +207,7 @@ care of this automatically in supported methods.</p>
       <li><a href="#deseqresults">DESeqResults</a></li>
 
       <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
     <h2>Author</h2>
     <p>Michael Steinbaugh</p>
