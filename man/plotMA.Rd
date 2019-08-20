@@ -77,6 +77,8 @@ taken in two samples, by transforming the data onto M (log ratio) and A
 }
 \note{
 We are not allowing post hoc \code{alpha} or \code{lfcThreshold} cutoffs here.
+
+Updated 2019-08-20.
 }
 \section{plotMA2 aliases}{
 
@@ -114,6 +116,7 @@ plotMA(deseq, results = 1L, direction = "down", ntop = 5L)
 
 ## Label genes manually.
 ## Note that either gene IDs or names (symbols) are supported.
+## FIXME Warning: Removed 1 rows containing missing values (geom_label_repel).
 plotMA(deseq, results = 1L, genes = genes)
 }
 \seealso{
