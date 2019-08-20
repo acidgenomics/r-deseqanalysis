@@ -1,6 +1,6 @@
 #' @name topTables
 #' @inherit bioverbs::topTables
-#' @note Updated 2019-07-30.
+#' @note Updated 2019-08-20.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -27,7 +27,7 @@ NULL
 
 
 ## Internal functions ==========================================================
-## Updated 2019-07-30.
+## Updated 2019-08-20.
 .topTibble <-  # nolint
     function(object, n = 10L) {
         assert(
@@ -35,10 +35,8 @@ NULL
             isInt(n),
             isPositive(n)
         )
-
         ## Ensure columns are in camel case.
         object <- camelCase(object)
-
         ## Select minimal columns of interest.
         required <- c(
             "rowname",
@@ -47,7 +45,6 @@ NULL
             "padj"
         )
         assert(isSubset(required, colnames(object)))
-
         ## Also include optional informative columns.
         ## Use of `broadClass` is cleaner than `biotype` here.
         optional <- c(
@@ -60,42 +57,41 @@ NULL
             y = colnames(object)
         )
         object <- object[, keep, drop = FALSE]
-
         ## Get the top rows.
         object <- head(object, n = n)
-
         ## Sanitize optional columns first.
         if ("description" %in% colnames(object)) {
-            object[["description"]] <- object[["description"]] %>%
-                as.character() %>%
-                ## Remove symbol information in brackets.
-                sub(
-                    pattern = " \\[.+\\]$",
-                    replacement = "",
-                    x = .
-                ) %>%
-                ## Truncate to max 50 characters.
-                str_trunc(width = 50L, side = "right")
+            desc <- object[["description"]]
+            desc <- as.character(desc)
+            ## Remove symbol information in brackets.
+            desc <- sub(
+                pattern = " \\[.+\\]$",
+                replacement = "",
+                x = desc
+            )
+            ## Truncate to max 50 characters.
+            desc <- str_trunc(desc, width = 50L, side = "right")
+            object[["description"]] <- desc
         }
-
         ## Now we can standardize using dplyr and return.
-        object %>%
-            mutate(
-                baseMean = round(!!sym("baseMean"), digits = 0L),
-                log2FoldChange = format(
-                    x = !!sym("log2FoldChange"),
-                    digits = 3L,
-                    scientific = FALSE
-                ),
-                padj = format(
-                    x = !!sym("padj"),
-                    digits = 3L,
-                    scientific = TRUE
-                )
-            ) %>%
-            ## Shorten `log2FoldChange` to `lfc` to keep column width compact.
-            rename(lfc = !!sym("log2FoldChange")) %>%
-            mutate_all(as.character)
+        object <- mutate(
+            object,
+            baseMean = round(!!sym("baseMean"), digits = 0L),
+            log2FoldChange = format(
+                x = !!sym("log2FoldChange"),
+                digits = 3L,
+                scientific = FALSE
+            ),
+            padj = format(
+                x = !!sym("padj"),
+                digits = 3L,
+                scientific = TRUE
+            )
+        )
+        ## Shorten `log2FoldChange` to `lfc` to keep column width compact.
+        object <- rename(object, lfc = !!sym("log2FoldChange"))
+        object <- mutate_all(object, as.character)
+        object
     }
 
 

@@ -35,7 +35,7 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-08-20.
 `contrastName,DESeqResults` <-  # nolint
     function(object, format = c("resultsNames", "title")) {
         validObject(object)
@@ -47,17 +47,18 @@ NULL
         ## Always strip prefix, e.g. log2 fold change (MLE).
         x <- sub("^.*:\\s", "", x)
         if (format == "resultsNames") {
-            makeNames(x)
+            x <- makeNames(x)
         } else if (format == "title") {
-            x %>%
-                ## Strip prefix, e.g. log2 fold change (MLE).
-                sub("^.*:\\s", "", .) %>%
-                ## Pad the first space with as a colon.
-                sub("\\s", " : ", .) %>%
-                sub("\\svs\\s", " vs. ", .) %>%
-                ## Improve appearance for difference of differences.
-                gsub("\\+", " \\+\n    ", .)
+            ## Strip prefix, e.g. log2 fold change (MLE).
+            x <- sub("^.*:\\s", "", x)
+            ## Pad the first space with as a colon.
+            x <- sub("\\s", " : ", x)
+            ## Ensure "vs." contains a period.
+            x <- sub("\\svs\\s", " vs. ", x)
+            ## Improve appearance for difference of differences.
+            x <- gsub("\\+", " \\+\n    ", x)
         }
+        x
     }
 
 

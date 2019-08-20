@@ -116,7 +116,6 @@ plotMA(deseq, results = 1L, direction = "down", ntop = 5L)
 
 ## Label genes manually.
 ## Note that either gene IDs or names (symbols) are supported.
-## FIXME Warning: Removed 1 rows containing missing values (geom_label_repel).
 plotMA(deseq, results = 1L, genes = genes)
 }
 \seealso{

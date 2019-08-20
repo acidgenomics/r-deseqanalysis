@@ -9,6 +9,5 @@ geneIDs <- head(g2s[["geneID"]])
 geneNames <- head(g2s[["geneName"]])
 
 ## nolint start
-is_tibble <- tibble::is_tibble
 realpath <- basejump::realpath
 ## nolint end
