@@ -1,6 +1,6 @@
 #' @name plotCounts
 #' @inherit acidplots::plotCounts
-#' @note Updated 2019-08-20.
+#' @note Updated 2019-08-27.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -35,34 +35,17 @@ NULL
 
 ## Note that DESeqDataSet is supported in basejump SummarizedExperiment method.
 ## That will detect the object and plot normalized counts automatically.
-## Updated 2019-07-23.
+## Updated 2019-08-27.
 `plotCounts,DESeqAnalysis` <-  # nolint
-    function(object, genes, transform = FALSE) {
+    function(object, genes) {
         validObject(object)
-        assert(
-            isCharacter(genes),
-            isFlag(transform)
-        )
-
-        if (isTRUE(transform)) {
-            object <- as(object, "DESeqTransform")
-            if ("rlogIntercept" %in% colnames(mcols(object))) {
-                countsAxisLabel <- "rlog counts (log2)"
-            } else {
-                countsAxisLabel <- "vst counts (log2)"
-            }
-        } else {
-            object <- as(object, "DESeqDataSet")
-            countsAxisLabel <- "normalized counts"
-        }
-
+        object <- as(object, "DESeqDataSet")
         do.call(
             what = plotCounts,
             args = matchArgsToDoCall(
                 args = list(
                     object = object,
-                    genes = genes,
-                    countsAxisLabel = countsAxisLabel
+                    genes = genes
                 ),
                 removeFormals = "transform"
             )
