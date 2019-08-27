@@ -6,7 +6,7 @@
 
 #' @name export
 #' @inherit bioverbs::export
-#' @note Updated 2019-08-20.
+#' @note Updated 2019-08-27.
 #'
 #' @inheritParams brio::export
 #' @inheritParams params
@@ -86,19 +86,15 @@ NULL
         compress = FALSE
     ) {
         validObject(object)
-
         call <- standardizeCall()
         assert(isString(name, nullOK = TRUE))
         if (is.null(name)) {
             name <- as.character(call[["object"]])
         }
-
         normalized <- counts(object, normalized = TRUE)
-
         rse <- as(object, "RangedSummarizedExperiment")
         assays(rse)[["normalized"]] <- normalized
         assays(rse) <- assays(rse)[c("counts", "normalized")]
-
         export(object = rse, name = name, dir = dir, compress = compress)
     }
 
@@ -129,20 +125,16 @@ setMethod(
             isFlag(compress),
             isFlag(lfcShrink)
         )
-
         call <- standardizeCall()
         assert(isString(name, nullOK = TRUE))
         if (is.null(name)) {
             name <- as.character(call[["object"]])
         }
-
         ## Note that we're combining the dir with name, so we can set
         ## subdirectories for each slotted data type (e.g. DESeqDataSet).
         dir <- initDir(file.path(dir, name))
         rm(name)
-
         files <- list()
-
         ## DESeqDataSet.
         message("Exporting DESeqDataSet.")
         files[["data"]] <-
@@ -152,7 +144,6 @@ setMethod(
                 dir = dir,
                 compress = compress
             )
-
         ## DESeqTransform.
         message("Exporting DESeqTransform.")
         files[["transform"]] <-
@@ -162,7 +153,6 @@ setMethod(
                 dir = dir,
                 compress = compress
             )
-
         ## DEG results tables.
         message("Exporting DESeqResults tables.")
         files[["resultsTables"]] <-
@@ -172,7 +162,6 @@ setMethod(
                 compress = compress,
                 lfcShrink = lfcShrink
             )
-
         invisible(files)
     }
 
