@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
-#' @note Updated 2019-08-20.
+#' @note Updated 2019-08-27.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -12,7 +12,7 @@
 #'   Show LFC and P value histograms.
 #' @param ... Additional arguments.
 #'
-#' @seealso Modification of `CHBUtils::volcano_density_plot()`.
+#' @seealso `CHBUtils::volcano_density_plot()`.
 #'
 #' @examples
 #' data(deseq)
@@ -66,7 +66,7 @@ NULL
 
 
 
-## Updated 2019-08-20.
+## Updated 2019-08-27.
 `plotVolcano,DESeqResults` <-  # nolint
     function(
         object,
@@ -171,11 +171,10 @@ NULL
         if (identical(return, "DataFrame")) {
             return(data)
         }
-        data <- as_tibble(data, rownames = "rowname")
 
         ## LFC density ---------------------------------------------------------
         lfcHist <- ggplot(
-            data = data,
+            data = as_tibble(data, rownames = NULL),
             mapping = aes(x = !!sym(lfcCol))
         ) +
             geom_density(
@@ -200,7 +199,7 @@ NULL
 
         ## P value density -----------------------------------------------------
         pvalueHist <- ggplot(
-            data = data,
+            data = as_tibble(data, rownames = NULL),
             mapping = aes(x = !!sym(negLogTestCol))
         ) +
             geom_density(
@@ -225,7 +224,7 @@ NULL
 
         ## Volcano plot --------------------------------------------------------
         p <- ggplot(
-            data = data,
+            data = as_tibble(data, rownames = NULL),
             mapping = aes(
                 x = !!sym(lfcCol),
                 y = !!sym(negLogTestCol),
@@ -271,12 +270,12 @@ NULL
         ## Get the genes to visualize when `ntop` is declared.
         if (isTRUE(ntop > 0L)) {
             assert(
-                isSubset(c("rowname", "rank"), colnames(data)),
-                ## Double check that data is arranged by `rank` column.
+                hasRownames(data),
+                isSubset("rank", colnames(data)),
                 identical(data[["rank"]], sort(data[["rank"]]))
             )
             ## Since we know the data is arranged by rank, simply take the head.
-            genes <- head(data[["rowname"]], n = ntop)
+            genes <- head(rownames(data), n = ntop)
         }
         ## Visualize specific genes on the plot, if desired.
         if (!is.null(genes)) {
@@ -289,21 +288,20 @@ NULL
             ## Map the user-defined `genes` to `gene2symbol` rownames.
             ## We're using this to match back to the `DESeqResults` object.
             rownames <- mapGenesToRownames(object = gene2symbol, genes = genes)
+            gene2symbol <- as(gene2symbol, "DataFrame")
+            gene2symbol[["rowname"]] <- rownames(gene2symbol)
             ## Prepare the label data tibble.
-            keep <- na.omit(match(x = rownames, table = data[["rowname"]]))
+            keep <- na.omit(match(x = rownames, table = rownames(data)))
             assert(hasLength(keep))
             labelData <- data[keep, , drop = FALSE]
-            labelData <- leftJoin(
-                x = labelData,
-                y = as_tibble(gene2symbol, rownames = "rowname"),
-                by = "rowname"
-            )
+            labelData[["rowname"]] <- rownames(labelData)
+            labelData <- leftJoin(labelData, gene2symbol, by = "rowname")
             p <- p +
                 acid_geom_label_repel(
-                    data = labelData,
+                    data = as_tibble(labelData, rownames = NULL),
                     mapping = aes(
-                        x = !!sym(lfcCol),
-                        y = !!sym(negLogTestCol),
+                        x = !!sym("baseMean"),
+                        y = !!sym(lfcCol),
                         label = !!sym("geneName")
                     )
                 )
