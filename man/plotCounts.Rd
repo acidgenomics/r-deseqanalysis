@@ -68,6 +68,15 @@ Plot counts
 \note{
 Updated 2019-08-20.
 }
+\section{Methods (by class)}{
+
+\itemize{
+\item \code{DESeqDataSet}: Automatically plots normalized counts. Arguments pass
+through to \code{SummarizedExperiment} method, but \code{assay} and \code{countsAxisLabel}
+are automatic.
+}
+}
+
 \examples{
 data(deseq)
 
