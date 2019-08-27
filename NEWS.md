@@ -1,3 +1,9 @@
+## DESeqAnalysis 0.2.5 (2019-08-27)
+
+### Minor changes
+
+- Requiring R 3.6. Updated basejump and Bioconductor dependencies.
+
 ## DESeqAnalysis 0.2.4 (2019-08-20)
 
 ### Minor changes
