@@ -49,10 +49,6 @@ Include plot legend.}
 \item{style}{\code{character(1)}.
 Plot style.}
 
-\item{transform}{\code{logical(1)}.
-Visualize using \code{DESeqTransform} log2 variance-stabilized counts, rather
-than \code{DESeqDataSet} size-factor normalized counts.}
-
 \item{...}{Additional arguments.}
 }
 \value{
