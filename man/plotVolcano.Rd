@@ -75,7 +75,7 @@ Use shrunken log2 fold change (LFC) values.}
 Volcano plot
 }
 \note{
-Updated 2019-08-20.
+Updated 2019-08-27.
 }
 \examples{
 data(deseq)
@@ -118,7 +118,7 @@ plotVolcano(
 plotVolcano(deseq, results = 1L, genes = genes)
 }
 \seealso{
-Modification of \code{CHBUtils::volcano_density_plot()}.
+\code{CHBUtils::volcano_density_plot()}.
 }
 \author{
 Michael Steinbaugh, John Hutchinson, Lorena Pantano

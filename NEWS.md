@@ -3,6 +3,8 @@
 ### Minor changes
 
 - Requiring R 3.6. Updated basejump and Bioconductor dependencies.
+- Improved consistency of `DataFrame` usage inside `plotMA` and `plotVolcano`,
+  using our `leftJoin` method internally.
 
 ## DESeqAnalysis 0.2.4 (2019-08-20)
 
