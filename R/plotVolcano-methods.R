@@ -293,7 +293,7 @@ NULL
             keep <- na.omit(match(x = rownames, table = data[["rowname"]]))
             assert(hasLength(keep))
             labelData <- data[keep, , drop = FALSE]
-            labelData <- left_join(
+            labelData <- leftJoin(
                 x = labelData,
                 y = as_tibble(gene2symbol, rownames = "rowname"),
                 by = "rowname"
