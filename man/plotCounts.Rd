@@ -8,7 +8,7 @@
 \usage{
 plotCounts(object, ...)
 
-\S4method{plotCounts}{DESeqAnalysis}(object, genes, transform = FALSE,
+\S4method{plotCounts}{DESeqAnalysis}(object, genes,
   interestingGroups = NULL, trans = c("identity", "log2", "log10"),
   medianLine = TRUE, color = getOption(x = "acid.color.discrete",
   default = acidplots::scale_colour_synesthesia_d()),
@@ -20,10 +20,6 @@ plotCounts(object, ...)
 
 \item{genes}{\code{character}.
 Gene identifiers.}
-
-\item{transform}{\code{logical(1)}.
-Visualize using \code{DESeqTransform} log2 variance-stabilized counts, rather
-than \code{DESeqDataSet} size-factor normalized counts.}
 
 \item{interestingGroups}{\code{character}.
 Groups of interest to use for visualization.
@@ -66,8 +62,17 @@ Plot style.}
 Plot counts
 }
 \note{
-Updated 2019-08-20.
+Updated 2019-08-27.
 }
+\section{Methods (by class)}{
+
+\itemize{
+\item \code{DESeqDataSet}: Automatically plots normalized counts. Arguments pass
+through to \code{SummarizedExperiment} method, but \code{assay} and \code{countsAxisLabel}
+are automatic.
+}
+}
+
 \examples{
 data(deseq)
 
