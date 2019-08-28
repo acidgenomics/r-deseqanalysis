@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.2.4
-Date: 2019-08-19
+Version: 0.2.5
+Date: 2019-08-27
 Authors@R: c(
     person(
         given = "Michael",
@@ -23,21 +23,21 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: false
 Depends:
-    R (>= 3.5),
-    basejump (>= 0.11.8)
+    R (>= 3.6),
+    basejump (>= 0.11.11)
 Imports:
-    acidplots (>= 0.2.12),
-    bioverbs (>= 0.2.5),
-    goalie (>= 0.3.5),
-    BiocGenerics,
-    DESeq2,
-    IRanges,
-    S4Vectors,
-    SummarizedExperiment,
-    UpSetR (>= 1.3),
+    acidplots (>= 0.2.14),
+    bioverbs (>= 0.2.7),
+    goalie (>= 0.3.6),
+    BiocGenerics (>= 0.30),
+    DESeq2 (>= 1.24),
+    IRanges (>= 2.18.2),
+    S4Vectors (>= 0.22),
+    SummarizedExperiment (>= 1.14),
+    UpSetR (>= 1.4),
     cowplot (>= 0.9),
-    ggplot2 (>= 3.1),
-    knitr (>= 1.21),
+    ggplot2 (>= 3.2),
+    knitr (>= 1.24),
     rlang (>= 0.4),
     stringr (>= 1.4),
     methods,
@@ -45,10 +45,10 @@ Imports:
     utils
 Suggests:
     acidroxygen (>= 0.1),
-    BiocStyle,
+    BiocStyle (>= 2.12),
     roxygen2 (>= 6.1),
     patrick (>= 0.0.1),
-    testthat (>= 2.1),
+    testthat (>= 2.2),
     viridis (>= 0.5)
 Remotes:
     acidgenomics/acidplots,

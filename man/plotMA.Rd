@@ -78,7 +78,7 @@ taken in two samples, by transforming the data onto M (log ratio) and A
 \note{
 We are not allowing post hoc \code{alpha} or \code{lfcThreshold} cutoffs here.
 
-Updated 2019-08-20.
+Updated 2019-08-27.
 }
 \section{plotMA2 aliases}{
 

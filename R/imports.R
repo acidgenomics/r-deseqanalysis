@@ -12,13 +12,13 @@
 #' @importFrom BiocGenerics updateObject
 #' @importFrom DESeq2 counts priorInfo
 #' @importFrom IRanges DataFrameList
-#' @importFrom S4Vectors SimpleList as.data.frame head mcols mcols<- metadata
-#'   na.omit
+#' @importFrom S4Vectors SimpleList as.data.frame cbind do.call head mcols
+#'   mcols<- metadata na.omit
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom UpSetR fromList
 #' @importFrom acidplots plotHeatmap scale_colour_synesthesia_d upset
 #' @importFrom basejump Gene2Symbol as_tibble camelCase convertSampleIDsToNames
-#'   decode droplevels initDir interestingGroups<- left_join makeNames
+#'   decode droplevels initDir interestingGroups<- leftJoin makeNames
 #'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
 #'   matchInterestingGroups matchesGene2Symbol methodFormals printString
 #'   removeNA showSlotInfo standardizeCall
