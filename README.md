@@ -9,8 +9,6 @@ Toolkit for performing differential expression with [DESeq2][].
 
 ## Installation
 
-This is an [R][] package.
-
 ### [R][] method
 
 ```r
