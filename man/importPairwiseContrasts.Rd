@@ -2,7 +2,7 @@
 % Please edit documentation in R/importPairwiseContrasts.R
 \name{importPairwiseContrasts}
 \alias{importPairwiseContrasts}
-\title{Import pairwise contrasts from user-defined file}
+\title{Import pairwise contrasts from a file}
 \usage{
 importPairwiseContrasts(file, groupCol = "group",
   numeratorCol = "numerator", denominatorCol = "denominator",
@@ -32,7 +32,10 @@ Named list of pairwise character vectors containing: "group", "numerator",
 "denominator".
 }
 \description{
-Import pairwise contrasts from user-defined file
+Import pairwise contrasts from a file
+}
+\note{
+Updated 2019-09-09.
 }
 \examples{
 file <- system.file("extdata/contrasts.csv", package = "DESeqAnalysis")
