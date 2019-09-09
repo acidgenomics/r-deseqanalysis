@@ -18,7 +18,7 @@
 #' @importFrom UpSetR fromList
 #' @importFrom acidplots plotHeatmap scale_colour_synesthesia_d upset
 #' @importFrom basejump Gene2Symbol as_tibble camelCase convertSampleIDsToNames
-#'   decode droplevels initDir interestingGroups<- leftJoin makeNames
+#'   decode droplevels import initDir interestingGroups<- leftJoin makeNames
 #'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
 #'   matchInterestingGroups matchesGene2Symbol methodFormals printString
 #'   removeNA showSlotInfo snakeCase standardizeCall

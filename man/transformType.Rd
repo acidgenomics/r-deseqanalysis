@@ -18,11 +18,18 @@ transformType(object, ...)
 
 \item{...}{Additional arguments.}
 }
+\value{
+\code{character(1)}.
+}
 \description{
 Variance-stabilizing transformation type
 }
 \note{
 Updated 2019-08-20.
+}
+\examples{
+data(deseq)
+transformType(deseq)
 }
 \seealso{
 \code{\link[DESeq2:DESeqTransform]{DESeq2::DESeqTransform()}}.
