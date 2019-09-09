@@ -5,7 +5,13 @@
 #'
 #' @inheritParams acidroxygen::params
 #'
+#' @return `character(1)`.
+#'
 #' @seealso [DESeq2::DESeqTransform()].
+#'
+#' @examples
+#' data(deseq)
+#' transformType(deseq)
 NULL
 
 

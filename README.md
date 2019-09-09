@@ -21,7 +21,6 @@ remotes::install_github("acidgenomics/DESeqAnalysis")
 remotes::update_packages()
 ```
 
-
 ### [conda][] method
 
 Configure [conda][] to use the [bioconda][] channels.
