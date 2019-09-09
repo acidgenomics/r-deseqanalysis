@@ -1,3 +1,10 @@
+## DESeqAnalysis 0.2.6 (2019-09-09)
+
+### New functions
+
+- `importPairwiseContrasts`: Quickly import pairwise contrasts definining
+  numerator and denominator for a specified group.
+
 ## DESeqAnalysis 0.2.5 (2019-08-27)
 
 ### Minor changes
