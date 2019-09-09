@@ -21,16 +21,16 @@
 #'   decode droplevels initDir interestingGroups<- leftJoin makeNames
 #'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
 #'   matchInterestingGroups matchesGene2Symbol methodFormals printString
-#'   removeNA showSlotInfo standardizeCall
+#'   removeNA showSlotInfo snakeCase standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_density
 #'   geom_hline geom_point geom_vline ggplot guides labs scale_colour_manual
 #'   scale_x_continuous scale_y_continuous theme
 #' @importFrom goalie areDisjointSets areSetEqual assert bapply hasLength
 #'   hasNames hasLength hasRows hasRownames hasValidDimnames hasValidNames
-#'   isAlpha isAny isCharacter isFlag isHeaderLevel isInRange isInt isNonEmpty
-#'   isNonNegative isNumber isPercentage isPositive isScalar isString isSubset
-#'   validate
+#'   isAFile isAlpha isAny isCharacter isFlag isHeaderLevel isInRange isInt
+#'   isNonEmpty isNonNegative isNumber isPercentage isPositive isScalar isString
+#'   isSubset validate
 #' @importFrom knitr kable
 #' @importFrom methods as is new prototype setClass show slot slot<- validObject
 #'   .hasSlot
