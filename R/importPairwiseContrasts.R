@@ -1,4 +1,7 @@
-#' Import pairwise contrasts from user-defined file
+#' Import pairwise contrasts from a file
+#'
+#' @export
+#' @note Updated 2019-09-09.
 #'
 #' @inheritParams acidroxygen::params
 #' @param groupCol `character(1)`.
@@ -42,7 +45,6 @@ importPairwiseContrasts <- function(
             y = colnames(data)
         )
     )
-    names <- snakeCase(data[[namesCol]])
     list <- mapply(
         numerator = data[["numerator"]],
         denominator = data[["denominator"]],
