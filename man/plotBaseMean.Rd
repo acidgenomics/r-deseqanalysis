@@ -10,16 +10,25 @@
 \usage{
 plotBaseMean(object, ...)
 
-\S4method{plotBaseMean}{DESeqDataSet}(object)
+\S4method{plotBaseMean}{DESeqDataSet}(object, nonzero = TRUE,
+  trans = c("log10", "log2", "identity"))
 
-\S4method{plotBaseMean}{DESeqResults}(object)
+\S4method{plotBaseMean}{DESeqResults}(object, nonzero = TRUE,
+  trans = c("log10", "log2", "identity"))
 
-\S4method{plotBaseMean}{DESeqAnalysis}(object)
+\S4method{plotBaseMean}{DESeqAnalysis}(object, nonzero = TRUE,
+  trans = c("log10", "log2", "identity"))
 }
 \arguments{
 \item{object}{Object.}
 
 \item{...}{Additional arguments.}
+
+\item{trans}{\code{character(1)}.
+Name of the axis scale transformation to apply.
+
+For more information:\preformatted{help(topic = "scale_x_continuous", package = "ggplot2")
+}}
 }
 \value{
 \code{ggplot}.
@@ -29,7 +38,7 @@ The base mean is the mean of normalized counts of all samples, normalizing
 for sequencing depth.
 }
 \note{
-Updated 2019-07-30.
+Updated 2019-09-10.
 }
 \examples{
 data(deseq)

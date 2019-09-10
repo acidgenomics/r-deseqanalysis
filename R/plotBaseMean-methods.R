@@ -4,7 +4,7 @@
 #' for sequencing depth.
 #'
 #' @name plotBaseMean
-#' @note Updated 2019-07-30.
+#' @note Updated 2019-09-10.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -28,18 +28,51 @@ NULL
 
 
 
-## Updated 2019-07-30.
-.plotBaseMean <- function(baseMean) {
-    assert(is.numeric(baseMean))
+## Updated 2019-09-10.
+.plotBaseMean <- function(
+    x,
+    nonzero = TRUE,
+    trans = c("log10", "log2", "identity")
+) {
+    assert(
+        is.numeric(x),
+        isFlag(nonzero)
+    )
+    trans <- match.arg(trans)
+    xLab <- "average expression across all samples"
     ## Drop zero values prior to plot.
-    baseMean <- baseMean[baseMean > 0L]
-    data <- data.frame(baseMean = baseMean)
-    summary <- summary(baseMean)
-    message(printString(round(summary)))
+    if (isTRUE(nonzero)) {
+        keep <- x > 0L
+        ## Inform the user about how many zero count features were dropped.
+        if (any(!keep)) {
+            n <- sum(!keep, na.rm = TRUE)
+            message(sprintf(
+                "Removing %d zero-count %s.",
+                n,
+                ngettext(
+                    n = n,
+                    msg1 = "feature",
+                    msg2 = "features"
+                )
+            ))
+        }
+        x <- x[keep]
+    }
+    ## Log transform.
+    if (!identical(trans, "identity")) {
+        message(printString(round(summary(x), digits = 2L)))
+        message(sprintf("Applying '%s(x + 1)' transformation.", trans))
+        fun <- get(x = trans, envir = asNamespace("base"), inherits = FALSE)
+        x <- fun(x + 1L)
+        xLab <- paste(trans, xLab)
+    }
+    summary <- summary(x)
+    message(printString(round(summary, digits = 2L)))
+    ## Plot.
     size <- 1L
     linetype <- "solid"
     ggplot(
-        data = data,
+        data = data.frame(baseMean = x),
         mapping = aes(
             x = !!sym("baseMean")
         )
@@ -49,14 +82,14 @@ NULL
             fill = NA,
             size = size
         ) +
-        scale_x_continuous(
-            trans = "log10",
-            breaks = log_breaks(n = Inf, base = 2L)
-        ) +
+        scale_x_continuous(breaks = pretty_breaks()) +
         geom_vline(
             mapping = aes(
                 xintercept = summary[["1st Qu."]],
-                colour = "1st quantile"
+                colour = sprintf(
+                    fmt = "1st quantile (%s)",
+                    round(summary[["1st Qu."]], digits = 2L)
+                )
             ),
             linetype = linetype,
             size = size
@@ -64,7 +97,10 @@ NULL
         geom_vline(
             mapping = aes(
                 xintercept = summary[["3rd Qu."]],
-                colour = "3rd quantile"
+                colour = sprintf(
+                    fmt = "3rd quantile (%s)",
+                    round(summary[["3rd Qu."]], digits = 2L)
+                )
             ),
             linetype = linetype,
             size = size
@@ -72,7 +108,10 @@ NULL
         geom_vline(
             mapping = aes(
                 xintercept = summary[["Mean"]],
-                colour = "mean"
+                colour = sprintf(
+                    fmt = "mean (%s)",
+                    round(summary[["Mean"]], digits = 2L)
+                )
             ),
             linetype = linetype,
             size = size
@@ -80,7 +119,10 @@ NULL
         geom_vline(
             mapping = aes(
                 xintercept = summary[["Median"]],
-                colour = "median"
+                colour = sprintf(
+                    fmt = "median (%s)",
+                    round(summary[["Median"]], digits = 2L)
+                )
             ),
             linetype = linetype,
             size = size
@@ -88,18 +130,30 @@ NULL
         scale_colour_synesthesia_d(name = "summary") +
         labs(
             title = "Base mean distribution",
-            x = "average expression across all samples"
+            x = xLab
         )
 }
 
 
 
-## Updated 2019-07-30.
+## Updated 2019-09-10.
 `plotBaseMean,DESeqDataSet` <-  # nolint
-    function(object) {
-        baseMean <- rowMeans(counts(object, normalized = TRUE))
-        .plotBaseMean(baseMean)
+    function(
+        object,
+        nonzero,
+        trans
+    ) {
+        trans <- match.arg(trans)
+        x <- rowMeans(counts(object, normalized = TRUE))
+        .plotBaseMean(
+            x = x,
+            nonzero = nonzero,
+            trans = trans
+        )
     }
+
+args <- c("nonzero", "trans")
+formals(`plotBaseMean,DESeqDataSet`)[args] <- formals(.plotBaseMean)[args]
 
 
 
@@ -115,10 +169,21 @@ setMethod(
 
 ## Updated 2019-07-30.
 `plotBaseMean,DESeqResults` <-  # nolint
-    function(object) {
-        baseMean <- object[["baseMean"]]
-        .plotBaseMean(baseMean)
+    function(
+        object,
+        nonzero,
+        trans
+    ) {
+        trans <- match.arg(trans)
+        x <- object[["baseMean"]]
+        .plotBaseMean(
+            x = x,
+            nonzero = nonzero,
+            trans = trans
+        )
     }
+
+formals(`plotBaseMean,DESeqResults`) <- formals(`plotBaseMean,DESeqDataSet`)
 
 
 
@@ -132,12 +197,23 @@ setMethod(
 
 
 
-## Updated 2019-07-30.
+## Updated 2019-09-10.
 `plotBaseMean,DESeqAnalysis` <-  # nolint
-    function(object) {
+    function(
+        object,
+        nonzero,
+        trans
+    ) {
+        trans <- match.arg(trans)
         dds <- as(object, "DESeqDataSet")
-        plotBaseMean(dds)
+        plotBaseMean(
+            object = dds,
+            nonzero = nonzero,
+            trans = trans
+        )
     }
+
+formals(`plotBaseMean,DESeqAnalysis`) <- formals(`plotBaseMean,DESeqDataSet`)
 
 
 
