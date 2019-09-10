@@ -24,6 +24,9 @@ plotBaseMean(object, ...)
 
 \item{...}{Additional arguments.}
 
+\item{nonzero}{\code{logical(1)}.
+Remove zero-count features (genes).}
+
 \item{trans}{\code{character(1)}.
 Name of the axis scale transformation to apply.
 

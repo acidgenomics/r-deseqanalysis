@@ -8,6 +8,8 @@
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
+#' @param nonzero `logical(1)`.
+#'   Remove zero-count features (genes).
 #'
 #' @seealso
 #' - https://support.bioconductor.org/p/75244/
