@@ -1,6 +1,6 @@
 #' @name topTables
 #' @inherit bioverbs::topTables
-#' @note Updated 2019-08-20.
+#' @note Updated 2019-09-10.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -162,7 +162,7 @@ setMethod(
 
 
 ## DESeqAnalysis ===============================================================
-## Updated 2019-07-30.
+## Updated 2019-09-10.
 `topTables,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -177,11 +177,7 @@ setMethod(
             extra = TRUE,
             return = "DataFrameList"
         )
-        ## Suppressing the message about the contrast name we're matching here,
-        ## since it will be shown in `resultsTables()` call above.
-        suppressMessages(
-            contrast <- contrastName(object, results = results)
-        )
+        contrast <- contrastName(object, results = results)
         .topKables(
             object = list,
             contrast = contrast,
