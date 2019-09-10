@@ -74,17 +74,16 @@ setMethod(
         resultsList <- slot(object, name = slotName)
         data <- resultsList[[results]]
         assert(is(data, "DESeqResults"))
-        if (isString(results)) {
-            name <- results
-        } else {
-            name <- resultsNames(object)[[results]]
-        }
+        ## Slot the contrast name into DESeqResults metadata.
+        name <- contrastName(object, results = results)
+        contrastName(data) <- name
         if (isTRUE(lfcShrink)) {
             msg <- paste(name, "(shrunken LFC)")
         } else {
             msg <- paste(name, "(unshrunken LFC)")
         }
         message(msg)
+        validObject(data)
         data
     }
 

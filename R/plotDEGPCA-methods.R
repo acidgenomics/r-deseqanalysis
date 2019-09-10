@@ -126,11 +126,8 @@ setMethod(
         ## Note that LFC values aren't used for this plot, just the DEGs, which
         ## are used to subset the DESeqTransform counts.
         res <- results(object, results = results, lfcShrink = FALSE)
-        contrastName(res) <- contrastNames(object)[[results]]
-        validObject(res)
         ## Using the variance-stabilized counts for visualization.
         dt <- as(object, "DESeqTransform")
-        validObject(dt)
         ## Subset the DESeqTransform, if necessary.
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, results = results)

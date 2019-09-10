@@ -1,6 +1,6 @@
 #' @name markdown
 #' @inherit basejump::markdown
-#' @note Updated 2019-08-20.
+#' @note Updated 2019-09-10.
 #'
 #' @inheritParams acidroxygen::params
 #' @param ... Additional arguments.
@@ -23,11 +23,11 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-09-10.
 `markdown,DESeqAnalysis` <-  # nolint
     function(object) {
         show(markdownHeader("Contrast names"))
-        show(markdownList(.contrastNames(object)))
+        show(markdownList(contrastNames(object)))
     }
 
 
