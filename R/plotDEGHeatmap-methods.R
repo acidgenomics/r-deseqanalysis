@@ -150,11 +150,8 @@ setMethod(
         ## Note use of `res` here instead of `results`, since we need to check
         ## the original `results` input below in `contrastSamples()` call.
         res <- results(object, results = results, lfcShrink = lfcShrink)
-        contrastName(res) <- contrastNames(object)[[results]]
-        validObject(res)
         ## We're using the variance-stabilized counts for visualization here.
         dt <- as(object, "DESeqTransform")
-        validObject(dt)
         ## Subset the DESeqTransform, if necessary.
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, results = results)
