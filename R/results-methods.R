@@ -83,6 +83,7 @@ setMethod(
             msg <- paste(name, "(unshrunken LFC)")
         }
         message(msg)
+        validObject(data)
         data
     }
 
