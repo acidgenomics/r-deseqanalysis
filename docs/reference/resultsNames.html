@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.7</span>
       </span>
     </div>
 
@@ -121,11 +121,29 @@
 
     <pre class="usage"><span class='fu'>resultsNames</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
+<span class='fu'>resultsNames</span>(<span class='no'>object</span>, <span class='no'>...</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
 <span class='co'># S4 method for DESeqDataSet</span>
 <span class='fu'>resultsNames</span>(<span class='no'>object</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>resultsNames</span>(<span class='no'>object</span>)</pre>
+<span class='fu'>resultsNames</span>(<span class='no'>object</span>)
+
+<span class='co'># S4 method for DESeqAnalysis,character</span>
+<span class='fu'>resultsNames</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='fu'>contrastNames</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+
+<span class='fu'>contrastNames</span>(<span class='no'>object</span>, <span class='no'>...</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S4 method for DESeqDataSet</span>
+<span class='fu'>contrastNames</span>(<span class='no'>object</span>)
+
+<span class='co'># S4 method for DESeqAnalysis</span>
+<span class='fu'>contrastNames</span>(<span class='no'>object</span>)
+
+<span class='co'># S4 method for DESeqAnalysis,character</span>
+<span class='fu'>contrastNames</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -133,6 +151,10 @@
     <tr>
       <th>object</th>
       <td><p>Object.</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>Value to assign.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -145,7 +167,7 @@
     <p><code>character</code>.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-08-20.</p>
+    <p>Updated 2019-09-10.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'>
