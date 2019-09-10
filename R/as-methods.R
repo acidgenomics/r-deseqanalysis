@@ -29,7 +29,6 @@
 #' print(dt)
 #' ## Pulls the first results slotted.
 #' res <- as(deseq, "DESeqResults")
-#' contrastName(res)
 #' summary(res)
 NULL
 
