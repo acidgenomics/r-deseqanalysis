@@ -72,9 +72,13 @@ setMethod(
             )
         }
         resultsList <- slot(object, name = slotName)
-        name <- resultsNames(object)[[results]]
         data <- resultsList[[results]]
         assert(is(data, "DESeqResults"))
+        if (isString(results)) {
+            name <- results
+        } else {
+            name <- resultsNames(object)[[results]]
+        }
         if (isTRUE(lfcShrink)) {
             msg <- paste(name, "(shrunken LFC)")
         } else {
