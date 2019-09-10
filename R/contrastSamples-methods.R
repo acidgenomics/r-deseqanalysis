@@ -1,6 +1,6 @@
 #' @name contrastSamples
 #' @inherit bioverbs::contrastSamples
-#' @note Updated 2019-08-20.
+#' @note Updated 2019-09-10.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -35,14 +35,13 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-09-10.
 `contrastSamples,DESeqAnalysis` <-  # nolint
     function(object, results) {
         validObject(object)
         suppressMessages(
             results <- results(object = object, results = results)
         )
-
         ## If we've defined a subset of samples for the contrast, stash them
         ## in DESeqResults metadata. Otherwise, there's no way to trace this
         ## back to a match in DESeqDataSet.
@@ -50,18 +49,15 @@ NULL
         if (hasLength(samples)) {
             return(samples)
         }
-
         contrast <- contrastName(results, format = "resultsNames")
         assert(
             isString(contrast),
             assert(grepl("_vs_", contrast))
         )
-
         data <- as(object, "DESeqDataSet")
         samples <- colnames(data)
         colData <- colData(data)
         assert(hasRownames(colData))
-
         ## Inform if the contrast doesn't exist in DESeqDataSet resultsNames.
         ## Note that this can happen for complex contrasts, so don't warn.
         resultsNames <- resultsNames(data)
@@ -75,7 +71,6 @@ NULL
                 contrast
             ))
         }
-
         ## Loop across the colData column names and determine which column
         ## matches the prefix of the defined contrast.
         match <- vapply(
@@ -91,7 +86,6 @@ NULL
         message(sprintf("Factor column: %s.", factorCol))
         factor <- colData[[factorCol]]
         assert(is.factor(factor))
-
         ## Now remove the factor prefix from our contrast.
         contrastSansFactor <- sub(
             pattern = paste0("^", factorCol, "_"),
@@ -102,25 +96,25 @@ NULL
             string = contrastSansFactor,
             pattern = "^(.+)_vs_(.+)$"
         )
-
+        ## Numerator.
         numeratorCol <- match[1L, 2L]
         assert(isSubset(numeratorCol, factor))
         numerator <- samples[factor %in% numeratorCol]
         assert(hasLength(numerator))
         message(sprintf(
             "Numerator samples: %s.",
-            toString(numerator, width = 100L)
+            toString(numerator, width = 200L)
         ))
-
+        ## Denominator.
         denominatorCol <- match[1L, 3L]
         assert(isSubset(denominatorCol, factor))
         denominator <- samples[factor %in% denominatorCol]
         assert(hasLength(denominator))
         message(sprintf(
             "Denominator samples: %s.",
-            toString(denominator, width = 100L)
+            toString(denominator, width = 200L)
         ))
-
+        ## Return.
         sort(c(numerator, denominator))
     }
 
