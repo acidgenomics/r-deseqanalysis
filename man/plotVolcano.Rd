@@ -75,7 +75,7 @@ Use shrunken log2 fold change (LFC) values.}
 Volcano plot
 }
 \note{
-Updated 2019-08-27.
+Updated 2019-09-10.
 }
 \examples{
 data(deseq)
