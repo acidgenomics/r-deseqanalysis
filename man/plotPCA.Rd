@@ -67,7 +67,7 @@ to the first argument in the \code{character} vector.}
 Principal component analysis plot
 }
 \note{
-Updated 2019-08-20.
+Updated 2019-09-10.
 }
 \section{Principal component analysis}{
 

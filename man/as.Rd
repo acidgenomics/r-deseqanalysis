@@ -71,7 +71,6 @@ dt <- as(deseq, "DESeqTransform")
 print(dt)
 ## Pulls the first results slotted.
 res <- as(deseq, "DESeqResults")
-contrastName(res)
 summary(res)
 }
 \references{

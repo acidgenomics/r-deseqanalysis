@@ -93,7 +93,7 @@ To adjust the annotation columns, modify the
 must contain/extend a \code{SummarizedExperiment}.
 }
 \note{
-Updated 2019-08-20.
+Updated 2019-09-10.
 }
 \examples{
 data(deseq)

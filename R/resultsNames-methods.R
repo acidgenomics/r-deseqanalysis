@@ -1,6 +1,6 @@
 #' @name resultsNames
 #' @inherit bioverbs::resultsNames
-#' @note Updated 2019-08-20.
+#' @note Updated 2019-09-10.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -17,6 +17,13 @@ NULL
 #' @name resultsNames
 #' @importFrom bioverbs resultsNames
 #' @usage resultsNames(object, ...)
+#' @export
+NULL
+
+#' @rdname resultsNames
+#' @name resultsNames<-
+#' @importFrom bioverbs resultsNames<-
+#' @usage resultsNames(object, ...) <- value
 #' @export
 NULL
 
@@ -54,4 +61,96 @@ setMethod(
     f = "resultsNames",
     signature = signature("DESeqAnalysis"),
     definition = `resultsNames,DESeqAnalysis`
+)
+
+
+
+## Updated 2019-09-10.
+`resultsNames<-,DESeqAnalysis,character` <-  # nolint
+    function(object, value) {
+        names(object@results) <- value
+        if (!is.null(object@lfcShrink)) {
+            names(object@lfcShrink) <- value
+        }
+        validObject(object)
+        object
+    }
+
+
+
+#' @rdname resultsNames
+#' @export
+setReplaceMethod(
+    f = "resultsNames",
+    signature = signature(
+        object = "DESeqAnalysis",
+        value = "character"
+    ),
+    definition = `resultsNames<-,DESeqAnalysis,character`
+)
+
+
+
+
+## contrastNames aliases =======================================================
+#' @rdname resultsNames
+#' @name contrastNames
+#' @importFrom bioverbs contrastNames
+#' @usage contrastNames(object, ...)
+#' @export
+NULL
+
+#' @rdname resultsNames
+#' @name contrastNames<-
+#' @importFrom bioverbs contrastNames<-
+#' @usage contrastNames(object, ...) <- value
+#' @export
+NULL
+
+
+
+`contrastNames,DESeqDataSet` <- `resultsNames,DESeqDataSet`
+
+
+
+#' @rdname resultsNames
+#' @export
+setMethod(
+    f = "contrastNames",
+    signature = signature("DESeqDataSet"),
+    definition = `contrastNames,DESeqDataSet`
+)
+
+
+
+## Updated 2019-07-23.
+`contrastNames,DESeqAnalysis` <- `resultsNames,DESeqAnalysis`
+
+
+
+#' @rdname resultsNames
+#' @export
+setMethod(
+    f = "contrastNames",
+    signature = signature("DESeqAnalysis"),
+    definition = `contrastNames,DESeqAnalysis`
+)
+
+
+
+## Updated 2019-09-10.
+`contrastNames<-,DESeqAnalysis,character` <-
+    `resultsNames<-,DESeqAnalysis,character`  # nolint
+
+
+
+#' @rdname resultsNames
+#' @export
+setReplaceMethod(
+    f = "contrastNames",
+    signature = signature(
+        object = "DESeqAnalysis",
+        value = "character"
+    ),
+    definition = `contrastNames<-,DESeqAnalysis,character`
 )

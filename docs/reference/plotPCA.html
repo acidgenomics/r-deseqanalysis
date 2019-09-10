@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.7</span>
       </span>
     </div>
 
@@ -204,7 +204,7 @@ to the first argument in the <code>character</code> vector.</p></td>
     <p><code>ggplot</code> or <code>DataFrame</code>.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-08-20.</p>
+    <p>Updated 2019-09-10.</p>
     <h2 class="hasAnchor" id="principal-component-analysis"><a class="anchor" href="#principal-component-analysis"></a>Principal component analysis</h2>
 
     
@@ -235,7 +235,7 @@ a way to look at how samples are clustering.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotPCA</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>Using DESeqTransform counts.</span></div><div class='output co'>#&gt; <span class='message'>Plotting PCA using 500 features.</span></div><div class='img'><img src='plotPCA-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plotPCA</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>Plotting PCA using 500 features.</span></div><div class='img'><img src='plotPCA-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## DESeqTransform ====</span>
 <span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.html'>as</a></span>(<span class='no'>deseq</span>, <span class='st'>"DESeqTransform"</span>)
 <span class='fu'>plotPCA</span>(<span class='no'>dt</span>)</div><div class='output co'>#&gt; <span class='message'>Plotting PCA using 500 features.</span></div><div class='img'><img src='plotPCA-2.png' alt='' width='700' height='433' /></div></pre>
