@@ -4,7 +4,7 @@
 
 #' @name plotDEGPCA
 #' @inherit bioverbs::plotDEGPCA
-#' @note Updated 2019-08-20.
+#' @note Updated 2019-09-10.
 #'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams acidplots::plotPCA
@@ -46,11 +46,9 @@ NULL
         )
         direction <- match.arg(direction)
         return <- match.arg(return)
-
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
-
         interestingGroups(dt) <- matchInterestingGroups(dt, interestingGroups)
         alpha <- metadata(res)[["alpha"]]
         lfcThreshold <- metadata(res)[["lfcThreshold"]]
@@ -59,17 +57,14 @@ NULL
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold)
         )
-
         ## Get the character vector of DEGs.
         deg <- deg(object = res, direction = direction)
         if (!hasLength(deg)) {
             warning("There are no DEGs to plot. Skipping.")
             return(invisible())
         }
-
         ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
-
         ## Titles.
         title <- contrastName(res)
         subtitle <- paste0(
@@ -77,7 +72,6 @@ NULL
             "alpha: ", alpha, ";  ",
             "lfcThreshold: ", lfcThreshold
         )
-
         ## Using SummarizedExperiment method here.
         rse <- as(dt, "RangedSummarizedExperiment")
         do.call(
@@ -117,7 +111,7 @@ setMethod(
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-09-09.
 `plotDEGPCA,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -129,16 +123,14 @@ setMethod(
             isScalar(results),
             isFlag(contrastSamples)
         )
-
         ## Note that LFC values aren't used for this plot, just the DEGs, which
         ## are used to subset the DESeqTransform counts.
         res <- results(object, results = results, lfcShrink = FALSE)
+        contrastName(res) <- contrastNames(object)[[results]]
         validObject(res)
-
         ## Using the variance-stabilized counts for visualization.
         dt <- as(object, "DESeqTransform")
         validObject(dt)
-
         ## Subset the DESeqTransform, if necessary.
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, results = results)
@@ -146,7 +138,6 @@ setMethod(
             dt <- dt[, samples, drop = FALSE]
             dt <- droplevels(dt)
         }
-
         ## Passing through to DESeqResults/DESeqTransform method here.
         do.call(
             what = plotDEGPCA,

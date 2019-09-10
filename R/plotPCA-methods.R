@@ -1,6 +1,6 @@
 #' @name plotPCA
 #' @inherit acidplots::plotPCA
-#' @note Updated 2019-08-20.
+#' @note Updated 2019-09-10.
 #' @examples
 #' data(deseq)
 #'
@@ -43,11 +43,10 @@ setMethod(
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-09-10.
 `plotPCA,DESeqAnalysis` <-  # nolint
     function(object, ...) {
         validObject(object)
-        message("Using DESeqTransform counts.")
         dt <- as(object, "DESeqTransform")
         plotPCA(object = dt, ...)
     }

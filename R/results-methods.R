@@ -1,6 +1,6 @@
 #' @name results
 #' @inherit bioverbs::results
-#' @note Updated 2019-07-30.
+#' @note Updated 2019-09-10.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -41,16 +41,9 @@ setMethod(
 
 
 
-## Updated 2019-07-30.
+## Updated 2019-09-10.
 `results,DESeqAnalysis` <-  # nolint
     function(object, results, lfcShrink = FALSE) {
-        if (missing(results)) {
-            stop(
-                "Failed to match results.\n",
-                "Required 'results' argument is missing.\n",
-                "Specify as either name or position scalar."
-            )
-        }
         assert(
             is(object, "DESeqAnalysis"),
             isScalar(results),
@@ -59,7 +52,6 @@ setMethod(
         if (isCharacter(results)) {
             assert(isSubset(results, resultsNames(object)))
         }
-
         ## Match the results.
         if (identical(lfcShrink, FALSE)) {
             slotName <- "results"
@@ -79,21 +71,21 @@ setMethod(
                 "Set 'lfcShrink = FALSE'."
             )
         }
-
         resultsList <- slot(object, name = slotName)
-        results <- resultsList[[results]]
-        assert(is(results, "DESeqResults"))
-
-        ## Inform the user about which data we're using.
-        msg <- contrastName(results)
-        if (isTRUE(lfcShrink)) {
-            msg <- paste(msg, "(shrunken LFC)")
+        data <- resultsList[[results]]
+        assert(is(data, "DESeqResults"))
+        if (isString(results)) {
+            name <- results
         } else {
-            msg <- paste(msg, "(unshrunken LFC)")
+            name <- resultsNames(object)[[results]]
+        }
+        if (isTRUE(lfcShrink)) {
+            msg <- paste(name, "(shrunken LFC)")
+        } else {
+            msg <- paste(name, "(unshrunken LFC)")
         }
         message(msg)
-
-        results
+        data
     }
 
 

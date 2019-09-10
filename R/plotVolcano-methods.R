@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
-#' @note Updated 2019-08-27.
+#' @note Updated 2019-09-10.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -343,7 +343,7 @@ setMethod(
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-09-10.
 `plotVolcano,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -362,12 +362,13 @@ setMethod(
             ),
             error = function(e) NULL
         )
-        results <- results(object, results = results, lfcShrink = lfcShrink)
+        data <- results(object, results = results, lfcShrink = lfcShrink)
+        contrastName(data) <- contrastNames(object)[[results]]
         do.call(
             what = `plotVolcano,DESeqResults`,
             args = matchArgsToDoCall(
                 args = list(
-                    object = results,
+                    object = data,
                     genes = genes,
                     gene2symbol = gene2symbol
                 ),

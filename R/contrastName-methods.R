@@ -1,6 +1,6 @@
 #' @name contrastName
 #' @inherit bioverbs::contrastName
-#' @note Updated 2019-08-20.
+#' @note Updated 2019-09-10.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -34,22 +34,35 @@ NULL
 #' @export
 NULL
 
+#' @rdname contrastName
+#' @name contrastName<-
+#' @importFrom bioverbs contrastName<-
+#' @usage contrastName(object, ...) <- value
+#' @export
+NULL
 
 
-## Updated 2019-08-20.
+
+## Updated 2019-09-10.
 `contrastName,DESeqResults` <-  # nolint
     function(object, format = c("resultsNames", "title")) {
         validObject(object)
         format <- match.arg(format)
-        ## Previously, Bioc <= 3.7 set `use.names = FALSE` by default.
-        x <- mcols(object, use.names = TRUE)
-        x <- x["log2FoldChange", "description", drop = TRUE]
-        assert(isCharacter(x))
+        ## Use metadata stash, if defined. This is the recommended approach
+        ## when passing off from DESeqAnalysis object, using `resultsNames()`.
+        x <- metadata(object)[["contrastName"]]
+        ## Otherwise, determine the contrast name automatically from mcols.
+        if (is.null(x)) {
+            ## See approach in `DESeq2::resultsNames()` on DESeqDataSet.
+            x <- mcols(object, use.names = TRUE)
+            x <- x["log2FoldChange", "description", drop = TRUE]
+        }
+        assert(isString(x))
         ## Always strip prefix, e.g. log2 fold change (MLE).
         x <- sub("^.*:\\s", "", x)
-        if (format == "resultsNames") {
+        if (identical(format, "resultsNames")) {
             x <- makeNames(x)
-        } else if (format == "title") {
+        } else if (identical(format, "title")) {
             ## Strip prefix, e.g. log2 fold change (MLE).
             x <- sub("^.*:\\s", "", x)
             ## Pad the first space with as a colon.
@@ -70,6 +83,30 @@ setMethod(
     f = "contrastName",
     signature = signature("DESeqResults"),
     definition = `contrastName,DESeqResults`
+)
+
+
+
+## Updated 2019-09-10.
+`contrastName<-,DESeqResults,character` <-  # nolint
+    function(object, value) {
+        assert(isString(value))
+        metadata(object)[["contrastName"]] <- value
+        validObject(object)
+        object
+    }
+
+
+
+#' @rdname contrastName
+#' @export
+setReplaceMethod(
+    f = "contrastName",
+    signature = signature(
+        object = "DESeqResults",
+        value = "character"
+    ),
+    definition = `contrastName<-,DESeqResults,character`
 )
 
 

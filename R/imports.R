@@ -13,7 +13,7 @@
 #' @importFrom DESeq2 counts priorInfo
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors SimpleList as.data.frame cbind do.call head mcols
-#'   mcols<- metadata na.omit
+#'   mcols<- metadata metadata<- na.omit
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom UpSetR fromList
 #' @importFrom acidplots plotHeatmap scale_colour_synesthesia_d upset

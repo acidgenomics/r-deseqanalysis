@@ -3,18 +3,41 @@
 \docType{methods}
 \name{resultsNames}
 \alias{resultsNames}
+\alias{resultsNames<-}
 \alias{resultsNames,DESeqDataSet-method}
 \alias{resultsNames,DESeqAnalysis-method}
+\alias{resultsNames<-,DESeqAnalysis,character-method}
+\alias{contrastNames}
+\alias{contrastNames<-}
+\alias{contrastNames,DESeqDataSet-method}
+\alias{contrastNames,DESeqAnalysis-method}
+\alias{contrastNames<-,DESeqAnalysis,character-method}
 \title{Results names}
 \usage{
 resultsNames(object, ...)
 
+resultsNames(object, ...) <- value
+
 \S4method{resultsNames}{DESeqDataSet}(object)
 
 \S4method{resultsNames}{DESeqAnalysis}(object)
+
+\S4method{resultsNames}{DESeqAnalysis,character}(object) <- value
+
+contrastNames(object, ...)
+
+contrastNames(object, ...) <- value
+
+\S4method{contrastNames}{DESeqDataSet}(object)
+
+\S4method{contrastNames}{DESeqAnalysis}(object)
+
+\S4method{contrastNames}{DESeqAnalysis,character}(object) <- value
 }
 \arguments{
 \item{object}{Object.}
+
+\item{value}{Value to assign.}
 
 \item{...}{Additional arguments.}
 }
@@ -25,7 +48,7 @@ resultsNames(object, ...)
 Results names
 }
 \note{
-Updated 2019-08-20.
+Updated 2019-09-10.
 }
 \examples{
 data(deseq)
