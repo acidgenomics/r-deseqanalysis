@@ -363,7 +363,12 @@ setMethod(
             error = function(e) NULL
         )
         data <- results(object, results = results, lfcShrink = lfcShrink)
-        contrastName(data) <- contrastNames(object)[[results]]
+        if (!isString(results)) {
+            name <- contrastNames(object)[[results]]
+        } else {
+            name <- results
+        }
+        contrastName(data) <- name
         do.call(
             what = `plotVolcano,DESeqResults`,
             args = matchArgsToDoCall(
