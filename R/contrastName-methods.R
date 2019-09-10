@@ -111,16 +111,20 @@ setReplaceMethod(
 
 
 
-## Updated 2019-07-23.
+## This method is to be used primarily to set the contrast name on DESeqResults
+## inside plotting functions. See `plotMA()` method, for example.
+## Updated 2019-09-10.
 `contrastName,DESeqAnalysis` <-  # nolint
     function(object, results) {
-        suppressMessages(
-            results <- results(object = object, results = results)
-        )
-        do.call(
-            what = contrastName,
-            args = list(object = results)
-        )
+        contrastNames <- contrastNames(object)
+        if (isString(results)) {
+            x <- results
+            assert(isSubset(x, contrastNames))
+        } else {
+            x <- contrastNames[[results]]
+        }
+        assert(isString(x))
+        x
     }
 
 
