@@ -1,6 +1,6 @@
 #' @name resultsNames
 #' @inherit bioverbs::resultsNames
-#' @note Updated 2019-08-20.
+#' @note Updated 2019-09-10.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -17,6 +17,13 @@ NULL
 #' @name resultsNames
 #' @importFrom bioverbs resultsNames
 #' @usage resultsNames(object, ...)
+#' @export
+NULL
+
+#' @rdname resultsNames
+#' @name resultsNames<-
+#' @importFrom bioverbs resultsNames<-
+#' @usage resultsNames(object, ...) <- value
 #' @export
 NULL
 
@@ -54,4 +61,30 @@ setMethod(
     f = "resultsNames",
     signature = signature("DESeqAnalysis"),
     definition = `resultsNames,DESeqAnalysis`
+)
+
+
+
+## Updated 2019-09-10.
+`resultsNames<-,DESeqAnalysis,character` <-  # nolint
+    function(object, value) {
+        names(object@results) <- value
+        if (!is.null(object@lfcShrink)) {
+            names(object@lfcShrink) <- value
+        }
+        validObject(object)
+        object
+    }
+
+
+
+#' @rdname sampleData
+#' @export
+setReplaceMethod(
+    f = "resultsNames",
+    signature = signature(
+        object = "DESeqAnalysis",
+        value = "character"
+    ),
+    definition = `resultsNames<-,DESeqAnalysis,character`
 )
