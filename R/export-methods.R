@@ -6,7 +6,9 @@
 
 #' @name export
 #' @inherit bioverbs::export
-#' @note Updated 2019-08-27.
+#' @note Size-factor normalized coutns and FPKM values are calculated on the fly
+#' and exported automatically.
+#' @note Updated 2019-09-11.
 #'
 #' @inheritParams brio::export
 #' @inheritParams params
@@ -77,7 +79,7 @@ NULL
 ## Inheriting the SummarizedExperiment method internally here.
 ## Only export the raw and normalized counts.
 ## Skip exporting other assays, including mu, H, cooks.
-## Updated 2019-07-23.
+## Updated 2019-09-11.
 `export,DESeqDataSet` <-  # nolint
     function(
         object,
@@ -91,10 +93,14 @@ NULL
         if (is.null(name)) {
             name <- as.character(call[["object"]])
         }
-        normalized <- counts(object, normalized = TRUE)
+        ## Generate additional matrices on the fly.
         rse <- as(object, "RangedSummarizedExperiment")
-        assays(rse)[["normalized"]] <- normalized
-        assays(rse) <- assays(rse)[c("counts", "normalized")]
+        assays <- SimpleList(
+            counts = counts(object, normalized = FALSE),
+            normalized = counts(object, normalized = TRUE),
+            fpkm = fpkm(object)
+        )
+        assays(rse) <- assays
         export(object = rse, name = name, dir = dir, compress = compress)
     }
 
@@ -125,16 +131,20 @@ setMethod(
             isFlag(compress),
             isFlag(lfcShrink)
         )
+
         call <- standardizeCall()
         assert(isString(name, nullOK = TRUE))
         if (is.null(name)) {
             name <- as.character(call[["object"]])
         }
+
         ## Note that we're combining the dir with name, so we can set
         ## subdirectories for each slotted data type (e.g. DESeqDataSet).
         dir <- initDir(file.path(dir, name))
         rm(name)
+
         files <- list()
+
         ## DESeqDataSet.
         message("Exporting DESeqDataSet.")
         files[["data"]] <-
@@ -144,6 +154,7 @@ setMethod(
                 dir = dir,
                 compress = compress
             )
+
         ## DESeqTransform.
         message("Exporting DESeqTransform.")
         files[["transform"]] <-
@@ -153,6 +164,7 @@ setMethod(
                 dir = dir,
                 compress = compress
             )
+
         ## DEG results tables.
         message("Exporting DESeqResults tables.")
         files[["resultsTables"]] <-
@@ -162,6 +174,7 @@ setMethod(
                 compress = compress,
                 lfcShrink = lfcShrink
             )
+
         invisible(files)
     }
 

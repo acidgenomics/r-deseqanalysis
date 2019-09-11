@@ -84,18 +84,6 @@ DESeqAnalysis <-  # nolint
 
 
 
-## Updated 2019-07-23.
-.contrastNames <- function(object) {
-    assert(is(object, "DESeqAnalysis"))
-    vapply(
-        X = slot(object, "results"),
-        FUN = contrastName,
-        FUN.VALUE = character(1L)
-    )
-}
-
-
-
 ## How to get names of dot arguments.
 ## https://stackoverflow.com/questions/51259346
 

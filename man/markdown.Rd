@@ -27,7 +27,7 @@ Markdown
 }}
 
 \note{
-Updated 2019-08-20.
+Updated 2019-09-10.
 }
 \examples{
 data(deseq)

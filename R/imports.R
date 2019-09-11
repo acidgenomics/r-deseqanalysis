@@ -10,27 +10,27 @@
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom BiocGenerics updateObject
-#' @importFrom DESeq2 counts priorInfo
+#' @importFrom DESeq2 counts fpkm priorInfo
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors SimpleList as.data.frame cbind do.call head mcols
-#'   mcols<- metadata na.omit
+#'   mcols<- metadata metadata<- na.omit
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom UpSetR fromList
 #' @importFrom acidplots plotHeatmap scale_colour_synesthesia_d upset
 #' @importFrom basejump Gene2Symbol as_tibble camelCase convertSampleIDsToNames
-#'   decode droplevels initDir interestingGroups<- leftJoin makeNames
+#'   decode droplevels import initDir interestingGroups<- leftJoin makeNames
 #'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
 #'   matchInterestingGroups matchesGene2Symbol methodFormals printString
-#'   removeNA showSlotInfo standardizeCall
+#'   removeNA showSlotInfo snakeCase standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_density
 #'   geom_hline geom_point geom_vline ggplot guides labs scale_colour_manual
 #'   scale_x_continuous scale_y_continuous theme
 #' @importFrom goalie areDisjointSets areSetEqual assert bapply hasLength
 #'   hasNames hasLength hasRows hasRownames hasValidDimnames hasValidNames
-#'   isAlpha isAny isCharacter isFlag isHeaderLevel isInRange isInt isNonEmpty
-#'   isNonNegative isNumber isPercentage isPositive isScalar isString isSubset
-#'   validate
+#'   isAFile isAlpha isAny isCharacter isFlag isHeaderLevel isInRange isInt
+#'   isNonEmpty isNonNegative isNumber isPercentage isPositive isScalar isString
+#'   isSubset validate
 #' @importFrom knitr kable
 #' @importFrom methods as is new prototype setClass show slot slot<- validObject
 #'   .hasSlot

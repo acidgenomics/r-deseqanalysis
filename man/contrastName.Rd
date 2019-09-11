@@ -3,14 +3,20 @@
 \docType{methods}
 \name{contrastName}
 \alias{contrastName}
+\alias{contrastName<-}
 \alias{contrastName,DESeqResults-method}
+\alias{contrastName<-,DESeqResults,character-method}
 \alias{contrastName,DESeqAnalysis-method}
 \title{Contrast name}
 \usage{
 contrastName(object, ...)
 
+contrastName(object, ...) <- value
+
 \S4method{contrastName}{DESeqResults}(object, format = c("resultsNames",
-  "title"))
+  "title"), useStash = TRUE)
+
+\S4method{contrastName}{DESeqResults,character}(object) <- value
 
 \S4method{contrastName}{DESeqAnalysis}(object, results)
 }
@@ -25,6 +31,12 @@ Name format to return:
 \item \code{title}: Human readable, for plot titles and/or table captions.
 }}
 
+\item{useStash}{\code{logical(1)}.
+Check for \code{contrastName} metadata stash in \code{DESeqResults} object. Intended
+for use with \code{DESeqAnalysis} methods.}
+
+\item{value}{Value to assign.}
+
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or position of \code{DESeqResults}.}
 
@@ -38,7 +50,7 @@ Contrast name.
 Contrast name
 }
 \note{
-Updated 2019-08-20.
+Updated 2019-09-11.
 }
 \examples{
 data(deseq)

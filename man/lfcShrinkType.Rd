@@ -18,11 +18,18 @@ lfcShrinkType(object, ...)
 
 \item{...}{Additional arguments.}
 }
+\value{
+\code{character(1)}.
+}
 \description{
 Shrunken log2 fold change (LFC) type
 }
 \note{
 Updated 2019-08-20.
+}
+\examples{
+data(deseq)
+lfcShrinkType(deseq)
 }
 \seealso{
 \code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}}.

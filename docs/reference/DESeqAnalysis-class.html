@@ -8,11 +8,13 @@
 
 <title>DESeq2 differential expression analysis — DESeqAnalysis-class • DESeqAnalysis</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -34,13 +36,14 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="DESeq2 differential expression analysis — DESeqAnalysis-class" />
 
+<meta property="og:title" content="DESeq2 differential expression analysis — DESeqAnalysis-class" />
 <meta property="og:description" content="Class containing all elements generated during differential expression
 analysis with DESeq2. This class is essentially a list with validity checks
 to ensure DESeqTransform and DESeqResults correspond to the
 DESeqDataSet." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -71,7 +74,7 @@ DESeqDataSet." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.7</span>
       </span>
     </div>
 
@@ -90,7 +93,6 @@ DESeqDataSet." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/acidgenomics/DESeqAnalysis">
@@ -117,19 +119,17 @@ DESeqDataSet." />
     </div>
 
     <div class="ref-description">
-    
     <p>Class containing all elements generated during differential expression
 analysis with DESeq2. This class is essentially a <code>list</code> with validity checks
 to ensure <code>DESeqTransform</code> and <code>DESeqResults</code> correspond to the
 <code>DESeqDataSet</code>.</p>
-    
     </div>
 
-        
+
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>DESeqAnalysis</code>.</p>
-    
     <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
 
     
@@ -145,12 +145,11 @@ One or more unshrunken <code>DESeqResults</code>.</p></dd>
 <dt><code>lfcShrink</code></dt><dd><p><code>list</code>.
 <em>Optional</em>. One or more shrunken <code>DESeqResults</code>. If set, must correspond to
 those defined in <code>results</code>. Otherwise, can set as empty list (<code><a href='https://rdrr.io/r/base/list.html'>list()</a></code>).</p></dd>
+
 </dl>
-    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>Updated 2019-07-23.</p>
-    
     <h2 class="hasAnchor" id="deseqdataset"><a class="anchor" href="#deseqdataset"></a>DESeqDataSet</h2>
 
     
@@ -160,7 +159,6 @@ those defined in <code>results</code>. Otherwise, can set as empty list (<code><
 object using <code><a href='as.html'>as(dds, "bcbioRNASeq")</a></code>. Don't use the <code><a href='https://rdrr.io/pkg/DESeq2/man/DESeqDataSet.html'>DESeq2::DESeqDataSet()</a></code>
 or <code><a href='https://rdrr.io/pkg/DESeq2/man/DESeqDataSet.html'>DESeq2::DESeqDataSetFromMatrix()</a></code> constructors to generate the
 <code>DESeqDataSet</code> object.</p>
-    
     <h2 class="hasAnchor" id="deseqtransform"><a class="anchor" href="#deseqtransform"></a>DESeqTransform</h2>
 
     
@@ -169,7 +167,6 @@ or <code><a href='https://rdrr.io/pkg/DESeq2/man/DESeqDataSet.html'>DESeq2::DESe
 <p>Object containing variance-stabilized counts. We recommend slotting the
 return from either <code><a href='https://rdrr.io/pkg/DESeq2/man/varianceStabilizingTransformation.html'>DESeq2::varianceStabilizingTransformation()</a></code> or
 <code><a href='https://rdrr.io/pkg/DESeq2/man/rlog.html'>DESeq2::rlog()</a></code>.</p>
-    
     <h2 class="hasAnchor" id="deseqresults"><a class="anchor" href="#deseqresults"></a>DESeqResults</h2>
 
     
@@ -178,7 +175,6 @@ return from either <code><a href='https://rdrr.io/pkg/DESeq2/man/varianceStabili
 <p>Don't modify any of the <code>DESeqResults</code> objects manually. This includes
 rearranging the rows or dropping genes without adjusted P values. We'll take
 care of this automatically in supported methods.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'>
@@ -187,27 +183,19 @@ care of this automatically in supported methods.</p>
 <li><p><code>showClass("Annotated")</code>.</p></li>
 </ul>
 </div>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#slots">Slots</a></li>
-
       <li><a href="#note">Note</a></li>
-
       <li><a href="#deseqdataset">DESeqDataSet</a></li>
-
       <li><a href="#deseqtransform">DESeqTransform</a></li>
-
       <li><a href="#deseqresults">DESeqResults</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+    </ul>
 
     <h2>Author</h2>
     <p>Michael Steinbaugh</p>
@@ -221,7 +209,7 @@ care of this automatically in supported methods.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
 </div>
 
       </footer>

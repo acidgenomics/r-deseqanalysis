@@ -30,24 +30,26 @@ NULL
 ## Updated 2019-07-23.
 `plotDEGUpset,DESeqAnalysis` <-  # nolint
     function(object) {
-        degPerContrast <- mapply(
-            results = resultsNames(object),
-            MoreArgs = list(object = object),
-            FUN = function(results, object) {
-                down <- deg(
-                    object = object,
-                    results = results,
-                    direction = "down"
-                )
-                up <- deg(
-                    object = object,
-                    results = results,
-                    direction = "up"
-                )
-                list(down = down, up = up)
-            },
-            SIMPLIFY = FALSE,
-            USE.NAMES = TRUE
+        suppressMessages(
+            degPerContrast <- mapply(
+                results = resultsNames(object),
+                MoreArgs = list(object = object),
+                FUN = function(results, object) {
+                    down <- deg(
+                        object = object,
+                        results = results,
+                        direction = "down"
+                    )
+                    up <- deg(
+                        object = object,
+                        results = results,
+                        direction = "up"
+                    )
+                    list(down = down, up = up)
+                },
+                SIMPLIFY = FALSE,
+                USE.NAMES = TRUE
+            )
         )
         listInput <- do.call(what = c, args = degPerContrast)
         ## Using "_" instead of "." for name concatenation.

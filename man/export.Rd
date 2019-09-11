@@ -39,7 +39,10 @@ Invisibily return file paths, either as \code{list} or \code{character}.
 Export data out of R and write to disk.
 }
 \note{
-Updated 2019-08-20.
+Size-factor normalized coutns and FPKM values are calculated on the fly
+and exported automatically.
+
+Updated 2019-09-11.
 }
 \examples{
 data(deseq)
