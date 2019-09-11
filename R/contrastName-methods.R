@@ -10,6 +10,9 @@
 #'   - `resultsNames`: Attempt to matching the conventions in
 #'     [`resultsNames()`][DESeq2::resultsNames].
 #'   - `title`: Human readable, for plot titles and/or table captions.
+#' @param useStash `logical(1)`.
+#'   Check for `contrastName` metadata stash in `DESeqResults` object. Intended
+#'   for use with `DESeqAnalysis` methods.
 #' @param ... Additional arguments.
 #'
 #' @seealso [`resultsNames()`][DESeq2::resultsNames].
@@ -45,15 +48,24 @@ NULL
 
 ## Updated 2019-09-10.
 `contrastName,DESeqResults` <-  # nolint
-    function(object, format = c("resultsNames", "title")) {
+    function(
+        object,
+        format = c("resultsNames", "title"),
+        useStash = TRUE
+    ) {
         validObject(object)
+        assert(isFlag(useStash))
         format <- match.arg(format)
         ## Use metadata stash, if defined. This is the recommended approach
         ## when passing off from DESeqAnalysis object, using `resultsNames()`.
-        x <- metadata(object)[["contrastName"]]
+        if (isTRUE(useStash)) {
+            x <- metadata(object)[["contrastName"]]
+        } else {
+            x <- NULL
+        }
         ## Otherwise, determine the contrast name automatically from mcols.
+        ## See approach in `DESeq2::resultsNames()` on DESeqDataSet.
         if (is.null(x)) {
-            ## See approach in `DESeq2::resultsNames()` on DESeqDataSet.
             x <- mcols(object, use.names = TRUE)
             x <- x["log2FoldChange", "description", drop = TRUE]
         }
