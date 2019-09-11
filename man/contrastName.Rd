@@ -50,7 +50,7 @@ Contrast name.
 Contrast name
 }
 \note{
-Updated 2019-09-10.
+Updated 2019-09-11.
 }
 \examples{
 data(deseq)
