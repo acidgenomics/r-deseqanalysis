@@ -14,7 +14,7 @@ contrastName(object, ...)
 contrastName(object, ...) <- value
 
 \S4method{contrastName}{DESeqResults}(object, format = c("resultsNames",
-  "title"))
+  "title"), useStash = TRUE)
 
 \S4method{contrastName}{DESeqResults,character}(object) <- value
 
@@ -30,6 +30,10 @@ Name format to return:
 \code{\link[DESeq2:resultsNames]{resultsNames()}}.
 \item \code{title}: Human readable, for plot titles and/or table captions.
 }}
+
+\item{useStash}{\code{logical(1)}.
+Check for \code{contrastName} metadata stash in \code{DESeqResults} object. Intended
+for use with \code{DESeqAnalysis} methods.}
 
 \item{value}{Value to assign.}
 
