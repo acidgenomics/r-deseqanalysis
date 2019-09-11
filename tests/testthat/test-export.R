@@ -26,6 +26,12 @@ test_that("DESeqAnalysis", {
                         "data",
                         "assays",
                         "normalized.csv.gz"
+                    ),
+                    fpkm = file.path(
+                        prefix,
+                        "data",
+                        "assays",
+                        "fpkm.csv.gz"
                     )
                 ),
                 colData = file.path(prefix, "data", "colData.csv.gz"),
