@@ -1,5 +1,5 @@
 ---
-## Updated 2019-09-10.
+## Updated 2019-09-11.
 params:
   title: "Differential expression analysis using DESeq2"
   
@@ -155,7 +155,7 @@ invisible(mapply(
 
 # Top tables {.tabset}
 
-Only the top up- and down-regulated genes (arranged by log2 fold change) are shown.
+Only the top up- and down-regulated genes (arranged by adjusted *P* value) are shown.
 
 ```{r top-tables, results="asis"}
 invisible(mapply(
