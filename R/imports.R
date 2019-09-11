@@ -10,7 +10,7 @@
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom BiocGenerics updateObject
-#' @importFrom DESeq2 counts priorInfo
+#' @importFrom DESeq2 counts fpkm priorInfo
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors SimpleList as.data.frame cbind do.call head mcols
 #'   mcols<- metadata metadata<- na.omit
