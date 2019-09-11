@@ -31,7 +31,7 @@ Varies, depending on the method.
 Results
 }
 \note{
-Updated 2019-07-30.
+Updated 2019-09-10.
 }
 \examples{
 data(deseq)

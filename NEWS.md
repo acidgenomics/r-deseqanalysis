@@ -1,3 +1,21 @@
+## DESeqAnalysis 0.2.7 (2019-09-11)
+
+### Minor changes
+
+- Bug fixes for contrast name handling with user-defined resultsNames.
+  `DESeqAnalysis` methods now stash contrast name into `metadata` as
+  `contrastName` for `DESeqResults` objects, which allows for easier contrast
+  name handling inside plotting and other markdown functions. We needed to add
+  a new `useStash` argument for `contrastName` that disables this behavior, so
+  `contrastSamples` can pull the samples from a pairwise contrast easily.
+
+## DESeqAnalysis 0.2.6 (2019-09-09)
+
+### New functions
+
+- `importPairwiseContrasts`: Quickly import pairwise contrasts definining
+  numerator and denominator for a specified group.
+
 ## DESeqAnalysis 0.2.5 (2019-08-27)
 
 ### Minor changes

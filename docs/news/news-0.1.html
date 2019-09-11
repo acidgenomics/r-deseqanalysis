@@ -8,11 +8,13 @@
 
 <title>Version 0.1 • DESeqAnalysis</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -34,7 +36,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
+
 <meta property="og:title" content="Version 0.1" />
+
 
 
 
@@ -65,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.7</span>
       </span>
     </div>
 
@@ -84,7 +88,6 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/acidgenomics/DESeqAnalysis">
@@ -139,9 +142,9 @@
     <div id="deseqanalysis-0-1-2-2018-12-12" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-2-2018-12-12" class="anchor"></a>DESeqAnalysis 0.1.2 (2018-12-12)</h2>
-<div id="new-functions-5" class="section level3">
+<div id="new-functions-6" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-functions-5" class="anchor"></a>New functions</h3>
+<a href="#new-functions-6" class="anchor"></a>New functions</h3>
 <ul>
 <li>
 <code>contrastSamples</code>: <strong>Experimental</strong>. Return the samples used to generate a corresponding <code>DESeqResults</code> object. May revise this approach to simply store the sample names directly in the <code>DESeqResults</code> in the future.</li>
@@ -377,9 +380,9 @@
     <div id="deseqanalysis-0-1-15-2019-04-03" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-15-2019-04-03" class="anchor"></a>DESeqAnalysis 0.1.15 (2019-04-03)</h2>
-<div id="new-functions-4" class="section level3">
+<div id="new-functions-5" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-functions-4" class="anchor"></a>New functions</h3>
+<a href="#new-functions-5" class="anchor"></a>New functions</h3>
 <ul>
 <li>
 <code>resultsMatrix</code>: Utility function that quickly aggregates <code>DESeqResults</code> values for multiple contrasts into a single <code>matrix</code>. Currently supports return of <code>log2FoldChange</code>, <code>stat</code>, or <code>padj</code> values.</li>
@@ -462,9 +465,9 @@
     <div id="deseqanalysis-0-1-20-2019-04-25" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-20-2019-04-25" class="anchor"></a>DESeqAnalysis 0.1.20 (2019-04-25)</h2>
-<div id="new-functions-3" class="section level3">
+<div id="new-functions-4" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-functions-3" class="anchor"></a>New functions</h3>
+<a href="#new-functions-4" class="anchor"></a>New functions</h3>
 <ul>
 <li>Now exporting <code>lfcShrinkType</code>, and <code>transformType</code>, which were previously used internally but are generally useful.</li>
 </ul>
@@ -493,9 +496,9 @@
     <div id="deseqanalysis-0-1-21-2019-04-26" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-21-2019-04-26" class="anchor"></a>DESeqAnalysis 0.1.21 (2019-04-26)</h2>
-<div id="new-functions-2" class="section level3">
+<div id="new-functions-3" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-functions-2" class="anchor"></a>New functions</h3>
+<a href="#new-functions-3" class="anchor"></a>New functions</h3>
 <ul>
 <li>
 <code>plotDEGUpset</code>: Support for easily plotting bidirectional (up/down) DEG intersections across contrasts, using the UpSetR package.</li>
@@ -514,9 +517,9 @@
     <div id="deseqanalysis-0-1-22-2019-04-28" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-22-2019-04-28" class="anchor"></a>DESeqAnalysis 0.1.22 (2019-04-28)</h2>
-<div id="new-functions-1" class="section level3">
+<div id="new-functions-2" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-functions-1" class="anchor"></a>New functions</h3>
+<a href="#new-functions-2" class="anchor"></a>New functions</h3>
 <ul>
 <li>
 <code>plotPCA</code>: Added improved method support for <code>DESeqTransform</code>, masking the method exported in DESeq2. Also added corresponding method support for <code>DESeqAnalysis</code> class, which uses <code>DESeqTransform</code> method internally.</li>
@@ -572,7 +575,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
 </div>
 
       </footer>
