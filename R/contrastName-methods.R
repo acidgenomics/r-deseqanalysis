@@ -1,6 +1,6 @@
 #' @name contrastName
 #' @inherit bioverbs::contrastName
-#' @note Updated 2019-09-10.
+#' @note Updated 2019-09-11.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -46,7 +46,7 @@ NULL
 
 
 
-## Updated 2019-09-10.
+## Updated 2019-09-11.
 `contrastName,DESeqResults` <-  # nolint
     function(
         object,
