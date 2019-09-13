@@ -2,7 +2,7 @@ Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
 Version: 0.2.7
-Date: 2019-09-11
+Date: 2019-09-13
 Authors@R: c(
     person(
         given = "Michael",
@@ -26,7 +26,7 @@ Depends:
     R (>= 3.6),
     basejump (>= 0.11.14)
 Imports:
-    acidplots (>= 0.2.14),
+    acidplots (>= 0.2.15),
     bioverbs (>= 0.2.10),
     goalie (>= 0.3.7),
     BiocGenerics (>= 0.30),
