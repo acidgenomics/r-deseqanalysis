@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
-#' @note Updated 2019-09-10.
+#' @note Updated 2019-09-13.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -66,7 +66,7 @@ NULL
 
 
 
-## Updated 2019-08-27.
+## Updated 2019-09-13.
 `plotVolcano,DESeqResults` <-  # nolint
     function(
         object,
@@ -75,13 +75,9 @@ NULL
         gene2symbol = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
-        pointColor = c(
-            downregulated = "darkorchid3",
-            upregulated = "darkorange2",
-            nonsignificant = "gray50"
-        ),
+        pointColor,
         pointSize = 2L,
-        pointAlpha = 0.7,
+        pointAlpha = 0.8,
         histograms = FALSE,
         return = c("ggplot", "DataFrame")
     ) {
@@ -330,6 +326,14 @@ NULL
             p
         }
     }
+
+palette <- acidplots::lightPalette
+formals(`plotVolcano,DESeqResults`)[["pointColor"]] <-
+    c(
+        downregulated = palette[["purple"]],
+        upregulated = palette[["orange"]],
+        nonsignificant = palette[["gray"]]
+    )
 
 
 

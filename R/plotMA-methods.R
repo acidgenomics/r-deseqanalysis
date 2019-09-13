@@ -2,7 +2,7 @@
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
 #' @note We are not allowing post hoc `alpha` or `lfcThreshold` cutoffs here.
-#' @note Updated 2019-09-10.
+#' @note Updated 2019-09-13.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual representation
@@ -67,7 +67,7 @@ NULL
 
 
 
-## Updated 2019-08-27.
+## Updated 2019-09-13.
 `plotMA,DESeqResults` <-  # nolint
     function(
         object,
@@ -75,13 +75,9 @@ NULL
         gene2symbol = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
-        pointColor = c(
-            downregulated = "darkorchid3",
-            upregulated = "darkorange2",
-            nonsignificant = "gray50"
-        ),
+        pointColor,
         pointSize = 2L,
-        pointAlpha = 0.7,
+        pointAlpha = 0.8,
         return = c("ggplot", "DataFrame")
     ) {
         validObject(object)
@@ -269,6 +265,14 @@ NULL
         ## Return --------------------------------------------------------------
         p
     }
+
+palette <- acidplots::lightPalette
+formals(`plotMA,DESeqResults`)[["pointColor"]] <-
+    c(
+        downregulated = palette[["purple"]],
+        upregulated = palette[["orange"]],
+        nonsignificant = palette[["gray"]]
+    )
 
 
 

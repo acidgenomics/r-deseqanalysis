@@ -12,15 +12,15 @@ plotMA(object, ...)
 
 \S4method{plotMA}{DESeqResults}(object, genes = NULL,
   gene2symbol = NULL, ntop = 0L, direction = c("both", "up", "down"),
-  pointColor = c(downregulated = "darkorchid3", upregulated =
-  "darkorange2", nonsignificant = "gray50"), pointSize = 2L,
-  pointAlpha = 0.7, return = c("ggplot", "DataFrame"))
+  pointColor = c(downregulated = "#AF52DE", upregulated = "#FF9500",
+  nonsignificant = "#8E8E93"), pointSize = 2L, pointAlpha = 0.8,
+  return = c("ggplot", "DataFrame"))
 
 \S4method{plotMA}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
   genes = NULL, ntop = 0L, direction = c("both", "up", "down"),
-  pointColor = c(downregulated = "darkorchid3", upregulated =
-  "darkorange2", nonsignificant = "gray50"), pointSize = 2L,
-  pointAlpha = 0.7, return = c("ggplot", "DataFrame"))
+  pointColor = c(downregulated = "#AF52DE", upregulated = "#FF9500",
+  nonsignificant = "#8E8E93"), pointSize = 2L, pointAlpha = 0.8,
+  return = c("ggplot", "DataFrame"))
 }
 \arguments{
 \item{object}{
@@ -78,7 +78,7 @@ taken in two samples, by transforming the data onto M (log ratio) and A
 \note{
 We are not allowing post hoc \code{alpha} or \code{lfcThreshold} cutoffs here.
 
-Updated 2019-09-10.
+Updated 2019-09-13.
 }
 \section{plotMA2 aliases}{
 
