@@ -174,7 +174,7 @@ NULL
             mapping = aes(x = !!sym(lfcCol))
         ) +
             geom_density(
-                colour = NA,
+                color = NA,
                 fill = pointColor[["nonsignificant"]]
             ) +
             scale_x_continuous(
@@ -199,7 +199,7 @@ NULL
             mapping = aes(x = !!sym(negLogTestCol))
         ) +
             geom_density(
-                colour = NA,
+                color = NA,
                 fill = pointColor[["nonsignificant"]]
             ) +
             scale_x_continuous(
@@ -224,13 +224,13 @@ NULL
             mapping = aes(
                 x = !!sym(lfcCol),
                 y = !!sym(negLogTestCol),
-                colour = !!sym("isDE")
+                color = !!sym("isDE")
             )
         ) +
             geom_vline(
                 xintercept = 0L,
                 size = 0.5,
-                colour = pointColor[["nonsignificant"]]
+                color = pointColor[["nonsignificant"]]
             ) +
             geom_point(
                 alpha = pointAlpha,
@@ -239,7 +239,7 @@ NULL
             ) +
             scale_x_continuous(breaks = pretty_breaks()) +
             scale_y_continuous(breaks = pretty_breaks()) +
-            guides(colour = FALSE) +
+            guides(color = FALSE) +
             labs(
                 title = contrastName(object),
                 subtitle = paste0(
@@ -253,7 +253,7 @@ NULL
 
         if (isCharacter(pointColor)) {
             p <- p +
-                scale_colour_manual(
+                scale_color_manual(
                     values = c(
                         "-1" = pointColor[["downregulated"]],
                         "0" = pointColor[["nonsignificant"]],

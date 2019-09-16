@@ -177,13 +177,13 @@ NULL
             mapping = aes(
                 x = !!sym("baseMean"),
                 y = !!sym(lfcCol),
-                colour = !!sym("isDE")
+                color = !!sym("isDE")
             )
         ) +
             geom_hline(
                 yintercept = 0L,
                 size = 0.5,
-                colour = pointColor[["nonsignificant"]]
+                color = pointColor[["nonsignificant"]]
             ) +
             geom_point(
                 alpha = pointAlpha,
@@ -197,7 +197,7 @@ NULL
             ) +
             scale_y_continuous(breaks = pretty_breaks()) +
             annotation_logticks(sides = "b") +
-            guides(colour = FALSE) +
+            guides(color = FALSE) +
             labs(
                 title = contrastName(object),
                 subtitle = paste0(
@@ -212,7 +212,7 @@ NULL
         ## Note that we're using direction-specific coloring by default.
         if (isCharacter(pointColor)) {
             p <- p +
-                scale_colour_manual(
+                scale_color_manual(
                     values = c(
                         "-1" = pointColor[["downregulated"]],
                         "0" = pointColor[["nonsignificant"]],
