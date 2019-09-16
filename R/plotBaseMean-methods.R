@@ -80,7 +80,7 @@ NULL
         )
     ) +
         geom_density(
-            colour = "black",
+            color = "black",
             fill = NA,
             size = size
         ) +
@@ -88,7 +88,7 @@ NULL
         geom_vline(
             mapping = aes(
                 xintercept = summary[["1st Qu."]],
-                colour = sprintf(
+                color = sprintf(
                     fmt = "1st quantile (%s)",
                     round(summary[["1st Qu."]], digits = 2L)
                 )
@@ -99,7 +99,7 @@ NULL
         geom_vline(
             mapping = aes(
                 xintercept = summary[["3rd Qu."]],
-                colour = sprintf(
+                color = sprintf(
                     fmt = "3rd quantile (%s)",
                     round(summary[["3rd Qu."]], digits = 2L)
                 )
@@ -110,7 +110,7 @@ NULL
         geom_vline(
             mapping = aes(
                 xintercept = summary[["Mean"]],
-                colour = sprintf(
+                color = sprintf(
                     fmt = "mean (%s)",
                     round(summary[["Mean"]], digits = 2L)
                 )
@@ -121,7 +121,7 @@ NULL
         geom_vline(
             mapping = aes(
                 xintercept = summary[["Median"]],
-                colour = sprintf(
+                color = sprintf(
                     fmt = "median (%s)",
                     round(summary[["Median"]], digits = 2L)
                 )
@@ -129,7 +129,7 @@ NULL
             linetype = linetype,
             size = size
         ) +
-        scale_colour_synesthesia_d(name = "summary") +
+        scale_color_synesthesia_d(name = "summary") +
         labs(
             title = "Base mean distribution",
             x = xLab

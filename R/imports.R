@@ -16,7 +16,7 @@
 #'   mcols<- metadata metadata<- na.omit
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom UpSetR fromList
-#' @importFrom acidplots plotHeatmap scale_colour_synesthesia_d upset
+#' @importFrom acidplots plotHeatmap scale_color_synesthesia_d upset
 #' @importFrom basejump Gene2Symbol as_tibble camelCase convertSampleIDsToNames
 #'   decode droplevels import initDir interestingGroups<- leftJoin makeNames
 #'   mapGenesToRownames markdownHeader markdownList matchArgsToDoCall
@@ -24,7 +24,7 @@
 #'   removeNA showSlotInfo snakeCase standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_density
-#'   geom_hline geom_point geom_vline ggplot guides labs scale_colour_manual
+#'   geom_hline geom_point geom_vline ggplot guides labs scale_color_manual
 #'   scale_x_continuous scale_y_continuous theme
 #' @importFrom goalie areDisjointSets areSetEqual assert bapply hasLength
 #'   hasNames hasLength hasRows hasRownames hasValidDimnames hasValidNames
