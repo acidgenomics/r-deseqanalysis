@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
-#' @note Updated 2019-09-13.
+#' @note Updated 2019-09-17.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -347,12 +347,13 @@ setMethod(
 
 
 
-## Updated 2019-09-10.
+## Updated 2019-09-17.
 `plotVolcano,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
-        lfcShrink = TRUE
+        lfcShrink = TRUE,
+        ...
     ) {
         validObject(object)
         assert(
@@ -366,29 +367,22 @@ setMethod(
             ),
             error = function(e) NULL
         )
-        data <- results(object, results = results, lfcShrink = lfcShrink)
-        do.call(
-            what = `plotVolcano,DESeqResults`,
-            args = matchArgsToDoCall(
-                args = list(
-                    object = data,
-                    genes = genes,
-                    gene2symbol = gene2symbol
-                ),
-                removeFormals = c("results", "lfcShrink")
-            )
+        plotVolcano(
+            object = results(
+                object = object,
+                results = results,
+                lfcShrink = lfcShrink
+            ),
+            genes = genes,
+            gene2symbol = gene2symbol,
+            ...
         )
     }
 
-f1 <- formals(`plotVolcano,DESeqAnalysis`)
-f2 <- formals(`plotVolcano,DESeqResults`)
-f2 <- f2[setdiff(names(f2), c(names(f1), "gene2symbol"))]
-f <- c(f1, f2)
-formals(`plotVolcano,DESeqAnalysis`) <- f
 
 
-
-#' @rdname plotVolcano
+#' @describeIn plotVolcano Passes to `DESeqResults` method, with `genes` and
+#'   `gene2symbol` arguments automatically defined.
 #' @export
 setMethod(
     f = "plotVolcano",

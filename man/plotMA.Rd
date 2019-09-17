@@ -16,11 +16,7 @@ plotMA(object, ...)
   nonsignificant = "#8E8E93"), pointSize = 2L, pointAlpha = 0.8,
   return = c("ggplot", "DataFrame"))
 
-\S4method{plotMA}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
-  genes = NULL, ntop = 0L, direction = c("both", "up", "down"),
-  pointColor = c(downregulated = "#AF52DE", upregulated = "#FF9500",
-  nonsignificant = "#8E8E93"), pointSize = 2L, pointAlpha = 0.8,
-  return = c("ggplot", "DataFrame"))
+\S4method{plotMA}{DESeqAnalysis}(object, results, lfcShrink = TRUE, ...)
 }
 \arguments{
 \item{object}{
@@ -75,10 +71,16 @@ of genomic data. The plot visualizes the differences between measurements
 taken in two samples, by transforming the data onto M (log ratio) and A
 (mean average) scales, then plotting these values.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{DESeqAnalysis}: Passes to \code{DESeqResults} method, with \code{genes} and
+\code{gene2symbol} arguments automatically defined.
+}}
+
 \note{
 We are not allowing post hoc \code{alpha} or \code{lfcThreshold} cutoffs here.
 
-Updated 2019-09-13.
+Updated 2019-09-17.
 }
 \section{plotMA2 aliases}{
 
