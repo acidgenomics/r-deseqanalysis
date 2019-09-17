@@ -2,7 +2,7 @@
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
 #' @note We are not allowing post hoc `alpha` or `lfcThreshold` cutoffs here.
-#' @note Updated 2019-09-13.
+#' @note Updated 2019-09-17.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual representation
@@ -286,12 +286,13 @@ setMethod(
 
 
 
-## Updated 2019-09-10.
+## Updated 2019-09-17.
 `plotMA,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
-        lfcShrink = TRUE
+        lfcShrink = TRUE,
+        ...
     ) {
         validObject(object)
         assert(
@@ -305,29 +306,23 @@ setMethod(
             ),
             error = function(e) NULL
         )
-        data <- results(object, results = results, lfcShrink = lfcShrink)
-        do.call(
-            what = plotMA,
-            args = matchArgsToDoCall(
-                args = list(
-                    object = data,
-                    genes = genes,
-                    gene2symbol = gene2symbol
-                ),
-                removeFormals = c("results", "lfcShrink")
-            )
+        ## Handoff to DESeqResults method.
+        plotMA(
+            object = results(
+                object = object,
+                results = results,
+                lfcShrink = lfcShrink
+            ),
+            genes = genes,
+            gene2symbol = gene2symbol,
+            ...
         )
     }
 
-f1 <- formals(`plotMA,DESeqAnalysis`)
-f2 <- formals(`plotMA,DESeqResults`)
-f2 <- f2[setdiff(names(f2), c(names(f1), "gene2symbol"))]
-f <- c(f1, f2)
-formals(`plotMA,DESeqAnalysis`) <- f
 
 
-
-#' @rdname plotMA
+#' @describeIn plotMA Passes to `DESeqResults` method, with `genes` and
+#'   `gene2symbol` arguments automatically defined.
 #' @export
 setMethod(
     f = "plotMA",

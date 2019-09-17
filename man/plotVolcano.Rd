@@ -17,11 +17,7 @@ plotVolcano(object, ...)
   return = c("ggplot", "DataFrame"))
 
 \S4method{plotVolcano}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
-  ylim = 1e-10, genes = NULL, ntop = 0L, direction = c("both",
-  "up", "down"), pointColor = c(downregulated = "#AF52DE", upregulated =
-  "#FF9500", nonsignificant = "#8E8E93"), pointSize = 2L,
-  pointAlpha = 0.8, histograms = FALSE, return = c("ggplot",
-  "DataFrame"))
+  ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -74,8 +70,14 @@ Use shrunken log2 fold change (LFC) values.}
 \description{
 Volcano plot
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{DESeqAnalysis}: Passes to \code{DESeqResults} method, with \code{genes} and
+\code{gene2symbol} arguments automatically defined.
+}}
+
 \note{
-Updated 2019-09-13.
+Updated 2019-09-17.
 }
 \examples{
 data(deseq)
