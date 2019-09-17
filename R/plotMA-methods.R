@@ -75,7 +75,11 @@ NULL
         gene2symbol = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
-        pointColor,
+        pointColor = c(
+            downregulated = acidplots::lightPalette[["purple"]],
+            upregulated = acidplots::lightPalette[["orange"]],
+            nonsignificant = acidplots::lightPalette[["gray"]]
+        ),
         pointSize = 2L,
         pointAlpha = 0.8,
         return = c("ggplot", "DataFrame")
@@ -265,14 +269,6 @@ NULL
         ## Return --------------------------------------------------------------
         p
     }
-
-palette <- acidplots::lightPalette
-formals(`plotMA,DESeqResults`)[["pointColor"]] <-
-    c(
-        downregulated = palette[["purple"]],
-        upregulated = palette[["orange"]],
-        nonsignificant = palette[["gray"]]
-    )
 
 
 
