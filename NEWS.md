@@ -1,3 +1,22 @@
+## DESeqAnalysis 0.2.8 (2019-09-17)
+
+### New functions
+
+- `apeglmContrast`: New utility function that enables `lfcShrink` using apeglm
+  without having to mentally deal with `coef` argument.
+
+### Major changes
+
+- Now attached DESeq2 automatically via "Depends" in `DESCRIPTION`.
+
+### Minor changes
+
+- `plotBaseMean`: Added argument support to define colors and disable summary
+  statistics lines. Simplified internal passthrough in `DESeqAnalysis`,
+  `DESeqDataSet`, and `DESeqResults` methods.
+
+
+
 ## DESeqAnalysis 0.2.7 (2019-09-11)
 
 ### Minor changes

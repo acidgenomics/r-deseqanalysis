@@ -2,7 +2,7 @@
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
 #' @note We are not allowing post hoc `alpha` or `lfcThreshold` cutoffs here.
-#' @note Updated 2019-09-10.
+#' @note Updated 2019-09-17.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual representation
@@ -67,7 +67,7 @@ NULL
 
 
 
-## Updated 2019-08-27.
+## Updated 2019-09-13.
 `plotMA,DESeqResults` <-  # nolint
     function(
         object,
@@ -76,12 +76,12 @@ NULL
         ntop = 0L,
         direction = c("both", "up", "down"),
         pointColor = c(
-            downregulated = "darkorchid3",
-            upregulated = "darkorange2",
-            nonsignificant = "gray50"
+            downregulated = acidplots::lightPalette[["purple"]],
+            upregulated = acidplots::lightPalette[["orange"]],
+            nonsignificant = acidplots::lightPalette[["gray"]]
         ),
         pointSize = 2L,
-        pointAlpha = 0.7,
+        pointAlpha = 0.8,
         return = c("ggplot", "DataFrame")
     ) {
         validObject(object)
@@ -181,13 +181,13 @@ NULL
             mapping = aes(
                 x = !!sym("baseMean"),
                 y = !!sym(lfcCol),
-                colour = !!sym("isDE")
+                color = !!sym("isDE")
             )
         ) +
             geom_hline(
                 yintercept = 0L,
                 size = 0.5,
-                colour = pointColor[["nonsignificant"]]
+                color = pointColor[["nonsignificant"]]
             ) +
             geom_point(
                 alpha = pointAlpha,
@@ -201,7 +201,7 @@ NULL
             ) +
             scale_y_continuous(breaks = pretty_breaks()) +
             annotation_logticks(sides = "b") +
-            guides(colour = FALSE) +
+            guides(color = FALSE) +
             labs(
                 title = contrastName(object),
                 subtitle = paste0(
@@ -216,7 +216,7 @@ NULL
         ## Note that we're using direction-specific coloring by default.
         if (isCharacter(pointColor)) {
             p <- p +
-                scale_colour_manual(
+                scale_color_manual(
                     values = c(
                         "-1" = pointColor[["downregulated"]],
                         "0" = pointColor[["nonsignificant"]],
@@ -282,12 +282,13 @@ setMethod(
 
 
 
-## Updated 2019-09-10.
+## Updated 2019-09-17.
 `plotMA,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
-        lfcShrink = TRUE
+        lfcShrink = TRUE,
+        ...
     ) {
         validObject(object)
         assert(
@@ -301,29 +302,22 @@ setMethod(
             ),
             error = function(e) NULL
         )
-        data <- results(object, results = results, lfcShrink = lfcShrink)
-        do.call(
-            what = plotMA,
-            args = matchArgsToDoCall(
-                args = list(
-                    object = data,
-                    genes = genes,
-                    gene2symbol = gene2symbol
-                ),
-                removeFormals = c("results", "lfcShrink")
-            )
+        ## Handoff to DESeqResults method.
+        plotMA(
+            object = results(
+                object = object,
+                results = results,
+                lfcShrink = lfcShrink
+            ),
+            gene2symbol = gene2symbol,
+            ...
         )
     }
 
-f1 <- formals(`plotMA,DESeqAnalysis`)
-f2 <- formals(`plotMA,DESeqResults`)
-f2 <- f2[setdiff(names(f2), c(names(f1), "gene2symbol"))]
-f <- c(f1, f2)
-formals(`plotMA,DESeqAnalysis`) <- f
 
 
-
-#' @rdname plotMA
+#' @describeIn plotMA Passes to `DESeqResults` method, with `gene2symbol`
+#'   argument automatically defined.
 #' @export
 setMethod(
     f = "plotMA",

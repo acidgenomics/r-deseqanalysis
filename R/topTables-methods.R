@@ -1,6 +1,6 @@
 #' @name topTables
 #' @inherit bioverbs::topTables
-#' @note Updated 2019-09-10.
+#' @note Updated 2019-09-17.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -13,6 +13,11 @@
 #'
 #' ## DESeqAnalysis ====
 #' topTables(deseq, results = 1L, n = 5L)
+#'
+#' ## DESeqResults `resultsTables()` list ====
+#' res <- results(deseq, results = 1L)
+#' resTbl <- resultsTables(res, return = "tbl_df")
+#' topTables(resTbl)
 NULL
 
 
@@ -26,13 +31,12 @@ NULL
 
 
 
-## Internal functions ==========================================================
 ## Updated 2019-08-20.
 .topKables <-  # nolint
     function(object, contrast, n) {
         assert(
             is(object, "DataFrameList"),
-            isString(contrast),
+            isString(contrast, nullOK = TRUE),
             isInt(n),
             isPositive(n)
         )
@@ -41,7 +45,11 @@ NULL
         if (hasLength(up)) {
             show(kable(
                 x = as.data.frame(.topTable(up, n = n)),
-                caption = paste(contrast, "(upregulated)")
+                caption = ifelse(
+                    test = is.null(contrast),
+                    yes = "upregulated",
+                    no = paste(contrast, "(upregulated)")
+                )
             ))
         }
         ## Downregulated genes.
@@ -49,7 +57,11 @@ NULL
         if (hasLength(down)) {
             show(kable(
                 x = as.data.frame(.topTable(down, n = n)),
-                caption = paste(contrast, "(downregulated)")
+                caption = ifelse(
+                    test = is.null(contrast),
+                    yes = "downregulated",
+                    no = paste(contrast, "(downregulated)")
+                )
             ))
         }
         ## Invisibly return list containing the subsets.
@@ -123,7 +135,6 @@ NULL
 
 
 
-## DESeqResults ================================================================
 ## This is used in bcbioRNASeq F1000 paper.
 ## Updated 2019-08-20.
 `topTables,DESeqResults` <-  # nolint
@@ -161,7 +172,6 @@ setMethod(
 
 
 
-## DESeqAnalysis ===============================================================
 ## Updated 2019-09-10.
 `topTables,DESeqAnalysis` <-  # nolint
     function(
@@ -193,4 +203,47 @@ setMethod(
     f = "topTables",
     signature = signature("DESeqAnalysis"),
     definition = `topTables,DESeqAnalysis`
+)
+
+
+
+## This is used in bcbioRNASeq F1000 paper.
+## Updated 2019-09-17.
+`topTables,list` <-  # nolint
+    function(object, n = 10L, contrast = NULL) {
+        assert(
+            isSubset(c("down", "up"), names(object)),
+            is(object[[1L]], "tbl_df"),
+            isSubset(
+                x = c("rowname", "baseMean", "log2FoldChange", "padj"),
+                y = colnames(object[[1L]])
+            )
+        )
+        ## Coerce tbl_df list to DataFrameList.
+        list <- DataFrameList(lapply(
+            X = object,
+            FUN = function(x) {
+                x <- as(x, "DataFrame")
+                x <- as(x, "DESeqResults")
+                x
+            }
+        ))
+        .topKables(
+            object = list,
+            contrast = contrast,
+            n = n
+        )
+    }
+
+
+
+#' @describeIn topTables Legacy support for `tbl_df` list returned from
+#'   `resultsTables()`. This method is still supported because it is used in the
+#'   F1000 v2 workflow paper. Otherwise, we now recommend using the
+#'   `DESeqAnalysis` method directly.
+#' @export
+setMethod(
+    f = "topTables",
+    signature = signature("list"),
+    definition = `topTables,list`
 )

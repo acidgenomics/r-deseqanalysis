@@ -1,6 +1,9 @@
 #' @name plotPCA
 #' @inherit acidplots::plotPCA
-#' @note Updated 2019-09-10.
+#' @note Updated 2019-09-17.
+#'
+#' @details Passes to `SummarizedExperiment` defined in acidplots package.
+#'
 #' @examples
 #' data(deseq)
 #'
@@ -33,7 +36,9 @@ NULL
 
 
 
-#' @rdname plotPCA
+#' @describeIn plotPCA Passes to `SummarizedExperiment` method defined in
+#'   acidplots package. Uses values defined in
+#'   [`assay()`][SummarizedExperiment::assay].
 #' @export
 setMethod(
     f = "plotPCA",
@@ -53,7 +58,8 @@ setMethod(
 
 
 
-#' @rdname plotPCA
+#' @describeIn plotPCA Extracts `DESeqTransform` and passes to corresponding
+#'   method.
 #' @export
 setMethod(
     f = "plotPCA",

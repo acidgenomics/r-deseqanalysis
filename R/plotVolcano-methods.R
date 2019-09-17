@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
-#' @note Updated 2019-09-10.
+#' @note Updated 2019-09-17.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -66,7 +66,7 @@ NULL
 
 
 
-## Updated 2019-08-27.
+## Updated 2019-09-13.
 `plotVolcano,DESeqResults` <-  # nolint
     function(
         object,
@@ -76,12 +76,12 @@ NULL
         ntop = 0L,
         direction = c("both", "up", "down"),
         pointColor = c(
-            downregulated = "darkorchid3",
-            upregulated = "darkorange2",
-            nonsignificant = "gray50"
+            downregulated = acidplots::lightPalette[["purple"]],
+            upregulated = acidplots::lightPalette[["orange"]],
+            nonsignificant = acidplots::lightPalette[["gray"]]
         ),
         pointSize = 2L,
-        pointAlpha = 0.7,
+        pointAlpha = 0.8,
         histograms = FALSE,
         return = c("ggplot", "DataFrame")
     ) {
@@ -178,7 +178,7 @@ NULL
             mapping = aes(x = !!sym(lfcCol))
         ) +
             geom_density(
-                colour = NA,
+                color = NA,
                 fill = pointColor[["nonsignificant"]]
             ) +
             scale_x_continuous(
@@ -203,7 +203,7 @@ NULL
             mapping = aes(x = !!sym(negLogTestCol))
         ) +
             geom_density(
-                colour = NA,
+                color = NA,
                 fill = pointColor[["nonsignificant"]]
             ) +
             scale_x_continuous(
@@ -228,13 +228,13 @@ NULL
             mapping = aes(
                 x = !!sym(lfcCol),
                 y = !!sym(negLogTestCol),
-                colour = !!sym("isDE")
+                color = !!sym("isDE")
             )
         ) +
             geom_vline(
                 xintercept = 0L,
                 size = 0.5,
-                colour = pointColor[["nonsignificant"]]
+                color = pointColor[["nonsignificant"]]
             ) +
             geom_point(
                 alpha = pointAlpha,
@@ -243,7 +243,7 @@ NULL
             ) +
             scale_x_continuous(breaks = pretty_breaks()) +
             scale_y_continuous(breaks = pretty_breaks()) +
-            guides(colour = FALSE) +
+            guides(color = FALSE) +
             labs(
                 title = contrastName(object),
                 subtitle = paste0(
@@ -257,7 +257,7 @@ NULL
 
         if (isCharacter(pointColor)) {
             p <- p +
-                scale_colour_manual(
+                scale_color_manual(
                     values = c(
                         "-1" = pointColor[["downregulated"]],
                         "0" = pointColor[["nonsignificant"]],
@@ -343,12 +343,13 @@ setMethod(
 
 
 
-## Updated 2019-09-10.
+## Updated 2019-09-17.
 `plotVolcano,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
-        lfcShrink = TRUE
+        lfcShrink = TRUE,
+        ...
     ) {
         validObject(object)
         assert(
@@ -362,29 +363,21 @@ setMethod(
             ),
             error = function(e) NULL
         )
-        data <- results(object, results = results, lfcShrink = lfcShrink)
-        do.call(
-            what = `plotVolcano,DESeqResults`,
-            args = matchArgsToDoCall(
-                args = list(
-                    object = data,
-                    genes = genes,
-                    gene2symbol = gene2symbol
-                ),
-                removeFormals = c("results", "lfcShrink")
-            )
+        plotVolcano(
+            object = results(
+                object = object,
+                results = results,
+                lfcShrink = lfcShrink
+            ),
+            gene2symbol = gene2symbol,
+            ...
         )
     }
 
-f1 <- formals(`plotVolcano,DESeqAnalysis`)
-f2 <- formals(`plotVolcano,DESeqResults`)
-f2 <- f2[setdiff(names(f2), c(names(f1), "gene2symbol"))]
-f <- c(f1, f2)
-formals(`plotVolcano,DESeqAnalysis`) <- f
 
 
-
-#' @rdname plotVolcano
+#' @describeIn plotVolcano Passes to `DESeqResults` method, with `gene2symbol`
+#'   argument automatically defined.
 #' @export
 setMethod(
     f = "plotVolcano",

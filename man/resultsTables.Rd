@@ -10,8 +10,8 @@
 resultsTables(object, ...)
 
 \S4method{resultsTables}{DESeqResults}(object, DESeqDataSet = NULL,
-  alpha = NULL, lfcThreshold = NULL, return = c("DataFrameList",
-  "tbl_df"), ...)
+  alpha = NULL, lfcThreshold = NULL, return = c("tbl_df",
+  "DataFrameList"), ...)
 
 \S4method{resultsTables}{DESeqAnalysis}(object, results,
   lfcShrink = TRUE, extra = TRUE, alpha = NULL,
@@ -48,6 +48,9 @@ Use shrunken log2 fold change (LFC) values.}
 
 \item{extra}{\code{logical(1)}.
 Include row data and normalized counts from internal \code{DESeqDataSet}.}
+
+\item{contrast}{\code{character(1)} or \code{NULL}.
+Contrast name.}
 }
 \value{
 \code{list}.

@@ -12,15 +12,12 @@ plotMA(object, ...)
 
 \S4method{plotMA}{DESeqResults}(object, genes = NULL,
   gene2symbol = NULL, ntop = 0L, direction = c("both", "up", "down"),
-  pointColor = c(downregulated = "darkorchid3", upregulated =
-  "darkorange2", nonsignificant = "gray50"), pointSize = 2L,
-  pointAlpha = 0.7, return = c("ggplot", "DataFrame"))
+  pointColor = c(downregulated = acidplots::lightPalette[["purple"]],
+  upregulated = acidplots::lightPalette[["orange"]], nonsignificant =
+  acidplots::lightPalette[["gray"]]), pointSize = 2L, pointAlpha = 0.8,
+  return = c("ggplot", "DataFrame"))
 
-\S4method{plotMA}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
-  genes = NULL, ntop = 0L, direction = c("both", "up", "down"),
-  pointColor = c(downregulated = "darkorchid3", upregulated =
-  "darkorange2", nonsignificant = "gray50"), pointSize = 2L,
-  pointAlpha = 0.7, return = c("ggplot", "DataFrame"))
+\S4method{plotMA}{DESeqAnalysis}(object, results, lfcShrink = TRUE, ...)
 }
 \arguments{
 \item{object}{
@@ -75,10 +72,16 @@ of genomic data. The plot visualizes the differences between measurements
 taken in two samples, by transforming the data onto M (log ratio) and A
 (mean average) scales, then plotting these values.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{DESeqAnalysis}: Passes to \code{DESeqResults} method, with \code{gene2symbol}
+argument automatically defined.
+}}
+
 \note{
 We are not allowing post hoc \code{alpha} or \code{lfcThreshold} cutoffs here.
 
-Updated 2019-09-10.
+Updated 2019-09-17.
 }
 \section{plotMA2 aliases}{
 

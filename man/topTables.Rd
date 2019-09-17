@@ -5,6 +5,7 @@
 \alias{topTables}
 \alias{topTables,DESeqResults-method}
 \alias{topTables,DESeqAnalysis-method}
+\alias{topTables,list-method}
 \title{Top tables}
 \usage{
 topTables(object, ...)
@@ -14,6 +15,8 @@ topTables(object, ...)
 
 \S4method{topTables}{DESeqAnalysis}(object, results, n = 10L,
   lfcShrink = TRUE)
+
+\S4method{topTables}{list}(object, n = 10L, contrast = NULL)
 }
 \arguments{
 \item{object}{Object.}
@@ -38,12 +41,25 @@ Markdown tables.
 \description{
 Top tables of differentially expressed genes.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{list}: Legacy support for \code{tbl_df} list returned from
+\code{resultsTables()}. This method is still supported because it is used in the
+F1000 v2 workflow paper. Otherwise, we now recommend using the
+\code{DESeqAnalysis} method directly.
+}}
+
 \note{
-Updated 2019-09-10.
+Updated 2019-09-17.
 }
 \examples{
 data(deseq)
 
 ## DESeqAnalysis ====
 topTables(deseq, results = 1L, n = 5L)
+
+## DESeqResults `resultsTables()` list ====
+res <- results(deseq, results = 1L)
+resTbl <- resultsTables(res, return = "tbl_df")
+topTables(resTbl)
 }
