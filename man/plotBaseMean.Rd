@@ -11,13 +11,22 @@
 plotBaseMean(object, ...)
 
 \S4method{plotBaseMean}{DESeqDataSet}(object, nonzero = TRUE,
-  trans = c("log10", "log2", "identity"))
+  trans = c("log10", "log2", "identity"), summary = TRUE,
+  color = getOption(x = "acid.color.discrete", default =
+  acidplots::scale_color_synesthesia_d()), labels = list(title =
+  "Base mean distribution", subtitle = NULL, x =
+  "average expression across all samples", y = "density", color =
+  "summary"))
 
 \S4method{plotBaseMean}{DESeqResults}(object, nonzero = TRUE,
-  trans = c("log10", "log2", "identity"))
+  trans = c("log10", "log2", "identity"), summary = TRUE,
+  color = getOption(x = "acid.color.discrete", default =
+  acidplots::scale_color_synesthesia_d()), labels = list(title =
+  "Base mean distribution", subtitle = NULL, x =
+  "average expression across all samples", y = "density", color =
+  "summary"))
 
-\S4method{plotBaseMean}{DESeqAnalysis}(object, nonzero = TRUE,
-  trans = c("log10", "log2", "identity"))
+\S4method{plotBaseMean}{DESeqAnalysis}(object, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -32,6 +41,18 @@ Name of the axis scale transformation to apply.
 
 For more information:\preformatted{help(topic = "scale_x_continuous", package = "ggplot2")
 }}
+
+\item{color}{\code{ScaleDiscrete}.
+Desired ggplot2 color scale. Must supply discrete values. When set \code{NULL},
+the default ggplot2 color palette will be used. If manual color definitions
+are desired, we recommend using \code{\link[ggplot2:scale_color_manual]{ggplot2::scale_color_manual()}}.
+
+To set the discrete color palette globally, use:\preformatted{options(acid.color.discrete = ggplot2::scale_color_viridis_d())
+}}
+
+\item{labels}{\code{list}.
+ggplot2 labels.
+See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
 }
 \value{
 \code{ggplot}.
@@ -40,8 +61,18 @@ For more information:\preformatted{help(topic = "scale_x_continuous", package = 
 The base mean is the mean of normalized counts of all samples, normalizing
 for sequencing depth.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{DESeqDataSet}: Generates row means of normalized counts. This value
+corresponds to the \code{baseMean} column of \code{DESeqResults}.
+
+\item \code{DESeqResults}: Uses \code{baseMean} column of results.
+
+\item \code{DESeqAnalysis}: Passes to \code{DESeqDataSet} method.
+}}
+
 \note{
-Updated 2019-09-10.
+Updated 2019-09-17.
 }
 \examples{
 data(deseq)
