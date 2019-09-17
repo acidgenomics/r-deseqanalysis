@@ -35,7 +35,8 @@ NULL
     function(object, ...) {
         dots <- list(...)
         rse <- as(object, "RangedSummarizedExperiment")
-        assays(rse) <- SimpleList(normalized = counts(object, normalized = TRUE))
+        assays(rse) <-
+            SimpleList(normalized = counts(object, normalized = TRUE))
         args <- c(object = rse, dots)
         labels <- args[["labels"]]
         if (is.null(labels)) {
