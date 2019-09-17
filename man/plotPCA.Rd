@@ -66,8 +66,21 @@ to the first argument in the \code{character} vector.}
 \description{
 Principal component analysis plot
 }
+\details{
+Passes to \code{SummarizedExperiment} defined in acidplots package.
+}
+\section{Methods (by class)}{
+\itemize{
+\item \code{DESeqTransform}: Passes to \code{SummarizedExperiment} method defined in
+acidplots package. Uses values defined in
+\code{\link[SummarizedExperiment:assay]{assay()}}.
+
+\item \code{DESeqAnalysis}: Extracts \code{DESeqTransform} and passes to corresponding
+method.
+}}
+
 \note{
-Updated 2019-09-10.
+Updated 2019-09-17.
 }
 \section{Principal component analysis}{
 
