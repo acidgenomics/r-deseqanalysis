@@ -7,23 +7,38 @@
 apeglmContrast(dds, contrast, ...)
 }
 \arguments{
+\item{dds}{\code{DESeqDataSet}.}
+
+\item{contrast}{\code{character(3)}.
+Pairwise contrast vector:
+\enumerate{
+\item \code{factor}: Grouping factor. Corresponds to column name in
+\code{\link[SummarizedExperiment:colData]{colData()}}.
+\item \code{numerator}: Numerator samples.
+\item \code{denominator}: Denominator samples.
+}
+
+Numerator and denominator values correspond to grouping factor column.
+See \code{\link[=results]{results()}} for details. Note that we're intentionally being more
+strict about the input format here.}
+
 \item{...}{Passes to \code{\link[DESeq2:lfcShrink]{lfcShrink()}}, with
 \code{type = "apeglm"} and \code{coef} automatically defined. Optionally can pass
 unshrunken \code{DESeqResults} via \code{res} argument here and this will set
 \code{alpha}, \code{lfcThreshold} automatically.}
 }
 \description{
-Log2 fold change shrinkage via \code{\link[DESeq2:lfcShrink]{lfcShrink()}}
-currently only supports \code{coef} but not \code{contrast} argument, so we're defining
-a wrapper function here that sets \code{coef} internally automatically.
+Wrapper function that helps set up \code{\link[DESeq2:lfcShrink]{lfcShrink()}} to
+shrink LFC values for a pairwise contrast via apeglm, without having to
+manually relevel factor reference levels to use the required \code{coef} argument.
 }
 \details{
-Generates model matrices internally via
-\code{\link[stats:model.matrix]{model.matrix()}} and then dynamically sets reference
-factor levels, as recommended by DESeq2 vignette.
+Dynamically sets reference factor levels, as recommended by DESeq2 vignette.
+Matches \code{contrast} input internally to corresponding \code{coef} corresponding
+to values in \code{\link[DESeq2:resultsNames]{resultsNames()}}.
 
 Runs \code{\link[DESeq2:nbinomWaldTest]{nbinomWaldTest()}} via
-\code{\link[DESeq2:DESeq2]{DESeq()}}, followed by \code{\link[DESeq2:lfcShrink]{lfcShrink()}}.
+\code{\link[DESeq2:DESeq]{DESeq()}}, followed by \code{\link[DESeq2:lfcShrink]{lfcShrink()}}.
 }
 \note{
 Updated 2019-09-17.
@@ -52,9 +67,10 @@ lfcShrinkType(shrink)
 \item "Extended section on shrinkage estimators" section of DESeq2 vignette,
 which explains how to manually define \code{coef} argument which can
 be used with apeglm \code{\link[DESeq2:lfcShrink]{lfcShrink()}}.
-\item \code{\link[stats:model.matrix]{stats::model.matrix()}}.
 \item \code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}}.
 \item \code{\link[apeglm:apeglm]{apeglm::apeglm()}}.
+\item \code{\link[stats:model.matrix]{stats::model.matrix()}}.
+\item \code{\link[DESeq2:resultsNames]{DESeq2::resultsNames()}}.
 \item \code{\link[DESeq2:DESeq]{DESeq2::DESeq()}}.
 }
 }

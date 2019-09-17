@@ -42,6 +42,9 @@ Name of the axis scale transformation to apply.
 For more information:\preformatted{help(topic = "scale_x_continuous", package = "ggplot2")
 }}
 
+\item{summary}{\code{logical(1)}.
+Include distribution summary statistics as lines on the plot.}
+
 \item{color}{\code{ScaleDiscrete}.
 Desired ggplot2 color scale. Must supply discrete values. When set \code{NULL},
 the default ggplot2 color palette will be used. If manual color definitions
@@ -81,5 +84,6 @@ plotBaseMean(deseq)
 \seealso{
 \itemize{
 \item https://support.bioconductor.org/p/75244/
+\item \code{\link[base:summary]{summary()}}
 }
 }

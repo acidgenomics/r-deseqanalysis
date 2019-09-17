@@ -1,19 +1,31 @@
 #' Run a quick pairwise contrast using lfcShrink with apeglm
 #'
-#' Log2 fold change shrinkage via [`lfcShrink()`][DESeq2::lfcShrink]
-#' currently only supports `coef` but not `contrast` argument, so we're defining
-#' a wrapper function here that sets `coef` internally automatically.
+#' Wrapper function that helps set up [`lfcShrink()`][DESeq2::lfcShrink] to
+#' shrink LFC values for a pairwise contrast via apeglm, without having to
+#' manually relevel factor reference levels to use the required `coef` argument.
 #'
-#' Generates model matrices internally via
-#' [`model.matrix()`][stats::model.matrix] and then dynamically sets reference
-#' factor levels, as recommended by DESeq2 vignette.
+#' Dynamically sets reference factor levels, as recommended by DESeq2 vignette.
+#' Matches `contrast` input internally to corresponding `coef` corresponding
+#' to values in [`resultsNames()`][DESeq2::resultsNames].
 #'
 #' Runs [`nbinomWaldTest()`][DESeq2::nbinomWaldTest] via
-#' [`DESeq()`][DESeq2::DESeq2], followed by [`lfcShrink()`][DESeq2::lfcShrink].
+#' [`DESeq()`][DESeq2::DESeq], followed by [`lfcShrink()`][DESeq2::lfcShrink].
 #'
 #' @export
 #' @note Updated 2019-09-17.
 #'
+#' @param dds `DESeqDataSet`.
+#' @param contrast `character(3)`.
+#'   Pairwise contrast vector:
+#'
+#'   1. `factor`: Grouping factor. Corresponds to column name in
+#'      [`colData()`][SummarizedExperiment::colData].
+#'   2. `numerator`: Numerator samples.
+#'   3. `denominator`: Denominator samples.
+#'
+#'   Numerator and denominator values correspond to grouping factor column.
+#'   See [`results()`] for details. Note that we're intentionally being more
+#'   strict about the input format here.
 #' @param ... Passes to [`lfcShrink()`][DESeq2::lfcShrink], with
 #'   `type = "apeglm"` and `coef` automatically defined. Optionally can pass
 #'   unshrunken `DESeqResults` via `res` argument here and this will set
@@ -23,9 +35,10 @@
 #' - "Extended section on shrinkage estimators" section of DESeq2 vignette,
 #'   which explains how to manually define `coef` argument which can
 #'   be used with apeglm [`lfcShrink()`][DESeq2::lfcShrink].
-#' - [stats::model.matrix()].
 #' - [DESeq2::lfcShrink()].
 #' - [apeglm::apeglm()].
+#' - [stats::model.matrix()].
+#' - [DESeq2::resultsNames()].
 #' - [DESeq2::DESeq()].
 #'
 #' @examples

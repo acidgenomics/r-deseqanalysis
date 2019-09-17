@@ -10,7 +10,8 @@
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom BiocGenerics updateObject
-#' @importFrom DESeq2 counts fpkm nbinomWaldTest priorInfo
+#' @importFrom DESeq2 DESeq counts design fpkm lfcShrink nbinomWaldTest
+#'   priorInfo
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors SimpleList as.data.frame cbind do.call head mcols
 #'   mcols<- metadata metadata<- na.omit
@@ -37,7 +38,7 @@
 #' @importFrom acidplots acid_geom_label_repel plotCounts plotPCA
 #' @importFrom rlang !! sym
 #' @importFrom scales log_breaks pretty_breaks
-#' @importFrom stats model.matrix
+#' @importFrom stats model.matrix relevel
 #' @importFrom stringr str_match str_trunc
 #' @importFrom utils capture.output getS3method globalVariables packageVersion
 NULL
