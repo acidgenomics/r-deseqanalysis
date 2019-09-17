@@ -13,7 +13,7 @@ plotDEGPCA(object, ...)
   direction = c("both", "up", "down"), object, assay = 1L,
   interestingGroups = NULL, label = getOption(x = "acid.label", default
   = FALSE), color = getOption(x = "acid.color.discrete", default =
-  acidplots::scale_colour_synesthesia_d()), pointSize = getOption(x =
+  acidplots::scale_color_synesthesia_d()), pointSize = getOption(x =
   "acid.point.size", default = 3L), return = c("ggplot", "DataFrame"),
   ...)
 
@@ -21,10 +21,9 @@ plotDEGPCA(object, ...)
   contrastSamples = FALSE, direction = c("both", "up", "down"),
   assay = 1L, interestingGroups = NULL, label = getOption(x =
   "acid.label", default = FALSE), color = getOption(x =
-  "acid.color.discrete", default =
-  acidplots::scale_colour_synesthesia_d()), pointSize = getOption(x =
-  "acid.point.size", default = 3L), return = c("ggplot", "DataFrame"),
-  ...)
+  "acid.color.discrete", default = acidplots::scale_color_synesthesia_d()),
+  pointSize = getOption(x = "acid.point.size", default = 3L),
+  return = c("ggplot", "DataFrame"), ...)
 }
 \arguments{
 \item{object}{Object.}
