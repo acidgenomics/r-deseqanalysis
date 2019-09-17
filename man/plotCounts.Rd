@@ -11,9 +11,10 @@ plotCounts(object, ...)
 \S4method{plotCounts}{DESeqAnalysis}(object, genes,
   interestingGroups = NULL, trans = c("identity", "log2", "log10"),
   medianLine = TRUE, color = getOption(x = "acid.color.discrete",
-  default = acidplots::scale_colour_synesthesia_d()),
-  legend = getOption(x = "acid.legend", default = TRUE),
-  style = c("facet", "wide"))
+  default = acidplots::scale_color_synesthesia_d()), legend = getOption(x
+  = "acid.legend", default = TRUE), style = c("facet", "wide"),
+  labels = list(title = NULL, subtitle = NULL, sampleAxis = NULL,
+  countAxis = "counts"))
 }
 \arguments{
 \item{object}{Object.}
@@ -32,8 +33,8 @@ For more information:\preformatted{help(topic = "scale_x_continuous", package = 
 }}
 
 \item{medianLine}{\code{logical(1)}.
-Include median line for each group. Disabled if samples are colored by
-sample name.}
+Include median line for each interesting group.
+Disabled if samples are colored by sample name.}
 
 \item{color}{\code{ScaleDiscrete}.
 Desired ggplot2 color scale. Must supply discrete values. When set \code{NULL},
@@ -48,6 +49,10 @@ Include plot legend.}
 
 \item{style}{\code{character(1)}.
 Plot style.}
+
+\item{labels}{\code{list}.
+ggplot2 labels.
+See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
 
 \item{...}{Additional arguments.}
 }
@@ -68,7 +73,7 @@ Updated 2019-08-27.
 
 \itemize{
 \item \code{DESeqDataSet}: Automatically plots normalized counts. Arguments pass
-through to \code{SummarizedExperiment} method, but \code{assay} and \code{countsAxisLabel}
+through to \code{SummarizedExperiment} method, but \code{assay} and \code{countAxisLabel}
 are automatic.
 }
 }

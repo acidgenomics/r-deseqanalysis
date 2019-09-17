@@ -10,8 +10,8 @@
 resultsTables(object, ...)
 
 \S4method{resultsTables}{DESeqResults}(object, DESeqDataSet = NULL,
-  alpha = NULL, lfcThreshold = NULL, return = c("DataFrameList",
-  "tbl_df"), ...)
+  alpha = NULL, lfcThreshold = NULL, return = c("tbl_df",
+  "DataFrameList"), ...)
 
 \S4method{resultsTables}{DESeqAnalysis}(object, results,
   lfcShrink = TRUE, extra = TRUE, alpha = NULL,
