@@ -38,9 +38,9 @@
   
 
 <meta property="og:title" content="Run a quick pairwise contrast using lfcShrink with apeglm — apeglmContrast" />
-<meta property="og:description" content="Log2 fold change shrinkage via lfcShrink()
-currently only supports coef but not contrast argument, so we're defining
-a wrapper function here that sets coef internally automatically." />
+<meta property="og:description" content="Wrapper function that helps set up lfcShrink() to
+shrink LFC values for a pairwise contrast via apeglm, without having to
+manually relevel factor reference levels to use the required coef argument." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -118,9 +118,9 @@ a wrapper function here that sets coef internally automatically." />
     </div>
 
     <div class="ref-description">
-    <p>Log2 fold change shrinkage via <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>lfcShrink()</a></code>
-currently only supports <code>coef</code> but not <code>contrast</code> argument, so we're defining
-a wrapper function here that sets <code>coef</code> internally automatically.</p>
+    <p>Wrapper function that helps set up <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>lfcShrink()</a></code> to
+shrink LFC values for a pairwise contrast via apeglm, without having to
+manually relevel factor reference levels to use the required <code>coef</code> argument.</p>
     </div>
 
     <pre class="usage"><span class='fu'>apeglmContrast</span>(<span class='no'>dds</span>, <span class='no'>contrast</span>, <span class='no'>...</span>)</pre>
@@ -128,6 +128,24 @@ a wrapper function here that sets <code>coef</code> internally automatically.</p
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>dds</th>
+      <td><p><code>DESeqDataSet</code>.</p></td>
+    </tr>
+    <tr>
+      <th>contrast</th>
+      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(3)</a></code>.
+Pairwise contrast vector:</p><ol>
+<li><p><code>factor</code>: Grouping factor. Corresponds to column name in
+<code><a href='https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html'>colData()</a></code>.</p></li>
+<li><p><code>numerator</code>: Numerator samples.</p></li>
+<li><p><code>denominator</code>: Denominator samples.</p></li>
+</ol>
+
+<p>Numerator and denominator values correspond to grouping factor column.
+See <code><a href='results.html'>results()</a></code> for details. Note that we're intentionally being more
+strict about the input format here.</p></td>
+    </tr>
     <tr>
       <th>...</th>
       <td><p>Passes to <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>lfcShrink()</a></code>, with
@@ -139,11 +157,11 @@ unshrunken <code>DESeqResults</code> via <code>res</code> argument here and this
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Generates model matrices internally via
-<code><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix()</a></code> and then dynamically sets reference
-factor levels, as recommended by DESeq2 vignette.</p>
+    <p>Dynamically sets reference factor levels, as recommended by DESeq2 vignette.
+Matches <code>contrast</code> input internally to corresponding <code>coef</code> corresponding
+to values in <code><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>resultsNames()</a></code>.</p>
 <p>Runs <code><a href='https://rdrr.io/pkg/DESeq2/man/nbinomWaldTest.html'>nbinomWaldTest()</a></code> via
-<code>DESeq()</code>, followed by <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>lfcShrink()</a></code>.</p>
+<code><a href='https://rdrr.io/pkg/DESeq2/man/DESeq.html'>DESeq()</a></code>, followed by <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>lfcShrink()</a></code>.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>Updated 2019-09-17.</p>
@@ -154,9 +172,10 @@ factor levels, as recommended by DESeq2 vignette.</p>
 <li><p>"Extended section on shrinkage estimators" section of DESeq2 vignette,
 which explains how to manually define <code>coef</code> argument which can
 be used with apeglm <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>lfcShrink()</a></code>.</p></li>
-<li><p><code><a href='https://rdrr.io/r/stats/model.matrix.html'>stats::model.matrix()</a></code>.</p></li>
 <li><p><code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>DESeq2::lfcShrink()</a></code>.</p></li>
 <li><p><code><a href='https://rdrr.io/pkg/apeglm/man/apeglm.html'>apeglm::apeglm()</a></code>.</p></li>
+<li><p><code><a href='https://rdrr.io/r/stats/model.matrix.html'>stats::model.matrix()</a></code>.</p></li>
+<li><p><code><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>DESeq2::resultsNames()</a></code>.</p></li>
 <li><p><code><a href='https://rdrr.io/pkg/DESeq2/man/DESeq.html'>DESeq2::DESeq()</a></code>.</p></li>
 </ul>
 </div>
