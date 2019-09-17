@@ -73,8 +73,8 @@ taken in two samples, by transforming the data onto M (log ratio) and A
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{DESeqAnalysis}: Passes to \code{DESeqResults} method, with \code{genes} and
-\code{gene2symbol} arguments automatically defined.
+\item \code{DESeqAnalysis}: Passes to \code{DESeqResults} method, with \code{gene2symbol}
+argument automatically defined.
 }}
 
 \note{

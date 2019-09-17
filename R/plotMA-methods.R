@@ -313,7 +313,6 @@ setMethod(
                 results = results,
                 lfcShrink = lfcShrink
             ),
-            genes = genes,
             gene2symbol = gene2symbol,
             ...
         )
@@ -321,8 +320,8 @@ setMethod(
 
 
 
-#' @describeIn plotMA Passes to `DESeqResults` method, with `genes` and
-#'   `gene2symbol` arguments automatically defined.
+#' @describeIn plotMA Passes to `DESeqResults` method, with `gene2symbol`
+#'   argument automatically defined.
 #' @export
 setMethod(
     f = "plotMA",
