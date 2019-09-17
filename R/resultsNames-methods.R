@@ -109,7 +109,8 @@ NULL
 
 
 
-`contrastNames,DESeqDataSet` <- `resultsNames,DESeqDataSet`
+`contrastNames,DESeqDataSet` <-  # nolint
+    `resultsNames,DESeqDataSet`
 
 
 
@@ -124,7 +125,8 @@ setMethod(
 
 
 ## Updated 2019-07-23.
-`contrastNames,DESeqAnalysis` <- `resultsNames,DESeqAnalysis`
+`contrastNames,DESeqAnalysis` <-  # nolint
+    `resultsNames,DESeqAnalysis`
 
 
 
@@ -139,8 +141,8 @@ setMethod(
 
 
 ## Updated 2019-09-10.
-`contrastNames<-,DESeqAnalysis,character` <-
-    `resultsNames<-,DESeqAnalysis,character`  # nolint
+`contrastNames<-,DESeqAnalysis,character` <-  # nolint
+    `resultsNames<-,DESeqAnalysis,character`
 
 
 
