@@ -48,6 +48,9 @@ Use shrunken log2 fold change (LFC) values.}
 
 \item{extra}{\code{logical(1)}.
 Include row data and normalized counts from internal \code{DESeqDataSet}.}
+
+\item{contrast}{\code{character(1)} or \code{NULL}.
+Contrast name.}
 }
 \value{
 \code{list}.
