@@ -12,9 +12,10 @@ plotVolcano(object, ...)
 \S4method{plotVolcano}{DESeqResults}(object, ylim = 1e-10,
   genes = NULL, gene2symbol = NULL, ntop = 0L,
   direction = c("both", "up", "down"), pointColor = c(downregulated =
-  "#AF52DE", upregulated = "#FF9500", nonsignificant = "#8E8E93"),
-  pointSize = 2L, pointAlpha = 0.8, histograms = FALSE,
-  return = c("ggplot", "DataFrame"))
+  acidplots::lightPalette[["purple"]], upregulated =
+  acidplots::lightPalette[["orange"]], nonsignificant =
+  acidplots::lightPalette[["gray"]]), pointSize = 2L, pointAlpha = 0.8,
+  histograms = FALSE, return = c("ggplot", "DataFrame"))
 
 \S4method{plotVolcano}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
   ...)
