@@ -65,10 +65,7 @@ setMethod(
 `plotCounts,DESeqAnalysis` <-  # nolint
     function(object, ...) {
         validObject(object)
-        plotCounts(
-            object = as(object, "DESeqDataSet"),
-            ...
-        )
+        plotCounts(object = as(object, "DESeqDataSet"), ...)
     }
 
 
