@@ -1,10 +1,16 @@
+## Note that `NULL` arguments aren't passing through as expected with
+## `matchArgsToDoCall()`. Look into fixing this in a future goalie release.
+## For example, `color = NULL` doesn't pass as expected.
+
+
+
 #' Plot base mean distribution
 #'
 #' The base mean is the mean of normalized counts of all samples, normalizing
 #' for sequencing depth.
 #'
 #' @name plotBaseMean
-#' @note Updated 2019-09-10.
+#' @note Updated 2019-09-17.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -30,21 +36,35 @@ NULL
 
 
 
-## Updated 2019-09-10.
+## Updated 2019-09-17.
 .plotBaseMean <- function(
-    x,
+    object,
     nonzero = TRUE,
-    trans = c("log10", "log2", "identity")
+    trans = c("log10", "log2", "identity"),
+    summary = TRUE,
+    color,
+    labels = list(
+        title = "Base mean distribution",
+        subtitle = NULL,
+        x = "average expression across all samples",
+        y = "density",
+        color = "summary"
+    )
 ) {
     assert(
-        is.numeric(x),
-        isFlag(nonzero)
+        is.numeric(object),
+        isFlag(nonzero),
+        isFlag(summary),
+        isGGScale(color, scale = "discrete", aes = "color", nullOK = TRUE)
     )
     trans <- match.arg(trans)
-    xLab <- "average expression across all samples"
+    labels <- matchLabels(
+        labels = labels,
+        choices = eval(formals()[["labels"]])
+    )
     ## Drop zero values prior to plot.
     if (isTRUE(nonzero)) {
-        keep <- x > 0L
+        keep <- object > 0L
         ## Inform the user about how many zero count features were dropped.
         if (any(!keep)) {
             n <- sum(!keep, na.rm = TRUE)
@@ -58,108 +78,121 @@ NULL
                 )
             ))
         }
-        x <- x[keep]
+        object <- object[keep]
     }
     ## Log transform.
     if (!identical(trans, "identity")) {
-        message(printString(round(summary(x), digits = 2L)))
+        if (isTRUE(summary)) {
+            message(
+                "Summary prior to transformation:\n",
+                printString(round(summary(object), digits = 2L))
+            )
+        }
         message(sprintf("Applying '%s(x + 1)' transformation.", trans))
         fun <- get(x = trans, envir = asNamespace("base"), inherits = FALSE)
-        x <- fun(x + 1L)
-        xLab <- paste(trans, xLab)
+        object <- fun(object + 1L)
+        labels[["x"]] <- paste(trans, labels[["x"]])
     }
-    summary <- summary(x)
-    message(printString(round(summary, digits = 2L)))
+    if (isTRUE(summary)) {
+        summaryValues <- summary(object)
+        message(printString(round(summaryValues, digits = 2L)))
+    }
     ## Plot.
     size <- 1L
     linetype <- "solid"
-    ggplot(
-        data = data.frame(baseMean = x),
-        mapping = aes(
-            x = !!sym("baseMean")
-        )
+    p <- ggplot(
+        data = data.frame(baseMean = object),
+        mapping = aes(x = !!sym("baseMean"))
     ) +
         geom_density(
             color = "black",
             fill = NA,
             size = size
         ) +
-        scale_x_continuous(breaks = pretty_breaks()) +
-        geom_vline(
-            mapping = aes(
-                xintercept = summary[["1st Qu."]],
-                color = sprintf(
-                    fmt = "1st quantile (%s)",
-                    round(summary[["1st Qu."]], digits = 2L)
-                )
-            ),
-            linetype = linetype,
-            size = size
-        ) +
-        geom_vline(
-            mapping = aes(
-                xintercept = summary[["3rd Qu."]],
-                color = sprintf(
-                    fmt = "3rd quantile (%s)",
-                    round(summary[["3rd Qu."]], digits = 2L)
-                )
-            ),
-            linetype = linetype,
-            size = size
-        ) +
-        geom_vline(
-            mapping = aes(
-                xintercept = summary[["Mean"]],
-                color = sprintf(
-                    fmt = "mean (%s)",
-                    round(summary[["Mean"]], digits = 2L)
-                )
-            ),
-            linetype = linetype,
-            size = size
-        ) +
-        geom_vline(
-            mapping = aes(
-                xintercept = summary[["Median"]],
-                color = sprintf(
-                    fmt = "median (%s)",
-                    round(summary[["Median"]], digits = 2L)
-                )
-            ),
-            linetype = linetype,
-            size = size
-        ) +
-        scale_color_synesthesia_d(name = "summary") +
-        labs(
-            title = "Base mean distribution",
-            x = xLab
-        )
+        scale_x_continuous(breaks = pretty_breaks())
+    ## Include the summary distribution lines.
+    if (isTRUE(summary)) {
+        p <- p +
+            geom_vline(
+                mapping = aes(
+                    xintercept = summaryValues[["1st Qu."]],
+                    color = sprintf(
+                        fmt = "1st quantile (%s)",
+                        round(summaryValues[["1st Qu."]], digits = 2L)
+                    )
+                ),
+                linetype = linetype,
+                size = size
+            ) +
+            geom_vline(
+                mapping = aes(
+                    xintercept = summaryValues[["3rd Qu."]],
+                    color = sprintf(
+                        fmt = "3rd quantile (%s)",
+                        round(summaryValues[["3rd Qu."]], digits = 2L)
+                    )
+                ),
+                linetype = linetype,
+                size = size
+            ) +
+            geom_vline(
+                mapping = aes(
+                    xintercept = summaryValues[["Mean"]],
+                    color = sprintf(
+                        fmt = "mean (%s)",
+                        round(summaryValues[["Mean"]], digits = 2L)
+                    )
+                ),
+                linetype = linetype,
+                size = size
+            ) +
+            geom_vline(
+                mapping = aes(
+                    xintercept = summaryValues[["Median"]],
+                    color = sprintf(
+                        fmt = "median (%s)",
+                        round(summaryValues[["Median"]], digits = 2L)
+                    )
+                ),
+                linetype = linetype,
+                size = size
+            )
+        ## Color.
+        if (is(color, "ScaleDiscrete")) {
+            p <- p + color
+        }
+    }
+    ## Labels.
+    if (is.list(labels)) {
+        p <- p + do.call(what = labs, args = labels)
+    }
+    ## Return.
+    p
 }
 
+formals(.plotBaseMean)[["color"]] <- formalsList[["color.discrete"]]
 
 
-## Updated 2019-09-10.
+
+## Updated 2019-09-17.
 `plotBaseMean,DESeqDataSet` <-  # nolint
-    function(
-        object,
-        nonzero,
-        trans
-    ) {
-        trans <- match.arg(trans)
-        x <- rowMeans(counts(object, normalized = TRUE))
-        .plotBaseMean(
-            x = x,
-            nonzero = nonzero,
-            trans = trans
+    function() {
+        do.call(
+            what = .plotBaseMean,
+            args = matchArgsToDoCall(
+                args = list(
+                    object = rowMeans(counts(object, normalized = TRUE))
+                )
+            )
         )
     }
 
-args <- c("nonzero", "trans")
-formals(`plotBaseMean,DESeqDataSet`)[args] <- formals(.plotBaseMean)[args]
+formals(`plotBaseMean,DESeqDataSet`) <- formals(.plotBaseMean)
 
 
 
-#' @rdname plotBaseMean
+#' @describeIn plotBaseMean Generates row means of normalized counts. This value
+#'   corresponds to the `baseMean` column of `DESeqResults`.
 #' @export
 setMethod(
     f = "plotBaseMean",
@@ -169,27 +202,24 @@ setMethod(
 
 
 
-## Updated 2019-07-30.
+## Updated 2019-09-17.
 `plotBaseMean,DESeqResults` <-  # nolint
-    function(
-        object,
-        nonzero,
-        trans
-    ) {
-        trans <- match.arg(trans)
-        x <- object[["baseMean"]]
-        .plotBaseMean(
-            x = x,
-            nonzero = nonzero,
-            trans = trans
+    function() {
+        do.call(
+            what = .plotBaseMean,
+            args = matchArgsToDoCall(
+                args = list(
+                    object = object[["baseMean"]]
+                )
+            )
         )
     }
 
-formals(`plotBaseMean,DESeqResults`) <- formals(`plotBaseMean,DESeqDataSet`)
+formals(`plotBaseMean,DESeqResults`) <- formals(.plotBaseMean)
 
 
 
-#' @rdname plotBaseMean
+#' @describeIn plotBaseMean Uses `baseMean` column of results.
 #' @export
 setMethod(
     f = "plotBaseMean",
@@ -199,27 +229,18 @@ setMethod(
 
 
 
-## Updated 2019-09-10.
+## Updated 2019-09-17.
 `plotBaseMean,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        nonzero,
-        trans
-    ) {
-        trans <- match.arg(trans)
-        dds <- as(object, "DESeqDataSet")
+    function(object, ...) {
         plotBaseMean(
-            object = dds,
-            nonzero = nonzero,
-            trans = trans
+            object = as(object, "DESeqDataSet"),
+            ...
         )
     }
 
-formals(`plotBaseMean,DESeqAnalysis`) <- formals(`plotBaseMean,DESeqDataSet`)
 
 
-
-#' @rdname plotBaseMean
+#' @describeIn plotBaseMean Passes to `DESeqDataSet` method.
 #' @export
 setMethod(
     f = "plotBaseMean",
