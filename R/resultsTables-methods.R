@@ -4,6 +4,8 @@
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
+#' @param contrast `character(1)` or `NULL`.
+#'   Contrast name.
 #' @param ... Additional arguments.
 #'
 #' @details
@@ -161,7 +163,7 @@ NULL
         DESeqDataSet = NULL,  # nolint
         alpha = NULL,
         lfcThreshold = NULL,
-        return = c("DataFrameList", "tbl_df"),
+        return = c("tbl_df", "DataFrameList"),
         ...
     ) {
         validObject(object)

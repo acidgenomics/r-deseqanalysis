@@ -12,16 +12,13 @@ plotVolcano(object, ...)
 \S4method{plotVolcano}{DESeqResults}(object, ylim = 1e-10,
   genes = NULL, gene2symbol = NULL, ntop = 0L,
   direction = c("both", "up", "down"), pointColor = c(downregulated =
-  "darkorchid3", upregulated = "darkorange2", nonsignificant = "gray50"),
-  pointSize = 2L, pointAlpha = 0.7, histograms = FALSE,
-  return = c("ggplot", "DataFrame"))
+  acidplots::lightPalette[["purple"]], upregulated =
+  acidplots::lightPalette[["orange"]], nonsignificant =
+  acidplots::lightPalette[["gray"]]), pointSize = 2L, pointAlpha = 0.8,
+  histograms = FALSE, return = c("ggplot", "DataFrame"))
 
 \S4method{plotVolcano}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
-  ylim = 1e-10, genes = NULL, ntop = 0L, direction = c("both",
-  "up", "down"), pointColor = c(downregulated = "darkorchid3",
-  upregulated = "darkorange2", nonsignificant = "gray50"),
-  pointSize = 2L, pointAlpha = 0.7, histograms = FALSE,
-  return = c("ggplot", "DataFrame"))
+  ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -74,8 +71,14 @@ Use shrunken log2 fold change (LFC) values.}
 \description{
 Volcano plot
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{DESeqAnalysis}: Passes to \code{DESeqResults} method, with \code{gene2symbol}
+argument automatically defined.
+}}
+
 \note{
-Updated 2019-09-10.
+Updated 2019-09-17.
 }
 \examples{
 data(deseq)

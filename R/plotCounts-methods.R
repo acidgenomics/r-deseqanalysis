@@ -1,6 +1,6 @@
 #' @name plotCounts
 #' @inherit acidplots::plotCounts
-#' @note Updated 2019-08-27.
+#' @note Updated 2019-09-17.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -30,38 +30,48 @@ NULL
 
 
 
-## Note that DESeqDataSet is supported in basejump SummarizedExperiment method.
-## That will detect the object and plot normalized counts automatically.
-## Updated 2019-08-27.
-`plotCounts,DESeqAnalysis` <-  # nolint
-    function(object, genes) {
-        validObject(object)
-        object <- as(object, "DESeqDataSet")
-        do.call(
-            what = plotCounts,
-            args = matchArgsToDoCall(
-                args = list(
-                    object = object,
-                    genes = genes
-                ),
-                removeFormals = "transform"
-            )
-        )
+## Updated 2019-09-17.
+`plotCounts,DESeqDataSet` <-  # nolint
+    function(object, ...) {
+        dots <- list(...)
+        rse <- as(object, "RangedSummarizedExperiment")
+        assays(rse) <-
+            SimpleList(normalized = counts(object, normalized = TRUE))
+        args <- c(object = rse, dots)
+        labels <- args[["labels"]]
+        if (is.null(labels)) {
+            labels <- list()
+        }
+        labels[["countAxis"]] <- "normalized counts"
+        args[["labels"]] <- labels
+        do.call(what = plotCounts, args = args)
     }
 
-f1 <- formals(`plotCounts,DESeqAnalysis`)
-f2 <- methodFormals(
+
+
+#' @describeIn plotCounts Automatically plots size factor (i.e. library size)
+#'   normalized counts. Arguments pass through to `SummarizedExperiment` method
+#'   defined in acidplots package.
+#' @export
+setMethod(
     f = "plotCounts",
-    signature = "SummarizedExperiment",
-    package = "acidplots"
+    signature = signature("DESeqDataSet"),
+    definition = `plotCounts,DESeqDataSet`
 )
-f2 <- f2[setdiff(names(f2), c(names(f1), "assay", "countsAxisLabel"))]
-f <- c(f1, f2)
-formals(`plotCounts,DESeqAnalysis`) <- f
 
 
 
-#' @rdname plotCounts
+
+## Updated 2019-09-17.
+`plotCounts,DESeqAnalysis` <-  # nolint
+    function(object, ...) {
+        validObject(object)
+        plotCounts(object = as(object, "DESeqDataSet"), ...)
+    }
+
+
+
+#' @describeIn plotCounts Passes to `DESeqDataSet` method.
 #' @export
 setMethod(
     f = "plotCounts",

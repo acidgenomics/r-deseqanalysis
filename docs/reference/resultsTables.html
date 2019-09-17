@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.8</span>
       </span>
     </div>
 
@@ -123,8 +123,8 @@
 
 <span class='co'># S4 method for DESeqResults</span>
 <span class='fu'>resultsTables</span>(<span class='no'>object</span>, <span class='kw'>DESeqDataSet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"DataFrameList"</span>,
-  <span class='st'>"tbl_df"</span>), <span class='no'>...</span>)
+  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"tbl_df"</span>,
+  <span class='st'>"DataFrameList"</span>), <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>resultsTables</span>(<span class='no'>object</span>, <span class='no'>results</span>,
@@ -181,6 +181,11 @@ Use shrunken log2 fold change (LFC) values.</p></td>
       <th>extra</th>
       <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
 Include row data and normalized counts from internal <code>DESeqDataSet</code>.</p></td>
+    </tr>
+    <tr>
+      <th>contrast</th>
+      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> or <code>NULL</code>.
+Contrast name.</p></td>
     </tr>
     </table>
 
@@ -243,7 +248,7 @@ used for overrepresentation testing but should NOT be used for GSEA.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

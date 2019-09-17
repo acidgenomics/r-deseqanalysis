@@ -12,10 +12,10 @@ plotPCA(object, ...)
 \S4method{plotPCA}{DESeqTransform}(object, assay = 1L,
   interestingGroups = NULL, ntop = 500L, label = getOption(x =
   "acid.label", default = FALSE), color = getOption(x =
-  "acid.color.discrete", default =
-  acidplots::scale_colour_synesthesia_d()), pointSize = getOption(x =
-  "acid.point.size", default = 3L), title = "PCA", subtitle = NULL,
-  return = c("ggplot", "DataFrame"), ...)
+  "acid.color.discrete", default = acidplots::scale_color_synesthesia_d()),
+  pointSize = getOption(x = "acid.point.size", default = 3L),
+  title = "PCA", subtitle = NULL, return = c("ggplot", "DataFrame"),
+  ...)
 
 \S4method{plotPCA}{DESeqAnalysis}(object, ...)
 }
@@ -66,8 +66,21 @@ to the first argument in the \code{character} vector.}
 \description{
 Principal component analysis plot
 }
+\details{
+Passes to \code{SummarizedExperiment} defined in acidplots package.
+}
+\section{Methods (by class)}{
+\itemize{
+\item \code{DESeqTransform}: Passes to \code{SummarizedExperiment} method defined in
+acidplots package. Uses values defined in
+\code{\link[SummarizedExperiment:assay]{assay()}}.
+
+\item \code{DESeqAnalysis}: Extracts \code{DESeqTransform} and passes to corresponding
+method.
+}}
+
 \note{
-Updated 2019-09-10.
+Updated 2019-09-17.
 }
 \section{Principal component analysis}{
 
