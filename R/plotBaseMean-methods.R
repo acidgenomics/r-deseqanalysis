@@ -16,9 +16,12 @@
 #' @inheritParams params
 #' @param nonzero `logical(1)`.
 #'   Remove zero-count features (genes).
+#' @param summary `logical(1)`.
+#'   Include distribution summary statistics as lines on the plot.
 #'
 #' @seealso
 #' - https://support.bioconductor.org/p/75244/
+#' - [`summary()`][base::summary]
 #'
 #' @return `ggplot`.
 #'
