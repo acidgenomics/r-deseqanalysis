@@ -4,6 +4,8 @@
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
+#' @param contrast `character(1)` or `NULL`.
+#'   Contrast name.
 #' @param ... Additional arguments.
 #'
 #' @details
