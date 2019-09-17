@@ -131,11 +131,7 @@
   <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ggplot"</span>, <span class='st'>"DataFrame"</span>))
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotMA</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>genes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
-  <span class='kw'>pointColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>downregulated</span> <span class='kw'>=</span> <span class='st'>"#AF52DE"</span>, <span class='kw'>upregulated</span> <span class='kw'>=</span> <span class='st'>"#FF9500"</span>,
-  <span class='kw'>nonsignificant</span> <span class='kw'>=</span> <span class='st'>"#8E8E93"</span>), <span class='kw'>pointSize</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>pointAlpha</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
-  <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ggplot"</span>, <span class='st'>"DataFrame"</span>))</pre>
+<span class='fu'>plotMA</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -212,10 +208,17 @@ Use shrunken log2 fold change (LFC) values.</p></td>
 of genomic data. The plot visualizes the differences between measurements
 taken in two samples, by transforming the data onto M (log ratio) and A
 (mean average) scales, then plotting these values.</p>
+    <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
+
+    
+<ul>
+<li><p><code>DESeqAnalysis</code>: Passes to <code>DESeqResults</code> method, with <code>gene2symbol</code>
+argument automatically defined.</p></li>
+</ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>We are not allowing post hoc <code>alpha</code> or <code>lfcThreshold</code> cutoffs here.</p>
-<p>Updated 2019-09-13.</p>
+<p>Updated 2019-09-17.</p>
     <h2 class="hasAnchor" id="plotma-aliases"><a class="anchor" href="#plotma-aliases"></a>plotMA2 aliases</h2>
 
     
@@ -259,6 +262,7 @@ primary methods defined here in the package mask DESeq2.</p>
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
+      <li><a href="#methods-by-class-">Methods (by class)</a></li>
       <li><a href="#note">Note</a></li>
       <li><a href="#plotma-aliases">plotMA2 aliases</a></li>
       <li><a href="#see-also">See also</a></li>
