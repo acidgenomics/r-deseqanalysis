@@ -30,8 +30,8 @@
 #' @importFrom goalie areDisjointSets areSetEqual assert bapply hasLength
 #'   hasNames hasLength hasRows hasRownames hasValidDimnames hasValidNames
 #'   isAFile isAlpha isAny isCharacter isFlag isGGScale isHeaderLevel isInRange
-#'   isInt isNonEmpty isNonNegative isNumber isPercentage isPositive isScalar
-#'   isString isSubset validate
+#'   isInt isNonNegative isNumber isPercentage isPositive isScalar isString
+#'   isSubset validate
 #' @importFrom knitr kable
 #' @importFrom methods as is new prototype setClass show slot slot<- validObject
 #'   .hasSlot

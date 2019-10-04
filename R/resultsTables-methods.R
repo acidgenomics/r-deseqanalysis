@@ -141,7 +141,7 @@ NULL
             FUN = is.atomic,
             FUN.VALUE = logical(1L)
         )),
-        isNonEmpty(rowData),
+        hasLength(rowData),
         identical(rownames(DESeqResults), rownames(rowData)),
         areDisjointSets(colnames(DESeqResults), colnames(rowData))
     )
