@@ -46,8 +46,8 @@ matchMetadataToFiles <- function(metadata, files) {
         )
     }
     idx <- match(
-        x = snake(metaSampleNames),
-        table = snake(fileSampleNames)
+        x = snakeCase(metaSampleNames),
+        table = snakeCase(fileSampleNames)
     )
     ## Return the sanitized name of file if defined.
     ## This gets slotted by `prepareTximportFiles()` return.
