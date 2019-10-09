@@ -1,3 +1,10 @@
+## DESeqAnalysis 0.2.9 (2019-10-09)
+
+### New functions
+
+- `prepareTximportFiles`: Automatically assigns valid sample names to tximport
+  quant file import. Tested primarily against salmon and kallisto files.
+
 ## DESeqAnalysis 0.2.8 (2019-09-17)
 
 ### New functions
