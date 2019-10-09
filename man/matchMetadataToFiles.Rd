@@ -12,7 +12,8 @@ User-defined metadata. The function assumes that sample identifiers are
 defined in the first metadata column.}
 
 \item{files}{\code{character}.
-Quant file paths passed to \code{\link[tximport:tximport]{tximport()}}.}
+Quant file paths passed to \code{\link[tximport:tximport]{tximport()}}.
+Sanitize return from \code{\link[=prepareTximportFiles]{prepareTximportFiles()}} is recommended.}
 }
 \value{
 \code{data.frame}.

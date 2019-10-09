@@ -5,6 +5,7 @@
 #'
 #' @param files `character`.
 #'   Quant file paths passed to [`tximport()`][tximport::tximport].
+#'   Sanitize return from [prepareTximportFiles()] is recommended.
 #' @param metadata `data.frame`.
 #'   User-defined metadata. The function assumes that sample identifiers are
 #'   defined in the first metadata column.
@@ -42,27 +43,29 @@ matchMetadataToFiles <- function(metadata, files) {
             "Example: 'salmon/sample-1/quant.sf'"
         )
     }
-    input <- list(
-        metadata = metaSampleNames,
-        files = fileSampleNames
-    )
     idx <- match(
-        x = snake(input[["metadata"]]),
-        table = snake(input[["files"]])
+        x = snake(metaSampleNames),
+        table = snake(fileSampleNames)
     )
-    output <- data.frame(
-        metadata = input[["metadata"]],
-        files = input[["files"]][idx],
+    ## Return the sanitized name of file if defined.
+    ## This gets slotted by `prepareTximportFiles()` return.
+    if (hasNames(files)) {
+        message("Returning 'names(files)' in data frame.")
+        fileSampleNames <- names(files)
+    }
+    out <- data.frame(
+        metadata = metaSampleNames,
+        files = fileSampleNames[idx],
         stringsAsFactors = FALSE
     )
-    if (!identical(anyNA(output, recursive = TRUE), FALSE)) {
-        fail <- !complete.cases(output)
-        fail <- output[fail, , drop = FALSE]
+    if (!identical(anyNA(out, recursive = TRUE), FALSE)) {
+        fail <- !complete.cases(out)
+        fail <- out[fail, , drop = FALSE]
         stop("Match failure:\n", printString(fail))
     }
     assert(identical(
         x = as.character(metadata[[1L]]),
-        y = as.character(output[[1L]])
+        y = as.character(out[[1L]])
     ))
-    output
+    out
 }
