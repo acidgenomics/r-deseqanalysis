@@ -17,33 +17,26 @@ test_that("Kebab files, snake user metadata out of order", {
         "quant.sf"
     )
     files <- rev(files)
-    object <- matchMetadataToFiles(metadata = metadata, files = files)
-    expected <- data.frame(
-        metadata = c(
-            "1_sample_A",
-            "2_sample_B",
-            "3_sample_C",
-            "4_sample_D"
-        ),
-        files = c(
+    out <- matchMetadataToFiles(metadata = metadata, files = files)
+    expect_identical(
+        object = out[[1L]],
+        expected = c(
             "1-sample-A",
             "2-sample-B",
             "3-sample-C",
             "4-sample-D"
-        ),
-        stringsAsFactors = FALSE
+        )
     )
-    expect_identical(object, expected)
 })
 
 test_that("'prepareTximportFiles()' return mode", {
     files <- file.path("salmon", "1-sample", "quant.sf")
     metadata <- data.frame(sampleID = "1_sample")
     out <- matchMetadataToFiles(metadata = metadata, files = files)
-    expect_identical(out[["files"]], "1-sample")
+    expect_identical(out[[1L]], "1-sample")
     files <- prepareTximportFiles(files, exists = FALSE)
     out <- matchMetadataToFiles(metadata = metadata, files = files)
-    expect_identical(out[["files"]], "X1_sample")
+    expect_identical(out[[1L]], "X1_sample")
 })
 
 test_that("Error on unresolvable mismatch", {

@@ -17,7 +17,8 @@ Sanitize return from \code{\link[=prepareTximportFiles]{prepareTximportFiles()}}
 }
 \value{
 \code{data.frame}.
-Contains 1:1 file to metadata sample identifier mappings.
+Modified metadata frame, with updated sample identifiers in slotted in
+first column. Original values are stashed in "originalSampleID".
 }
 \description{
 Match user metadata to file names used for tximport
