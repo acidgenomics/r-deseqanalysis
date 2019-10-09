@@ -3,6 +3,9 @@
 #' @export
 #' @note Updated 2019-10-09.
 #'
+#' @param files `character`.
+#'   Quant file paths (e.g. "quant.sf" for salmon, "abundance.h5" for kallisto).
+#'   See [`tximport()`][tximport::tximport] for details.
 #' @param exists `logical(1)`.
 #'   Check if requested input exists on disk.
 #'   Runs [`realpath()`][basejump::realpath] internally.
