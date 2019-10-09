@@ -17,13 +17,13 @@
 #'     sampleID = paste(seq_len(4L), "sample", LETTERS[seq_len(4L)], sep = "_"),
 #'     condition = rep(LETTERS[seq_len(2L)], times = 2L)
 #' )
-#' ## The function will match regardless of row order in user metadata.
-#' metadata <- metadata[nrow(metadata):1L, ]
 #' files <- file.path(
 #'     "salmon",
 #'     paste(seq_len(4L), "sample", LETTERS[seq_len(4L)], sep = "-"),
 #'     "quant.sf"
 #' )
+#' ## The function will match regardless of row order in user metadata.
+#' files <- rev(files)
 #' print(metadata)
 #' print(files)
 #' matchMetadataToFiles(metadata = metadata, files = files)
