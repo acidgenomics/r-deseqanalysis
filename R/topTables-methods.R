@@ -1,9 +1,11 @@
 #' @name topTables
 #' @inherit bioverbs::topTables
-#' @note Updated 2019-09-17.
+#' @note Updated 2019-10-09.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
+#' @param contrast `character(1)` or `NULL`.
+#'   Contrast name.
 #' @param n `integer(1)`.
 #'   Number of genes (per direction) to report.
 #' @param ... Additional arguments.

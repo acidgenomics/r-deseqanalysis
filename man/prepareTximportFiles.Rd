@@ -8,6 +8,10 @@ prepareTximportFiles(files, makeNames = c("makeNames", "snakeCase",
   "camelCase"), exists = TRUE)
 }
 \arguments{
+\item{files}{\code{character}.
+Quant file paths (e.g. "quant.sf" for salmon, "abundance.h5" for kallisto).
+See \code{\link[tximport:tximport]{tximport()}} for details.}
+
 \item{makeNames}{\code{character(1)}.
 Syntactic name function to apply on sample names.
 Uses \code{\link[base:match.arg]{match.arg()}} internally.

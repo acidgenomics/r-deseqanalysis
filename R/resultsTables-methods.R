@@ -1,11 +1,9 @@
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
-#' @note Updated 2019-08-20.
+#' @note Updated 2019-10-09.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
-#' @param contrast `character(1)` or `NULL`.
-#'   Contrast name.
 #' @param ... Additional arguments.
 #'
 #' @details
