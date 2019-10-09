@@ -150,23 +150,23 @@ Contains 1:1 file to metadata sample identifier mappings.</p>
     <span class='kw'>sampleID</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>4L</span>), <span class='st'>"sample"</span>, <span class='no'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>4L</span>)], <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>),
     <span class='kw'>condition</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>2L</span>)], <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>2L</span>)
 )
-<span class='co'>## The function will match regardless of row order in user metadata.</span>
-<span class='no'>metadata</span> <span class='kw'>&lt;-</span> <span class='no'>metadata</span>[<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>metadata</span>):<span class='fl'>1L</span>, ]
 <span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(
     <span class='st'>"salmon"</span>,
     <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>4L</span>), <span class='st'>"sample"</span>, <span class='no'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>4L</span>)], <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"-"</span>),
     <span class='st'>"quant.sf"</span>
 )
+<span class='co'>## The function will match regardless of row order in user metadata.</span>
+<span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='no'>files</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>metadata</span>)</div><div class='output co'>#&gt;     sampleID condition
-#&gt; 4 4_sample_D         B
-#&gt; 3 3_sample_C         A
+#&gt; 1 1_sample_A         A
 #&gt; 2 2_sample_B         B
-#&gt; 1 1_sample_A         A</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>files</span>)</div><div class='output co'>#&gt; [1] "salmon/1-sample-A/quant.sf" "salmon/2-sample-B/quant.sf"
-#&gt; [3] "salmon/3-sample-C/quant.sf" "salmon/4-sample-D/quant.sf"</div><div class='input'><span class='fu'>matchMetadataToFiles</span>(<span class='kw'>metadata</span> <span class='kw'>=</span> <span class='no'>metadata</span>, <span class='kw'>files</span> <span class='kw'>=</span> <span class='no'>files</span>)</div><div class='output co'>#&gt;     metadata      files
-#&gt; 1 4_sample_D 4-sample-D
-#&gt; 2 3_sample_C 3-sample-C
-#&gt; 3 2_sample_B 2-sample-B
-#&gt; 4 1_sample_A 1-sample-A</div></pre>
+#&gt; 3 3_sample_C         A
+#&gt; 4 4_sample_D         B</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>files</span>)</div><div class='output co'>#&gt; [1] "salmon/4-sample-D/quant.sf" "salmon/3-sample-C/quant.sf"
+#&gt; [3] "salmon/2-sample-B/quant.sf" "salmon/1-sample-A/quant.sf"</div><div class='input'><span class='fu'>matchMetadataToFiles</span>(<span class='kw'>metadata</span> <span class='kw'>=</span> <span class='no'>metadata</span>, <span class='kw'>files</span> <span class='kw'>=</span> <span class='no'>files</span>)</div><div class='output co'>#&gt;     metadata      files
+#&gt; 1 1_sample_A 1-sample-A
+#&gt; 2 2_sample_B 2-sample-B
+#&gt; 3 3_sample_C 3-sample-C
+#&gt; 4 4_sample_D 4-sample-D</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

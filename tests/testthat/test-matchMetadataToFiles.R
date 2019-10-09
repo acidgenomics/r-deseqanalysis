@@ -10,25 +10,25 @@ test_that("Kebab files, snake user metadata out of order", {
         ),
         condition = rep(LETTERS[seq_len(2L)], times = 2L)
     )
-    metadata <- metadata[nrow(metadata):1L, ]
     files <- file.path(
         "salmon",
         paste(seq_len(4L), "sample", LETTERS[seq_len(4L)], sep = "-"),
         "quant.sf"
     )
+    files <- rev(files)
     object <- matchMetadataToFiles(metadata = metadata, files = files)
     expected <- data.frame(
         metadata = c(
-            "4_sample_D",
-            "3_sample_C",
+            "1_sample_A",
             "2_sample_B",
-            "1_sample_A"
+            "3_sample_C",
+            "4_sample_D"
         ),
         files = c(
-            "4-sample-D",
-            "3-sample-C",
+            "1-sample-A",
             "2-sample-B",
-            "1-sample-A"
+            "3-sample-C",
+            "4-sample-D"
         )
     )
     expect_identical(object, expected)
