@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Contrast name — contrastName • DESeqAnalysis</title>
+<title>Prepare quant files for tximport — prepareTximportFiles • DESeqAnalysis</title>
 
 
 <!-- jquery -->
@@ -37,8 +37,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Contrast name — contrastName" />
-<meta property="og:description" content="Contrast name" />
+<meta property="og:title" content="Prepare quant files for tximport — prepareTximportFiles" />
+<meta property="og:description" content="Prepare quant files for tximport" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,93 +110,77 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Contrast name</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/contrastName-methods.R'><code>R/contrastName-methods.R</code></a></small>
-    <div class="hidden name"><code>contrastName.Rd</code></div>
+    <h1>Prepare quant files for tximport</h1>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/prepareTximportFiles.R'><code>R/prepareTximportFiles.R</code></a></small>
+    <div class="hidden name"><code>prepareTximportFiles.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Contrast name</p>
+    <p>Prepare quant files for tximport</p>
     </div>
 
-    <pre class="usage"><span class='fu'>contrastName</span>(<span class='no'>object</span>, <span class='no'>...</span>)
-
-<span class='fu'>contrastName</span>(<span class='no'>object</span>, <span class='no'>...</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-
-<span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>contrastName</span>(<span class='no'>object</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"resultsNames"</span>,
-  <span class='st'>"title"</span>), <span class='kw'>useStash</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='co'># S4 method for DESeqResults,character</span>
-<span class='fu'>contrastName</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-
-<span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>contrastName</span>(<span class='no'>object</span>, <span class='no'>results</span>)</pre>
+    <pre class="usage"><span class='fu'>prepareTximportFiles</span>(<span class='no'>files</span>, <span class='kw'>makeNames</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"makeNames"</span>, <span class='st'>"snakeCase"</span>,
+  <span class='st'>"camelCase"</span>), <span class='kw'>exists</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>Object.</p></td>
+      <th>files</th>
+      <td><p><code>character</code>.
+Quant file paths (e.g. "quant.sf" for salmon, "abundance.h5" for kallisto).
+See <code><a href='https://rdrr.io/pkg/tximport/man/tximport.html'>tximport()</a></code> for details.</p></td>
     </tr>
     <tr>
-      <th>format</th>
+      <th>makeNames</th>
       <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
-Name format to return:</p><ul>
-<li><p><code>resultsNames</code>: Attempt to matching the conventions in
-<code><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>resultsNames()</a></code>.</p></li>
-<li><p><code>title</code>: Human readable, for plot titles and/or table captions.</p></li>
-</ul></td>
+Syntactic name function to apply on sample names.
+Uses <code><a href='https://rdrr.io/r/base/match.arg.html'>match.arg()</a></code> internally.
+See basejump toolkit for details.</p></td>
     </tr>
     <tr>
-      <th>useStash</th>
+      <th>exists</th>
       <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
-Check for <code>contrastName</code> metadata stash in <code>DESeqResults</code> object. Intended
-for use with <code>DESeqAnalysis</code> methods.</p></td>
-    </tr>
-    <tr>
-      <th>value</th>
-      <td><p>Value to assign.</p></td>
-    </tr>
-    <tr>
-      <th>results</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> or <code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>.
-Name or position of <code>DESeqResults</code>.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments.</p></td>
+Check if requested input exists on disk.
+Runs <code><a href='https://rdrr.io/pkg/basejump/man/reexports.html'>realpath()</a></code> internally.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
-Contrast name.</p>
+    <p><code>character</code>.
+Return quant file paths, with valid sample names automatically applied.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Runs the following internal comments:</p><ol>
+<li><p>Extract sample directory name from quant file using
+<code><a href='https://rdrr.io/r/base/basename.html'>dirname()</a></code> and <code><a href='https://rdrr.io/r/base/basename.html'>basename()</a></code>.</p></li>
+<li><p>Autopad zeros, if necessary, via
+<code><a href='https://rdrr.io/pkg/basejump/man/autopadZeros.html'>autopadZeros()</a></code>.</p></li>
+<li><p>Sanitizes names with <code><a href='https://rdrr.io/pkg/syntactic/man/snakeCase.html'>snakeCase()</a></code>.</p></li>
+<li><p>Sorts files alphabetically.</p></li>
+</ol>
+
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-09-11.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>resultsNames()</a></code>.</p></div>
+    <p>Updated 2019-10-09.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
-
-<span class='co'>## DESeqResults ====</span>
-<span class='no'>object</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.html'>as</a></span>(<span class='no'>deseq</span>, <span class='st'>"DESeqResults"</span>)
-<span class='fu'>contrastName</span>(<span class='no'>object</span>)</div><div class='output co'>#&gt; [1] "condition_B_vs_A"</div><div class='input'>
-<span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>contrastName</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; [1] "condition_B_vs_A"</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
+    <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"salmon"</span>, <span class='st'>"1-sample-A"</span>, <span class='st'>"quant.sf"</span>),
+    <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"salmon"</span>, <span class='st'>"2-sample-B"</span>, <span class='st'>"quant.sf"</span>)
+)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>files</span>)</div><div class='output co'>#&gt; [1] "salmon/1-sample-A/quant.sf" "salmon/2-sample-B/quant.sf"</div><div class='input'><span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'>prepareTximportFiles</span>(<span class='no'>files</span>, <span class='kw'>makeNames</span> <span class='kw'>=</span> <span class='st'>"snakeCase"</span>, <span class='kw'>exists</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>files</span>)</div><div class='output co'>#&gt;                  x1_sample_a                  x2_sample_b 
+#&gt; "salmon/1-sample-A/quant.sf" "salmon/2-sample-B/quant.sf" </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#note">Note</a></li>
-      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
