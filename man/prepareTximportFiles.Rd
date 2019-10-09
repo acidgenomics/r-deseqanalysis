@@ -4,11 +4,17 @@
 \alias{prepareTximportFiles}
 \title{Prepare quant files for tximport}
 \usage{
-prepareTximportFiles(files, exists = TRUE)
+prepareTximportFiles(files, exists = TRUE, makeNames = c("snakeCase",
+  "camelCase", "makeNames"))
 }
 \arguments{
 \item{exists}{\code{logical(1)}.
 Check if requested input exists on disk.}
+
+\item{makeNames}{\code{character(1)}.
+Syntactic name function to apply on sample names.
+Uses \code{\link[base:match.arg]{match.arg()}} internally.
+See syntactic package for details.}
 }
 \value{
 \code{character}.
