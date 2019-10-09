@@ -48,9 +48,6 @@ Use shrunken log2 fold change (LFC) values.}
 
 \item{extra}{\code{logical(1)}.
 Include row data and normalized counts from internal \code{DESeqDataSet}.}
-
-\item{contrast}{\code{character(1)} or \code{NULL}.
-Contrast name.}
 }
 \value{
 \code{list}.
@@ -65,7 +62,7 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 \code{all} table), are arranged by adjusted \emph{P} value.
 }
 \note{
-Updated 2019-08-20.
+Updated 2019-10-09.
 
 Do not apply post hoc log fold change cutoffs.
 }

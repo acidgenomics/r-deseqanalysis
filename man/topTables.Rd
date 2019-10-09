@@ -32,6 +32,9 @@ Name or position of \code{DESeqResults}.}
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
 
+\item{contrast}{\code{character(1)} or \code{NULL}.
+Contrast name.}
+
 \item{...}{Additional arguments.}
 }
 \value{
@@ -50,7 +53,7 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
 }}
 
 \note{
-Updated 2019-09-17.
+Updated 2019-10-09.
 }
 \examples{
 data(deseq)
