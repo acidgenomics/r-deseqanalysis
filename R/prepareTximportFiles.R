@@ -5,6 +5,10 @@
 #'
 #' @param exists `logical(1)`.
 #'   Check if requested input exists on disk.
+#' @param makeNames `character(1)`.
+#'   Syntactic name function to apply on sample names.
+#'   Uses [`match.arg()`][base::match.arg] internally.
+#'   See syntactic package for details.
 #'
 #' @details
 #' Runs the following internal comments:
@@ -27,13 +31,27 @@
 #' print(files)
 #' files <- prepareTximportFiles(files, exists = FALSE)
 #' print(files)
-prepareTximportFiles <- function(files, exists = TRUE) {
+prepareTximportFiles <- function(
+    files,
+    exists = TRUE,
+    makeNames = c("snakeCase", "camelCase", "makeNames")
+) {
+    makeNames <- get(
+        x = match.arg(makeNames),
+        envir = asNamespace("syntactic"),
+        inherits = FALSE
+    )
+    assert(
+        isCharacter(files),
+        isFlag(exists),
+        is.function(makeNames)
+    )
     if (isTRUE(exists)) {
         files <- realpath(files)
     }
     names <- basename(dirname(files))
     names <- autopadZeros(names)
-    names <- snakeCase(names)
+    names <- makeNames(names)
     names(files) <- names
     files <- files[sort(names)]
     files
