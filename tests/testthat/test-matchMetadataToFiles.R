@@ -8,7 +8,8 @@ test_that("Kebab files, snake user metadata out of order", {
             LETTERS[seq_len(4L)],
             sep = "_"
         ),
-        condition = rep(LETTERS[seq_len(2L)], times = 2L)
+        condition = rep(LETTERS[seq_len(2L)], times = 2L),
+        stringsAsFactors = FALSE
     )
     files <- file.path(
         "salmon",
@@ -29,7 +30,8 @@ test_that("Kebab files, snake user metadata out of order", {
             "2-sample-B",
             "3-sample-C",
             "4-sample-D"
-        )
+        ),
+        stringsAsFactors = FALSE
     )
     expect_identical(object, expected)
 })
