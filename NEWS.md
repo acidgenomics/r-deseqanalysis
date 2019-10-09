@@ -2,6 +2,10 @@
 
 ### New functions
 
+- `matchMetadataFiles`: Quickly generate a mapping data frame of user input
+  metadata sample names to the expected tximport quant directory names
+  (e.g. salmon, kallisto output). This is useful when a user provides metadata
+  that doesn't match the FASTQ names exactly.
 - `prepareTximportFiles`: Automatically assigns valid sample names to tximport
   quant file import. Tested primarily against salmon and kallisto files.
 
