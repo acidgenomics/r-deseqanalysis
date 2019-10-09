@@ -42,6 +42,7 @@ Imports:
     stringr (>= 1.4),
     methods,
     scales,
+    stats,
     utils
 Suggests:
     acidroxygen (>= 0.1.3),
