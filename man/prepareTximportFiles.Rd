@@ -4,17 +4,18 @@
 \alias{prepareTximportFiles}
 \title{Prepare quant files for tximport}
 \usage{
-prepareTximportFiles(files, exists = TRUE, makeNames = c("snakeCase",
-  "camelCase", "makeNames"))
+prepareTximportFiles(files, makeNames = c("makeNames", "snakeCase",
+  "camelCase"), exists = TRUE)
 }
 \arguments{
-\item{exists}{\code{logical(1)}.
-Check if requested input exists on disk.}
-
 \item{makeNames}{\code{character(1)}.
 Syntactic name function to apply on sample names.
 Uses \code{\link[base:match.arg]{match.arg()}} internally.
-See syntactic package for details.}
+See basejump toolkit for details.}
+
+\item{exists}{\code{logical(1)}.
+Check if requested input exists on disk.
+Runs \code{\link[basejump:realpath]{realpath()}} internally.}
 }
 \value{
 \code{character}.
@@ -43,6 +44,6 @@ files <- c(
     file.path("salmon", "2-sample-B", "quant.sf")
 )
 print(files)
-files <- prepareTximportFiles(files, exists = FALSE)
+files <- prepareTximportFiles(files, makeNames = "snakeCase", exists = FALSE)
 print(files)
 }
