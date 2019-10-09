@@ -32,17 +32,19 @@ matchMetadataToFiles <- function(metadata, files) {
         is.data.frame(metadata),
         isCharacter(files)
     )
-    sampleNames <- basename(dirname(files))
+    metaSampleNames <- metadata[[1L]]
+    fileSampleNames <- basename(dirname(files))
+    assert(areSameLength(metaSampleNames, fileSampleNames))
     # Currently requiring that the user pass in tximport-style quant files.
-    if (!areDisjointSets(sampleNames, ".")) {
+    if (!areDisjointSets(fileSampleNames, ".")) {
         stop(
             "Failed to detect sample name from quant file.\n",
             "Example: 'salmon/sample-1/quant.sf'"
         )
     }
     input <- list(
-        metadata = metadata[[1L]],
-        files = sampleNames
+        metadata = metaSampleNames,
+        files = fileSampleNames
     )
     idx <- match(
         x = snake(input[["metadata"]]),
