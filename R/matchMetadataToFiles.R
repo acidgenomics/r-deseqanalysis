@@ -32,7 +32,7 @@ matchMetadataToFiles <- function(metadata, files) {
         is.data.frame(metadata),
         isCharacter(files)
     )
-    metaSampleNames <- metadata[[1L]]
+    metaSampleNames <- as.character(metadata[[1L]])
     fileSampleNames <- basename(dirname(files))
     assert(areSameLength(metaSampleNames, fileSampleNames))
     # Currently requiring that the user pass in tximport-style quant files.
@@ -52,13 +52,17 @@ matchMetadataToFiles <- function(metadata, files) {
     )
     output <- data.frame(
         metadata = input[["metadata"]],
-        files = input[["files"]][idx]
+        files = input[["files"]][idx],
+        stringsAsFactors = FALSE
     )
     if (!identical(anyNA(output, recursive = TRUE), FALSE)) {
         fail <- !complete.cases(output)
         fail <- output[fail, , drop = FALSE]
         stop("Match failure:\n", printString(fail))
     }
-    assert(identical(metadata[[1L]], output[[1L]]))
+    assert(identical(
+        x = as.character(metadata[[1L]]),
+        y = as.character(output[[1L]])
+    ))
     output
 }
