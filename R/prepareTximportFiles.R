@@ -5,10 +5,11 @@
 #'
 #' @param exists `logical(1)`.
 #'   Check if requested input exists on disk.
+#'   Runs [`realpath()`][basejump::realpath] internally.
 #' @param makeNames `character(1)`.
 #'   Syntactic name function to apply on sample names.
 #'   Uses [`match.arg()`][base::match.arg] internally.
-#'   See syntactic package for details.
+#'   See basejump toolkit for details.
 #'
 #' @details
 #' Runs the following internal comments:
@@ -29,17 +30,17 @@
 #'     file.path("salmon", "2-sample-B", "quant.sf")
 #' )
 #' print(files)
-#' files <- prepareTximportFiles(files, exists = FALSE)
+#' files <- prepareTximportFiles(files, makeNames = "snakeCase", exists = FALSE)
 #' print(files)
 prepareTximportFiles <- function(
     files,
-    exists = TRUE,
-    makeNames = c("snakeCase", "camelCase", "makeNames")
+    makeNames = c("makeNames", "snakeCase", "camelCase"),
+    exists = TRUE
 ) {
     makeNames <- get(
         x = match.arg(makeNames),
-        envir = asNamespace("syntactic"),
-        inherits = FALSE
+        envir = asNamespace("basejump"),
+        inherits = TRUE
     )
     assert(
         isCharacter(files),
@@ -47,7 +48,7 @@ prepareTximportFiles <- function(
         is.function(makeNames)
     )
     if (isTRUE(exists)) {
-        files <- realpath(files)
+        files <- realpath(files)  # nocov
     }
     names <- basename(dirname(files))
     names <- autopadZeros(names)
