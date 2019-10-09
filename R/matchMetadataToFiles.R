@@ -11,7 +11,8 @@
 #'   defined in the first metadata column.
 #'
 #' @return `data.frame`.
-#' Contains 1:1 file to metadata sample identifier mappings.
+#' Modified metadata frame, with updated sample identifiers in slotted in
+#' first column. Original values are stashed in "originalSampleID".
 #'
 #' @examples
 #' metadata <- data.frame(
@@ -31,6 +32,7 @@
 matchMetadataToFiles <- function(metadata, files) {
     assert(
         is.data.frame(metadata),
+        areDisjointSets("originalSampleID", colnames(metadata)),
         isCharacter(files)
     )
     metaSampleNames <- as.character(metadata[[1L]])
@@ -53,19 +55,22 @@ matchMetadataToFiles <- function(metadata, files) {
         message("Returning 'names(files)' in data frame.")
         fileSampleNames <- names(files)
     }
-    out <- data.frame(
+    map <- data.frame(
         metadata = metaSampleNames,
         files = fileSampleNames[idx],
         stringsAsFactors = FALSE
     )
-    if (!identical(anyNA(out, recursive = TRUE), FALSE)) {
-        fail <- !complete.cases(out)
-        fail <- out[fail, , drop = FALSE]
+    if (!identical(anyNA(map, recursive = TRUE), FALSE)) {
+        fail <- !complete.cases(map)
+        fail <- map[fail, , drop = FALSE]
         stop("Match failure:\n", printString(fail))
     }
     assert(identical(
         x = as.character(metadata[[1L]]),
-        y = as.character(out[[1L]])
+        y = as.character(map[[1L]])
     ))
+    out <- metadata
+    out[[1L]] <- map[["files"]]
+    out[["originalSampleID"]] <- metadata[[1L]]
     out
 }
