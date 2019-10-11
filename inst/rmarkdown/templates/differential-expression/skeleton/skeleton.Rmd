@@ -1,14 +1,14 @@
 ---
-## Updated 2019-09-11.
+## Updated 2019-10-11.
 params:
-  title: "Differential expression analysis using DESeq2"
+  title: "Differential expression using DESeq2"
   
   ## Use DESeqAnalysis object as input.
   ## - Standard: Load from file on disk, either RDS or RDA.
   ## - Advanced: Loop across multiple objects using `rmarkdown::render()`.
   object: "rds/YYYY-MM-DD/object.rds"
   
-  ## The `name` param is only necessary when passing in object directly, during
+  ## The `name` param is only required when passing in object directly, during
   ## an `rmarkdown::render()` call. See `object` param.
   name: ""
   
@@ -42,7 +42,10 @@ knitr::opts_chunk[["set"]](message = FALSE)
 if (is.character(params$object)) {
     file <- params$object
     object <- import(file)
-    name <- basenameSansExt(file)
+    name <- params$name
+    if (!isTRUE(nzchar(name))) {
+      name <- basenameSansExt(file)
+    }
     rm(file)
 } else {
     object <- params$object
@@ -50,7 +53,7 @@ if (is.character(params$object)) {
 }
 stopifnot(
     is(object, "DESeqAnalysis"),
-    is.character(name)
+    isTRUE(nzchar(name))
 )
 ## Note that DESeq2 will mask the S4 generic.
 resultsNames <- DESeqAnalysis::resultsNames(object)
