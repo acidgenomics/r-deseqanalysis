@@ -18,12 +18,7 @@ plotDEGPCA(object, ...)
   ...)
 
 \S4method{plotDEGPCA}{DESeqAnalysis}(object, results,
-  contrastSamples = FALSE, direction = c("both", "up", "down"),
-  assay = 1L, interestingGroups = NULL, label = getOption(x =
-  "acid.label", default = FALSE), color = getOption(x =
-  "acid.color.discrete", default = acidplots::scale_color_synesthesia_d()),
-  pointSize = getOption(x = "acid.point.size", default = 3L),
-  return = c("ggplot", "DataFrame"), ...)
+  contrastSamples = FALSE, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -91,8 +86,13 @@ To adjust the annotation columns, modify the
 \code{\link[SummarizedExperiment:colData]{colData()}} of the \code{counts} argument, which
 must contain/extend a \code{SummarizedExperiment}.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{DESeqAnalysis}: Passes to \code{DESeqResults} method.
+}}
+
 \note{
-Updated 2019-09-10.
+Updated 2019-10-15.
 }
 \examples{
 data(deseq)
