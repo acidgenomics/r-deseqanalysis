@@ -1,6 +1,6 @@
 #' @name topTables
 #' @inherit bioverbs::topTables
-#' @note Updated 2019-10-09.
+#' @note Updated 2019-10-15.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
