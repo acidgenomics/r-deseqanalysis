@@ -21,8 +21,8 @@
 #' @importFrom basejump Gene2Symbol as_tibble autopadZeros camelCase
 #'   convertSampleIDsToNames decode droplevels import initDir
 #'   interestingGroups<- leftJoin makeNames mapGenesToRownames markdownHeader
-#'   markdownList matchInterestingGroups matchesGene2Symbol methodFormals
-#'   printString realpath removeNA showSlotInfo snakeCase standardizeCall
+#'   markdownList matchInterestingGroups matchesGene2Symbol  printString
+#'   realpath removeNA showSlotInfo snakeCase standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_density
 #'   geom_hline geom_point geom_vline ggplot guides labs scale_color_manual

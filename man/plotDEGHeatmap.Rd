@@ -10,11 +10,11 @@
 plotDEGHeatmap(object, ...)
 
 \S4method{plotDEGHeatmap}{DESeqResults}(object, DESeqTransform,
-  direction = c("both", "up", "down"), scale = c("row", "column",
-  "none"), clusteringMethod = "ward.D2", clusterRows = TRUE,
-  clusterCols = TRUE, breaks = seq(from = -2L, to = 2L, by = 0.25),
-  legendBreaks = seq(from = -2L, to = 2L, by = 1L), ...,
-  color = getOption(x = "acid.heatmap.color", default =
+  interestingGroups = NULL, direction = c("both", "up", "down"),
+  scale = c("row", "column", "none"), clusteringMethod = "ward.D2",
+  clusterRows = TRUE, clusterCols = TRUE, breaks = seq(from = -2L, to
+  = 2L, by = 0.25), legendBreaks = seq(from = -2L, to = 2L, by = 1L),
+  ..., color = getOption(x = "acid.heatmap.color", default =
   acidplots::blueYellow))
 
 \S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results,
@@ -24,6 +24,10 @@ plotDEGHeatmap(object, ...)
 \item{object}{Object.}
 
 \item{DESeqTransform}{\code{DESeqTransform}.}
+
+\item{interestingGroups}{\code{character}.
+Groups of interest to use for visualization.
+Corresponds to factors describing the columns of the object.}
 
 \item{direction}{\code{character(1)}.
 Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}

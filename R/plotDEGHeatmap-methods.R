@@ -37,6 +37,7 @@ NULL
     function(
         object,
         DESeqTransform,  # nolint
+        interestingGroups = NULL,
         direction = c("both", "up", "down"),
         scale = c("row", "column", "none"),
         clusteringMethod = "ward.D2",

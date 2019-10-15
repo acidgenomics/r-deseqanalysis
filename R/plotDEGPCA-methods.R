@@ -35,7 +35,9 @@ NULL
     function(
         object,
         DESeqTransform,  # nolint
-        direction = c("both", "up", "down")
+        interestingGroups = NULL,
+        direction = c("both", "up", "down"),
+        ...
     ) {
         validObject(object)
         validObject(DESeqTransform)
@@ -76,31 +78,18 @@ NULL
             "lfcThreshold: ", lfcThreshold
         )
         ## Using SummarizedExperiment method here.
-        rse <- as(dt, "RangedSummarizedExperiment")
-        do.call(
-            what = plotPCA,
-            args = list(
-                object = rse,
-                interestingGroups = interestingGroups,
-                ## We're using our DEGs instead of top (500) variable genes.
-                ntop = Inf,
-                label = label,
-                title = title,
-                subtitle = subtitle,
-                return = return
-            )
+        plotPCA(
+            object = as(dt, "RangedSummarizedExperiment"),
+            interestingGroups = interestingGroups,
+            ## We're using our DEGs instead of top (500) variable genes.
+            ntop = Inf,
+            label = label,
+            title = title,
+            subtitle = subtitle,
+            return = return,
+            ...
         )
     }
-
-f1 <- formals(`plotDEGPCA,DESeqResults`)
-f2 <- methodFormals(
-    f = "plotPCA",
-    signature = "SummarizedExperiment",
-    package = "acidplots"
-)
-f2 <- f2[setdiff(names(f2), c("ntop", "subtitle", "title"))]
-f <- c(f1, f2)
-formals(`plotDEGPCA,DESeqResults`) <- f
 
 
 
