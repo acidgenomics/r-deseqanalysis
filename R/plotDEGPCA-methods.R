@@ -59,8 +59,12 @@ NULL
         )
         ## Get the character vector of DEGs.
         deg <- deg(object = res, direction = direction)
-        if (!hasLength(deg)) {
-            warning("There are no DEGs to plot. Skipping.")
+        minThreshold <- 10L
+        if (length(deg) < minThreshold) {
+            message(sprintf(
+                fmt = "Fewer than %s DEGs to plot. Skipping.",
+                minThreshold
+            ))
             return(invisible())
         }
         ## Subset to only include the DEGs.
