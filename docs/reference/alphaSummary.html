@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.10</span>
       </span>
     </div>
 
@@ -138,30 +138,20 @@
     </tr>
     <tr>
       <th>contrast</th>
-      <td><p>this argument specifies what comparison to extract from
-the <code>object</code> to build a results table. one of either:</p><ul>
-<li><p>a character vector with exactly three elements:
-the name of a factor in the design formula,
-the name of the numerator level for the fold change,
-and the name of the denominator level for the fold change
-(simplest case)</p></li>
-<li><p>a list of 2 character vectors: the names of the fold changes
-for the numerator, and the names of the fold changes
-for the denominator.
-these names should be elements of <code><a href='resultsNames.html'>resultsNames(object)</a></code>.
-if the list is length 1, a second element is added which is the
-empty character vector, <code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>.
-(more general case, can be to combine interaction terms and main effects)</p></li>
-<li><p>a numeric contrast vector with one element
-for each element in <code><a href='resultsNames.html'>resultsNames(object)</a></code> (most general case)</p></li>
-</ul><p>If specified, the <code>name</code> argument is ignored.</p></td>
+      <td><p><code>character</code>.
+A character vector with exactly 3 elements:</p><ol>
+<li><p>Name of factor in the design formula.</p></li>
+<li><p>Name of numerator level for the fold change.</p></li>
+<li><p>Name of denominator level for the fold change.</p></li>
+</ol>
+
+<p>See <code><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>DESeq2::results()</a></code> for details.</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>the name of the individual effect (coefficient) for
-building a results table. Use this argument rather than <code>contrast</code>
-for continuous variables, individual effects or for individual interaction terms.
-The value provided to <code>name</code> must be an element of <code><a href='resultsNames.html'>resultsNames(object)</a></code>.</p></td>
+      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
+Name of the individual effect (coefficient) for building a results table.
+Use this argument rather than <code>contrast</code> for continuous variables.</p></td>
     </tr>
     <tr>
       <th>...</th>

@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.10</span>
       </span>
     </div>
 
@@ -132,6 +132,17 @@
       <td><p><code>DESeqTransform</code>.</p></td>
     </tr>
     <tr>
+      <th>contrast</th>
+      <td><p><code>character</code>.
+A character vector with exactly 3 elements:</p><ol>
+<li><p>Name of factor in the design formula.</p></li>
+<li><p>Name of numerator level for the fold change.</p></li>
+<li><p>Name of denominator level for the fold change.</p></li>
+</ol>
+
+<p>See <code><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>DESeq2::results()</a></code> for details.</p></td>
+    </tr>
+    <tr>
       <th>contrastSamples</th>
       <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
 <strong>Experimental</strong>. Only include the samples used to define the contrast
@@ -142,6 +153,12 @@ contrasts (e.g. interaction effect).</p></td>
       <th>lfcShrink</th>
       <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
 Use shrunken log2 fold change (LFC) values.</p></td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
+Name of the individual effect (coefficient) for building a results table.
+Use this argument rather than <code>contrast</code> for continuous variables.</p></td>
     </tr>
     <tr>
       <th>results</th>
