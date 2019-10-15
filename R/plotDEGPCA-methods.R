@@ -59,11 +59,10 @@ NULL
         )
         ## Get the character vector of DEGs.
         deg <- deg(object = res, direction = direction)
-        minThreshold <- 10L
-        if (length(deg) < minThreshold) {
+        if (length(deg) < .minDEGThreshold) {
             message(sprintf(
                 fmt = "Fewer than %s DEGs to plot. Skipping.",
-                minThreshold
+                .minDEGThreshold
             ))
             return(invisible())
         }

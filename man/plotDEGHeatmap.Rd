@@ -13,26 +13,12 @@ plotDEGHeatmap(object, ...)
   direction = c("both", "up", "down"), scale = c("row", "column",
   "none"), clusteringMethod = "ward.D2", clusterRows = TRUE,
   clusterCols = TRUE, breaks = seq(from = -2L, to = 2L, by = 0.25),
-  legendBreaks = seq(from = -2L, to = 2L, by = 1L),
-  interestingGroups = NULL, showRownames = FALSE,
-  showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
+  legendBreaks = seq(from = -2L, to = 2L, by = 1L), ...,
   color = getOption(x = "acid.heatmap.color", default =
-  acidplots::blueYellow), legendColor = getOption(x =
-  "acid.heatmap.color", default = acidplots::synesthesia),
-  borderColor = NULL, title = NULL, ...)
+  acidplots::blueYellow))
 
 \S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results,
-  contrastSamples = FALSE, lfcShrink = TRUE, direction = c("both",
-  "up", "down"), scale = c("row", "column", "none"),
-  clusteringMethod = "ward.D2", clusterRows = TRUE,
-  clusterCols = TRUE, breaks = seq(from = -2L, to = 2L, by = 0.25),
-  legendBreaks = seq(from = -2L, to = 2L, by = 1L),
-  interestingGroups = NULL, showRownames = FALSE,
-  showColnames = TRUE, treeheightRow = 50L, treeheightCol = 50L,
-  color = getOption(x = "acid.heatmap.color", default =
-  acidplots::blueYellow), legendColor = getOption(x =
-  "acid.heatmap.color", default = acidplots::synesthesia),
-  borderColor = NULL, title = NULL, ...)
+  contrastSamples = FALSE, lfcShrink = TRUE, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -63,21 +49,7 @@ automatically, differing from the behavior in pheatmap.}
 \item{legendBreaks}{\code{numeric} or \code{NULL}.
 Numeric vector of breakpoints for the color legend.}
 
-\item{interestingGroups}{\code{character}.
-Groups of interest to use for visualization.
-Corresponds to factors describing the columns of the object.}
-
-\item{showRownames}{\code{logical(1)}.
-Show row or column names.}
-
-\item{showColnames}{\code{logical(1)}.
-Show row or column names.}
-
-\item{treeheightRow}{\code{integer(1)}.
-Size of the row and column dendrograms. Use \code{0} to disable.}
-
-\item{treeheightCol}{\code{integer(1)}.
-Size of the row and column dendrograms. Use \code{0} to disable.}
+\item{...}{Additional arguments.}
 
 \item{color}{\code{function}, \code{character}, or \code{NULL}.
 Hexadecimal color function or values to use for plot.
@@ -95,19 +67,6 @@ Alternatively, colors can be defined manually using hexadecimal values
 (e.g. \code{c("#FF0000", "#0000FF")}), but this is not generally recommended.
 Refer to the RColorBrewer package for hexadecimal color palettes that may
 be suitable. If set \code{NULL}, will use the default pheatmap colors.}
-
-\item{legendColor}{\code{function} or \code{NULL}.
-Hexadecimal color function to use for legend labels. Note that hexadecimal
-values are not supported. If set \code{NULL}, will use the default pheatmap
-colors.}
-
-\item{borderColor}{\code{character(1)} or \code{NULL}.
-Border color.}
-
-\item{title}{\code{character(1)}.
-Title.}
-
-\item{...}{Additional arguments.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or position of \code{DESeqResults}.}
@@ -134,8 +93,16 @@ To adjust the annotation columns, modify the
 \code{\link[SummarizedExperiment:colData]{colData()}} of the \code{counts} argument, which
 must contain a \code{SummarizedExperiment}.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{DESeqResults}: Passes to \code{plotHeatmap()} \code{SummarizedExperiment}
+method defined in acidplots.
+
+\item \code{DESeqAnalysis}: Passes to \code{DESeqResults} method.
+}}
+
 \note{
-Updated 2019-09-10.
+Updated 2019-10-15.
 }
 \examples{
 data(deseq)
