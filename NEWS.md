@@ -1,4 +1,4 @@
-## DESeqanalysis 0.2.10 (2019-10-15)
+## DESeqAnalysis 0.2.10 (2019-10-15)
 
 ### Minor changes
 
