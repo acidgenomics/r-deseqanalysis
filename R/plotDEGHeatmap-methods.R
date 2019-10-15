@@ -43,6 +43,7 @@ NULL
         clusteringMethod = "ward.D2",
         clusterRows = TRUE,
         clusterCols = TRUE,
+        color,
         breaks = seq(from = -2L, to = 2L, by = 0.25),
         legendBreaks = seq(from = -2L, to = 2L, by = 1L),
         ...

@@ -47,7 +47,6 @@ NULL
             identical(rownames(object), rownames(DESeqTransform))
         )
         direction <- match.arg(direction)
-        return <- match.arg(return)
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
@@ -78,17 +77,14 @@ NULL
             "lfcThreshold: ", lfcThreshold
         )
         ## Using SummarizedExperiment method here.
-        plotPCA(
+        args <- list(
             object = as(dt, "RangedSummarizedExperiment"),
-            interestingGroups = interestingGroups,
-            ## We're using our DEGs instead of top (500) variable genes.
             ntop = Inf,
-            label = label,
             title = title,
-            subtitle = subtitle,
-            return = return,
-            ...
+            subtitle = subtitle
         )
+        args <- c(args, list(...))
+        do.call(what = plotPCA, args = args)
     }
 
 

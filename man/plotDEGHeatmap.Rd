@@ -12,10 +12,10 @@ plotDEGHeatmap(object, ...)
 \S4method{plotDEGHeatmap}{DESeqResults}(object, DESeqTransform,
   interestingGroups = NULL, direction = c("both", "up", "down"),
   scale = c("row", "column", "none"), clusteringMethod = "ward.D2",
-  clusterRows = TRUE, clusterCols = TRUE, breaks = seq(from = -2L, to
-  = 2L, by = 0.25), legendBreaks = seq(from = -2L, to = 2L, by = 1L),
-  ..., color = getOption(x = "acid.heatmap.color", default =
-  acidplots::blueYellow))
+  clusterRows = TRUE, clusterCols = TRUE, color = getOption(x =
+  "acid.heatmap.color", default = acidplots::blueYellow),
+  breaks = seq(from = -2L, to = 2L, by = 0.25), legendBreaks = seq(from
+  = -2L, to = 2L, by = 1L), ...)
 
 \S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results,
   contrastSamples = FALSE, lfcShrink = TRUE, ...)
@@ -45,16 +45,6 @@ Arrange with hierarchical clustering.}
 \item{clusterCols}{\code{logical(1)}.
 Arrange with hierarchical clustering.}
 
-\item{breaks}{\code{numeric} or \code{NULL}.
-A sequence of numbers that covers the range of values in the matrix. Must
-be 1 element longer than the color vector, which is handled internally
-automatically, differing from the behavior in pheatmap.}
-
-\item{legendBreaks}{\code{numeric} or \code{NULL}.
-Numeric vector of breakpoints for the color legend.}
-
-\item{...}{Additional arguments.}
-
 \item{color}{\code{function}, \code{character}, or \code{NULL}.
 Hexadecimal color function or values to use for plot.
 
@@ -71,6 +61,16 @@ Alternatively, colors can be defined manually using hexadecimal values
 (e.g. \code{c("#FF0000", "#0000FF")}), but this is not generally recommended.
 Refer to the RColorBrewer package for hexadecimal color palettes that may
 be suitable. If set \code{NULL}, will use the default pheatmap colors.}
+
+\item{breaks}{\code{numeric} or \code{NULL}.
+A sequence of numbers that covers the range of values in the matrix. Must
+be 1 element longer than the color vector, which is handled internally
+automatically, differing from the behavior in pheatmap.}
+
+\item{legendBreaks}{\code{numeric} or \code{NULL}.
+Numeric vector of breakpoints for the color legend.}
+
+\item{...}{Additional arguments.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or position of \code{DESeqResults}.}
