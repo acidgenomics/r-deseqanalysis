@@ -95,7 +95,7 @@ NULL
             title <- paste0(title, "; lfc > ", lfcThreshold)
         }
         ## Using SummarizedExperiment method defined in basejump here.
-        plotHeatmap(
+        args <- list(
             object = as(dt, "RangedSummarizedExperiment"),
             scale = scale,
             clusteringMethod = clusteringMethod,
@@ -103,10 +103,10 @@ NULL
             clusterCols = clusterCols,
             color = color,
             breaks = breaks,
-            legendBreaks = legendBreaks,
-            ...
-
+            legendBreaks = legendBreaks
         )
+        args <- c(args, list(...))
+        do.call(what = plotHeatmap, args = args)
     }
 
 formals(`plotDEGHeatmap,DESeqResults`)[["color"]] <-
