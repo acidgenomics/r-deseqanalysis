@@ -1,3 +1,13 @@
+## DESeqanalysis 0.2.10 (2019-10-15)
+
+### Minor changes
+
+- `plotDEGHeatmap`, `plotDEGPCA`: Hardened methods against input with very few
+  DEGs (less than 10). Simplified internal method passthrough to no longer
+  rely upon `matchArgsToDoCall` function.
+- `plotBaseMean`: Now exporting `numeric` method, which is the basis for
+  `DESeqDataSet` and `DESeqResults` methods.
+
 ## DESeqAnalysis 0.2.9 (2019-10-09)
 
 ### New functions
