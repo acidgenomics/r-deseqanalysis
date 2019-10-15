@@ -4,7 +4,7 @@
 
 #' @name plotDEGPCA
 #' @inherit bioverbs::plotDEGPCA
-#' @note Updated 2019-09-10.
+#' @note Updated 2019-10-15.
 #'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams acidplots::plotPCA
@@ -30,7 +30,7 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-10-15.
 `plotDEGPCA,DESeqResults` <-  # nolint
     function(
         object,
@@ -111,12 +111,13 @@ setMethod(
 
 
 
-## Updated 2019-09-09.
+## Updated 2019-10-15.
 `plotDEGPCA,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
-        contrastSamples = FALSE
+        contrastSamples = FALSE,
+        ...
     ) {
         validObject(object)
         assert(
@@ -136,30 +137,12 @@ setMethod(
             dt <- droplevels(dt)
         }
         ## Passing through to DESeqResults/DESeqTransform method here.
-        do.call(
-            what = plotDEGPCA,
-            args = matchArgsToDoCall(
-                args = list(
-                    object = res,
-                    DESeqTransform = dt
-                ),
-                removeFormals = c(
-                    "results",
-                    "contrastSamples"
-                )
-            )
-        )
+        plotDEGPCA(object = res, DESeqTransform = dt, ...)
     }
 
-f1 <- formals(`plotDEGPCA,DESeqAnalysis`)
-f2 <- formals(`plotDEGPCA,DESeqResults`)
-f2 <- f2[setdiff(names(f2), c(names(f1), "DESeqTransform"))]
-f <- c(f1, f2)
-formals(`plotDEGPCA,DESeqAnalysis`) <- f
 
 
-
-#' @rdname plotDEGPCA
+#' @describeIn plotDEGPCA Passes to `DESeqResults` method.
 #' @export
 setMethod(
     f = "plotDEGPCA",

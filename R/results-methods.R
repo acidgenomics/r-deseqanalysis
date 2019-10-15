@@ -1,6 +1,7 @@
+#' Results
+#'
 #' @name results
-#' @inherit bioverbs::results
-#' @note Updated 2019-09-10.
+#' @note Updated 2019-10-15.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
