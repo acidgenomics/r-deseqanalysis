@@ -13,11 +13,18 @@
 #'   Assign the [DESeq2::lfcShrink()] return here.
 #'
 #' @examples
-#' data <- DESeq2::makeExampleDESeqDataSet()
-#' data <- DESeq2::DESeq(data)
+#' suppressPackageStartupMessages(library(DESeq2))
+#'
+#' data <- makeExampleDESeqDataSet()
+#' data <- DESeq(data)
 #' class(data)
 #'
-#' transform <- DESeq2::varianceStabilizingTransformation(data)
+#' ## Gene identifiers and names (symbols) are required.
+#' rowRanges <- emptyRanges(names = rownames(data))
+#' mcols(rowRanges)[["geneID"]] <- paste0("id", seq_len(length(rowRanges)))
+#' mcols(rowRanges)[["geneName"]] <- paste0("name", seq_len(length(rowRanges)))
+#'
+#' transform <- varianceStabilizingTransformation(data)
 #' class(transform)
 #'
 #' resultsNames(data)
@@ -25,7 +32,7 @@
 #' results <- results(data, name = name)
 #' class(results)
 #'
-#' lfcShrink <- DESeq2::lfcShrink(dds = data, res = results, coef = 2L)
+#' lfcShrink <- lfcShrink(dds = data, res = results, coef = 2L)
 #'
 #' results <- list(results)
 #' names(results) <- name
@@ -33,15 +40,13 @@
 #' lfcShrink <- list(lfcShrink)
 #' names(lfcShrink) <- name
 #'
-#' identical(names(results), names(lfcShrink))
-#'
-#' x <- DESeqAnalysis(
+#' object <- DESeqAnalysis(
 #'     data = data,
 #'     transform = transform,
 #'     results = results,
 #'     lfcShrink = lfcShrink
 #' )
-#' print(x)
+#' print(object)
 DESeqAnalysis <-  # nolint
     function(
         data,
