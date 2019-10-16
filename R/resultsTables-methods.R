@@ -240,10 +240,10 @@ NULL
             lfcThreshold = lfcThreshold,
             direction = "both"
         )
-        ## Early return with warning if there are not DEGs.
+        ## Early return if there are not DEGs.
         if (!hasLength(both)) {
             ## nocov start
-            warning(sprintf(
+            message(sprintf(
                 "'%s' does not contain any DEGs. Skipping.",
                 deparse(results)
             ))
