@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.10</span>
       </span>
     </div>
 
@@ -163,10 +163,8 @@ first column. Original values are stashed in "originalSampleID".</p>
 #&gt; 1 1_sample_A         A
 #&gt; 2 2_sample_B         B
 #&gt; 3 3_sample_C         A
-#&gt; 4 4_sample_D         B</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>files</span>)</div><div class='output co'>#&gt; [1] "salmon/4-sample-D/quant.sf"
-#&gt; [2] "salmon/3-sample-C/quant.sf"
-#&gt; [3] "salmon/2-sample-B/quant.sf"
-#&gt; [4] "salmon/1-sample-A/quant.sf"</div><div class='input'><span class='fu'>matchMetadataToFiles</span>(<span class='kw'>metadata</span> <span class='kw'>=</span> <span class='no'>metadata</span>, <span class='kw'>files</span> <span class='kw'>=</span> <span class='no'>files</span>)</div><div class='output co'>#&gt;     sampleID condition originalSampleID
+#&gt; 4 4_sample_D         B</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>files</span>)</div><div class='output co'>#&gt; [1] "salmon/4-sample-D/quant.sf" "salmon/3-sample-C/quant.sf"
+#&gt; [3] "salmon/2-sample-B/quant.sf" "salmon/1-sample-A/quant.sf"</div><div class='input'><span class='fu'>matchMetadataToFiles</span>(<span class='kw'>metadata</span> <span class='kw'>=</span> <span class='no'>metadata</span>, <span class='kw'>files</span> <span class='kw'>=</span> <span class='no'>files</span>)</div><div class='output co'>#&gt;     sampleID condition originalSampleID
 #&gt; 1 1-sample-A         A       1_sample_A
 #&gt; 2 2-sample-B         B       2_sample_B
 #&gt; 3 3-sample-C         A       3_sample_C

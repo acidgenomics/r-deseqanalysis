@@ -8,6 +8,16 @@
 
 \item{DESeqTransform}{\code{DESeqTransform}.}
 
+\item{contrast}{\code{character}.
+A character vector with exactly 3 elements:
+\enumerate{
+\item Name of factor in the design formula.
+\item Name of numerator level for the fold change.
+\item Name of denominator level for the fold change.
+}
+
+See \code{\link[DESeq2:results]{DESeq2::results()}} for details.}
+
 \item{contrastSamples}{\code{logical(1)}.
 \strong{Experimental}. Only include the samples used to define the contrast
 passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
@@ -15,6 +25,10 @@ contrasts (e.g. interaction effect).}
 
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
+
+\item{name}{\code{character(1)}.
+Name of the individual effect (coefficient) for building a results table.
+Use this argument rather than \code{contrast} for continuous variables.}
 
 \item{results}{\code{character(1)} or \code{integer(1)}.
 Name or position of \code{DESeqResults}.}

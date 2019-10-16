@@ -24,14 +24,11 @@ Name or position of \code{DESeqResults}.}
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
 }
-\value{
-Varies, depending on the method.
-}
 \description{
 Results
 }
 \note{
-Updated 2019-09-10.
+Updated 2019-10-15.
 }
 \examples{
 data(deseq)

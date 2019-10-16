@@ -62,7 +62,7 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 \code{all} table), are arranged by adjusted \emph{P} value.
 }
 \note{
-Updated 2019-10-09.
+Updated 2019-10-15.
 
 Do not apply post hoc log fold change cutoffs.
 }

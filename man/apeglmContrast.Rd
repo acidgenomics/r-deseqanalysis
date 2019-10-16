@@ -41,12 +41,12 @@ Runs \code{\link[DESeq2:nbinomWaldTest]{nbinomWaldTest()}} via
 \code{\link[DESeq2:DESeq]{DESeq()}}, followed by \code{\link[DESeq2:lfcShrink]{lfcShrink()}}.
 }
 \note{
-Updated 2019-09-17.
+Updated 2019-10-15.
 }
 \examples{
 dds <- DESeq2::makeExampleDESeqDataSet(n = 1000L, m = 12L)
 dds$condition <- factor(rep(LETTERS[seq_len(4L)], each = 3L))
-dds <- DESeq(dds)
+dds <- DESeq2::DESeq(dds)
 resultsNames(dds)
 
 ## Contrast C vs. B.
@@ -58,9 +58,11 @@ class(res)
 lfcShrinkType(res)
 
 ## Shrunken DESeqResults, using apeglm via `lfcShrink()`.
-shrink <- apeglmContrast(dds = dds, contrast = contrast)
-class(shrink)
-lfcShrinkType(shrink)
+if (requireNamespace("apeglm", quietly = TRUE)) {
+    shrink <- apeglmContrast(dds = dds, contrast = contrast)
+    class(shrink)
+    lfcShrinkType(shrink)
+}
 }
 \seealso{
 \itemize{

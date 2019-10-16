@@ -90,11 +90,7 @@ NULL
                 msg2 = "genes"
             )
         )
-        if (!hasLength(deg)) {
-            warning(status)
-        } else {
-            message(status)
-        }
+        message(status)
         deg
     }
 
