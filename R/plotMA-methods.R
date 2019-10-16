@@ -2,7 +2,7 @@
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
 #' @note We are not allowing post hoc `alpha` or `lfcThreshold` cutoffs here.
-#' @note Updated 2019-09-17.
+#' @note Updated 2019-10-15.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual representation
@@ -163,7 +163,7 @@ NULL
         }
         ## Check for no genes passing cutoffs and early return.
         if (!hasRows(data)) {
-            warning("No genes passed cutoffs.")
+            message("No genes passed cutoffs.")
             return(invisible())
         }
         ## Early return the data, if desired.

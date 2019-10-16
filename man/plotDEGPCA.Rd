@@ -10,63 +10,22 @@
 plotDEGPCA(object, ...)
 
 \S4method{plotDEGPCA}{DESeqResults}(object, DESeqTransform,
-  direction = c("both", "up", "down"), object, assay = 1L,
-  interestingGroups = NULL, label = getOption(x = "acid.label", default
-  = FALSE), color = getOption(x = "acid.color.discrete", default =
-  acidplots::scale_color_synesthesia_d()), pointSize = getOption(x =
-  "acid.point.size", default = 3L), return = c("ggplot", "DataFrame"),
-  ...)
+  interestingGroups = NULL, direction = c("both", "up", "down"), ...)
 
 \S4method{plotDEGPCA}{DESeqAnalysis}(object, results,
-  contrastSamples = FALSE, direction = c("both", "up", "down"),
-  assay = 1L, interestingGroups = NULL, label = getOption(x =
-  "acid.label", default = FALSE), color = getOption(x =
-  "acid.color.discrete", default = acidplots::scale_color_synesthesia_d()),
-  pointSize = getOption(x = "acid.point.size", default = 3L),
-  return = c("ggplot", "DataFrame"), ...)
+  contrastSamples = FALSE, ...)
 }
 \arguments{
 \item{object}{Object.}
 
 \item{DESeqTransform}{\code{DESeqTransform}.}
 
-\item{direction}{\code{character(1)}.
-Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
-
-\item{assay}{\code{vector(1)}.
-Assay name or index position.}
-
 \item{interestingGroups}{\code{character}.
 Groups of interest to use for visualization.
 Corresponds to factors describing the columns of the object.}
 
-\item{label}{\code{logical(1)}.
-Superimpose sample text labels on the plot.}
-
-\item{color}{\code{function}, \code{character}, or \code{NULL}.
-Hexadecimal color function or values to use for plot.
-
-We generally recommend these hexadecimal functions from the viridis
-package, in addition to our \code{\link[=synesthesia]{synesthesia()}} palette:
-\itemize{
-\item \code{viridis::viridis()}.
-\item \code{viridis::inferno()}.
-\item \code{viridis::magma()}.
-\item \code{viridis::plasma()}.
-}
-
-Alternatively, colors can be defined manually using hexadecimal values
-(e.g. \code{c("#FF0000", "#0000FF")}), but this is not generally recommended.
-Refer to the RColorBrewer package for hexadecimal color palettes that may
-be suitable. If set \code{NULL}, will use the default pheatmap colors.}
-
-\item{pointSize}{\code{numeric(1)}.
-Point size for dots in the plot.
-In the range of 1-3 is generally recommended.}
-
-\item{return}{\code{character(1)}.
-Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
-to the first argument in the \code{character} vector.}
+\item{direction}{\code{character(1)}.
+Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
 \item{...}{Additional arguments.}
 
@@ -91,8 +50,13 @@ To adjust the annotation columns, modify the
 \code{\link[SummarizedExperiment:colData]{colData()}} of the \code{counts} argument, which
 must contain/extend a \code{SummarizedExperiment}.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{DESeqAnalysis}: Passes to \code{DESeqResults} method.
+}}
+
 \note{
-Updated 2019-09-10.
+Updated 2019-10-15.
 }
 \examples{
 data(deseq)

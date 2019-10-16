@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.10</span>
       </span>
     </div>
 
@@ -133,14 +133,16 @@ defined in the first metadata column.</p></td>
     <tr>
       <th>files</th>
       <td><p><code>character</code>.
-Quant file paths passed to <code><a href='https://rdrr.io/pkg/tximport/man/tximport.html'>tximport()</a></code>.</p></td>
+Quant file paths passed to <code><a href='https://rdrr.io/pkg/tximport/man/tximport.html'>tximport()</a></code>.
+Sanitize return from <code><a href='prepareTximportFiles.html'>prepareTximportFiles()</a></code> is recommended.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>data.frame</code>.
-Contains 1:1 file to metadata sample identifier mappings.</p>
+Modified metadata frame, with updated sample identifiers in slotted in
+first column. Original values are stashed in "originalSampleID".</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>Updated 2019-10-09.</p>
@@ -162,11 +164,11 @@ Contains 1:1 file to metadata sample identifier mappings.</p>
 #&gt; 2 2_sample_B         B
 #&gt; 3 3_sample_C         A
 #&gt; 4 4_sample_D         B</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>files</span>)</div><div class='output co'>#&gt; [1] "salmon/4-sample-D/quant.sf" "salmon/3-sample-C/quant.sf"
-#&gt; [3] "salmon/2-sample-B/quant.sf" "salmon/1-sample-A/quant.sf"</div><div class='input'><span class='fu'>matchMetadataToFiles</span>(<span class='kw'>metadata</span> <span class='kw'>=</span> <span class='no'>metadata</span>, <span class='kw'>files</span> <span class='kw'>=</span> <span class='no'>files</span>)</div><div class='output co'>#&gt;     metadata      files
-#&gt; 1 1_sample_A 1-sample-A
-#&gt; 2 2_sample_B 2-sample-B
-#&gt; 3 3_sample_C 3-sample-C
-#&gt; 4 4_sample_D 4-sample-D</div></pre>
+#&gt; [3] "salmon/2-sample-B/quant.sf" "salmon/1-sample-A/quant.sf"</div><div class='input'><span class='fu'>matchMetadataToFiles</span>(<span class='kw'>metadata</span> <span class='kw'>=</span> <span class='no'>metadata</span>, <span class='kw'>files</span> <span class='kw'>=</span> <span class='no'>files</span>)</div><div class='output co'>#&gt;     sampleID condition originalSampleID
+#&gt; 1 1-sample-A         A       1_sample_A
+#&gt; 2 2-sample-B         B       2_sample_B
+#&gt; 3 3-sample-C         A       3_sample_C
+#&gt; 4 4-sample-D         B       4_sample_D</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
