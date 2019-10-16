@@ -242,13 +242,7 @@ NULL
         )
         ## Early return if there are not DEGs.
         if (!hasLength(both)) {
-            ## nocov start
-            message(sprintf(
-                "'%s' does not contain any DEGs. Skipping.",
-                deparse(results)
-            ))
-            return(invisible())
-            ## nocov end
+            return(NULL)  # nocov
         }
         up <- deg(
             object = object,
