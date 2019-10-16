@@ -37,7 +37,7 @@ NULL
 .topKables <-  # nolint
     function(object, contrast, n) {
         assert(
-            is(object, "DataFrameList"),
+            is(object, "DataFrameList") || is.null(object),
             isString(contrast, nullOK = TRUE),
             isInt(n),
             isPositive(n)
