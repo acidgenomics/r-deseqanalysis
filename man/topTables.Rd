@@ -53,7 +53,7 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
 }}
 
 \note{
-Updated 2019-10-09.
+Updated 2019-10-15.
 }
 \examples{
 data(deseq)

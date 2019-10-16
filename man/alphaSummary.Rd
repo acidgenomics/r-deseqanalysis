@@ -16,30 +16,19 @@ alphaSummary(object, ...)
 
 \item{alpha}{\code{numeric}. Multiple alpha cutoffs.}
 
-\item{contrast}{this argument specifies what comparison to extract from
-the \code{object} to build a results table. one of either:
-\itemize{
- \item a character vector with exactly three elements:
-the name of a factor in the design formula,
-the name of the numerator level for the fold change,
-and the name of the denominator level for the fold change
-(simplest case)
- \item a list of 2 character vectors: the names of the fold changes
-for the numerator, and the names of the fold changes
-for the denominator.
-these names should be elements of \code{resultsNames(object)}.
-if the list is length 1, a second element is added which is the
-empty character vector, \code{character()}.
-(more general case, can be to combine interaction terms and main effects)
- \item a numeric contrast vector with one element
-for each element in \code{resultsNames(object)} (most general case)
+\item{contrast}{\code{character}.
+A character vector with exactly 3 elements:
+\enumerate{
+\item Name of factor in the design formula.
+\item Name of numerator level for the fold change.
+\item Name of denominator level for the fold change.
 }
-If specified, the \code{name} argument is ignored.}
 
-\item{name}{the name of the individual effect (coefficient) for
-building a results table. Use this argument rather than \code{contrast}
-for continuous variables, individual effects or for individual interaction terms.
-The value provided to \code{name} must be an element of \code{resultsNames(object)}.}
+See \code{\link[DESeq2:results]{DESeq2::results()}} for details.}
+
+\item{name}{\code{character(1)}.
+Name of the individual effect (coefficient) for building a results table.
+Use this argument rather than \code{contrast} for continuous variables.}
 
 \item{...}{Additional arguments.}
 }

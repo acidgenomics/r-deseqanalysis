@@ -26,7 +26,7 @@
 #'
 #' @author Michael Steinbaugh
 #' @export
-#' @note Updated 2019-07-23.
+#' @note Updated 2019-10-15.
 #'
 #' @slot data `DESeqDataSet`.
 #' @slot transform `DESeqTransform`.
@@ -61,6 +61,15 @@ setClass(
         ok <- validate(
             ## DESeqDataSet and DESeqTransform must correspond.
             identical(dimnames(data), dimnames(transform)),
+            ## Gene metadata must be defined in rowRanges.
+            isSubset(
+                x = c("geneID", "geneName"),
+                y = names(mcols(rowRanges(data)))
+            ),
+            isSubset(
+                x = c("geneID", "geneName"),
+                y = names(mcols(rowRanges(transform)))
+            ),
             ## results and lfcShrink must be list.
             is.list(results),
             is.list(lfcShrink),

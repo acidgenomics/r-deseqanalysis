@@ -8,8 +8,8 @@ stopifnot(file.exists(templateFile))
 
 ## Load the DESeqAnalysis objects.
 datasets <- c(
-    name1 = "dds1_analysis",
-    name2 = "dds2_analysis"
+    name1 = "deseqanalysis1",
+    name2 = "deseqanalysis2"
 )
 objectFiles <- file.path(
     "rds",

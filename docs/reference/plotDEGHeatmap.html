@@ -74,7 +74,7 @@ plotHeatmap() are also supported by this function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.10</span>
       </span>
     </div>
 
@@ -129,30 +129,16 @@ manual input of a gene vector. All of the optional parameters for
 
 <span class='co'># S4 method for DESeqResults</span>
 <span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>DESeqTransform</span>,
-  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"row"</span>, <span class='st'>"column"</span>,
-  <span class='st'>"none"</span>), <span class='kw'>clusteringMethod</span> <span class='kw'>=</span> <span class='st'>"ward.D2"</span>, <span class='kw'>clusterRows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>clusterCols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> -<span class='fl'>2L</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.25</span>),
-  <span class='kw'>legendBreaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> -<span class='fl'>2L</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>1L</span>),
-  <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>showRownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>showColnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>treeheightRow</span> <span class='kw'>=</span> <span class='fl'>50L</span>, <span class='kw'>treeheightCol</span> <span class='kw'>=</span> <span class='fl'>50L</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"acid.heatmap.color"</span>, <span class='kw'>default</span> <span class='kw'>=</span>
-  <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/acidplots/man/gradient.html'>blueYellow</a></span>), <span class='kw'>legendColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span>
-  <span class='st'>"acid.heatmap.color"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/acidplots/man/synesthesia.html'>synesthesia</a></span>),
-  <span class='kw'>borderColor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+  <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
+  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"row"</span>, <span class='st'>"column"</span>, <span class='st'>"none"</span>), <span class='kw'>clusteringMethod</span> <span class='kw'>=</span> <span class='st'>"ward.D2"</span>,
+  <span class='kw'>clusterRows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>clusterCols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span>
+  <span class='st'>"acid.heatmap.color"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/acidplots/man/gradient.html'>blueYellow</a></span>),
+  <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> -<span class='fl'>2L</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.25</span>), <span class='kw'>legendBreaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='kw'>from</span>
+  <span class='kw'>=</span> -<span class='fl'>2L</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>1L</span>), <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>results</span>,
-  <span class='kw'>contrastSamples</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>,
-  <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"row"</span>, <span class='st'>"column"</span>, <span class='st'>"none"</span>),
-  <span class='kw'>clusteringMethod</span> <span class='kw'>=</span> <span class='st'>"ward.D2"</span>, <span class='kw'>clusterRows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>clusterCols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> -<span class='fl'>2L</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.25</span>),
-  <span class='kw'>legendBreaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> -<span class='fl'>2L</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>1L</span>),
-  <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>showRownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>showColnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>treeheightRow</span> <span class='kw'>=</span> <span class='fl'>50L</span>, <span class='kw'>treeheightCol</span> <span class='kw'>=</span> <span class='fl'>50L</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"acid.heatmap.color"</span>, <span class='kw'>default</span> <span class='kw'>=</span>
-  <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/acidplots/man/gradient.html'>blueYellow</a></span>), <span class='kw'>legendColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span>
-  <span class='st'>"acid.heatmap.color"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/acidplots/man/synesthesia.html'>synesthesia</a></span>),
-  <span class='kw'>borderColor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>contrastSamples</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,6 +150,12 @@ manual input of a gene vector. All of the optional parameters for
     <tr>
       <th>DESeqTransform</th>
       <td><p><code>DESeqTransform</code>.</p></td>
+    </tr>
+    <tr>
+      <th>interestingGroups</th>
+      <td><p><code>character</code>.
+Groups of interest to use for visualization.
+Corresponds to factors describing the columns of the object.</p></td>
     </tr>
     <tr>
       <th>direction</th>
@@ -192,44 +184,6 @@ Arrange with hierarchical clustering.</p></td>
 Arrange with hierarchical clustering.</p></td>
     </tr>
     <tr>
-      <th>breaks</th>
-      <td><p><code>numeric</code> or <code>NULL</code>.
-A sequence of numbers that covers the range of values in the matrix. Must
-be 1 element longer than the color vector, which is handled internally
-automatically, differing from the behavior in pheatmap.</p></td>
-    </tr>
-    <tr>
-      <th>legendBreaks</th>
-      <td><p><code>numeric</code> or <code>NULL</code>.
-Numeric vector of breakpoints for the color legend.</p></td>
-    </tr>
-    <tr>
-      <th>interestingGroups</th>
-      <td><p><code>character</code>.
-Groups of interest to use for visualization.
-Corresponds to factors describing the columns of the object.</p></td>
-    </tr>
-    <tr>
-      <th>showRownames</th>
-      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
-Show row or column names.</p></td>
-    </tr>
-    <tr>
-      <th>showColnames</th>
-      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
-Show row or column names.</p></td>
-    </tr>
-    <tr>
-      <th>treeheightRow</th>
-      <td><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>.
-Size of the row and column dendrograms. Use <code>0</code> to disable.</p></td>
-    </tr>
-    <tr>
-      <th>treeheightCol</th>
-      <td><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>.
-Size of the row and column dendrograms. Use <code>0</code> to disable.</p></td>
-    </tr>
-    <tr>
       <th>color</th>
       <td><p><code>function</code>, <code>character</code>, or <code>NULL</code>.
 Hexadecimal color function or values to use for plot.</p>
@@ -247,21 +201,16 @@ Refer to the RColorBrewer package for hexadecimal color palettes that may
 be suitable. If set <code>NULL</code>, will use the default pheatmap colors.</p></td>
     </tr>
     <tr>
-      <th>legendColor</th>
-      <td><p><code>function</code> or <code>NULL</code>.
-Hexadecimal color function to use for legend labels. Note that hexadecimal
-values are not supported. If set <code>NULL</code>, will use the default pheatmap
-colors.</p></td>
+      <th>breaks</th>
+      <td><p><code>numeric</code> or <code>NULL</code>.
+A sequence of numbers that covers the range of values in the matrix. Must
+be 1 element longer than the color vector, which is handled internally
+automatically, differing from the behavior in pheatmap.</p></td>
     </tr>
     <tr>
-      <th>borderColor</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> or <code>NULL</code>.
-Border color.</p></td>
-    </tr>
-    <tr>
-      <th>title</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
-Title.</p></td>
+      <th>legendBreaks</th>
+      <td><p><code>numeric</code> or <code>NULL</code>.
+Numeric vector of breakpoints for the color legend.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -294,9 +243,17 @@ Use shrunken log2 fold change (LFC) values.</p></td>
     <p>To adjust the annotation columns, modify the
 <code><a href='https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html'>colData()</a></code> of the <code>counts</code> argument, which
 must contain a <code>SummarizedExperiment</code>.</p>
+    <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
+
+    
+<ul>
+<li><p><code>DESeqResults</code>: Passes to <code>plotHeatmap()</code> <code>SummarizedExperiment</code>
+method defined in acidplots.</p></li>
+<li><p><code>DESeqAnalysis</code>: Passes to <code>DESeqResults</code> method.</p></li>
+</ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-09-10.</p>
+    <p>Updated 2019-10-15.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
@@ -311,6 +268,7 @@ must contain a <code>SummarizedExperiment</code>.</p>
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
+      <li><a href="#methods-by-class-">Methods (by class)</a></li>
       <li><a href="#note">Note</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>

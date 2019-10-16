@@ -13,18 +13,15 @@
 #'   Assign the [DESeq2::lfcShrink()] return here.
 #'
 #' @examples
-#' suppressPackageStartupMessages(library(DESeq2))
-#'
-#' data <- makeExampleDESeqDataSet()
-#' data <- DESeq(data)
-#' class(data)
-#'
-#' ## Gene identifiers and names (symbols) are required.
+#' data <- DESeq2::makeExampleDESeqDataSet()
 #' rowRanges <- emptyRanges(names = rownames(data))
 #' mcols(rowRanges)[["geneID"]] <- paste0("id", seq_len(length(rowRanges)))
 #' mcols(rowRanges)[["geneName"]] <- paste0("name", seq_len(length(rowRanges)))
+#' rowRanges(data) <- rowRanges
+#' data <- DESeq2::DESeq(data)
+#' class(data)
 #'
-#' transform <- varianceStabilizingTransformation(data)
+#' transform <- DESeq2::varianceStabilizingTransformation(data)
 #' class(transform)
 #'
 #' resultsNames(data)
@@ -32,7 +29,7 @@
 #' results <- results(data, name = name)
 #' class(results)
 #'
-#' lfcShrink <- lfcShrink(dds = data, res = results, coef = 2L)
+#' lfcShrink <- DESeq2::lfcShrink(dds = data, res = results, coef = 2L)
 #'
 #' results <- list(results)
 #' names(results) <- name
