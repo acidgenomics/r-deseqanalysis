@@ -170,9 +170,12 @@ Return quant file paths, with valid sample names automatically applied.</p>
     <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"salmon"</span>, <span class='st'>"1-sample-A"</span>, <span class='st'>"quant.sf"</span>),
     <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"salmon"</span>, <span class='st'>"2-sample-B"</span>, <span class='st'>"quant.sf"</span>)
 )
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>files</span>)</div><div class='output co'>#&gt; [1] "salmon/1-sample-A/quant.sf" "salmon/2-sample-B/quant.sf"</div><div class='input'><span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'>prepareTximportFiles</span>(<span class='no'>files</span>, <span class='kw'>makeNames</span> <span class='kw'>=</span> <span class='st'>"snakeCase"</span>, <span class='kw'>exists</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>files</span>)</div><div class='output co'>#&gt;                  x1_sample_a                  x2_sample_b 
-#&gt; "salmon/1-sample-A/quant.sf" "salmon/2-sample-B/quant.sf" </div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>files</span>)</div><div class='output co'>#&gt; [1] "salmon/1-sample-A/quant.sf"
+#&gt; [2] "salmon/2-sample-B/quant.sf"</div><div class='input'><span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'>prepareTximportFiles</span>(<span class='no'>files</span>, <span class='kw'>makeNames</span> <span class='kw'>=</span> <span class='st'>"snakeCase"</span>, <span class='kw'>exists</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>files</span>)</div><div class='output co'>#&gt;                  x1_sample_a 
+#&gt; "salmon/1-sample-A/quant.sf" 
+#&gt;                  x2_sample_b 
+#&gt; "salmon/2-sample-B/quant.sf" </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
