@@ -81,7 +81,7 @@ argument automatically defined.
 \note{
 We are not allowing post hoc \code{alpha} or \code{lfcThreshold} cutoffs here.
 
-Updated 2019-09-17.
+Updated 2019-10-15.
 }
 \section{plotMA2 aliases}{
 

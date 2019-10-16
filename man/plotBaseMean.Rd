@@ -3,6 +3,7 @@
 \docType{methods}
 \name{plotBaseMean}
 \alias{plotBaseMean}
+\alias{plotBaseMean,numeric-method}
 \alias{plotBaseMean,DESeqDataSet-method}
 \alias{plotBaseMean,DESeqResults-method}
 \alias{plotBaseMean,DESeqAnalysis-method}
@@ -10,7 +11,7 @@
 \usage{
 plotBaseMean(object, ...)
 
-\S4method{plotBaseMean}{DESeqDataSet}(object, nonzero = TRUE,
+\S4method{plotBaseMean}{numeric}(object, nonzero = TRUE,
   trans = c("log10", "log2", "identity"), summary = TRUE,
   color = getOption(x = "acid.color.discrete", default =
   acidplots::scale_color_synesthesia_d()), labels = list(title =
@@ -18,13 +19,9 @@ plotBaseMean(object, ...)
   "average expression across all samples", y = "density", color =
   "summary"))
 
-\S4method{plotBaseMean}{DESeqResults}(object, nonzero = TRUE,
-  trans = c("log10", "log2", "identity"), summary = TRUE,
-  color = getOption(x = "acid.color.discrete", default =
-  acidplots::scale_color_synesthesia_d()), labels = list(title =
-  "Base mean distribution", subtitle = NULL, x =
-  "average expression across all samples", y = "density", color =
-  "summary"))
+\S4method{plotBaseMean}{DESeqDataSet}(object, ...)
+
+\S4method{plotBaseMean}{DESeqResults}(object, ...)
 
 \S4method{plotBaseMean}{DESeqAnalysis}(object, ...)
 }
@@ -66,16 +63,18 @@ for sequencing depth.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{DESeqDataSet}: Generates row means of normalized counts. This value
-corresponds to the \code{baseMean} column of \code{DESeqResults}.
+\item \code{DESeqDataSet}: Generates row means of normalized counts.
+This value corresponds to the \code{baseMean} column of \code{DESeqResults}.
+Passes to \code{numeric} method.
 
 \item \code{DESeqResults}: Uses \code{baseMean} column of results.
+Passes to \code{numeric} method.
 
 \item \code{DESeqAnalysis}: Passes to \code{DESeqDataSet} method.
 }}
 
 \note{
-Updated 2019-09-17.
+Updated 2019-10-15.
 }
 \examples{
 data(deseq)

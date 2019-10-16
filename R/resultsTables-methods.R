@@ -1,6 +1,6 @@
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
-#' @note Updated 2019-10-09.
+#' @note Updated 2019-10-15.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -99,7 +99,7 @@ NULL
 ## will fail to write to disk as CSV. Note that we're using `decode()` here to
 ## handle S4 Rle columns from the Genomic Ranges.
 ##
-## Updated 2019-07-23.
+## Updated 2019-10-15.
 .joinRowData <- function(
     DESeqResults,  # nolint
     DESeqDataSet   # nolint
@@ -132,6 +132,12 @@ NULL
         },
         FUN.VALUE = logical(1L)
     )
+    if (!any(keep)) {
+        stop(
+            "No suitable row annotations detected.\n",
+            "Check 'rowData()' of DESeqDataSet."
+        )
+    }
     rowData <- rowData[, keep, drop = FALSE]
     assert(
         all(vapply(
@@ -154,7 +160,7 @@ NULL
 ## https://github.com/hbc/bcbioRNASeq/blob/v0.2.10/R/resultsTables-methods.R
 
 ## Note that this method is used in bcbioRNASeq F1000 paper.
-## Updated 2019-08-20.
+## Updated 2019-10-15.
 `resultsTables,DESeqResults` <-  # nolint
     function(
         object,
@@ -234,15 +240,9 @@ NULL
             lfcThreshold = lfcThreshold,
             direction = "both"
         )
-        ## Early return with warning if there are not DEGs.
+        ## Early return if there are not DEGs.
         if (!hasLength(both)) {
-            ## nocov start
-            warning(sprintf(
-                "'%s' does not contain any DEGs. Skipping.",
-                deparse(results)
-            ))
-            return(invisible())
-            ## nocov end
+            return(NULL)  # nocov
         }
         up <- deg(
             object = object,
@@ -284,7 +284,7 @@ setMethod(
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-10-15.
 `resultsTables,DESeqAnalysis` <-  # nolint
     function(
         object,

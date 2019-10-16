@@ -3,7 +3,7 @@
 #' @inherit bioverbs::alphaSummary
 #' @note Updated 2019-08-20.
 #'
-#' @inheritParams DESeq2::results
+#' @inheritParams params
 #' @inheritParams acidroxygen::params
 #' @param ... Additional arguments.
 #'

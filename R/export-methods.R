@@ -56,6 +56,9 @@ NULL
                 extra = TRUE,
                 return = "tbl_df"
             )
+            if (is.null(resTbl)) {
+                return(invisible())
+            }
             files <- file.path(dir, results, paste0(names(resTbl), ".csv"))
             if (isTRUE(compress)) {
                 files <- paste0(files, ".gz")

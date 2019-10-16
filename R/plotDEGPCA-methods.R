@@ -4,7 +4,7 @@
 
 #' @name plotDEGPCA
 #' @inherit bioverbs::plotDEGPCA
-#' @note Updated 2019-09-10.
+#' @note Updated 2019-10-15.
 #'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams acidplots::plotPCA
@@ -30,12 +30,14 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-10-15.
 `plotDEGPCA,DESeqResults` <-  # nolint
     function(
         object,
         DESeqTransform,  # nolint
-        direction = c("both", "up", "down")
+        interestingGroups = NULL,
+        direction = c("both", "up", "down"),
+        ...
     ) {
         validObject(object)
         validObject(DESeqTransform)
@@ -45,7 +47,6 @@ NULL
             identical(rownames(object), rownames(DESeqTransform))
         )
         direction <- match.arg(direction)
-        return <- match.arg(return)
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
@@ -59,8 +60,11 @@ NULL
         )
         ## Get the character vector of DEGs.
         deg <- deg(object = res, direction = direction)
-        if (!hasLength(deg)) {
-            warning("There are no DEGs to plot. Skipping.")
+        if (length(deg) < .minDEGThreshold) {
+            message(sprintf(
+                fmt = "Fewer than %s DEGs to plot. Skipping.",
+                .minDEGThreshold
+            ))
             return(invisible())
         }
         ## Subset to only include the DEGs.
@@ -73,31 +77,15 @@ NULL
             "lfcThreshold: ", lfcThreshold
         )
         ## Using SummarizedExperiment method here.
-        rse <- as(dt, "RangedSummarizedExperiment")
-        do.call(
-            what = plotPCA,
-            args = list(
-                object = rse,
-                interestingGroups = interestingGroups,
-                ## We're using our DEGs instead of top (500) variable genes.
-                ntop = Inf,
-                label = label,
-                title = title,
-                subtitle = subtitle,
-                return = return
-            )
+        args <- list(
+            object = as(dt, "RangedSummarizedExperiment"),
+            ntop = Inf,
+            title = title,
+            subtitle = subtitle
         )
+        args <- c(args, list(...))
+        do.call(what = plotPCA, args = args)
     }
-
-f1 <- formals(`plotDEGPCA,DESeqResults`)
-f2 <- methodFormals(
-    f = "plotPCA",
-    signature = "SummarizedExperiment",
-    package = "acidplots"
-)
-f2 <- f2[setdiff(names(f2), c("ntop", "subtitle", "title"))]
-f <- c(f1, f2)
-formals(`plotDEGPCA,DESeqResults`) <- f
 
 
 
@@ -111,12 +99,13 @@ setMethod(
 
 
 
-## Updated 2019-09-09.
+## Updated 2019-10-15.
 `plotDEGPCA,DESeqAnalysis` <-  # nolint
     function(
         object,
         results,
-        contrastSamples = FALSE
+        contrastSamples = FALSE,
+        ...
     ) {
         validObject(object)
         assert(
@@ -136,30 +125,12 @@ setMethod(
             dt <- droplevels(dt)
         }
         ## Passing through to DESeqResults/DESeqTransform method here.
-        do.call(
-            what = plotDEGPCA,
-            args = matchArgsToDoCall(
-                args = list(
-                    object = res,
-                    DESeqTransform = dt
-                ),
-                removeFormals = c(
-                    "results",
-                    "contrastSamples"
-                )
-            )
-        )
+        plotDEGPCA(object = res, DESeqTransform = dt, ...)
     }
 
-f1 <- formals(`plotDEGPCA,DESeqAnalysis`)
-f2 <- formals(`plotDEGPCA,DESeqResults`)
-f2 <- f2[setdiff(names(f2), c(names(f1), "DESeqTransform"))]
-f <- c(f1, f2)
-formals(`plotDEGPCA,DESeqAnalysis`) <- f
 
 
-
-#' @rdname plotDEGPCA
+#' @describeIn plotDEGPCA Passes to `DESeqResults` method.
 #' @export
 setMethod(
     f = "plotDEGPCA",

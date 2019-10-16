@@ -34,6 +34,10 @@ Updated 2019-08-20.
 }
 \examples{
 data <- DESeq2::makeExampleDESeqDataSet()
+rowRanges <- emptyRanges(names = rownames(data))
+mcols(rowRanges)[["geneID"]] <- paste0("id", seq_len(length(rowRanges)))
+mcols(rowRanges)[["geneName"]] <- paste0("name", seq_len(length(rowRanges)))
+rowRanges(data) <- rowRanges
 data <- DESeq2::DESeq(data)
 class(data)
 
@@ -53,13 +57,11 @@ names(results) <- name
 lfcShrink <- list(lfcShrink)
 names(lfcShrink) <- name
 
-identical(names(results), names(lfcShrink))
-
-x <- DESeqAnalysis(
+object <- DESeqAnalysis(
     data = data,
     transform = transform,
     results = results,
     lfcShrink = lfcShrink
 )
-print(x)
+print(object)
 }
