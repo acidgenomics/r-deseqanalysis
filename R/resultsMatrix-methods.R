@@ -3,14 +3,14 @@
 #' Generate an aggregate matrix of DESeqResults values.
 #'
 #' @name resultsMatrix
-#' @note Updated 2019-07-30.
+#' @note Updated 2019-10-23.
 #'
 #' @param object `DESeqAnalysis`.
 #' @param value `character(1)`.
 #'   Value type to return. Corresponds to supported `DESeqResults` column:
 #'
-#'   - `log2FoldChange`: log2 fold change. This will return *shrunken* LFC
-#'     values if they are slotted in the `DESeqAnalysis` object.
+#'   - `log2FoldChange`: log2 fold change.\cr
+#'     This will return *shrunken* LFC values if they are defined.
 #'   - `stat`: Wald test statistic.
 #'   - `padj`: BH adjusted *P* value.
 #' @param ... Additional arguments.
@@ -34,39 +34,34 @@ NULL
 
 
 
-## Updated 2019-07-30.
+## Updated 2019-10-23.
 `resultsMatrix,DESeqAnalysis` <-  # nolint
     function(
         object,
-        value = c("log2FoldChange", "stat", "padj")
+        value = c("log2FoldChange", "stat", "padj", "baseMean")
     ) {
         validObject(object)
         value <- match.arg(value)
-
-        ## Get appropriate list of `DESeqResults`.
-        ## Use shrunken LFC values, if defined.
-        ## Otherwise, just pull values from `results()` return.
+        ## Get appropriate list of `DESeqResults`. Use the shrunken LFC values,
+        ## if defined. Otherwise, just pull values from `results()` return.
         if (
-            value == "log2FoldChange" &&
-            length(slot(object, "lfcShrink")) > 0L
+            identical(value, "log2FoldChange") &&
+            hasLength(slot(object, "lfcShrink"))
         ) {
             slotName <- "lfcShrink"
         } else {
             slotName <- "results"
         }
-
         message(sprintf(
-            "Generating results matrix from '%s' slot using '%s' column.",
-            slotName, value
+            "Generating '%s' results matrix from '%s' slot.",
+            value, slotName
         ))
-
         results <- slot(object, name = slotName)
         assert(
             is.list(results),
             length(results) > 0L,
             hasValidNames(results)
         )
-
         list <- lapply(
             X = results,
             col = value,
@@ -82,7 +77,6 @@ NULL
                 names(list)
             )
         )
-
         ## Double check that our unlist operation is correct.
         assert(
             identical(
@@ -90,7 +84,6 @@ NULL
                 unname(mat[, 1L, drop = TRUE])
             )
         )
-
         ## Stash useful metadata in the object.
         attr(mat, which = "DESeqAnalysis") <-
             list(
@@ -99,7 +92,6 @@ NULL
                 slotName = slotName,
                 value = value
             )
-
         mat
     }
 
@@ -115,29 +107,17 @@ setMethod(
 
 
 
-## Loop across the nested DESeqAnalysis objects and get the corresponding
-## result matrices.
-## Updated 2019-07-23.
+## Updated 2019-10-23.
 `resultsMatrix,DESeqAnalysisList` <-  # nolint
-    function(
-        object,
-        value = c("log2FoldChange", "stat", "padj")
-    ) {
+    function(object, value) {
         validObject(object)
         value <- match.arg(value)
-        message(sprintf(
-            "Creating aggregate results matrix using %s.\n%s",
-            value,
-            printString(names(object))
-        ))
         list <- mapply(
             name = names(object),
             object = object,
             MoreArgs = list(value = value),
             FUN = function(object, name, value) {
-                suppressMessages(
-                    m <- resultsMatrix(object = object, value = value)
-                )
+                m <- resultsMatrix(object = object, value = value)
                 colnames(m) <- makeNames(paste(name, colnames(m)))
                 m
             },
@@ -147,9 +127,13 @@ setMethod(
         do.call(what = cbind, args = list)
     }
 
+formals(`resultsMatrix,DESeqAnalysisList`)[["value"]] <-
+    formals(`resultsMatrix,DESeqAnalysis`)[["value"]]
 
 
-#' @rdname resultsMatrix
+
+#' @describeIn resultsMatrix Loops across the nested `DESeqAnalysis` objects and
+#'   gets the corresponding result matrices.
 #' @export
 setMethod(
     f = "resultsMatrix",
