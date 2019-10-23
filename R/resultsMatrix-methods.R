@@ -1,6 +1,6 @@
-#' DESeqResults matrix
+#' DESeq aggregate results matrix
 #'
-#' Generate an aggregate matrix of DESeqResults values.
+#' Generate an aggregate matrix of `DESeqResults` column values per contrast.
 #'
 #' @name resultsMatrix
 #' @note Updated 2019-10-23.
@@ -132,8 +132,9 @@ formals(`resultsMatrix,DESeqAnalysisList`)[["value"]] <-
 
 
 
-#' @describeIn resultsMatrix Loops across the nested `DESeqAnalysis` objects and
-#'   gets the corresponding result matrices.
+#' @describeIn resultsMatrix Loop across the nested `DESeqAnalysis` objects and
+#'   aggregate the corresponding result matrices. Note that the analysis names
+#'   are automatically prefixed to the column names.
 #' @export
 setMethod(
     f = "resultsMatrix",

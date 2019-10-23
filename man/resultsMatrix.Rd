@@ -5,7 +5,7 @@
 \alias{resultsMatrix}
 \alias{resultsMatrix,DESeqAnalysis-method}
 \alias{resultsMatrix,DESeqAnalysisList-method}
-\title{DESeqResults matrix}
+\title{DESeq aggregate results matrix}
 \usage{
 resultsMatrix(object, ...)
 
@@ -33,12 +33,13 @@ This will return \emph{shrunken} LFC values if they are defined.
 \code{matrix}.
 }
 \description{
-Generate an aggregate matrix of DESeqResults values.
+Generate an aggregate matrix of \code{DESeqResults} column values per contrast.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{DESeqAnalysisList}: Loops across the nested \code{DESeqAnalysis} objects and
-gets the corresponding result matrices.
+\item \code{DESeqAnalysisList}: Loop across the nested \code{DESeqAnalysis} objects and
+aggregate the corresponding result matrices. Note that the analysis names
+are automatically prefixed to the column names.
 }}
 
 \note{
