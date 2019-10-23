@@ -10,10 +10,10 @@
 resultsMatrix(object, ...)
 
 \S4method{resultsMatrix}{DESeqAnalysis}(object,
-  value = c("log2FoldChange", "stat", "padj"))
+  value = c("log2FoldChange", "stat", "padj", "baseMean"))
 
 \S4method{resultsMatrix}{DESeqAnalysisList}(object,
-  value = c("log2FoldChange", "stat", "padj"))
+  value = c("log2FoldChange", "stat", "padj", "baseMean"))
 }
 \arguments{
 \item{object}{\code{DESeqAnalysis}.}
@@ -21,8 +21,8 @@ resultsMatrix(object, ...)
 \item{value}{\code{character(1)}.
 Value type to return. Corresponds to supported \code{DESeqResults} column:
 \itemize{
-\item \code{log2FoldChange}: log2 fold change. This will return \emph{shrunken} LFC
-values if they are slotted in the \code{DESeqAnalysis} object.
+\item \code{log2FoldChange}: log2 fold change.\cr
+This will return \emph{shrunken} LFC values if they are defined.
 \item \code{stat}: Wald test statistic.
 \item \code{padj}: BH adjusted \emph{P} value.
 }}
@@ -35,8 +35,14 @@ values if they are slotted in the \code{DESeqAnalysis} object.
 \description{
 Generate an aggregate matrix of DESeqResults values.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{DESeqAnalysisList}: Loops across the nested \code{DESeqAnalysis} objects and
+gets the corresponding result matrices.
+}}
+
 \note{
-Updated 2019-07-30.
+Updated 2019-10-23.
 }
 \examples{
 data(deseq)
