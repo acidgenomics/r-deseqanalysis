@@ -1,7 +1,3 @@
-## FIXME Need to ensure rowData is only appended once for DESeqAnalysisList.
-
-
-
 #' DESeq aggregate results matrix
 #'
 #' Generate an aggregate matrix of `DESeqResults` column values per contrast.
@@ -81,9 +77,11 @@ NULL
         )
         if (isTRUE(rowData)) {
             out <- as(mat, "DataFrame")
-            rowData <- .usefulRowData(as(object, "DESeqDataSet"))
+            rowData <- .usefulRowData(object)
             assert(areDisjointSets(colnames(out), colnames(rowData)))
             out <- cbind(rowData, out)
+        } else {
+            out <- mat
         }
         metadata2(out, which = "DESeqAnalysis") <- list(
             version = packageVersion("DESeqAnalysis"),
@@ -133,7 +131,9 @@ setMethod(
         out <- do.call(what = cbind, args = list)
         if (isTRUE(rowData)) {
             out <- as(out, "DataFrame")
-            ## FIXME Need to assign the rowData here.
+            rowData <- .usefulRowData(object)
+            assert(areDisjointSets(colnames(out), colnames(rowData)))
+            out <- cbind(rowData, out)
         }
         metadata2(out, which = "DESeqAnalysis") <- list(
             version = packageVersion("DESeqAnalysis"),
