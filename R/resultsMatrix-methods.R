@@ -1,9 +1,13 @@
+## FIXME Need to ensure rowData is only appended once for DESeqAnalysisList.
+
+
+
 #' DESeq aggregate results matrix
 #'
 #' Generate an aggregate matrix of `DESeqResults` column values per contrast.
 #'
 #' @name resultsMatrix
-#' @note Updated 2019-10-23.
+#' @note Updated 2019-10-24.
 #'
 #' @param object `DESeqAnalysis`.
 #' @param value `character(1)`.
@@ -13,9 +17,13 @@
 #'     This will return *shrunken* LFC values if they are defined.
 #'   - `stat`: Wald test statistic.
 #'   - `padj`: BH adjusted *P* value.
+#' @param rowData `logical(1)`.
+#'   Include row (gene) annotations, bound to the left side of the data frame.
 #' @param ... Additional arguments.
 #'
-#' @return `matrix`.
+#' @return
+#' - `rowData = FALSE`: `matrix`.
+#' - `rowData = TRUE`: `DataFrame`.
 #'
 #' @examples
 #' data(deseq)
@@ -34,32 +42,21 @@ NULL
 
 
 
-## Updated 2019-10-23.
+## Updated 2019-10-24.
 `resultsMatrix,DESeqAnalysis` <-  # nolint
     function(
         object,
-        value = c("log2FoldChange", "stat", "padj", "baseMean")
+        value = c("log2FoldChange", "stat", "padj", "baseMean"),
+        rowData = FALSE
     ) {
         validObject(object)
+        assert(isFlag(rowData))
         value <- match.arg(value)
-        ## Get appropriate list of `DESeqResults`. Use the shrunken LFC values,
-        ## if defined. Otherwise, just pull values from `results()` return.
-        if (
-            identical(value, "log2FoldChange") &&
-            hasLength(slot(object, "lfcShrink"))
-        ) {
-            slotName <- "lfcShrink"
-        } else {
-            slotName <- "results"
-        }
-        message(sprintf(
-            "Generating '%s' results matrix from '%s' slot.",
-            value, slotName
-        ))
+        slotName <- .whichResults(object, value)
         results <- slot(object, name = slotName)
         assert(
             is.list(results),
-            length(results) > 0L,
+            hasLength(results),
             hasValidNames(results)
         )
         list <- lapply(
@@ -67,9 +64,8 @@ NULL
             col = value,
             FUN = function(data, col) data[[col]]
         )
-        unlist <- unlist(list, recursive = FALSE, use.names = FALSE)
         mat <- matrix(
-            data = unlist,
+            data = unlist(list, recursive = FALSE, use.names = FALSE),
             ncol = length(list),
             byrow = FALSE,
             dimnames = list(
@@ -77,22 +73,25 @@ NULL
                 names(list)
             )
         )
-        ## Double check that our unlist operation is correct.
         assert(
             identical(
                 unname(results[[1L]][[value]]),
                 unname(mat[, 1L, drop = TRUE])
             )
         )
-        ## Stash useful metadata in the object.
-        attr(mat, which = "DESeqAnalysis") <-
-            list(
-                version = packageVersion("DESeqAnalysis"),
-                date = Sys.Date(),
-                slotName = slotName,
-                value = value
-            )
-        mat
+        if (isTRUE(rowData)) {
+            out <- as(mat, "DataFrame")
+            rowData <- .usefulRowData(as(object, "DESeqDataSet"))
+            assert(areDisjointSets(colnames(out), colnames(rowData)))
+            out <- cbind(rowData, out)
+        }
+        metadata2(out, which = "DESeqAnalysis") <- list(
+            version = packageVersion("DESeqAnalysis"),
+            date = Sys.Date(),
+            slotName = slotName,
+            value = value
+        )
+        out
     }
 
 
@@ -107,28 +106,47 @@ setMethod(
 
 
 
-## Updated 2019-10-23.
+## Updated 2019-10-24.
 `resultsMatrix,DESeqAnalysisList` <-  # nolint
-    function(object, value) {
+    function(object, value, rowData) {
         validObject(object)
+        assert(isFlag(rowData))
         value <- match.arg(value)
+        slotName <- .whichResults(object, value)
         list <- mapply(
             name = names(object),
             object = object,
             MoreArgs = list(value = value),
             FUN = function(object, name, value) {
-                m <- resultsMatrix(object = object, value = value)
+                ## Note that we're handling rowData below.
+                m <- resultsMatrix(
+                    object = object,
+                    value = value,
+                    rowData = FALSE
+                )
                 colnames(m) <- makeNames(paste(name, colnames(m)))
                 m
             },
             SIMPLIFY = FALSE,
             USE.NAMES = TRUE
         )
-        do.call(what = cbind, args = list)
+        out <- do.call(what = cbind, args = list)
+        if (isTRUE(rowData)) {
+            out <- as(out, "DataFrame")
+            ## FIXME Need to assign the rowData here.
+        }
+        metadata2(out, which = "DESeqAnalysis") <- list(
+            version = packageVersion("DESeqAnalysis"),
+            date = Sys.Date(),
+            slotName = slotName,
+            value = value
+        )
+        out
     }
 
-formals(`resultsMatrix,DESeqAnalysisList`)[["value"]] <-
-    formals(`resultsMatrix,DESeqAnalysis`)[["value"]]
+args <- c("value", "rowData")
+formals(`resultsMatrix,DESeqAnalysisList`)[args] <-
+    formals(`resultsMatrix,DESeqAnalysis`)[args]
 
 
 
