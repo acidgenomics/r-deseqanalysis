@@ -104,7 +104,48 @@ setMethod(
 
 
 
+## Intended for S3 class, or S4 class that doesn't support `metadata()`.
+## Updated 2019-10-24.
+`metadata2<-,ANY,ANY` <-  # nolint
+    function(x, which, value) {
+        attr(x = x, which = which) <- value
+        x
+    }
 
 
 
+#' @rdname metadata2
+#' @export
+setReplaceMethod(
+    f = "metadata2",
+    signature = signature(
+        x = "ANY",
+        which = "character",
+        value = "ANY"
+    ),
+    definition = `metadata2<-,ANY,ANY`
+)
 
+
+
+## Intended for S3 class, or S4 class that doesn't support `metadata()`.
+## Updated 2019-10-24.
+`metadata2<-,Annotated,ANY` <-  # nolint
+    function(x, which, value) {
+        metadata(x)[[which]] <- value
+        x
+    }
+
+
+
+#' @rdname metadata2
+#' @export
+setReplaceMethod(
+    f = "metadata2",
+    signature = signature(
+        x = "Annotated",
+        which = "character",
+        value = "ANY"
+    ),
+    definition = `metadata2<-,Annotated,ANY`
+)
