@@ -53,6 +53,25 @@
 
 
 
+#' Extract the useful row data from DESeqDataSet
+#'
+#' Intentionally drop `logical` and `numeric` columns, which contain values used
+#' internally by DESeq2.
+#'
+#' @note Updated 2019-10-24.
+#' @noRd
+.usefulRowData <- function(object) {
+    data <- rowData(object)
+    assert(
+        is(data, "DataFrame"),
+        hasLength(data)
+    )
+    keep <- !bapply(X = data, FUN = isAny, classes = c("logical", "numeric"))
+    data[, keep, drop = FALSE]
+}
+
+
+
 ## Updated 2019-07-23.
 .transformCountsAxisLabel <- function(object) {
     paste(transformType(object), "counts (log2)")
