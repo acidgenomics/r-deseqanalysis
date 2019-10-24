@@ -53,21 +53,32 @@
 
 
 
-#' Extract the useful row data from DESeqDataSet
+#' Extract the useful row data from object
 #'
 #' Intentionally drop `logical` and `numeric` columns, which contain values used
 #' internally by DESeq2.
 #'
 #' @note Updated 2019-10-24.
 #' @noRd
+#'
+#' @param object `DESeqAnalysis` or `DESeqAnalysisList`.
+#'
+#' @examples
+#' data <- .usefulRowData(object)
 .usefulRowData <- function(object) {
-    data <- rowData(object)
+    if (is(object, "DESeqAnalysisList")) {
+        object <- object[[1L]]
+    }
+    assert(is(object, "DESeqAnalysis"))
+    dds <- as(object, "DESeqDataSet")
+    data <- rowData(dds)
     assert(
         is(data, "DataFrame"),
         hasLength(data)
     )
     keep <- !bapply(X = data, FUN = isAny, classes = c("logical", "numeric"))
-    data[, keep, drop = FALSE]
+    out <- data[, keep, drop = FALSE]
+    out
 }
 
 
@@ -75,4 +86,39 @@
 ## Updated 2019-07-23.
 .transformCountsAxisLabel <- function(object) {
     paste(transformType(object), "counts (log2)")
+}
+
+
+
+#' Determine which results slot to use
+#'
+#' @note Updated 2019-10-24.
+#' @noRd
+#'
+#' @param object `DESeqAnalysis` or `DESeqAnalysisList`.
+#' @param value `character(1)`.
+#'   `DESeqResults` column name.
+#'
+#' @return `character(1)`.
+#'   `DESeqResults` slot name. Either "results" or "lfcShrink"
+#'
+#' @examples
+#' .whichResults(object, value = "log2FoldChange")
+.whichResults <- function(object, value) {
+    if (is(object, "DESeqAnalysisList")) {
+        object <- object[[1L]]
+    }
+    assert(
+        is(object, "DESeqAnalysis"),
+        isCharacter(value)
+    )
+    if (
+        identical(value, "log2FoldChange") &&
+        hasLength(slot(object, "lfcShrink"))
+    ) {
+        slot <- "lfcShrink"
+    } else {
+        slot <- "results"
+    }
+    slot
 }
