@@ -1,3 +1,12 @@
+## DESeqAnalysis 0.2.11 (2019-10-23)
+
+### Minor changes
+
+- `resultsMatrix`: Added support for `baseMean` aggregation, and improved
+  documentation.
+- Updated basejump dependency versions.
+- Added tximport as a suggested package.
+
 ## DESeqAnalysis 0.2.10 (2019-10-16)
 
 ### Minor changes

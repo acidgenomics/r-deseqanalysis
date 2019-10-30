@@ -10,10 +10,12 @@
 resultsMatrix(object, ...)
 
 \S4method{resultsMatrix}{DESeqAnalysis}(object,
-  value = c("log2FoldChange", "stat", "padj", "baseMean"))
+  value = c("log2FoldChange", "stat", "padj", "baseMean"),
+  rowData = FALSE)
 
 \S4method{resultsMatrix}{DESeqAnalysisList}(object,
-  value = c("log2FoldChange", "stat", "padj", "baseMean"))
+  value = c("log2FoldChange", "stat", "padj", "baseMean"),
+  rowData = FALSE)
 }
 \arguments{
 \item{object}{\code{DESeqAnalysis}.}
@@ -27,10 +29,16 @@ This will return \emph{shrunken} LFC values if they are defined.
 \item \code{padj}: BH adjusted \emph{P} value.
 }}
 
+\item{rowData}{\code{logical(1)}.
+Include row (gene) annotations, bound to the left side of the data frame.}
+
 \item{...}{Additional arguments.}
 }
 \value{
-\code{matrix}.
+\itemize{
+\item \code{rowData = FALSE}: \code{matrix}.
+\item \code{rowData = TRUE}: \code{DataFrame}.
+}
 }
 \description{
 Generate an aggregate matrix of \code{DESeqResults} column values per contrast.
@@ -43,7 +51,7 @@ are automatically prefixed to the column names.
 }}
 
 \note{
-Updated 2019-10-23.
+Updated 2019-10-24.
 }
 \examples{
 data(deseq)
