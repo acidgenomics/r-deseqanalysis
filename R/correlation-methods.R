@@ -29,14 +29,20 @@ NULL
 
 ## FIXME Allow the user to use x vs. y or i vs. j but not both.
 
+## Updated 2019-11-07.
 `correlation,SummarizedExperiment` <-  # nolint
     function(
-        x,
-        y = NULL,
-        i = 1L,
-        j = NULL,
+        x, y = NULL,
+        i = 1L, j = NULL,
         method = c("pearson", "kendall", "spearman")
     ) {
         method <- match.arg(method)
+    }
 
+
+
+## Updated 2019-11-07.
+`correlation,DESeqResults` <-  # nolint
+    function(x, y, col = "log2FoldChange") {
+        print("hello world")
     }
