@@ -43,6 +43,7 @@ NULL
 `plotHeatmap,DESeqAnalysis` <-  # nolint
     function(object, ...) {
         validObject(object)
+        message("Using DESeqTransform ", transformType(object), " counts.")
         dt <- as(object, "DESeqTransform")
         plotHeatmap(dt, ...)
     }
@@ -62,6 +63,7 @@ setMethod(
 `plotCorrelationHeatmap,DESeqAnalysis` <-  # nolint
     function(object, ...) {
         validObject(object)
+        message("Using DESeqTransform ", transformType(object), " counts.")
         dt <- as(object, "DESeqTransform")
         plotCorrelationHeatmap(dt, ...)
     }
@@ -81,6 +83,7 @@ setMethod(
 `plotQuantileHeatmap,DESeqAnalysis` <-  # nolint
     function(object, ...) {
         validObject(object)
+        message("Using DESeqTransform ", transformType(object), " counts.")
         dt <- as(object, "DESeqTransform")
         plotQuantileHeatmap(dt, ...)
     }
