@@ -20,6 +20,17 @@ setGeneric(
 
 
 
+#' @rdname correlation
+#' @export
+setGeneric(
+    name = "correlation",
+    def = function(x, y, i, j, ...) {
+        standardGeneric("correlation")
+    }
+)
+
+
+
 #' @rdname transformType
 #' @export
 setGeneric(
