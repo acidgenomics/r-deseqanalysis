@@ -40,7 +40,6 @@ Imports:
     knitr (>= 1.25),
     rlang (>= 0.4),
     stringr (>= 1.4),
-    tximport (>= 1.14),
     methods,
     scales,
     stats,
@@ -53,6 +52,7 @@ Suggests:
     patrick (>= 0.0.1),
     roxygen2 (>= 6.1),
     testthat (>= 2.3),
+    tximport (>= 1.14),
     viridis (>= 0.5)
 Remotes:
     acidgenomics/acidplots,

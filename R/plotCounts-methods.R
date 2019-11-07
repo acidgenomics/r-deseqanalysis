@@ -61,7 +61,6 @@ setMethod(
 
 
 
-
 ## Updated 2019-09-17.
 `plotCounts,DESeqAnalysis` <-  # nolint
     function(object, ...) {

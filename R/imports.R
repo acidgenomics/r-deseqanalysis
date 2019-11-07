@@ -1,7 +1,3 @@
-## Note that `summary.DESeqResults()` isn't currently exported in BioC 3.10.
-
-
-
 #' @importClassesFrom DESeq2 DESeqDataSet DESeqTransform
 #' @importClassesFrom SummarizedExperiment RangedSummarizedExperiment
 #'   SummarizedExperiment
@@ -21,8 +17,8 @@
 #' @importFrom basejump Gene2Symbol as_tibble autopadZeros camelCase
 #'   convertSampleIDsToNames decode droplevels import initDir
 #'   interestingGroups<- leftJoin makeNames mapGenesToRownames markdownHeader
-#'   markdownList matchInterestingGroups matchesGene2Symbol  printString
-#'   realpath removeNA showSlotInfo snakeCase standardizeCall
+#'   markdownList matchInterestingGroups matchesGene2Symbol metadata2<-
+#'   printString realpath removeNA showSlotInfo snakeCase standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_density
 #'   geom_hline geom_point geom_vline ggplot guides labs scale_color_manual
