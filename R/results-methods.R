@@ -1,12 +1,7 @@
-## FIXME Rename formal to 'i' from results.
-## Still support the old one but deprecate.
-
-
-
 #' Results
 #'
 #' @name results
-#' @note Updated 2019-10-15.
+#' @note Updated 2019-11-08.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
