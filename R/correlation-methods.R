@@ -55,7 +55,6 @@ method <- formals(stats::cor)[["method"]]
         )
         ## Ensure that no NA values propagate.
         data <- data[complete.cases(data), , drop = FALSE]
-        message("Analyzing ", nrow(data), " genes.")
         correlation(x = data[["x"]], y = data[["y"]], method = method)
     }
 
@@ -79,6 +78,7 @@ setMethod(
 ## Updated 2019-11-08.
 `correlation,DESeqAnalysis,missing` <-  # nolint
     function(x, y = NULL, i, j, col = "log2FoldChange", method) {
+        assert(!identical(i, j))
         method <- match.arg(method)
         correlation(
             x = results(object = x, i = i),
