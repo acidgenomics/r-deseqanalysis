@@ -18,7 +18,7 @@ contrastName(object, ...) <- value
 
 \S4method{contrastName}{DESeqResults,character}(object) <- value
 
-\S4method{contrastName}{DESeqAnalysis}(object, results)
+\S4method{contrastName}{DESeqAnalysis}(object, i, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -37,8 +37,8 @@ for use with \code{DESeqAnalysis} methods.}
 
 \item{value}{Value to assign.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}.
-Name or position of \code{DESeqResults}.}
+\item{i}{\code{integer(1)} or \code{character(1)}.
+Position or name corresponding to \code{DESeqResults} slotted in \code{results}.}
 
 \item{...}{Additional arguments.}
 }
@@ -50,7 +50,7 @@ Contrast name.
 Contrast name
 }
 \note{
-Updated 2019-09-11.
+Updated 2019-11-08.
 }
 \examples{
 data(deseq)
@@ -60,8 +60,11 @@ object <- as(deseq, "DESeqResults")
 contrastName(object)
 
 ## DESeqAnalysis ====
-contrastName(deseq, results = 1L)
+contrastName(deseq, i = 1L)
 }
 \seealso{
-\code{\link[DESeq2:resultsNames]{resultsNames()}}.
+\itemize{
+\item \code{\link[=contrastNames]{contrastNames()}}.
+\item \code{\link[DESeq2:resultsNames]{resultsNames()}}.
+}
 }

@@ -1,6 +1,6 @@
 #' @name contrastName
 #' @inherit bioverbs::contrastName
-#' @note Updated 2019-09-11.
+#' @note Updated 2019-11-08.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -10,12 +10,16 @@
 #'   - `resultsNames`: Attempt to matching the conventions in
 #'     [`resultsNames()`][DESeq2::resultsNames].
 #'   - `title`: Human readable, for plot titles and/or table captions.
+#' @param i `integer(1)` or `character(1)`.
+#'   Position or name corresponding to `DESeqResults` slotted in `results`.
 #' @param useStash `logical(1)`.
 #'   Check for `contrastName` metadata stash in `DESeqResults` object. Intended
 #'   for use with `DESeqAnalysis` methods.
 #' @param ... Additional arguments.
 #'
-#' @seealso [`resultsNames()`][DESeq2::resultsNames].
+#' @seealso
+#' - [`contrastNames()`].
+#' - [`resultsNames()`][DESeq2::resultsNames].
 #'
 #' @examples
 #' data(deseq)
@@ -25,7 +29,7 @@
 #' contrastName(object)
 #'
 #' ## DESeqAnalysis ====
-#' contrastName(deseq, results = 1L)
+#' contrastName(deseq, i = 1L)
 NULL
 
 
@@ -125,15 +129,27 @@ setReplaceMethod(
 
 ## This method is to be used primarily to set the contrast name on DESeqResults
 ## inside plotting functions. See `plotMA()` method, for example.
-## Updated 2019-09-10.
+## Updated 2019-11-08.
 `contrastName,DESeqAnalysis` <-  # nolint
-    function(object, results) {
+    function(object, i, ...) {
+        ## nocov start
+        call <- match.call()
+        ## results
+        if ("results" %in% names(call)) {
+            stop("'results' is defunct in favor of 'i'.")
+        }
+        assert(isSubset(
+            x = setdiff(names(call), ""),
+            y = names(formals())
+        ))
+        rm(call)
+        ## nocov end
         contrastNames <- contrastNames(object)
-        if (isString(results)) {
-            x <- results
+        if (isString(i)) {
+            x <- i
             assert(isSubset(x, contrastNames))
         } else {
-            x <- contrastNames[[results]]
+            x <- contrastNames[[i]]
         }
         assert(isString(x))
         x
