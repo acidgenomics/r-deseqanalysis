@@ -24,7 +24,7 @@ setGeneric(
 #' @export
 setGeneric(
     name = "correlation",
-    def = function(x, y, ...) {
+    def = function(x, ...) {
         standardGeneric("correlation")
     }
 )
