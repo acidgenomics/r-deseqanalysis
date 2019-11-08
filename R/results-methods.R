@@ -1,3 +1,8 @@
+## FIXME Rename formal to 'i' from results.
+## Still support the old one but deprecate.
+
+
+
 #' Results
 #'
 #' @name results
@@ -42,16 +47,28 @@ setMethod(
 
 
 
-## Updated 2019-09-10.
+## Updated 2019-11-08.
 `results,DESeqAnalysis` <-  # nolint
-    function(object, results, lfcShrink = FALSE) {
+    function(object, i, lfcShrink = FALSE, ...) {
+        ## nocov start
+        call <- match.call()
+        ## results
+        if ("results" %in% names(call)) {
+            stop("'results' is defunct in favor of 'i'.")
+        }
+        assert(isSubset(
+            x = setdiff(names(call), ""),
+            y = names(formals())
+        ))
+        rm(call)
+        ## nocov end
         assert(
             is(object, "DESeqAnalysis"),
-            isScalar(results),
+            isScalar(i),
             isFlag(lfcShrink)
         )
-        if (isCharacter(results)) {
-            assert(isSubset(results, resultsNames(object)))
+        if (isCharacter(i)) {
+            assert(isSubset(i, resultsNames(object)))
         }
         ## Match the results.
         if (identical(lfcShrink, FALSE)) {
@@ -73,10 +90,10 @@ setMethod(
             )
         }
         resultsList <- slot(object, name = slotName)
-        data <- resultsList[[results]]
+        data <- resultsList[[i]]
         assert(is(data, "DESeqResults"))
         ## Slot the contrast name into DESeqResults metadata.
-        name <- contrastName(object, results = results)
+        name <- contrastName(object, i = i)
         contrastName(data) <- name
         if (isTRUE(lfcShrink)) {
             msg <- paste(name, "(shrunken LFC)")
