@@ -1,6 +1,8 @@
 #' Example DESeq2 differential expression analysis.
 #' Updated 2019-07-30.
 
+## FIXME The working example needs to include multiple contrasts.
+
 library(pryr)
 library(basejump)
 library(DESeq2)

@@ -16,6 +16,14 @@ correlation(x, y, ...)
 
 \item{y}{Object.}
 
+\item{col}{\code{character(1)}.
+Column name.}
+
+\item{method}{a character string indicating which correlation
+    coefficient (or covariance) is to be computed.  One of
+    \code{"pearson"} (default), \code{"kendall"}, or \code{"spearman"}:
+    can be abbreviated.}
+
 \item{...}{Additional arguments.}
 }
 \value{
@@ -28,38 +36,13 @@ Correlation
 Updated 2019-11-08.
 }
 \examples{
-data(correlation, package = "acidtest")
-list <- correlation
+data(deseq, package = "acidtest")
 
 ## DESeqResults ====
-x <- list[["vector_x"]]
-y <- list[["vector_y"]]
 
-head(x)
-head(y)
-
-correlation(x = x, y = y)
 
 ## DESeqAnalysis ====
-x <- list[["matrix_x"]]
-y <- list[["matrix_y"]]
 
-head(x)
-head(y)
-
-stats::cor(x)
-correlation(x)
-
-stats::cor(x = c(x), y = c(y))
-correlation(x = x, y = y)
-
-## SummarizedExperiment ====
-x <- list[["SummarizedExperiment_x"]]
-y <- list[["SummarizedExperiment_y"]]
-
-correlation(x = x, i = 1L)
-correlation(x = x, i = 1L, j = 2L)
-correlation(x = x, y = y)
 }
 \seealso{
 \itemize{

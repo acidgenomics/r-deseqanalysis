@@ -23,10 +23,10 @@
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_density
 #'   geom_hline geom_point geom_vline ggplot guides labs scale_color_manual
 #'   scale_x_continuous scale_y_continuous theme
-#' @importFrom goalie areDisjointSets areSameLength areSetEqual assert bapply
-#'   hasLength hasNames hasLength hasRows hasRownames hasValidDimnames
-#'   hasValidNames isAFile isAlpha isAny isCharacter isFlag isGGScale
-#'   isHeaderLevel isInRange isInt isNonNegative isNumber isPercentage
+#' @importFrom goalie areDisjointSets areIntersectingSets areSameLength
+#'   areSetEqual assert bapply hasLength hasNames hasLength hasRows hasRownames
+#'   hasValidDimnames hasValidNames isAFile isAlpha isAny isCharacter isFlag
+#'   isGGScale isHeaderLevel isInRange isInt isNonNegative isNumber isPercentage
 #'   isPositive isScalar isString isSubset validate
 #' @importFrom knitr kable
 #' @importFrom methods as is new prototype setClass show slot slot<- validObject
