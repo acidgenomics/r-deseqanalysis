@@ -126,7 +126,7 @@
   <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>,
+<span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>,
   <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S4 method for list</span>
@@ -149,9 +149,11 @@
 Number of genes (per direction) to report.</p></td>
     </tr>
     <tr>
-      <th>results</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> or <code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>.
-Name or position of <code>DESeqResults</code>.</p></td>
+      <th>i</th>
+      <td><p>Indices specifying elements to extract or replace. Indices are <code>numeric</code> or
+<code>character</code> vectors, empty (<code>missing</code>), or <code>NULL</code>.</p>
+<p>For more information:</p><pre>help(topic = "Extract", package = "base")
+</pre></td>
     </tr>
     <tr>
       <th>lfcShrink</th>
@@ -184,13 +186,13 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
 </ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-10-15.</p>
+    <p>Updated 2019-11-08.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>156 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>81 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>75 downregulated genes detected.</span></div><div class='output co'>#&gt; 
+<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>156 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>81 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>75 downregulated genes detected.</span></div><div class='output co'>#&gt; 
 #&gt; 
 #&gt; |        | baseMean|lfc  |padj     |broadClass |geneName |description                         |
 #&gt; |:-------|--------:|:----|:--------|:----------|:--------|:-----------------------------------|
@@ -208,8 +210,8 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
 #&gt; |gene456 |       51|-1.89 |2.39e-07 |coding     |RNASET2  |ribonuclease T2                  |
 #&gt; |gene427 |       34|-2.21 |2.72e-07 |coding     |ERP44    |endoplasmic reticulum protein 44 |
 #&gt; |gene050 |       85|-1.49 |3.33e-06 |coding     |AK2      |adenylate kinase 2               |</div><div class='input'>
-<span class='co'>## DESeqResults `resultsTables()` list ====</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='input'><span class='no'>resTbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsTables.html'>resultsTables</a></span>(<span class='no'>res</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"tbl_df"</span>)</div><div class='output co'>#&gt; <span class='message'>156 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>81 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>75 downregulated genes detected.</span></div><div class='input'><span class='fu'>topTables</span>(<span class='no'>resTbl</span>)</div><div class='output co'>#&gt; 
+<span class='co'>## DESeqResults 'resultsTables()' list ====</span>
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='input'><span class='no'>resTbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsTables.html'>resultsTables</a></span>(<span class='no'>res</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"tbl_df"</span>)</div><div class='output co'>#&gt; <span class='message'>156 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>81 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>75 downregulated genes detected.</span></div><div class='input'><span class='fu'>topTables</span>(<span class='no'>resTbl</span>)</div><div class='output co'>#&gt; 
 #&gt; 
 #&gt; |        | baseMean|lfc  |padj     |
 #&gt; |:-------|--------:|:----|:--------|
