@@ -77,19 +77,30 @@ setMethod(
 
 
 ## Updated 2019-11-08.
-`correlation,DESeqAnalysis` <-  # nolint
-    function(x, i, j, col = "log2FoldChange", method) {
+`correlation,DESeqAnalysis,missing` <-  # nolint
+    function(x, y = NULL, i, j, col = "log2FoldChange", method) {
         method <- match.arg(method)
-
-        # correlation(
-        #     x = results(x,
-        # )
-
-        print("hello world")
-        ## correlation
+        correlation(
+            x = results(object = x, i = i),
+            y = results(object = x, i = j),
+            method = method
+        )
     }
 
-formals(`correlation,DESeqAnalysis`)[["method"]] <- method
+formals(`correlation,DESeqAnalysis,missing`)[["method"]] <- method
+
+
+
+#' @rdname correlation
+#' @export
+setMethod(
+    f = "correlation",
+    signature = signature(
+        x = "DESeqAnalysis",
+        y = "missingOrNULL"
+    ),
+    definition = `correlation,DESeqAnalysis,missing`
+)
 
 
 

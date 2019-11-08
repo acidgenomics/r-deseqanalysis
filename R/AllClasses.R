@@ -1,3 +1,8 @@
+## > showClass("missingOrNULL")
+setClassUnion(name = "missingOrNULL", members = c("missing", "NULL"))
+
+
+
 #' DESeq2 differential expression analysis
 #'
 #' Class containing all elements generated during differential expression
