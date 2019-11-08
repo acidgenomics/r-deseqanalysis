@@ -2,7 +2,7 @@
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
 #' @note We are not allowing post hoc `alpha` or `lfcThreshold` cutoffs here.
-#' @note Updated 2019-10-15.
+#' @note Updated 2019-11-08.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual representation
@@ -34,12 +34,12 @@
 #' print(genes)
 #'
 #' ## DESeqAnalysis ====
-#' plotMA(deseq, results = 1L)
+#' plotMA(deseq, i = 1L)
 #'
 #' ## Customize the colors.
 #' plotMA(
 #'     object = deseq,
-#'     results = 1L,
+#'     i = 1L,
 #'     pointColor = c(
 #'         downregulated = "red",
 #'         nonsignificant = "black",
@@ -48,12 +48,12 @@
 #' )
 #'
 #' ## Directional support (up or down).
-#' plotMA(deseq, results = 1L, direction = "up", ntop = 5L)
-#' plotMA(deseq, results = 1L, direction = "down", ntop = 5L)
+#' plotMA(deseq, i = 1L, direction = "up", ntop = 5L)
+#' plotMA(deseq, i = 1L, direction = "down", ntop = 5L)
 #'
 #' ## Label genes manually.
 #' ## Note that either gene IDs or names (symbols) are supported.
-#' plotMA(deseq, results = 1L, genes = genes)
+#' plotMA(deseq, i = 1L, genes = genes)
 NULL
 
 
@@ -282,17 +282,25 @@ setMethod(
 
 
 
-## Updated 2019-09-17.
+## Updated 2019-11-08.
 `plotMA,DESeqAnalysis` <-  # nolint
     function(
         object,
-        results,
+        i,
         lfcShrink = TRUE,
         ...
     ) {
+        ## nocov start
+        call <- match.call()
+        ## results
+        if ("results" %in% names(call)) {
+            stop("'results' is defunct in favor of 'i'.")
+        }
+        rm(call)
+        ## nocov end
         validObject(object)
         assert(
-            isScalar(results),
+            isScalar(i),
             isFlag(lfcShrink)
         )
         ## Return `NULL` for objects that don't contain gene symbol mappings.
@@ -306,7 +314,7 @@ setMethod(
         plotMA(
             object = results(
                 object = object,
-                results = results,
+                i = i,
                 lfcShrink = lfcShrink
             ),
             gene2symbol = gene2symbol,
@@ -333,5 +341,6 @@ setMethod(
 #' @usage NULL
 #' @export
 plotMeanAverage <- function(...) {
+    ## > .Deprecated("plotMA")
     plotMA(...)
 }

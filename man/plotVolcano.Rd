@@ -17,8 +17,7 @@ plotVolcano(object, ...)
   acidplots::lightPalette[["gray"]]), pointSize = 2L, pointAlpha = 0.8,
   histograms = FALSE, return = c("ggplot", "DataFrame"))
 
-\S4method{plotVolcano}{DESeqAnalysis}(object, results, lfcShrink = TRUE,
-  ...)
+\S4method{plotVolcano}{DESeqAnalysis}(object, i, lfcShrink = TRUE, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -57,8 +56,11 @@ Show LFC and P value histograms.}
 Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
 to the first argument in the \code{character} vector.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}.
-Name or position of \code{DESeqResults}.}
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
 
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
@@ -78,7 +80,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2019-09-17.
+Updated 2019-11-08.
 }
 \examples{
 data(deseq)
@@ -89,12 +91,12 @@ genes <- head(rownames(dds))
 print(genes)
 
 ## DESeqAnalysis ====
-plotVolcano(deseq, results = 1L)
+plotVolcano(deseq, i = 1L)
 
 ## Customize the colors.
 plotVolcano(
     object = deseq,
-    results = 1L,
+    i = 1L,
     pointColor = c(
         downregulated = "red",
         nonsignificant = "black",
@@ -105,20 +107,20 @@ plotVolcano(
 ## Directional support (up or down).
 plotVolcano(
     object = deseq,
-    results = 1L,
+    i = 1L,
     direction = "up",
     ntop = 5L
 )
 plotVolcano(
     object = deseq,
-    results = 1L,
+    i = 1L,
     direction = "down",
     ntop = 5L
 )
 
 ## Label genes manually.
 ## Note that either gene IDs or names (symbols) are supported.
-plotVolcano(deseq, results = 1L, genes = genes)
+plotVolcano(deseq, i = 1L, genes = genes)
 }
 \seealso{
 \code{CHBUtils::volcano_density_plot()}.

@@ -1,6 +1,6 @@
 #' @name topTables
 #' @inherit bioverbs::topTables
-#' @note Updated 2019-10-15.
+#' @note Updated 2019-11-08.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -14,10 +14,10 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' topTables(deseq, results = 1L, n = 5L)
+#' topTables(deseq, i = 1L, n = 5L)
 #'
-#' ## DESeqResults `resultsTables()` list ====
-#' res <- results(deseq, results = 1L)
+#' ## DESeqResults 'resultsTables()' list ====
+#' res <- results(deseq, i = 1L)
 #' resTbl <- resultsTables(res, return = "tbl_df")
 #' topTables(resTbl)
 NULL
@@ -178,23 +178,31 @@ setMethod(
 `topTables,DESeqAnalysis` <-  # nolint
     function(
         object,
-        results,
+        i,
         n = 10L,
         lfcShrink = TRUE
     ) {
+        ## nocov start
+        call <- match.call()
+        ## results
+        if ("results" %in% names(call)) {
+            stop("'results' is defunct in favor of 'i'.")
+        }
+        assert(isSubset(
+            x = setdiff(names(call), ""),
+            y = names(formals())
+        ))
+        rm(call)
+        ## nocov end
         list <- resultsTables(
             object = object,
-            results = results,
+            i = i,
             lfcShrink = lfcShrink,
             extra = TRUE,
             return = "DataFrameList"
         )
-        contrast <- contrastName(object, results = results)
-        .topKables(
-            object = list,
-            contrast = contrast,
-            n = n
-        )
+        contrast <- contrastName(object, i = i)
+        .topKables(object = list, contrast = contrast, n = n)
     }
 
 

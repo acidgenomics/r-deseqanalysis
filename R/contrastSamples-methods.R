@@ -1,6 +1,6 @@
 #' @name contrastSamples
 #' @inherit bioverbs::contrastSamples
-#' @note Updated 2019-09-11.
+#' @note Updated 2019-11-08.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -21,7 +21,7 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' contrastSamples(deseq, results = 1L)
+#' contrastSamples(deseq, i = 1L)
 NULL
 
 
@@ -35,12 +35,24 @@ NULL
 
 
 
-## Updated 2019-09-11.
+## Updated 2019-11-08.
 `contrastSamples,DESeqAnalysis` <-  # nolint
-    function(object, results) {
+    function(object, i, ...) {
+        ## nocov start
+        call <- match.call()
+        ## results
+        if ("results" %in% names(call)) {
+            stop("'results' is defunct in favor of 'i'.")
+        }
+        assert(isSubset(
+            x = setdiff(names(call), ""),
+            y = names(formals())
+        ))
+        rm(call)
+        ## nocov end
         validObject(object)
         suppressMessages(
-            res <- results(object = object, results = results)
+            res <- results(object = object, i = i)
         )
         ## If we've defined a subset of samples for the contrast, stash them
         ## in DESeqResults metadata. Otherwise, there's no way to trace this

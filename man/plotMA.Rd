@@ -17,7 +17,7 @@ plotMA(object, ...)
   acidplots::lightPalette[["gray"]]), pointSize = 2L, pointAlpha = 0.8,
   return = c("ggplot", "DataFrame"))
 
-\S4method{plotMA}{DESeqAnalysis}(object, results, lfcShrink = TRUE, ...)
+\S4method{plotMA}{DESeqAnalysis}(object, i, lfcShrink = TRUE, ...)
 }
 \arguments{
 \item{object}{
@@ -51,8 +51,11 @@ Alpha transparency level.}
 Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
 to the first argument in the \code{character} vector.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}.
-Name or position of \code{DESeqResults}.}
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
 
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
@@ -81,7 +84,7 @@ argument automatically defined.
 \note{
 We are not allowing post hoc \code{alpha} or \code{lfcThreshold} cutoffs here.
 
-Updated 2019-10-15.
+Updated 2019-11-08.
 }
 \section{plotMA2 aliases}{
 
@@ -100,12 +103,12 @@ genes <- head(rownames(dds))
 print(genes)
 
 ## DESeqAnalysis ====
-plotMA(deseq, results = 1L)
+plotMA(deseq, i = 1L)
 
 ## Customize the colors.
 plotMA(
     object = deseq,
-    results = 1L,
+    i = 1L,
     pointColor = c(
         downregulated = "red",
         nonsignificant = "black",
@@ -114,12 +117,12 @@ plotMA(
 )
 
 ## Directional support (up or down).
-plotMA(deseq, results = 1L, direction = "up", ntop = 5L)
-plotMA(deseq, results = 1L, direction = "down", ntop = 5L)
+plotMA(deseq, i = 1L, direction = "up", ntop = 5L)
+plotMA(deseq, i = 1L, direction = "down", ntop = 5L)
 
 ## Label genes manually.
 ## Note that either gene IDs or names (symbols) are supported.
-plotMA(deseq, results = 1L, genes = genes)
+plotMA(deseq, i = 1L, genes = genes)
 }
 \seealso{
 \code{\link[DESeq2:plotMA]{DESeq2::plotMA()}}.

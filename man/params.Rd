@@ -23,6 +23,9 @@ See \code{\link[DESeq2:results]{DESeq2::results()}} for details.}
 passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
 contrasts (e.g. interaction effect).}
 
+\item{i}{\code{character(1)} or \code{integer(1)}.
+\code{DESeqResults} contrast name or position in \code{results} slot.}
+
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
 

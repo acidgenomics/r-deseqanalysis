@@ -37,8 +37,11 @@ for use with \code{DESeqAnalysis} methods.}
 
 \item{value}{Value to assign.}
 
-\item{i}{\code{integer(1)} or \code{character(1)}.
-Position or name corresponding to \code{DESeqResults} slotted in \code{results}.}
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
 
 \item{...}{Additional arguments.}
 }

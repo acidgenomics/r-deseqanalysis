@@ -2,7 +2,7 @@ context("plotDEGHeatmap")
 
 test_that("DESeqAnalysis", {
     expect_is(
-        object = plotDEGHeatmap(deseq, results = 1L),
+        object = plotDEGHeatmap(deseq, i = 1L),
         class = "pheatmap"
     )
 })

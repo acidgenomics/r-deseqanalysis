@@ -12,8 +12,8 @@ plotDEGPCA(object, ...)
 \S4method{plotDEGPCA}{DESeqResults}(object, DESeqTransform,
   interestingGroups = NULL, direction = c("both", "up", "down"), ...)
 
-\S4method{plotDEGPCA}{DESeqAnalysis}(object, results,
-  contrastSamples = FALSE, ...)
+\S4method{plotDEGPCA}{DESeqAnalysis}(object, i, contrastSamples = FALSE,
+  ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -29,8 +29,11 @@ Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
 \item{...}{Additional arguments.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}.
-Name or position of \code{DESeqResults}.}
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
 
 \item{contrastSamples}{\code{logical(1)}.
 \strong{Experimental}. Only include the samples used to define the contrast
@@ -56,11 +59,11 @@ must contain/extend a \code{SummarizedExperiment}.
 }}
 
 \note{
-Updated 2019-10-15.
+Updated 2019-11-08.
 }
 \examples{
 data(deseq)
 
 ## DESeqAnalysis ====
-plotDEGPCA(deseq, results = 1L)
+plotDEGPCA(deseq, i = 1L)
 }

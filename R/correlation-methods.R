@@ -5,11 +5,11 @@
 #' @note Updated 2019-11-08.
 #'
 #' @inheritParams acidroxygen::params
+#' @param ... Additional arguments.
 #'
 #' @examples
 #' data(correlation, package = "acidtest")
 #' list <- correlation
-#' rm(correlation)
 #'
 #' ## DESeqResults ====
 #' x <- list[["vector_x"]]
@@ -46,25 +46,54 @@ NULL
 
 #' @rdname correlation
 #' @name correlation
-#' @importFrom bioverbs correlation
+#' @importFrom basejump correlation
 #' @usage correlation(x, y, ...)
 #' @export
 NULL
 
 
 
+method <- formals(stats::cor)[["method"]]
+
+
+
 ## Updated 2019-11-08.
 `correlation,DESeqResults` <-  # nolint
-    function(x, y, col = "log2FoldChange") {
-        print("hello world")
-        ## correlation
+    function(x, y, col = "log2FoldChange", method) {
+        method <- match.arg(method)
+        correlation(
+            x = x[[col]],
+            y = y[[col]],
+            method = method
+        )
     }
+
+formals(`correlation,DESeqResults`)[["method"]] <- method
+
+
+
+#' @rdname correlation
+#' @export
+setMethod(
+    f = "correlation",
+    signature = signature(
+        x = "DESeqResults",
+        y = "DESeqResults"
+    ),
+    definition = `correlation,DESeqResults`
+)
 
 
 
 ## Updated 2019-11-08.
 `correlation,DESeqAnalysis` <-  # nolint
-    function(x, i, j, col = "log2FoldChange") {
+    function(x, i, j, col = "log2FoldChange", method) {
+        method <- match.arg(method)
+        # correlation(
+        #     x = results(x,
+        # )
+
+
         print("hello world")
         ## correlation
     }

@@ -1,13 +1,11 @@
-## DESeqAnalysis 0.2.12 (2019-11-07)
+## DESeqAnalysis 0.2.11 (2019-11-08)
 
-### Minor changes
+### Major changes
 
-- Updated dependencies to require Bioconductor 3.10 release.
-- Added `plotHeatmap`, `plotCorrelationHeatmap`, and `plotQuantileHeatmap`
-  method support, which extracts `DESeqTransform` object internally and hands
-  off to `SummarizedExperiment` methods defined in [acidplots][].
-
-## DESeqAnalysis 0.2.11 (2019-10-23)
+- Renamed `results` argument to `i` for `DESeqAnalysis` methods, where
+  applicable. This improves consistency with Bioconductor conventions (similar
+  to `assay` method, which also uses `i` for position). Note that previous
+  usage of `results` is now defunct and should intentionally error.
 
 ### Minor changes
 
@@ -15,6 +13,10 @@
   documentation.
 - Updated basejump dependency versions.
 - Added tximport as a suggested package.
+- Updated dependencies to require Bioconductor 3.10 release.
+- Added `plotHeatmap`, `plotCorrelationHeatmap`, and `plotQuantileHeatmap`
+  method support, which extracts `DESeqTransform` object internally and hands
+  off to `SummarizedExperiment` methods defined in [acidplots][].
 
 ## DESeqAnalysis 0.2.10 (2019-10-16)
 

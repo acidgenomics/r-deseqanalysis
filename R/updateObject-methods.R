@@ -28,12 +28,10 @@ NULL
             )
             ## nocov end
         }
-
         data <- object@data
         transform <- object@transform
         results <- object@results
         lfcShrink <- object@lfcShrink
-
         DESeqAnalysis(
             data = data,
             transform = transform,
