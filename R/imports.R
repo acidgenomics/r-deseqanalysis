@@ -9,8 +9,8 @@
 #' @importFrom DESeq2 DESeq counts design fpkm lfcShrink nbinomWaldTest
 #'   priorInfo
 #' @importFrom IRanges DataFrameList
-#' @importFrom S4Vectors SimpleList as.data.frame cbind complete.cases do.call
-#'   head mcols mcols<- metadata metadata<- na.omit
+#' @importFrom S4Vectors SimpleList as.data.frame cbind complete.cases cor
+#'   do.call head mcols mcols<- metadata metadata<- na.omit
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom UpSetR fromList
 #' @importFrom acidplots matchLabels plotHeatmap scale_color_synesthesia_d upset
