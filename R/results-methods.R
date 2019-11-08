@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' data(deseq)
-#' x <- results(deseq, results = 1L)
+#' x <- results(deseq, i = 1L)
 #' class(x)
 NULL
 

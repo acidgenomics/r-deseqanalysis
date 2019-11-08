@@ -5,7 +5,7 @@
 
 #' @name plotDEGUpset
 #' @inherit bioverbs::plotDEGUpset
-#' @note Updated 2019-08-20.
+#' @note Updated 2019-11-08.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -27,22 +27,22 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-11-08.
 `plotDEGUpset,DESeqAnalysis` <-  # nolint
     function(object) {
         suppressMessages(
             degPerContrast <- mapply(
-                results = resultsNames(object),
+                i = resultsNames(object),
                 MoreArgs = list(object = object),
-                FUN = function(results, object) {
+                FUN = function(i, object) {
                     down <- deg(
                         object = object,
-                        results = results,
+                        i = i,
                         direction = "down"
                     )
                     up <- deg(
                         object = object,
-                        results = results,
+                        i = i,
                         direction = "up"
                     )
                     list(down = down, up = up)

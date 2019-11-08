@@ -4,7 +4,7 @@
 
 #' @name plotDEGPCA
 #' @inherit bioverbs::plotDEGPCA
-#' @note Updated 2019-10-15.
+#' @note Updated 2019-11-08.
 #'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams acidplots::plotPCA
@@ -16,7 +16,7 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' plotDEGPCA(deseq, results = 1L)
+#' plotDEGPCA(deseq, i = 1L)
 NULL
 
 
@@ -99,27 +99,39 @@ setMethod(
 
 
 
-## Updated 2019-10-15.
+## Updated 2019-11-08.
 `plotDEGPCA,DESeqAnalysis` <-  # nolint
     function(
         object,
-        results,
+        i,
         contrastSamples = FALSE,
         ...
     ) {
+        ## nocov start
+        call <- match.call()
+        ## results
+        if ("results" %in% names(call)) {
+            stop("'results' is defunct in favor of 'i'.")
+        }
+        assert(isSubset(
+            x = setdiff(names(call), ""),
+            y = names(formals())
+        ))
+        rm(call)
+        ## nocov end
         validObject(object)
         assert(
-            isScalar(results),
+            isScalar(i),
             isFlag(contrastSamples)
         )
         ## Note that LFC values aren't used for this plot, just the DEGs, which
         ## are used to subset the DESeqTransform counts.
-        res <- results(object, results = results, lfcShrink = FALSE)
+        res <- results(object, i = i, lfcShrink = FALSE)
         ## Using the variance-stabilized counts for visualization.
         dt <- as(object, "DESeqTransform")
         ## Subset the DESeqTransform, if necessary.
         if (isTRUE(contrastSamples)) {
-            samples <- contrastSamples(object, results = results)
+            samples <- contrastSamples(object, i = i)
             assert(isSubset(samples, colnames(dt)))
             dt <- dt[, samples, drop = FALSE]
             dt <- droplevels(dt)

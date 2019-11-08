@@ -13,9 +13,9 @@ resultsTables(object, ...)
   alpha = NULL, lfcThreshold = NULL, return = c("tbl_df",
   "DataFrameList"), ...)
 
-\S4method{resultsTables}{DESeqAnalysis}(object, results,
-  lfcShrink = TRUE, extra = TRUE, alpha = NULL,
-  lfcThreshold = NULL, return = c("tbl_df", "DataFrameList"))
+\S4method{resultsTables}{DESeqAnalysis}(object, i, lfcShrink = TRUE,
+  extra = TRUE, alpha = NULL, lfcThreshold = NULL,
+  return = c("tbl_df", "DataFrameList"))
 }
 \arguments{
 \item{object}{Object.}
@@ -40,8 +40,11 @@ Uses \link[base:match.arg]{match.arg()}.
 
 \item{...}{Additional arguments.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}.
-Name or position of \code{DESeqResults}.}
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
 
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
@@ -62,7 +65,7 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 \code{all} table), are arranged by adjusted \emph{P} value.
 }
 \note{
-Updated 2019-10-15.
+Updated 2019-11-08.
 
 Do not apply post hoc log fold change cutoffs.
 }
@@ -83,12 +86,12 @@ used for overrepresentation testing but should NOT be used for GSEA.
 data(deseq)
 
 ## DESeqAnalysis ====
-x <- resultsTables(deseq, results = 1L)
+x <- resultsTables(deseq, i = 1L)
 names(x)
 
 ## DESeqResults ====
 ## Use of DESeqAnalysis is encouraged instead of this approach.
-res <- results(deseq, results = 1L)
+res <- results(deseq, i = 1L)
 dds <- as(deseq, "DESeqDataSet")
 x <- resultsTables(object = res, DESeqDataSet = dds)
 names(x)

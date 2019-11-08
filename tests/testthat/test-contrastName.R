@@ -1,14 +1,14 @@
 context("contrastName")
 
 test_that("DESeqResults", {
-    object <- results(deseq, results = 1L)
+    object <- results(deseq, i = 1L)
     expect_identical(
-        contrastName(object),
-        "condition_B_vs_A"
+        object = contrastName(object),
+        expected = "condition_B_vs_A"
     )
     contrastName(object) <- "XXX"
     expect_identical(
-        contrastName(object),
-        "XXX"
+        object = contrastName(object),
+        expected = "XXX"
     )
 })

@@ -8,13 +8,16 @@
 \usage{
 contrastSamples(object, ...)
 
-\S4method{contrastSamples}{DESeqAnalysis}(object, results)
+\S4method{contrastSamples}{DESeqAnalysis}(object, i, ...)
 }
 \arguments{
 \item{object}{Object.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}.
-Name or position of \code{DESeqResults}.}
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
 
 \item{...}{Additional arguments.}
 }
@@ -32,7 +35,7 @@ corresponding \code{DESeqResults} object. Note that this only works for simple
 comparisons.
 }
 \note{
-Updated 2019-09-11.
+Updated 2019-11-08.
 
 \strong{EXPERIMENTAL}. This approach will error intentionally for
 \code{DESeqResults} objects generated with complex contrasts (e.g. interaction
@@ -43,5 +46,5 @@ too error-prone.
 data(deseq)
 
 ## DESeqAnalysis ====
-contrastSamples(deseq, results = 1L)
+contrastSamples(deseq, i = 1L)
 }

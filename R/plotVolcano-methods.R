@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
-#' @note Updated 2019-09-17.
+#' @note Updated 2019-11-08.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -23,12 +23,12 @@
 #' print(genes)
 #'
 #' ## DESeqAnalysis ====
-#' plotVolcano(deseq, results = 1L)
+#' plotVolcano(deseq, i = 1L)
 #'
 #' ## Customize the colors.
 #' plotVolcano(
 #'     object = deseq,
-#'     results = 1L,
+#'     i = 1L,
 #'     pointColor = c(
 #'         downregulated = "red",
 #'         nonsignificant = "black",
@@ -39,20 +39,20 @@
 #' ## Directional support (up or down).
 #' plotVolcano(
 #'     object = deseq,
-#'     results = 1L,
+#'     i = 1L,
 #'     direction = "up",
 #'     ntop = 5L
 #' )
 #' plotVolcano(
 #'     object = deseq,
-#'     results = 1L,
+#'     i = 1L,
 #'     direction = "down",
 #'     ntop = 5L
 #' )
 #'
 #' ## Label genes manually.
 #' ## Note that either gene IDs or names (symbols) are supported.
-#' plotVolcano(deseq, results = 1L, genes = genes)
+#' plotVolcano(deseq, i = 1L, genes = genes)
 NULL
 
 
@@ -343,17 +343,25 @@ setMethod(
 
 
 
-## Updated 2019-09-17.
+## Updated 2019-11-08.
 `plotVolcano,DESeqAnalysis` <-  # nolint
     function(
         object,
-        results,
+        i,
         lfcShrink = TRUE,
         ...
     ) {
+        ## nocov start
+        call <- match.call()
+        ## results
+        if ("results" %in% names(call)) {
+            stop("'results' is defunct in favor of 'i'.")
+        }
+        rm(call)
+        ## nocov end
         validObject(object)
         assert(
-            isScalar(results),
+            isScalar(i),
             isFlag(lfcShrink)
         )
         ## Return `NULL` for objects that don't contain gene symbol mappings.
@@ -366,7 +374,7 @@ setMethod(
         plotVolcano(
             object = results(
                 object = object,
-                results = results,
+                i = i,
                 lfcShrink = lfcShrink
             ),
             gene2symbol = gene2symbol,

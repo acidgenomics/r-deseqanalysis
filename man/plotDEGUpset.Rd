@@ -22,7 +22,7 @@ Plot.
 UpSet plot of directional DEG intersections across contrasts
 }
 \note{
-Updated 2019-08-20.
+Updated 2019-11-08.
 }
 \examples{
 data(deseq)

@@ -13,7 +13,7 @@ topTables(object, ...)
 \S4method{topTables}{DESeqResults}(object, DESeqDataSet = NULL,
   n = 10L)
 
-\S4method{topTables}{DESeqAnalysis}(object, results, n = 10L,
+\S4method{topTables}{DESeqAnalysis}(object, i, n = 10L,
   lfcShrink = TRUE)
 
 \S4method{topTables}{list}(object, n = 10L, contrast = NULL)
@@ -26,8 +26,11 @@ topTables(object, ...)
 \item{n}{\code{integer(1)}.
 Number of genes (per direction) to report.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}.
-Name or position of \code{DESeqResults}.}
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
 
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
@@ -53,16 +56,16 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
 }}
 
 \note{
-Updated 2019-10-15.
+Updated 2019-11-08.
 }
 \examples{
 data(deseq)
 
 ## DESeqAnalysis ====
-topTables(deseq, results = 1L, n = 5L)
+topTables(deseq, i = 1L, n = 5L)
 
-## DESeqResults `resultsTables()` list ====
-res <- results(deseq, results = 1L)
+## DESeqResults 'resultsTables()' list ====
+res <- results(deseq, i = 1L)
 resTbl <- resultsTables(res, return = "tbl_df")
 topTables(resTbl)
 }

@@ -10,8 +10,6 @@
 #'   - `resultsNames`: Attempt to matching the conventions in
 #'     [`resultsNames()`][DESeq2::resultsNames].
 #'   - `title`: Human readable, for plot titles and/or table captions.
-#' @param i `integer(1)` or `character(1)`.
-#'   Position or name corresponding to `DESeqResults` slotted in `results`.
 #' @param useStash `logical(1)`.
 #'   Check for `contrastName` metadata stash in `DESeqResults` object. Intended
 #'   for use with `DESeqAnalysis` methods.

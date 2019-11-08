@@ -17,7 +17,7 @@ plotDEGHeatmap(object, ...)
   breaks = seq(from = -2L, to = 2L, by = 0.25), legendBreaks = seq(from
   = -2L, to = 2L, by = 1L), ...)
 
-\S4method{plotDEGHeatmap}{DESeqAnalysis}(object, results,
+\S4method{plotDEGHeatmap}{DESeqAnalysis}(object, i,
   contrastSamples = FALSE, lfcShrink = TRUE, ...)
 }
 \arguments{
@@ -72,8 +72,11 @@ Numeric vector of breakpoints for the color legend.}
 
 \item{...}{Additional arguments.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}.
-Name or position of \code{DESeqResults}.}
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
 
 \item{contrastSamples}{\code{logical(1)}.
 \strong{Experimental}. Only include the samples used to define the contrast
@@ -106,11 +109,11 @@ method defined in acidplots.
 }}
 
 \note{
-Updated 2019-10-15.
+Updated 2019-11-08.
 }
 \examples{
 data(deseq)
 
 ## DESeqAnalysis ====
-plotDEGHeatmap(deseq, results = 1L)
+plotDEGHeatmap(deseq, i = 1L)
 }

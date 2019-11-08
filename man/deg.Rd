@@ -12,8 +12,8 @@ deg(object, ...)
 \S4method{deg}{DESeqResults}(object, alpha = NULL, lfcThreshold = NULL,
   direction = c("both", "up", "down"))
 
-\S4method{deg}{DESeqAnalysis}(object, results, direction = c("both",
-  "up", "down"))
+\S4method{deg}{DESeqAnalysis}(object, i, direction = c("both", "up",
+  "down"), ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -29,8 +29,11 @@ the cutoff defined in the object.}
 \item{direction}{\code{character(1)}.
 Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
-\item{results}{\code{character(1)} or \code{integer(1)}.
-Name or position of \code{DESeqResults}.}
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
 
 \item{...}{Additional arguments.}
 }
@@ -42,12 +45,12 @@ Gene identifiers.
 Differentially expressed genes
 }
 \note{
-Updated 2019-08-20.
+Updated 2019-11-08.
 }
 \examples{
 data(deseq)
 
 ## DESeqAnalysis ====
-x <- deg(deseq, results = 1L)
+x <- deg(deseq, i = 1L)
 head(x)
 }

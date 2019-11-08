@@ -38,7 +38,7 @@ NULL
 ## Internal helpers ============================================================
 ## Here we are looping across each contrast and writing out DEG tables.
 ## Note: We don't need to support humanize mode because `geneName` is required.
-## Updated 2019-07-23.
+## Updated 2019-11-08.
 .exportResultsTables <- function(object, dir, compress, lfcShrink) {
     assert(
         is(object, "DESeqAnalysis"),
@@ -48,10 +48,10 @@ NULL
     resultsNames <- resultsNames(object)
     out <- lapply(
         X = resultsNames,
-        FUN = function(results) {
+        FUN = function(i) {
             resTbl <- resultsTables(
                 object = object,
-                results = results,
+                i = i,
                 lfcShrink = lfcShrink,
                 extra = TRUE,
                 return = "tbl_df"
@@ -59,7 +59,7 @@ NULL
             if (is.null(resTbl)) {
                 return(invisible())
             }
-            files <- file.path(dir, results, paste0(names(resTbl), ".csv"))
+            files <- file.path(dir, i, paste0(names(resTbl), ".csv"))
             if (isTRUE(compress)) {
                 files <- paste0(files, ".gz")
             }
@@ -119,7 +119,7 @@ setMethod(
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-11-08.
 `export,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -134,20 +134,16 @@ setMethod(
             isFlag(compress),
             isFlag(lfcShrink)
         )
-
         call <- standardizeCall()
         assert(isString(name, nullOK = TRUE))
         if (is.null(name)) {
             name <- as.character(call[["object"]])
         }
-
         ## Note that we're combining the dir with name, so we can set
         ## subdirectories for each slotted data type (e.g. DESeqDataSet).
         dir <- initDir(file.path(dir, name))
         rm(name)
-
         files <- list()
-
         ## DESeqDataSet.
         message("Exporting DESeqDataSet.")
         files[["data"]] <-
@@ -157,7 +153,6 @@ setMethod(
                 dir = dir,
                 compress = compress
             )
-
         ## DESeqTransform.
         message("Exporting DESeqTransform.")
         files[["transform"]] <-
@@ -167,7 +162,6 @@ setMethod(
                 dir = dir,
                 compress = compress
             )
-
         ## DEG results tables.
         message("Exporting DESeqResults tables.")
         files[["resultsTables"]] <-
@@ -177,7 +171,7 @@ setMethod(
                 compress = compress,
                 lfcShrink = lfcShrink
             )
-
+        ## Return file list.
         invisible(files)
     }
 

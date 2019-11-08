@@ -2,11 +2,11 @@ context("results")
 
 test_that("results argument", {
     ## Numeric scalar.
-    x <- results(deseq, results = 1L)
+    x <- results(deseq, i = 1L)
     expect_s4_class(x, "DESeqResults")
 
     ## Character string.
-    x <- results(deseq, results = resultsNames(deseq)[[1L]])
+    x <- results(deseq, i = resultsNames(deseq)[[1L]])
     expect_s4_class(x, "DESeqResults")
 })
 
@@ -16,7 +16,7 @@ test_that("Match failure", {
         regexp = "missing"
     )
     expect_error(
-        object = results(deseq, results = "XXX"),
+        object = results(deseq, i = "XXX"),
         regexp = "XXX"
     )
 })
@@ -25,10 +25,10 @@ test_that("lfcShrink results requested, but not slotted", {
     object <- deseq
     object@lfcShrink <- list()
     expect_true(validObject(object))
-    x <- results(object, results = 1L, lfcShrink = FALSE)
+    x <- results(object, i = 1L, lfcShrink = FALSE)
     expect_s4_class(x, "DESeqResults")
     expect_error(
-        object = results(object, results = 1L, lfcShrink = TRUE),
+        object = results(object, i = 1L, lfcShrink = TRUE),
         regexp = "lfcShrink"
     )
 })

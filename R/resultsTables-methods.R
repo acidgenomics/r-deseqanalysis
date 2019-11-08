@@ -1,6 +1,10 @@
+## FIXME Switch to 'i' instead of 'results'.
+
+
+
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
-#' @note Updated 2019-10-15.
+#' @note Updated 2019-11-08.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -39,12 +43,12 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' x <- resultsTables(deseq, results = 1L)
+#' x <- resultsTables(deseq, i = 1L)
 #' names(x)
 #'
 #' ## DESeqResults ====
 #' ## Use of DESeqAnalysis is encouraged instead of this approach.
-#' res <- results(deseq, results = 1L)
+#' res <- results(deseq, i = 1L)
 #' dds <- as(deseq, "DESeqDataSet")
 #' x <- resultsTables(object = res, DESeqDataSet = dds)
 #' names(x)
@@ -284,17 +288,29 @@ setMethod(
 
 
 
-## Updated 2019-10-15.
+## Updated 2019-11-08.
 `resultsTables,DESeqAnalysis` <-  # nolint
     function(
         object,
-        results,
+        i,
         lfcShrink = TRUE,
         extra = TRUE,
         alpha = NULL,
         lfcThreshold = NULL,
         return = c("tbl_df", "DataFrameList")
     ) {
+        ## nocov start
+        call <- match.call()
+        ## results
+        if ("results" %in% names(call)) {
+            stop("'results' is defunct in favor of 'i'.")
+        }
+        assert(isSubset(
+            x = setdiff(names(call), ""),
+            y = names(formals())
+        ))
+        rm(call)
+        ## nocov end
         validObject(object)
         assert(
             isFlag(lfcShrink),
@@ -302,11 +318,7 @@ setMethod(
         )
         return <- match.arg(return)
         ## Note that this will use the shrunken LFC values, if slotted.
-        results <- results(
-            object = object,
-            results = results,
-            lfcShrink = lfcShrink
-        )
+        res <- results(object, i = i, lfcShrink = lfcShrink)
         ## Include extra annotations, if desired.
         if (isTRUE(extra)) {
             ## Get the DESeqDataSet, and humanize the sample names. Note that
@@ -321,7 +333,7 @@ setMethod(
             dds <- NULL
         }
         resultsTables(
-            object = results,
+            object = res,
             DESeqDataSet = dds,
             alpha = alpha,
             lfcThreshold = lfcThreshold,

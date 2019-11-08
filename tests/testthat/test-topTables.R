@@ -1,12 +1,12 @@
 context("topTables")
 
 test_that("DESeqAnalysis", {
-    x <- capture.output(topTables(deseq, results = 1L))
+    x <- capture.output(topTables(deseq, i = 1L))
     expect_true(grepl("padj", x[[3L]]))
 })
 
 test_that("DESeqResults", {
-    res <- results(deseq, results = 1L)
+    res <- results(deseq, i = 1L)
     dds <- as(deseq, "DESeqDataSet")
 
     ## Minimal return.
