@@ -1,14 +1,13 @@
 #' Example DESeq2 differential expression analysis.
-#' Updated 2019-07-30.
+#' Updated 2019-11-12.
 
-## FIXME The working example needs to include multiple contrasts.
+library(usethis)   # 1.5.1
+library(pryr)      # 0.1.4
+library(basejump)  # 0.11.22
+library(DESeq2)    # 1.26.0
+library(apeglm)    # 1.8.0
 
-library(pryr)
-library(basejump)
-library(DESeq2)
-library(apeglm)
-
-stopifnot(packageVersion("acidtest") >= "0.2.1")
+stopifnot(packageVersion("acidtest") >= "0.2.8")
 data(RangedSummarizedExperiment, package = "acidtest")
 rse <- RangedSummarizedExperiment
 
@@ -16,29 +15,62 @@ rse <- RangedSummarizedExperiment
 ## Use `pryr::object_size()` instead of `utils::object.size()`.
 limit <- structure(2e6, class = "object_size")
 
-## DESeqDataSet
-## Consider updating the example RSE in basejump to include more genes.
-
 ## Requiring rich metadata to test `resultsTables()` and `topTables()`.
-stopifnot(all(c("broadClass", "description") %in% colnames(rowData(rse))))
+stopifnot(
+    all(c("broadClass", "description") %in% colnames(rowData(rse))),
+    "condition" %in% names(colData(rse))
+)
 
-stopifnot("condition" %in% names(colData(rse)))
-dds <- DESeqDataSet(se = rse, design = ~ condition)
+## DESeqDataSet
+rse$treatment <- as.factor(x = rep(c("C", "D"), each = 3L))
+design <- ~ condition + treatment + condition:treatment
+dds <- DESeqDataSet(se = rse, design = design)
 dds <- DESeq(dds)
 validObject(dds)
 
 ## DESeqTransform
 dt <- varianceStabilizingTransformation(dds)
 
-## DESeqResults
-contrast <- resultsNames(dds)[[2L]]
-res <- results(dds, name = contrast)
-## Shrink log2 fold changes.
-shrink <- lfcShrink(
-    dds = dds,
+## DESeqResults list
+alpha <- 0.01
+lfcThreshold <- 0L
+contrasts <- list(
+    "condition_B_vs_A" = c(
+        factor = "condition",
+        numerator = "B",
+        denominator = "A"
+    ),
+    "treatment_D_vs_C" = c(
+        factor = "treatment",
+        numerator = "D",
+        denominator = "C"
+    )
+)
+res <- mapply(
+    FUN = DESeq2::results,
+    contrast = contrasts,
+    MoreArgs = list(
+        object = dds,
+        lfcThreshold = lfcThreshold,
+        alpha = alpha
+    ),
+    SIMPLIFY = FALSE,
+    USE.NAMES = TRUE
+)
+
+## Shrink log2 fold changes via `DESeq2::lfcShrink()`.
+## apeglm is now recommended over normal. Also note that LFC shrinkage via
+## type='normal' is not implemented for designs with interactions.
+shrink <- mapply(
+    FUN = apeglmContrast,
+    contrast = contrasts,
     res = res,
-    coef = contrast,
-    type = "apeglm"
+    MoreArgs = list(
+        dds = dds,
+        lfcThreshold = lfcThreshold
+    ),
+    SIMPLIFY = FALSE,
+    USE.NAMES = TRUE
 )
 
 ## Package up the analysis into a DESeqAnalysis object.
@@ -58,4 +90,4 @@ stopifnot(object_size(deseq) < limit)
 stopifnot(is(deseq, "DESeqAnalysis"))
 validObject(deseq)
 
-usethis::use_data(deseq, overwrite = TRUE, compress = "xz")
+use_data(deseq, overwrite = TRUE, compress = "xz")
