@@ -5,29 +5,33 @@
 
 
 
-## Updated 2019-07-23.
+## Updated 2019-11-12.
 .joinCounts <- function(
-    DESeqResults,  # nolint
+    object,  # nolint
     DESeqDataSet   # nolint
 ) {
     assert(
-        is(DESeqResults, "DESeqResults"),
+        is(object, "DataFrame"),
         is(DESeqDataSet, "DESeqDataSet"),
         identical(
-            x = rownames(DESeqResults),
+            x = rownames(object),
             y = rownames(DESeqDataSet)
         ),
         areDisjointSets(
-            x = colnames(DESeqResults),
+            x = colnames(object),
             y = colnames(DESeqDataSet)
         )
     )
-    validObject(DESeqResults)
+    validObject(object)
     validObject(DESeqDataSet)
     message("Joining size factor adjusted normalized counts.")
     counts <- counts(DESeqDataSet, normalized = TRUE)
-    out <- cbind(DESeqResults, counts)
-    out <- as(out, "DESeqResults")
+    out <- cbind(object, counts)
+    ## Ensure we're not changing the object class on return.
+    ## This can happen for DESeqResults, which will coerce to DataFrame.
+    if (!identical(x = class(object), y = class(out))) {
+        out <- as(out, Class = class(object)[[1L]])
+    }
     validObject(out)
     out
 }
@@ -43,24 +47,24 @@
 ## will fail to write to disk as CSV. Note that we're using `decode()` here to
 ## handle S4 Rle columns from the Genomic Ranges.
 ##
-## Updated 2019-10-15.
+## Updated 2019-11-12.
 .joinRowData <- function(
-    DESeqResults,  # nolint
+    object,  # nolint
     DESeqDataSet   # nolint
 ) {
     assert(
-        is(DESeqResults, "DESeqResults"),
+        is(object, "DataFrame"),
         is(DESeqDataSet, "DESeqDataSet"),
         identical(
-            x = rownames(DESeqResults),
+            x = rownames(object),
             y = rownames(DESeqDataSet)
         ),
         areDisjointSets(
-            x = colnames(DESeqResults),
+            x = colnames(object),
             y = colnames(DESeqDataSet)
         )
     )
-    validObject(DESeqResults)
+    validObject(object)
     validObject(DESeqDataSet)
     message("Joining row annotations.")
     ## SummarizedExperiment inconsistently handles rownames on rowData.
@@ -90,11 +94,15 @@
             FUN.VALUE = logical(1L)
         )),
         hasLength(rowData),
-        identical(rownames(DESeqResults), rownames(rowData)),
-        areDisjointSets(colnames(DESeqResults), colnames(rowData))
+        identical(rownames(object), rownames(rowData)),
+        areDisjointSets(colnames(object), colnames(rowData))
     )
-    out <- cbind(DESeqResults, rowData)
-    out <- as(out, "DESeqResults")
+    out <- cbind(object, rowData)
+    ## Ensure we're not changing the object class on return.
+    ## This can happen for DESeqResults, which will coerce to DataFrame.
+    if (!identical(x = class(object), y = class(out))) {
+        out <- as(out, Class = class(object)[[1L]])
+    }
     validObject(out)
     out
 }
