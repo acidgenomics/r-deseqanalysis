@@ -1,7 +1,3 @@
-## FIXME Switch to 'i' instead of 'results'.
-
-
-
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
 #' @note Updated 2019-11-08.
