@@ -3,7 +3,7 @@
 #' Generate an aggregate matrix of `DESeqResults` column values per contrast.
 #'
 #' @name resultsMatrix
-#' @note Updated 2019-10-24.
+#' @note Updated 2019-11-12.
 #'
 #' @param object `DESeqAnalysis`.
 #' @param value `character(1)`.
@@ -42,7 +42,7 @@ NULL
 `resultsMatrix,DESeqAnalysis` <-  # nolint
     function(
         object,
-        value = c("log2FoldChange", "stat", "padj", "baseMean"),
+        value = c("log2FoldChange", "stat", "padj"),
         rowData = FALSE
     ) {
         validObject(object)
@@ -79,7 +79,7 @@ NULL
             out <- as(mat, "DataFrame")
             rowData <- .usefulRowData(object)
             assert(areDisjointSets(colnames(out), colnames(rowData)))
-            out <- cbind(rowData, out)
+            out <- cbind(out, rowData)
         } else {
             out <- mat
         }
