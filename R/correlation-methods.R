@@ -14,13 +14,13 @@
 #' data(deseq)
 #'
 #' ## DESeqResults ====
-#' ## > x <- results(deseq, i = 1L)
-#' ## > y <- results(deseq, i = 2L)
-#' ## > correlation(x = x, y = y)
+#' x <- results(deseq, i = 1L)
+#' y <- results(deseq, i = 2L)
+#' correlation(x = x, y = y)
 #'
 #' ## DESeqAnalysis ====
-#' ## > x <- deseq
-#' ## > correlation(x = x, i = 1L, j = 2L)
+#' x <- deseq
+#' correlation(x = x, i = 1L, j = 2L)
 NULL
 
 
