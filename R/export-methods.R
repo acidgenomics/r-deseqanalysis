@@ -57,7 +57,7 @@ NULL
         files <- paste0(files, ".gz")
     }
     mapply(
-        object = data,
+        object = list,
         file = files,
         FUN = export,
         SIMPLIFY = TRUE,
