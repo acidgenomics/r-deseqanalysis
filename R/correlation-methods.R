@@ -2,7 +2,7 @@
 #'
 #' @name correlation
 #' @inherit basejump::correlation
-#' @note Updated 2019-11-08.
+#' @note Updated 2019-11-12.
 #'
 #' @inheritParams acidroxygen::params
 #' @param col `character(1)`.
@@ -10,13 +10,17 @@
 #' @param ... Additional arguments.
 #'
 #' @examples
-#' data(deseq, package = "acidtest")
+#' ## Working example currently only has 1 contrast slotted.
+#' data(deseq)
 #'
 #' ## DESeqResults ====
-#'
+#' ## > x <- results(deseq, i = 1L)
+#' ## > y <- results(deseq, i = 2L)
+#' correlation(x = x, y = y)
 #'
 #' ## DESeqAnalysis ====
-#'
+#' ## > x <- deseq
+#' ## > correlation(x = x, i = 1L, j = 2L)
 NULL
 
 

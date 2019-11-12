@@ -44,16 +44,20 @@ If \code{NULL}, calculates correlation matrix only on the primary assay.}
 Correlation
 }
 \note{
-Updated 2019-11-08.
+Updated 2019-11-12.
 }
 \examples{
-data(deseq, package = "acidtest")
+## Working example currently only has 1 contrast slotted.
+data(deseq)
 
 ## DESeqResults ====
-
+## > x <- results(deseq, i = 1L)
+## > y <- results(deseq, i = 2L)
+correlation(x = x, y = y)
 
 ## DESeqAnalysis ====
-
+## > x <- deseq
+## > correlation(x = x, i = 1L, j = 2L)
 }
 \seealso{
 \itemize{
