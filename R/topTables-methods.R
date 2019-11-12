@@ -1,6 +1,6 @@
 #' @name topTables
 #' @inherit bioverbs::topTables
-#' @note Updated 2019-11-08.
+#' @note Updated 2019-11-12.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -138,7 +138,7 @@ NULL
 
 
 ## This is used in bcbioRNASeq F1000 paper.
-## Updated 2019-08-20.
+## Updated 2019-11-12.
 `topTables,DESeqResults` <-  # nolint
     function(
         object,
@@ -149,7 +149,7 @@ NULL
         assert(isAny(DESeqDataSet, c("DESeqDataSet", "NULL")))
         if (is(DESeqDataSet, "DESeqDataSet")) {
             object <- .joinRowData(
-                DESeqResults = object,
+                object = object,
                 DESeqDataSet = DESeqDataSet
             )
         }

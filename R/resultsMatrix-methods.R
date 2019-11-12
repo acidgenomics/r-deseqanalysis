@@ -76,10 +76,10 @@ NULL
             )
         )
         if (isTRUE(rowData)) {
-            out <- as(mat, "DataFrame")
-            rowData <- .usefulRowData(object)
-            assert(areDisjointSets(colnames(out), colnames(rowData)))
-            out <- cbind(out, rowData)
+            out <- .joinRowData(
+                object = as(mat, "DataFrame"),
+                DESeqDataSet = as(object, "DESeqDataSet")
+            )
         } else {
             out <- mat
         }
@@ -130,10 +130,10 @@ setMethod(
         )
         out <- do.call(what = cbind, args = list)
         if (isTRUE(rowData)) {
-            out <- as(out, "DataFrame")
-            rowData <- .usefulRowData(object)
-            assert(areDisjointSets(colnames(out), colnames(rowData)))
-            out <- cbind(rowData, out)
+            out <- .joinRowData(
+                object = out,
+                DESeqDataSet = as(object, "DESeqDataSet")
+            )
         }
         metadata2(out, which = "DESeqAnalysis") <- list(
             version = packageVersion("DESeqAnalysis"),
