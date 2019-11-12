@@ -4,8 +4,11 @@
 \alias{prepareTximportFiles}
 \title{Prepare quant files for tximport}
 \usage{
-prepareTximportFiles(files, makeNames = c("makeNames", "snakeCase",
-  "camelCase"), exists = TRUE)
+prepareTximportFiles(
+  files,
+  makeNames = c("makeNames", "snakeCase", "camelCase"),
+  exists = TRUE
+)
 }
 \arguments{
 \item{files}{\code{character}.
