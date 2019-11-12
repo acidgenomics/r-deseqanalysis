@@ -1,6 +1,6 @@
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
-#' @note Updated 2019-11-08.
+#' @note Updated 2019-11-12.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -147,29 +147,30 @@ NULL
         )
         ## Early return if there are not DEGs.
         if (!hasLength(both)) {
-            return(NULL)  # nocov
+            out <- list(all = object)
+        } else {
+            up <- deg(
+                object = object,
+                alpha = alpha,
+                lfcThreshold = lfcThreshold,
+                direction = "up"
+            )
+            down <- deg(
+                object = object,
+                alpha = alpha,
+                lfcThreshold = lfcThreshold,
+                direction = "down"
+            )
+            ## Prepare the return list.
+            out <- list(
+                all = object,
+                up = object[up, , drop = FALSE],
+                down = object[down, , drop = FALSE],
+                both = object[both, , drop = FALSE]
+            )
+            ## Filter out empty up/down tables.
+            out <- Filter(f = hasRows, x = out)
         }
-        up <- deg(
-            object = object,
-            alpha = alpha,
-            lfcThreshold = lfcThreshold,
-            direction = "up"
-        )
-        down <- deg(
-            object = object,
-            alpha = alpha,
-            lfcThreshold = lfcThreshold,
-            direction = "down"
-        )
-        ## Prepare the return list.
-        out <- list(
-            all = object,
-            up = object[up, , drop = FALSE],
-            down = object[down, , drop = FALSE],
-            both = object[both, , drop = FALSE]
-        )
-        ## Filter out empty up/down tables.
-        out <- Filter(f = hasRows, x = out)
         switch(
             EXPR = return,
             "DataFrameList" = DataFrameList(out),
