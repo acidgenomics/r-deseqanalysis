@@ -38,6 +38,9 @@ test_that("DESeqAnalysisList", {
     expect_is(x, "matrix")
     expect_identical(
         object = colnames(x),
-        expected = "deseq_condition_B_vs_A"
+        expected = c(
+            "deseq_condition_B_vs_A",
+            "deseq_treatment_D_vs_C"
+        )
     )
 })
