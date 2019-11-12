@@ -53,7 +53,7 @@ data(deseq)
 ## DESeqResults ====
 ## > x <- results(deseq, i = 1L)
 ## > y <- results(deseq, i = 2L)
-correlation(x = x, y = y)
+## > correlation(x = x, y = y)
 
 ## DESeqAnalysis ====
 ## > x <- deseq
