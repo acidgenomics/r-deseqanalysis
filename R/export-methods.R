@@ -1,6 +1,7 @@
+## Need to add method for DESeqAnalysisList.
+
 ## DESeqTransform can inherit from SummarizedExperiment without modification.
 ## DESeqResults can inherit from DataFrame without modification.
-## Need to add method for DESeqAnalysisList.
 
 
 
@@ -8,7 +9,7 @@
 #' @inherit bioverbs::export
 #' @note Size-factor normalized coutns and FPKM values are calculated on the fly
 #' and exported automatically.
-#' @note Updated 2019-09-11.
+#' @note Updated 2019-11-12.
 #'
 #' @inheritParams brio::export
 #' @inheritParams params
@@ -35,7 +36,37 @@ NULL
 
 
 
-## Internal helpers ============================================================
+## Updated 2019-11-12.
+.exportResultsMatrices <- function(object, dir, compress) {
+    assert(
+        is(object, "DESeqAnalysis"),
+        isFlag(compress)
+    )
+    values <- eval(formals(`resultsMatrix,DESeqAnalysis`)[["value"]])
+    list <- lapply(
+        X = values,
+        FUN = function(value) {
+            ## FIXME Include only atomic columns in `export()` method.
+            ## Inform the user when we're dropping these.
+            resultsMatrix(object, value = value, rowData = TRUE)
+        }
+    )
+    names(list) <- values
+    files <- file.path(dir, paste0(values, ".csv"))
+    if (isTRUE(compress)) {
+        files <- paste0(files, ".gz")
+    }
+    mapply(
+        object = data,
+        file = files,
+        FUN = export,
+        SIMPLIFY = TRUE,
+        USE.NAMES = TRUE
+    )
+}
+
+
+
 ## Here we are looping across each contrast and writing out DEG tables.
 ## Note: We don't need to support humanize mode because `geneName` is required.
 ## Updated 2019-11-08.
@@ -49,22 +80,22 @@ NULL
     out <- lapply(
         X = resultsNames,
         FUN = function(i) {
-            resTbl <- resultsTables(
+            data <- resultsTables(
                 object = object,
                 i = i,
                 lfcShrink = lfcShrink,
                 extra = TRUE,
                 return = "tbl_df"
             )
-            if (is.null(resTbl)) {
+            if (is.null(data)) {
                 return(invisible())
             }
-            files <- file.path(dir, i, paste0(names(resTbl), ".csv"))
+            files <- file.path(dir, i, paste0(names(data), ".csv"))
             if (isTRUE(compress)) {
                 files <- paste0(files, ".gz")
             }
             mapply(
-                object = resTbl,
+                object = data,
                 file = files,
                 FUN = export,
                 SIMPLIFY = TRUE,
@@ -78,7 +109,6 @@ NULL
 
 
 
-## Exported methods ============================================================
 ## Inheriting the SummarizedExperiment method internally here.
 ## Only export the raw and normalized counts.
 ## Skip exporting other assays, including mu, H, cooks.
@@ -119,7 +149,7 @@ setMethod(
 
 
 
-## Updated 2019-11-08.
+## Updated 2019-11-12.
 `export,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -145,7 +175,7 @@ setMethod(
         rm(name)
         files <- list()
         ## DESeqDataSet.
-        message("Exporting DESeqDataSet.")
+        message("Exporting DESeqDataSet to 'data'.")
         files[["data"]] <-
             export(
                 object = as(object, "DESeqDataSet"),
@@ -154,7 +184,7 @@ setMethod(
                 compress = compress
             )
         ## DESeqTransform.
-        message("Exporting DESeqTransform.")
+        message("Exporting DESeqTransform to 'transform'.")
         files[["transform"]] <-
             export(
                 object = as(object, "DESeqTransform"),
@@ -163,13 +193,21 @@ setMethod(
                 compress = compress
             )
         ## DEG results tables.
-        message("Exporting DESeqResults tables.")
+        message("Exporting DESeqResults tables to 'resultsTables'.")
         files[["resultsTables"]] <-
             .exportResultsTables(
                 object = object,
                 dir = file.path(dir, "resultsTables"),
                 compress = compress,
                 lfcShrink = lfcShrink
+            )
+        ## Combined results matrices.
+        message("Exporting DESeqResults matrices to 'resultsMatrices'.")
+        files[["resultsMatrices"]] <-
+            .exportResultsMatrices(
+                object = object,
+                dir = file.path(dir, "resultsMatrices"),
+                compress = compress
             )
         ## Return file list.
         invisible(files)
