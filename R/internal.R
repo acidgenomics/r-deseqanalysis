@@ -53,40 +53,6 @@
 
 
 
-#' Extract the useful row data from object
-#'
-#' Intentionally drop `logical` and `numeric` columns, which contain values used
-#' internally by DESeq2.
-#'
-#' @note Updated 2019-11-12.
-#' @noRd
-#'
-#' @param object `DESeqAnalysis` or `DESeqAnalysisList`.
-#'
-#' @examples
-#' data <- .usefulRowData(object)
-.extractUsefulRowData <- function(object) {
-    if (is(object, "DESeqAnalysisList")) {
-        object <- object[[1L]]
-    }
-    assert(is(object, "DESeqAnalysis"))
-    dds <- as(object, "DESeqDataSet")
-    data <- rowData(dds)
-    assert(
-        is(data, "DataFrame"),
-        hasLength(data)
-    )
-    keep <- !bapply(
-        X = data,
-        FUN = isAny,
-        classes = c("list", "logical", "numeric")
-    )
-    out <- data[, keep, drop = FALSE]
-    out
-}
-
-
-
 ## Updated 2019-11-12.
 .joinCounts <- function(
     object,  # nolint
@@ -168,6 +134,11 @@
             "Check 'rowData()' of DESeqDataSet."
         )
     }
+    rowData <- rowData[, keep, drop = FALSE]
+    ## Drop any remaining blacklisted columns. These columsn aren't useful in
+    ## the downstream export to CSV format.
+    blacklist <- "seqCoordSystem"
+    keep <- !colnames(rowData) %in% blacklist
     rowData <- rowData[, keep, drop = FALSE]
     assert(
         all(vapply(
