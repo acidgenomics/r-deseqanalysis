@@ -4,9 +4,13 @@
 \alias{importPairwiseContrasts}
 \title{Import pairwise contrasts from a file}
 \usage{
-importPairwiseContrasts(file, groupCol = "group",
-  numeratorCol = "numerator", denominatorCol = "denominator",
-  namesCol = "description")
+importPairwiseContrasts(
+  file,
+  groupCol = "group",
+  numeratorCol = "numerator",
+  denominatorCol = "denominator",
+  namesCol = "description"
+)
 }
 \arguments{
 \item{file}{\code{character(1)}.
