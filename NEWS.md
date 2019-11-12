@@ -1,4 +1,4 @@
-## DESeqAnalysis 0.2.11 (2019-11-08)
+## DESeqAnalysis 0.2.11 (2019-11-12)
 
 ### Major changes
 
