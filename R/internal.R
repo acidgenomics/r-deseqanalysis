@@ -58,7 +58,7 @@
 #' Intentionally drop `logical` and `numeric` columns, which contain values used
 #' internally by DESeq2.
 #'
-#' @note Updated 2019-10-24.
+#' @note Updated 2019-11-12.
 #' @noRd
 #'
 #' @param object `DESeqAnalysis` or `DESeqAnalysisList`.
@@ -76,7 +76,11 @@
         is(data, "DataFrame"),
         hasLength(data)
     )
-    keep <- !bapply(X = data, FUN = isAny, classes = c("logical", "numeric"))
+    keep <- !bapply(
+        X = data,
+        FUN = isAny,
+        classes = c("list", "logical", "numeric")
+    )
     out <- data[, keep, drop = FALSE]
     out
 }
