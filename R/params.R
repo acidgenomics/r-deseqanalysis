@@ -1,5 +1,5 @@
 #' @name params
-#' @inherit acidroxygen::params
+#' @inherit acidroxygen::params return title
 #' @keywords internal
 #'
 #' @param DESeqDataSet `DESeqDataSet` or `NULL`.
@@ -16,6 +16,8 @@
 #'   **Experimental**. Only include the samples used to define the contrast
 #'   passed to [DESeq2::results()]. This setting will break for complex DESeq2
 #'   contrasts (e.g. interaction effect).
+#' @param i `character(1)` or `integer(1)`.
+#'   `DESeqResults` contrast name or position in `results` slot.
 #' @param lfcShrink `logical(1)`.
 #'   Use shrunken log2 fold change (LFC) values.
 #' @param name `character(1)`.

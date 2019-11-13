@@ -1,3 +1,23 @@
+## DESeqAnalysis 0.2.11 (2019-11-12)
+
+### Major changes
+
+- Renamed `results` argument to `i` for `DESeqAnalysis` methods, where
+  applicable. This improves consistency with Bioconductor conventions (similar
+  to `assay` method, which also uses `i` for position). Note that previous
+  usage of `results` is now defunct and should intentionally error.
+
+### Minor changes
+
+- `resultsMatrix`: Added support for `baseMean` aggregation, and improved
+  documentation.
+- Updated basejump dependency versions.
+- Added tximport as a suggested package.
+- Updated dependencies to require Bioconductor 3.10 release.
+- Added `plotHeatmap`, `plotCorrelationHeatmap`, and `plotQuantileHeatmap`
+  method support, which extracts `DESeqTransform` object internally and hands
+  off to `SummarizedExperiment` methods defined in [acidplots][].
+
 ## DESeqAnalysis 0.2.10 (2019-10-16)
 
 ### Minor changes
@@ -35,8 +55,6 @@
 - `plotBaseMean`: Added argument support to define colors and disable summary
   statistics lines. Simplified internal passthrough in `DESeqAnalysis`,
   `DESeqDataSet`, and `DESeqResults` methods.
-
-
 
 ## DESeqAnalysis 0.2.7 (2019-09-11)
 
@@ -117,8 +135,6 @@ Version bump, reflecting change in basejump dependency.
 
 - Removed `plotMA2` export, which keeps DESeq2 `plotMA` method as an alias.
 
-
-
 ## DESeqAnalysis 0.1.21 (2019-04-26)
 
 ### New functions
@@ -130,8 +146,6 @@ Version bump, reflecting change in basejump dependency.
 
 - Improved `show` method to include `alpha` and `lfcThreshold` information.
 - `topTables`: Added `lfcShrink` support.
-
-
 
 ## DESeqAnalysis 0.1.20 (2019-04-25)
 
@@ -156,8 +170,6 @@ Version bump, reflecting change in basejump dependency.
   internal `Gene2Symbol` call, which isn't informative here.
 - Added `lfcThreshold` and `lfcShrink` information on plots, where applicable.
 
-
-
 ## DESeqAnalysis 0.1.19 (2019-04-23)
 
 ### Minor changes
@@ -165,15 +177,11 @@ Version bump, reflecting change in basejump dependency.
 - Converted `resultsMatrix` to an S4 generic and added initial support for
   `DESeqAnalysis` and `DESeqAnalysisList` class objects.
 
-
-
 ## DESeqAnalysis 0.1.18 (2019-04-23)
 
 ### Minor changes
 
 - NAMESPACE and documentation updates, incorporating new [acidplots][] package.
-
-
 
 ## DESeqAnalysis 0.1.17 (2019-04-08)
 
@@ -187,8 +195,6 @@ annotations.
   by checking against the column names of `colData` internally.
 - `topTables`: `geneID`, `geneName`, and `geneBiotype` are now optional columns.
 - Updated Travis CI configuration to use rnaseq Docker image.
-
-
 
 ## DESeqAnalysis 0.1.16 (2019-04-08)
 
@@ -205,8 +211,6 @@ annotations.
 - Consistently importing British spelling variants for ggplot2 functions.
 - Updated unit tests for plotting functions.
 
-
-
 ## DESeqAnalysis 0.1.15 (2019-04-03)
 
 ### New functions
@@ -218,8 +222,6 @@ annotations.
 ### Minor changes
 
 - Reorganized unit tests and improved code coverage.
-
-
 
 ## DESeqAnalysis 0.1.14 (2019-03-29)
 
@@ -233,23 +235,17 @@ annotations.
 - Updated documentation on global formals, which now use `acid` prefix instead
   of `basejump`.
 
-
-
 ## DESeqAnalysis 0.1.13 (2019-03-23)
 
 ### Minor changes
 
 - Migrated code to [Acid Genomics][].
 
-
-
 ## DESeqAnalysis 0.1.12 (2019-03-18)
 
 ### Minor changes
 
 - Updated differential expression template and dependencies.
-
-
 
 ## DESeqAnalysis 0.1.11 (2019-03-11)
 
@@ -259,8 +255,6 @@ annotations.
   inside `SummarizedExperiment` method support in [basejump][].
 - Updated differential expression R Markdown template to improve
   parameterization support.
-
-
 
 ## DESeqAnalysis 0.1.10 (2019-02-18)
 
@@ -277,16 +271,12 @@ annotations.
 
 - Updated NEWS to include information on all previous releases.
 
-
-
 ## DESeqAnalysis 0.1.9 (2019-02-12)
 
 ### Minor changes
 
 - R 3.4 compatibility fix for `resultsTables`, which needs to assign rownames
   on `rowData` return.
-
-
 
 ## DESeqAnalysis 0.1.8 (2019-02-08)
 
@@ -318,8 +308,6 @@ valid when checked using `validObject`. They can be updated using
   the version of DESeqAnalysis and not just DESeq2.
 - Updated `deseq` example object.
 
-
-
 ## DESeqAnalysis 0.1.7 (2019-01-31)
 
 ### Minor changes
@@ -327,8 +315,6 @@ valid when checked using `validObject`. They can be updated using
 - `contrastSamples`: Improved internal sample and contrast name handling.
   No longer attempting to force snake case formatting.
 - Pinned lintr check package to steinbaugh fork.
-
-
 
 ## DESeqAnalysis 0.1.6 (2019-01-23)
 
@@ -339,8 +325,6 @@ valid when checked using `validObject`. They can be updated using
 - Removed `sanitizeRowData` from imports.
 - Draft update to internal `.matchResults` assert check, looking for `missing`
   results argument.
-
-
 
 ## DESeqAnalysis 0.1.5 (2019-01-14)
 
@@ -360,8 +344,6 @@ valid when checked using `validObject`. They can be updated using
   against master branch (e.g. for pull requests). This reduces the overall CI
   burden, so that pushes to develop branch don't trigger CI builds.
 
-
-
 ## DESeqAnalysis 0.1.4 (2019-01-08)
 
 ### Major changes
@@ -380,8 +362,6 @@ valid when checked using `validObject`. They can be updated using
 - Now using `isAlpha` instead of `containsAlpha` for assert check.
 - Split out NAMESPACE imports into a separate `imports.R` file.
 
-
-
 ## DESeqAnalysis 0.1.3 (2018-12-13)
 
 ### Major changes
@@ -396,8 +376,6 @@ valid when checked using `validObject`. They can be updated using
 - Improved internal code for `plotDEGHeatmap`, `plotDEGPCA`,
 - Code cleanup to pass lintr checks.
 - Miscellaneous documentation (primarily working example) improvements.
-
-
 
 ## DESeqAnalysis 0.1.2 (2018-12-12)
 
@@ -428,8 +406,6 @@ valid when checked using `validObject`. They can be updated using
 - Reorganized and improved unit tests.
 - Added a placeholder for `updateObject`, which must be added in future update.
 
-
-
 ## DESeqAnalysis 0.1.1 (2018-12-01)
 
 ### Major changes
@@ -444,14 +420,10 @@ valid when checked using `validObject`. They can be updated using
 - Enabled [Travis CI][] and [AppVeyor CI][] build checks.
 - Added CI badges to README.
 
-
-
 ## DESeqAnalysis 0.1.0 (2018-11-19)
 
 Initial release. Some of the functions defined in this package have been
 migrated from my [bcbioRNASeq][] R package.
-
-
 
 [acidplots]: https://acidplots.acidgenomics.com/
 [Acid Genomics]: https://acidgenomics.com/

@@ -1,6 +1,6 @@
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
-#' @note Updated 2019-10-15.
+#' @note Updated 2019-11-12.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -39,12 +39,12 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' x <- resultsTables(deseq, results = 1L)
+#' x <- resultsTables(deseq, i = 1L)
 #' names(x)
 #'
 #' ## DESeqResults ====
 #' ## Use of DESeqAnalysis is encouraged instead of this approach.
-#' res <- results(deseq, results = 1L)
+#' res <- results(deseq, i = 1L)
 #' dds <- as(deseq, "DESeqDataSet")
 #' x <- resultsTables(object = res, DESeqDataSet = dds)
 #' names(x)
@@ -61,106 +61,11 @@ NULL
 
 
 
-## Updated 2019-07-23.
-.joinCounts <- function(
-    DESeqResults,  # nolint
-    DESeqDataSet   # nolint
-) {
-    assert(
-        is(DESeqResults, "DESeqResults"),
-        is(DESeqDataSet, "DESeqDataSet"),
-        identical(
-            x = rownames(DESeqResults),
-            y = rownames(DESeqDataSet)
-        ),
-        areDisjointSets(
-            x = colnames(DESeqResults),
-            y = colnames(DESeqDataSet)
-        )
-    )
-    validObject(DESeqResults)
-    validObject(DESeqDataSet)
-    message("Joining size factor adjusted normalized counts.")
-    counts <- counts(DESeqDataSet, normalized = TRUE)
-    out <- cbind(DESeqResults, counts)
-    out <- as(out, "DESeqResults")
-    validObject(out)
-    out
-}
-
-
-
-## Join the row annotations.
-##
-## DESeq2 includes additional columns in `rowData()` that aren't informative for
-## a user, and doesn't need to be included in the tables. Instead, only keep
-## informative columns that are character or factor. Be sure to drop complex,
-## non-atomic columns (e.g. list, S4) that are allowed in GRanges/DataFrame but
-## will fail to write to disk as CSV. Note that we're using `decode()` here to
-## handle S4 Rle columns from the Genomic Ranges.
-##
-## Updated 2019-10-15.
-.joinRowData <- function(
-    DESeqResults,  # nolint
-    DESeqDataSet   # nolint
-) {
-    assert(
-        is(DESeqResults, "DESeqResults"),
-        is(DESeqDataSet, "DESeqDataSet"),
-        identical(
-            x = rownames(DESeqResults),
-            y = rownames(DESeqDataSet)
-        ),
-        areDisjointSets(
-            x = colnames(DESeqResults),
-            y = colnames(DESeqDataSet)
-        )
-    )
-    validObject(DESeqResults)
-    validObject(DESeqDataSet)
-    message("Joining row annotations.")
-    ## SummarizedExperiment inconsistently handles rownames on rowData.
-    ## Ensure they are set here before continuing.
-    rownames <- rownames(DESeqDataSet)
-    rowData <- rowData(DESeqDataSet)
-    rownames(rowData) <- rownames
-    rowData <- decode(rowData)
-    keep <- vapply(
-        X = rowData,
-        FUN = function(x) {
-            is.character(x) || is.factor(x)
-        },
-        FUN.VALUE = logical(1L)
-    )
-    if (!any(keep)) {
-        stop(
-            "No suitable row annotations detected.\n",
-            "Check 'rowData()' of DESeqDataSet."
-        )
-    }
-    rowData <- rowData[, keep, drop = FALSE]
-    assert(
-        all(vapply(
-            X = rowData,
-            FUN = is.atomic,
-            FUN.VALUE = logical(1L)
-        )),
-        hasLength(rowData),
-        identical(rownames(DESeqResults), rownames(rowData)),
-        areDisjointSets(colnames(DESeqResults), colnames(rowData))
-    )
-    out <- cbind(DESeqResults, rowData)
-    out <- as(out, "DESeqResults")
-    validObject(out)
-    out
-}
-
-
 ## bcbioRNASeq v0.2 release series defaults:
 ## https://github.com/hbc/bcbioRNASeq/blob/v0.2.10/R/resultsTables-methods.R
 
 ## Note that this method is used in bcbioRNASeq F1000 paper.
-## Updated 2019-10-15.
+## Updated 2019-11-12.
 `resultsTables,DESeqResults` <-  # nolint
     function(
         object,
@@ -225,11 +130,11 @@ NULL
         ## Join row data and counts from DESeqDataSet.
         if (is(DESeqDataSet, "DESeqDataSet")) {
             object <- .joinRowData(
-                DESeqResults = object,
+                object = object,
                 DESeqDataSet = DESeqDataSet
             )
             object <- .joinCounts(
-                DESeqResults = object,
+                object = object,
                 DESeqDataSet = DESeqDataSet
             )
         }
@@ -242,29 +147,30 @@ NULL
         )
         ## Early return if there are not DEGs.
         if (!hasLength(both)) {
-            return(NULL)  # nocov
+            out <- list(all = object)
+        } else {
+            up <- deg(
+                object = object,
+                alpha = alpha,
+                lfcThreshold = lfcThreshold,
+                direction = "up"
+            )
+            down <- deg(
+                object = object,
+                alpha = alpha,
+                lfcThreshold = lfcThreshold,
+                direction = "down"
+            )
+            ## Prepare the return list.
+            out <- list(
+                all = object,
+                up = object[up, , drop = FALSE],
+                down = object[down, , drop = FALSE],
+                both = object[both, , drop = FALSE]
+            )
+            ## Filter out empty up/down tables.
+            out <- Filter(f = hasRows, x = out)
         }
-        up <- deg(
-            object = object,
-            alpha = alpha,
-            lfcThreshold = lfcThreshold,
-            direction = "up"
-        )
-        down <- deg(
-            object = object,
-            alpha = alpha,
-            lfcThreshold = lfcThreshold,
-            direction = "down"
-        )
-        ## Prepare the return list.
-        out <- list(
-            all = object,
-            up = object[up, , drop = FALSE],
-            down = object[down, , drop = FALSE],
-            both = object[both, , drop = FALSE]
-        )
-        ## Filter out empty up/down tables.
-        out <- Filter(f = hasRows, x = out)
         switch(
             EXPR = return,
             "DataFrameList" = DataFrameList(out),
@@ -284,17 +190,29 @@ setMethod(
 
 
 
-## Updated 2019-10-15.
+## Updated 2019-11-08.
 `resultsTables,DESeqAnalysis` <-  # nolint
     function(
         object,
-        results,
+        i,
         lfcShrink = TRUE,
         extra = TRUE,
         alpha = NULL,
         lfcThreshold = NULL,
         return = c("tbl_df", "DataFrameList")
     ) {
+        ## nocov start
+        call <- match.call()
+        ## results
+        if ("results" %in% names(call)) {
+            stop("'results' is defunct in favor of 'i'.")
+        }
+        assert(isSubset(
+            x = setdiff(names(call), ""),
+            y = names(formals())
+        ))
+        rm(call)
+        ## nocov end
         validObject(object)
         assert(
             isFlag(lfcShrink),
@@ -302,11 +220,7 @@ setMethod(
         )
         return <- match.arg(return)
         ## Note that this will use the shrunken LFC values, if slotted.
-        results <- results(
-            object = object,
-            results = results,
-            lfcShrink = lfcShrink
-        )
+        res <- results(object, i = i, lfcShrink = lfcShrink)
         ## Include extra annotations, if desired.
         if (isTRUE(extra)) {
             ## Get the DESeqDataSet, and humanize the sample names. Note that
@@ -321,7 +235,7 @@ setMethod(
             dds <- NULL
         }
         resultsTables(
-            object = results,
+            object = res,
             DESeqDataSet = dds,
             alpha = alpha,
             lfcThreshold = lfcThreshold,

@@ -10,7 +10,7 @@
 #' data(deseq)
 #'
 #' ## Get genes from working example.
-#' res <- results(deseq, results = 1L)
+#' res <- results(deseq, i = 1L)
 #' genes <- head(rownames(res))
 #' print(genes)
 #'
@@ -58,7 +58,6 @@ setMethod(
     signature = signature("DESeqDataSet"),
     definition = `plotCounts,DESeqDataSet`
 )
-
 
 
 

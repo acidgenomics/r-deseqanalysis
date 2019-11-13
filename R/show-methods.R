@@ -1,8 +1,8 @@
 #' Show an object
 #'
 #' @name show
-#' @inherit methods::show
-#' @note Updated 2019-08-20.
+#' @inherit methods::show params return title
+#' @note Updated 2019-11-13.
 #'
 #' @examples
 #' data(deseq)

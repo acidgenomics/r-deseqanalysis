@@ -1,6 +1,6 @@
 context("plotMA")
 
-args <- list(object = deseq, results = 1L)
+args <- list(object = deseq, i = 1L)
 
 test_that("DESeqAnalysis", {
     x <- do.call(plotMA, args)

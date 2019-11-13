@@ -9,7 +9,8 @@ test_that("DESeqAnalysis", {
         lfcShrink = TRUE
     )
     prefix <- realpath(file.path("XXX", "AAA"))
-    resultsPrefix <- file.path(prefix, "resultsTables", "condition_B_vs_A")
+    resTblPrefix <- file.path(prefix, "resultsTables")
+    resMatPrefix <- file.path(prefix, "resultsMatrices")
     expect_identical(
         object = x,
         expected = list(
@@ -51,10 +52,34 @@ test_that("DESeqAnalysis", {
             ),
             resultsTables = list(
                 condition_B_vs_A = c(
-                    all = file.path(resultsPrefix, "all.csv.gz"),
-                    up = file.path(resultsPrefix, "up.csv.gz"),
-                    down = file.path(resultsPrefix, "down.csv.gz"),
-                    both = file.path(resultsPrefix, "both.csv.gz")
+                    all = file.path(
+                        resTblPrefix, "condition_B_vs_A", "all.csv.gz"
+                    ),
+                    up = file.path(
+                        resTblPrefix, "condition_B_vs_A", "up.csv.gz"
+                    ),
+                    down = file.path(
+                        resTblPrefix, "condition_B_vs_A", "down.csv.gz"
+                    ),
+                    both = file.path(
+                        resTblPrefix, "condition_B_vs_A", "both.csv.gz"
+                    )
+                ),
+                treatment_D_vs_C = c(
+                    all = file.path(
+                        resTblPrefix, "treatment_D_vs_C", "all.csv.gz"
+                    )
+                )
+            ),
+            resultsMatrices = c(
+                log2FoldChange = file.path(
+                    resMatPrefix, "log2FoldChange.csv.gz"
+                ),
+                stat = file.path(
+                    resMatPrefix, "stat.csv.gz"
+                ),
+                padj = file.path(
+                    resMatPrefix, "padj.csv.gz"
                 )
             )
         )

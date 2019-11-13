@@ -3,7 +3,7 @@ context("resultsTables")
 names <- c("all", "up", "down", "both")
 
 test_that("tbl_df return", {
-    x <- resultsTables(deseq, results = 1L, return = "tbl_df")
+    x <- resultsTables(deseq, i = 1L, return = "tbl_df")
     expect_type(x, "list")
     expect_true(all(vapply(
         X = x,
@@ -15,7 +15,7 @@ test_that("tbl_df return", {
 })
 
 test_that("DataFrameList return", {
-    x <- resultsTables(deseq, results = 1L, return = "DataFrameList")
+    x <- resultsTables(deseq, i = 1L, return = "DataFrameList")
     expect_s4_class(x, "SimpleDataFrameList")
     expect_identical(names(x), names)
 })
@@ -23,7 +23,7 @@ test_that("DataFrameList return", {
 test_that("Extra mode handling", {
     args <- list(
         object = deseq,
-        results = 1L,
+        i = 1L,
         return = "tbl_df"
     )
 

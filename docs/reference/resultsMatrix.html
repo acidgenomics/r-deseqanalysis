@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DESeqResults matrix — resultsMatrix • DESeqAnalysis</title>
+<title>DESeq aggregate results matrix — resultsMatrix • DESeqAnalysis</title>
 
 
 <!-- jquery -->
@@ -37,8 +37,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="DESeqResults matrix — resultsMatrix" />
-<meta property="og:description" content="Generate an aggregate matrix of DESeqResults values." />
+<meta property="og:title" content="DESeq aggregate results matrix — resultsMatrix" />
+<meta property="og:description" content="Generate an aggregate matrix of DESeqResults column values per contrast." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.11</span>
       </span>
     </div>
 
@@ -110,24 +110,26 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>DESeqResults matrix</h1>
+    <h1>DESeq aggregate results matrix</h1>
     <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/resultsMatrix-methods.R'><code>R/resultsMatrix-methods.R</code></a></small>
     <div class="hidden name"><code>resultsMatrix.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generate an aggregate matrix of DESeqResults values.</p>
+    <p>Generate an aggregate matrix of <code>DESeqResults</code> column values per contrast.</p>
     </div>
 
     <pre class="usage"><span class='fu'>resultsMatrix</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>resultsMatrix</span>(<span class='no'>object</span>,
-  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>))
+  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>, <span class='st'>"baseMean"</span>),
+  <span class='kw'>rowData</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S4 method for DESeqAnalysisList</span>
 <span class='fu'>resultsMatrix</span>(<span class='no'>object</span>,
-  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>))</pre>
+  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>, <span class='st'>"baseMean"</span>),
+  <span class='kw'>rowData</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,11 +142,16 @@
       <th>value</th>
       <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
 Value type to return. Corresponds to supported <code>DESeqResults</code> column:</p><ul>
-<li><p><code>log2FoldChange</code>: log2 fold change. This will return <em>shrunken</em> LFC
-values if they are slotted in the <code>DESeqAnalysis</code> object.</p></li>
+<li><p><code>log2FoldChange</code>: log2 fold change.<br />
+This will return <em>shrunken</em> LFC values if they are defined.</p></li>
 <li><p><code>stat</code>: Wald test statistic.</p></li>
 <li><p><code>padj</code>: BH adjusted <em>P</em> value.</p></li>
 </ul></td>
+    </tr>
+    <tr>
+      <th>rowData</th>
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
+Include row (gene) annotations, bound to the left side of the data frame.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -154,14 +161,28 @@ values if they are slotted in the <code>DESeqAnalysis</code> object.</p></li>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>matrix</code>.</p>
+    
+<ul>
+<li><p><code>rowData = FALSE</code>: <code>matrix</code>.</p></li>
+<li><p><code>rowData = TRUE</code>: <code>DataFrame</code>.</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
+
+    
+<ul>
+<li><p><code>DESeqAnalysisList</code>: Loop across the nested <code>DESeqAnalysis</code> objects and
+aggregate the corresponding result matrices. Note that the analysis names
+are automatically prefixed to the column names.</p></li>
+</ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-07-30.</p>
+    <p>Updated 2019-10-24.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsMatrix</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>Generating results matrix from 'lfcShrink' slot using 'log2FoldChange' column.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;         condition_B_vs_A
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsMatrix</span>(<span class='no'>deseq</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;         condition_B_vs_A
 #&gt; gene001      -1.69923225
 #&gt; gene002      -1.54322097
 #&gt; gene003      -0.28723590
@@ -174,6 +195,7 @@ values if they are slotted in the <code>DESeqAnalysis</code> object.</p></li>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#methods-by-class-">Methods (by class)</a></li>
       <li><a href="#note">Note</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
