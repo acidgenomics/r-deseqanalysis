@@ -2,7 +2,7 @@ context("plotCounts")
 
 test_that("DESeqAnalysis", {
     ## Get genes from working example.
-    res <- results(deseq, results = 1L)
+    res <- results(deseq, i = 1L)
     genes <- head(rownames(res))
 
     p <- plotCounts(deseq, genes = genes, style = "facet")

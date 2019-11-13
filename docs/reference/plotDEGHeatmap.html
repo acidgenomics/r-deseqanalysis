@@ -74,7 +74,7 @@ plotHeatmap() are also supported by this function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.11</span>
       </span>
     </div>
 
@@ -119,10 +119,10 @@ plotHeatmap() are also supported by this function." />
     </div>
 
     <div class="ref-description">
-    <p>This function is an extension of <code>plotHeatmap()</code> that is optimized for
+    <p>This function is an extension of <code><a href='plotHeatmap.html'>plotHeatmap()</a></code> that is optimized for
 automatic handling differentially expressed genes, rather than requiring
 manual input of a gene vector. All of the optional parameters for
-<code>plotHeatmap()</code> are also supported by this function.</p>
+<code><a href='plotHeatmap.html'>plotHeatmap()</a></code> are also supported by this function.</p>
     </div>
 
     <pre class="usage"><span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>...</span>)
@@ -137,7 +137,7 @@ manual input of a gene vector. All of the optional parameters for
   <span class='kw'>=</span> -<span class='fl'>2L</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>1L</span>), <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>results</span>,
+<span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>i</span>,
   <span class='kw'>contrastSamples</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -217,9 +217,11 @@ Numeric vector of breakpoints for the color legend.</p></td>
       <td><p>Additional arguments.</p></td>
     </tr>
     <tr>
-      <th>results</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> or <code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>.
-Name or position of <code>DESeqResults</code>.</p></td>
+      <th>i</th>
+      <td><p>Indices specifying elements to extract or replace. Indices are <code>numeric</code> or
+<code>character</code> vectors, empty (<code>missing</code>), or <code>NULL</code>.</p>
+<p>For more information:</p><pre>help(topic = "Extract", package = "base")
+</pre></td>
     </tr>
     <tr>
       <th>contrastSamples</th>
@@ -247,19 +249,19 @@ must contain a <code>SummarizedExperiment</code>.</p>
 
     
 <ul>
-<li><p><code>DESeqResults</code>: Passes to <code>plotHeatmap()</code> <code>SummarizedExperiment</code>
+<li><p><code>DESeqResults</code>: Passes to <code><a href='plotHeatmap.html'>plotHeatmap()</a></code> <code>SummarizedExperiment</code>
 method defined in acidplots.</p></li>
 <li><p><code>DESeqAnalysis</code>: Passes to <code>DESeqResults</code> method.</p></li>
 </ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-10-15.</p>
+    <p>Updated 2019-11-08.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotDEGHeatmap</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>156 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>Scaling matrix per row (z-score).</span></div><div class='output co'>#&gt; <span class='message'>Performing hierarchical clustering.</span>
+<span class='fu'>plotDEGHeatmap</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>156 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>Scaling matrix per row (z-score).</span></div><div class='output co'>#&gt; <span class='message'>Performing hierarchical clustering.</span>
 #&gt; <span class='message'>Using 'stats::hclust(method = "ward.D2")'.</span></div><div class='output co'>#&gt; <span class='message'>Arranging rows using 'hclust()'.</span></div><div class='output co'>#&gt; <span class='message'>Arranging columns using 'hclust()'.</span></div><div class='img'><img src='plotDEGHeatmap-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

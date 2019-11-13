@@ -4,7 +4,7 @@
 
 #' @name plotDEGHeatmap
 #' @inherit bioverbs::plotDEGHeatmap
-#' @note Updated 2019-10-15.
+#' @note Updated 2019-11-08.
 #'
 #' @inheritParams acidplots::plotHeatmap
 #' @inheritParams acidroxygen::params
@@ -15,7 +15,7 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' plotDEGHeatmap(deseq, results = 1L)
+#' plotDEGHeatmap(deseq, i = 1L)
 NULL
 
 
@@ -130,28 +130,41 @@ setMethod(
 
 
 
-## Updated 2019-10-15.
+## Updated 2019-11-08.
 `plotDEGHeatmap,DESeqAnalysis` <-  # nolint
     function(
         object,
-        results,
+        i,
         contrastSamples = FALSE,
         lfcShrink = TRUE,
         ...
     ) {
+        ## nocov start
+        call <- match.call()
+        ## results
+        if ("results" %in% names(call)) {
+            stop("'results' is defunct in favor of 'i'.")
+        }
+        assert(isSubset(
+            x = setdiff(names(call), ""),
+            y = names(formals())
+        ))
+        rm(call)
+        ## nocov end
         validObject(object)
         assert(
+            isScalar(i),
             isFlag(contrastSamples),
             isFlag(lfcShrink)
         )
         ## Note use of `res` here instead of `results`, since we need to check
         ## the original `results` input below in `contrastSamples()` call.
-        res <- results(object, results = results, lfcShrink = lfcShrink)
+        res <- results(object, i = i, lfcShrink = lfcShrink)
         ## We're using the variance-stabilized counts for visualization here.
         dt <- as(object, "DESeqTransform")
         ## Subset the DESeqTransform, if necessary.
         if (isTRUE(contrastSamples)) {
-            samples <- contrastSamples(object, results = results)
+            samples <- contrastSamples(object, i = i)
             assert(isSubset(samples, colnames(dt)))
             dt <- dt[, samples, drop = FALSE]
             dt <- droplevels(dt)

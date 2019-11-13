@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.11</span>
       </span>
     </div>
 
@@ -122,7 +122,7 @@
     <pre class="usage"><span class='fu'>contrastSamples</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>contrastSamples</span>(<span class='no'>object</span>, <span class='no'>results</span>)</pre>
+<span class='fu'>contrastSamples</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -132,9 +132,11 @@
       <td><p>Object.</p></td>
     </tr>
     <tr>
-      <th>results</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> or <code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>.
-Name or position of <code>DESeqResults</code>.</p></td>
+      <th>i</th>
+      <td><p>Indices specifying elements to extract or replace. Indices are <code>numeric</code> or
+<code>character</code> vectors, empty (<code>missing</code>), or <code>NULL</code>.</p>
+<p>For more information:</p><pre>help(topic = "Extract", package = "base")
+</pre></td>
     </tr>
     <tr>
       <th>...</th>
@@ -154,7 +156,7 @@ corresponding <code>DESeqResults</code> object. Note that this only works for si
 comparisons.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-09-11.</p>
+    <p>Updated 2019-11-08.</p>
 <p><strong>EXPERIMENTAL</strong>. This approach will error intentionally for
 <code>DESeqResults</code> objects generated with complex contrasts (e.g. interaction
 effect or LRT). It may be removed in a future release if this approach is
@@ -164,7 +166,7 @@ too error-prone.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>contrastSamples</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>Factor column: condition.</span></div><div class='output co'>#&gt; <span class='message'>Numerator samples: sample07, sample08, sample09, sample10, sample11, sample12.</span></div><div class='output co'>#&gt; <span class='message'>Denominator samples: sample01, sample02, sample03, sample04, sample05, sample06.</span></div><div class='output co'>#&gt;  [1] "sample01" "sample02" "sample03" "sample04" "sample05" "sample06"
+<span class='fu'>contrastSamples</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>Factor column: condition.</span></div><div class='output co'>#&gt; <span class='message'>Numerator samples: sample07, sample08, sample09, sample10, sample11, sample12.</span></div><div class='output co'>#&gt; <span class='message'>Denominator samples: sample01, sample02, sample03, sample04, sample05, sample06.</span></div><div class='output co'>#&gt;  [1] "sample01" "sample02" "sample03" "sample04" "sample05" "sample06"
 #&gt;  [7] "sample07" "sample08" "sample09" "sample10" "sample11" "sample12"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

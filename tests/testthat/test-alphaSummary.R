@@ -1,7 +1,10 @@
 context("alphaSummary")
 
 test_that("Default, no contrast specified.", {
-    object <- alphaSummary(dds)
+    object <- alphaSummary(
+        object = dds,
+        contrast = c("condition", "B", "A")
+    )
     expect_is(object, "matrix")
     expect_type(object, "integer")
     expect_equal(
@@ -9,10 +12,10 @@ test_that("Default, no contrast specified.", {
         expected = matrix(
             ## nolint start
             data = c(
-                 81,  64,  47,  30,   6,
-                 75,  60,  39,  23,   4,
-                  2,   2,   2,   2,   2,
-                  0,   0,  96, 173,   0
+                 52,  42,  22,  18,   2,
+                 43,  30,  18,   9,   0,
+                  0,   0,   0,   0,   0,
+                 49, 155,  68, 271,   0
             ),
             ## nolint end
             nrow = 4L,
@@ -31,27 +34,17 @@ test_that("Default, no contrast specified.", {
     )
 })
 
-test_that("Contrast vector", {
-    expect_identical(
-        object = alphaSummary(
-            object = dds,
-            contrast = c("condition", "B", "A")
-        ),
-        expected = alphaSummary(dds)
-    )
-})
-
-test_that("Contrast name", {
+test_that("Contrast vector or name", {
     expect_identical(
         object = alphaSummary(
             object = dds,
             name = "condition_B_vs_A"
         ),
-        expected = alphaSummary(dds)
+        expected = alphaSummary(
+            object = dds,
+            contrast = c("condition", "B", "A")
+        )
     )
-})
-
-test_that("Contrast or name", {
     expect_error(
         alphaSummary(dds, contrast = "aaa", name = "bbb"),
         "Specify either 'contrast' or 'name'."

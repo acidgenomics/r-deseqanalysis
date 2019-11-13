@@ -3,12 +3,15 @@ context("resultsNames")
 test_that("DESeqAnalysis", {
     object <- deseq
     expect_identical(
-        resultsNames(object),
-        "condition_B_vs_A"
+        object = resultsNames(object),
+        expected = c(
+            "condition_B_vs_A",
+            "treatment_D_vs_C"
+        )
     )
-    resultsNames(object) <- "XXX"
+    resultsNames(object) <- c("XXX", "YYY")
     expect_identical(
-        resultsNames(object),
-        "XXX"
+        object = resultsNames(object),
+        expected = c("XXX", "YYY")
     )
 })

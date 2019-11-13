@@ -8,10 +8,10 @@
 \alias{coerce,DESeqAnalysis,DESeqResults-method}
 \title{Force an object to belong to a class}
 \description{
-Coerce an object to a given class.
+Force an object to belong to a class
 }
 \note{
-Updated 2019-08-20.
+Updated 2019-11-12.
 }
 \section{DESeqAnalysis}{
 
@@ -26,41 +26,6 @@ not been shrunken} using \code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}}.
 }
 }
 
-\section{Description}{
-
-    \code{as(object)}
-      returns the version of this object coerced to be the given
-      \code{Class}.  When used in the replacement form on the left of
-      an assignment, the portion of the object corresponding to
-      \code{Class} is replaced by \code{value}.
-
-      The operation of \code{as()} in either form depends on the
-      definition of coerce methods.  Methods are defined automatically
-      when the two classes are related by inheritance; that is, when
-      one of the classes is a subclass of the other.
-
-      Coerce methods are also predefined for basic classes (including all
-      the types of vectors, functions and a few others).
-
-      Beyond these two sources of methods, further methods are defined
-      by calls to the \code{\link{setAs}} function.  See that
-      documentation also for details of how coerce methods work. Use
-      \code{showMethods(coerce)} for a list of all currently defined methods, as in the
-      example below.
-
- 
-  
-}
-
-\section{Basic Coercion Methods}{
-
-  Methods are pre-defined for coercing any object to one of the basic
-  datatypes.  For example, \code{as(x, "numeric")} uses the existing
-  \code{as.numeric} function.  These and all other existing methods
-  can be listed as shown in the example.
-
-}
-
 \examples{
 data(deseq)
 
@@ -72,16 +37,6 @@ print(dt)
 ## Pulls the first results slotted.
 res <- as(deseq, "DESeqResults")
 summary(res)
-}
-\references{
-Chambers, John M. (2016)
- \emph{Extending R},
-  Chapman & Hall.
-(Chapters 9 and 10.)
-}
-\seealso{
-If you think of using \code{try(as(x, cl))}, consider
-  \code{\link{canCoerce}(x, cl)} instead.
 }
 \author{
 Michael Steinbaugh

@@ -5,9 +5,8 @@
 #' @author Michael Steinbaugh
 #' @exportMethod coerce
 #' @importFrom methods coerce
-#' @inherit methods::as
-#' @inheritParams coerce
-#' @note Updated 2019-08-20.
+#' @inherit methods::as return title
+#' @note Updated 2019-11-12.
 #'
 #' @section DESeqAnalysis:
 #'

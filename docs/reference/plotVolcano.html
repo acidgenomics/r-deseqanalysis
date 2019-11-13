@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.11</span>
       </span>
     </div>
 
@@ -131,8 +131,7 @@
   <span class='kw'>histograms</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ggplot"</span>, <span class='st'>"DataFrame"</span>))
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotVolcano</span>(<span class='no'>object</span>, <span class='no'>results</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>)</pre>
+<span class='fu'>plotVolcano</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,9 +195,11 @@ Return type. Uses <code><a href='https://rdrr.io/r/base/match.arg.html'>match.ar
 to the first argument in the <code>character</code> vector.</p></td>
     </tr>
     <tr>
-      <th>results</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> or <code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>.
-Name or position of <code>DESeqResults</code>.</p></td>
+      <th>i</th>
+      <td><p>Indices specifying elements to extract or replace. Indices are <code>numeric</code> or
+<code>character</code> vectors, empty (<code>missing</code>), or <code>NULL</code>.</p>
+<p>For more information:</p><pre>help(topic = "Extract", package = "base")
+</pre></td>
     </tr>
     <tr>
       <th>lfcShrink</th>
@@ -223,7 +224,7 @@ argument automatically defined.</p></li>
 </ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-09-17.</p>
+    <p>Updated 2019-11-08.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code>CHBUtils::volcano_density_plot()</code>.</p></div>
@@ -236,11 +237,11 @@ argument automatically defined.</p></li>
 <span class='no'>genes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>dds</span>))
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>genes</span>)</div><div class='output co'>#&gt; [1] "gene001" "gene002" "gene003" "gene004" "gene005" "gene006"</div><div class='input'>
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Customize the colors.</span>
 <span class='fu'>plotVolcano</span>(
     <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
-    <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
+    <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
     <span class='kw'>pointColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
         <span class='kw'>downregulated</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
         <span class='kw'>nonsignificant</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
@@ -250,18 +251,18 @@ argument automatically defined.</p></li>
 <span class='co'>## Directional support (up or down).</span>
 <span class='fu'>plotVolcano</span>(
     <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
-    <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
+    <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
     <span class='kw'>direction</span> <span class='kw'>=</span> <span class='st'>"up"</span>,
     <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>5L</span>
 )</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotVolcano</span>(
     <span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>deseq</span>,
-    <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
+    <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
     <span class='kw'>direction</span> <span class='kw'>=</span> <span class='st'>"down"</span>,
     <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>5L</span>
 )</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Label genes manually.</span>
 <span class='co'>## Note that either gene IDs or names (symbols) are supported.</span>
-<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>genes</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-5.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plotVolcano</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>genes</span> <span class='kw'>=</span> <span class='no'>genes</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotVolcano-5.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
