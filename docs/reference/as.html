@@ -38,7 +38,7 @@
   
 
 <meta property="og:title" content="Force an object to belong to a class — as" />
-<meta property="og:description" content="Coerce an object to a given class." />
+<meta property="og:description" content="Force an object to belong to a class" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -116,14 +116,14 @@
     </div>
 
     <div class="ref-description">
-    <p>Coerce an object to a given class.</p>
+    <p>Force an object to belong to a class</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-08-20.</p>
+    <p>Updated 2019-11-12.</p>
     <h2 class="hasAnchor" id="deseqanalysis"><a class="anchor" href="#deseqanalysis"></a>DESeqAnalysis</h2>
 
     
@@ -137,47 +137,6 @@ corresponds to results containing log2 fold change (LFC) values that <em>have
 not been shrunken</em> using <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>DESeq2::lfcShrink()</a></code>.</p></li>
 </ul>
 
-    <h2 class="hasAnchor" id="description"><a class="anchor" href="#description"></a>Description</h2>
-
-    
-
-<p><code>as(object)</code>
-      returns the version of this object coerced to be the given
-      <code>Class</code>.  When used in the replacement form on the left of
-      an assignment, the portion of the object corresponding to
-      <code>Class</code> is replaced by <code>value</code>.</p>
-<p>The operation of <code>as()</code> in either form depends on the
-      definition of coerce methods.  Methods are defined automatically
-      when the two classes are related by inheritance; that is, when
-      one of the classes is a subclass of the other.</p>
-<p>Coerce methods are also predefined for basic classes (including all
-      the types of vectors, functions and a few others).</p>
-<p>Beyond these two sources of methods, further methods are defined
-      by calls to the <code>setAs</code> function.  See that
-      documentation also for details of how coerce methods work. Use
-      <code>showMethods(coerce)</code> for a list of all currently defined methods, as in the
-      example below.</p>
- 
-  
-
-    <h2 class="hasAnchor" id="basic-coercion-methods"><a class="anchor" href="#basic-coercion-methods"></a>Basic Coercion Methods</h2>
-
-    
-
-<p>Methods are pre-defined for coercing any object to one of the basic
-  datatypes.  For example, <code>as(x, "numeric")</code> uses the existing
-  <code>as.numeric</code> function.  These and all other existing methods
-  can be listed as shown in the example.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>Chambers, John M. (2016)
- <em>Extending R</em>,
-  Chapman &amp; Hall.
-(Chapters 9 and 10.)</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>If you think of using <code><a href='https://rdrr.io/r/base/try.html'>try(as(x, cl))</a></code>, consider
-  <code>canCoerce(x, cl)</code> instead.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
@@ -189,26 +148,26 @@ not been shrunken</em> using <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcSh
 #&gt; metadata(3): version date interestingGroups
 #&gt; assays(4): counts mu H cooks
 #&gt; rownames(500): gene001 gene002 ... gene499 gene500
-#&gt; rowData names(30): broadClass description ... deviance maxCooks
+#&gt; rowData names(38): broadClass description ... deviance maxCooks
 #&gt; colnames(12): sample01 sample02 ... sample11 sample12
-#&gt; colData names(2): condition sizeFactor</div><div class='input'><span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqTransform"</span>)
+#&gt; colData names(3): condition treatment sizeFactor</div><div class='input'><span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqTransform"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>dt</span>)</div><div class='output co'>#&gt; class: DESeqTransform 
 #&gt; dim: 500 12 
 #&gt; metadata(3): version date interestingGroups
 #&gt; assays(1): ''
 #&gt; rownames(500): gene001 gene002 ... gene499 gene500
-#&gt; rowData names(31): broadClass description ... dispGeneIter.1 dispFit
+#&gt; rowData names(38): broadClass description ... dispGeneIter dispFit
 #&gt; colnames(12): sample01 sample02 ... sample11 sample12
-#&gt; colData names(2): condition sizeFactor</div><div class='input'><span class='co'>## Pulls the first results slotted.</span>
+#&gt; colData names(3): condition treatment sizeFactor</div><div class='input'><span class='co'>## Pulls the first results slotted.</span>
 <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqResults"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; 
 #&gt; out of 500 with nonzero total read count
-#&gt; adjusted p-value &lt; 0.1
-#&gt; LFC &gt; 0 (up)       : 81, 16%
-#&gt; LFC &lt; 0 (down)     : 75, 15%
-#&gt; outliers [1]       : 2, 0.4%
-#&gt; low counts [2]     : 0, 0%
-#&gt; (mean count &lt; 0)
+#&gt; adjusted p-value &lt; 0.01
+#&gt; LFC &gt; 0 (up)       : 22, 4.4%
+#&gt; LFC &lt; 0 (down)     : 18, 3.6%
+#&gt; outliers [1]       : 0, 0%
+#&gt; low counts [2]     : 68, 14%
+#&gt; (mean count &lt; 3)
 #&gt; [1] see 'cooksCutoff' argument of ?results
 #&gt; [2] see 'independentFiltering' argument of ?results
 #&gt; </div></pre>
@@ -218,10 +177,6 @@ not been shrunken</em> using <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcSh
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#note">Note</a></li>
       <li><a href="#deseqanalysis">DESeqAnalysis</a></li>
-      <li><a href="#description">Description</a></li>
-      <li><a href="#basic-coercion-methods">Basic Coercion Methods</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
