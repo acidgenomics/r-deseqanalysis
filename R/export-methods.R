@@ -46,8 +46,6 @@ NULL
     list <- lapply(
         X = values,
         FUN = function(value) {
-            ## FIXME Include only atomic columns in `export()` method.
-            ## Inform the user when we're dropping these.
             resultsMatrix(object, value = value, rowData = TRUE)
         }
     )
