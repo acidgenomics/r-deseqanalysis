@@ -126,12 +126,16 @@ than requiring manual input of a gene vector or subset object.</p>
     <pre class="usage"><span class='fu'>plotDEGPCA</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>plotDEGPCA</span>(<span class='no'>object</span>, <span class='no'>DESeqTransform</span>,
-  <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='no'>...</span>)
+<span class='fu'>plotDEGPCA</span>(
+  <span class='no'>object</span>,
+  <span class='no'>DESeqTransform</span>,
+  <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
+  <span class='no'>...</span>
+)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotDEGPCA</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='kw'>contrastSamples</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>)</pre>
+<span class='fu'>plotDEGPCA</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='kw'>contrastSamples</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -183,11 +187,11 @@ contrasts (e.g. interaction effect).</p></td>
     <p>To adjust the annotation columns, modify the
 <code><a href='https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html'>colData()</a></code> of the <code>counts</code> argument, which
 must contain/extend a <code>SummarizedExperiment</code>.</p>
-    <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     
 <ul>
-<li><p><code>DESeqAnalysis</code>: Passes to <code>DESeqResults</code> method.</p></li>
+<li><p><code>plotDEGPCA,DESeqAnalysis-method</code>: Passes to <code>DESeqResults</code> method.</p></li>
 </ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
@@ -197,7 +201,7 @@ must contain/extend a <code>SummarizedExperiment</code>.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotDEGPCA</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>156 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>Plotting PCA using 156 features.</span></div><div class='img'><img src='plotDEGPCA-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plotDEGPCA</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>40 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>Plotting PCA using 40 features.</span></div><div class='img'><img src='plotDEGPCA-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -205,7 +209,7 @@ must contain/extend a <code>SummarizedExperiment</code>.</p>
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
-      <li><a href="#methods-by-class-">Methods (by class)</a></li>
+      <li><a href="#functions">Functions</a></li>
       <li><a href="#note">Note</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
