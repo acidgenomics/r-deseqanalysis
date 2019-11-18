@@ -37,7 +37,7 @@ defined in acidplots package.
 }}
 
 \note{
-Updated 2019-09-17.
+Updated 2019-11-18.
 }
 \examples{
 data(deseq)

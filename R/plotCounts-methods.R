@@ -1,6 +1,11 @@
+## FIXME Consider adding in plotCounts method support, which would simplify
+## handoff from pfgsea package.
+
+
+
 #' @name plotCounts
 #' @inherit acidplots::plotCounts
-#' @note Updated 2019-09-17.
+#' @note Updated 2019-11-18.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -30,7 +35,7 @@ NULL
 
 
 
-## Updated 2019-09-17.
+## Updated 2019-11-18.
 `plotCounts,DESeqDataSet` <-  # nolint
     function(object, ...) {
         dots <- list(...)
@@ -42,7 +47,7 @@ NULL
         if (is.null(labels)) {
             labels <- list()
         }
-        labels[["countAxis"]] <- "normalized counts"
+        labels[["countAxis"]] <- "norm counts"
         args[["labels"]] <- labels
         do.call(what = plotCounts, args = args)
     }
@@ -61,12 +66,27 @@ setMethod(
 
 
 
+
+
+
+
+
+## FIXME Allow a `transform` option in DESeqAnalysis method.
+## FIXME Need to define DESeqTransform method support here.
+
+
+
+
+
+
+
 ## Updated 2019-09-17.
 `plotCounts,DESeqAnalysis` <-  # nolint
     function(object, ...) {
         validObject(object)
         plotCounts(object = as(object, "DESeqDataSet"), ...)
     }
+
 
 
 
