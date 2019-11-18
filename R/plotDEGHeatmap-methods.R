@@ -94,7 +94,7 @@ NULL
         if (lfcThreshold > 0L) {
             title <- paste0(title, "; lfc > ", lfcThreshold)
         }
-        ## Using SummarizedExperiment method defined in basejump here.
+        ## Using SummarizedExperiment method defined in acidplots here.
         args <- list(
             object = as(dt, "RangedSummarizedExperiment"),
             scale = scale,
