@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.12</span>
       </span>
     </div>
 
@@ -122,14 +122,18 @@
     <pre class="usage"><span class='fu'>resultsMatrix</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>resultsMatrix</span>(<span class='no'>object</span>,
-  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>, <span class='st'>"baseMean"</span>),
-  <span class='kw'>rowData</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>resultsMatrix</span>(
+  <span class='no'>object</span>,
+  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>),
+  <span class='kw'>rowData</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
 <span class='co'># S4 method for DESeqAnalysisList</span>
-<span class='fu'>resultsMatrix</span>(<span class='no'>object</span>,
-  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>, <span class='st'>"baseMean"</span>),
-  <span class='kw'>rowData</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>resultsMatrix</span>(
+  <span class='no'>object</span>,
+  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>),
+  <span class='kw'>rowData</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,35 +171,35 @@ Include row (gene) annotations, bound to the left side of the data frame.</p></t
 <li><p><code>rowData = TRUE</code>: <code>DataFrame</code>.</p></li>
 </ul>
 
-    <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     
 <ul>
-<li><p><code>DESeqAnalysisList</code>: Loop across the nested <code>DESeqAnalysis</code> objects and
+<li><p><code>resultsMatrix,DESeqAnalysisList-method</code>: Loop across the nested <code>DESeqAnalysis</code> objects and
 aggregate the corresponding result matrices. Note that the analysis names
 are automatically prefixed to the column names.</p></li>
 </ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-10-24.</p>
+    <p>Updated 2019-11-12.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsMatrix</span>(<span class='no'>deseq</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;         condition_B_vs_A
-#&gt; gene001      -1.69923225
-#&gt; gene002      -1.54322097
-#&gt; gene003      -0.28723590
-#&gt; gene004       0.16979050
-#&gt; gene005      -0.07815415
-#&gt; gene006      -0.71691336</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;         condition_B_vs_A treatment_D_vs_C
+#&gt; gene001       -0.7499889     -0.001521148
+#&gt; gene002       -0.7021330     -0.066104797
+#&gt; gene003       -1.7858167      0.030834194
+#&gt; gene004       -1.4916993     -0.071126904
+#&gt; gene005       -0.4273848     -0.081256739
+#&gt; gene006       -0.1741650     -0.023515830</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#methods-by-class-">Methods (by class)</a></li>
+      <li><a href="#functions">Functions</a></li>
       <li><a href="#note">Note</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
