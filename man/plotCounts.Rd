@@ -3,6 +3,7 @@
 \name{plotCounts}
 \alias{plotCounts}
 \alias{plotCounts,DESeqDataSet-method}
+\alias{plotCounts,DESeqTransform-method}
 \alias{plotCounts,DESeqAnalysis-method}
 \title{Plot counts}
 \usage{
@@ -10,12 +11,19 @@ plotCounts(object, ...)
 
 \S4method{plotCounts}{DESeqDataSet}(object, ...)
 
-\S4method{plotCounts}{DESeqAnalysis}(object, ...)
+\S4method{plotCounts}{DESeqTransform}(object, ...)
+
+\S4method{plotCounts}{DESeqAnalysis}(object, transform = FALSE, ...)
 }
 \arguments{
 \item{object}{Object.}
 
 \item{...}{Additional arguments.}
+
+\item{transform}{\code{logical(1)}.
+Plot log2 variance-stabilized transform counts, defined internally in
+\code{DESeqTransform} object (see \code{transform} slot). If \code{FALSE}, plot the
+size factor adjusted counts from \code{DESeqDataSet}.}
 }
 \value{
 \itemize{
@@ -29,11 +37,14 @@ Plot counts
 }
 \section{Functions}{
 \itemize{
-\item \code{plotCounts,DESeqDataSet-method}: Automatically plots size factor (i.e. library size)
+\item \code{plotCounts,DESeqDataSet-method}: Plot size factor (i.e. library size) adjusted
 normalized counts. Arguments pass through to \code{SummarizedExperiment} method
 defined in acidplots package.
 
-\item \code{plotCounts,DESeqAnalysis-method}: Passes to \code{DESeqDataSet} method.
+\item \code{plotCounts,DESeqTransform-method}: Plot log2 variance-stabilized transformed counts.
+
+\item \code{plotCounts,DESeqAnalysis-method}: Plot either \code{DESeqDataSet} normalized counts or
+\code{DESeqTransform} log2 variance-stabilized counts.
 }}
 
 \note{
