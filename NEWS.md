@@ -1,3 +1,12 @@
+## DESeqAnalysis 0.2.12 (2019-11-18)
+
+### Minor changes
+
+- `plotCounts`: Added method support for `DESeqTransform`. Also added a
+  `transform` argument to `DESeqAnalysis` method, which allows the user to
+  easily plot variance-stabilized counts using the slotted `DESeqTransform`
+  object.
+
 ## DESeqAnalysis 0.2.11 (2019-11-12)
 
 ### Major changes

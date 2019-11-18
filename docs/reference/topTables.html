@@ -122,12 +122,10 @@
     <pre class="usage"><span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='kw'>DESeqDataSet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>)
+<span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='kw'>DESeqDataSet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>,
-  <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S4 method for list</span>
 <span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>, <span class='kw'>contrast</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -175,77 +173,77 @@ Contrast name.</p></td>
 
     <p><code>kable</code>.
 Markdown tables.</p>
-    <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     
 <ul>
-<li><p><code>list</code>: Legacy support for <code>tbl_df</code> list returned from
+<li><p><code>topTables,list-method</code>: Legacy support for <code>tbl_df</code> list returned from
 <code><a href='resultsTables.html'>resultsTables()</a></code>. This method is still supported because it is used in the
 F1000 v2 workflow paper. Otherwise, we now recommend using the
 <code>DESeqAnalysis</code> method directly.</p></li>
 </ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-11-08.</p>
+    <p>Updated 2019-11-12.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>156 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>81 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>75 downregulated genes detected.</span></div><div class='output co'>#&gt; 
+<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>40 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>22 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>18 downregulated genes detected.</span></div><div class='output co'>#&gt; 
 #&gt; 
-#&gt; |        | baseMean|lfc  |padj     |broadClass |geneName |description                         |
-#&gt; |:-------|--------:|:----|:--------|:----------|:--------|:-----------------------------------|
-#&gt; |gene278 |      197|2.60 |1.19e-14 |coding     |MRC2     |mannose receptor C type 2           |
-#&gt; |gene260 |     1520|2.26 |2.11e-13 |coding     |NISCH    |nischarin                           |
-#&gt; |gene339 |      423|2.07 |6.34e-08 |coding     |DNASE1L1 |deoxyribonuclease 1 like 1          |
-#&gt; |gene343 |       92|1.66 |6.34e-08 |coding     |MAMLD1   |mastermind like domain containing 1 |
-#&gt; |gene349 |       51|2.89 |6.34e-08 |coding     |CAPN1    |calpain 1                           |
+#&gt; |        | baseMean|lfc  |padj     |broadClass |geneName |description                                 |
+#&gt; |:-------|--------:|:----|:--------|:----------|:--------|:-------------------------------------------|
+#&gt; |gene190 |      451|2.61 |4.15e-11 |coding     |CRAMP1   |cramped chromatin regulator homolog 1       |
+#&gt; |gene343 |      260|3.58 |2.90e-09 |coding     |MAMLD1   |mastermind like domain containing 1         |
+#&gt; |gene032 |      246|2.47 |3.36e-05 |coding     |TMEM176A |transmembrane protein 176A                  |
+#&gt; |gene436 |      244|1.83 |1.21e-04 |coding     |DEF6     |DEF6, guanine nucleotide exchange factor    |
+#&gt; |gene488 |       42|2.78 |1.39e-04 |coding     |FAM13B   |family with sequence similarity 13 member B |
 #&gt; 
 #&gt; 
-#&gt; |        | baseMean|lfc   |padj     |broadClass |geneName |description                      |
-#&gt; |:-------|--------:|:-----|:--------|:----------|:--------|:--------------------------------|
-#&gt; |gene079 |       32|-2.19 |4.28e-08 |coding     |POLR2J   |RNA polymerase II subunit J      |
-#&gt; |gene240 |      117|-1.93 |6.19e-08 |coding     |TRAF3IP3 |TRAF3 interacting protein 3      |
-#&gt; |gene456 |       51|-1.89 |2.39e-07 |coding     |RNASET2  |ribonuclease T2                  |
-#&gt; |gene427 |       34|-2.21 |2.72e-07 |coding     |ERP44    |endoplasmic reticulum protein 44 |
-#&gt; |gene050 |       85|-1.49 |3.33e-06 |coding     |AK2      |adenylate kinase 2               |</div><div class='input'>
+#&gt; |        | baseMean|lfc   |padj     |broadClass |geneName |description                                        |
+#&gt; |:-------|--------:|:-----|:--------|:----------|:--------|:--------------------------------------------------|
+#&gt; |gene406 |      292|-2.02 |2.28e-06 |coding     |SERPINB1 |serpin family B member 1                           |
+#&gt; |gene361 |      144|-1.75 |1.04e-04 |coding     |MATR3    |matrin 3                                           |
+#&gt; |gene065 |      118|-2.11 |1.21e-04 |coding     |ARX      |aristaless related homeobox                        |
+#&gt; |gene293 |       31|-2.83 |1.21e-04 |coding     |DPF1     |double PHD fingers 1                               |
+#&gt; |gene475 |      197|-1.88 |1.39e-04 |coding     |ARNTL2   |aryl hydrocarbon receptor nuclear translocator ... |</div><div class='input'>
 <span class='co'>## DESeqResults 'resultsTables()' list ====</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='input'><span class='no'>resTbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsTables.html'>resultsTables</a></span>(<span class='no'>res</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"tbl_df"</span>)</div><div class='output co'>#&gt; <span class='message'>156 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>81 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>75 downregulated genes detected.</span></div><div class='input'><span class='fu'>topTables</span>(<span class='no'>resTbl</span>)</div><div class='output co'>#&gt; 
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='input'><span class='no'>resTbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsTables.html'>resultsTables</a></span>(<span class='no'>res</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"tbl_df"</span>)</div><div class='output co'>#&gt; <span class='message'>40 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>22 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>18 downregulated genes detected.</span></div><div class='input'><span class='fu'>topTables</span>(<span class='no'>resTbl</span>)</div><div class='output co'>#&gt; 
 #&gt; 
 #&gt; |        | baseMean|lfc  |padj     |
 #&gt; |:-------|--------:|:----|:--------|
-#&gt; |gene278 |      197|2.67 |1.19e-14 |
-#&gt; |gene260 |     1520|2.32 |2.11e-13 |
-#&gt; |gene339 |      423|2.17 |6.34e-08 |
-#&gt; |gene343 |       92|1.73 |6.34e-08 |
-#&gt; |gene349 |       51|3.04 |6.34e-08 |
-#&gt; |gene059 |      162|1.89 |5.20e-07 |
-#&gt; |gene068 |       23|2.88 |8.03e-06 |
-#&gt; |gene139 |       39|2.64 |8.92e-06 |
-#&gt; |gene362 |      651|1.70 |8.92e-06 |
-#&gt; |gene498 |      188|1.49 |9.50e-06 |
+#&gt; |gene190 |      451|2.70 |4.15e-11 |
+#&gt; |gene343 |      260|3.73 |2.90e-09 |
+#&gt; |gene032 |      246|2.66 |3.36e-05 |
+#&gt; |gene436 |      244|1.97 |1.21e-04 |
+#&gt; |gene488 |       42|3.05 |1.39e-04 |
+#&gt; |gene217 |       77|1.89 |3.59e-04 |
+#&gt; |gene242 |      392|1.89 |3.59e-04 |
+#&gt; |gene262 |      120|1.87 |3.59e-04 |
+#&gt; |gene272 |      351|1.79 |3.59e-04 |
+#&gt; |gene304 |       79|2.19 |3.65e-04 |
 #&gt; 
 #&gt; 
 #&gt; |        | baseMean|lfc   |padj     |
 #&gt; |:-------|--------:|:-----|:--------|
-#&gt; |gene079 |       32|-2.29 |4.28e-08 |
-#&gt; |gene240 |      117|-2.02 |6.19e-08 |
-#&gt; |gene456 |       51|-1.98 |2.39e-07 |
-#&gt; |gene427 |       34|-2.33 |2.72e-07 |
-#&gt; |gene050 |       85|-1.57 |3.33e-06 |
-#&gt; |gene404 |       20|-2.74 |3.33e-06 |
-#&gt; |gene246 |       38|-2.29 |4.58e-06 |
-#&gt; |gene493 |       58|-1.72 |1.56e-05 |
-#&gt; |gene329 |       98|-2.11 |3.10e-05 |
-#&gt; |gene214 |       63|-1.66 |4.17e-05 |</div></pre>
+#&gt; |gene406 |      292|-2.13 |2.28e-06 |
+#&gt; |gene361 |      144|-1.88 |1.04e-04 |
+#&gt; |gene065 |      118|-2.28 |1.21e-04 |
+#&gt; |gene293 |       31|-3.10 |1.21e-04 |
+#&gt; |gene475 |      197|-2.04 |1.39e-04 |
+#&gt; |gene499 |       33|-3.12 |3.59e-04 |
+#&gt; |gene411 |       91|-1.68 |1.07e-03 |
+#&gt; |gene211 |      213|-1.52 |1.42e-03 |
+#&gt; |gene375 |       13|-3.20 |1.67e-03 |
+#&gt; |gene135 |       59|-1.75 |1.75e-03 |</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#methods-by-class-">Methods (by class)</a></li>
+      <li><a href="#functions">Functions</a></li>
       <li><a href="#note">Note</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
