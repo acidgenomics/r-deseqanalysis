@@ -12,7 +12,7 @@
 #' [`DESeq()`][DESeq2::DESeq], followed by [`lfcShrink()`][DESeq2::lfcShrink].
 #'
 #' @export
-#' @note Updated 2019-10-15.
+#' @note Updated 2019-11-18.
 #'
 #' @param dds `DESeqDataSet`.
 #' @param contrast `character(3)`.
@@ -40,6 +40,9 @@
 #' - [stats::model.matrix()].
 #' - [DESeq2::resultsNames()].
 #' - [DESeq2::DESeq()].
+#'
+#' @return `DESeqResults`, with apeglm adaptive shrinkage applied to fold
+#'   change values.
 #'
 #' @examples
 #' dds <- DESeq2::makeExampleDESeqDataSet(n = 1000L, m = 12L)

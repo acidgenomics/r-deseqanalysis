@@ -27,6 +27,10 @@ strict about the input format here.}
 unshrunken \code{DESeqResults} via \code{res} argument here and this will set
 \code{alpha}, \code{lfcThreshold} automatically.}
 }
+\value{
+\code{DESeqResults}, with apeglm adaptive shrinkage applied to fold
+change values.
+}
 \description{
 Wrapper function that helps set up \code{\link[DESeq2:lfcShrink]{lfcShrink()}} to
 shrink LFC values for a pairwise contrast via apeglm, without having to
@@ -41,7 +45,7 @@ Runs \code{\link[DESeq2:nbinomWaldTest]{nbinomWaldTest()}} via
 \code{\link[DESeq2:DESeq]{DESeq()}}, followed by \code{\link[DESeq2:lfcShrink]{lfcShrink()}}.
 }
 \note{
-Updated 2019-10-15.
+Updated 2019-11-18.
 }
 \examples{
 dds <- DESeq2::makeExampleDESeqDataSet(n = 1000L, m = 12L)
