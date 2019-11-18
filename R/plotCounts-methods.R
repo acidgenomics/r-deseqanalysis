@@ -1,9 +1,13 @@
 #' @name plotCounts
 #' @inherit acidplots::plotCounts
-#' @note Updated 2019-09-17.
+#' @note Updated 2019-11-18.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
+#' @param transform `logical(1)`.
+#'   Plot log2 variance-stabilized transform counts, defined internally in
+#'   `DESeqTransform` object (see `transform` slot). If `FALSE`, plot the
+#'   size factor adjusted counts from `DESeqDataSet`.
 #' @param ... Additional arguments.
 #'
 #' @examples
@@ -30,7 +34,7 @@ NULL
 
 
 
-## Updated 2019-09-17.
+## Updated 2019-11-18.
 `plotCounts,DESeqDataSet` <-  # nolint
     function(object, ...) {
         dots <- list(...)
@@ -42,14 +46,14 @@ NULL
         if (is.null(labels)) {
             labels <- list()
         }
-        labels[["countAxis"]] <- "normalized counts"
+        labels[["countAxis"]] <- "norm counts"
         args[["labels"]] <- labels
         do.call(what = plotCounts, args = args)
     }
 
 
 
-#' @describeIn plotCounts Automatically plots size factor (i.e. library size)
+#' @describeIn plotCounts Plot size factor (i.e. library size) adjusted
 #'   normalized counts. Arguments pass through to `SummarizedExperiment` method
 #'   defined in acidplots package.
 #' @export
@@ -61,16 +65,57 @@ setMethod(
 
 
 
-## Updated 2019-09-17.
-`plotCounts,DESeqAnalysis` <-  # nolint
+## Updated 2019-11-18.
+`plotCounts,DESeqTransform` <-  # nolint
     function(object, ...) {
-        validObject(object)
-        plotCounts(object = as(object, "DESeqDataSet"), ...)
+        dots <- list(...)
+        rse <- as(object, "RangedSummarizedExperiment")
+        args <- c(object = rse, dots)
+        labels <- args[["labels"]]
+        if (is.null(labels)) {
+            labels <- list()
+        }
+        type <- transformType(object)
+        ## Abbreviate as acronym becuase this label it too long otherwise.
+        if (identical(type, "varianceStabilizingTransformation")) {
+            type <- "vst"
+        }
+        labels[["countAxis"]] <- paste0(type, " counts (log2)")
+        args[["labels"]] <- labels
+        do.call(what = plotCounts, args = args)
     }
 
 
 
-#' @describeIn plotCounts Passes to `DESeqDataSet` method.
+#' @describeIn plotCounts Plot log2 variance-stabilized transformed counts.
+#' @export
+setMethod(
+    f = "plotCounts",
+    signature = signature("DESeqTransform"),
+    definition = `plotCounts,DESeqTransform`
+)
+
+
+
+## Updated 2019-11-18.
+`plotCounts,DESeqAnalysis` <-  # nolint
+    function(object, transform = FALSE, ...) {
+        validObject(object)
+        assert(isFlag(transform))
+        if (isTRUE(transform)) {
+            class <- "DESeqTransform"
+        } else {
+            class <- "DESeqDataSet"
+        }
+        dots <- list(...)
+        args <- c(object = as(object, Class = class), dots)
+        do.call(what = plotCounts, args = args)
+    }
+
+
+
+#' @describeIn plotCounts Plot either `DESeqDataSet` normalized counts or
+#'   `DESeqTransform` log2 variance-stabilized counts.
 #' @export
 setMethod(
     f = "plotCounts",

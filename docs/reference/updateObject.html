@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.12</span>
       </span>
     </div>
 
@@ -207,25 +207,25 @@ package versions must be updated to account for this change.</p>
           methods defined for a given generic function.</p></li>
 <li><p><code><a href='https://rdrr.io/r/methods/getMethod.html'>selectMethod</a></code> for getting the definition of
           a specific method.</p></li>
-<li><p>BiocGenerics for a summary of all the generics defined
+<li><p><a href='https://rdrr.io/pkg/BiocGenerics/man/BiocGenerics-package.html'>BiocGenerics</a> for a summary of all the generics defined
           in the <span class="pkg">BiocGenerics</span> package.</p></li>
 </ul>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
-<span class='fu'>updateObject</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; DESeqAnalysis 0.2.11; DESeq2 1.24.0
+<span class='fu'>updateObject</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; DESeqAnalysis 0.2.12; DESeq2 1.26.0
 #&gt; data:
 #&gt;   dim: 500 12 
 #&gt;   metadata(3): version date interestingGroups
 #&gt;   assays(4): counts mu H cooks
 #&gt;   rownames(500): gene001 gene002 ... gene499 gene500
-#&gt;   rowData names(30): broadClass description ... deviance maxCooks
+#&gt;   rowData names(38): broadClass description ... deviance maxCooks
 #&gt;   colnames(12): sample01 sample02 ... sample11 sample12
-#&gt;   colData names(2): condition sizeFactor
+#&gt;   colData names(3): condition treatment sizeFactor
 #&gt; transformType: varianceStabilizingTransformation
-#&gt; resultsNames: condition_B_vs_A
-#&gt; alpha: 0.1
+#&gt; resultsNames(2): condition_B_vs_A treatment_D_vs_C
+#&gt; alpha: 0.01
 #&gt; lfcThreshold: 0
 #&gt; lfcShrinkType: apeglm</div></pre>
   </div>

@@ -50,7 +50,7 @@ Arrange with hierarchical clustering.}
 \item{clusterCols}{\code{logical(1)}.
 Arrange with hierarchical clustering.}
 
-\item{color}{\code{function}, \code{character}, or \code{NULL}.
+\item{color}{\verb{function}, \code{character}, or \code{NULL}.
 Hexadecimal color function or values to use for plot.
 
 We generally recommend these hexadecimal functions from the viridis

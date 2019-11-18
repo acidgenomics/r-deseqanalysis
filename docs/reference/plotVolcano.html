@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.12</span>
       </span>
     </div>
 
@@ -122,13 +122,21 @@
     <pre class="usage"><span class='fu'>plotVolcano</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>plotVolcano</span>(<span class='no'>object</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
-  <span class='kw'>genes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>gene2symbol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
-  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='kw'>pointColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>downregulated</span> <span class='kw'>=</span>
-  <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/acidplots/man/palettes.html'>lightPalette</a></span><span class='kw'>[[</span><span class='st'>"purple"</span>]], <span class='kw'>upregulated</span> <span class='kw'>=</span>
-  <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/acidplots/man/palettes.html'>lightPalette</a></span><span class='kw'>[[</span><span class='st'>"orange"</span>]], <span class='kw'>nonsignificant</span> <span class='kw'>=</span>
-  <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/acidplots/man/palettes.html'>lightPalette</a></span><span class='kw'>[[</span><span class='st'>"gray"</span>]]), <span class='kw'>pointSize</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>pointAlpha</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
-  <span class='kw'>histograms</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ggplot"</span>, <span class='st'>"DataFrame"</span>))
+<span class='fu'>plotVolcano</span>(
+  <span class='no'>object</span>,
+  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
+  <span class='kw'>genes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>gene2symbol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
+  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
+  <span class='kw'>pointColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>downregulated</span> <span class='kw'>=</span> <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/acidplots/man/palettes.html'>lightPalette</a></span><span class='kw'>[[</span><span class='st'>"purple"</span>]], <span class='kw'>upregulated</span> <span class='kw'>=</span>
+    <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/acidplots/man/palettes.html'>lightPalette</a></span><span class='kw'>[[</span><span class='st'>"orange"</span>]], <span class='kw'>nonsignificant</span> <span class='kw'>=</span>
+    <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/acidplots/man/palettes.html'>lightPalette</a></span><span class='kw'>[[</span><span class='st'>"gray"</span>]]),
+  <span class='kw'>pointSize</span> <span class='kw'>=</span> <span class='fl'>2L</span>,
+  <span class='kw'>pointAlpha</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
+  <span class='kw'>histograms</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ggplot"</span>, <span class='st'>"DataFrame"</span>)
+)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>plotVolcano</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
@@ -215,11 +223,11 @@ Use shrunken log2 fold change (LFC) values.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>ggplot</code>.</p>
-    <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     
 <ul>
-<li><p><code>DESeqAnalysis</code>: Passes to <code>DESeqResults</code> method, with <code>gene2symbol</code>
+<li><p><code>plotVolcano,DESeqAnalysis-method</code>: Passes to <code>DESeqResults</code> method, with <code>gene2symbol</code>
 argument automatically defined.</p></li>
 </ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
@@ -269,7 +277,7 @@ argument automatically defined.</p></li>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#methods-by-class-">Methods (by class)</a></li>
+      <li><a href="#functions">Functions</a></li>
       <li><a href="#note">Note</a></li>
       <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
