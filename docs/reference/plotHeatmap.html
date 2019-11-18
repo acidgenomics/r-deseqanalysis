@@ -153,12 +153,12 @@
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>Updated 2019-11-07.</p>
-    <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     
 
 <ul>
-<li><p><code>SingleCellExperiment</code>: Applies <code>pseudobulk()</code> calculation to average gene
+<li><p><code>plotHeatmap,SingleCellExperiment-method</code>: Applies <code>pseudobulk()</code> calculation to average gene
 expression at sample level prior to plotting.<br />
 Passes <code>...</code> to <code>SummarizedExperiment</code> method.</p></li>
 </ul>
@@ -222,7 +222,7 @@ hclust &lt;- hclust(dist, method = "ward.D2")
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotHeatmap</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>Using DESeqTransform varianceStabilizingTransformation counts.</span></div><div class='img'><img src='plotHeatmap-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotCorrelationHeatmap</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>Using DESeqTransform varianceStabilizingTransformation counts.</span></div><div class='output co'>#&gt; <span class='message'>Calculating correlation matrix using 'pearson' method.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: partial match of 'just' to 'justification'</span></div><div class='img'><img src='plotHeatmap-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotQuantileHeatmap</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>Using DESeqTransform varianceStabilizingTransformation counts.</span></div><div class='img'><img src='plotHeatmap-3.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plotHeatmap</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>Using DESeqTransform varianceStabilizingTransformation counts.</span></div><div class='img'><img src='plotHeatmap-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotCorrelationHeatmap</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>Using DESeqTransform varianceStabilizingTransformation counts.</span></div><div class='output co'>#&gt; <span class='message'>Calculating correlation matrix using 'pearson' method.</span></div><div class='img'><img src='plotHeatmap-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotQuantileHeatmap</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>Using DESeqTransform varianceStabilizingTransformation counts.</span></div><div class='img'><img src='plotHeatmap-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -230,7 +230,7 @@ hclust &lt;- hclust(dist, method = "ward.D2")
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#note">Note</a></li>
-      <li><a href="#methods-by-class-">Methods (by class)</a></li>
+      <li><a href="#functions">Functions</a></li>
       <li><a href="#scaling">Scaling</a></li>
       <li><a href="#hierarchical-clustering">Hierarchical clustering</a></li>
       <li><a href="#see-also">See also</a></li>

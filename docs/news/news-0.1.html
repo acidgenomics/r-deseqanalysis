@@ -127,9 +127,9 @@
 <li>Improved <code>show</code> method for <code>DESeqResultsTables</code> class.</li>
 </ul>
 </div>
-<div id="minor-changes-30" class="section level3">
+<div id="minor-changes-31" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-30" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-31" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Miscellaneous documentation and working example improvements.</li>
 <li>Initial set up of <a href="http://testthat.r-lib.org/">testthat</a> unit tests.</li>
@@ -164,9 +164,9 @@
 <li>No longer exporting <code>DESeqResults</code> method for <code>plotDEGHeatmap</code>, <code>plotDEGPCA</code>. May add this back in a future release to maintain compatibility with <a href="https://bioinformatics.sph.harvard.edu/bcbioRNASeq/">bcbioRNASeq</a> workflow paper.</li>
 </ul>
 </div>
-<div id="minor-changes-29" class="section level3">
+<div id="minor-changes-30" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-29" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-30" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Miscellaneous documentation and assert check (using <a href="https://goalie.steinbaugh.com/">goalie</a>) fixes.</li>
 <li>Improved internal S4 validity checks using <code><a href="https://rdrr.io/pkg/goalie/man/validate.html">goalie::validate</a></code> instead of <code><a href="https://rdrr.io/pkg/assertthat/man/validate_that.html">assertthat::validate_that</a></code>.</li>
@@ -186,9 +186,9 @@
 <li>No longer using <code>results = 1L</code> by default in <code>DESeqAnalysis</code> methods for functions that support pulling a <code>DESeqResults</code> object. This can result in unwanted behavior, and we shouldn’t assume use of first slotted contrast. Now the user must request the desired contrast explicitly.</li>
 </ul>
 </div>
-<div id="minor-changes-28" class="section level3">
+<div id="minor-changes-29" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-28" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-29" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Improved internal code for <code>plotDEGHeatmap</code>, <code>plotDEGPCA</code>,</li>
 <li>Code cleanup to pass lintr checks.</li>
@@ -206,9 +206,9 @@
 <li>Added new R Markdown template designed for a <code>DESeqAnalysis</code> object.</li>
 </ul>
 </div>
-<div id="minor-changes-27" class="section level3">
+<div id="minor-changes-28" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-27" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-28" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Switched to reexporting generics from <a href="https://bioverbs.acidgenomics.com/">bioverbs</a> instead of <a href="https://basejump.acidgenomics.com/">basejump</a>, where applicable. For example, moved <code>contrastSamples</code> and <code>resultsTables</code> generics (verbs) to <a href="https://bioverbs.acidgenomics.com/">bioverbs</a>.</li>
 <li>Removed internal <code>validateS4</code> code, instead relying upon <code><a href="https://rdrr.io/pkg/goalie/man/validate.html">goalie::validate</a></code>.</li>
@@ -229,9 +229,9 @@
 <li>Importing <code>DataFrame</code> to <code>tbl_df</code> coercion methods directly from <a href="https://basejump.acidgenomics.com/">basejump</a> instead of the <a href="https://transformer.acidgenomics.com/">transformer</a> package. Note that S4Transfomer package was renamed simply to transformer at this date.</li>
 </ul>
 </div>
-<div id="minor-changes-26" class="section level3">
+<div id="minor-changes-27" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-26" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-27" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Improved documentation for <code>DESeqAnalysis-class</code> and the corresponding generator function. Refer to the roxygen syntax (e.g. <code>rdname</code>) on how to accomplish this, since it is useful across packages that define S4 class.</li>
 <li>Improved working examples and removed todo/fixme comments.</li>
@@ -242,9 +242,9 @@
     <div id="deseqanalysis-0-1-6-2019-01-23" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-6-2019-01-23" class="anchor"></a>DESeqAnalysis 0.1.6 (2019-01-23)</h2>
-<div id="minor-changes-25" class="section level3">
+<div id="minor-changes-26" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-25" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-26" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Finish requiring <code>results</code> argument for all <code>DESeqAnalysis</code> methods, where applicable. For example, refer to <code>contrastSamples</code> in this release.</li>
 <li>Removed <code>sanitizeRowData</code> from imports.</li>
@@ -255,9 +255,9 @@
     <div id="deseqanalysis-0-1-7-2019-01-31" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-7-2019-01-31" class="anchor"></a>DESeqAnalysis 0.1.7 (2019-01-31)</h2>
-<div id="minor-changes-24" class="section level3">
+<div id="minor-changes-25" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-24" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-25" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>
 <code>contrastSamples</code>: Improved internal sample and contrast name handling. No longer attempting to force snake case formatting.</li>
@@ -286,9 +286,9 @@
 <li>Improved checks in <code>DESeqAnalysis</code> validity method.</li>
 </ul>
 </div>
-<div id="minor-changes-23" class="section level3">
+<div id="minor-changes-24" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-23" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-24" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Added support for <code>plotCounts</code> generic, in favor of now deprecated <code>plotGene</code>.</li>
 <li>Added support for <code>results</code> and <code>resultsNames</code> generics.</li>
@@ -302,9 +302,9 @@
     <div id="deseqanalysis-0-1-9-2019-02-12" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-9-2019-02-12" class="anchor"></a>DESeqAnalysis 0.1.9 (2019-02-12)</h2>
-<div id="minor-changes-22" class="section level3">
+<div id="minor-changes-23" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-22" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-23" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>R 3.4 compatibility fix for <code>resultsTables</code>, which needs to assign rownames on <code>rowData</code> return.</li>
 </ul>
@@ -322,9 +322,9 @@
 <li>Exported additional legacy <code>DESeqResults</code> method support for <code>plotMA</code>, <code>plotVolcano</code>, <code>resultsTables</code>, and <code>topTables</code>, to maintain backward compatibility with bcbioRNASeq R package.</li>
 </ul>
 </div>
-<div id="minor-changes-21" class="section level3">
+<div id="minor-changes-22" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-21" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-22" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Updated NEWS to include information on all previous releases.</li>
 </ul>
@@ -333,9 +333,9 @@
     <div id="deseqanalysis-0-1-11-2019-03-11" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-11-2019-03-11" class="anchor"></a>DESeqAnalysis 0.1.11 (2019-03-11)</h2>
-<div id="minor-changes-20" class="section level3">
+<div id="minor-changes-21" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-20" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-21" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>
 <code>plotCounts</code>: Removed <code>DESeqDataSet</code> method support, which is now covered inside <code>SummarizedExperiment</code> method support in <a href="https://basejump.acidgenomics.com/">basejump</a>.</li>
@@ -346,9 +346,9 @@
     <div id="deseqanalysis-0-1-12-2019-03-18" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-12-2019-03-18" class="anchor"></a>DESeqAnalysis 0.1.12 (2019-03-18)</h2>
-<div id="minor-changes-19" class="section level3">
+<div id="minor-changes-20" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-19" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-20" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Updated differential expression template and dependencies.</li>
 </ul>
@@ -357,9 +357,9 @@
     <div id="deseqanalysis-0-1-13-2019-03-23" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-13-2019-03-23" class="anchor"></a>DESeqAnalysis 0.1.13 (2019-03-23)</h2>
-<div id="minor-changes-18" class="section level3">
+<div id="minor-changes-19" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-18" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-19" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Migrated code to <a href="https://acidgenomics.com/">Acid Genomics</a>.</li>
 </ul>
@@ -368,9 +368,9 @@
     <div id="deseqanalysis-0-1-14-2019-03-29" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-14-2019-03-29" class="anchor"></a>DESeqAnalysis 0.1.14 (2019-03-29)</h2>
-<div id="minor-changes-17" class="section level3">
+<div id="minor-changes-18" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-17" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-18" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Compatibility update for basejump v0.10 release. Some plotting code dependencies have been split out to firestarter and minimalism packages. We have updated the internal code dependencies to reflect these changes. This includes <code>plotCounts</code>, <code>plotDEGHeatmap</code> (i.e. <code>plotHeatmap</code>), and <code>plotDEGPCA</code> (i.e. <code>plotPCA</code>).</li>
 <li>Updated documentation on global formals, which now use <code>acid</code> prefix instead of <code>basejump</code>.</li>
@@ -388,9 +388,9 @@
 <code>resultsMatrix</code>: Utility function that quickly aggregates <code>DESeqResults</code> values for multiple contrasts into a single <code>matrix</code>. Currently supports return of <code>log2FoldChange</code>, <code>stat</code>, or <code>padj</code> values.</li>
 </ul>
 </div>
-<div id="minor-changes-16" class="section level3">
+<div id="minor-changes-17" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-16" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-17" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Reorganized unit tests and improved code coverage.</li>
 </ul>
@@ -413,9 +413,9 @@
 <code>plotMA</code>, <code>plotVolcano</code>: Improved color support and gene-to-symbol handling.</li>
 </ul>
 </div>
-<div id="minor-changes-15" class="section level3">
+<div id="minor-changes-16" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-15" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-16" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>
 <code>topTables</code>: Simplifed internal method code for <code>DESeqAnalysis</code> class.</li>
@@ -428,9 +428,9 @@
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-17-2019-04-08" class="anchor"></a>DESeqAnalysis 0.1.17 (2019-04-08)</h2>
 <p>Bug fixes to improve handling of <code>DESeqDataSet</code> generated using RefSeq gene annotations.</p>
-<div id="minor-changes-14" class="section level3">
+<div id="minor-changes-15" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-14" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-15" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>
 <code>contrastNames</code>: Improved internal regular expression matching to properly detect a contrast factor prefix that contains an underscore. This now works by checking against the column names of <code>colData</code> internally.</li>
@@ -443,9 +443,9 @@
     <div id="deseqanalysis-0-1-18-2019-04-23" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-18-2019-04-23" class="anchor"></a>DESeqAnalysis 0.1.18 (2019-04-23)</h2>
-<div id="minor-changes-13" class="section level3">
+<div id="minor-changes-14" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-13" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-14" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>NAMESPACE and documentation updates, incorporating new <a href="https://acidplots.acidgenomics.com/">acidplots</a> package.</li>
 </ul>
@@ -454,9 +454,9 @@
     <div id="deseqanalysis-0-1-19-2019-04-23" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-19-2019-04-23" class="anchor"></a>DESeqAnalysis 0.1.19 (2019-04-23)</h2>
-<div id="minor-changes-12" class="section level3">
+<div id="minor-changes-13" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-12" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-13" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Converted <code>resultsMatrix</code> to an S4 generic and added initial support for <code>DESeqAnalysis</code> and <code>DESeqAnalysisList</code> class objects.</li>
 </ul>
@@ -481,9 +481,9 @@
 <li>Removed internal <code>.matchResults</code> function in favor of consistently using <code>results</code> instead throughout the package.</li>
 </ul>
 </div>
-<div id="minor-changes-11" class="section level3">
+<div id="minor-changes-12" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-11" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-12" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Slotting <code>lfcShrink</code> into object is now optional again.</li>
 <li>Added <code>lfcShrink</code> argument support to <code>plotDEGHeatmap</code>, <code>topTables</code>, and <code>export</code>.</li>
@@ -504,9 +504,9 @@
 <code>plotDEGUpset</code>: Support for easily plotting bidirectional (up/down) DEG intersections across contrasts, using the UpSetR package.</li>
 </ul>
 </div>
-<div id="minor-changes-10" class="section level3">
+<div id="minor-changes-11" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-10" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-11" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Improved <code>show</code> method to include <code>alpha</code> and <code>lfcThreshold</code> information.</li>
 <li>
@@ -525,9 +525,9 @@
 <code>plotPCA</code>: Added improved method support for <code>DESeqTransform</code>, masking the method exported in DESeq2. Also added corresponding method support for <code>DESeqAnalysis</code> class, which uses <code>DESeqTransform</code> method internally.</li>
 </ul>
 </div>
-<div id="minor-changes-9" class="section level3">
+<div id="minor-changes-10" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-9" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-10" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Removed <code>plotMA2</code> export, which keeps DESeq2 <code>plotMA</code> method as an alias.</li>
 </ul>

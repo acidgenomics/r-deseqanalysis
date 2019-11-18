@@ -124,8 +124,11 @@
 <span class='co'># S4 method for DESeqDataSet</span>
 <span class='fu'>plotCounts</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
+<span class='co'># S4 method for DESeqTransform</span>
+<span class='fu'>plotCounts</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotCounts</span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>plotCounts</span>(<span class='no'>object</span>, <span class='kw'>transform</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,6 +140,13 @@
     <tr>
       <th>...</th>
       <td><p>Additional arguments.</p></td>
+    </tr>
+    <tr>
+      <th>transform</th>
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
+Plot log2 variance-stabilized transform counts, defined internally in
+<code>DESeqTransform</code> object (see <code>transform</code> slot). If <code>FALSE</code>, plot the
+size factor adjusted counts from <code>DESeqDataSet</code>.</p></td>
     </tr>
     </table>
 
@@ -153,14 +163,16 @@
 
     
 <ul>
-<li><p><code>plotCounts,DESeqDataSet-method</code>: Automatically plots size factor (i.e. library size)
+<li><p><code>plotCounts,DESeqDataSet-method</code>: Plot size factor (i.e. library size) adjusted
 normalized counts. Arguments pass through to <code>SummarizedExperiment</code> method
 defined in acidplots package.</p></li>
-<li><p><code>plotCounts,DESeqAnalysis-method</code>: Passes to <code>DESeqDataSet</code> method.</p></li>
+<li><p><code>plotCounts,DESeqTransform-method</code>: Plot log2 variance-stabilized transformed counts.</p></li>
+<li><p><code>plotCounts,DESeqAnalysis-method</code>: Plot either <code>DESeqDataSet</code> normalized counts or
+<code>DESeqTransform</code> log2 variance-stabilized counts.</p></li>
 </ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-09-17.</p>
+    <p>Updated 2019-11-18.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/DESeq2/man/plotCounts.html'>DESeq2::plotCounts()</a></code>.</p></div>
