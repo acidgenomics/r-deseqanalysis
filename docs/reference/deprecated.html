@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Differentially expressed genes — deg • DESeqAnalysis</title>
+<title>Deprecated functions — deprecated • DESeqAnalysis</title>
 
 
 <!-- jquery -->
@@ -37,8 +37,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Differentially expressed genes — deg" />
-<meta property="og:description" content="Differentially expressed genes" />
+<meta property="og:title" content="Deprecated functions — deprecated" />
+<meta property="og:description" content="Deprecated functions" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,59 +110,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Differentially expressed genes</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/deg-methods.R'><code>R/deg-methods.R</code></a></small>
-    <div class="hidden name"><code>deg.Rd</code></div>
+    <h1>Deprecated functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
+    <div class="hidden name"><code>deprecated.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Differentially expressed genes</p>
+    <p>Deprecated functions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>deg</span>(<span class='no'>object</span>, <span class='no'>...</span>)
-
-<span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>deg</span>(
-  <span class='no'>object</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>)
-)
-
-<span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>deg</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>object</th>
-      <td><p>Object.</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
-Adjusted P value ("alpha") cutoff. If left <code>NULL</code>, will use the cutoff
-defined in the object.</p></td>
-    </tr>
-    <tr>
-      <th>lfcThreshold</th>
-      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
-Log fold change ratio (base 2) cutoff threshold. If left <code>NULL</code>, will use
-the cutoff defined in the object.</p></td>
-    </tr>
-    <tr>
-      <th>direction</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
-Plot <code>"both"</code>, <code>"up"</code>, or <code>"down"</code> directions.</p></td>
-    </tr>
-    <tr>
-      <th>i</th>
-      <td><p>Indices specifying elements to extract or replace. Indices are <code>numeric</code> or
-<code>character</code> vectors, empty (<code>missing</code>), or <code>NULL</code>.</p>
-<p>For more information:</p><pre>help(topic = "Extract", package = "base")
-</pre></td>
-    </tr>
     <tr>
       <th>...</th>
       <td><p>Additional arguments.</p></td>
@@ -171,24 +131,37 @@ Plot <code>"both"</code>, <code>"up"</code>, or <code>"down"</code> directions.<
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>character</code>.
-Gene identifiers.</p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+    <p><code>.Deprecated</code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Updated 2019-11-08.</p>
+    <div class='dont-index'><p><a href='https://rdrr.io/r/base/Deprecated.html'>Deprecated</a>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
+    <pre class="examples"><div class='input'><span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>...</span>) {
+    <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>.Deprecated</a></span>(<span class='st'>"b"</span>)
+    <span class='fu'>b</span>(<span class='no'>...</span>)
+}
 
-<span class='co'>## DESeqAnalysis ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>deg</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>40 differentially expressed genes detected.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "gene190" "gene343" "gene406" "gene032" "gene361" "gene065"</div></pre>
+<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) {
+    <span class='no'>x</span> + <span class='fl'>1L</span>
+}
+
+<span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>withCallingHandlers</a></span>(
+    <span class='kw'>expr</span> <span class='kw'>=</span> <span class='fu'>a</span>(<span class='fl'>1L</span>),
+    <span class='kw'>warning</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>w</span>) {
+        <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>w</span>)
+        <span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>invokeRestart</a></span>(<span class='st'>"muffleWarning"</span>)
+    }
+)</div><div class='output co'>#&gt; &lt;deprecatedWarning: 'a' is deprecated.
+#&gt; Use 'b' instead.
+#&gt; See help("Deprecated")&gt;</div><div class='output co'>#&gt; [1] 2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#note">Note</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

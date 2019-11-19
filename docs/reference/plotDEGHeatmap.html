@@ -74,7 +74,7 @@ plotHeatmap() are also supported by this function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.13</span>
       </span>
     </div>
 
@@ -119,10 +119,10 @@ plotHeatmap() are also supported by this function." />
     </div>
 
     <div class="ref-description">
-    <p>This function is an extension of <code><a href='plotHeatmap.html'>plotHeatmap()</a></code> that is optimized for
+    <p>This function is an extension of <code>plotHeatmap()</code> that is optimized for
 automatic handling differentially expressed genes, rather than requiring
 manual input of a gene vector. All of the optional parameters for
-<code><a href='plotHeatmap.html'>plotHeatmap()</a></code> are also supported by this function.</p>
+<code>plotHeatmap()</code> are also supported by this function.</p>
     </div>
 
     <pre class="usage"><span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>...</span>)
@@ -131,15 +131,7 @@ manual input of a gene vector. All of the optional parameters for
 <span class='fu'>plotDEGHeatmap</span>(
   <span class='no'>object</span>,
   <span class='no'>DESeqTransform</span>,
-  <span class='kw'>interestingGroups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"row"</span>, <span class='st'>"column"</span>, <span class='st'>"none"</span>),
-  <span class='kw'>clusteringMethod</span> <span class='kw'>=</span> <span class='st'>"ward.D2"</span>,
-  <span class='kw'>clusterRows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>clusterCols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"acid.heatmap.color"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='kw pkg'>acidplots</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/acidplots/man/gradient.html'>blueYellow</a></span>),
-  <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> -<span class='fl'>2L</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.25</span>),
-  <span class='kw'>legendBreaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> -<span class='fl'>2L</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>1L</span>),
   <span class='no'>...</span>
 )
 
@@ -158,65 +150,9 @@ manual input of a gene vector. All of the optional parameters for
       <td><p><code>DESeqTransform</code>.</p></td>
     </tr>
     <tr>
-      <th>interestingGroups</th>
-      <td><p><code>character</code>.
-Groups of interest to use for visualization.
-Corresponds to factors describing the columns of the object.</p></td>
-    </tr>
-    <tr>
       <th>direction</th>
       <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
 Plot <code>"both"</code>, <code>"up"</code>, or <code>"down"</code> directions.</p></td>
-    </tr>
-    <tr>
-      <th>scale</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
-Whether the values should be centered and scaled in either the row or
-column direction, or remain unscaled.</p></td>
-    </tr>
-    <tr>
-      <th>clusteringMethod</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
-Clustering method. Accepts the same values as <code><a href='https://rdrr.io/r/stats/hclust.html'>hclust()</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>clusterRows</th>
-      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
-Arrange with hierarchical clustering.</p></td>
-    </tr>
-    <tr>
-      <th>clusterCols</th>
-      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
-Arrange with hierarchical clustering.</p></td>
-    </tr>
-    <tr>
-      <th>color</th>
-      <td><p><code>function</code>, <code>character</code>, or <code>NULL</code>.
-Hexadecimal color function or values to use for plot.</p>
-<p>We generally recommend these hexadecimal functions from the viridis
-package, in addition to our <code>synesthesia()</code> palette:</p><ul>
-<li><p><code><a href='https://rdrr.io/pkg/viridis/man/reexports.html'>viridis::viridis()</a></code>.</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/viridis/man/reexports.html'>viridis::inferno()</a></code>.</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/viridis/man/reexports.html'>viridis::magma()</a></code>.</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/viridis/man/reexports.html'>viridis::plasma()</a></code>.</p></li>
-</ul>
-
-<p>Alternatively, colors can be defined manually using hexadecimal values
-(e.g. <code><a href='https://rdrr.io/r/base/c.html'>c("#FF0000", "#0000FF")</a></code>), but this is not generally recommended.
-Refer to the RColorBrewer package for hexadecimal color palettes that may
-be suitable. If set <code>NULL</code>, will use the default pheatmap colors.</p></td>
-    </tr>
-    <tr>
-      <th>breaks</th>
-      <td><p><code>numeric</code> or <code>NULL</code>.
-A sequence of numbers that covers the range of values in the matrix. Must
-be 1 element longer than the color vector, which is handled internally
-automatically, differing from the behavior in pheatmap.</p></td>
-    </tr>
-    <tr>
-      <th>legendBreaks</th>
-      <td><p><code>numeric</code> or <code>NULL</code>.
-Numeric vector of breakpoints for the color legend.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -255,13 +191,13 @@ must contain a <code>SummarizedExperiment</code>.</p>
 
     
 <ul>
-<li><p><code>plotDEGHeatmap,DESeqResults-method</code>: Passes to <code><a href='plotHeatmap.html'>plotHeatmap()</a></code> <code>SummarizedExperiment</code>
+<li><p><code>plotDEGHeatmap,DESeqResults-method</code>: Passes to <code>plotHeatmap()</code> <code>SummarizedExperiment</code>
 method defined in acidplots.</p></li>
 <li><p><code>plotDEGHeatmap,DESeqAnalysis-method</code>: Passes to <code>DESeqResults</code> method.</p></li>
 </ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-11-08.</p>
+    <p>Updated 2019-11-19.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)

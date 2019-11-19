@@ -2,7 +2,7 @@
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
 #' @note We are not allowing post hoc `alpha` or `lfcThreshold` cutoffs here.
-#' @note Updated 2019-11-08.
+#' @note Updated 2019-11-19.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual representation
@@ -282,7 +282,7 @@ setMethod(
 
 
 
-## Updated 2019-11-08.
+## Updated 2019-11-19.
 `plotMA,DESeqAnalysis` <-  # nolint
     function(
         object,

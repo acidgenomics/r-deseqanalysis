@@ -13,7 +13,8 @@
 #'   cor do.call head mcols mcols<- metadata metadata<- na.omit
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom UpSetR fromList
-#' @importFrom acidplots matchLabels plotHeatmap scale_color_synesthesia_d upset
+#' @importFrom acidplots matchLabels plotHeatmap scale_color_synesthesia_d
+#'   plotUpset
 #' @importFrom basejump Gene2Symbol as_tibble autopadZeros camelCase
 #'   convertSampleIDsToNames decode droplevels import initDir
 #'   interestingGroups<- leftJoin makeNames mapGenesToRownames markdownHeader

@@ -11,15 +11,7 @@ plotDEGHeatmap(object, ...)
 \S4method{plotDEGHeatmap}{DESeqResults}(
   object,
   DESeqTransform,
-  interestingGroups = NULL,
   direction = c("both", "up", "down"),
-  scale = c("row", "column", "none"),
-  clusteringMethod = "ward.D2",
-  clusterRows = TRUE,
-  clusterCols = TRUE,
-  color = getOption(x = "acid.heatmap.color", default = acidplots::blueYellow),
-  breaks = seq(from = -2L, to = 2L, by = 0.25),
-  legendBreaks = seq(from = -2L, to = 2L, by = 1L),
   ...
 )
 
@@ -30,50 +22,8 @@ plotDEGHeatmap(object, ...)
 
 \item{DESeqTransform}{\code{DESeqTransform}.}
 
-\item{interestingGroups}{\code{character}.
-Groups of interest to use for visualization.
-Corresponds to factors describing the columns of the object.}
-
 \item{direction}{\code{character(1)}.
 Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
-
-\item{scale}{\code{character(1)}.
-Whether the values should be centered and scaled in either the row or
-column direction, or remain unscaled.}
-
-\item{clusteringMethod}{\code{character(1)}.
-Clustering method. Accepts the same values as \code{\link[stats:hclust]{hclust()}}.}
-
-\item{clusterRows}{\code{logical(1)}.
-Arrange with hierarchical clustering.}
-
-\item{clusterCols}{\code{logical(1)}.
-Arrange with hierarchical clustering.}
-
-\item{color}{\verb{function}, \code{character}, or \code{NULL}.
-Hexadecimal color function or values to use for plot.
-
-We generally recommend these hexadecimal functions from the viridis
-package, in addition to our \code{\link[=synesthesia]{synesthesia()}} palette:
-\itemize{
-\item \code{viridis::viridis()}.
-\item \code{viridis::inferno()}.
-\item \code{viridis::magma()}.
-\item \code{viridis::plasma()}.
-}
-
-Alternatively, colors can be defined manually using hexadecimal values
-(e.g. \code{c("#FF0000", "#0000FF")}), but this is not generally recommended.
-Refer to the RColorBrewer package for hexadecimal color palettes that may
-be suitable. If set \code{NULL}, will use the default pheatmap colors.}
-
-\item{breaks}{\code{numeric} or \code{NULL}.
-A sequence of numbers that covers the range of values in the matrix. Must
-be 1 element longer than the color vector, which is handled internally
-automatically, differing from the behavior in pheatmap.}
-
-\item{legendBreaks}{\code{numeric} or \code{NULL}.
-Numeric vector of breakpoints for the color legend.}
 
 \item{...}{Additional arguments.}
 
@@ -114,7 +64,7 @@ method defined in acidplots.
 }}
 
 \note{
-Updated 2019-11-08.
+Updated 2019-11-19.
 }
 \examples{
 data(deseq)

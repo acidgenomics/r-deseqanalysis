@@ -26,11 +26,14 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
 }
+\value{
+\code{DESeqResults}.
+}
 \description{
 Results
 }
 \note{
-Updated 2019-11-08.
+Updated 2019-11-18.
 }
 \examples{
 data(deseq)

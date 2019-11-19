@@ -1,11 +1,13 @@
 #' Results
 #'
 #' @name results
-#' @note Updated 2019-11-08.
+#' @note Updated 2019-11-18.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
+#'
+#' @return `DESeqResults`.
 #'
 #' @examples
 #' data(deseq)
