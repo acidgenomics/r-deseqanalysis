@@ -1,14 +1,14 @@
 #' Match user metadata to file names used for tximport
 #'
 #' @export
-#' @note Updated 2019-10-09.
+#' @note Updated 2019-11-19.
 #'
-#' @param files `character`.
-#'   Quant file paths passed to [`tximport()`][tximport::tximport].
-#'   Sanitize return from [prepareTximportFiles()] is recommended.
 #' @param metadata `data.frame`.
 #'   User-defined metadata. The function assumes that sample identifiers are
 #'   defined in the first metadata column.
+#' @param files `character`.
+#'   Quant file paths passed to [`tximport()`][tximport::tximport].
+#'   Sanitize return from [prepareTximportFiles()] is recommended.
 #'
 #' @return `data.frame`.
 #' Modified metadata frame, with updated sample identifiers in slotted in

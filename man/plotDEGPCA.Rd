@@ -8,13 +8,7 @@
 \usage{
 plotDEGPCA(object, ...)
 
-\S4method{plotDEGPCA}{DESeqResults}(
-  object,
-  DESeqTransform,
-  interestingGroups = NULL,
-  direction = c("both", "up", "down"),
-  ...
-)
+\S4method{plotDEGPCA}{DESeqResults}(object, DESeqTransform, direction = c("both", "up", "down"), ...)
 
 \S4method{plotDEGPCA}{DESeqAnalysis}(object, i, contrastSamples = FALSE, ...)
 }
@@ -22,10 +16,6 @@ plotDEGPCA(object, ...)
 \item{object}{Object.}
 
 \item{DESeqTransform}{\code{DESeqTransform}.}
-
-\item{interestingGroups}{\code{character}.
-Groups of interest to use for visualization.
-Corresponds to factors describing the columns of the object.}
 
 \item{direction}{\code{character(1)}.
 Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
@@ -62,7 +52,7 @@ must contain/extend a \code{SummarizedExperiment}.
 }}
 
 \note{
-Updated 2019-11-08.
+Updated 2019-11-19.
 }
 \examples{
 data(deseq)

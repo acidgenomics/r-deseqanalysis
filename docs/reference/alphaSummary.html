@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.13</span>
       </span>
     </div>
 
@@ -185,8 +185,8 @@ Use this argument rather than <code>contrast</code> for continuous variables.</p
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqDataSet ====</span>
-<span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.html'>as</a></span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
-<span class='fu'><a href='resultsNames.html'>resultsNames</a></span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; [1] "Intercept"             "condition_B_vs_A"      "treatment_D_vs_C"     
+<span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
+<span class='fu'>resultsNames</span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; [1] "Intercept"             "condition_B_vs_A"      "treatment_D_vs_C"     
 #&gt; [4] "conditionB.treatmentD"</div><div class='input'><span class='fu'>alphaSummary</span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; <span class='message'>Intercept</span>
 #&gt; <span class='message'>Alpha levels: 0.1, 0.05, 0.01, 0.001, 1e-06</span></div><div class='output co'>#&gt;                0.1 0.05 0.01 0.001 1e-06
 #&gt; LFC &gt; 0 (up)     0    0    0     0     0

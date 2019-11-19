@@ -43,6 +43,30 @@
 
 
 
+#' Map contrast vector to coefficient
+#'
+#' @note Updated 2019-09-17.
+#' @noRd
+.contrast2coef <- function(contrast, resultsNames) {
+    assert(
+        isCharacter(contrast),
+        hasLength(contrast, n = 3L),
+        isCharacter(resultsNames)
+    )
+    factor <- contrast[[1L]]
+    numerator <- contrast[[2L]]
+    denominator <- contrast[[3L]]
+    coef <- match(
+        x = paste(factor, numerator, "vs", denominator, sep = "_"),
+        table = resultsNames
+    )
+    assert(isInt(coef), !is.na(coef))
+    message(sprintf("Contrast: %s\nCoef: %d", resultsNames[[coef]], coef))
+    coef
+}
+
+
+
 ## Updated 2019-07-23.
 .ddsMsg <- function() {
     message(sprintf(
