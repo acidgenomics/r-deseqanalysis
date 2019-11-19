@@ -24,7 +24,7 @@ first column. Original values are stashed in "originalSampleID".
 Match user metadata to file names used for tximport
 }
 \note{
-Updated 2019-10-09.
+Updated 2019-11-19.
 }
 \examples{
 metadata <- data.frame(
