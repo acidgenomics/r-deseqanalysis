@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Run a quick pairwise contrast using lfcShrink with apeglm — apeglmContrast • DESeqAnalysis</title>
+<title>Run a quick pairwise contrast using lfcShrink with apeglm — apeglmResults • DESeqAnalysis</title>
 
 
 <!-- jquery -->
@@ -37,7 +37,7 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Run a quick pairwise contrast using lfcShrink with apeglm — apeglmContrast" />
+<meta property="og:title" content="Run a quick pairwise contrast using lfcShrink with apeglm — apeglmResults" />
 <meta property="og:description" content="Wrapper function that helps set up lfcShrink() to
 shrink LFC values for a pairwise contrast via apeglm, without having to
 manually relevel factor reference levels to use the required coef argument." />
@@ -113,8 +113,8 @@ manually relevel factor reference levels to use the required coef argument." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Run a quick pairwise contrast using lfcShrink with apeglm</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/apeglmContrast.R'><code>R/apeglmContrast.R</code></a></small>
-    <div class="hidden name"><code>apeglmContrast.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/apeglmResults-methods.R'><code>R/apeglmResults-methods.R</code></a></small>
+    <div class="hidden name"><code>apeglmResults.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -123,14 +123,24 @@ shrink LFC values for a pairwise contrast via apeglm, without having to
 manually relevel factor reference levels to use the required <code>coef</code> argument.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>apeglmContrast</span>(<span class='no'>dds</span>, <span class='no'>contrast</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>apeglmResults</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+
+<span class='co'># S4 method for DESeqDataSet</span>
+<span class='fu'>apeglmResults</span>(<span class='no'>object</span>, <span class='no'>contrast</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dds</th>
-      <td><p><code>DESeqDataSet</code>.</p></td>
+      <th>object</th>
+      <td><p>Object.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Passes to <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>lfcShrink()</a></code>, with
+<code>type = "apeglm"</code> and <code>coef</code> automatically defined. Optionally can pass
+unshrunken <code>DESeqResults</code> via <code>res</code> argument here and this will set
+<code>alpha</code>, <code>lfcThreshold</code> automatically.</p></td>
     </tr>
     <tr>
       <th>contrast</th>
@@ -143,18 +153,15 @@ Pairwise contrast vector:</p><ol>
 </ol>
 
 <p>Numerator and denominator values correspond to grouping factor column.
-See <code><a href='results.html'>results()</a></code> for details. Note that we're intentionally being more
+See <code>results()</code> for details. Note that we're intentionally being more
 strict about the input format here.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Passes to <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>lfcShrink()</a></code>, with
-<code>type = "apeglm"</code> and <code>coef</code> automatically defined. Optionally can pass
-unshrunken <code>DESeqResults</code> via <code>res</code> argument here and this will set
-<code>alpha</code>, <code>lfcThreshold</code> automatically.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p><code>DESeqResults</code>, with apeglm adaptive shrinkage applied to fold
+change values.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Dynamically sets reference factor levels, as recommended by DESeq2 vignette.
@@ -164,7 +171,7 @@ to values in <code><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>results
 <code><a href='https://rdrr.io/pkg/DESeq2/man/DESeq.html'>DESeq()</a></code>, followed by <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>lfcShrink()</a></code>.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-10-15.</p>
+    <p>Updated 2019-11-19.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'>
@@ -172,8 +179,8 @@ to values in <code><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>results
 <li><p>"Extended section on shrinkage estimators" section of DESeq2 vignette,
 which explains how to manually define <code>coef</code> argument which can
 be used with apeglm <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>lfcShrink()</a></code>.</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>DESeq2::lfcShrink()</a></code>.</p></li>
 <li><p><code><a href='https://rdrr.io/pkg/apeglm/man/apeglm.html'>apeglm::apeglm()</a></code>.</p></li>
+<li><p><code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>DESeq2::lfcShrink()</a></code>.</p></li>
 <li><p><code><a href='https://rdrr.io/r/stats/model.matrix.html'>stats::model.matrix()</a></code>.</p></li>
 <li><p><code><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>DESeq2::resultsNames()</a></code>.</p></li>
 <li><p><code><a href='https://rdrr.io/pkg/DESeq2/man/DESeq.html'>DESeq2::DESeq()</a></code>.</p></li>
@@ -183,20 +190,20 @@ be used with apeglm <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>DESeq2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DESeq2/man/makeExampleDESeqDataSet.html'>makeExampleDESeqDataSet</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000L</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>12L</span>)
 <span class='no'>dds</span>$<span class='no'>condition</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>4L</span>)], <span class='kw'>each</span> <span class='kw'>=</span> <span class='fl'>3L</span>))
-<span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>DESeq2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DESeq2/man/DESeq.html'>DESeq</a></span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; <span class='message'>estimating size factors</span></div><div class='output co'>#&gt; <span class='message'>estimating dispersions</span></div><div class='output co'>#&gt; <span class='message'>gene-wise dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>mean-dispersion relationship</span></div><div class='output co'>#&gt; <span class='message'>final dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>fitting model and testing</span></div><div class='input'><span class='fu'><a href='resultsNames.html'>resultsNames</a></span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; [1] "Intercept"        "condition_B_vs_A" "condition_C_vs_A" "condition_D_vs_A"</div><div class='input'>
+<span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>DESeq2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DESeq2/man/DESeq.html'>DESeq</a></span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; <span class='message'>estimating size factors</span></div><div class='output co'>#&gt; <span class='message'>estimating dispersions</span></div><div class='output co'>#&gt; <span class='message'>gene-wise dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>mean-dispersion relationship</span></div><div class='output co'>#&gt; <span class='message'>final dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>fitting model and testing</span></div><div class='input'><span class='fu'>resultsNames</span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; [1] "Intercept"        "condition_B_vs_A" "condition_C_vs_A" "condition_D_vs_A"</div><div class='input'>
 <span class='co'>## Contrast C vs. B.</span>
 <span class='no'>contrast</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>factor</span> <span class='kw'>=</span> <span class='st'>"condition"</span>, <span class='kw'>numerator</span> <span class='kw'>=</span> <span class='st'>"C"</span>, <span class='kw'>denominator</span> <span class='kw'>=</span> <span class='st'>"B"</span>)
 
 <span class='co'>## Unshrunken DESeqResults.</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>dds</span>, <span class='kw'>contrast</span> <span class='kw'>=</span> <span class='no'>contrast</span>)
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>results</span>(<span class='no'>dds</span>, <span class='kw'>contrast</span> <span class='kw'>=</span> <span class='no'>contrast</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; [1] "DESeqResults"
 #&gt; attr(,"package")
-#&gt; [1] "DESeq2"</div><div class='input'><span class='fu'><a href='lfcShrinkType.html'>lfcShrinkType</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; [1] "unshrunken"</div><div class='input'>
+#&gt; [1] "DESeq2"</div><div class='input'><span class='fu'>lfcShrinkType</span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; [1] "unshrunken"</div><div class='input'>
 <span class='co'>## Shrunken DESeqResults, using apeglm via `lfcShrink()`.</span>
 <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"apeglm"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-    <span class='no'>shrink</span> <span class='kw'>&lt;-</span> <span class='fu'>apeglmContrast</span>(<span class='kw'>dds</span> <span class='kw'>=</span> <span class='no'>dds</span>, <span class='kw'>contrast</span> <span class='kw'>=</span> <span class='no'>contrast</span>)
+    <span class='no'>shrink</span> <span class='kw'>&lt;-</span> <span class='fu'>apeglmResults</span>(<span class='no'>dds</span>, <span class='kw'>contrast</span> <span class='kw'>=</span> <span class='no'>contrast</span>)
     <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>shrink</span>)
-    <span class='fu'><a href='lfcShrinkType.html'>lfcShrinkType</a></span>(<span class='no'>shrink</span>)
+    <span class='fu'>lfcShrinkType</span>(<span class='no'>shrink</span>)
 }</div><div class='output co'>#&gt; <span class='message'>Design: ~condition</span></div><div class='output co'>#&gt; <span class='message'>using pre-existing size factors</span></div><div class='output co'>#&gt; <span class='message'>estimating dispersions</span></div><div class='output co'>#&gt; <span class='message'>found already estimated dispersions, replacing these</span></div><div class='output co'>#&gt; <span class='message'>gene-wise dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>mean-dispersion relationship</span></div><div class='output co'>#&gt; <span class='message'>final dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>fitting model and testing</span></div><div class='output co'>#&gt; <span class='message'>Contrast: condition_C_vs_B</span>
 #&gt; <span class='message'>Coef: 3</span></div><div class='output co'>#&gt; [1] "apeglm"</div></pre>
   </div>
@@ -204,6 +211,7 @@ be used with apeglm <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
       <li><a href="#note">Note</a></li>
       <li><a href="#see-also">See also</a></li>

@@ -120,9 +120,9 @@
     <div id="deseqanalysis-0-1-1-2018-12-01" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-1-2018-12-01" class="anchor"></a>DESeqAnalysis 0.1.1 (2018-12-01)</h2>
-<div id="major-changes-10" class="section level3">
+<div id="major-changes-11" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes-10" class="anchor"></a>Major changes</h3>
+<a href="#major-changes-11" class="anchor"></a>Major changes</h3>
 <ul>
 <li>Improved <code>show</code> method for <code>DESeqResultsTables</code> class.</li>
 </ul>
@@ -154,9 +154,9 @@
 <code>resultsTables</code>: Migrated from <a href="https://bioinformatics.sph.harvard.edu/bcbioRNASeq/">bcbioRNASeq</a>. Enables easy output of directional DEG tables from <code>DESeqResults</code> object.</li>
 </ul>
 </div>
-<div id="major-changes-9" class="section level3">
+<div id="major-changes-10" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes-9" class="anchor"></a>Major changes</h3>
+<a href="#major-changes-10" class="anchor"></a>Major changes</h3>
 <ul>
 <li>Added new <code>.matchResults</code> internal utility to match <code>DESeqResults</code>.</li>
 <li>Reworked internal code for <code>export</code>.</li>
@@ -179,9 +179,9 @@
     <div id="deseqanalysis-0-1-3-2018-12-13" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-3-2018-12-13" class="anchor"></a>DESeqAnalysis 0.1.3 (2018-12-13)</h2>
-<div id="major-changes-8" class="section level3">
+<div id="major-changes-9" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes-8" class="anchor"></a>Major changes</h3>
+<a href="#major-changes-9" class="anchor"></a>Major changes</h3>
 <ul>
 <li>No longer using <code>results = 1L</code> by default in <code>DESeqAnalysis</code> methods for functions that support pulling a <code>DESeqResults</code> object. This can result in unwanted behavior, and we shouldn’t assume use of first slotted contrast. Now the user must request the desired contrast explicitly.</li>
 </ul>
@@ -199,9 +199,9 @@
     <div id="deseqanalysis-0-1-4-2019-01-08" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-4-2019-01-08" class="anchor"></a>DESeqAnalysis 0.1.4 (2019-01-08)</h2>
-<div id="major-changes-7" class="section level3">
+<div id="major-changes-8" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes-7" class="anchor"></a>Major changes</h3>
+<a href="#major-changes-8" class="anchor"></a>Major changes</h3>
 <ul>
 <li>Added new R Markdown template designed for a <code>DESeqAnalysis</code> object.</li>
 </ul>
@@ -222,9 +222,9 @@
     <div id="deseqanalysis-0-1-5-2019-01-14" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-5-2019-01-14" class="anchor"></a>DESeqAnalysis 0.1.5 (2019-01-14)</h2>
-<div id="major-changes-6" class="section level3">
+<div id="major-changes-7" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes-6" class="anchor"></a>Major changes</h3>
+<a href="#major-changes-7" class="anchor"></a>Major changes</h3>
 <ul>
 <li>Importing <code>DataFrame</code> to <code>tbl_df</code> coercion methods directly from <a href="https://basejump.acidgenomics.com/">basejump</a> instead of the <a href="https://transformer.acidgenomics.com/">transformer</a> package. Note that S4Transfomer package was renamed simply to transformer at this date.</li>
 </ul>
@@ -277,9 +277,9 @@
 <code>DESeqAnalysisList</code>: extends <code>SimpleList</code>, and enables saving of multiple analyses (e.g. per patient clinical data) in a single object. This class makes it much easier to report on multiple complex contrasts.</li>
 </ul>
 </div>
-<div id="major-changes-5" class="section level3">
+<div id="major-changes-6" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes-5" class="anchor"></a>Major changes</h3>
+<a href="#major-changes-6" class="anchor"></a>Major changes</h3>
 <ul>
 <li>
 <code>DESeqAnalysis</code> now inherits from <code>Annotated</code> class. This enables support for <code>metadata</code> slot, which can be used to store package version.</li>
@@ -313,9 +313,9 @@
     <div id="deseqanalysis-0-1-10-2019-02-18" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-10-2019-02-18" class="anchor"></a>DESeqAnalysis 0.1.10 (2019-02-18)</h2>
-<div id="major-changes-4" class="section level3">
+<div id="major-changes-5" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes-4" class="anchor"></a>Major changes</h3>
+<a href="#major-changes-5" class="anchor"></a>Major changes</h3>
 <ul>
 <li>
 <code>plotDEGHeatmap</code>, <code>plotDEGPCA</code>: Reworked internal code to export <code>DESeqResults</code> method that maintains backward compatibility with approach used in bcbioRNASeq F1000 paper.</li>
@@ -399,9 +399,9 @@
     <div id="deseqanalysis-0-1-16-2019-04-08" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-1-16-2019-04-08" class="anchor"></a>DESeqAnalysis 0.1.16 (2019-04-08)</h2>
-<div id="major-changes-3" class="section level3">
+<div id="major-changes-4" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes-3" class="anchor"></a>Major changes</h3>
+<a href="#major-changes-4" class="anchor"></a>Major changes</h3>
 <ul>
 <li>
 <code>export</code>: Removed <code>humanize</code> argument.</li>
@@ -472,9 +472,9 @@
 <li>Now exporting <code>lfcShrinkType</code>, and <code>transformType</code>, which were previously used internally but are generally useful.</li>
 </ul>
 </div>
-<div id="major-changes-2" class="section level3">
+<div id="major-changes-3" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes-2" class="anchor"></a>Major changes</h3>
+<a href="#major-changes-3" class="anchor"></a>Major changes</h3>
 <ul>
 <li>
 <code>plotDEGHeatmap</code>: Improved default color breaks. Now defaults to blue-black-yellow default color scheme (see <code><a href="https://rdrr.io/pkg/acidplots/man/gradient.html">acidplots::blueYellow</a></code>).</li>
