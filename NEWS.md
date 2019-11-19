@@ -1,11 +1,13 @@
-## DESeqAnalysis 0.2.12 (2019-11-19)
+## DESeqAnalysis 0.2.13 (2019-11-19)
 
-### Major changes
+### Minor changes
 
 - Deprecated `apeglmContrast` in favor of modified S4 method approach now
   defined in `apeglmResults`. The internal code is otherwise unmodified.
 - `plotDEGHeatmap`: Simplified argument handling and internal passthrough to
   `plotHeatmap` `SummarizedExperiment` method defined in acidplots.
+
+## DESeqAnalysis 0.2.12 (2019-11-18)
 
 ### Minor changes
 
