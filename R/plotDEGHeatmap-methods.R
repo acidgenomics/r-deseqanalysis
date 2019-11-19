@@ -4,7 +4,7 @@
 
 #' @name plotDEGHeatmap
 #' @inherit bioverbs::plotDEGHeatmap
-#' @note Updated 2019-11-08.
+#' @note Updated 2019-11-19.
 #'
 #' @inheritParams acidplots::plotHeatmap
 #' @inheritParams acidroxygen::params
@@ -32,20 +32,12 @@ NULL
 ## This method is used in F1000 paper and needs to be included. Note that in
 ## newer versions of bcbioRNASeq, this step won't work because we've slotted the
 ## rlog/vst counts in as a matrix instead of DESeqTransform.
-## Updated 2019-10-15.
+## Updated 2019-11-19.
 `plotDEGHeatmap,DESeqResults` <-  # nolint
     function(
         object,
         DESeqTransform,  # nolint
-        interestingGroups = NULL,
         direction = c("both", "up", "down"),
-        scale = c("row", "column", "none"),
-        clusteringMethod = "ward.D2",
-        clusterRows = TRUE,
-        clusterCols = TRUE,
-        color,
-        breaks = seq(from = -2L, to = 2L, by = 0.25),
-        legendBreaks = seq(from = -2L, to = 2L, by = 1L),
         ...
     ) {
         validObject(object)
@@ -53,16 +45,12 @@ NULL
         assert(
             is(object, "DESeqResults"),
             is(DESeqTransform, "DESeqTransform"),
-            identical(rownames(object), rownames(DESeqTransform)),
-            isString(clusteringMethod),
-            is.numeric(legendBreaks)
+            identical(rownames(object), rownames(DESeqTransform))
         )
         direction <- match.arg(direction)
-        scale <- match.arg(scale)
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
-        interestingGroups(dt) <- matchInterestingGroups(dt, interestingGroups)
         alpha <- metadata(res)[["alpha"]]
         lfcThreshold <- metadata(res)[["lfcThreshold"]]
         lfcShrinkType <- lfcShrinkType(object)
@@ -97,25 +85,11 @@ NULL
         ## Using SummarizedExperiment method defined in acidplots here.
         args <- list(
             object = as(dt, "RangedSummarizedExperiment"),
-            scale = scale,
-            clusteringMethod = clusteringMethod,
-            clusterRows = clusterRows,
-            clusterCols = clusterCols,
-            color = color,
-            breaks = breaks,
-            legendBreaks = legendBreaks
+            title = title
         )
         args <- c(args, list(...))
         do.call(what = plotHeatmap, args = args)
     }
-
-formals(`plotDEGHeatmap,DESeqResults`)[["color"]] <-
-    quote(
-        getOption(
-            x = "acid.heatmap.color",
-            default = acidplots::blueYellow
-        )
-    )
 
 
 
@@ -145,10 +119,6 @@ setMethod(
         if ("results" %in% names(call)) {
             stop("'results' is defunct in favor of 'i'.")
         }
-        assert(isSubset(
-            x = setdiff(names(call), ""),
-            y = names(formals())
-        ))
         rm(call)
         ## nocov end
         validObject(object)

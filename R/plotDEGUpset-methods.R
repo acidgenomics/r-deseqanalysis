@@ -5,7 +5,7 @@
 
 #' @name plotDEGUpset
 #' @inherit bioverbs::plotDEGUpset
-#' @note Updated 2019-11-08.
+#' @note Updated 2019-11-19.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -27,7 +27,7 @@ NULL
 
 
 
-## Updated 2019-11-08.
+## Updated 2019-11-19.
 `plotDEGUpset,DESeqAnalysis` <-  # nolint
     function(object) {
         suppressMessages(
@@ -57,7 +57,7 @@ NULL
         ## Suppressing message about contrast not having up/down DEG overlap:
         ## geom_path: Each group consists of only one observation.
         suppressMessages(
-            upset(data = fromList(listInput))
+            plotUpset(object = fromList(listInput))
         )
     }
 
