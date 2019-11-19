@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
-#' @note Updated 2019-11-08.
+#' @note Updated 2019-11-19.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -343,7 +343,7 @@ setMethod(
 
 
 
-## Updated 2019-11-08.
+## Updated 2019-11-19.
 `plotVolcano,DESeqAnalysis` <-  # nolint
     function(
         object,

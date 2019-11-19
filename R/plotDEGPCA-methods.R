@@ -4,7 +4,7 @@
 
 #' @name plotDEGPCA
 #' @inherit bioverbs::plotDEGPCA
-#' @note Updated 2019-11-08.
+#' @note Updated 2019-11-19.
 #'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams acidplots::plotPCA
@@ -30,12 +30,11 @@ NULL
 
 
 
-## Updated 2019-10-15.
+## Updated 2019-11-19.
 `plotDEGPCA,DESeqResults` <-  # nolint
     function(
         object,
         DESeqTransform,  # nolint
-        interestingGroups = NULL,
         direction = c("both", "up", "down"),
         ...
     ) {
@@ -50,7 +49,6 @@ NULL
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
-        interestingGroups(dt) <- matchInterestingGroups(dt, interestingGroups)
         alpha <- metadata(res)[["alpha"]]
         lfcThreshold <- metadata(res)[["lfcThreshold"]]
         assert(
@@ -99,7 +97,7 @@ setMethod(
 
 
 
-## Updated 2019-11-08.
+## Updated 2019-11-19.
 `plotDEGPCA,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -113,10 +111,6 @@ setMethod(
         if ("results" %in% names(call)) {
             stop("'results' is defunct in favor of 'i'.")
         }
-        assert(isSubset(
-            x = setdiff(names(call), ""),
-            y = names(formals())
-        ))
         rm(call)
         ## nocov end
         validObject(object)
