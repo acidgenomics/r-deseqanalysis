@@ -19,3 +19,8 @@ apeglmContrast <- function(dds, ...) {
     .Deprecated("apeglmResults")
     apeglmResults(object = dds, ...)
 }
+
+
+
+## nolint end
+## nocov end
