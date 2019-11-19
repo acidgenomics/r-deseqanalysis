@@ -222,9 +222,9 @@
 <code>apeglmContrast</code>: New utility function that enables <code>lfcShrink</code> using apeglm without having to mentally deal with <code>coef</code> argument.</li>
 </ul>
 </div>
-<div id="major-changes-1" class="section level3">
+<div id="major-changes-2" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes-1" class="anchor"></a>Major changes</h3>
+<a href="#major-changes-2" class="anchor"></a>Major changes</h3>
 <ul>
 <li>Now attached DESeq2 automatically via “Depends” in <code>DESCRIPTION</code>.</li>
 </ul>
@@ -269,9 +269,9 @@
     <div id="deseqanalysis-0-2-11-2019-11-12" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0-2-11-2019-11-12" class="anchor"></a>DESeqAnalysis 0.2.11 (2019-11-12)</h2>
-<div id="major-changes" class="section level3">
+<div id="major-changes-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes" class="anchor"></a>Major changes</h3>
+<a href="#major-changes-1" class="anchor"></a>Major changes</h3>
 <ul>
 <li>Renamed <code>results</code> argument to <code>i</code> for <code>DESeqAnalysis</code> methods, where applicable. This improves consistency with Bioconductor conventions (similar to <code>assay</code> method, which also uses <code>i</code> for position). Note that previous usage of <code>results</code> is now defunct and should intentionally error.</li>
 </ul>
@@ -289,9 +289,18 @@
 </ul>
 </div>
 </div>
-    <div id="deseqanalysis-0-2-12-2019-11-18" class="section level2">
+    <div id="deseqanalysis-0-2-12-2019-11-19" class="section level2">
 <h2 class="hasAnchor">
-<a href="#deseqanalysis-0-2-12-2019-11-18" class="anchor"></a>DESeqAnalysis 0.2.12 (2019-11-18)</h2>
+<a href="#deseqanalysis-0-2-12-2019-11-19" class="anchor"></a>DESeqAnalysis 0.2.12 (2019-11-19)</h2>
+<div id="major-changes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#major-changes" class="anchor"></a>Major changes</h3>
+<ul>
+<li>Deprecated <code>apeglmContrast</code> in favor of modified S4 method approach now defined in <code>apeglmResults</code>. The internal code is otherwise unmodified.</li>
+<li>
+<code>plotDEGHeatmap</code>: Simplified argument handling and internal passthrough to <code>plotHeatmap</code> <code>SummarizedExperiment</code> method defined in acidplots.</li>
+</ul>
+</div>
 <div id="minor-changes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#minor-changes" class="anchor"></a>Minor changes</h3>
@@ -319,7 +328,7 @@
         <li><a href="#deseqanalysis-0-2-9-2019-10-09">0.2.9</a></li>
         <li><a href="#deseqanalysis-0-2-10-2019-10-16">0.2.10</a></li>
         <li><a href="#deseqanalysis-0-2-11-2019-11-12">0.2.11</a></li>
-        <li><a href="#deseqanalysis-0-2-12-2019-11-18">0.2.12</a></li>
+        <li><a href="#deseqanalysis-0-2-12-2019-11-19">0.2.12</a></li>
       </ul>
     </div>
   </div>
