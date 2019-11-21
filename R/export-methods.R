@@ -4,6 +4,9 @@
 ## DESeqResults can inherit from DataFrame without modification.
 
 
+## FIXME Add `alpha` and `lfcThreshold` support here.
+
+
 
 #' @name export
 #' @inherit bioverbs::export
