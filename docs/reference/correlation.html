@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.14</span>
       </span>
     </div>
 
@@ -202,7 +202,7 @@ If <code>NULL</code>, calculates correlation matrix only on the primary assay.</
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqResults ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>results</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='input'><span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>results</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>2L</span>)</div><div class='output co'>#&gt; <span class='message'>treatment_D_vs_C (unshrunken LFC)</span></div><div class='input'><span class='fu'>correlation</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt; <span class='message'>Calculating pearson correlation on 500 values.</span></div><div class='output co'>#&gt; [1] 0.3557595</div><div class='input'>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='input'><span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>2L</span>)</div><div class='output co'>#&gt; <span class='message'>treatment_D_vs_C (unshrunken LFC)</span></div><div class='input'><span class='fu'>correlation</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt; <span class='message'>Calculating pearson correlation on 500 values.</span></div><div class='output co'>#&gt; [1] 0.3557595</div><div class='input'>
 <span class='co'>## DESeqAnalysis ====</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>deseq</span>
 <span class='fu'>correlation</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>2L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>treatment_D_vs_C (unshrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Calculating pearson correlation on 500 values.</span></div><div class='output co'>#&gt; [1] 0.3557595</div></pre>
