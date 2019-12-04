@@ -73,7 +73,7 @@ manually relevel factor reference levels to use the required coef argument." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.14</span>
       </span>
     </div>
 
@@ -153,7 +153,7 @@ Pairwise contrast vector:</p><ol>
 </ol>
 
 <p>Numerator and denominator values correspond to grouping factor column.
-See <code>results()</code> for details. Note that we're intentionally being more
+See <code><a href='results.html'>results()</a></code> for details. Note that we're intentionally being more
 strict about the input format here.</p></td>
     </tr>
     </table>
@@ -190,20 +190,20 @@ be used with apeglm <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>DESeq2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DESeq2/man/makeExampleDESeqDataSet.html'>makeExampleDESeqDataSet</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000L</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>12L</span>)
 <span class='no'>dds</span>$<span class='no'>condition</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>4L</span>)], <span class='kw'>each</span> <span class='kw'>=</span> <span class='fl'>3L</span>))
-<span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>DESeq2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DESeq2/man/DESeq.html'>DESeq</a></span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; <span class='message'>estimating size factors</span></div><div class='output co'>#&gt; <span class='message'>estimating dispersions</span></div><div class='output co'>#&gt; <span class='message'>gene-wise dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>mean-dispersion relationship</span></div><div class='output co'>#&gt; <span class='message'>final dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>fitting model and testing</span></div><div class='input'><span class='fu'>resultsNames</span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; [1] "Intercept"        "condition_B_vs_A" "condition_C_vs_A" "condition_D_vs_A"</div><div class='input'>
+<span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>DESeq2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DESeq2/man/DESeq.html'>DESeq</a></span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; <span class='message'>estimating size factors</span></div><div class='output co'>#&gt; <span class='message'>estimating dispersions</span></div><div class='output co'>#&gt; <span class='message'>gene-wise dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>mean-dispersion relationship</span></div><div class='output co'>#&gt; <span class='message'>final dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>fitting model and testing</span></div><div class='input'><span class='fu'><a href='resultsNames.html'>resultsNames</a></span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; [1] "Intercept"        "condition_B_vs_A" "condition_C_vs_A" "condition_D_vs_A"</div><div class='input'>
 <span class='co'>## Contrast C vs. B.</span>
 <span class='no'>contrast</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>factor</span> <span class='kw'>=</span> <span class='st'>"condition"</span>, <span class='kw'>numerator</span> <span class='kw'>=</span> <span class='st'>"C"</span>, <span class='kw'>denominator</span> <span class='kw'>=</span> <span class='st'>"B"</span>)
 
 <span class='co'>## Unshrunken DESeqResults.</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>results</span>(<span class='no'>dds</span>, <span class='kw'>contrast</span> <span class='kw'>=</span> <span class='no'>contrast</span>)
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>dds</span>, <span class='kw'>contrast</span> <span class='kw'>=</span> <span class='no'>contrast</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; [1] "DESeqResults"
 #&gt; attr(,"package")
-#&gt; [1] "DESeq2"</div><div class='input'><span class='fu'>lfcShrinkType</span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; [1] "unshrunken"</div><div class='input'>
+#&gt; [1] "DESeq2"</div><div class='input'><span class='fu'><a href='lfcShrinkType.html'>lfcShrinkType</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; [1] "unshrunken"</div><div class='input'>
 <span class='co'>## Shrunken DESeqResults, using apeglm via `lfcShrink()`.</span>
 <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"apeglm"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
     <span class='no'>shrink</span> <span class='kw'>&lt;-</span> <span class='fu'>apeglmResults</span>(<span class='no'>dds</span>, <span class='kw'>contrast</span> <span class='kw'>=</span> <span class='no'>contrast</span>)
     <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>shrink</span>)
-    <span class='fu'>lfcShrinkType</span>(<span class='no'>shrink</span>)
+    <span class='fu'><a href='lfcShrinkType.html'>lfcShrinkType</a></span>(<span class='no'>shrink</span>)
 }</div><div class='output co'>#&gt; <span class='message'>Design: ~condition</span></div><div class='output co'>#&gt; <span class='message'>using pre-existing size factors</span></div><div class='output co'>#&gt; <span class='message'>estimating dispersions</span></div><div class='output co'>#&gt; <span class='message'>found already estimated dispersions, replacing these</span></div><div class='output co'>#&gt; <span class='message'>gene-wise dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>mean-dispersion relationship</span></div><div class='output co'>#&gt; <span class='message'>final dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>fitting model and testing</span></div><div class='output co'>#&gt; <span class='message'>Contrast: condition_C_vs_B</span>
 #&gt; <span class='message'>Coef: 3</span></div><div class='output co'>#&gt; [1] "apeglm"</div></pre>
   </div>
