@@ -1,8 +1,3 @@
-## FIXME Rework to inherit from DESeqDataSet?
-## Then if we resize, make sure DESeqTransform updates.
-
-
-
 ## > showClass("missingOrNULL")
 setClassUnion(name = "missingOrNULL", members = c("missing", "NULL"))
 
