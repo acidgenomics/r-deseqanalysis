@@ -1,6 +1,6 @@
 #' @name deg
 #' @inherit bioverbs::deg
-#' @note Updated 2019-11-08.
+#' @note Updated 2019-12-04.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -106,12 +106,11 @@ setMethod(
 
 
 
-## Updated 2019-11-08.
+## Updated 2019-12-04.
 `deg,DESeqAnalysis` <-  # nolint
     function(
         object,
         i,
-        direction = c("both", "up", "down"),
         ...
     ) {
         ## nocov start
@@ -120,15 +119,10 @@ setMethod(
         if ("results" %in% names(call)) {
             stop("'results' is defunct in favor of 'i'.")
         }
-        assert(isSubset(
-            x = setdiff(names(call), ""),
-            y = names(formals())
-        ))
         rm(call)
         ## nocov end
         res <- results(object = object, i = i)
-        direction <- match.arg(direction)
-        deg(res, direction = direction)
+        deg(object = res, ...)
     }
 
 
