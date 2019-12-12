@@ -1,3 +1,10 @@
+## DESeqAnalysis 0.2.14 (2019-12-04)
+
+### Minor changes
+
+- `deg`: Fixed `DESeqAnalysis` method passthrough to `DESeqResults`, allowing
+  use of `alpha` and `lfcThreshold`, for post-hoc cutoffs.
+
 ## DESeqAnalysis 0.2.13 (2019-11-19)
 
 ### Minor changes

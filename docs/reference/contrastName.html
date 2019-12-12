@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.14</span>
       </span>
     </div>
 
@@ -182,7 +182,7 @@ Contrast name.</p>
 
     <div class='dont-index'>
 <ul>
-<li><p><code>contrastNames()</code>.</p></li>
+<li><p><code><a href='resultsNames.html'>contrastNames()</a></code>.</p></li>
 <li><p><code><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>resultsNames()</a></code>.</p></li>
 </ul>
 </div>
@@ -191,7 +191,7 @@ Contrast name.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqResults ====</span>
-<span class='no'>object</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqResults"</span>)
+<span class='no'>object</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.html'>as</a></span>(<span class='no'>deseq</span>, <span class='st'>"DESeqResults"</span>)
 <span class='fu'>contrastName</span>(<span class='no'>object</span>)</div><div class='output co'>#&gt; [1] "condition_B_vs_A"</div><div class='input'>
 <span class='co'>## DESeqAnalysis ====</span>
 <span class='fu'>contrastName</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; [1] "condition_B_vs_A"</div></pre>

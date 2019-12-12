@@ -1,10 +1,3 @@
-## Need to add method for DESeqAnalysisList.
-
-## DESeqTransform can inherit from SummarizedExperiment without modification.
-## DESeqResults can inherit from DataFrame without modification.
-
-
-
 #' @name export
 #' @inherit bioverbs::export
 #' @note Size-factor normalized coutns and FPKM values are calculated on the fly

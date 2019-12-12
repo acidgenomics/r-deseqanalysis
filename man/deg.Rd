@@ -15,7 +15,7 @@ deg(object, ...)
   direction = c("both", "up", "down")
 )
 
-\S4method{deg}{DESeqAnalysis}(object, i, direction = c("both", "up", "down"), ...)
+\S4method{deg}{DESeqAnalysis}(object, i, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -47,7 +47,7 @@ Gene identifiers.
 Differentially expressed genes
 }
 \note{
-Updated 2019-11-08.
+Updated 2019-12-04.
 }
 \examples{
 data(deseq)

@@ -1,5 +1,5 @@
 ---
-## Updated 2019-10-11.
+## Updated 2019-12-12.
 params:
   title: "Differential expression using DESeq2"
   
@@ -79,7 +79,7 @@ invisible(mapply(
         markdownHeader(results, level = 2L, asis = TRUE)
         print(plotMA(
             object = object,
-            results = results,
+            i = results,
             lfcShrink = params$lfc_shrink
         ))
     },
@@ -100,7 +100,7 @@ invisible(mapply(
         markdownHeader(results, level = 2L, asis = TRUE)
         print(plotVolcano(
             object = object,
-            results = results,
+            i = results,
             lfcShrink = params$lfc_shrink
         ))
     },
@@ -122,7 +122,7 @@ invisible(mapply(
         markdownHeader(results, level = 2L, asis = TRUE)
         print(plotDEGPCA(
             object = object,
-            results = results,
+            i = results,
             contrastSamples = contrastSamples
         ))
     },
@@ -146,7 +146,7 @@ invisible(mapply(
         markdownHeader(results, level = 2L, asis = TRUE)
         plotDEGHeatmap(
             object = object,
-            results = results,
+            i = results,
             contrastSamples = contrastSamples,
             lfcShrink = params$lfc_shrink
         )
@@ -171,7 +171,7 @@ invisible(mapply(
         markdownHeader(results, level = 2L, asis = TRUE)
         topTables(
             object = object,
-            results = results,
+            i = results,
             n = n,
             lfcShrink = params$lfc_shrink
         )
