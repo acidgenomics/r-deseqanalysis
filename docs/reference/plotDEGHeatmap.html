@@ -74,7 +74,7 @@ plotHeatmap() are also supported by this function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.15</span>
       </span>
     </div>
 
@@ -131,7 +131,11 @@ manual input of a gene vector. All of the optional parameters for
 <span class='fu'>plotDEGHeatmap</span>(
   <span class='no'>object</span>,
   <span class='no'>DESeqTransform</span>,
+  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>
 )
 
@@ -150,9 +154,32 @@ manual input of a gene vector. All of the optional parameters for
       <td><p><code>DESeqTransform</code>.</p></td>
     </tr>
     <tr>
+      <th>alpha</th>
+      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
+Adjusted P value ("alpha") cutoff. If left <code>NULL</code>, will use the cutoff
+defined in the object.</p></td>
+    </tr>
+    <tr>
+      <th>lfcThreshold</th>
+      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
+Log fold change ratio (base 2) cutoff threshold. If left <code>NULL</code>, will use
+the cutoff defined in the object.</p></td>
+    </tr>
+    <tr>
       <th>direction</th>
       <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
 Plot <code>"both"</code>, <code>"up"</code>, or <code>"down"</code> directions.</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>, <code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
+Include contrast name as title?
+Can manually define as <code>character</code>.</p></td>
+    </tr>
+    <tr>
+      <th>subtitle</th>
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
+Include subtitle containing DEG information?</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -197,7 +224,7 @@ method defined in acidplots.</p></li>
 </ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-11-19.</p>
+    <p>Updated 2019-12-13.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
