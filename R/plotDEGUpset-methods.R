@@ -27,25 +27,44 @@ NULL
 
 
 
-## Updated 2019-11-19.
+## Updated 2019-12-13.
 `plotDEGUpset,DESeqAnalysis` <-  # nolint
-    function(object) {
+    function(
+        object,
+        alpha = NULL,
+        lfcThreshold = NULL,
+        direction = c("both", "up", "down")
+    ) {
+        direction <- match.arg(direction)
         suppressMessages(
             degPerContrast <- mapply(
                 i = resultsNames(object),
                 MoreArgs = list(object = object),
                 FUN = function(i, object) {
-                    down <- deg(
-                        object = object,
-                        i = i,
-                        direction = "down"
+                    if (isSubset(direction, c("both", "down"))) {
+                        down <- deg(
+                            object = object,
+                            i = i,
+                            direction = "down",
+                            alpha = alpha,
+                            lfcThreshold = lfcThreshold
+                        )
+                    }
+                    if (isSubset(direction, c("both", "up"))) {
+                        up <- deg(
+                            object = object,
+                            i = i,
+                            direction = "up",
+                            alpha = alpha,
+                            lfcThreshold = lfcThreshold
+                        )
+                    }
+                    switch(
+                        EXPR = direction,
+                        "both" = list(down = down, up = up),
+                        "down" = list(down = down),
+                        "up" = list(up = up)
                     )
-                    up <- deg(
-                        object = object,
-                        i = i,
-                        direction = "up"
-                    )
-                    list(down = down, up = up)
                 },
                 SIMPLIFY = FALSE,
                 USE.NAMES = TRUE
