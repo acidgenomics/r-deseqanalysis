@@ -14,10 +14,12 @@ NULL
         object,
         alpha = NULL,
         lfcThreshold = NULL,
-        color
+        fill,
+        flip = TRUE
     ) {
         validObject(object)
-        direction <- match.arg(direction)
+        assert(isFlag(flip))
+        direction <- "both"
         degPerContrast <- .degPerContrast(
             object = object,
             alpha = alpha,
@@ -33,7 +35,10 @@ NULL
             colnames = c("rowname", "colname", "value")
         ))
         assert(is.factor(data[["rowname"]]))
-        data[["rowname"]] <- factor(data[["rowname"]], levels = levels)
+        data[["rowname"]] <- factor(
+            x = data[["rowname"]],
+            levels = levels
+        )
         p <- ggplot(
             data = data,
             mapping = aes(
@@ -49,20 +54,22 @@ NULL
                 position = position_stack(vjust = 0.5)
             ) +
             labs(
-                x = "sample",
-                y = "n",
+                x = "contrast",
+                y = "differentially expressed genes",
                 fill = "direction"
             )
-        p <- acidplots::acid_coord_flip(p)
-        ## Color.
-        if (is(color, "ScaleDiscrete")) {
-            p <- p + color
+        if (isTRUE(flip)) {
+            p <- acid_coord_flip(p)
+        }
+        ## Fill.
+        if (is(fill, "ScaleDiscrete")) {
+            p <- p + fill
         }
         p
     }
 
-formals(`plotDEGStackedBar,DESeqAnalysis`)[["color"]] <-
-    formalsList[["color.discrete"]]
+formals(`plotDEGStackedBar,DESeqAnalysis`)[["fill"]] <-
+    formalsList[["fill.discrete"]]
 
 
 
