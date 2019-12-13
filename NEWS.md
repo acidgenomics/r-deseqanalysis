@@ -1,3 +1,10 @@
+## DESeqAnalysis 0.2.15 (2019-12-13)
+
+### Minor changes
+
+- Now allowing the user to override internal `alpha` and `lfcThreshold` for
+  these plots: `plotDEGPCA`, `plotDEGHeatmap`, `plotMA`, `plotVolcano`.
+
 ## DESeqAnalysis 0.2.14 (2019-12-04)
 
 ### Minor changes
