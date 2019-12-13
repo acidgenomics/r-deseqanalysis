@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit bioverbs::plotVolcano
-#' @note Updated 2019-11-19.
+#' @note Updated 2019-12-13.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -66,11 +66,12 @@ NULL
 
 
 
-## Updated 2019-09-13.
+## Updated 2019-12-13.
 `plotVolcano,DESeqResults` <-  # nolint
     function(
         object,
-        ylim = 1e-10,
+        alpha = NULL,
+        lfcThreshold = NULL,
         genes = NULL,
         gene2symbol = NULL,
         ntop = 0L,
@@ -82,20 +83,23 @@ NULL
         ),
         pointSize = 2L,
         pointAlpha = 0.8,
+        ylim = 1e-10,
         histograms = FALSE,
         return = c("ggplot", "DataFrame")
     ) {
         validObject(object)
-        alpha <- metadata(object)[["alpha"]]
-        lfcThreshold <- metadata(object)[["lfcThreshold"]]
+        if (is.null(alpha)) {
+            alpha <- metadata(object)[["alpha"]]
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- metadata(object)[["lfcThreshold"]]
+        }
         lfcShrinkType <- lfcShrinkType(object)
         assert(
             isAlpha(alpha),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
             isString(lfcShrinkType),
-            isNumber(ylim),
-            isInRange(ylim, lower = 1e-100, upper = 1e-3),
             isInt(ntop),
             isNonNegative(ntop),
             isCharacter(pointColor),
@@ -106,6 +110,8 @@ NULL
             isNumber(pointSize),
             isNonNegative(pointSize),
             isPercentage(pointAlpha),
+            isNumber(ylim),
+            isInRange(ylim, lower = 1e-100, upper = 1e-3),
             isFlag(histograms)
         )
         direction <- match.arg(direction)
