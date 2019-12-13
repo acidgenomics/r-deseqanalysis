@@ -1,8 +1,3 @@
-## Rethink this approach, using `enriched()?`? Consider referring to method
-## support in pfgsea, for example.
-
-
-
 #' @name plotDEGUpset
 #' @inherit bioverbs::plotDEGUpset
 #' @note Updated 2019-11-19.
