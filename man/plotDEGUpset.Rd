@@ -7,10 +7,26 @@
 \usage{
 plotDEGUpset(object, ...)
 
-\S4method{plotDEGUpset}{DESeqAnalysis}(object)
+\S4method{plotDEGUpset}{DESeqAnalysis}(
+  object,
+  alpha = NULL,
+  lfcThreshold = NULL,
+  direction = c("both", "up", "down")
+)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{alpha}{\code{numeric(1)} or \code{NULL}.
+Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
+defined in the object.}
+
+\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
+Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
+the cutoff defined in the object.}
+
+\item{direction}{\code{character(1)}.
+Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
 \item{...}{Additional arguments.}
 }
