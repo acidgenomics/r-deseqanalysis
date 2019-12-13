@@ -2,7 +2,7 @@
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
 #' @note We are not allowing post hoc `alpha` or `lfcThreshold` cutoffs here.
-#' @note Updated 2019-11-19.
+#' @note Updated 2019-12-13.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual representation
@@ -16,7 +16,6 @@
 #' geneplotter instead of ggplot2. I prefer using ggplot2 instead, so the
 #' primary methods defined here in the package mask DESeq2.
 #'
-#' @inheritParams DESeq2::plotMA
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
@@ -67,10 +66,12 @@ NULL
 
 
 
-## Updated 2019-09-13.
+## Updated 2019-12-13.
 `plotMA,DESeqResults` <-  # nolint
     function(
         object,
+        alpha = NULL,
+        lfcThreshold = NULL,
         genes = NULL,
         gene2symbol = NULL,
         ntop = 0L,
@@ -85,8 +86,12 @@ NULL
         return = c("ggplot", "DataFrame")
     ) {
         validObject(object)
-        alpha <- metadata(object)[["alpha"]]
-        lfcThreshold <- metadata(object)[["lfcThreshold"]]
+        if (is.null(alpha)) {
+            alpha <- metadata(object)[["alpha"]]
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- metadata(object)[["lfcThreshold"]]
+        }
         lfcShrinkType <- lfcShrinkType(object)
         assert(
             isAlpha(alpha),
