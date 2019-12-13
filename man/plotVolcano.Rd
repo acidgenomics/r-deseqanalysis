@@ -10,7 +10,8 @@ plotVolcano(object, ...)
 
 \S4method{plotVolcano}{DESeqResults}(
   object,
-  ylim = 1e-10,
+  alpha = NULL,
+  lfcThreshold = NULL,
   genes = NULL,
   gene2symbol = NULL,
   ntop = 0L,
@@ -20,6 +21,7 @@ plotVolcano(object, ...)
     acidplots::lightPalette[["gray"]]),
   pointSize = 2L,
   pointAlpha = 0.8,
+  ylim = 1e-10,
   histograms = FALSE,
   return = c("ggplot", "DataFrame")
 )
@@ -29,9 +31,13 @@ plotVolcano(object, ...)
 \arguments{
 \item{object}{Object.}
 
-\item{ylim}{\code{numeric(1)}.
-Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets
-containing highly significant P values (e.g. \code{1e-100}).}
+\item{alpha}{\code{numeric(1)} or \code{NULL}.
+Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
+defined in the object.}
+
+\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
+Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
+the cutoff defined in the object.}
 
 \item{genes}{\code{character}.
 Gene identifiers.}
@@ -55,6 +61,10 @@ In the range of 1-3 is generally recommended.}
 
 \item{pointAlpha}{\code{numeric(1)} (\code{0}-\code{1}).
 Alpha transparency level.}
+
+\item{ylim}{\code{numeric(1)}.
+Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets
+containing highly significant P values (e.g. \code{1e-100}).}
 
 \item{histograms}{\code{logical(1)}.
 Show LFC and P value histograms.}
@@ -87,7 +97,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2019-11-19.
+Updated 2019-12-13.
 }
 \examples{
 data(deseq)
