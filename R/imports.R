@@ -13,18 +13,19 @@
 #'   cor do.call head mcols mcols<- metadata metadata<- na.omit
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom UpSetR fromList
-#' @importFrom acidplots matchLabels plotHeatmap scale_color_synesthesia_d
-#'   plotUpset
+#' @importFrom acidplots acid_coord_flip matchLabels plotHeatmap
+#'   scale_color_synesthesia_d plotUpset
 #' @importFrom basejump Gene2Symbol as_tibble autopadZeros camelCase
 #'   convertSampleIDsToNames decode droplevels import initDir
 #'   interestingGroups<- leftJoin makeNames mapGenesToRownames markdownHeader
-#'   markdownList matchInterestingGroups matchesGene2Symbol metadata2
+#'   markdownList matchInterestingGroups matchesGene2Symbol melt metadata2
 #'   metadata2<- printString realpath removeNA showSlotInfo snakeCase
 #'   standardizeCall
 #' @importFrom cowplot draw_plot ggdraw
-#' @importFrom ggplot2 aes annotation_logticks element_blank geom_density
-#'   geom_hline geom_point geom_vline ggplot guides labs scale_color_manual
-#'   scale_x_continuous scale_y_continuous theme
+#' @importFrom ggplot2 aes annotation_logticks element_blank geom_bar
+#'   geom_density geom_hline geom_point geom_text geom_vline ggplot guides labs
+#'   position_stack scale_color_manual scale_x_continuous scale_y_continuous
+#'   theme
 #' @importFrom goalie areDisjointSets areIntersectingSets areSameLength
 #'   areSetEqual assert bapply hasLength hasNames hasLength hasRows hasRownames
 #'   hasValidDimnames hasValidNames isAFile isAlpha isAny isCharacter isFlag
