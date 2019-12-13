@@ -1,10 +1,6 @@
-## Do not allow post hoc alpha or lfcThreshold cutoffs here.
-
-
-
 #' @name plotDEGHeatmap
 #' @inherit bioverbs::plotDEGHeatmap
-#' @note Updated 2019-11-19.
+#' @note Updated 2019-12-13.
 #'
 #' @inheritParams acidplots::plotHeatmap
 #' @inheritParams acidroxygen::params
@@ -32,11 +28,13 @@ NULL
 ## This method is used in F1000 paper and needs to be included. Note that in
 ## newer versions of bcbioRNASeq, this step won't work because we've slotted the
 ## rlog/vst counts in as a matrix instead of DESeqTransform.
-## Updated 2019-11-19.
+## Updated 2019-12-13.
 `plotDEGHeatmap,DESeqResults` <-  # nolint
     function(
         object,
         DESeqTransform,  # nolint
+        alpha = NULL,
+        lfcThreshold = NULL,
         direction = c("both", "up", "down"),
         ...
     ) {
@@ -51,8 +49,12 @@ NULL
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
-        alpha <- metadata(res)[["alpha"]]
-        lfcThreshold <- metadata(res)[["lfcThreshold"]]
+        if (is.null(alpha)) {
+            alpha <- metadata(res)[["alpha"]]
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- metadata(res)[["lfcThreshold"]]
+        }
         lfcShrinkType <- lfcShrinkType(object)
         assert(
             isAlpha(alpha),
@@ -61,7 +63,12 @@ NULL
             isString(lfcShrinkType)
         )
         ## Get the character vector of DEGs.
-        deg <- deg(res, direction = direction)
+        deg <- deg(
+            object = res,
+            alpha = alpha,
+            lfcThreshold = lfcThreshold,
+            direction = direction
+        )
         if (length(deg) < .minDEGThreshold) {
             message(sprintf(
                 fmt = "Fewer than %s DEGs to plot. Skipping.",
@@ -77,7 +84,8 @@ NULL
             length(deg), " genes;  ",
             "alpha: ", alpha, ";  ",
             "lfcThreshold: ", lfcThreshold, ";  ",
-            "lfcShrink: ", lfcShrinkType
+            "lfcShrink: ", lfcShrinkType, ";  ",
+            "direction: ", direction
         )
         if (lfcThreshold > 0L) {
             title <- paste0(title, "; lfc > ", lfcThreshold)
