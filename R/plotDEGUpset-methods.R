@@ -39,7 +39,8 @@ NULL
             object = object,
             alpha = alpha,
             lfcThreshold = lfcThreshold,
-            direction = direction
+            direction = direction,
+            n = FALSE
         )
         ## This will collapse the nested lists into a single flat list.
         listInput <- do.call(what = c, args = degPerContrast)
