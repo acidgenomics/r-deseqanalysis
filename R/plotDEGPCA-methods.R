@@ -83,7 +83,8 @@ NULL
         subtitle <- paste0(
             length(deg), " genes", ";  ",
             "alpha: ", alpha, ";  ",
-            "lfcThreshold: ", lfcThreshold
+            "lfcThreshold: ", lfcThreshold, ";  ",
+            "direction: ", direction
         )
         ## Using SummarizedExperiment method here.
         args <- list(
