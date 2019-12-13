@@ -67,6 +67,53 @@
 
 
 
+## Updated 2019-12-13.
+.degPerContrast <- function(
+    object,
+    alpha = NULL,
+    lfcThreshold = NULL,
+    direction = c("both", "up", "down")
+) {
+    assert(is(object, "DESeqAnalysis"))
+    direction <- match.arg(direction)
+    suppressMessages(
+        mapply(
+            i = resultsNames(object),
+            MoreArgs = list(object = object),
+            FUN = function(i, object) {
+                if (isSubset(direction, c("both", "down"))) {
+                    down <- deg(
+                        object = object,
+                        i = i,
+                        direction = "down",
+                        alpha = alpha,
+                        lfcThreshold = lfcThreshold
+                    )
+                }
+                if (isSubset(direction, c("both", "up"))) {
+                    up <- deg(
+                        object = object,
+                        i = i,
+                        direction = "up",
+                        alpha = alpha,
+                        lfcThreshold = lfcThreshold
+                    )
+                }
+                switch(
+                    EXPR = direction,
+                    "both" = list(down = down, up = up),
+                    "down" = list(down = down),
+                    "up" = list(up = up)
+                )
+            },
+            SIMPLIFY = FALSE,
+            USE.NAMES = TRUE
+        )
+    )
+}
+
+
+
 ## Updated 2019-07-23.
 .ddsMsg <- function() {
     message(sprintf(
