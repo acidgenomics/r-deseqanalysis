@@ -65,6 +65,7 @@ NULL
                 USE.NAMES = TRUE
             )
         )
+        ## This will collapse the nested lists into a single flat list.
         listInput <- do.call(what = c, args = degPerContrast)
         ## Using "_" instead of "." for name concatenation.
         names(listInput) <- makeNames(names(listInput), unique = TRUE)
