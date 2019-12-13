@@ -22,6 +22,10 @@ NULL
 
 
 
+
+
+
+
 ## Updated 2019-12-13.
 `plotDEGUpset,DESeqAnalysis` <-  # nolint
     function(
@@ -31,39 +35,11 @@ NULL
         direction = c("both", "up", "down")
     ) {
         direction <- match.arg(direction)
-        suppressMessages(
-            degPerContrast <- mapply(
-                i = resultsNames(object),
-                MoreArgs = list(object = object),
-                FUN = function(i, object) {
-                    if (isSubset(direction, c("both", "down"))) {
-                        down <- deg(
-                            object = object,
-                            i = i,
-                            direction = "down",
-                            alpha = alpha,
-                            lfcThreshold = lfcThreshold
-                        )
-                    }
-                    if (isSubset(direction, c("both", "up"))) {
-                        up <- deg(
-                            object = object,
-                            i = i,
-                            direction = "up",
-                            alpha = alpha,
-                            lfcThreshold = lfcThreshold
-                        )
-                    }
-                    switch(
-                        EXPR = direction,
-                        "both" = list(down = down, up = up),
-                        "down" = list(down = down),
-                        "up" = list(up = up)
-                    )
-                },
-                SIMPLIFY = FALSE,
-                USE.NAMES = TRUE
-            )
+        degPerContrast <- .degPerContrast(
+            object = object,
+            alpha = alpha,
+            lfcThreshold = lfcThreshold,
+            direction = direction
         )
         ## This will collapse the nested lists into a single flat list.
         listInput <- do.call(what = c, args = degPerContrast)
