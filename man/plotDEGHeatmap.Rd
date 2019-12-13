@@ -14,6 +14,8 @@ plotDEGHeatmap(object, ...)
   alpha = NULL,
   lfcThreshold = NULL,
   direction = c("both", "up", "down"),
+  title = TRUE,
+  subtitle = TRUE,
   ...
 )
 
@@ -34,6 +36,13 @@ the cutoff defined in the object.}
 
 \item{direction}{\code{character(1)}.
 Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
+
+\item{title}{\code{logical(1)}, \code{character(1)}.
+Include contrast name as title?
+Can manually define as \code{character}.}
+
+\item{subtitle}{\code{logical(1)}.
+Include subtitle containing DEG information?}
 
 \item{...}{Additional arguments.}
 

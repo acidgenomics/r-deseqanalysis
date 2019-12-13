@@ -5,6 +5,11 @@
 #' @inheritParams acidplots::plotHeatmap
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
+#' @param title `logical(1)`, `character(1)`.
+#'   Include contrast name as title?
+#'   Can manually define as `character`.
+#' @param subtitle `logical(1)`.
+#'   Include subtitle containing DEG information?
 #' @param ... Additional arguments.
 #'
 #' @examples
@@ -36,6 +41,8 @@ NULL
         alpha = NULL,
         lfcThreshold = NULL,
         direction = c("both", "up", "down"),
+        title = TRUE,
+        subtitle = TRUE,
         ...
     ) {
         validObject(object)
@@ -43,7 +50,9 @@ NULL
         assert(
             is(object, "DESeqResults"),
             is(DESeqTransform, "DESeqTransform"),
-            identical(rownames(object), rownames(DESeqTransform))
+            identical(rownames(object), rownames(DESeqTransform)),
+            isFlag(title) || isCharacter(title) || is.null(title),
+            isFlag(subtitle)
         )
         direction <- match.arg(direction)
         ## Rename objects internally to make the code more readable.
@@ -79,16 +88,20 @@ NULL
         ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
         ## Title.
-        title <- paste0(
-            contrastName(res, format = "title"), "\n",
-            length(deg), " genes;  ",
-            "alpha: ", alpha, ";  ",
-            "lfcThreshold: ", lfcThreshold, ";  ",
-            "lfcShrink: ", lfcShrinkType, ";  ",
-            "direction: ", direction
-        )
-        if (lfcThreshold > 0L) {
-            title <- paste0(title, "; lfc > ", lfcThreshold)
+        if (isTRUE(title)) {
+            title <- contrastName(res, format = "title")
+        } else if (identical(title, FALSE)) {
+            title <- NULL
+        }
+        if (isString(title) && isTRUE(subtitle)) {
+            title <- paste0(
+                title, "\n",
+                length(deg), " genes;  ",
+                "alpha: ", alpha, ";  ",
+                "lfcThreshold: ", lfcThreshold, ";  ",
+                "lfcShrink: ", lfcShrinkType, ";  ",
+                "direction: ", direction
+            )
         }
         ## Using SummarizedExperiment method defined in acidplots here.
         args <- list(
