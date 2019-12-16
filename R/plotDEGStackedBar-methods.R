@@ -50,7 +50,7 @@ NULL
         ) +
             geom_bar(stat = "identity") +
             geom_text(
-                size = 3,
+                size = 3L,
                 position = position_stack(vjust = 0.5)
             ) +
             labs(
