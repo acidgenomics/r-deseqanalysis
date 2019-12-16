@@ -1,6 +1,6 @@
 #' @name plotCounts
 #' @inherit acidplots::plotCounts
-#' @note Updated 2019-11-18.
+#' @note Updated 2019-12-16.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -97,9 +97,11 @@ setMethod(
 
 
 
-## Updated 2019-11-18.
+## Putting the args after `...` here so we can pass in genes easily as a
+## positional argument, during interactive use.
+## Updated 2019-12-16.
 `plotCounts,DESeqAnalysis` <-  # nolint
-    function(object, transform = FALSE, ...) {
+    function(object, ..., transform = FALSE) {
         validObject(object)
         assert(isFlag(transform))
         if (isTRUE(transform)) {
