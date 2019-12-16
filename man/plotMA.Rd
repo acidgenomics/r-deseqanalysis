@@ -11,6 +11,8 @@ plotMA(object, ...)
 
 \S4method{plotMA}{DESeqResults}(
   object,
+  alpha = NULL,
+  lfcThreshold = NULL,
   genes = NULL,
   gene2symbol = NULL,
   ntop = 0L,
@@ -29,6 +31,14 @@ plotMA(object, ...)
 \item{object}{
     A data object, typically containing count values from an RNA-Seq experiment or microarray intensity values.
   }
+
+\item{alpha}{\code{numeric(1)} or \code{NULL}.
+Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
+defined in the object.}
+
+\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
+Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
+the cutoff defined in the object.}
 
 \item{genes}{\code{character}.
 Gene identifiers.}
@@ -90,7 +100,7 @@ argument automatically defined.
 \note{
 We are not allowing post hoc \code{alpha} or \code{lfcThreshold} cutoffs here.
 
-Updated 2019-11-19.
+Updated 2019-12-13.
 }
 \section{plotMA2 aliases}{
 

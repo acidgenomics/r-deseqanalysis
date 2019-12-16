@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.15</span>
       </span>
     </div>
 
@@ -126,6 +126,8 @@
 <span class='co'># S4 method for DESeqResults</span>
 <span class='fu'>plotMA</span>(
   <span class='no'>object</span>,
+  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>genes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>gene2symbol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
@@ -147,6 +149,18 @@
     <tr>
       <th>object</th>
       <td><p>A data object, typically containing count values from an RNA-Seq experiment or microarray intensity values.</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
+Adjusted P value ("alpha") cutoff. If left <code>NULL</code>, will use the cutoff
+defined in the object.</p></td>
+    </tr>
+    <tr>
+      <th>lfcThreshold</th>
+      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
+Log fold change ratio (base 2) cutoff threshold. If left <code>NULL</code>, will use
+the cutoff defined in the object.</p></td>
     </tr>
     <tr>
       <th>genes</th>
@@ -228,7 +242,7 @@ argument automatically defined.</p></li>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>We are not allowing post hoc <code>alpha</code> or <code>lfcThreshold</code> cutoffs here.</p>
-<p>Updated 2019-11-19.</p>
+<p>Updated 2019-12-13.</p>
     <h2 class="hasAnchor" id="plotma-aliases"><a class="anchor" href="#plotma-aliases"></a>plotMA2 aliases</h2>
 
     

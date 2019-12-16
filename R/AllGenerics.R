@@ -31,6 +31,17 @@ setGeneric(
 
 
 
+#' @rdname plotDEGStackedBar
+#' @export
+setGeneric(
+    name = "plotDEGStackedBar",
+    def = function(object, ...) {
+        standardGeneric("plotDEGStackedBar")
+    }
+)
+
+
+
 #' @rdname transformType
 #' @export
 setGeneric(

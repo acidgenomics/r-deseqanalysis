@@ -35,6 +35,8 @@ NULL
     function(
         object,
         DESeqTransform,  # nolint
+        alpha = NULL,
+        lfcThreshold = NULL,
         direction = c("both", "up", "down"),
         ...
     ) {
@@ -49,15 +51,24 @@ NULL
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
-        alpha <- metadata(res)[["alpha"]]
-        lfcThreshold <- metadata(res)[["lfcThreshold"]]
+        if (is.null(alpha)) {
+            alpha <- metadata(res)[["alpha"]]
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- metadata(res)[["lfcThreshold"]]
+        }
         assert(
             isAlpha(alpha),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold)
         )
         ## Get the character vector of DEGs.
-        deg <- deg(object = res, direction = direction)
+        deg <- deg(
+            object = res,
+            alpha = alpha,
+            lfcThreshold = lfcThreshold,
+            direction = direction
+        )
         if (length(deg) < .minDEGThreshold) {
             message(sprintf(
                 fmt = "Fewer than %s DEGs to plot. Skipping.",
@@ -72,7 +83,8 @@ NULL
         subtitle <- paste0(
             length(deg), " genes", ";  ",
             "alpha: ", alpha, ";  ",
-            "lfcThreshold: ", lfcThreshold
+            "lfcThreshold: ", lfcThreshold, ";  ",
+            "direction: ", direction
         )
         ## Using SummarizedExperiment method here.
         args <- list(
