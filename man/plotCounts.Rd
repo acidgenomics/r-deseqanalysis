@@ -13,7 +13,7 @@ plotCounts(object, ...)
 
 \S4method{plotCounts}{DESeqTransform}(object, ...)
 
-\S4method{plotCounts}{DESeqAnalysis}(object, transform = FALSE, ...)
+\S4method{plotCounts}{DESeqAnalysis}(object, ..., transform = FALSE)
 }
 \arguments{
 \item{object}{Object.}
@@ -48,7 +48,7 @@ defined in acidplots package.
 }}
 
 \note{
-Updated 2019-11-18.
+Updated 2019-12-16.
 }
 \examples{
 data(deseq)
