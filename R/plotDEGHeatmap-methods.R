@@ -1,14 +1,15 @@
-## Do not allow post hoc alpha or lfcThreshold cutoffs here.
-
-
-
 #' @name plotDEGHeatmap
 #' @inherit bioverbs::plotDEGHeatmap
-#' @note Updated 2019-11-19.
+#' @note Updated 2019-12-13.
 #'
 #' @inheritParams acidplots::plotHeatmap
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
+#' @param title `logical(1)`, `character(1)`.
+#'   Include contrast name as title?
+#'   Can manually define as `character`.
+#' @param subtitle `logical(1)`.
+#'   Include subtitle containing DEG information?
 #' @param ... Additional arguments.
 #'
 #' @examples
@@ -32,12 +33,16 @@ NULL
 ## This method is used in F1000 paper and needs to be included. Note that in
 ## newer versions of bcbioRNASeq, this step won't work because we've slotted the
 ## rlog/vst counts in as a matrix instead of DESeqTransform.
-## Updated 2019-11-19.
+## Updated 2019-12-13.
 `plotDEGHeatmap,DESeqResults` <-  # nolint
     function(
         object,
         DESeqTransform,  # nolint
+        alpha = NULL,
+        lfcThreshold = NULL,
         direction = c("both", "up", "down"),
+        title = TRUE,
+        subtitle = TRUE,
         ...
     ) {
         validObject(object)
@@ -45,14 +50,20 @@ NULL
         assert(
             is(object, "DESeqResults"),
             is(DESeqTransform, "DESeqTransform"),
-            identical(rownames(object), rownames(DESeqTransform))
+            identical(rownames(object), rownames(DESeqTransform)),
+            isFlag(title) || isCharacter(title) || is.null(title),
+            isFlag(subtitle)
         )
         direction <- match.arg(direction)
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
-        alpha <- metadata(res)[["alpha"]]
-        lfcThreshold <- metadata(res)[["lfcThreshold"]]
+        if (is.null(alpha)) {
+            alpha <- metadata(res)[["alpha"]]
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- metadata(res)[["lfcThreshold"]]
+        }
         lfcShrinkType <- lfcShrinkType(object)
         assert(
             isAlpha(alpha),
@@ -61,7 +72,12 @@ NULL
             isString(lfcShrinkType)
         )
         ## Get the character vector of DEGs.
-        deg <- deg(res, direction = direction)
+        deg <- deg(
+            object = res,
+            alpha = alpha,
+            lfcThreshold = lfcThreshold,
+            direction = direction
+        )
         if (length(deg) < .minDEGThreshold) {
             message(sprintf(
                 fmt = "Fewer than %s DEGs to plot. Skipping.",
@@ -72,15 +88,20 @@ NULL
         ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
         ## Title.
-        title <- paste0(
-            contrastName(res, format = "title"), "\n",
-            length(deg), " genes;  ",
-            "alpha: ", alpha, ";  ",
-            "lfcThreshold: ", lfcThreshold, ";  ",
-            "lfcShrink: ", lfcShrinkType
-        )
-        if (lfcThreshold > 0L) {
-            title <- paste0(title, "; lfc > ", lfcThreshold)
+        if (isTRUE(title)) {
+            title <- contrastName(res, format = "title")
+        } else if (identical(title, FALSE)) {
+            title <- NULL
+        }
+        if (isString(title) && isTRUE(subtitle)) {
+            title <- paste0(
+                title, "\n",
+                length(deg), " genes;  ",
+                "alpha: ", alpha, ";  ",
+                "lfcThreshold: ", lfcThreshold, ";  ",
+                "lfcShrink: ", lfcShrinkType, ";  ",
+                "direction: ", direction
+            )
         }
         ## Using SummarizedExperiment method defined in acidplots here.
         args <- list(

@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.2.14
-Date: 2019-12-04
+Version: 0.2.15
+Date: 2019-12-13
 Authors@R: c(
     person(
         given = "Michael",
@@ -32,11 +32,11 @@ Imports:
     S4Vectors (>= 0.24),
     SummarizedExperiment (>= 1.16),
     UpSetR (>= 1.4),
-    acidplots (>= 0.2.19),
+    acidplots (>= 0.2.20),
     bioverbs (>= 0.2.12),
     cowplot (>= 1.0),
     ggplot2 (>= 3.2),
-    goalie (>= 0.4.0),
+    goalie (>= 0.4.1),
     knitr (>= 1.25),
     rlang (>= 0.4),
     stringr (>= 1.4),

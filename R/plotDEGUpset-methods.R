@@ -1,8 +1,3 @@
-## Rethink this approach, using `enriched()?`? Consider referring to method
-## support in pfgsea, for example.
-
-
-
 #' @name plotDEGUpset
 #' @inherit bioverbs::plotDEGUpset
 #' @note Updated 2019-11-19.
@@ -27,30 +22,27 @@ NULL
 
 
 
-## Updated 2019-11-19.
+
+
+
+
+## Updated 2019-12-13.
 `plotDEGUpset,DESeqAnalysis` <-  # nolint
-    function(object) {
-        suppressMessages(
-            degPerContrast <- mapply(
-                i = resultsNames(object),
-                MoreArgs = list(object = object),
-                FUN = function(i, object) {
-                    down <- deg(
-                        object = object,
-                        i = i,
-                        direction = "down"
-                    )
-                    up <- deg(
-                        object = object,
-                        i = i,
-                        direction = "up"
-                    )
-                    list(down = down, up = up)
-                },
-                SIMPLIFY = FALSE,
-                USE.NAMES = TRUE
-            )
+    function(
+        object,
+        alpha = NULL,
+        lfcThreshold = NULL,
+        direction = c("both", "up", "down")
+    ) {
+        direction <- match.arg(direction)
+        degPerContrast <- .degPerContrast(
+            object = object,
+            alpha = alpha,
+            lfcThreshold = lfcThreshold,
+            direction = direction,
+            n = FALSE
         )
+        ## This will collapse the nested lists into a single flat list.
         listInput <- do.call(what = c, args = degPerContrast)
         ## Using "_" instead of "." for name concatenation.
         names(listInput) <- makeNames(names(listInput), unique = TRUE)

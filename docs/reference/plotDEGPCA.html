@@ -73,7 +73,7 @@ than requiring manual input of a gene vector or subset object." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.15</span>
       </span>
     </div>
 
@@ -126,7 +126,14 @@ than requiring manual input of a gene vector or subset object.</p>
     <pre class="usage"><span class='fu'>plotDEGPCA</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>plotDEGPCA</span>(<span class='no'>object</span>, <span class='no'>DESeqTransform</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='no'>...</span>)
+<span class='fu'>plotDEGPCA</span>(
+  <span class='no'>object</span>,
+  <span class='no'>DESeqTransform</span>,
+  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
+  <span class='no'>...</span>
+)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>plotDEGPCA</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='kw'>contrastSamples</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
@@ -141,6 +148,18 @@ than requiring manual input of a gene vector or subset object.</p>
     <tr>
       <th>DESeqTransform</th>
       <td><p><code>DESeqTransform</code>.</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
+Adjusted P value ("alpha") cutoff. If left <code>NULL</code>, will use the cutoff
+defined in the object.</p></td>
+    </tr>
+    <tr>
+      <th>lfcThreshold</th>
+      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
+Log fold change ratio (base 2) cutoff threshold. If left <code>NULL</code>, will use
+the cutoff defined in the object.</p></td>
     </tr>
     <tr>
       <th>direction</th>

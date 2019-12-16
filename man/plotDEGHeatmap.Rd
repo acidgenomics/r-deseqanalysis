@@ -11,7 +11,11 @@ plotDEGHeatmap(object, ...)
 \S4method{plotDEGHeatmap}{DESeqResults}(
   object,
   DESeqTransform,
+  alpha = NULL,
+  lfcThreshold = NULL,
   direction = c("both", "up", "down"),
+  title = TRUE,
+  subtitle = TRUE,
   ...
 )
 
@@ -22,8 +26,23 @@ plotDEGHeatmap(object, ...)
 
 \item{DESeqTransform}{\code{DESeqTransform}.}
 
+\item{alpha}{\code{numeric(1)} or \code{NULL}.
+Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
+defined in the object.}
+
+\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
+Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
+the cutoff defined in the object.}
+
 \item{direction}{\code{character(1)}.
 Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
+
+\item{title}{\code{logical(1)}, \code{character(1)}.
+Include contrast name as title?
+Can manually define as \code{character}.}
+
+\item{subtitle}{\code{logical(1)}.
+Include subtitle containing DEG information?}
 
 \item{...}{Additional arguments.}
 
@@ -64,7 +83,7 @@ method defined in acidplots.
 }}
 
 \note{
-Updated 2019-11-19.
+Updated 2019-12-13.
 }
 \examples{
 data(deseq)
