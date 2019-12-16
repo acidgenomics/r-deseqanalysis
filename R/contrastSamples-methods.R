@@ -42,7 +42,7 @@ NULL
 ## This has been split out to an internal function, so we can support
 ## interaction effect (difference of differences) contrasts more easily.
 ## Updated 2019-12-16.
-.samplesFromContrast <- function(
+.contrastSamples <- function(
     dds,
     contrast,
     factorCol
@@ -52,6 +52,7 @@ NULL
         isString(contrast),
         isString(factorCol)
     )
+    colData <- colData(dds)
     factor <- colData[[factorCol]]
     assert(is.factor(factor))
     samples <- colnames(dds)
@@ -140,11 +141,6 @@ NULL
         assert(identical(sum(match), 1L))
         factorCol <- names(match)[match]
         message(sprintf("Factor column: %s.", factorCol))
-
-
-
-
-
         ## Look for interaction effect (difference of differences).
         ## e.g. "group_B_vs_A_group_C_vs_A_effect".
         if (isTRUE(grepl(pattern = "_effect$", x = contrast))) {
@@ -155,9 +151,27 @@ NULL
             loc <- str_locate_all(string = x, pattern = factorCol)[[1L]]
             contrast1 <- substr(x = x, start = loc[1,1], stop = loc[2,1] - 2L)
             contrast2 <- substr(x = x, start = loc[2,1], stop = nchar(x))
+            message(sprintf("Contrast 1: %s.", contrast1))
+            samples1 <- .contrastSamples(
+                dds = dds,
+                contrast = contrast1,
+                factorCol = factorCol
+            )
+            message(sprintf("Contrast 2: %s.", contrast2))
+            samples2 <- .contrastSamples(
+                dds = dds,
+                contrast = contrast2,
+                factorCol = factorCol
+            )
         } else {
             interaction <- FALSE
+            samples <- .contrastSamples(
+                dds = dds,
+                contrast = contrast,
+                factorCol = factorCol
+            )
         }
+        samples
 
 
 
