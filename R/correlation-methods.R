@@ -39,7 +39,7 @@ method <- formals(stats::cor)[["method"]]
 
 
 ## Updated 2019-11-08.
-`correlation,DESeqResults` <-  # nolint
+`correlation,DESeqResults,DESeqResults` <-  # nolint
     function(x, y, col = "log2FoldChange", method) {
         assert(
             hasRownames(x),
@@ -62,7 +62,7 @@ method <- formals(stats::cor)[["method"]]
         correlation(x = data[["x"]], y = data[["y"]], method = method)
     }
 
-formals(`correlation,DESeqResults`)[["method"]] <- method
+formals(`correlation,DESeqResults,DESeqResults`)[["method"]] <- method
 
 
 
@@ -74,7 +74,7 @@ setMethod(
         x = "DESeqResults",
         y = "DESeqResults"
     ),
-    definition = `correlation,DESeqResults`
+    definition = `correlation,DESeqResults,DESeqResults`
 )
 
 
