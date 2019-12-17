@@ -76,7 +76,7 @@ NULL
         data <- data[order(data[[alphaCol]]), , drop = FALSE]
         deg <- rownames(data)
         status <- sprintf(
-            fmt = "%d %s %s detected.",
+            fmt = "%d %s %s detected (alpha: %g; lfc: %g).",
             length(deg),
             switch(
                 EXPR = direction,
@@ -88,7 +88,9 @@ NULL
                 n = length(deg),
                 msg1 = "gene",
                 msg2 = "genes"
-            )
+            ),
+            alpha,
+            lfcThreshold
         )
         message(status)
         deg
