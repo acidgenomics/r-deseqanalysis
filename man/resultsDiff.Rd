@@ -8,17 +8,54 @@
 \usage{
 resultsDiff(x, y, ...)
 
-\S4method{resultsDiff}{DESeqResults,DESeqResults}(x, y, col = c("log2FoldChange", "stat"))
+\S4method{resultsDiff}{DESeqResults,DESeqResults}(
+  x,
+  y,
+  col = c("log2FoldChange", "stat"),
+  deg = c("no", "intersect", "union"),
+  alpha = NULL,
+  lfcThreshold = NULL,
+  direction = c("both", "up", "down")
+)
 
-\S4method{resultsDiff}{DESeqAnalysis,missingOrNULL}(x, y = NULL, i, j, col = c("log2FoldChange", "stat"))
+\S4method{resultsDiff}{DESeqAnalysis,missingOrNULL}(x, y = NULL, i, j, ...)
 }
 \arguments{
+\item{col}{\code{character(1)}.
+Column to use for difference calculation (subtraction).
+Note that \code{x}/\code{i} represents \code{A} and \code{y}/\code{j} \code{B} in \code{A - B} calculation.}
+
+\item{deg}{\code{character(1)}.
+\itemize{
+\item \code{"no"}: Return all genes, corresponding to original row names order.
+\item \code{"intersect"}: Return only genes called as DE in both contrasts.
+\item \code{"union"}: Return genes called as DE in either contrast.
+Note that \code{intersect} and \code{union} return is alphabetical, based on the
+names (genes).
+}}
+
 \item{i}{\code{character(1)} or \code{integer(1)}.
 \code{DESeqResults} contrast name or position in \code{results} slot.}
+}
+\value{
+Named \code{numeric}.
+Names correspond to the genes (row names).
 }
 \description{
 Relative difference of DESeq results
 }
 \note{
 Updated 2019-12-17.
+}
+\examples{
+data(deseq)
+
+## DESeqResults ====
+x <- results(deseq, i = 1L)
+y <- results(deseq, i = 2L)
+resultsDiff(x = x, y = y)
+
+## DESeqAnalysis ====
+object <- deseq
+resultsDiff(object, i = 1L, j = 2L)
 }
