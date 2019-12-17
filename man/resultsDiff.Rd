@@ -18,7 +18,7 @@ resultsDiff(x, y, ...)
   direction = c("both", "up", "down")
 )
 
-\S4method{resultsDiff}{DESeqAnalysis,missingOrNULL}(x, y = NULL, i, j, ...)
+\S4method{resultsDiff}{DESeqAnalysis,missingOrNULL}(x, y = NULL, i, j, lfcShrink = FALSE, ...)
 }
 \arguments{
 \item{col}{\code{character(1)}.
@@ -30,12 +30,13 @@ Note that \code{x}/\code{i} represents \code{A} and \code{y}/\code{j} \code{B} i
 \item \code{"no"}: Return all genes, corresponding to original row names order.
 \item \code{"intersect"}: Return only genes called as DE in both contrasts.
 \item \code{"union"}: Return genes called as DE in either contrast.
-Note that \code{intersect} and \code{union} return is alphabetical, based on the
-names (genes).
 }}
 
 \item{i}{\code{character(1)} or \code{integer(1)}.
 \code{DESeqResults} contrast name or position in \code{results} slot.}
+
+\item{lfcShrink}{\code{logical(1)}.
+Use shrunken log2 fold change (LFC) values.}
 }
 \value{
 Named \code{numeric}.
@@ -44,6 +45,11 @@ Names correspond to the genes (row names).
 \description{
 Relative difference of DESeq results
 }
+\section{Functions}{
+\itemize{
+\item \code{resultsDiff,DESeqAnalysis,missingOrNULL-method}: Passes arguments to \code{DESeqResults} method.
+}}
+
 \note{
 Updated 2019-12-17.
 }

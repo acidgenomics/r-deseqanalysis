@@ -74,6 +74,7 @@ NULL
             if (!hasLength(genes)) {
                 return(NULL)
             }
+            message(sprintf("Returning %s of DEGs (%d).", deg, length(genes)))
             diff <- diff[genes]
         }
         diff
@@ -96,13 +97,24 @@ setMethod(
 
 ## Updated 2019-12-17.
 `resultsDiff,DESeqAnalysis,missing` <-
-    function(x, y = NULL, i, j, ...) {
-        stop("NOT DEFINED YET")
+    function(x, y = NULL, i, j, lfcShrink = FALSE, ...) {
+        validObject(x)
+        res1 <- results(
+            object = x,
+            i = i,
+            lfcShrink = lfcShrink
+        )
+        res2 <- results(
+            object = x,
+            i = j,
+            lfcShrink = lfcShrink
+        )
+        resultsDiff(x = res1, y = res2, ...)
     }
 
 
 
-#' @rdname resultsDiff
+#' @describeIn resultsDiff Passes arguments to `DESeqResults` method.
 #' @export
 setMethod(
     f = "resultsDiff",
