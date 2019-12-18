@@ -163,6 +163,7 @@ NULL
                 contrast = contrast2,
                 factorCol = factorCol
             )
+            samples <- unique(c(samples1, samples2))
         } else {
             interaction <- FALSE
             samples <- .contrastSamples(
@@ -172,28 +173,6 @@ NULL
             )
         }
         samples
-
-
-
-
-
-
-
-
-
-
-        ## FIXME RETHINK THIS APPROACH.
-        ## Remove the factor prefix from our contrast.
-
-        ## FIXME Just include the factorCol
-
-
-
-
-
-
-
-
     }
 
 
