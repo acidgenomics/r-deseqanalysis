@@ -1,8 +1,13 @@
+# j param is missing.
+
+
+
 #' Relative difference of DESeq results
 #'
 #' @name resultsDiff
 #' @note Updated 2019-12-17.
 #'
+#' @inheritParams acidroxygen::params
 #' @inheritParams params
 #' @param col `character(1)`.
 #'   Column to use for difference calculation (subtraction).
