@@ -13,12 +13,15 @@ plotCounts(object, ...)
 
 \S4method{plotCounts}{DESeqTransform}(object, ...)
 
-\S4method{plotCounts}{DESeqAnalysis}(object, ..., transform = FALSE)
+\S4method{plotCounts}{DESeqAnalysis}(object, ..., samples = NULL, transform = FALSE)
 }
 \arguments{
 \item{object}{Object.}
 
 \item{...}{Additional arguments.}
+
+\item{samples}{\code{character}.
+Sample identifiers.}
 
 \item{transform}{\code{logical(1)}.
 Plot log2 variance-stabilized transform counts, defined internally in
@@ -48,14 +51,13 @@ defined in acidplots package.
 }}
 
 \note{
-Updated 2019-12-16.
+Updated 2019-12-18.
 }
 \examples{
 data(deseq)
 
 ## Get genes from working example.
-res <- results(deseq, i = 1L)
-genes <- head(rownames(res))
+genes <- head(rownames(as(deseq, "DESeqDataSet")))
 print(genes)
 
 ## DESeqAnalysis ====

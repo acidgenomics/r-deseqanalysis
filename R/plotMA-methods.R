@@ -1,8 +1,7 @@
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
-#' @note We are not allowing post hoc `alpha` or `lfcThreshold` cutoffs here.
-#' @note Updated 2019-12-13.
+#' @note Updated 2019-12-18.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual representation
