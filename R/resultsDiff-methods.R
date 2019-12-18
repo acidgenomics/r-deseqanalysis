@@ -31,7 +31,7 @@ NULL
 
 
 ## Updated 2019-12-17.
-`resultsDiff,DESeqResults,DESeqResults` <-
+`resultsDiff,DESeqResults,DESeqResults` <-  # nolint
     function(
         x,
         y,
@@ -96,7 +96,7 @@ setMethod(
 
 
 ## Updated 2019-12-17.
-`resultsDiff,DESeqAnalysis,missing` <-
+`resultsDiff,DESeqAnalysis,missing` <-  # nolint
     function(x, y = NULL, i, j, lfcShrink = TRUE, ...) {
         validObject(x)
         res1 <- results(
