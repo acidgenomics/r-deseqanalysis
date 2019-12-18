@@ -59,10 +59,10 @@ Updated 2019-11-12.
 data(deseq)
 
 ## DESeqAnalysis ====
-topTables(deseq, i = 1L, n = 5L)
+topTables(deseq, i = 1L, n = 5L, lfcShrink = TRUE)
 
 ## DESeqResults 'resultsTables()' list ====
-res <- results(deseq, i = 1L)
+res <- results(deseq, i = 1L, lfcShrink = TRUE)
 resTbl <- resultsTables(res, return = "tbl_df")
 topTables(resTbl)
 }

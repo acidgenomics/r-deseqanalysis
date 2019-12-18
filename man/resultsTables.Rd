@@ -75,9 +75,12 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 \code{all} table), are arranged by adjusted \emph{P} value.
 }
 \note{
-Updated 2019-11-12.
+Updated 2019-12-18.
 
-Do not apply post hoc log fold change cutoffs.
+It is generally recommended to not apply post hoc log fold change
+cutoffs. If a specific effect size is desired, instead run
+\code{DESeq2::results()} using the \code{lfcThreshold} parameter. Refer to the DESeq2
+documentation and vignette for details.
 }
 \section{Tables}{
 

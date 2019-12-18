@@ -33,10 +33,16 @@ Use shrunken log2 fold change (LFC) values.}
 Results
 }
 \note{
-Updated 2019-11-18.
+Updated 2019-12-18.
 }
 \examples{
 data(deseq)
-x <- results(deseq, i = 1L)
+
+x <- results(deseq, i = 2L, lfcShrink = FALSE)
 class(x)
+colnames(x)
+
+x <- results(deseq, i = 1L, lfcShrink = TRUE)
+class(x)
+colnames(x)
 }

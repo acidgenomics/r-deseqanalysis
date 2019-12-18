@@ -38,6 +38,6 @@
 #' @importFrom rlang !! sym
 #' @importFrom scales log_breaks pretty_breaks
 #' @importFrom stats model.matrix relevel
-#' @importFrom stringr str_match str_trunc
+#' @importFrom stringr str_locate_all str_match str_trunc
 #' @importFrom utils capture.output getS3method globalVariables packageVersion
 NULL

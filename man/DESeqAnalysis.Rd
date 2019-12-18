@@ -46,7 +46,7 @@ class(transform)
 
 resultsNames(data)
 name <- resultsNames(data)[[2L]]
-results <- results(data, name = name)
+results <- DESeq2::results(data, name = name)
 class(results)
 
 lfcShrink <- DESeq2::lfcShrink(dds = data, res = results, coef = 2L)

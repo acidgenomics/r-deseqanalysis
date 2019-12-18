@@ -1,6 +1,6 @@
 #' @name resultsTables
 #' @inherit bioverbs::resultsTables
-#' @note Updated 2019-11-12.
+#' @note Updated 2019-12-18.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -11,7 +11,10 @@
 #' differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 #' `all` table), are arranged by adjusted *P* value.
 #'
-#' @note Do not apply post hoc log fold change cutoffs.
+#' @note It is generally recommended to not apply post hoc log fold change
+#'   cutoffs. If a specific effect size is desired, instead run
+#'   `DESeq2::results()` using the `lfcThreshold` parameter. Refer to the DESeq2
+#'   documentation and vignette for details.
 #'
 #' @section Tables:
 #'

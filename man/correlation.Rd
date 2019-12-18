@@ -53,15 +53,15 @@ If \code{NULL}, calculates correlation matrix only on the primary assay.}
 Correlation
 }
 \note{
-Updated 2019-11-12.
+Updated 2019-12-18.
 }
 \examples{
 ## Working example currently only has 1 contrast slotted.
 data(deseq)
 
 ## DESeqResults ====
-x <- results(deseq, i = 1L)
-y <- results(deseq, i = 2L)
+x <- results(deseq, i = 1L, lfcShrink = FALSE)
+y <- results(deseq, i = 2L, lfcShrink = FALSE)
 correlation(x = x, y = y)
 
 ## DESeqAnalysis ====
