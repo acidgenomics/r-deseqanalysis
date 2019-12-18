@@ -2,7 +2,7 @@
 #'
 #' @name correlation
 #' @inherit basejump::correlation
-#' @note Updated 2019-11-12.
+#' @note Updated 2019-12-18.
 #'
 #' @inheritParams acidroxygen::params
 #' @param col `character(1)`.
@@ -14,8 +14,8 @@
 #' data(deseq)
 #'
 #' ## DESeqResults ====
-#' x <- results(deseq, i = 1L)
-#' y <- results(deseq, i = 2L)
+#' x <- results(deseq, i = 1L, lfcShrink = FALSE)
+#' y <- results(deseq, i = 2L, lfcShrink = FALSE)
 #' correlation(x = x, y = y)
 #'
 #' ## DESeqAnalysis ====
@@ -79,14 +79,14 @@ setMethod(
 
 
 
-## Updated 2019-11-08.
+## Updated 2019-12-18.
 `correlation,DESeqAnalysis,missing` <-  # nolint
     function(x, y = NULL, i, j, col = "log2FoldChange", method) {
         assert(!identical(i, j))
         method <- match.arg(method)
         correlation(
-            x = results(object = x, i = i),
-            y = results(object = x, i = j),
+            x = results(object = x, i = i, lfcShrink = FALSE),
+            y = results(object = x, i = j, lfcShrink = FALSE),
             method = method
         )
     }

@@ -18,7 +18,7 @@ resultsDiff(x, y, ...)
   direction = c("both", "up", "down")
 )
 
-\S4method{resultsDiff}{DESeqAnalysis,missingOrNULL}(x, y = NULL, i, j, lfcShrink = FALSE, ...)
+\S4method{resultsDiff}{DESeqAnalysis,missingOrNULL}(x, y = NULL, i, j, lfcShrink = TRUE, ...)
 }
 \arguments{
 \item{col}{\code{character(1)}.

@@ -1,7 +1,7 @@
 #' Results
 #'
 #' @name results
-#' @note Updated 2019-11-18.
+#' @note Updated 2019-12-18.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -11,8 +11,14 @@
 #'
 #' @examples
 #' data(deseq)
-#' x <- results(deseq, i = 1L)
+#'
+#' x <- results(deseq, i = 2L, lfcShrink = FALSE)
 #' class(x)
+#' colnames(x)
+#'
+#' x <- results(deseq, i = 1L, lfcShrink = TRUE)
+#' class(x)
+#' colnames(x)
 NULL
 
 
@@ -44,7 +50,7 @@ setMethod(
 
 
 
-## Updated 2019-11-08.
+## Updated 2019-12-18.
 `results,DESeqAnalysis` <-  # nolint
     function(object, i, lfcShrink = FALSE, ...) {
         ## nocov start

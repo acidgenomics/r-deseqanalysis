@@ -97,7 +97,7 @@ setMethod(
 
 ## Updated 2019-12-17.
 `resultsDiff,DESeqAnalysis,missing` <-
-    function(x, y = NULL, i, j, lfcShrink = FALSE, ...) {
+    function(x, y = NULL, i, j, lfcShrink = TRUE, ...) {
         validObject(x)
         res1 <- results(
             object = x,

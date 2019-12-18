@@ -1,6 +1,6 @@
 #' @name deg
 #' @inherit bioverbs::deg
-#' @note Updated 2019-12-04.
+#' @note Updated 2019-12-18.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -108,7 +108,7 @@ setMethod(
 
 
 
-## Updated 2019-12-04.
+## Updated 2019-12-18.
 `deg,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -123,7 +123,7 @@ setMethod(
         }
         rm(call)
         ## nocov end
-        res <- results(object = object, i = i)
+        res <- results(object = object, i = i, lfcShrink = FALSE)
         deg(object = res, ...)
     }
 

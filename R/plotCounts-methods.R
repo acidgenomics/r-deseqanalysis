@@ -1,6 +1,6 @@
 #' @name plotCounts
 #' @inherit acidplots::plotCounts
-#' @note Updated 2019-12-16.
+#' @note Updated 2019-12-18.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -14,8 +14,7 @@
 #' data(deseq)
 #'
 #' ## Get genes from working example.
-#' res <- results(deseq, i = 1L)
-#' genes <- head(rownames(res))
+#' genes <- head(rownames(as(deseq, "DESeqDataSet")))
 #' print(genes)
 #'
 #' ## DESeqAnalysis ====
@@ -99,11 +98,14 @@ setMethod(
 
 ## Putting the args after `...` here so we can pass in genes easily as a
 ## positional argument, during interactive use.
-## Updated 2019-12-16.
+## Updated 2019-12-18.
 `plotCounts,DESeqAnalysis` <-  # nolint
-    function(object, ..., transform = FALSE) {
+    function(object, ..., samples = NULL, transform = FALSE) {
         validObject(object)
-        assert(isFlag(transform))
+        assert(
+            isCharacter(samples, nullOK = TRUE),
+            isFlag(transform)
+        )
         if (isTRUE(transform)) {
             class <- "DESeqTransform"
         } else {

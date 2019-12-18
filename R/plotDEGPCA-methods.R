@@ -1,10 +1,6 @@
-## Do not allow post hoc alpha or lfcThreshold cutoffs here.
-
-
-
 #' @name plotDEGPCA
 #' @inherit bioverbs::plotDEGPCA
-#' @note Updated 2019-11-19.
+#' @note Updated 2019-12-18.
 #'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams acidplots::plotPCA
