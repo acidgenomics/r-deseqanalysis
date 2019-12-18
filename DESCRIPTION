@@ -46,7 +46,7 @@ Imports:
     utils
 Suggests:
     BiocStyle (>= 2.14),
-    acidroxygen (>= 0.1.4),
+    acidroxygen (>= 0.1.5),
     apeglm (>= 1.8),
     ashr (>= 2.2),
     patrick (>= 0.0.1),

@@ -21,6 +21,12 @@ resultsDiff(x, y, ...)
 \S4method{resultsDiff}{DESeqAnalysis,missingOrNULL}(x, y = NULL, i, j, lfcShrink = TRUE, ...)
 }
 \arguments{
+\item{x}{Object.}
+
+\item{y}{Object.}
+
+\item{...}{Additional arguments.}
+
 \item{col}{\code{character(1)}.
 Column to use for difference calculation (subtraction).
 Note that \code{x}/\code{i} represents \code{A} and \code{y}/\code{j} \code{B} in \code{A - B} calculation.}
@@ -32,8 +38,28 @@ Note that \code{x}/\code{i} represents \code{A} and \code{y}/\code{j} \code{B} i
 \item \code{"union"}: Return genes called as DE in either contrast.
 }}
 
-\item{i}{\code{character(1)} or \code{integer(1)}.
-\code{DESeqResults} contrast name or position in \code{results} slot.}
+\item{alpha}{\code{numeric(1)} or \code{NULL}.
+Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
+defined in the object.}
+
+\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
+Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
+the cutoff defined in the object.}
+
+\item{direction}{\code{character(1)}.
+Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
+
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
+
+\item{j}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
 
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
