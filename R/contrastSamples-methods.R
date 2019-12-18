@@ -1,10 +1,6 @@
-## FIXME Add support for difference of differences.
-
-
-
 #' @name contrastSamples
 #' @inherit bioverbs::contrastSamples
-#' @note Updated 2019-12-16.
+#' @note Updated 2019-12-18.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -41,7 +37,7 @@ NULL
 
 ## This has been split out to an internal function, so we can support
 ## interaction effect (difference of differences) contrasts more easily.
-## Updated 2019-12-16.
+## Updated 2019-12-18.
 .contrastSamples <- function(
     dds,
     contrast,
@@ -89,7 +85,7 @@ NULL
 
 
 
-## Updated 2019-12-16.
+## Updated 2019-12-18.
 `contrastSamples,DESeqAnalysis` <-  # nolint
     function(object, i, ...) {
         ## nocov start
@@ -149,8 +145,10 @@ NULL
             x <- contrast
             x <- sub("_effect$", "", x)
             loc <- str_locate_all(string = x, pattern = factorCol)[[1L]]
-            contrast1 <- substr(x = x, start = loc[1,1], stop = loc[2,1] - 2L)
-            contrast2 <- substr(x = x, start = loc[2,1], stop = nchar(x))
+            contrast1 <-
+                substr(x = x, start = loc[1L, 1L], stop = loc[2L, 1L] - 2L)
+            contrast2 <-
+                substr(x = x, start = loc[2L, 1L], stop = nchar(x))
             message(sprintf("Contrast 1: %s.", contrast1))
             samples1 <- .contrastSamples(
                 dds = dds,
