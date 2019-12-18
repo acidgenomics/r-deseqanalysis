@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.15</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.16</span>
       </span>
     </div>
 
@@ -190,7 +190,7 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>40 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>22 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>18 downregulated genes detected.</span></div><div class='output co'>#&gt; 
+<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>40 differentially expressed genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>22 upregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>18 downregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; 
 #&gt; 
 #&gt; |        | baseMean|lfc  |padj     |broadClass |geneName |description                                 |
 #&gt; |:-------|--------:|:----|:--------|:----------|:--------|:-------------------------------------------|
@@ -209,34 +209,34 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
 #&gt; |gene293 |       31|-2.83 |1.21e-04 |coding     |DPF1     |double PHD fingers 1                               |
 #&gt; |gene475 |      197|-1.88 |1.39e-04 |coding     |ARNTL2   |aryl hydrocarbon receptor nuclear translocator ... |</div><div class='input'>
 <span class='co'>## DESeqResults 'resultsTables()' list ====</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='input'><span class='no'>resTbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsTables.html'>resultsTables</a></span>(<span class='no'>res</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"tbl_df"</span>)</div><div class='output co'>#&gt; <span class='message'>40 differentially expressed genes detected.</span></div><div class='output co'>#&gt; <span class='message'>22 upregulated genes detected.</span></div><div class='output co'>#&gt; <span class='message'>18 downregulated genes detected.</span></div><div class='input'><span class='fu'>topTables</span>(<span class='no'>resTbl</span>)</div><div class='output co'>#&gt; 
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='input'><span class='no'>resTbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsTables.html'>resultsTables</a></span>(<span class='no'>res</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"tbl_df"</span>)</div><div class='output co'>#&gt; <span class='message'>40 differentially expressed genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>22 upregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>18 downregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='input'><span class='fu'>topTables</span>(<span class='no'>resTbl</span>)</div><div class='output co'>#&gt; 
 #&gt; 
 #&gt; |        | baseMean|lfc  |padj     |
 #&gt; |:-------|--------:|:----|:--------|
-#&gt; |gene190 |      451|2.70 |4.15e-11 |
-#&gt; |gene343 |      260|3.73 |2.90e-09 |
-#&gt; |gene032 |      246|2.66 |3.36e-05 |
-#&gt; |gene436 |      244|1.97 |1.21e-04 |
-#&gt; |gene488 |       42|3.05 |1.39e-04 |
-#&gt; |gene217 |       77|1.89 |3.59e-04 |
-#&gt; |gene242 |      392|1.89 |3.59e-04 |
-#&gt; |gene262 |      120|1.87 |3.59e-04 |
-#&gt; |gene272 |      351|1.79 |3.59e-04 |
-#&gt; |gene304 |       79|2.19 |3.65e-04 |
+#&gt; |gene190 |      451|2.61 |4.15e-11 |
+#&gt; |gene343 |      260|3.58 |2.90e-09 |
+#&gt; |gene032 |      246|2.47 |3.36e-05 |
+#&gt; |gene436 |      244|1.83 |1.21e-04 |
+#&gt; |gene488 |       42|2.78 |1.39e-04 |
+#&gt; |gene217 |       77|1.74 |3.59e-04 |
+#&gt; |gene242 |      392|1.73 |3.59e-04 |
+#&gt; |gene262 |      120|1.71 |3.59e-04 |
+#&gt; |gene272 |      351|1.64 |3.59e-04 |
+#&gt; |gene304 |       79|1.99 |3.65e-04 |
 #&gt; 
 #&gt; 
 #&gt; |        | baseMean|lfc   |padj     |
 #&gt; |:-------|--------:|:-----|:--------|
-#&gt; |gene406 |      292|-2.13 |2.28e-06 |
-#&gt; |gene361 |      144|-1.88 |1.04e-04 |
-#&gt; |gene065 |      118|-2.28 |1.21e-04 |
-#&gt; |gene293 |       31|-3.10 |1.21e-04 |
-#&gt; |gene475 |      197|-2.04 |1.39e-04 |
-#&gt; |gene499 |       33|-3.12 |3.59e-04 |
-#&gt; |gene411 |       91|-1.68 |1.07e-03 |
-#&gt; |gene211 |      213|-1.52 |1.42e-03 |
-#&gt; |gene375 |       13|-3.20 |1.67e-03 |
-#&gt; |gene135 |       59|-1.75 |1.75e-03 |</div></pre>
+#&gt; |gene406 |      292|-2.02 |2.28e-06 |
+#&gt; |gene361 |      144|-1.75 |1.04e-04 |
+#&gt; |gene065 |      118|-2.11 |1.21e-04 |
+#&gt; |gene293 |       31|-2.83 |1.21e-04 |
+#&gt; |gene475 |      197|-1.88 |1.39e-04 |
+#&gt; |gene499 |       33|-2.80 |3.59e-04 |
+#&gt; |gene411 |       91|-1.52 |1.07e-03 |
+#&gt; |gene211 |      213|-1.38 |1.42e-03 |
+#&gt; |gene375 |       13|-2.77 |1.67e-03 |
+#&gt; |gene135 |       59|-1.56 |1.75e-03 |</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

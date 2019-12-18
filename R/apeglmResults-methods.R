@@ -54,7 +54,7 @@
 #' contrast <- c(factor = "condition", numerator = "C", denominator = "B")
 #'
 #' ## Unshrunken DESeqResults.
-#' res <- results(dds, contrast = contrast)
+#' res <- DESeq2::results(dds, contrast = contrast)
 #' class(res)
 #' lfcShrinkType(res)
 #'

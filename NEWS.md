@@ -1,3 +1,22 @@
+## DESeqanalysis 0.2.16 (2019-12-18)
+
+### New functions
+
+- `resultsDiff`: Compare the effect difference between two `DESeqResults`
+  contrasts. Useful for evaluating the relative effect of compounds, RNAi
+  clones, CRISPR guides, for example.
+
+### Minor changes
+
+- `contrastSamples`: Added support for interaction effect (difference of
+  differences) contrasts. For example: "group_B_vs_A_group_C_vs_A_effect".
+- `plotCounts`: Added `samples` argument support for `DESeqAnalysis` method.
+  This is useful for quick sample selection when generating plots.
+- Improved internal consistency of `lfcShrink` handling in `results` calls.
+  Note that `reuslts` still defaults to `lfcShrink = FALSE`, whereas other
+  plotting and results table functions default to `lfcShrink = TRUE`.
+- `deg`: Added alpha and LFC information in message.
+
 ## DESeqAnalysis 0.2.15 (2019-12-13)
 
 ### Minor changes

@@ -1,6 +1,6 @@
 #' @name deg
 #' @inherit bioverbs::deg
-#' @note Updated 2019-12-04.
+#' @note Updated 2019-12-18.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -76,7 +76,7 @@ NULL
         data <- data[order(data[[alphaCol]]), , drop = FALSE]
         deg <- rownames(data)
         status <- sprintf(
-            fmt = "%d %s %s detected.",
+            fmt = "%d %s %s detected (alpha: %g; lfc: %g).",
             length(deg),
             switch(
                 EXPR = direction,
@@ -88,7 +88,9 @@ NULL
                 n = length(deg),
                 msg1 = "gene",
                 msg2 = "genes"
-            )
+            ),
+            alpha,
+            lfcThreshold
         )
         message(status)
         deg
@@ -106,7 +108,7 @@ setMethod(
 
 
 
-## Updated 2019-12-04.
+## Updated 2019-12-18.
 `deg,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -121,7 +123,7 @@ setMethod(
         }
         rm(call)
         ## nocov end
-        res <- results(object = object, i = i)
+        res <- results(object = object, i = i, lfcShrink = FALSE)
         deg(object = res, ...)
     }
 

@@ -42,6 +42,17 @@ setGeneric(
 
 
 
+#' @rdname resultsDiff
+#' @export
+setGeneric(
+    name = "resultsDiff",
+    def = function(x, y, ...) {
+        standardGeneric("resultsDiff")
+    }
+)
+
+
+
 #' @rdname transformType
 #' @export
 setGeneric(
