@@ -74,7 +74,7 @@ DESeqDataSet." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.15</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.16</span>
       </span>
     </div>
 
@@ -174,7 +174,7 @@ Assign the <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>DESeq2:
 #&gt; attr(,"package")
 #&gt; [1] "DESeq2"</div><div class='input'>
 <span class='fu'><a href='resultsNames.html'>resultsNames</a></span>(<span class='no'>data</span>)</div><div class='output co'>#&gt; [1] "Intercept"        "condition_B_vs_A"</div><div class='input'><span class='no'>name</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsNames.html'>resultsNames</a></span>(<span class='no'>data</span>)<span class='kw'>[[</span><span class='fl'>2L</span>]]
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>data</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='no'>name</span>)
+<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>DESeq2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>results</a></span>(<span class='no'>data</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='no'>name</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>results</span>)</div><div class='output co'>#&gt; [1] "DESeqResults"
 #&gt; attr(,"package")
 #&gt; [1] "DESeq2"</div><div class='input'>
@@ -195,7 +195,7 @@ Assign the <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>DESeq2:
     <span class='kw'>results</span> <span class='kw'>=</span> <span class='no'>results</span>,
     <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='no'>lfcShrink</span>
 )
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>object</span>)</div><div class='output co'>#&gt; DESeqAnalysis 0.2.15; DESeq2 1.26.0
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>object</span>)</div><div class='output co'>#&gt; DESeqAnalysis 0.2.16; DESeq2 1.26.0
 #&gt; data:
 #&gt;   dim: 1000 12 
 #&gt;   metadata(1): version
