@@ -112,7 +112,11 @@ setMethod(
             class <- "DESeqDataSet"
         }
         dots <- list(...)
-        args <- c(object = as(object, Class = class), dots)
+        object <- as(object, Class = class)
+        if (!is.null(samples)) {
+            object <- object[, samples, drop = FALSE]
+        }
+        args <- c(object = object, dots)
         do.call(what = plotCounts, args = args)
     }
 
