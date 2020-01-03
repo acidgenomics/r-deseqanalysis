@@ -40,9 +40,17 @@ To set the discrete fill palette globally, use:\preformatted{options(acid.fill.d
 \item{flip}{\code{logical(1)}.
 Flip x and y axes. Recommended for plots containing many samples.}
 }
+\value{
+Plot.
+}
 \description{
 Stacked bar plot of DEGs
 }
 \note{
-Updated 2019-12-13.
+Updated 2020-01-03.
+}
+\examples{
+data(deseq)
+
+plotDEGStackedBar(deseq)
 }
