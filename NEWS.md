@@ -1,4 +1,12 @@
-## DESeqanalysis 0.2.16 (2019-12-18)
+## DESeqAnalysis 0.2.17 (2020-01-03)
+
+### New functions
+
+- `combine`: Method support for combining multiple results contrasts into a
+  single `DESeqAnalysis` object. Note that the internal `DESeqDataSet` and
+  `DESeqTransform` objects defined in `x` and `y` must match.
+
+## DESeqAnalysis 0.2.16 (2019-12-18)
 
 ### New functions
 
