@@ -16,10 +16,9 @@
 #' data(deseq)
 #'
 #' x <- deseq
-#' resultsNames(x)
-#'
 #' y <- deseq
-#' resultsNames(y)
+#' resultsNames(x) <- paste0("x_", resultsNames(x))
+#' resultsNames(y) <- paste0("y_", resultsNames(y))
 #'
 #' object <- combine(x, y)
 #' resultsNames(object)
