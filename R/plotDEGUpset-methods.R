@@ -1,5 +1,5 @@
 #' @name plotDEGUpset
-#' @inherit bioverbs::plotDEGUpset
+#' @inherit acidgenerics::plotDEGUpset
 #' @note Updated 2019-11-19.
 #'
 #' @inheritParams acidroxygen::params
@@ -15,7 +15,7 @@ NULL
 
 #' @rdname plotDEGUpset
 #' @name plotDEGUpset
-#' @importFrom bioverbs plotDEGUpset
+#' @importFrom acidgenerics plotDEGUpset
 #' @usage plotDEGUpset(object, ...)
 #' @export
 NULL

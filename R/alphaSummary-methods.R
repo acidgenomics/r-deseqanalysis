@@ -1,6 +1,6 @@
 #' @name alphaSummary
 #' @author Michael Steinbaugh, Lorena Patano
-#' @inherit bioverbs::alphaSummary
+#' @inherit acidgenerics::alphaSummary
 #' @note Updated 2019-08-20.
 #'
 #' @inheritParams params
@@ -31,7 +31,7 @@ NULL
 
 #' @rdname alphaSummary
 #' @name alphaSummary
-#' @importFrom bioverbs alphaSummary
+#' @importFrom acidgenerics alphaSummary
 #' @usage alphaSummary(object, ...)
 #' @export
 NULL

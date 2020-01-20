@@ -1,5 +1,5 @@
 #' @name contrastName
-#' @inherit bioverbs::contrastName
+#' @inherit acidgenerics::contrastName
 #' @note Updated 2019-11-08.
 #'
 #' @inheritParams acidroxygen::params
@@ -34,14 +34,14 @@ NULL
 
 #' @rdname contrastName
 #' @name contrastName
-#' @importFrom bioverbs contrastName
+#' @importFrom acidgenerics contrastName
 #' @usage contrastName(object, ...)
 #' @export
 NULL
 
 #' @rdname contrastName
 #' @name contrastName<-
-#' @importFrom bioverbs contrastName<-
+#' @importFrom acidgenerics contrastName<-
 #' @usage contrastName(object, ...) <- value
 #' @export
 NULL

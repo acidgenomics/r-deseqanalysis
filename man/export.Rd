@@ -16,13 +16,8 @@ export(object, ...)
 \item{object}{Object.}
 
 \item{name}{\code{character(1)}.
-Name to use on disk. If \code{NULL}, will use the name of the object instead.}
-
-\item{dir}{\code{character(1)}.
-Directory path.}
-
-\item{compress}{\code{logical(1)}.
-Apply gzip compression to all files.}
+Name of the individual effect (coefficient) for building a results table.
+Use this argument rather than \code{contrast} for continuous variables.}
 
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}

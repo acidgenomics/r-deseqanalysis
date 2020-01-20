@@ -1,5 +1,5 @@
 #' @name resultsNames
-#' @inherit bioverbs::resultsNames
+#' @inherit acidgenerics::resultsNames
 #' @note Updated 2019-09-10.
 #'
 #' @inheritParams acidroxygen::params
@@ -15,14 +15,14 @@ NULL
 
 #' @rdname resultsNames
 #' @name resultsNames
-#' @importFrom bioverbs resultsNames
+#' @importFrom acidgenerics resultsNames
 #' @usage resultsNames(object, ...)
 #' @export
 NULL
 
 #' @rdname resultsNames
 #' @name resultsNames<-
-#' @importFrom bioverbs resultsNames<-
+#' @importFrom acidgenerics resultsNames<-
 #' @usage resultsNames(object, ...) <- value
 #' @export
 NULL
@@ -95,14 +95,14 @@ setReplaceMethod(
 ## contrastNames aliases =======================================================
 #' @rdname resultsNames
 #' @name contrastNames
-#' @importFrom bioverbs contrastNames
+#' @importFrom acidgenerics contrastNames
 #' @usage contrastNames(object, ...)
 #' @export
 NULL
 
 #' @rdname resultsNames
 #' @name contrastNames<-
-#' @importFrom bioverbs contrastNames<-
+#' @importFrom acidgenerics contrastNames<-
 #' @usage contrastNames(object, ...) <- value
 #' @export
 NULL
