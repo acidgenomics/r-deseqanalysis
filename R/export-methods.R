@@ -1,5 +1,5 @@
 #' @name export
-#' @inherit bioverbs::export
+#' @inherit acidgenerics::export
 #' @note Size-factor normalized coutns and FPKM values are calculated on the fly
 #' and exported automatically.
 #' @note Updated 2019-11-12.
@@ -22,7 +22,7 @@ NULL
 
 #' @rdname export
 #' @name export
-#' @importFrom bioverbs export
+#' @importFrom acidgenerics export
 #' @usage export(object, ...)
 #' @export
 NULL

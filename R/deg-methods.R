@@ -1,5 +1,5 @@
 #' @name deg
-#' @inherit bioverbs::deg
+#' @inherit acidgenerics::deg
 #' @note Updated 2019-12-18.
 #'
 #' @inheritParams acidroxygen::params
@@ -18,7 +18,7 @@ NULL
 
 #' @rdname deg
 #' @name deg
-#' @importFrom bioverbs deg
+#' @importFrom acidgenerics deg
 #' @usage deg(object, ...)
 #' @export
 NULL
