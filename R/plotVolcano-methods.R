@@ -1,6 +1,6 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
-#' @inherit bioverbs::plotVolcano
+#' @inherit acidgenerics::plotVolcano
 #' @note Updated 2019-12-13.
 #'
 #' @inheritParams acidroxygen::params
@@ -59,7 +59,7 @@ NULL
 
 #' @rdname plotVolcano
 #' @name plotVolcano
-#' @importFrom bioverbs plotVolcano
+#' @importFrom acidgenerics plotVolcano
 #' @usage plotVolcano(object, ...)
 #' @export
 NULL

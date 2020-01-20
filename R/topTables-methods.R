@@ -1,5 +1,5 @@
 #' @name topTables
-#' @inherit bioverbs::topTables
+#' @inherit acidgenerics::topTables
 #' @note Updated 2019-11-12.
 #'
 #' @inheritParams acidroxygen::params
@@ -26,7 +26,7 @@ NULL
 
 #' @rdname topTables
 #' @name topTables
-#' @importFrom bioverbs topTables
+#' @importFrom acidgenerics topTables
 #' @usage topTables(object, ...)
 #' @export
 NULL

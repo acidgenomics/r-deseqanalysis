@@ -1,5 +1,5 @@
 #' @name sampleData
-#' @inherit bioverbs::sampleData
+#' @inherit acidgenerics::sampleData
 #' @note Updated 2019-08-20.
 #'
 #' @param ... Additional arguments.
@@ -14,7 +14,7 @@ NULL
 
 #' @rdname sampleData
 #' @name sampleData
-#' @importFrom bioverbs sampleData
+#' @importFrom acidgenerics sampleData
 #' @usage sampleData(object, ...)
 #' @export
 NULL

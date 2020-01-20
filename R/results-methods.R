@@ -25,7 +25,7 @@ NULL
 
 #' @rdname results
 #' @name results
-#' @importFrom bioverbs results
+#' @importFrom acidgenerics results
 #' @usage results(object, ...)
 #' @export
 NULL
