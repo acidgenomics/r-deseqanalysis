@@ -1,5 +1,5 @@
 #' @name contrastSamples
-#' @inherit bioverbs::contrastSamples
+#' @inherit acidgenerics::contrastSamples
 #' @note Updated 2019-12-18.
 #'
 #' @inheritParams acidroxygen::params
@@ -28,7 +28,7 @@ NULL
 
 #' @rdname contrastSamples
 #' @name contrastSamples
-#' @importFrom bioverbs contrastSamples
+#' @importFrom acidgenerics contrastSamples
 #' @usage contrastSamples(object, ...)
 #' @export
 NULL

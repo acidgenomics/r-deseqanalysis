@@ -16,7 +16,7 @@ NULL
 
 #' @rdname markdown
 #' @name markdown
-#' @importFrom bioverbs markdown
+#' @importFrom acidgenerics markdown
 #' @usage markdown(object, ...)
 #' @export
 NULL

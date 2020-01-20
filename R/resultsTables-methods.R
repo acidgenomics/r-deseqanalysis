@@ -1,5 +1,5 @@
 #' @name resultsTables
-#' @inherit bioverbs::resultsTables
+#' @inherit acidgenerics::resultsTables
 #' @note Updated 2019-12-18.
 #'
 #' @inheritParams acidroxygen::params
@@ -57,7 +57,7 @@ NULL
 
 #' @rdname resultsTables
 #' @name resultsTables
-#' @importFrom bioverbs resultsTables
+#' @importFrom acidgenerics resultsTables
 #' @usage resultsTables(object, ...)
 #' @export
 NULL

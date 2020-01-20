@@ -64,10 +64,10 @@ Use shrunken log2 fold change (LFC) values.}
 Plot.
 }
 \description{
-This function is an extension of \code{\link[bioverbs:plotHeatmap]{plotHeatmap()}} that is optimized for
+This function is an extension of \code{\link[acidgenerics:plotHeatmap]{plotHeatmap()}} that is optimized for
 automatic handling differentially expressed genes, rather than requiring
 manual input of a gene vector. All of the optional parameters for
-\code{\link[bioverbs:plotHeatmap]{plotHeatmap()}} are also supported by this function.
+\code{\link[acidgenerics:plotHeatmap]{plotHeatmap()}} are also supported by this function.
 }
 \details{
 To adjust the annotation columns, modify the

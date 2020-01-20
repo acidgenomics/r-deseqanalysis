@@ -19,21 +19,21 @@ NULL
 
 #' @rdname plotHeatmap
 #' @name plotHeatmap
-#' @importFrom bioverbs plotHeatmap
+#' @importFrom acidgenerics plotHeatmap
 #' @usage plotHeatmap(object, ...)
 #' @export
 NULL
 
 #' @rdname plotHeatmap
 #' @name plotCorrelationHeatmap
-#' @importFrom bioverbs plotCorrelationHeatmap
+#' @importFrom acidgenerics plotCorrelationHeatmap
 #' @usage plotCorrelationHeatmap(object, ...)
 #' @export
 NULL
 
 #' @rdname plotHeatmap
 #' @name plotQuantileHeatmap
-#' @importFrom bioverbs plotQuantileHeatmap
+#' @importFrom acidgenerics plotQuantileHeatmap
 #' @usage plotQuantileHeatmap(object, ...)
 #' @export
 NULL

@@ -1,5 +1,5 @@
 #' @name plotDEGPCA
-#' @inherit bioverbs::plotDEGPCA
+#' @inherit acidgenerics::plotDEGPCA
 #' @note Updated 2019-12-18.
 #'
 #' @inheritParams plotDEGHeatmap
@@ -19,7 +19,7 @@ NULL
 
 #' @rdname plotDEGPCA
 #' @name plotDEGPCA
-#' @importFrom bioverbs plotDEGPCA
+#' @importFrom acidgenerics plotDEGPCA
 #' @usage plotDEGPCA(object, ...)
 #' @export
 NULL

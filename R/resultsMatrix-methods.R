@@ -31,7 +31,7 @@ NULL
 
 #' @rdname resultsMatrix
 #' @name resultsMatrix
-#' @importFrom bioverbs resultsMatrix
+#' @importFrom acidgenerics resultsMatrix
 #' @usage resultsMatrix(object, ...)
 #' @export
 NULL

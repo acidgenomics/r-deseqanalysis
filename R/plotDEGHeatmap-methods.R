@@ -1,5 +1,5 @@
 #' @name plotDEGHeatmap
-#' @inherit bioverbs::plotDEGHeatmap
+#' @inherit acidgenerics::plotDEGHeatmap
 #' @note Updated 2019-12-13.
 #'
 #' @inheritParams acidplots::plotHeatmap
@@ -23,7 +23,7 @@ NULL
 
 #' @rdname plotDEGHeatmap
 #' @name plotDEGHeatmap
-#' @importFrom bioverbs plotDEGHeatmap
+#' @importFrom acidgenerics plotDEGHeatmap
 #' @usage plotDEGHeatmap(object, ...)
 #' @export
 NULL

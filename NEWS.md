@@ -1,3 +1,10 @@
+## DESeqAnalysis 0.2.18 (2020-01-20)
+
+### Minor changes
+
+- Updated basejump dependencies. Namely, bioverbs package has been renamed to
+  acidgenerics, prior to CRAN submission.
+
 ## DESeqAnalysis 0.2.17 (2020-01-03)
 
 ### New functions
