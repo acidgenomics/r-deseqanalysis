@@ -19,7 +19,7 @@ URL:
     https://deseqanalysis.acidgenomics.com/,
     https://github.com/acidgenomics/DESeqAnalysis/
 BugReports: https://github.com/acidgenomics/DESeqAnalysis/issues/
-License: MIT + file LICENSE
+License: GPL-3
 Encoding: UTF-8
 LazyData: false
 Depends:
