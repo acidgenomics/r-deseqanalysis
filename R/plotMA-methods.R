@@ -1,13 +1,13 @@
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
-#' @note Updated 2019-12-18.
+#' @note Updated 2020-03-12.
 #'
 #' @details
-#' An MA plot is an application of a Bland–Altman plot for visual representation
-#' of genomic data. The plot visualizes the differences between measurements
-#' taken in two samples, by transforming the data onto M (log ratio) and A
-#' (mean average) scales, then plotting these values.
+#' An MA plot is an application of a Bland–Altman plot for visual
+#' representation of genomic data. The plot visualizes the differences between
+#' measurements taken in two samples, by transforming the data onto
+#' M (log ratio) and A (mean average) scales, then plotting these values.
 #'
 #' @section plotMA2 aliases:
 #'

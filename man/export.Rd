@@ -16,8 +16,13 @@ export(object, ...)
 \item{object}{Object.}
 
 \item{name}{\code{character(1)}.
-Name of the individual effect (coefficient) for building a results table.
-Use this argument rather than \code{contrast} for continuous variables.}
+Name to use on disk. If \code{NULL}, will use the name of the object instead.}
+
+\item{dir}{\code{character(1)}.
+Directory path.}
+
+\item{compress}{\code{logical(1)}.
+Apply gzip compression to all files.}
 
 \item{lfcShrink}{\code{logical(1)}.
 Use shrunken log2 fold change (LFC) values.}
@@ -34,7 +39,7 @@ Export data out of R and write to disk.
 Size-factor normalized coutns and FPKM values are calculated on the fly
 and exported automatically.
 
-Updated 2019-11-12.
+Updated 2020-03-12.
 }
 \examples{
 data(deseq)
