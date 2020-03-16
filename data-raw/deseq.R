@@ -1,13 +1,13 @@
 #' Example DESeq2 differential expression analysis.
-#' Updated 2019-11-12.
+#' Updated 2020-03-16.
 
-library(usethis)   # 1.5.1
+library(usethis)
 library(pryr)      # 0.1.4
-library(basejump)  # 0.11.22
+library(basejump)  # 0.12.4
 library(DESeq2)    # 1.26.0
 library(apeglm)    # 1.8.0
 
-stopifnot(packageVersion("acidtest") >= "0.2.8")
+stopifnot(packageVersion("acidtest") >= "0.3.0")
 data(RangedSummarizedExperiment, package = "acidtest")
 rse <- RangedSummarizedExperiment
 
@@ -62,11 +62,11 @@ res <- mapply(
 ## apeglm is now recommended over normal. Also note that LFC shrinkage via
 ## type='normal' is not implemented for designs with interactions.
 shrink <- mapply(
-    FUN = apeglmContrast,
+    FUN = apeglmResults,
     contrast = contrasts,
     res = res,
     MoreArgs = list(
-        dds = dds,
+        object = dds,
         lfcThreshold = lfcThreshold
     ),
     SIMPLIFY = FALSE,
