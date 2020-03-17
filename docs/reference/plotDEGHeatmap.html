@@ -74,7 +74,7 @@ plotHeatmap() are also supported by this function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.17</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.19</span>
       </span>
     </div>
 
@@ -119,10 +119,10 @@ plotHeatmap() are also supported by this function." />
     </div>
 
     <div class="ref-description">
-    <p>This function is an extension of <code><a href='https://rdrr.io/pkg/bioverbs/man/plotHeatmap.html'>plotHeatmap()</a></code> that is optimized for
+    <p>This function is an extension of <code><a href='https://rdrr.io/pkg/acidgenerics/man/plotHeatmap.html'>plotHeatmap()</a></code> that is optimized for
 automatic handling differentially expressed genes, rather than requiring
 manual input of a gene vector. All of the optional parameters for
-<code><a href='https://rdrr.io/pkg/bioverbs/man/plotHeatmap.html'>plotHeatmap()</a></code> are also supported by this function.</p>
+<code><a href='https://rdrr.io/pkg/acidgenerics/man/plotHeatmap.html'>plotHeatmap()</a></code> are also supported by this function.</p>
     </div>
 
     <pre class="usage"><span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>...</span>)
@@ -230,7 +230,7 @@ method defined in acidplots.</p></li>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotDEGHeatmap</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>40 differentially expressed genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>Scaling matrix per row (z-score).</span></div><div class='output co'>#&gt; <span class='message'>Performing hierarchical clustering.</span>
+<span class='fu'>plotDEGHeatmap</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>38 differentially expressed genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>Scaling matrix per row (z-score).</span></div><div class='output co'>#&gt; <span class='message'>Performing hierarchical clustering.</span>
 #&gt; <span class='message'>Using 'stats::hclust(method = "ward.D2")'.</span></div><div class='output co'>#&gt; <span class='message'>Arranging rows using 'hclust()'.</span></div><div class='output co'>#&gt; <span class='message'>Arranging columns using 'hclust()'.</span></div><div class='img'><img src='plotDEGHeatmap-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

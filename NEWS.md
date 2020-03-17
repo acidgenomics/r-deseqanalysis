@@ -1,3 +1,10 @@
+## DESeqAnalysis 0.2.19 (2020-03-16)
+
+### Minor changes
+
+- Resaved example test data set, using Ensembl 99 annotations.
+- Updated documentation using roxygen2 v7.1.
+
 ## DESeqAnalysis 0.2.18 (2020-01-20)
 
 ### Minor changes

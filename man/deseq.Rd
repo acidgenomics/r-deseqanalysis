@@ -4,7 +4,9 @@
 \name{deseq}
 \alias{deseq}
 \title{DESeq2 example analysis}
-\format{An object of class \code{DESeqAnalysis} of length 1.}
+\format{
+An object of class \code{DESeqAnalysis} of length 1.
+}
 \usage{
 deseq
 }
