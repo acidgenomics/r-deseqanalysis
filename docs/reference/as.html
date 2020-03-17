@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.17</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.19</span>
       </span>
     </div>
 
@@ -161,13 +161,13 @@ not been shrunken</em> using <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcSh
 #&gt; colData names(3): condition treatment sizeFactor</div><div class='input'><span class='co'>## Pulls the first results slotted.</span>
 <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqResults"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; 
-#&gt; out of 500 with nonzero total read count
+#&gt; out of 499 with nonzero total read count
 #&gt; adjusted p-value &lt; 0.01
-#&gt; LFC &gt; 0 (up)       : 22, 4.4%
-#&gt; LFC &lt; 0 (down)     : 18, 3.6%
+#&gt; LFC &gt; 0 (up)       : 24, 4.8%
+#&gt; LFC &lt; 0 (down)     : 14, 2.8%
 #&gt; outliers [1]       : 0, 0%
-#&gt; low counts [2]     : 68, 14%
-#&gt; (mean count &lt; 3)
+#&gt; low counts [2]     : 58, 12%
+#&gt; (mean count &lt; 2)
 #&gt; [1] see 'cooksCutoff' argument of ?results
 #&gt; [2] see 'independentFiltering' argument of ?results
 #&gt; </div></pre>

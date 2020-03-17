@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.17</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.19</span>
       </span>
     </div>
 
@@ -190,53 +190,53 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>40 differentially expressed genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>22 upregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>18 downregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; 
+<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'><span style='color: #BBBB00;'>!</span><span> Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>38 differentially expressed genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>24 upregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>14 downregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; 
 #&gt; 
-#&gt; |        | baseMean|lfc  |padj     |broadClass |geneName |description                                 |
-#&gt; |:-------|--------:|:----|:--------|:----------|:--------|:-------------------------------------------|
-#&gt; |gene190 |      451|2.61 |4.15e-11 |coding     |CRAMP1   |cramped chromatin regulator homolog 1       |
-#&gt; |gene343 |      260|3.58 |2.90e-09 |coding     |MAMLD1   |mastermind like domain containing 1         |
-#&gt; |gene032 |      246|2.47 |3.36e-05 |coding     |TMEM176A |transmembrane protein 176A                  |
-#&gt; |gene436 |      244|1.83 |1.21e-04 |coding     |DEF6     |DEF6, guanine nucleotide exchange factor    |
-#&gt; |gene488 |       42|2.78 |1.39e-04 |coding     |FAM13B   |family with sequence similarity 13 member B |
+#&gt; |        | baseMean|lfc  |padj     |broadClass |geneName |description                                        |
+#&gt; |:-------|--------:|:----|:--------|:----------|:--------|:--------------------------------------------------|
+#&gt; |gene338 |      236|2.89 |3.79e-09 |coding     |RNF14    |ring finger protein 14                             |
+#&gt; |gene214 |      474|2.00 |6.73e-07 |coding     |AASS     |aminoadipate-semialdehyde synthase                 |
+#&gt; |gene028 |       83|2.60 |3.52e-06 |coding     |HECW1    |HECT, C2 and WW domain containing E3 ubiquitin ... |
+#&gt; |gene112 |       76|2.11 |9.52e-05 |coding     |LAMP2    |lysosomal associated membrane protein 2            |
+#&gt; |gene465 |      117|1.88 |9.52e-05 |coding     |IFNGR1   |interferon gamma receptor 1                        |
 #&gt; 
 #&gt; 
 #&gt; |        | baseMean|lfc   |padj     |broadClass |geneName |description                                        |
 #&gt; |:-------|--------:|:-----|:--------|:----------|:--------|:--------------------------------------------------|
-#&gt; |gene406 |      292|-2.02 |2.28e-06 |coding     |SERPINB1 |serpin family B member 1                           |
-#&gt; |gene361 |      144|-1.75 |1.04e-04 |coding     |MATR3    |matrin 3                                           |
-#&gt; |gene065 |      118|-2.11 |1.21e-04 |coding     |ARX      |aristaless related homeobox                        |
-#&gt; |gene293 |       31|-2.83 |1.21e-04 |coding     |DPF1     |double PHD fingers 1                               |
-#&gt; |gene475 |      197|-1.88 |1.39e-04 |coding     |ARNTL2   |aryl hydrocarbon receptor nuclear translocator ... |</div><div class='input'>
+#&gt; |gene380 |       61|-3.09 |6.73e-07 |coding     |WWTR1    |WW domain containing transcription regulator 1     |
+#&gt; |gene401 |      261|-1.96 |9.52e-05 |coding     |MNAT1    |MNAT1 component of CDK activating kinase           |
+#&gt; |gene494 |       27|-3.36 |9.52e-05 |coding     |EIPR1    |EARP complex and GARP complex interacting prote... |
+#&gt; |gene119 |       83|-1.74 |2.92e-04 |coding     |TMEM98   |transmembrane protein 98                           |
+#&gt; |gene232 |        6|-6.72 |2.96e-04 |coding     |CSDE1    |cold shock domain containing E1                    |</div><div class='input'>
 <span class='co'>## DESeqResults 'resultsTables()' list ====</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='input'><span class='no'>resTbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsTables.html'>resultsTables</a></span>(<span class='no'>res</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"tbl_df"</span>)</div><div class='output co'>#&gt; <span class='message'>40 differentially expressed genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>22 upregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>18 downregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='input'><span class='fu'>topTables</span>(<span class='no'>resTbl</span>)</div><div class='output co'>#&gt; 
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='input'><span class='no'>resTbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsTables.html'>resultsTables</a></span>(<span class='no'>res</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"tbl_df"</span>)</div><div class='output co'>#&gt; <span class='message'>38 differentially expressed genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>24 upregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>14 downregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='input'><span class='fu'>topTables</span>(<span class='no'>resTbl</span>)</div><div class='output co'>#&gt; 
 #&gt; 
 #&gt; |        | baseMean|lfc  |padj     |
 #&gt; |:-------|--------:|:----|:--------|
-#&gt; |gene190 |      451|2.61 |4.15e-11 |
-#&gt; |gene343 |      260|3.58 |2.90e-09 |
-#&gt; |gene032 |      246|2.47 |3.36e-05 |
-#&gt; |gene436 |      244|1.83 |1.21e-04 |
-#&gt; |gene488 |       42|2.78 |1.39e-04 |
-#&gt; |gene217 |       77|1.74 |3.59e-04 |
-#&gt; |gene242 |      392|1.73 |3.59e-04 |
-#&gt; |gene262 |      120|1.71 |3.59e-04 |
-#&gt; |gene272 |      351|1.64 |3.59e-04 |
-#&gt; |gene304 |       79|1.99 |3.65e-04 |
+#&gt; |gene338 |      236|2.89 |3.79e-09 |
+#&gt; |gene214 |      474|2.00 |6.73e-07 |
+#&gt; |gene028 |       83|2.60 |3.52e-06 |
+#&gt; |gene112 |       76|2.11 |9.52e-05 |
+#&gt; |gene465 |      117|1.88 |9.52e-05 |
+#&gt; |gene185 |      453|1.81 |9.67e-05 |
+#&gt; |gene417 |       63|2.39 |1.75e-04 |
+#&gt; |gene257 |      133|1.59 |1.75e-04 |
+#&gt; |gene030 |       69|1.93 |2.96e-04 |
+#&gt; |gene431 |      235|1.49 |7.90e-04 |
 #&gt; 
 #&gt; 
 #&gt; |        | baseMean|lfc   |padj     |
 #&gt; |:-------|--------:|:-----|:--------|
-#&gt; |gene406 |      292|-2.02 |2.28e-06 |
-#&gt; |gene361 |      144|-1.75 |1.04e-04 |
-#&gt; |gene065 |      118|-2.11 |1.21e-04 |
-#&gt; |gene293 |       31|-2.83 |1.21e-04 |
-#&gt; |gene475 |      197|-1.88 |1.39e-04 |
-#&gt; |gene499 |       33|-2.80 |3.59e-04 |
-#&gt; |gene411 |       91|-1.52 |1.07e-03 |
-#&gt; |gene211 |      213|-1.38 |1.42e-03 |
-#&gt; |gene375 |       13|-2.77 |1.67e-03 |
-#&gt; |gene135 |       59|-1.56 |1.75e-03 |</div></pre>
+#&gt; |gene380 |       61|-3.09 |6.73e-07 |
+#&gt; |gene401 |      261|-1.96 |9.52e-05 |
+#&gt; |gene494 |       27|-3.36 |9.52e-05 |
+#&gt; |gene119 |       83|-1.74 |2.92e-04 |
+#&gt; |gene232 |        6|-6.72 |2.96e-04 |
+#&gt; |gene463 |       31|-2.80 |8.92e-04 |
+#&gt; |gene060 |      106|-1.71 |1.36e-03 |
+#&gt; |gene288 |       22|-2.38 |1.36e-03 |
+#&gt; |gene084 |       72|-1.62 |1.81e-03 |
+#&gt; |gene208 |       42|-1.95 |2.85e-03 |</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

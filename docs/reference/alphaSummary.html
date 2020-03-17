@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.17</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.19</span>
       </span>
     </div>
 
@@ -194,15 +194,15 @@ Use this argument rather than <code>contrast</code> for continuous variables.</p
 #&gt; outliers [1]     0    0    0     0     0
 #&gt; low counts [2]   0    0    0     0     0</div><div class='input'><span class='fu'>alphaSummary</span>(<span class='no'>dds</span>, <span class='kw'>contrast</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"condition"</span>, <span class='st'>"B"</span>, <span class='st'>"A"</span>))</div><div class='output co'>#&gt; <span class='message'>condition B A</span>
 #&gt; <span class='message'>Alpha levels: 0.1, 0.05, 0.01, 0.001, 1e-06</span></div><div class='output co'>#&gt;                0.1 0.05 0.01 0.001 1e-06
-#&gt; LFC &gt; 0 (up)    52   42   22    18     2
-#&gt; LFC &lt; 0 (down)  43   30   18     9     0
+#&gt; LFC &gt; 0 (up)    48   36   24    15     2
+#&gt; LFC &lt; 0 (down)  39   22   14     8     1
 #&gt; outliers [1]     0    0    0     0     0
-#&gt; low counts [2]  49  155   68   271     0</div><div class='input'><span class='fu'>alphaSummary</span>(<span class='no'>dds</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"condition_B_vs_A"</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A</span>
+#&gt; low counts [2] 116  116   58   271     0</div><div class='input'><span class='fu'>alphaSummary</span>(<span class='no'>dds</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"condition_B_vs_A"</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A</span>
 #&gt; <span class='message'>Alpha levels: 0.1, 0.05, 0.01, 0.001, 1e-06</span></div><div class='output co'>#&gt;                0.1 0.05 0.01 0.001 1e-06
-#&gt; LFC &gt; 0 (up)    52   42   22    18     2
-#&gt; LFC &lt; 0 (down)  43   30   18     9     0
+#&gt; LFC &gt; 0 (up)    48   36   24    15     2
+#&gt; LFC &lt; 0 (down)  39   22   14     8     1
 #&gt; outliers [1]     0    0    0     0     0
-#&gt; low counts [2]  49  155   68   271     0</div></pre>
+#&gt; low counts [2] 116  116   58   271     0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

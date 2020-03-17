@@ -12,10 +12,10 @@ test_that("Default, no contrast specified.", {
         expected = matrix(
             ## nolint start
             data = c(
-                 52,  42,  22,  18,   2,
-                 43,  30,  18,   9,   0,
+                 48,  36,  24,  15,   2,
+                 39,  22,  14,   8,   1,
                   0,   0,   0,   0,   0,
-                 49, 155,  68, 271,   0
+                116, 116,  58, 271,   0
             ),
             ## nolint end
             nrow = 4L,

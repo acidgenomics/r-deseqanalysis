@@ -35,15 +35,6 @@ Construct a simple heatmap.
 \note{
 Updated 2019-11-07.
 }
-\section{Functions}{
-
-\itemize{
-\item \code{plotHeatmap,SingleCellExperiment-method}: Applies \code{\link[=pseudobulk]{pseudobulk()}} calculation to average gene
-expression at sample level prior to plotting.\cr
-Passes \code{...} to \code{SummarizedExperiment} method.
-}
-}
-
 \section{Scaling}{
 
 

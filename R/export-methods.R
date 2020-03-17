@@ -2,9 +2,9 @@
 #' @inherit acidgenerics::export
 #' @note Size-factor normalized coutns and FPKM values are calculated on the fly
 #' and exported automatically.
-#' @note Updated 2019-11-12.
+#' @note Updated 2020-03-16.
 #'
-#' @inheritParams brio::export
+#' @inheritParams pipette::export
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'
