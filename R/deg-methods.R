@@ -52,7 +52,7 @@ NULL
         )
         direction <- match.arg(direction)
         data <- as(object, "DataFrame")
-        ## Define symbols to use in dplyr calls below.
+        ## Define symbols to use in filtering steps below.
         alphaCol <- "padj"
         lfcCol <- "log2FoldChange"
         data <- data[, c(lfcCol, alphaCol)]
@@ -65,10 +65,10 @@ NULL
             data <- data[keep, , drop = FALSE]
         }
         ## Apply directional filtering.
-        if (direction == "up") {
+        if (identical(direction, "up")) {
             keep <- which(data[[lfcCol]] > 0L)
             data <- data[keep, , drop = FALSE]
-        } else if (direction == "down") {
+        } else if (identical(direction, "down")) {
             keep <- which(data[[lfcCol]] < 0L)
             data <- data[keep, , drop = FALSE]
         }
@@ -92,7 +92,7 @@ NULL
             alpha,
             lfcThreshold
         )
-        message(status)
+        cli_alert_info(status)
         deg
     }
 
