@@ -32,8 +32,8 @@
 #'   isGGScale isHeaderLevel isInRange isInt isNonNegative isNumber isPercentage
 #'   isPositive isScalar isString isSubset validate
 #' @importFrom knitr kable
-#' @importFrom methods as is new prototype setClass show slot slot<- validObject
-#'   .hasSlot
+#' @importFrom methods as is new prototype setClass setValidity show slot slot<-
+#'   validObject .hasSlot
 #' @importFrom acidplots acid_geom_label_repel plotCounts plotPCA
 #' @importFrom rlang !! sym
 #' @importFrom scales log_breaks pretty_breaks
