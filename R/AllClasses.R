@@ -31,7 +31,7 @@ setClassUnion(name = "missingOrNULL", members = c("missing", "NULL"))
 #'
 #' @author Michael Steinbaugh
 #' @export
-#' @note Updated 2019-10-15.
+#' @note Updated 2020-05-11.
 #'
 #' @slot data `DESeqDataSet`.
 #' @slot transform `DESeqTransform`.
@@ -57,8 +57,11 @@ setClass(
     ),
     prototype = prototype(
         lfcShrink = list()
-    ),
-    validity = function(object) {
+    )
+)
+setValidity(
+    Class = "DESeqAnalysis",
+    method = function(object) {
         data <- slot(object, "data")
         transform <- slot(object, "transform")
         results <- slot(object, "results")
@@ -158,12 +161,15 @@ setClass(
 #'
 #' @author Michael Steinbaugh
 #' @export
-#' @note Updated 2019-07-23.
+#' @note Updated 2020-05-11.
 #' @return `DESeqAnalysisList`.
 setClass(
     Class = "DESeqAnalysisList",
-    contains = "SimpleList",
-    validity = function(object) {
+    contains = "SimpleList"
+)
+setValidity(
+    Class = "DESeqAnalysisList",
+    method = function(object) {
         ## Currently allowing an empty list.
         if (!hasLength(object)) return(TRUE)
         ## Require that all objects in list are named.
