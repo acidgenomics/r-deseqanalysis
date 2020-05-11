@@ -11,7 +11,7 @@
 List containing related DESeq2 analyses
 }
 \note{
-Updated 2019-07-23.
+Updated 2020-05-11.
 }
 \author{
 Michael Steinbaugh
