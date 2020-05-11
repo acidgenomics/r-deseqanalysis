@@ -29,7 +29,7 @@ Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
 the cutoff defined in the object.}
 
 \item{direction}{\code{character(1)}.
-Plot \code{"both"}, \code{"up"}, or \code{"down"} directions.}
+Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
 \item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
 \code{character} vectors, empty (\code{missing}), or \code{NULL}.
