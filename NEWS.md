@@ -1,3 +1,11 @@
+## DESeqAnalysis 0.2.20 (2020-05-12)
+
+### Minor changes
+
+- Split out `setValidity` call separately from `setClass`.
+- `updateObject`: `FGSEAList` method now uses `...` and `verbose` arguments,
+  as defined in the S4 generic.
+
 ## DESeqAnalysis 0.2.19 (2020-03-16)
 
 ### Minor changes
