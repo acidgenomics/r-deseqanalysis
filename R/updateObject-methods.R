@@ -1,6 +1,6 @@
 #' @name updateObject
 #' @inherit BiocGenerics::updateObject
-#' @note Updated 2019-08-20.
+#' @note Updated 2020-05-11.
 #'
 #' @section `DESeqAnalysis`:
 #'
@@ -17,16 +17,19 @@ NULL
 
 
 
-## Updated 2019-07-25.
+## Updated 2020-05-11.
 `updateObject,DESeqAnalysis` <-  # nolint
-    function(object) {
+    function(object, ..., verbose = FALSE) {
+        assert(isFlag(verbose))
         if (!isTRUE(.hasSlot(object, "metadata"))) {
-            ## nocov start
-            message(
-                "Legacy object < 0.1.8 detected.\n",
-                "Updating to support metadata slot."
-            )
-            ## nocov end
+            if (isTRUE(verbose)) {
+                ## nocov start
+                message(
+                    "Legacy object < 0.1.8 detected.\n",
+                    "Updating to support metadata slot."
+                )
+                ## nocov end
+            }
         }
         data <- object@data
         transform <- object@transform
