@@ -1,5 +1,5 @@
 ---
-## Updated 2019-12-12.
+## Updated 2020-07-22.
 params:
   title: "Differential expression using DESeq2"
   
@@ -13,8 +13,8 @@ params:
   name: ""
   
   ## Use log2 fold change values with adaptive shrinkage applied.
-  ## Recommended by default. Refer to `DESeq2::lfcShrink()` for details.
-  lfc_shrink: TRUE
+  ## Refer to `DESeq2::lfcShrink()` for details.
+  lfc_shrink: FALSE
   
   output_dir: !r file.path("results", Sys.Date(), "differential-expression")
 
