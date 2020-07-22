@@ -36,7 +36,7 @@ Updated 2020-05-11.
 
 We recommend generating the \code{DESeqDataSet} by coercion from \code{bcbioRNASeq}
 object using \code{as(dds, "bcbioRNASeq")}. Don't use the \code{\link[DESeq2:DESeqDataSet]{DESeq2::DESeqDataSet()}}
-or \code{\link[DESeq2:DESeqDataSetFromMatrix]{DESeq2::DESeqDataSetFromMatrix()}} constructors to generate the
+or \code{\link[DESeq2:DESeqDataSet]{DESeq2::DESeqDataSetFromMatrix()}} constructors to generate the
 \code{DESeqDataSet} object.
 }
 
