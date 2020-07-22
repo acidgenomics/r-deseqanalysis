@@ -1,7 +1,3 @@
-## FIXME Add baseMean thresholding support here.
-
-
-
 #' @name deg
 #' @inherit acidgenerics::deg
 #' @note Updated 2020-07-22.
@@ -55,18 +51,33 @@ NULL
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold)
         )
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- 0L
+        }
+        assert(
+            isNumber(baseMeanThreshold),
+            isNonNegative(baseMeanThreshold)
+        )
         direction <- match.arg(direction)
         data <- as(object, "DataFrame")
         ## Define symbols to use in filtering steps below.
         alphaCol <- "padj"
         lfcCol <- "log2FoldChange"
-        data <- data[, c(lfcCol, alphaCol)]
+        baseMeanCol <- "baseMean"
+        cols <- c(alphaCol, baseMeanCol, lfcCol)
+        assert(isSubset(cols, colnames(data)))
+        data <- data[, cols, drop = FALSE]
         ## Apply alpha cutoff.
         keep <- which(data[[alphaCol]] < alpha)
         data <- data[keep, , drop = FALSE]
         ## Apply LFC threshold cutoff.
         if (lfcThreshold > 0L) {
             keep <- which(abs(data[[lfcCol]]) > lfcThreshold)
+            data <- data[keep, , drop = FALSE]
+        }
+        ## Apply base mean cutoff.
+        if (baseMeanThreshold > 0L) {
+            keep <- which(data[[baseMeanCol]] > baseMeanThreshold)
             data <- data[keep, , drop = FALSE]
         }
         ## Apply directional filtering.
