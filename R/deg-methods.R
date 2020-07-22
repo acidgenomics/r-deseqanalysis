@@ -1,6 +1,10 @@
+## FIXME Add baseMean thresholding support here.
+
+
+
 #' @name deg
 #' @inherit acidgenerics::deg
-#' @note Updated 2019-12-18.
+#' @note Updated 2020-07-22.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -30,12 +34,13 @@ NULL
 ## Note that we're not sorting the identifiers here by LFC or P value.
 ## It's just performing a simple subset to get the identifiers as a character.
 ##
-## Updated 2019-08-20.
+## Updated 2020-07-22.
 `deg,DESeqResults` <-  # nolint
     function(
         object,
         alpha = NULL,
         lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         direction = c("both", "up", "down")
     ) {
         validObject(object)

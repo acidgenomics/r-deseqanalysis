@@ -1,3 +1,7 @@
+## FIXME Remove UpSetR fromList dependency here.
+
+
+
 #' @name plotDEGUpset
 #' @inherit acidgenerics::plotDEGUpset
 #' @note Updated 2019-11-19.
@@ -19,10 +23,6 @@ NULL
 #' @usage plotDEGUpset(object, ...)
 #' @export
 NULL
-
-
-
-
 
 
 
