@@ -1,3 +1,7 @@
+## FIXME Remove UpSetR `fromList` dependency here.
+
+
+
 #' @importClassesFrom DESeq2 DESeqDataSet DESeqTransform
 #' @importClassesFrom SummarizedExperiment RangedSummarizedExperiment
 #'   SummarizedExperiment
