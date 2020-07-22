@@ -17,7 +17,7 @@ importPairwiseContrasts(
 File path.}
 
 \item{groupCol}{\code{character(1)}.
-Group column name in \code{\link[SummarizedExperiment:colData]{colData()}} of
+Group column name in \code{\link[SummarizedExperiment:SummarizedExperiment-class]{colData()}} of
 \code{DESeqDataSet}. Corresponds to value in \code{\link[DESeq2:design]{design()}}.}
 
 \item{numeratorCol}{\code{character(1)}.

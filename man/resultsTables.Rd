@@ -37,8 +37,8 @@ Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 
 \item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
-Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
-the cutoff defined in the object.}
+Log (base 2) fold change ratio cutoff threshold.
+If left \code{NULL}, will use the cutoff defined in the object.}
 
 \item{return}{\code{character(1)}.
 Type of data frame to return as a list.

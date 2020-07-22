@@ -29,8 +29,8 @@ Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 
 \item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
-Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
-the cutoff defined in the object.}
+Log (base 2) fold change ratio cutoff threshold.
+If left \code{NULL}, will use the cutoff defined in the object.}
 
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
@@ -58,7 +58,7 @@ than requiring manual input of a gene vector or subset object.
 }
 \details{
 To adjust the annotation columns, modify the
-\code{\link[SummarizedExperiment:colData]{colData()}} of the \code{counts} argument, which
+\code{\link[SummarizedExperiment:SummarizedExperiment-class]{colData()}} of the \code{counts} argument, which
 must contain/extend a \code{SummarizedExperiment}.
 }
 \section{Functions}{
