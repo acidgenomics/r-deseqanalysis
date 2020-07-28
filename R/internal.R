@@ -1,33 +1,45 @@
-#' Calculate a numeric vector to define the colors.
+#' Calculate a numeric vector to define the colors
+#' @note Updated 2020-07-28.
 #' @details
+#' - test: P value or S value.
+#' - lfc: log2 fold change cutoff.
+#' @return `integer`.
 #' - `-1`: downregulated
 #' -  `0`: not significant
 #' -  `1`: upregulated
 #' @noRd
-## Updated 2019-07-23.
 .addIsDECol <- function(
     data,
-    testCol = "padj",
-    alpha,
-    lfcCol = "log2FoldChange",
-    lfcThreshold
+    alpha, alphaCol = "padj",
+    lfcThreshold, lfcCol = "log2FoldChange",
+    baseMeanThreshold, baseMeanCol = "baseMean"
 ) {
-    ## test: P value or S value
-    test <- data[[testCol]]
-    ## lfc: log2 fold change cutoff
-    lfc <- data[[lfcCol]]
+    cols <- c(alphaCol, lfcCol, baseMeanCol)
+    assert(isSubset(cols, colnames(data)))
     isDE <- mapply(
-        test = test,
-        lfc = lfc,
-        FUN = function(test, lfc) {
-            if (any(is.na(c(test, lfc)))) {
-                ## nonsignificant
-                0L
-            } else if (test < alpha & lfc > lfcThreshold) {
-                ## upregulated
+        test = data[[alphaCol]],
+        lfc = data[[lfcCol]],
+        baseMean = data[[baseMeanCol]],
+        MoreArgs = list(
+            alpha = alpha,
+            lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold
+        ),
+        FUN = function(
+            test, alpha,
+            lfc, lfcThreshold,
+            baseMean, baseMeanThreshold
+        ) {
+            if (
+                any(is.na(c(test, lfc, baseMean))) ||
+                test < alpha ||
+                baseMean < baseMeanThreshold
+            ) {
+                return(0L)
+            }
+            if (lfc > lfcThreshold) {
                 1L
-            } else if (test < alpha & lfc < -lfcThreshold) {
-                ## downregulated
+            } else if (lfc < -lfcThreshold) {
                 -1L
             } else {
                 0L
@@ -67,13 +79,12 @@
 
 
 
-## Updated 2019-12-13.
+## Updated 2020-07-28.
 .degPerContrast <- function(
     object,
-    alpha = NULL,
-    lfcThreshold = NULL,
     direction = c("both", "up", "down"),
-    n = FALSE
+    n = FALSE,
+    ...
 ) {
     assert(
         is(object, "DESeqAnalysis"),
@@ -90,8 +101,7 @@
                         object = object,
                         i = i,
                         direction = "down",
-                        alpha = alpha,
-                        lfcThreshold = lfcThreshold
+                        ...
                     )
                     if (isTRUE(n)) {
                         down <- length(down)
@@ -102,8 +112,7 @@
                         object = object,
                         i = i,
                         direction = "up",
-                        alpha = alpha,
-                        lfcThreshold = lfcThreshold
+                        ...
                     )
                     if (isTRUE(n)) {
                         up <- length(up)
