@@ -90,14 +90,31 @@ NULL
             title <- NULL
         }
         if (isString(title) && isTRUE(subtitle)) {
+            sep <- ";  "
             title <- paste0(
                 title, "\n",
-                length(deg), " genes;  ",
-                "alpha: ", alpha, ";  ",
-                "lfcThreshold: ", lfcThreshold, ";  ",
-                "lfcShrink: ", lfcShrinkType, ";  ",
-                "direction: ", direction
+                length(deg), " genes", sep,
+                "direction: ", direction, sep,
+                "alpha < ", alpha
             )
+            if (lfcThreshold > 0L) {
+                title <- paste0(
+                    title, sep,
+                    "lfc > ", lfcThreshold
+                )
+            }
+            if (lfcShrinkType != "unshrunken") {
+                title <- paste0(
+                    title, sep,
+                    "lfcShrink: ", lfcShrinkType
+                )
+            }
+            if (baseMeanThreshold > 0L) {
+                title <- paste0(
+                    title, sep,
+                    "baseMean > ", baseMeanThreshold
+                )
+            }
         }
         ## Using SummarizedExperiment method defined in acidplots here.
         args <- list(
