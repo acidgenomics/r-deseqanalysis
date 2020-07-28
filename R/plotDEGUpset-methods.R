@@ -28,6 +28,7 @@ NULL
         object,
         alpha = NULL,
         lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         direction = c("both", "up", "down")
     ) {
         direction <- match.arg(direction)
@@ -35,6 +36,7 @@ NULL
             object = object,
             alpha = alpha,
             lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold,
             direction = direction,
             n = FALSE
         )
