@@ -12,14 +12,15 @@
 #' @importFrom S4Vectors DataFrame SimpleList as.data.frame cbind complete.cases
 #'   cor do.call head mcols mcols<- metadata metadata<- na.omit
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
-#' @importFrom acidplots acid_coord_flip matchLabels plotHeatmap
-#'   scale_color_synesthesia_d plotUpset
+#' @importFrom acidplots acid_coord_flip acid_geom_label_repel matchLabels
+#'   plotHeatmap scale_color_synesthesia_d plotCounts plotPCA plotUpset
 #' @importFrom basejump Gene2Symbol as_tibble autopadZeros camelCase
 #'   convertSampleIDsToNames decode droplevels import initDir
 #'   interestingGroups<- leftJoin makeNames mapGenesToRownames markdownHeader
 #'   markdownList matchInterestingGroups matchesGene2Symbol melt metadata2
 #'   metadata2<- printString realpath removeNA showSlotInfo snakeCase
 #'   standardizeCall
+#' @importFrom cli cli_alert_info
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_bar
 #'   geom_density geom_hline geom_point geom_text geom_vline ggplot guides labs
@@ -33,7 +34,6 @@
 #' @importFrom knitr kable
 #' @importFrom methods as is new prototype setClass setValidity show slot slot<-
 #'   validObject .hasSlot
-#' @importFrom acidplots acid_geom_label_repel plotCounts plotPCA
 #' @importFrom rlang !! sym
 #' @importFrom scales log_breaks pretty_breaks
 #' @importFrom stats model.matrix relevel
