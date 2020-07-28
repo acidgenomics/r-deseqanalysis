@@ -98,7 +98,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2020-03-12.
+Updated 2020-07-28.
 }
 \section{plotMA2 aliases}{
 

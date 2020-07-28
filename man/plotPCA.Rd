@@ -2,11 +2,14 @@
 % Please edit documentation in R/plotPCA-methods.R
 \name{plotPCA}
 \alias{plotPCA}
+\alias{plotPCA,DESeqDataSet-method}
 \alias{plotPCA,DESeqTransform-method}
 \alias{plotPCA,DESeqAnalysis-method}
 \title{Principal component analysis plot}
 \usage{
 plotPCA(object, ...)
+
+\S4method{plotPCA}{DESeqDataSet}(object, ...)
 
 \S4method{plotPCA}{DESeqTransform}(
   object,
@@ -27,6 +30,8 @@ plotPCA(object, ...)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{...}{Additional arguments.}
 
 \item{assay}{\code{vector(1)}.
 Assay name or index position.}
@@ -63,8 +68,6 @@ Subtitle.}
 \item{return}{\code{character(1)}.
 Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
 to the first argument in the \code{character} vector.}
-
-\item{...}{Additional arguments.}
 }
 \value{
 \code{ggplot} or \code{DataFrame}.
