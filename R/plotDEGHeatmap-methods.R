@@ -1,10 +1,6 @@
-## FIXME BASEMEANTHRESHOLD
-
-
-
 #' @name plotDEGHeatmap
 #' @inherit acidgenerics::plotDEGHeatmap
-#' @note Updated 2019-12-13.
+#' @note Updated 2020-07-28.
 #'
 #' @inheritParams acidplots::plotHeatmap
 #' @inheritParams acidroxygen::params
@@ -37,13 +33,14 @@ NULL
 ## This method is used in F1000 paper and needs to be included. Note that in
 ## newer versions of bcbioRNASeq, this step won't work because we've slotted the
 ## rlog/vst counts in as a matrix instead of DESeqTransform.
-## Updated 2019-12-13.
+## Updated 2020-07-28.
 `plotDEGHeatmap,DESeqResults` <-  # nolint
     function(
         object,
         DESeqTransform,  # nolint
         alpha = NULL,
         lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         direction = c("both", "up", "down"),
         title = TRUE,
         subtitle = TRUE,
@@ -69,17 +66,12 @@ NULL
             lfcThreshold <- metadata(res)[["lfcThreshold"]]
         }
         lfcShrinkType <- lfcShrinkType(object)
-        assert(
-            isAlpha(alpha),
-            isNumber(lfcThreshold),
-            isNonNegative(lfcThreshold),
-            isString(lfcShrinkType)
-        )
         ## Get the character vector of DEGs.
         deg <- deg(
             object = res,
             alpha = alpha,
             lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold,
             direction = direction
         )
         if (length(deg) < .minDEGThreshold) {
