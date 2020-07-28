@@ -23,14 +23,12 @@ test_that("Unshrunken values", {
     expect_is(x, "matrix")
 })
 
-value <- eval(formals(`resultsMatrix,DESeqAnalysis`)[["value"]])
-with_parameters_test_that(
-    "value argument", {
+test_that("value argument", {
+    for (value in eval(formals(`resultsMatrix,DESeqAnalysis`)[["value"]])) {
         x <- resultsMatrix(deseq, value = value)
         expect_is(x, "matrix")
-    },
-    value = value
-)
+    }
+})
 
 test_that("DESeqAnalysisList", {
     object <- DESeqAnalysisList(deseq)
