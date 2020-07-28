@@ -1,3 +1,7 @@
+## FIXME baseMeanThreshold
+
+
+
 #' DESeq aggregate results matrix
 #'
 #' Generate an aggregate matrix of `DESeqResults` column values per contrast.

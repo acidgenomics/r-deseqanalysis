@@ -1,3 +1,7 @@
+## FIXME BASEMEANTHRESHOLD
+
+
+
 #' @name plotDEGPCA
 #' @inherit acidgenerics::plotDEGPCA
 #' @note Updated 2019-12-18.

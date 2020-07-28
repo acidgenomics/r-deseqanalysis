@@ -1,3 +1,7 @@
+## FIXME BASEMEANTHRESHOLD
+
+
+
 #' @name plotDEGHeatmap
 #' @inherit acidgenerics::plotDEGHeatmap
 #' @note Updated 2019-12-13.
