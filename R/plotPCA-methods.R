@@ -26,6 +26,24 @@ NULL
 
 
 
+## Updated 2020-07-28.
+`plotPCA,DESeqDataSet` <-  # nolint
+    function(object, ...) {
+        stop("Use DESeqTransform object instead of DESeqDataSet.")
+    }
+
+
+
+#' @rdname plotPCA
+#' @export
+setMethod(
+    f = "plotPCA",
+    signature = signature("DESeqDataSet"),
+    definition = `plotPCA,DESeqDataSet`
+)
+
+
+
 ## Updated 2019-07-23.
 `plotPCA,DESeqTransform` <-  # nolint
     getMethod(
