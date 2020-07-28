@@ -2,7 +2,7 @@ Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
 Version: 0.2.21
-Date: 2020-07-22
+Date: 2020-07-28
 Authors@R: c(
     person(
         given = "Michael",
@@ -38,21 +38,20 @@ Imports:
     ggplot2 (>= 3.3),
     goalie (>= 0.4.5),
     knitr (>= 1.29),
-    rlang (>= 0.4),
-    stringr (>= 1.4),
     methods,
+    rlang (>= 0.4),
     scales,
     stats,
+    stringr (>= 1.4),
     utils
 Suggests:
     BiocStyle,
     apeglm (>= 1.10.0),
     ashr (>= 2.2.47),
-    patrick (>= 0.0.1),
-    roxygen2 (>= 7.1),
-    testthat (>= 2.3),
+    roxygen2,
+    testthat,
     tximport (>= 1.16.1),
-    viridis (>= 0.5)
+    viridis
 Remotes:
     acidgenomics/acidgenerics,
     acidgenomics/acidplots,

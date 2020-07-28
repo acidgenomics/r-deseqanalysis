@@ -1,7 +1,3 @@
-## FIXME Remove UpSetR `fromList` dependency here.
-
-
-
 #' @importClassesFrom DESeq2 DESeqDataSet DESeqTransform
 #' @importClassesFrom SummarizedExperiment RangedSummarizedExperiment
 #'   SummarizedExperiment
@@ -16,7 +12,6 @@
 #' @importFrom S4Vectors DataFrame SimpleList as.data.frame cbind complete.cases
 #'   cor do.call head mcols mcols<- metadata metadata<- na.omit
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
-#' @importFrom UpSetR fromList
 #' @importFrom acidplots acid_coord_flip matchLabels plotHeatmap
 #'   scale_color_synesthesia_d plotUpset
 #' @importFrom basejump Gene2Symbol as_tibble autopadZeros camelCase
