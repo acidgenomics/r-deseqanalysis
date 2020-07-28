@@ -1,7 +1,11 @@
+## FIXME baseMeanThreshold
+
+
+
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
-#' @note Updated 2020-03-12.
+#' @note Updated 2020-07-28.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual

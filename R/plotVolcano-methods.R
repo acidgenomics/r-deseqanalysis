@@ -1,7 +1,11 @@
+## FIXME baseMeanThreshold
+
+
+
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit acidgenerics::plotVolcano
-#' @note Updated 2019-12-13.
+#' @note Updated 2020-07-28.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
