@@ -80,7 +80,7 @@
         isFlag(n)
     )
     direction <- match.arg(direction)
-    suppressMessages(
+    suppressMessages({
         mapply(
             i = resultsNames(object),
             MoreArgs = list(object = object),
@@ -128,7 +128,7 @@
             SIMPLIFY = FALSE,
             USE.NAMES = TRUE
         )
-    )
+    })
 }
 
 

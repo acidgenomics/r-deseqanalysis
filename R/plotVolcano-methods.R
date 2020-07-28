@@ -372,9 +372,9 @@ setMethod(
         )
         ## Return `NULL` for objects that don't contain gene symbol mappings.
         gene2symbol <- tryCatch(
-            expr = suppressMessages(
+            expr = suppressMessages({
                 Gene2Symbol(as(object, "DESeqDataSet"))
-            ),
+            }),
             error = function(e) NULL
         )
         plotVolcano(
