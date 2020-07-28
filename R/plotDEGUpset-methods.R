@@ -1,10 +1,6 @@
-## FIXME Remove UpSetR fromList dependency here.
-
-
-
 #' @name plotDEGUpset
 #' @inherit acidgenerics::plotDEGUpset
-#' @note Updated 2019-11-19.
+#' @note Updated 2020-07-28.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -26,7 +22,7 @@ NULL
 
 
 
-## Updated 2019-12-13.
+## Updated 2020-07-28.
 `plotDEGUpset,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -46,10 +42,9 @@ NULL
         listInput <- do.call(what = c, args = degPerContrast)
         ## Using "_" instead of "." for name concatenation.
         names(listInput) <- makeNames(names(listInput), unique = TRUE)
-        ## Suppressing message about contrast not having up/down DEG overlap:
-        ## geom_path: Each group consists of only one observation.
+        ## Suppressing message about contrast not having up/down DEG overlap.
         suppressMessages({
-            plotUpset(object = fromList(listInput))
+            plotUpset(listInput)
         })
     }
 
