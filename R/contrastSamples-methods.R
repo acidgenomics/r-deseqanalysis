@@ -101,9 +101,9 @@ NULL
         rm(call)
         ## nocov end
         validObject(object)
-        suppressMessages(
+        suppressMessages({
             res <- results(object = object, i = i, lfcShrink = FALSE)
-        )
+        })
         ## If we've defined a subset of samples for the contrast, stash them
         ## in DESeqResults metadata. Otherwise, there's no way to trace this
         ## back to a match in DESeqDataSet.

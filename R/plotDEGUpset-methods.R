@@ -48,9 +48,9 @@ NULL
         names(listInput) <- makeNames(names(listInput), unique = TRUE)
         ## Suppressing message about contrast not having up/down DEG overlap:
         ## geom_path: Each group consists of only one observation.
-        suppressMessages(
+        suppressMessages({
             plotUpset(object = fromList(listInput))
-        )
+        })
     }
 
 
