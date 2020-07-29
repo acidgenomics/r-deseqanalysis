@@ -75,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.20</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.21</span>
       </span>
     </div>
 
@@ -131,6 +131,7 @@
   <span class='no'>object</span>,
   <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>baseMeanThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>genes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>gene2symbol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>ntop</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
@@ -162,8 +163,15 @@ defined in the object.</p></td>
     <tr>
       <th>lfcThreshold</th>
       <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
-Log fold change ratio (base 2) cutoff threshold. If left <code>NULL</code>, will use
-the cutoff defined in the object.</p></td>
+Log (base 2) fold change ratio cutoff threshold.
+If left <code>NULL</code>, will use the cutoff defined in the object.</p></td>
+    </tr>
+    <tr>
+      <th>baseMeanThreshold</th>
+      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
+Base mean (i.e. average expression across all samples) threshold.
+If left <code>NULL</code>, will use the cutoff defined in the object.
+Applies in general to DESeq2 RNA-seq differential expression output.</p></td>
     </tr>
     <tr>
       <th>genes</th>
@@ -243,7 +251,7 @@ argument automatically defined.</p></li>
 </ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2020-03-12.</p>
+    <p>Updated 2020-07-29.</p>
     <h2 class="hasAnchor" id="plotma-aliases"><a class="anchor" href="#plotma-aliases"></a>plotMA2 aliases</h2>
 
     

@@ -12,6 +12,7 @@ plotVolcano(object, ...)
   object,
   alpha = NULL,
   lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
   genes = NULL,
   gene2symbol = NULL,
   ntop = 0L,
@@ -38,6 +39,11 @@ defined in the object.}
 \item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
 Log (base 2) fold change ratio cutoff threshold.
 If left \code{NULL}, will use the cutoff defined in the object.}
+
+\item{baseMeanThreshold}{\code{numeric(1)} or \code{NULL}.
+Base mean (i.e. average expression across all samples) threshold.
+If left \code{NULL}, will use the cutoff defined in the object.
+Applies in general to DESeq2 RNA-seq differential expression output.}
 
 \item{genes}{\code{character}.
 Gene identifiers.}
@@ -97,7 +103,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2020-07-28.
+Updated 2020-07-29.
 }
 \examples{
 data(deseq)
