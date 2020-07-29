@@ -79,7 +79,7 @@ NULL
                 fmt = "Fewer than %s DEGs to plot. Skipping.",
                 .minDEGThreshold
             ))
-            return(invisible())
+            return()
         }
         ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
@@ -90,7 +90,7 @@ NULL
             title <- NULL
         }
         if (isString(title) && isTRUE(subtitle)) {
-            sep <- ";  "
+            sep <- "; "
             title <- paste0(
                 title, "\n",
                 length(deg), " genes", sep,
@@ -100,7 +100,7 @@ NULL
             if (lfcThreshold > 0L) {
                 title <- paste0(
                     title, sep,
-                    "lfc > ", lfcThreshold
+                    "lfc >= ", lfcThreshold
                 )
             }
             if (lfcShrinkType != "unshrunken") {
@@ -112,7 +112,7 @@ NULL
             if (baseMeanThreshold > 0L) {
                 title <- paste0(
                     title, sep,
-                    "baseMean > ", baseMeanThreshold
+                    "baseMean >= ", baseMeanThreshold
                 )
             }
         }
