@@ -1,11 +1,7 @@
-## FIXME baseMeanThreshold
-
-
-
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit acidgenerics::plotVolcano
-#' @note Updated 2020-07-28.
+#' @note Updated 2020-07-29.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -70,12 +66,13 @@ NULL
 
 
 
-## Updated 2019-12-13.
+## Updated 2020-07-29.
 `plotVolcano,DESeqResults` <-  # nolint
     function(
         object,
         alpha = NULL,
         lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         genes = NULL,
         gene2symbol = NULL,
         ntop = 0L,
@@ -92,6 +89,20 @@ NULL
         return = c("ggplot", "DataFrame")
     ) {
         validObject(object)
+        baseMeanCol <- "baseMean"
+        lfcCol <- "log2FoldChange"
+        if ("svalue" %in% names(object)) {
+            testCol <- "svalue"  # nocov
+        } else {
+            testCol <- "padj"
+        }
+        negLogTestCol <- camelCase(paste("neg", "log10", testCol))
+        ## Note that `lfcShrink()` doesn't return `stat` column.
+        if ("stat" %in% names(object)) {
+            rankCol <- "stat"
+        } else {
+            rankCol <- negLogTestCol
+        }
         if (is.null(alpha)) {
             alpha <- metadata(object)[["alpha"]]
         }
@@ -99,11 +110,16 @@ NULL
             lfcThreshold <- metadata(object)[["lfcThreshold"]]
         }
         lfcShrinkType <- lfcShrinkType(object)
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- 1L
+        }
         assert(
             isAlpha(alpha),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
             isString(lfcShrinkType),
+            isNumber(baseMeanThreshold),
+            isNonNegative(baseMeanThreshold),
             isInt(ntop),
             isNonNegative(ntop),
             isCharacter(pointColor),
@@ -120,32 +136,13 @@ NULL
         )
         direction <- match.arg(direction)
         return <- match.arg(return)
-        ## Check to see if we should use `sval` instead of `padj`
-        if ("svalue" %in% names(object)) {
-            testCol <- "svalue"  # nocov
-        } else {
-            testCol <- "padj"
-        }
-        ## Placeholder variables.
-        lfcCol <- "log2FoldChange"
-        negLogTestCol <- camelCase(paste("neg", "log10", testCol))
-        ## Note that `lfcShrink()` doesn't return `stat` column.
-        if ("stat" %in% names(object)) {
-            rankCol <- "stat"
-        } else {
-            rankCol <- negLogTestCol
-        }
         data <- as(object, "DataFrame")
         data <- camelCase(data)
-        assert(isSubset(
-            x = c("baseMean", lfcCol, testCol),
-            y = colnames(data)
-        ))
+        assert(isSubset(c(baseMeanCol, lfcCol, testCol), colnames(data)))
         ## Remove genes with NA adjusted P values.
         keep <- which(!is.na(data[[testCol]]))
         data <- data[keep, , drop = FALSE]
-        ## Remove genes with zero counts.
-        keep <- which(data[["baseMean"]] > 0L)
+        keep <- which(data[[baseMeanCol]] >= baseMeanThreshold)
         data <- data[keep, , drop = FALSE]
         ## Negative log10 transform the test values. Add `ylim` here to prevent
         ## `Inf` values resulting from log transformation. This will also define
@@ -154,21 +151,17 @@ NULL
         data[[negLogTestCol]] <- -log10(data[[testCol]] + ylim)
         data[["rankScore"]] <- abs(data[[rankCol]])
         data <- data[
-            order(data[["rankScore"]], decreasing = TRUE),
-            ,
-            drop = FALSE
-            ]
+            order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE
+        ]
         data[["rank"]] <- seq_len(nrow(data))
         data <- .addIsDECol(
             data = data,
             testCol = testCol,
             alpha = alpha,
-            lfcThreshold = lfcThreshold
+            lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold
         )
-        assert(isSubset(
-            x = c("isDE", "rank", "rankScore"),
-            y = colnames(data)
-        ))
+        assert(isSubset(c("isDE", "rank", "rankScore"), colnames(data)))
         ## Apply directional filtering, if desired.
         if (direction == "up") {
             keep <- which(data[[lfcCol]] > 0L)
@@ -233,6 +226,26 @@ NULL
             )
 
         ## Volcano plot --------------------------------------------------------
+        sep <- "; "
+        subtitle <- paste0("alpha: ", alpha)
+        if (lfcThreshold > 0L) {
+            subtitle <- paste0(
+                subtitle, sep,
+                "lfc >= ", lfcThreshold
+            )
+        }
+        if (lfcShrinkType != "unshrunken") {
+            subtitle <- paste0(
+                subtitle, sep,
+                "lfcShrink: ", lfcShrinkType
+            )
+        }
+        if (baseMeanThreshold > 1L) {
+            subtitle <- paste0(
+                subtitle, sep,
+                "baseMean >= ", baseMeanThreshold
+            )
+        }
         p <- ggplot(
             data = as_tibble(data, rownames = NULL),
             mapping = aes(
@@ -256,11 +269,7 @@ NULL
             guides(color = FALSE) +
             labs(
                 title = contrastName(object),
-                subtitle = paste0(
-                    "alpha: ", alpha, ";  ",
-                    "lfcThreshold: ", lfcThreshold, ";  ",
-                    "lfcShrink: ", lfcShrinkType
-                ),
+                subtitle = subtitle,
                 x = "log2 fold change",
                 y = "-log10 adj p value"
             )
