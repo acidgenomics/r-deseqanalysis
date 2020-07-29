@@ -1,5 +1,5 @@
 #' Calculate a numeric vector to define the colors
-#' @note Updated 2020-07-28.
+#' @note Updated 2020-07-29.
 #' @details
 #' - test: P value or S value.
 #' - lfc: log2 fold change cutoff.
@@ -10,14 +10,14 @@
 #' @noRd
 .addIsDECol <- function(
     data,
-    alpha, alphaCol = "padj",
-    lfcThreshold, lfcCol = "log2FoldChange",
-    baseMeanThreshold, baseMeanCol = "baseMean"
+    testCol = "padj", alpha,
+    lfcCol = "log2FoldChange", lfcThreshold,
+    baseMeanCol = "baseMean", baseMeanThreshold
 ) {
-    cols <- c(alphaCol, lfcCol, baseMeanCol)
+    cols <- c(testCol, lfcCol, baseMeanCol)
     assert(isSubset(cols, colnames(data)))
     isDE <- mapply(
-        test = data[[alphaCol]],
+        test = data[[testCol]],
         lfc = data[[lfcCol]],
         baseMean = data[[baseMeanCol]],
         MoreArgs = list(
@@ -32,14 +32,14 @@
         ) {
             if (
                 any(is.na(c(test, lfc, baseMean))) ||
-                test < alpha ||
+                test >= alpha ||
                 baseMean < baseMeanThreshold
             ) {
                 return(0L)
             }
-            if (lfc > lfcThreshold) {
+            if (lfc >= lfcThreshold) {
                 1L
-            } else if (lfc < -lfcThreshold) {
+            } else if (lfc <= -lfcThreshold) {
                 -1L
             } else {
                 0L
