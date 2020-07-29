@@ -1,6 +1,6 @@
 #' @name deg
 #' @inherit acidgenerics::deg
-#' @note Updated 2020-07-22.
+#' @note Updated 2020-07-29.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -30,33 +30,33 @@ NULL
 ## Note that we're not sorting the identifiers here by LFC or P value.
 ## It's just performing a simple subset to get the identifiers as a character.
 ##
-## Updated 2020-07-22.
+## Updated 2020-07-29.
 `deg,DESeqResults` <-  # nolint
     function(
         object,
         alpha = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
-        direction = c("both", "up", "down")
+        direction = c("both", "up", "down"),
+        quiet = FALSE
     ) {
         validObject(object)
         if (is.null(alpha)) {
             alpha <- metadata(object)[["alpha"]]
         }
-        assert(isAlpha(alpha))
         if (is.null(lfcThreshold)) {
             lfcThreshold <- metadata(object)[["lfcThreshold"]]
         }
-        assert(
-            isNumber(lfcThreshold),
-            isNonNegative(lfcThreshold)
-        )
         if (is.null(baseMeanThreshold)) {
             baseMeanThreshold <- 0L
         }
         assert(
+            isAlpha(alpha),
+            isNumber(lfcThreshold),
+            isNonNegative(lfcThreshold),
             isNumber(baseMeanThreshold),
-            isNonNegative(baseMeanThreshold)
+            isNonNegative(baseMeanThreshold),
+            isFlag(quiet)
         )
         direction <- match.arg(direction)
         data <- as(object, "DataFrame")
@@ -72,12 +72,12 @@ NULL
         data <- data[keep, , drop = FALSE]
         ## Apply LFC threshold cutoff.
         if (lfcThreshold > 0L) {
-            keep <- which(abs(data[[lfcCol]]) > lfcThreshold)
+            keep <- which(abs(data[[lfcCol]]) >= lfcThreshold)
             data <- data[keep, , drop = FALSE]
         }
         ## Apply base mean cutoff.
         if (baseMeanThreshold > 0L) {
-            keep <- which(data[[baseMeanCol]] > baseMeanThreshold)
+            keep <- which(data[[baseMeanCol]] >= baseMeanThreshold)
             data <- data[keep, , drop = FALSE]
         }
         ## Apply directional filtering.
@@ -91,24 +91,39 @@ NULL
         ## Arrange table by adjusted P value.
         data <- data[order(data[[alphaCol]]), , drop = FALSE]
         deg <- rownames(data)
-        status <- sprintf(
-            fmt = "%d %s %s detected (alpha: %g; lfc: %g).",
-            length(deg),
-            switch(
-                EXPR = direction,
-                up = "upregulated",
-                down = "downregulated",
-                both = "differentially expressed"
-            ),
-            ngettext(
-                n = length(deg),
-                msg1 = "gene",
-                msg2 = "genes"
-            ),
-            alpha,
-            lfcThreshold
-        )
-        cli_alert_info(status)
+        if (!isTRUE(quiet)) {
+            sep <- "; "
+            status <- sprintf(
+                fmt = "%d %s %s",
+                length(deg),
+                switch(
+                    EXPR = direction,
+                    up = "upregulated",
+                    down = "downregulated",
+                    both = "differentially expressed"
+                ),
+                ngettext(
+                    n = length(deg),
+                    msg1 = "gene",
+                    msg2 = "genes"
+                )
+            )
+            status <- paste0(status, " (alpha < ", alpha)
+            if (lfcThreshold > 0L) {
+                status <- paste0(
+                    status, sep,
+                    "lfc >= ", lfcThreshold
+                )
+            }
+            if (baseMeanThreshold > 0L) {
+                status <- paste0(
+                    status, sep,
+                    "baseMean >= ", baseMeanThreshold
+                )
+            }
+            status <- paste0(status, ")")
+            cli_alert_info(status)
+        }
         deg
     }
 
