@@ -48,14 +48,6 @@ NULL
     ) {
         validObject(object)
         validObject(DESeqTransform)
-        assert(
-            is(object, "DESeqResults"),
-            is(DESeqTransform, "DESeqTransform"),
-            identical(rownames(object), rownames(DESeqTransform)),
-            isFlag(title) || isCharacter(title) || is.null(title),
-            isFlag(subtitle)
-        )
-        direction <- match.arg(direction)
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
@@ -66,7 +58,17 @@ NULL
             lfcThreshold <- metadata(res)[["lfcThreshold"]]
         }
         lfcShrinkType <- lfcShrinkType(object)
-        ## Get the character vector of DEGs.
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- 0L
+        }
+        assert(
+            is(res, "DESeqResults"),
+            is(dt, "DESeqTransform"),
+            identical(rownames(object), rownames(DESeqTransform)),
+            isFlag(title) || isCharacter(title) || is.null(title),
+            isFlag(subtitle)
+        )
+        direction <- match.arg(direction)
         deg <- deg(
             object = res,
             alpha = alpha,
