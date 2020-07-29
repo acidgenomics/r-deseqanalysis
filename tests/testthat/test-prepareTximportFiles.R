@@ -8,7 +8,7 @@ test_that("makeNames", {
             snakeCase = c("x001_sample_a", "x100_sample_b"),
             camelCase = c("x001SampleA", "x100SampleB")
         ),
-        FUN = functinon(makeNames, names) {
+        FUN = function(makeNames, names) {
             files <- c(
                 file.path("salmon", "1-sample-A", "quant.sf"),
                 file.path("salmon", "100-sample-B", "quant.sf")
