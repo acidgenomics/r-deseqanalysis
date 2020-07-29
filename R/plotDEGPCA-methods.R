@@ -1,10 +1,6 @@
-## FIXME BASEMEANTHRESHOLD
-
-
-
 #' @name plotDEGPCA
 #' @inherit acidgenerics::plotDEGPCA
-#' @note Updated 2019-12-18.
+#' @note Updated 2020-07-29.
 #'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams acidplots::plotPCA
@@ -30,24 +26,19 @@ NULL
 
 
 
-## Updated 2019-11-19.
+## Updated 2020-07-29.
 `plotDEGPCA,DESeqResults` <-  # nolint
     function(
         object,
         DESeqTransform,  # nolint
         alpha = NULL,
         lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         direction = c("both", "up", "down"),
         ...
     ) {
         validObject(object)
         validObject(DESeqTransform)
-        assert(
-            is(object, "DESeqResults"),
-            is(DESeqTransform, "DESeqTransform"),
-            identical(rownames(object), rownames(DESeqTransform))
-        )
-        direction <- match.arg(direction)
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
@@ -57,16 +48,25 @@ NULL
         if (is.null(lfcThreshold)) {
             lfcThreshold <- metadata(res)[["lfcThreshold"]]
         }
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- 0L
+        }
         assert(
+            is(res, "DESeqResults"),
+            is(dt, "DESeqTransform"),
+            identical(rownames(res), rownames(dt)),
             isAlpha(alpha),
             isNumber(lfcThreshold),
-            isNonNegative(lfcThreshold)
+            isNonNegative(lfcThreshold),
+            isNumber(baseMeanThreshold),
+            isNonNegative(baseMeanThreshold)
         )
-        ## Get the character vector of DEGs.
+        direction <- match.arg(direction)
         deg <- deg(
             object = res,
             alpha = alpha,
             lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold,
             direction = direction
         )
         if (length(deg) < .minDEGThreshold) {
@@ -74,18 +74,30 @@ NULL
                 fmt = "Fewer than %s DEGs to plot. Skipping.",
                 .minDEGThreshold
             ))
-            return(invisible())
+            return()
         }
         ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
         ## Titles.
         title <- contrastName(res)
+        sep <- "; "
         subtitle <- paste0(
-            length(deg), " genes", ";  ",
-            "alpha: ", alpha, ";  ",
-            "lfcThreshold: ", lfcThreshold, ";  ",
-            "direction: ", direction
+            length(deg), " genes", sep,
+            "direction: ", direction, sep,
+            "alpha < ", alpha
         )
+        if (lfcThreshold > 0L) {
+            subtitle <- paste0(
+                subtitle, sep,
+                "lfc >=", lfcThreshold
+            )
+        }
+        if (baseMeanThreshold > 0L) {
+            subtitle <- paste0(
+                subtitle, sep,
+                "baseMean >=", baseMeanThreshold
+            )
+        }
         ## Using SummarizedExperiment method here.
         args <- list(
             object = as(dt, "RangedSummarizedExperiment"),
