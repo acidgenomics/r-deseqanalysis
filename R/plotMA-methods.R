@@ -86,6 +86,19 @@ NULL
         return = c("ggplot", "DataFrame")
     ) {
         validObject(object)
+        baseMeanCol <- "baseMean"
+        lfcCol <- "log2FoldChange"
+        if ("svalue" %in% names(object)) {
+            testCol <- "svalue"  # nocov
+        } else {
+            testCol <- "padj"
+        }
+        ## Note that `lfcShrink()` doesn't return `stat` column.
+        if ("stat" %in% names(object)) {
+            rankCol <- "stat"
+        } else {
+            rankCol <- lfcCol
+        }
         if (is.null(alpha)) {
             alpha <- metadata(object)[["alpha"]]
         }
@@ -93,7 +106,6 @@ NULL
             lfcThreshold <- metadata(object)[["lfcThreshold"]]
         }
         lfcShrinkType <- lfcShrinkType(object)
-        baseMeanCol <- "baseMean"
         if (is.null(baseMeanThreshold)) {
             baseMeanThreshold <- 1L
         }
@@ -101,9 +113,9 @@ NULL
             isAlpha(alpha),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
+            isString(lfcShrinkType),
             isNumber(baseMeanThreshold),
             isNonNegative(baseMeanThreshold),
-            isString(lfcShrinkType),
             isAny(genes, classes = c("character", "NULL")),
             isAny(gene2symbol, classes = c("Gene2Symbol", "NULL")),
             isCharacter(pointColor),
@@ -122,20 +134,6 @@ NULL
         ## Genes or ntop, but not both.
         if (!is.null(genes) && ntop > 0L) {
             stop("Specify either 'genes' or 'ntop'.")
-        }
-        ## Check to see if we should use `sval` column instead of `padj`.
-        if ("svalue" %in% names(object)) {
-            testCol <- "svalue"  # nocov
-        } else {
-            testCol <- "padj"
-        }
-        ## Placeholder variables.
-        lfcCol <- "log2FoldChange"
-        ## Note that `lfcShrink()` doesn't return `stat` column.
-        if ("stat" %in% names(object)) {
-            rankCol <- "stat"
-        } else {
-            rankCol <- lfcCol
         }
         data <- as(object, "DataFrame")
         data <- camelCase(data)
@@ -187,8 +185,7 @@ NULL
         floor <- min(floor(log10BaseMean))
         ceiling <- max(ceiling(log10BaseMean))
         xBreaks <- 10L ^ seq(from = floor, to = ceiling, by = 1L)
-        ## Define the subtitle text.
-        sep <- ";  "
+        sep <- "; "
         subtitle <- paste0("alpha: ", alpha)
         if (lfcThreshold > 0L) {
             subtitle <- paste0(
