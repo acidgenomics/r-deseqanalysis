@@ -31,7 +31,6 @@ Imports:
     IRanges,
     S4Vectors,
     SummarizedExperiment,
-    UpSetR (>= 1.4),
     acidgenerics (>= 0.3.7),
     acidplots (>= 0.2.30),
     cli (>= 2.0),

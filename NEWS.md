@@ -9,6 +9,10 @@
   and `baseMeanThreshold` now use `>=` logic rather than previous `>` approach.
   The alpha cutoff still uses `>` operator logic.
 
+### Minor changes
+
+- Removed UpSetR dependency, in preparation for future switch to ggupset.
+
 ## DESeqAnalysis 0.2.20 (2020-05-12)
 
 ### Minor changes
