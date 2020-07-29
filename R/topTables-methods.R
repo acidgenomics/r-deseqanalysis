@@ -1,7 +1,3 @@
-## FIXME baseMeanThreshold
-
-
-
 #' @name topTables
 #' @inherit acidgenerics::topTables
 #' @note Updated 2019-11-12.
