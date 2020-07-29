@@ -193,7 +193,7 @@ NULL
         if (lfcThreshold > 0L) {
             subtitle <- paste0(
                 subtitle, sep,
-                "lfc > ", lfcThreshold
+                "lfc >= ", lfcThreshold
             )
         }
         if (lfcShrinkType != "unshrunken") {
@@ -205,7 +205,7 @@ NULL
         if (baseMeanThreshold > 1L) {
             subtitle <- paste0(
                 subtitle, sep,
-                "baseMean > ", baseMeanThreshold
+                "baseMean >= ", baseMeanThreshold
             )
         }
         p <- ggplot(
@@ -228,7 +228,7 @@ NULL
             ) +
             scale_x_continuous(
                 breaks = xBreaks,
-                limits = c(1L, NA),
+                limits = c(baseMeanThreshold, NA),
                 trans = "log10"
             ) +
             scale_y_continuous(breaks = pretty_breaks()) +
