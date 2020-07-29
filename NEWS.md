@@ -1,3 +1,13 @@
+## DESeqAnalysis 0.2.21 (2020-07-29)
+
+### Major changes
+
+- Added support for `baseMeanThreshold`, where applicable. Applies primarily
+  to `resultsTables`, `plotMA`, and `plotVolcano`.
+- Reworked internal code that handles DEG extraction. Note that `lfcThreshold`
+  and `baseMeanThreshold` now use `>=` logic rather than previous `>` approach.
+  The alpha cutoff still uses `>` operator logic.
+
 ## DESeqAnalysis 0.2.20 (2020-05-12)
 
 ### Minor changes
