@@ -1,11 +1,7 @@
-## FIXME baseMeanThreshold
-
-
-
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
-#' @note Updated 2020-07-28.
+#' @note Updated 2020-07-29.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual
@@ -69,12 +65,13 @@ NULL
 
 
 
-## Updated 2019-12-13.
+## Updated 2020-07-29.
 `plotMA,DESeqResults` <-  # nolint
     function(
         object,
         alpha = NULL,
         lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         genes = NULL,
         gene2symbol = NULL,
         ntop = 0L,
@@ -96,10 +93,16 @@ NULL
             lfcThreshold <- metadata(object)[["lfcThreshold"]]
         }
         lfcShrinkType <- lfcShrinkType(object)
+        baseMeanCol <- "baseMean"
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- 1L
+        }
         assert(
             isAlpha(alpha),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
+            isNumber(baseMeanThreshold),
+            isNonNegative(baseMeanThreshold),
             isString(lfcShrinkType),
             isAny(genes, classes = c("character", "NULL")),
             isAny(gene2symbol, classes = c("Gene2Symbol", "NULL")),
@@ -137,25 +140,25 @@ NULL
         data <- as(object, "DataFrame")
         data <- camelCase(data)
         assert(isSubset(
-            x = c("baseMean", lfcCol, rankCol, testCol),
+            x = c(baseMeanCol, lfcCol, rankCol, testCol),
             y = colnames(data)
         ))
         ## Remove genes with very low expression.
-        keep <- which(data[["baseMean"]] >= 1L)
+        keep <- which(data[[baseMeanCol]] >= baseMeanThreshold)
         data <- data[keep, , drop = FALSE]
         data[["rankScore"]] <- abs(data[[rankCol]])
         data <- data[
-            order(data[["rankScore"]], decreasing = TRUE),
-            ,
-            drop = FALSE
-            ]
+            order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE
+        ]
         data[["rank"]] <- seq_len(nrow(data))
         data <- .addIsDECol(
             data = data,
             testCol = testCol,
             alpha = alpha,
             lfcCol = lfcCol,
-            lfcThreshold = lfcThreshold
+            lfcThreshold = lfcThreshold,
+            baseMeanCol = baseMeanCol,
+            baseMeanThreshold = baseMeanThreshold
         )
         assert(isSubset(
             x = c("isDE", "rank", "rankScore"),
@@ -172,7 +175,7 @@ NULL
         ## Check for no genes passing cutoffs and early return.
         if (!hasRows(data)) {
             message("No genes passed cutoffs.")
-            return(invisible())
+            return()
         }
         ## Early return the data, if desired.
         if (identical(return, "DataFrame")) {
@@ -184,6 +187,27 @@ NULL
         floor <- min(floor(log10BaseMean))
         ceiling <- max(ceiling(log10BaseMean))
         xBreaks <- 10L ^ seq(from = floor, to = ceiling, by = 1L)
+        ## Define the subtitle text.
+        sep <- ";  "
+        subtitle <- paste0("alpha: ", alpha)
+        if (lfcThreshold > 0L) {
+            subtitle <- paste0(
+                subtitle, sep,
+                "lfc > ", lfcThreshold
+            )
+        }
+        if (lfcShrinkType != "unshrunken") {
+            subtitle <- paste0(
+                subtitle, sep,
+                "lfcShrink: ", lfcShrinkType
+            )
+        }
+        if (baseMeanThreshold > 1L) {
+            subtitle <- paste0(
+                subtitle, sep,
+                "baseMean > ", baseMeanThreshold
+            )
+        }
         p <- ggplot(
             data = as_tibble(data, rownames = NULL),
             mapping = aes(
@@ -212,14 +236,11 @@ NULL
             guides(color = FALSE) +
             labs(
                 title = contrastName(object),
-                subtitle = paste0(
-                    "alpha: ", alpha, ";  ",
-                    "lfcThreshold: ", lfcThreshold, ";  ",
-                    "lfcShrink: ", lfcShrinkType
-                ),
+                subtitle = subtitle,
                 x = "mean expression across all samples",
                 y = "log2 fold change"
             )
+
         ## Color the significant points.
         ## Note that we're using direction-specific coloring by default.
         if (isCharacter(pointColor)) {
