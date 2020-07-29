@@ -13,7 +13,8 @@ deg(object, ...)
   alpha = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
-  direction = c("both", "up", "down")
+  direction = c("both", "up", "down"),
+  quiet = FALSE
 )
 
 \S4method{deg}{DESeqAnalysis}(object, i, ...)
@@ -37,6 +38,9 @@ Applies in general to DESeq2 RNA-seq differential expression output.}
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
+\item{quiet}{\code{logical(1)}.
+Perform command quietly, suppressing messages.}
+
 \item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
 \code{character} vectors, empty (\code{missing}), or \code{NULL}.
 
@@ -53,7 +57,7 @@ Gene identifiers.
 Differentially expressed genes
 }
 \note{
-Updated 2020-07-22.
+Updated 2020-07-29.
 }
 \examples{
 data(deseq)

@@ -13,6 +13,7 @@ plotDEGPCA(object, ...)
   DESeqTransform,
   alpha = NULL,
   lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
   direction = c("both", "up", "down"),
   ...
 )
@@ -31,6 +32,11 @@ defined in the object.}
 \item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
 Log (base 2) fold change ratio cutoff threshold.
 If left \code{NULL}, will use the cutoff defined in the object.}
+
+\item{baseMeanThreshold}{\code{numeric(1)} or \code{NULL}.
+Base mean (i.e. average expression across all samples) threshold.
+If left \code{NULL}, will use the cutoff defined in the object.
+Applies in general to DESeq2 RNA-seq differential expression output.}
 
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
@@ -67,7 +73,7 @@ must contain/extend a \code{SummarizedExperiment}.
 }}
 
 \note{
-Updated 2019-12-18.
+Updated 2020-07-29.
 }
 \examples{
 data(deseq)
