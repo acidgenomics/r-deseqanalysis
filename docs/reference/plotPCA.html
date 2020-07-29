@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.20</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.21</span>
       </span>
     </div>
 
@@ -124,6 +124,9 @@
 
     <pre class="usage"><span class='fu'>plotPCA</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
+<span class='co'># S4 method for DESeqDataSet</span>
+<span class='fu'>plotPCA</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+
 <span class='co'># S4 method for DESeqTransform</span>
 <span class='fu'>plotPCA</span>(
   <span class='no'>object</span>,
@@ -149,6 +152,10 @@
     <tr>
       <th>object</th>
       <td><p>Object.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments.</p></td>
     </tr>
     <tr>
       <th>assay</th>
@@ -201,10 +208,6 @@ Subtitle.</p></td>
       <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
 Return type. Uses <code><a href='https://rdrr.io/r/base/match.arg.html'>match.arg()</a></code> internally and defaults
 to the first argument in the <code>character</code> vector.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments.</p></td>
     </tr>
     </table>
 

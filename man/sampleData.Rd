@@ -22,7 +22,7 @@ Metadata that describes the samples.
 }
 \details{
 This is a complement to the standard
-\code{\link[SummarizedExperiment:colData]{colData()}} function, but improves support
+\code{\link[SummarizedExperiment:SummarizedExperiment-class]{colData()}} function, but improves support
 for accessing sample metadata for datasets where multiple items in the
 columns map to a single sample (e.g. cells for a single-cell RNA-seq
 experiment).

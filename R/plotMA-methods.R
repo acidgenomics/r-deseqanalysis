@@ -1,7 +1,7 @@
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA
-#' @note Updated 2020-03-12.
+#' @note Updated 2020-07-29.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual
@@ -65,12 +65,13 @@ NULL
 
 
 
-## Updated 2019-12-13.
+## Updated 2020-07-29.
 `plotMA,DESeqResults` <-  # nolint
     function(
         object,
         alpha = NULL,
         lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         genes = NULL,
         gene2symbol = NULL,
         ntop = 0L,
@@ -85,6 +86,19 @@ NULL
         return = c("ggplot", "DataFrame")
     ) {
         validObject(object)
+        baseMeanCol <- "baseMean"
+        lfcCol <- "log2FoldChange"
+        if ("svalue" %in% names(object)) {
+            testCol <- "svalue"  # nocov
+        } else {
+            testCol <- "padj"
+        }
+        ## Note that `lfcShrink()` doesn't return `stat` column.
+        if ("stat" %in% names(object)) {
+            rankCol <- "stat"
+        } else {
+            rankCol <- lfcCol
+        }
         if (is.null(alpha)) {
             alpha <- metadata(object)[["alpha"]]
         }
@@ -92,11 +106,16 @@ NULL
             lfcThreshold <- metadata(object)[["lfcThreshold"]]
         }
         lfcShrinkType <- lfcShrinkType(object)
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- 1L
+        }
         assert(
             isAlpha(alpha),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
             isString(lfcShrinkType),
+            isNumber(baseMeanThreshold),
+            isNonNegative(baseMeanThreshold),
             isAny(genes, classes = c("character", "NULL")),
             isAny(gene2symbol, classes = c("Gene2Symbol", "NULL")),
             isCharacter(pointColor),
@@ -116,42 +135,28 @@ NULL
         if (!is.null(genes) && ntop > 0L) {
             stop("Specify either 'genes' or 'ntop'.")
         }
-        ## Check to see if we should use `sval` column instead of `padj`.
-        if ("svalue" %in% names(object)) {
-            testCol <- "svalue"  # nocov
-        } else {
-            testCol <- "padj"
-        }
-        ## Placeholder variables.
-        lfcCol <- "log2FoldChange"
-        ## Note that `lfcShrink()` doesn't return `stat` column.
-        if ("stat" %in% names(object)) {
-            rankCol <- "stat"
-        } else {
-            rankCol <- lfcCol
-        }
         data <- as(object, "DataFrame")
         data <- camelCase(data)
         assert(isSubset(
-            x = c("baseMean", lfcCol, rankCol, testCol),
+            x = c(baseMeanCol, lfcCol, rankCol, testCol),
             y = colnames(data)
         ))
         ## Remove genes with very low expression.
-        keep <- which(data[["baseMean"]] >= 1L)
+        keep <- which(data[[baseMeanCol]] >= baseMeanThreshold)
         data <- data[keep, , drop = FALSE]
         data[["rankScore"]] <- abs(data[[rankCol]])
         data <- data[
-            order(data[["rankScore"]], decreasing = TRUE),
-            ,
-            drop = FALSE
-            ]
+            order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE
+        ]
         data[["rank"]] <- seq_len(nrow(data))
         data <- .addIsDECol(
             data = data,
             testCol = testCol,
             alpha = alpha,
             lfcCol = lfcCol,
-            lfcThreshold = lfcThreshold
+            lfcThreshold = lfcThreshold,
+            baseMeanCol = baseMeanCol,
+            baseMeanThreshold = baseMeanThreshold
         )
         assert(isSubset(
             x = c("isDE", "rank", "rankScore"),
@@ -168,7 +173,7 @@ NULL
         ## Check for no genes passing cutoffs and early return.
         if (!hasRows(data)) {
             message("No genes passed cutoffs.")
-            return(invisible())
+            return()
         }
         ## Early return the data, if desired.
         if (identical(return, "DataFrame")) {
@@ -180,6 +185,26 @@ NULL
         floor <- min(floor(log10BaseMean))
         ceiling <- max(ceiling(log10BaseMean))
         xBreaks <- 10L ^ seq(from = floor, to = ceiling, by = 1L)
+        sep <- "; "
+        subtitle <- paste0("alpha: ", alpha)
+        if (lfcThreshold > 0L) {
+            subtitle <- paste0(
+                subtitle, sep,
+                "lfc >= ", lfcThreshold
+            )
+        }
+        if (lfcShrinkType != "unshrunken") {
+            subtitle <- paste0(
+                subtitle, sep,
+                "lfcShrink: ", lfcShrinkType
+            )
+        }
+        if (baseMeanThreshold > 1L) {
+            subtitle <- paste0(
+                subtitle, sep,
+                "baseMean >= ", baseMeanThreshold
+            )
+        }
         p <- ggplot(
             data = as_tibble(data, rownames = NULL),
             mapping = aes(
@@ -200,7 +225,7 @@ NULL
             ) +
             scale_x_continuous(
                 breaks = xBreaks,
-                limits = c(1L, NA),
+                limits = c(baseMeanThreshold, NA),
                 trans = "log10"
             ) +
             scale_y_continuous(breaks = pretty_breaks()) +
@@ -208,14 +233,11 @@ NULL
             guides(color = FALSE) +
             labs(
                 title = contrastName(object),
-                subtitle = paste0(
-                    "alpha: ", alpha, ";  ",
-                    "lfcThreshold: ", lfcThreshold, ";  ",
-                    "lfcShrink: ", lfcShrinkType
-                ),
+                subtitle = subtitle,
                 x = "mean expression across all samples",
                 y = "log2 fold change"
             )
+
         ## Color the significant points.
         ## Note that we're using direction-specific coloring by default.
         if (isCharacter(pointColor)) {
@@ -309,9 +331,9 @@ setMethod(
         )
         ## Return `NULL` for objects that don't contain gene symbol mappings.
         gene2symbol <- tryCatch(
-            expr = suppressMessages(
+            expr = suppressMessages({
                 Gene2Symbol(as(object, "DESeqDataSet"))
-            ),
+            }),
             error = function(e) NULL
         )
         ## Handoff to DESeqResults method.

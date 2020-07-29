@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.2.20
-Date: 2020-05-11
+Version: 0.2.21
+Date: 2020-07-29
 Authors@R: c(
     person(
         given = "Michael",
@@ -23,36 +23,35 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: false
 Depends:
-    R (>= 3.6),
-    basejump (>= 0.12.6),
-    DESeq2 (>= 1.26)
+    R (>= 4.0),
+    basejump (>= 0.12.8),
+    DESeq2 (>= 1.28.1)
 Imports:
-    BiocGenerics (>= 0.32),
-    IRanges (>= 2.20),
-    S4Vectors (>= 0.24),
-    SummarizedExperiment (>= 1.16),
-    UpSetR (>= 1.4),
-    acidgenerics (>= 0.3.4),
-    acidplots (>= 0.2.26),
+    BiocGenerics,
+    IRanges,
+    S4Vectors,
+    SummarizedExperiment,
+    acidgenerics (>= 0.3.7),
+    acidplots (>= 0.2.30),
+    cli (>= 2.0),
     cowplot (>= 1.0),
-    ggplot2 (>= 3.2),
-    goalie (>= 0.4.4),
-    knitr (>= 1.25),
-    rlang (>= 0.4),
-    stringr (>= 1.4),
+    ggplot2 (>= 3.3),
+    goalie (>= 0.4.5),
+    knitr (>= 1.29),
     methods,
+    rlang (>= 0.4),
     scales,
     stats,
+    stringr (>= 1.4),
     utils
 Suggests:
-    BiocStyle (>= 2.14),
-    apeglm (>= 1.8),
-    ashr (>= 2.2),
-    patrick (>= 0.0.1),
-    roxygen2 (>= 7.1),
-    testthat (>= 2.3),
-    tximport (>= 1.14),
-    viridis (>= 0.5)
+    BiocStyle,
+    apeglm (>= 1.10.0),
+    ashr (>= 2.2.47),
+    roxygen2,
+    testthat,
+    tximport (>= 1.16.1),
+    viridis
 Remotes:
     acidgenomics/acidgenerics,
     acidgenomics/acidplots,
@@ -67,5 +66,5 @@ biocViews:
     Transcription,
     Visualization
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr

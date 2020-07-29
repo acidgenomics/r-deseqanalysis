@@ -25,7 +25,7 @@ contrastName(object, ...) <- value
 Name format to return:
 \itemize{
 \item \code{resultsNames}: Attempt to matching the conventions in
-\code{\link[DESeq2:resultsNames]{resultsNames()}}.
+\code{\link[DESeq2:results]{resultsNames()}}.
 \item \code{title}: Human readable, for plot titles and/or table captions.
 }}
 
@@ -66,6 +66,6 @@ contrastName(deseq, i = 1L)
 \seealso{
 \itemize{
 \item \code{\link[=contrastNames]{contrastNames()}}.
-\item \code{\link[DESeq2:resultsNames]{resultsNames()}}.
+\item \code{\link[DESeq2:results]{resultsNames()}}.
 }
 }

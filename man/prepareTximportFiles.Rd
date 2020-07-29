@@ -22,7 +22,7 @@ See basejump toolkit for details.}
 
 \item{exists}{\code{logical(1)}.
 Check if requested input exists on disk.
-Runs \code{\link[basejump:realpath]{realpath()}} internally.}
+Runs \code{\link[basejump:reexports]{realpath()}} internally.}
 }
 \value{
 \code{character}.
@@ -35,7 +35,7 @@ Prepare quant files for tximport
 Runs the following internal comments:
 \enumerate{
 \item Extract sample directory name from quant file using
-\code{\link[base:dirname]{dirname()}} and \code{\link[base:basename]{basename()}}.
+\code{\link[base:basename]{dirname()}} and \code{\link[base:basename]{basename()}}.
 \item Autopad zeros, if necessary, via
 \code{\link[basejump:autopadZeros]{autopadZeros()}}.
 \item Sanitizes names with \code{\link[syntactic:snakeCase]{snakeCase()}}.

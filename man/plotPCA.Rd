@@ -2,11 +2,14 @@
 % Please edit documentation in R/plotPCA-methods.R
 \name{plotPCA}
 \alias{plotPCA}
+\alias{plotPCA,DESeqDataSet-method}
 \alias{plotPCA,DESeqTransform-method}
 \alias{plotPCA,DESeqAnalysis-method}
 \title{Principal component analysis plot}
 \usage{
 plotPCA(object, ...)
+
+\S4method{plotPCA}{DESeqDataSet}(object, ...)
 
 \S4method{plotPCA}{DESeqTransform}(
   object,
@@ -28,6 +31,8 @@ plotPCA(object, ...)
 \arguments{
 \item{object}{Object.}
 
+\item{...}{Additional arguments.}
+
 \item{assay}{\code{vector(1)}.
 Assay name or index position.}
 
@@ -45,7 +50,7 @@ Superimpose sample text labels on the plot.}
 \item{color}{\code{ScaleDiscrete}.
 Desired ggplot2 color scale. Must supply discrete values. When set \code{NULL},
 the default ggplot2 color palette will be used. If manual color definitions
-are desired, we recommend using \code{\link[ggplot2:scale_color_manual]{ggplot2::scale_color_manual()}}.
+are desired, we recommend using \code{ggplot2::scale_color_manual()}.
 
 To set the discrete color palette globally, use:\preformatted{options(acid.color.discrete = ggplot2::scale_color_viridis_d())
 }}
@@ -63,8 +68,6 @@ Subtitle.}
 \item{return}{\code{character(1)}.
 Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
 to the first argument in the \code{character} vector.}
-
-\item{...}{Additional arguments.}
 }
 \value{
 \code{ggplot} or \code{DataFrame}.
@@ -79,7 +82,7 @@ Passes to \code{SummarizedExperiment} defined in acidplots package.
 \itemize{
 \item \code{plotPCA,DESeqTransform-method}: Passes to \code{SummarizedExperiment} method defined in
 acidplots package. Uses values defined in
-\code{\link[SummarizedExperiment:assay]{assay()}}.
+\code{\link[SummarizedExperiment:SummarizedExperiment-class]{assay()}}.
 
 \item \code{plotPCA,DESeqAnalysis-method}: Extracts \code{DESeqTransform} and passes to corresponding
 method.

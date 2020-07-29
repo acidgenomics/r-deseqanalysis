@@ -13,6 +13,7 @@ resultsTables(object, ...)
   DESeqDataSet = NULL,
   alpha = NULL,
   lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
   return = c("tbl_df", "DataFrameList"),
   ...
 )
@@ -24,6 +25,7 @@ resultsTables(object, ...)
   extra = TRUE,
   alpha = NULL,
   lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
   return = c("tbl_df", "DataFrameList")
 )
 }
@@ -37,8 +39,13 @@ Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 
 \item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
-Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
-the cutoff defined in the object.}
+Log (base 2) fold change ratio cutoff threshold.
+If left \code{NULL}, will use the cutoff defined in the object.}
+
+\item{baseMeanThreshold}{\code{numeric(1)} or \code{NULL}.
+Base mean (i.e. average expression across all samples) threshold.
+If left \code{NULL}, will use the cutoff defined in the object.
+Applies in general to DESeq2 RNA-seq differential expression output.}
 
 \item{return}{\code{character(1)}.
 Type of data frame to return as a list.
