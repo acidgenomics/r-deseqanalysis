@@ -1,7 +1,7 @@
 #' Stacked bar plot of DEGs
 #'
 #' @name plotDEGStackedBar
-#' @note Updated 2020-01-03.
+#' @note Updated 2020-07-28.
 #'
 #' @inheritParams acidroxygen::params
 #'
@@ -9,18 +9,18 @@
 #'
 #' @examples
 #' data(deseq)
-#'
 #' plotDEGStackedBar(deseq)
 NULL
 
 
 
-## Updated 2019-12-13.
+## Updated 2020-07-28.
 `plotDEGStackedBar,DESeqAnalysis` <-  # nolint
     function(
         object,
         alpha = NULL,
         lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         fill,
         flip = TRUE
     ) {
@@ -31,6 +31,7 @@ NULL
             object = object,
             alpha = alpha,
             lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold,
             direction = direction,
             n = TRUE
         )

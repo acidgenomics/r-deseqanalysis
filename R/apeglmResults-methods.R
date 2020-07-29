@@ -98,14 +98,14 @@ NULL
         ## Match the contrast to coef, based on resultsNames.
         coef <- .contrast2coef(contrast = contrast, resultsNames = resultsNames)
         ## Quiet down about citation, it's too noisy.
-        suppressMessages(
+        suppressMessages({
             shrink <- lfcShrink(
                 dds = object,
                 type = "apeglm",
                 coef = coef,
                 ...
             )
-        )
+        })
         assert(
             is(shrink, "DESeqResults"),
             identical(lfcShrinkType(shrink), "apeglm")

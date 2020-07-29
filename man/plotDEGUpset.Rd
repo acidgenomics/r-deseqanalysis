@@ -11,6 +11,7 @@ plotDEGUpset(object, ...)
   object,
   alpha = NULL,
   lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
   direction = c("both", "up", "down")
 )
 }
@@ -22,8 +23,13 @@ Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 
 \item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
-Log fold change ratio (base 2) cutoff threshold. If left \code{NULL}, will use
-the cutoff defined in the object.}
+Log (base 2) fold change ratio cutoff threshold.
+If left \code{NULL}, will use the cutoff defined in the object.}
+
+\item{baseMeanThreshold}{\code{numeric(1)} or \code{NULL}.
+Base mean (i.e. average expression across all samples) threshold.
+If left \code{NULL}, will use the cutoff defined in the object.
+Applies in general to DESeq2 RNA-seq differential expression output.}
 
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
@@ -37,7 +43,7 @@ Plot.
 UpSet plot of directional DEG intersections across contrasts
 }
 \note{
-Updated 2019-11-19.
+Updated 2020-07-28.
 }
 \examples{
 data(deseq)

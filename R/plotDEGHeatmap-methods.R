@@ -1,6 +1,6 @@
 #' @name plotDEGHeatmap
 #' @inherit acidgenerics::plotDEGHeatmap
-#' @note Updated 2019-12-13.
+#' @note Updated 2020-07-28.
 #'
 #' @inheritParams acidplots::plotHeatmap
 #' @inheritParams acidroxygen::params
@@ -33,13 +33,14 @@ NULL
 ## This method is used in F1000 paper and needs to be included. Note that in
 ## newer versions of bcbioRNASeq, this step won't work because we've slotted the
 ## rlog/vst counts in as a matrix instead of DESeqTransform.
-## Updated 2019-12-13.
+## Updated 2020-07-28.
 `plotDEGHeatmap,DESeqResults` <-  # nolint
     function(
         object,
         DESeqTransform,  # nolint
         alpha = NULL,
         lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         direction = c("both", "up", "down"),
         title = TRUE,
         subtitle = TRUE,
@@ -47,14 +48,6 @@ NULL
     ) {
         validObject(object)
         validObject(DESeqTransform)
-        assert(
-            is(object, "DESeqResults"),
-            is(DESeqTransform, "DESeqTransform"),
-            identical(rownames(object), rownames(DESeqTransform)),
-            isFlag(title) || isCharacter(title) || is.null(title),
-            isFlag(subtitle)
-        )
-        direction <- match.arg(direction)
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
@@ -65,17 +58,22 @@ NULL
             lfcThreshold <- metadata(res)[["lfcThreshold"]]
         }
         lfcShrinkType <- lfcShrinkType(object)
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- 0L
+        }
         assert(
-            isAlpha(alpha),
-            isNumber(lfcThreshold),
-            isNonNegative(lfcThreshold),
-            isString(lfcShrinkType)
+            is(res, "DESeqResults"),
+            is(dt, "DESeqTransform"),
+            identical(rownames(object), rownames(DESeqTransform)),
+            isFlag(title) || isCharacter(title) || is.null(title),
+            isFlag(subtitle)
         )
-        ## Get the character vector of DEGs.
+        direction <- match.arg(direction)
         deg <- deg(
             object = res,
             alpha = alpha,
             lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold,
             direction = direction
         )
         if (length(deg) < .minDEGThreshold) {
@@ -83,7 +81,7 @@ NULL
                 fmt = "Fewer than %s DEGs to plot. Skipping.",
                 .minDEGThreshold
             ))
-            return(invisible())
+            return()
         }
         ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
@@ -94,14 +92,31 @@ NULL
             title <- NULL
         }
         if (isString(title) && isTRUE(subtitle)) {
+            sep <- "; "
             title <- paste0(
                 title, "\n",
-                length(deg), " genes;  ",
-                "alpha: ", alpha, ";  ",
-                "lfcThreshold: ", lfcThreshold, ";  ",
-                "lfcShrink: ", lfcShrinkType, ";  ",
-                "direction: ", direction
+                length(deg), " genes", sep,
+                "direction: ", direction, sep,
+                "alpha < ", alpha
             )
+            if (lfcThreshold > 0L) {
+                title <- paste0(
+                    title, sep,
+                    "lfc >= ", lfcThreshold
+                )
+            }
+            if (lfcShrinkType != "unshrunken") {
+                title <- paste0(
+                    title, sep,
+                    "lfcShrink: ", lfcShrinkType
+                )
+            }
+            if (baseMeanThreshold > 0L) {
+                title <- paste0(
+                    title, sep,
+                    "baseMean >= ", baseMeanThreshold
+                )
+            }
         }
         ## Using SummarizedExperiment method defined in acidplots here.
         args <- list(

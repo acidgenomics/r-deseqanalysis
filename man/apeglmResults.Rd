@@ -21,7 +21,7 @@ unshrunken \code{DESeqResults} via \code{res} argument here and this will set
 Pairwise contrast vector:
 \enumerate{
 \item \code{factor}: Grouping factor. Corresponds to column name in
-\code{\link[SummarizedExperiment:colData]{colData()}}.
+\code{\link[SummarizedExperiment:SummarizedExperiment-class]{colData()}}.
 \item \code{numerator}: Numerator samples.
 \item \code{denominator}: Denominator samples.
 }
@@ -42,7 +42,7 @@ manually relevel factor reference levels to use the required \code{coef} argumen
 \details{
 Dynamically sets reference factor levels, as recommended by DESeq2 vignette.
 Matches \code{contrast} input internally to corresponding \code{coef} corresponding
-to values in \code{\link[DESeq2:resultsNames]{resultsNames()}}.
+to values in \code{\link[DESeq2:results]{resultsNames()}}.
 
 Runs \code{\link[DESeq2:nbinomWaldTest]{nbinomWaldTest()}} via
 \code{\link[DESeq2:DESeq]{DESeq()}}, followed by \code{\link[DESeq2:lfcShrink]{lfcShrink()}}.
@@ -79,7 +79,7 @@ be used with apeglm \code{\link[DESeq2:lfcShrink]{lfcShrink()}}.
 \item \code{\link[apeglm:apeglm]{apeglm::apeglm()}}.
 \item \code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}}.
 \item \code{\link[stats:model.matrix]{stats::model.matrix()}}.
-\item \code{\link[DESeq2:resultsNames]{DESeq2::resultsNames()}}.
+\item \code{\link[DESeq2:results]{DESeq2::resultsNames()}}.
 \item \code{\link[DESeq2:DESeq]{DESeq2::DESeq()}}.
 }
 }

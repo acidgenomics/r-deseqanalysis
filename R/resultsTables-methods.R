@@ -75,6 +75,7 @@ NULL
         DESeqDataSet = NULL,  # nolint
         alpha = NULL,
         lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         return = c("tbl_df", "DataFrameList"),
         ...
     ) {
@@ -85,47 +86,37 @@ NULL
         ## Legacy bcbioRNASeq arguments ----------------------------------------
         ## nocov start
         call <- match.call()
-        ## dir
         if (isSubset("dir", names(call))) {
             stop(
                 "'dir' argument is defunct.\n",
                 "Use 'export()' instead."
             )
         }
-        ## dropboxDir
         if (isSubset("dropboxDir", names(call))) {
             stop(
                 "'dropboxDir' argument is defunct.\n",
                 "Use 'copyToDropbox()' instead."
             )
         }
-        ## headerLevel
         if (isSubset("headerLevel", names(call))) {
             stop("'headerLevel' argument is defunct.")
         }
-        ## rdsToken
         if (isSubset("rdsToken", names(call))) {
             stop(
                 "'rdsToken' argument is defunct.\n",
                 "Use 'copyToDropbox()' instead."
             )
         }
-        ## summary
         if (isSubset("summary", names(call))) {
             stop("'summary' argument is defunct.")
         }
-        ## write
         if (isSubset("write", names(call))) {
             stop(
                 "'write' argument is defunct.\n",
                 "Use 'export()' instead."
             )
         }
-        ## Error on unsupported arguments.
-        assert(isSubset(
-            x = setdiff(names(call), ""),
-            y = names(formals())
-        ))
+        assert(isSubset(setdiff(names(call), ""), names(formals())))
         rm(call)
         ## nocov end
 
@@ -146,6 +137,7 @@ NULL
             object = object,
             alpha = alpha,
             lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold,
             direction = "both"
         )
         ## Early return if there are not DEGs.
@@ -193,7 +185,7 @@ setMethod(
 
 
 
-## Updated 2019-11-08.
+## Updated 2020-07-29.
 `resultsTables,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -202,6 +194,7 @@ setMethod(
         extra = TRUE,
         alpha = NULL,
         lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         return = c("tbl_df", "DataFrameList")
     ) {
         ## nocov start
@@ -242,6 +235,7 @@ setMethod(
             DESeqDataSet = dds,
             alpha = alpha,
             lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold,
             return = return
         )
     }

@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.20</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.21</span>
       </span>
     </div>
 
@@ -192,7 +192,9 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'><span style='color: #BBBB00;'>!</span><span> Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'>38 differentially expressed genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>24 upregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>14 downregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; 
+<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'><span style='color: #BBBB00;'>!</span><span> Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 38 differentially expressed genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 24 upregulated genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 14 downregulated genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; 
+#&gt; 
+#&gt; Table: condition_B_vs_A (upregulated)
 #&gt; 
 #&gt; |        | baseMean|lfc  |padj     |broadClass |geneName |description                                        |
 #&gt; |:-------|--------:|:----|:--------|:----------|:--------|:--------------------------------------------------|
@@ -203,6 +205,8 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
 #&gt; |gene465 |      117|1.88 |9.52e-05 |coding     |IFNGR1   |interferon gamma receptor 1                        |
 #&gt; 
 #&gt; 
+#&gt; Table: condition_B_vs_A (downregulated)
+#&gt; 
 #&gt; |        | baseMean|lfc   |padj     |broadClass |geneName |description                                        |
 #&gt; |:-------|--------:|:-----|:--------|:----------|:--------|:--------------------------------------------------|
 #&gt; |gene380 |       61|-3.09 |6.73e-07 |coding     |WWTR1    |WW domain containing transcription regulator 1     |
@@ -211,7 +215,9 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
 #&gt; |gene119 |       83|-1.74 |2.92e-04 |coding     |TMEM98   |transmembrane protein 98                           |
 #&gt; |gene232 |        6|-6.72 |2.96e-04 |coding     |CSDE1    |cold shock domain containing E1                    |</div><div class='input'>
 <span class='co'>## DESeqResults 'resultsTables()' list ====</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='input'><span class='no'>resTbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsTables.html'>resultsTables</a></span>(<span class='no'>res</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"tbl_df"</span>)</div><div class='output co'>#&gt; <span class='message'>38 differentially expressed genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>24 upregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='output co'>#&gt; <span class='message'>14 downregulated genes detected (alpha: 0.01; lfc: 0).</span></div><div class='input'><span class='fu'>topTables</span>(<span class='no'>resTbl</span>)</div><div class='output co'>#&gt; 
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='input'><span class='no'>resTbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsTables.html'>resultsTables</a></span>(<span class='no'>res</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"tbl_df"</span>)</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 38 differentially expressed genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 24 upregulated genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 14 downregulated genes (alpha &lt; 0.01)</span></div><div class='input'><span class='fu'>topTables</span>(<span class='no'>resTbl</span>)</div><div class='output co'>#&gt; 
+#&gt; 
+#&gt; Table: upregulated
 #&gt; 
 #&gt; |        | baseMean|lfc  |padj     |
 #&gt; |:-------|--------:|:----|:--------|
@@ -226,6 +232,8 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
 #&gt; |gene030 |       69|1.93 |2.96e-04 |
 #&gt; |gene431 |      235|1.49 |7.90e-04 |
 #&gt; 
+#&gt; 
+#&gt; Table: downregulated
 #&gt; 
 #&gt; |        | baseMean|lfc   |padj     |
 #&gt; |:-------|--------:|:-----|:--------|
