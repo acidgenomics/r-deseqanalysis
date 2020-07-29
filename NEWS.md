@@ -3,7 +3,8 @@
 ### Major changes
 
 - Added support for `baseMeanThreshold`, where applicable. Applies primarily
-  to `resultsTables`, `plotMA`, and `plotVolcano`.
+  to `deg`, `plotDEGHeatmap`, `plotDEGPCA`, `plotMA`, and `plotVolcano`,
+  and `resultsTables`.
 - Reworked internal code that handles DEG extraction. Note that `lfcThreshold`
   and `baseMeanThreshold` now use `>=` logic rather than previous `>` approach.
   The alpha cutoff still uses `>` operator logic.
