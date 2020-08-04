@@ -1,11 +1,6 @@
-# j param is missing.
-
-
-
-#' Relative difference of DESeq results
-#'
 #' @name resultsDiff
-#' @note Updated 2019-12-17.
+#' @inherit acidgenerics::resultsDiff
+#' @note Updated 2020-08-04.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -16,9 +11,6 @@
 #'   - `"no"`: Return all genes, corresponding to original row names order.
 #'   - `"intersect"`: Return only genes called as DE in both contrasts.
 #'   - `"union"`: Return genes called as DE in either contrast.
-#'
-#' @return Named `numeric`.
-#'   Names correspond to the genes (row names).
 #'
 #' @examples
 #' data(deseq)
@@ -31,6 +23,15 @@
 #' ## DESeqAnalysis ====
 #' object <- deseq
 #' resultsDiff(object, i = 1L, j = 2L)
+NULL
+
+
+
+#' @rdname resultsDiff
+#' @name resultsDiff
+#' @importFrom acidgenerics resultsDiff
+#' @usage resultsDiff(x, y, ...)
+#' @export
 NULL
 
 
