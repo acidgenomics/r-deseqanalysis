@@ -1,6 +1,6 @@
 #' @name combine
 #' @inherit BiocGenerics::combine return title
-#' @note Updated 2020-01-03.
+#' @note Updated 2020-08-04.
 #'
 #' @details
 #' Combines the results from 2 separate `DESeqAnalysis` objects. Note that the
