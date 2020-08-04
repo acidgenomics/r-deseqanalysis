@@ -1,7 +1,7 @@
 #' Match user metadata to file names used for tximport
 #'
 #' @export
-#' @note Updated 2019-11-19.
+#' @note Updated 2020-08-04.
 #'
 #' @param metadata `data.frame`.
 #'   User-defined metadata. The function assumes that sample identifiers are
@@ -52,7 +52,7 @@ matchMetadataToFiles <- function(metadata, files) {
     ## Return the sanitized name of file if defined.
     ## This gets slotted by `prepareTximportFiles()` return.
     if (hasNames(files)) {
-        message("Returning 'names(files)' in data frame.")
+        cli_alert("Returning {.var names(files)} in data frame.")
         fileSampleNames <- names(files)
     }
     map <- data.frame(
