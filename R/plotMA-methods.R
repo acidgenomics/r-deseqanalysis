@@ -173,7 +173,7 @@ NULL
         }
         ## Check for no genes passing cutoffs and early return.
         if (!hasRows(data)) {
-            message("No genes passed cutoffs.")
+            cli_alert_warning("No genes passed cutoffs.")
             return()
         }
         ## Early return the data, if desired.
