@@ -33,16 +33,15 @@ NULL
     ) {
         validObject(object)
         assert(isFlag(flip))
-        direction <- "both"
-        degPerContrast <- .degPerContrast(
+        mat <- degPerContrast(
             object = object,
             alphaThreshold = alphaThreshold,
             lfcThreshold = lfcThreshold,
             baseMeanThreshold = baseMeanThreshold,
-            direction = direction,
-            n = TRUE
+            direction = "both",
+            return = "matrix"
         )
-        data <- as.data.frame(degPerContrast)
+        data <- as.data.frame(mat)
         ## Reorder the factor levels, so we can rank from most DEG to least.
         levels <- names(sort(colSums(data), decreasing = TRUE))
         data <- as.data.frame(melt(
