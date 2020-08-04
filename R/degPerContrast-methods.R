@@ -7,7 +7,7 @@
 #' @param ... Passthrough arguments to [deg()].
 #'
 #' @return
-#' - `DataFrame`: Summary data frame with numbers of DEGs per contrast.
+#' - `matrix`: Matrix containing numbers of DEGs per contrast.
 #'   Intended primarily for use with [plotDEGStackedBar()].
 #' - `list`: Named vector containing the DEG identifiers.
 #'   Intended primarily for use with [plotDEGUpset()].
@@ -26,7 +26,7 @@ NULL
     object,
     direction = c("both", "up", "down"),
     n = FALSE,
-    return = c("DataFrame", "list"),
+    return = c("matrix", "list"),
     ...
 ) {
     assert(isFlag(n))
@@ -34,7 +34,7 @@ NULL
     return <- match.arg(return)
     n <- switch(
         EXPR = return,
-        "DataFrame" = TRUE,
+        "matrix" = TRUE,
         "list" = FALSE
     )
     suppressMessages({
@@ -86,7 +86,7 @@ NULL
     })
     switch(
         EXPR = return,
-        "DataFrame" = as(list, "DataFrame"),
+        "matrix" = as.matrix(as.data.frame(list)),
         "list" = list
     )
 }
