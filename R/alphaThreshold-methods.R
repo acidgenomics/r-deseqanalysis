@@ -1,14 +1,14 @@
 #' @name alphaThreshold
 #' @inherit acidgenerics::alphaThreshold
-#' @note Updated 2019-08-06.
+#' @note Updated 2020-08-04.
 #' @param ... Additional arguments.
 #' @examples
-#' data(RangedSummarizedExperiment, package = "acidtest")
-#' rse <- RangedSummarizedExperiment
+#' data(deseq)
 #'
-#' ## Annotated ====
-#' alphaThreshold(rse) <- 0.05
-#' alphaThreshold(rse)
+#' ## DESeqAnalysis ====
+#' object <- deseq
+#' alphaThreshold(object) <- 0.05
+#' alphaThreshold(object)
 NULL
 
 
