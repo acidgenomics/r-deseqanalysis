@@ -19,12 +19,9 @@
 #' @examples
 #' data(deseq)
 #'
-#' ## DESeqDataSet ====
-#' dds <- as(deseq, "DESeqDataSet")
-#' resultsNames(dds)
-#' alphaSummary(dds)
-#' alphaSummary(dds, contrast = c("condition", "B", "A"))
-#' alphaSummary(dds, name = "condition_B_vs_A")
+#' ## DESeqAnalysis ====
+#' alphaSummary(deseq, contrast = c("condition", "B", "A"))
+#' alphaSummary(deseq, name = "condition_B_vs_A")
 NULL
 
 
@@ -124,4 +121,23 @@ setMethod(
     f = "alphaSummary",
     signature = signature("DESeqDataSet"),
     definition = `alphaSummary,DESeqDataSet`
+)
+
+
+
+## Updated 2020-08-04.
+`alphaSummary,DESeqAnalysis` <-  # nolint
+    function(object, ...) {
+        object <- as(object, "DESeqDataSet")
+        alphaSummary(object, ...)
+    }
+
+
+
+#' @rdname alphaSummary
+#' @export
+setMethod(
+    f = "alphaSummary",
+    signature = signature("DESeqAnalysis"),
+    definition = `alphaSummary,DESeqAnalysis`
 )
