@@ -1,6 +1,6 @@
 #' @name updateObject
 #' @inherit BiocGenerics::updateObject
-#' @note Updated 2020-05-11.
+#' @note Updated 2020-08-04.
 #'
 #' @section `DESeqAnalysis`:
 #'
@@ -17,7 +17,7 @@ NULL
 
 
 
-## Updated 2020-05-11.
+## Updated 2020-08-04.
 `updateObject,DESeqAnalysis` <-  # nolint
     function(object, ..., verbose = FALSE) {
         assert(isFlag(verbose))
@@ -31,16 +31,18 @@ NULL
                 ## nocov end
             }
         }
-        data <- object@data
-        transform <- object@transform
-        results <- object@results
-        lfcShrink <- object@lfcShrink
-        DESeqAnalysis(
-            data = data,
-            transform = transform,
-            results = results,
-            lfcShrink = lfcShrink
+        out <- DESeqAnalysis(
+            data = object@data,
+            transform = object@transform,
+            results = object@results,
+            lfcShrink = object@lfcShrink
         )
+        if (!identical(names(metadata(object)), names(metadata(out)))) {
+            diff <- setdiff(names(metadata(object)), names(metadata(out)))
+            meta <- c(metadata(out), metadata(object)[diff])
+            metadata(out) <- meta
+        }
+        out
     }
 
 
