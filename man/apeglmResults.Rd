@@ -51,6 +51,7 @@ Runs \code{\link[DESeq2:nbinomWaldTest]{nbinomWaldTest()}} via
 Updated 2019-11-19.
 }
 \examples{
+## DESeqDataSet ====
 dds <- DESeq2::makeExampleDESeqDataSet(n = 1000L, m = 12L)
 dds$condition <- factor(rep(LETTERS[seq_len(4L)], each = 3L))
 dds <- DESeq2::DESeq(dds)

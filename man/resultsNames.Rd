@@ -51,6 +51,8 @@ Updated 2019-09-10.
 }
 \examples{
 data(deseq)
+
+## DESeqAnalysis ====
 resultsNames(deseq)
 }
 \seealso{

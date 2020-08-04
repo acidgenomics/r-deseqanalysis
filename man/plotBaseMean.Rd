@@ -80,6 +80,8 @@ Updated 2020-08-04.
 }
 \examples{
 data(deseq)
+
+## DESeqAnalysis ====
 plotBaseMean(deseq)
 }
 \seealso{

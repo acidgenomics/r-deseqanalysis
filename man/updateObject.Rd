@@ -103,6 +103,8 @@ package versions must be updated to account for this change.
 
 \examples{
 data(deseq)
+
+## DESeqAnalysis ====
 updateObject(deseq)
 }
 \seealso{
