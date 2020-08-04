@@ -21,11 +21,11 @@ NULL
 
 
 
-## Updated 2020-07-28.
+## Updated 2020-08-04.
 `plotDEGStackedBar,DESeqAnalysis` <-  # nolint
     function(
         object,
-        alpha = NULL,
+        alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         fill,
@@ -36,7 +36,7 @@ NULL
         direction <- "both"
         degPerContrast <- .degPerContrast(
             object = object,
-            alpha = alpha,
+            alphaThreshold = alphaThreshold,
             lfcThreshold = lfcThreshold,
             baseMeanThreshold = baseMeanThreshold,
             direction = direction,
