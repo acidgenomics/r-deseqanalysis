@@ -1,17 +1,22 @@
-#' Shrunken log2 fold change (LFC) type
-#'
 #' @name lfcShrinkType
-#' @note Updated 2019-08-20.
-#'
-#' @inheritParams acidroxygen::params
-#'
-#' @return `character(1)`.
-#'
+#' @inherit acidgenerics::lfcShrinkType
+#' @note Updated 2020-08-04.
+#' @param ... Additional arguments.
 #' @seealso [DESeq2::lfcShrink()].
-#'
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' lfcShrinkType(deseq)
+NULL
+
+
+
+#' @rdname lfcShrinkType
+#' @name lfcShrinkType
+#' @importFrom acidgenerics lfcShrinkType
+#' @usage lfcShrinkType(object, ...)
+#' @export
 NULL
 
 
