@@ -15,11 +15,6 @@
 #' @examples
 #' data(deseq)
 #'
-#' ## DESeqResults ====
-#' x <- results(deseq, i = 1L)
-#' y <- results(deseq, i = 2L)
-#' resultsDiff(x = x, y = y)
-#'
 #' ## DESeqAnalysis ====
 #' object <- deseq
 #' resultsDiff(object, i = 1L, j = 2L)
