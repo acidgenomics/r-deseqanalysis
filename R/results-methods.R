@@ -12,11 +12,8 @@
 #' @examples
 #' data(deseq)
 #'
-#' x <- results(deseq, i = 2L, lfcShrink = FALSE)
-#' class(x)
-#' colnames(x)
-#'
-#' x <- results(deseq, i = 1L, lfcShrink = TRUE)
+#' ## DESeqAnalysis ====
+#' x <- results(deseq, i = 1L)
 #' class(x)
 #' colnames(x)
 NULL

@@ -7,6 +7,8 @@
 #' @param ... Additional arguments.
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' plotDEGStackedBar(deseq)
 NULL
 

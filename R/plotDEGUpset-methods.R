@@ -8,6 +8,8 @@
 #'
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' plotDEGUpset(deseq)
 NULL
 

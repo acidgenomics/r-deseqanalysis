@@ -17,6 +17,8 @@
 #'
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' plotBaseMean(deseq)
 NULL
 
