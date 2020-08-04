@@ -87,7 +87,7 @@ NULL
         dt <- dt[deg, , drop = FALSE]
         ## Title.
         if (isTRUE(title)) {
-            title <- contrastName(res, format = "title")
+            title <- contrastName(res, .format = "title")
         } else if (identical(title, FALSE)) {
             title <- NULL
         }
