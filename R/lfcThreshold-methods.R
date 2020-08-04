@@ -91,3 +91,25 @@ setReplaceMethod(
     ),
     definition = `lfcThreshold<-,DESeqAnalysis,numeric`
 )
+
+
+
+## Updated 2020-08-04.
+`lfcThreshold<-,DESeqAnalysis,NULL` <-  # nolint
+    function(object, value) {
+        metadata(object)[["lfcThreshold"]] <- value
+        object
+    }
+
+
+
+#' @rdname lfcThreshold
+#' @export
+setReplaceMethod(
+    f = "lfcThreshold",
+    signature = signature(
+        object = "DESeqAnalysis",
+        value = "NULL"
+    ),
+    definition = `lfcThreshold<-,DESeqAnalysis,NULL`
+)
