@@ -1,15 +1,20 @@
 #' Stacked bar plot of DEGs
 #'
 #' @name plotDEGStackedBar
-#' @note Updated 2020-07-28.
-#'
-#' @inheritParams acidroxygen::params
-#'
-#' @return Plot.
-#'
+#' @inherit acidgenerics::plotDEGStackedBar
+#' @note Updated 2020-08-04.
 #' @examples
 #' data(deseq)
 #' plotDEGStackedBar(deseq)
+NULL
+
+
+
+#' @rdname plotDEGStackedBar
+#' @name plotDEGStackedBar
+#' @importFrom acidgenerics plotDEGStackedBar
+#' @usage plotDEGStackedBar(object, ...)
+#' @export
 NULL
 
 
