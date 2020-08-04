@@ -31,12 +31,8 @@ NULL
 ## Updated 2020-08-04.
 `lfcThreshold,DESeqResults` <-  # nolint
     function(object) {
-        validObject(object)
         x <- metadata(object)[["lfcThreshold"]]
-        assert(
-            isNumber(x),
-            isNonNegative(x)
-        )
+        assert(isNumber(x), isNonNegative(x))
         x
     }
 
@@ -55,15 +51,11 @@ setMethod(
 ## Updated 2020-08-04.
 `lfcThreshold,DESeqAnalysis` <-  # nolint
     function(object) {
-        validObject(object)
         x <- metadata(object)[["lfcThreshold"]]
         if (is.null(x)) {
             x <- lfcThreshold(slot(object, "results")[[1L]])
         }
-        assert(
-            isNumber(x),
-            isNonNegative(x)
-        )
+        assert(isNumber(x), isNonNegative(x))
         x
     }
 
@@ -82,12 +74,8 @@ setMethod(
 ## Updated 2020-08-04.
 `lfcThreshold<-,DESeqAnalysis,numeric` <-  # nolint
     function(object, value) {
-        assert(
-            isScalar(value),
-            isNonNegative(value)
-        )
+        assert(isScalar(value), isNonNegative(value))
         metadata(object)[["lfcThreshold"]] <- value
-        validObject(object)
         object
     }
 

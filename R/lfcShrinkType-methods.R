@@ -21,10 +21,9 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2020-08-04.
 `lfcShrinkType,DESeqResults` <-  # nolint
     function(object) {
-        validObject(object)
         pi <- priorInfo(object)
         if (isSubset("type", names(pi))) {
             type <- pi[["type"]]
@@ -50,7 +49,6 @@ setMethod(
 ## Updated 2020-08-04.
 `lfcShrinkType,DESeqAnalysis` <-  # nolint
     function(object) {
-        validObject(object)
         if (!isTRUE(lfcShrink(object))) return(NULL)
         lfcShrinkType(slot(object, "lfcShrink")[[1L]])
     }

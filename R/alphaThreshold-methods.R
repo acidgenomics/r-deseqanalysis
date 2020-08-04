@@ -32,7 +32,6 @@ NULL
 ## Updated 2020-08-04.
 `alphaThreshold,DESeqResults` <-  # nolint
     function(object) {
-        validObject(object)
         x <- metadata(object)[["alpha"]]
         assert(isAlpha(x))
         x
@@ -53,7 +52,6 @@ setMethod(
 ## Updated 2020-08-04.
 `alphaThreshold,DESeqAnalysis` <-  # nolint
     function(object) {
-        validObject(object)
         x <- metadata(object)[["alphaThreshold"]]
         if (is.null(x)) {
             x <- alphaThreshold(slot(object, "results")[[1L]])
@@ -79,7 +77,6 @@ setMethod(
     function(object, value) {
         assert(isAlpha(value))
         metadata(object)[["alphaThreshold"]] <- value
-        validObject(object)
         object
     }
 
