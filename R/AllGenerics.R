@@ -6,3 +6,14 @@ setGeneric(
         standardGeneric("apeglmResults")
     }
 )
+
+
+
+#' @rdname degPerContrast
+#' @export
+setGeneric(
+    name = "degPerContrast",
+    def = function(object, ...) {
+        standardGeneric("degPerContrast")
+    }
+)
