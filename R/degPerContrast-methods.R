@@ -6,6 +6,12 @@
 #' @inheritParams acidroxygen::params
 #' @param ... Passthrough arguments to [deg()].
 #'
+#' @return
+#' - `DataFrame`: Summary data frame with numbers of DEGs per contrast.
+#'   Intended primarily for use with [plotDEGStackedBar()].
+#' - `list`: Named vector containing the DEG identifiers.
+#'   Intended primarily for use with [plotDEGUpset()].
+#'
 #' @examples
 #' data(deseq)
 #'
@@ -26,8 +32,13 @@ NULL
     assert(isFlag(n))
     direction <- match.arg(direction)
     return <- match.arg(return)
+    n <- switch(
+        EXPR = return,
+        "DataFrame" = TRUE,
+        "list" = FALSE
+    )
     suppressMessages({
-        mapply(
+        list <- mapply(
             i = resultsNames(object),
             MoreArgs = list(object = object),
             FUN = function(i, object) {
@@ -73,6 +84,11 @@ NULL
             USE.NAMES = TRUE
         )
     })
+    switch(
+        EXPR = return,
+        "DataFrame" = as(list, "DataFrame"),
+        "list" = list
+    )
 }
 
 
