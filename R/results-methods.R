@@ -60,14 +60,10 @@ setMethod(
     ) {
         ## nocov start
         call <- match.call()
-        ## results
         if ("results" %in% names(call)) {
             stop("'results' is defunct in favor of 'i'.")
         }
-        assert(isSubset(
-            x = setdiff(names(call), ""),
-            y = names(formals())
-        ))
+        assert(isSubset(setdiff(names(call), ""), names(formals())))
         rm(call)
         ## nocov end
         if (is.null(lfcShrink)) {
