@@ -1,16 +1,6 @@
-## Note that `NULL` arguments aren't passing through as expected with
-## `matchArgsToDoCall()`. Look into fixing this in a future goalie release.
-## For example, `color = NULL` doesn't pass as expected.
-
-
-
-#' Plot base mean distribution
-#'
-#' The base mean is the mean of normalized counts of all samples, normalizing
-#' for sequencing depth.
-#'
 #' @name plotBaseMean
-#' @note Updated 2019-10-15.
+#' @inherit acidgenerics::plotBaseMean
+#' @note Updated 2020-08-04.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -28,6 +18,15 @@
 #' @examples
 #' data(deseq)
 #' plotBaseMean(deseq)
+NULL
+
+
+
+#' @rdname plotBaseMean
+#' @name plotBaseMean
+#' @importFrom acidgenerics plotBaseMean
+#' @usage plotBaseMean(object, ...)
+#' @export
 NULL
 
 
@@ -192,10 +191,11 @@ setMethod(
 
 
 
-## Updated 2019-09-17.
+## Updated 2020-08-04.
 `plotBaseMean,DESeqDataSet` <-  # nolint
     function(object, ...) {
-        plotBaseMean(object = rowMeans(counts(object, normalized = TRUE)))
+        object <- rowMeans(counts(object, normalized = TRUE))
+        plotBaseMean(object, ...)
     }
 
 
@@ -212,10 +212,11 @@ setMethod(
 
 
 
-## Updated 2019-09-17.
+## Updated 2020-08-04.
 `plotBaseMean,DESeqResults` <-  # nolint
     function(object, ...) {
-        plotBaseMean(object = object[["baseMean"]], ...)
+        object <- object[["baseMean"]]
+        plotBaseMean(object, ...)
     }
 
 
@@ -231,10 +232,11 @@ setMethod(
 
 
 
-## Updated 2019-10-15.
+## Updated 2020-08-04.
 `plotBaseMean,DESeqAnalysis` <-  # nolint
     function(object, ...) {
-        plotBaseMean(object = as(object, "DESeqDataSet"), ...)
+        object <- as(object, "DESeqDataSet")
+        plotBaseMean(object, ...)
     }
 
 
