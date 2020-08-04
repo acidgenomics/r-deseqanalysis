@@ -52,21 +52,21 @@ Updated 2019-11-19.
 }
 \examples{
 ## DESeqDataSet ====
-dds <- DESeq2::makeExampleDESeqDataSet(n = 1000L, m = 12L)
-dds$condition <- factor(rep(LETTERS[seq_len(4L)], each = 3L))
-dds <- DESeq2::DESeq(dds)
-resultsNames(dds)
-
-## Contrast C vs. B.
-contrast <- c(factor = "condition", numerator = "C", denominator = "B")
-
-## Unshrunken DESeqResults.
-res <- DESeq2::results(dds, contrast = contrast)
-class(res)
-lfcShrinkType(res)
-
-## Shrunken DESeqResults, using apeglm via `lfcShrink()`.
 if (requireNamespace("apeglm", quietly = TRUE)) {
+    dds <- DESeq2::makeExampleDESeqDataSet(n = 1000L, m = 12L)
+    dds$condition <- factor(rep(LETTERS[seq_len(4L)], each = 3L))
+    dds <- DESeq2::DESeq(dds)
+    resultsNames(dds)
+
+    ## Contrast C vs. B.
+    contrast <- c(factor = "condition", numerator = "C", denominator = "B")
+
+    ## Unshrunken DESeqResults.
+    res <- DESeq2::results(dds, contrast = contrast)
+    class(res)
+    lfcShrinkType(res)
+
+    ## Shrunken DESeqResults, using apeglm via `lfcShrink()`.
     shrink <- apeglmResults(dds, contrast = contrast)
     class(shrink)
     lfcShrinkType(shrink)
