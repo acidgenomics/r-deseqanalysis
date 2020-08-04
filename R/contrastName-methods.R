@@ -1,16 +1,16 @@
 #' @name contrastName
 #' @inherit acidgenerics::contrastName
-#' @note Updated 2019-11-08.
+#' @note Updated 2020-08-04.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
-#' @param format `character(1)`.
+#' @param .format `character(1)`.
 #'   Name format to return:
 #'
 #'   - `resultsNames`: Attempt to matching the conventions in
 #'     [`resultsNames()`][DESeq2::resultsNames].
 #'   - `title`: Human readable, for plot titles and/or table captions.
-#' @param useStash `logical(1)`.
+#' @param .useStash `logical(1)`.
 #'   Check for `contrastName` metadata stash in `DESeqResults` object. Intended
 #'   for use with `DESeqAnalysis` methods.
 #' @param ... Additional arguments.
@@ -21,10 +21,6 @@
 #'
 #' @examples
 #' data(deseq)
-#'
-#' ## DESeqResults ====
-#' object <- as(deseq, "DESeqResults")
-#' contrastName(object)
 #'
 #' ## DESeqAnalysis ====
 #' contrastName(deseq, i = 1L)
@@ -48,19 +44,19 @@ NULL
 
 
 
-## Updated 2019-09-11.
+## Updated 2020-08-04.
 `contrastName,DESeqResults` <-  # nolint
     function(
         object,
-        format = c("resultsNames", "title"),
-        useStash = TRUE
+        .format = c("resultsNames", "title"),
+        .useStash = TRUE
     ) {
         validObject(object)
-        assert(isFlag(useStash))
-        format <- match.arg(format)
+        assert(isFlag(.useStash))
+        .format <- match.arg(.format)
         ## Use metadata stash, if defined. This is the recommended approach
         ## when passing off from DESeqAnalysis object, using `resultsNames()`.
-        if (isTRUE(useStash)) {
+        if (isTRUE(.useStash)) {
             x <- metadata(object)[["contrastName"]]
         } else {
             x <- NULL
@@ -74,9 +70,9 @@ NULL
         assert(isString(x))
         ## Always strip prefix, e.g. log2 fold change (MLE).
         x <- sub("^.*:\\s", "", x)
-        if (identical(format, "resultsNames")) {
+        if (identical(.format, "resultsNames")) {
             x <- makeNames(x)
-        } else if (identical(format, "title")) {
+        } else if (identical(.format, "title")) {
             ## Strip prefix, e.g. log2 fold change (MLE).
             x <- sub("^.*:\\s", "", x)
             ## Pad the first space with as a colon.
@@ -127,21 +123,9 @@ setReplaceMethod(
 
 ## This method is to be used primarily to set the contrast name on DESeqResults
 ## inside plotting functions. See `plotMA()` method, for example.
-## Updated 2019-11-08.
+## Updated 2020-08-04.
 `contrastName,DESeqAnalysis` <-  # nolint
     function(object, i, ...) {
-        ## nocov start
-        call <- match.call()
-        ## results
-        if ("results" %in% names(call)) {
-            stop("'results' is defunct in favor of 'i'.")
-        }
-        assert(isSubset(
-            x = setdiff(names(call), ""),
-            y = names(formals())
-        ))
-        rm(call)
-        ## nocov end
         contrastNames <- contrastNames(object)
         if (isString(i)) {
             x <- i
