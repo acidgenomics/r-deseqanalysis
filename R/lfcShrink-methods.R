@@ -1,17 +1,28 @@
-#' Return shrunken log2 fold change values?
-#'
 #' @name lfcShrink
+#' @inherit acidgenerics::lfcShrink
 #' @note Updated 2020-08-04.
-#'
-#' @inheritParams acidroxygen::params
-#'
-#' @return `logical(1)`.
-#'
 #' @seealso [DESeq2::lfcShrink()].
-#'
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' lfcShrink(deseq)
+NULL
+
+
+
+#' @rdname lfcShrink
+#' @name lfcShrink
+#' @importFrom acidgenerics lfcShrink
+#' @usage lfcShrink(object, ...)
+#' @export
+NULL
+
+#' @rdname lfcShrink
+#' @name lfcShrink<-
+#' @importFrom acidgenerics lfcShrink<-
+#' @usage lfcShrink(object, ...) <- value
+#' @export
 NULL
 
 
