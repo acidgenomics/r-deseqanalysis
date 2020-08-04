@@ -91,10 +91,11 @@ setMethod(
         ## Slot the contrast name into DESeqResults metadata.
         name <- contrastName(object, i = i)
         contrastName(data) <- name
+        msg <- name
         if (isTRUE(lfcShrink)) {
-            msg <- paste(name, "(shrunken LFC)")
+            msg <- paste(msg, "(shrunken LFC)")
         }
-        message(msg)
+        cli_alert_info(msg)
         validObject(data)
         data
     }
