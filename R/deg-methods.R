@@ -139,21 +139,13 @@ setMethod(
 
 
 
-## Updated 2019-12-18.
+## Updated 2020-08-04.
 `deg,DESeqAnalysis` <-  # nolint
     function(
         object,
         i,
         ...
     ) {
-        ## nocov start
-        call <- match.call()
-        ## results
-        if ("results" %in% names(call)) {
-            stop("'results' is defunct in favor of 'i'.")
-        }
-        rm(call)
-        ## nocov end
         res <- results(object = object, i = i, lfcShrink = FALSE)
         deg(object = res, ...)
     }
