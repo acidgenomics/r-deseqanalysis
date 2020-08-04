@@ -1,7 +1,7 @@
 #' Results
 #'
 #' @name results
-#' @note Updated 2019-12-18.
+#' @note Updated 2020-08-04.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -50,9 +50,14 @@ setMethod(
 
 
 
-## Updated 2019-12-18.
+## Updated 2020-08-04.
 `results,DESeqAnalysis` <-  # nolint
-    function(object, i, lfcShrink = FALSE, ...) {
+    function(
+        object,
+        i,
+        lfcShrink = NULL,
+        ...
+    ) {
         ## nocov start
         call <- match.call()
         ## results
@@ -65,6 +70,9 @@ setMethod(
         ))
         rm(call)
         ## nocov end
+        if (is.null(lfcShrink)) {
+            lfcShrink <- lfcShrink(object)
+        }
         assert(
             is(object, "DESeqAnalysis"),
             isScalar(i),
