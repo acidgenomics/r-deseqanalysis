@@ -64,10 +64,9 @@ NULL
 
 
 
+## Note that this method is used in bcbioRNASeq F1000 paper.
 ## bcbioRNASeq v0.2 release series defaults:
 ## https://github.com/hbc/bcbioRNASeq/blob/v0.2.10/R/resultsTables-methods.R
-
-## Note that this method is used in bcbioRNASeq F1000 paper.
 ## Updated 2020-08-04.
 `resultsTables,DESeqResults` <-  # nolint
     function(
@@ -79,19 +78,8 @@ NULL
         return = c("tbl_df", "DataFrameList"),
         ...
     ) {
-        validObject(object)
-        assert(isAny(DESeqDataSet, c("DESeqDataSet", "NULL")))
-        return <- match.arg(return)
-
-        ## Legacy bcbioRNASeq arguments ----------------------------------------
         ## nocov start
         call <- match.call()
-        if (isSubset("alpha", names(call))) {
-            stop(
-                "'alpha' argument is defunct.\n",
-                "Use 'alphaThreshold' instead."
-            )
-        }
         if (isSubset("dir", names(call))) {
             stop(
                 "'dir' argument is defunct.\n",
@@ -125,9 +113,9 @@ NULL
         assert(isSubset(setdiff(names(call), ""), names(formals())))
         rm(call)
         ## nocov end
-
-        ## Prepare results -----------------------------------------------------
-        ## Join row data and counts from DESeqDataSet.
+        validObject(object)
+        assert(isAny(DESeqDataSet, c("DESeqDataSet", "NULL")))
+        return <- match.arg(return)
         if (is(DESeqDataSet, "DESeqDataSet")) {
             object <- .joinRowData(
                 object = object,
@@ -138,7 +126,6 @@ NULL
                 DESeqDataSet = DESeqDataSet
             )
         }
-        ## Get the DEG character vectors, which we'll use against the rownames.
         both <- deg(
             object = object,
             alphaThreshold = alphaThreshold,
@@ -146,7 +133,6 @@ NULL
             baseMeanThreshold = baseMeanThreshold,
             direction = "both"
         )
-        ## Early return if there are not DEGs.
         if (!hasLength(both)) {
             out <- list(all = object)
         } else {
@@ -162,14 +148,12 @@ NULL
                 lfcThreshold = lfcThreshold,
                 direction = "down"
             )
-            ## Prepare the return list.
             out <- list(
                 all = object,
                 up = object[up, , drop = FALSE],
                 down = object[down, , drop = FALSE],
                 both = object[both, , drop = FALSE]
             )
-            ## Filter out empty up/down tables.
             out <- Filter(f = hasRows, x = out)
         }
         switch(
@@ -203,14 +187,6 @@ setMethod(
         baseMeanThreshold = NULL,
         return = c("tbl_df", "DataFrameList")
     ) {
-        ## nocov start
-        call <- match.call()
-        if ("results" %in% names(call)) {
-            stop("'results' is defunct in favor of 'i'.")
-        }
-        assert(isSubset(setdiff(names(call), ""), names(formals())))
-        rm(call)
-        ## nocov end
         validObject(object)
         assert(isFlag(extra))
         return <- match.arg(return)
