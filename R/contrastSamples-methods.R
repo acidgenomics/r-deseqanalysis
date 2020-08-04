@@ -1,6 +1,6 @@
 #' @name contrastSamples
 #' @inherit acidgenerics::contrastSamples
-#' @note Updated 2019-12-18.
+#' @note Updated 2020-08-04.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -113,8 +113,8 @@ NULL
         }
         contrast <- contrastName(
             object = res,
-            format = "resultsNames",
-            useStash = FALSE
+            .format = "resultsNames",
+            .useStash = FALSE
         )
         assert(
             isString(contrast),
