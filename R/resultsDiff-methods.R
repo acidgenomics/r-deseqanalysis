@@ -16,8 +16,8 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' object <- deseq
-#' resultsDiff(object, i = 1L, j = 2L)
+#' diff <- resultsDiff(deseq, i = 1L, j = 2L)
+#' head(diff)
 NULL
 
 
@@ -31,15 +31,16 @@ NULL
 
 
 
-## Updated 2019-12-17.
+## Updated 2020-08-04.
 `resultsDiff,DESeqResults,DESeqResults` <-  # nolint
     function(
         x,
         y,
         col = c("log2FoldChange", "stat"),
         deg = c("no", "intersect", "union"),
-        alpha = NULL,
+        alphaThreshold = NULL,
         lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         direction = c("both", "up", "down")
     ) {
         validObject(x)
@@ -57,14 +58,16 @@ NULL
         if (!identical(deg, "no")) {
             degX <- deg(
                 object = x,
-                alpha = alpha,
+                alphaThreshold = alphaThreshold,
                 lfcThreshold = lfcThreshold,
+                baseMeanThreshold = baseMeanThreshold,
                 direction = direction
             )
             degY <- deg(
                 object = y,
-                alpha = alpha,
+                alphaThreshold = alphaThreshold,
                 lfcThreshold = lfcThreshold,
+                baseMeanThreshold = baseMeanThreshold,
                 direction = direction
             )
             genes <- switch(
@@ -96,9 +99,16 @@ setMethod(
 
 
 
-## Updated 2019-12-17.
+## Updated 2020-08-04.
 `resultsDiff,DESeqAnalysis,missing` <-  # nolint
-    function(x, y = NULL, i, j, lfcShrink = TRUE, ...) {
+    function(
+        x,
+        y = NULL,
+        i,
+        j,
+        lfcShrink = NULL,
+        ...
+    ) {
         validObject(x)
         res1 <- results(
             object = x,
