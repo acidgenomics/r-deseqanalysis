@@ -32,13 +32,13 @@ NULL
         direction = c("both", "up", "down")
     ) {
         direction <- match.arg(direction)
-        degPerContrast <- .degPerContrast(
+        degPerContrast <- degPerContrast(
             object = object,
             alphaThreshold = alphaThreshold,
             lfcThreshold = lfcThreshold,
             baseMeanThreshold = baseMeanThreshold,
             direction = direction,
-            n = FALSE
+            return = "list"
         )
         ## This will collapse the nested lists into a single flat list.
         listInput <- do.call(what = c, args = degPerContrast)
