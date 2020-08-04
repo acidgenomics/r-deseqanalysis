@@ -9,6 +9,17 @@ setGeneric(
 
 
 
+#' @rdname lfcShrink
+#' @export
+setGeneric(
+    name = "lfcShrink",
+    def = function(object, ...) {
+        standardGeneric("lfcShrink")
+    }
+)
+
+
+
 #' @rdname lfcShrinkType
 #' @export
 setGeneric(
