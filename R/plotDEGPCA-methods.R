@@ -26,12 +26,12 @@ NULL
 
 
 
-## Updated 2020-07-29.
+## Updated 2020-08-04.
 `plotDEGPCA,DESeqResults` <-  # nolint
     function(
         object,
         DESeqTransform,  # nolint
-        alpha = NULL,
+        alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         direction = c("both", "up", "down"),
@@ -42,29 +42,24 @@ NULL
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
-        if (is.null(alpha)) {
-            alpha <- metadata(res)[["alpha"]]
+        if (is.null(alphaThreshold)) {
+            alphaThreshold <- alphaThreshold(res)
         }
         if (is.null(lfcThreshold)) {
-            lfcThreshold <- metadata(res)[["lfcThreshold"]]
+            lfcThreshold <- lfcThreshold(res)
         }
         if (is.null(baseMeanThreshold)) {
-            baseMeanThreshold <- 0L
+            baseMeanThreshold <- baseMeanThreshold(res)
         }
         assert(
             is(res, "DESeqResults"),
             is(dt, "DESeqTransform"),
-            identical(rownames(res), rownames(dt)),
-            isAlpha(alpha),
-            isNumber(lfcThreshold),
-            isNonNegative(lfcThreshold),
-            isNumber(baseMeanThreshold),
-            isNonNegative(baseMeanThreshold)
+            identical(rownames(res), rownames(dt))
         )
         direction <- match.arg(direction)
         deg <- deg(
             object = res,
-            alpha = alpha,
+            alphaThreshold = alphaThreshold,
             lfcThreshold = lfcThreshold,
             baseMeanThreshold = baseMeanThreshold,
             direction = direction
@@ -84,7 +79,7 @@ NULL
         subtitle <- paste0(
             length(deg), " genes", sep,
             "direction: ", direction, sep,
-            "alpha < ", alpha
+            "alpha < ", alphaThreshold
         )
         if (lfcThreshold > 0L) {
             subtitle <- paste0(
@@ -121,7 +116,7 @@ setMethod(
 
 
 
-## Updated 2019-11-19.
+## Updated 2020-08-04.
 `plotDEGPCA,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -129,14 +124,6 @@ setMethod(
         contrastSamples = FALSE,
         ...
     ) {
-        ## nocov start
-        call <- match.call()
-        ## results
-        if ("results" %in% names(call)) {
-            stop("'results' is defunct in favor of 'i'.")
-        }
-        rm(call)
-        ## nocov end
         validObject(object)
         assert(
             isScalar(i),
