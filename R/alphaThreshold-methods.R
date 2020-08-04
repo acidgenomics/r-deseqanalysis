@@ -92,3 +92,25 @@ setReplaceMethod(
     ),
     definition = `alphaThreshold<-,DESeqAnalysis,numeric`
 )
+
+
+
+## Updated 2020-08-04.
+`alphaThreshold<-,DESeqAnalysis,NULL` <-  # nolint
+    function(object, value) {
+        metadata(object)[["alphaThreshold"]] <- value
+        object
+    }
+
+
+
+#' @rdname alphaThreshold
+#' @export
+setReplaceMethod(
+    f = "alphaThreshold",
+    signature = signature(
+        object = "DESeqAnalysis",
+        value = "NULL"
+    ),
+    definition = `alphaThreshold<-,DESeqAnalysis,NULL`
+)

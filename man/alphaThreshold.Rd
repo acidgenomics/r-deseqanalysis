@@ -6,6 +6,7 @@
 \alias{alphaThreshold,DESeqResults-method}
 \alias{alphaThreshold,DESeqAnalysis-method}
 \alias{alphaThreshold<-,DESeqAnalysis,numeric-method}
+\alias{alphaThreshold<-,DESeqAnalysis,NULL-method}
 \title{Alpha threshold}
 \usage{
 alphaThreshold(object, ...)
@@ -17,6 +18,8 @@ alphaThreshold(object, ...) <- value
 \S4method{alphaThreshold}{DESeqAnalysis}(object)
 
 \S4method{alphaThreshold}{DESeqAnalysis,numeric}(object) <- value
+
+\S4method{alphaThreshold}{DESeqAnalysis,`NULL`}(object) <- value
 }
 \arguments{
 \item{object}{Object.}
