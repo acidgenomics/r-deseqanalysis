@@ -6,8 +6,7 @@
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom BiocGenerics updateObject
-#' @importFrom DESeq2 DESeq counts design fpkm lfcShrink nbinomWaldTest
-#'   priorInfo
+#' @importFrom DESeq2 DESeq counts design fpkm nbinomWaldTest priorInfo
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors DataFrame SimpleList as.data.frame cbind complete.cases
 #'   cor do.call head mcols mcols<- metadata metadata<- na.omit
