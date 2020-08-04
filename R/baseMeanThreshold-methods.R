@@ -29,7 +29,7 @@ NULL
 
 
 
-`baseMeanThreshold,DESeqAnalysis` <-  # nolint
+`baseMeanThreshold,Annotated` <-  # nolint
     function(object) {
         validObject(object)
         x <- metadata(object)[["baseMeanThreshold"]]
@@ -49,14 +49,14 @@ NULL
 #' @export
 setMethod(
     f = "baseMeanThreshold",
-    signature = signature("DESeqAnalysis"),
-    definition = `baseMeanThreshold,DESeqAnalysis`
+    signature = signature("Annotated"),
+    definition = `baseMeanThreshold,Annotated`
 )
 
 
 
 ## Updated 2020-08-04.
-`baseMeanThreshold<-,DESeqAnalysis,numeric` <-  # nolint
+`baseMeanThreshold<-,Annotated,numeric` <-  # nolint
     function(object, value) {
         assert(isAlpha(value))
         metadata(object)[["baseMeanThreshold"]] <- value
@@ -71,8 +71,8 @@ setMethod(
 setReplaceMethod(
     f = "baseMeanThreshold",
     signature = signature(
-        object = "DESeqAnalysis",
+        object = "Annotated",
         value = "numeric"
     ),
-    definition = `baseMeanThreshold<-,DESeqAnalysis,numeric`
+    definition = `baseMeanThreshold<-,Annotated,numeric`
 )
