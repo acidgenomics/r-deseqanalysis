@@ -85,21 +85,9 @@ NULL
 
 
 
-## Updated 2019-12-18.
+## Updated 2020-08-04.
 `contrastSamples,DESeqAnalysis` <-  # nolint
     function(object, i, ...) {
-        ## nocov start
-        call <- match.call()
-        ## results
-        if ("results" %in% names(call)) {
-            stop("'results' is defunct in favor of 'i'.")
-        }
-        assert(isSubset(
-            x = setdiff(names(call), ""),
-            y = names(formals())
-        ))
-        rm(call)
-        ## nocov end
         validObject(object)
         suppressMessages({
             res <- results(object = object, i = i, lfcShrink = FALSE)
