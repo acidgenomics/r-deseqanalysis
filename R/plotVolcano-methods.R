@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit acidgenerics::plotVolcano
-#' @note Updated 2020-07-29.
+#' @note Updated 2020-08-04.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -66,11 +66,11 @@ NULL
 
 
 
-## Updated 2020-07-29.
+## Updated 2020-08-04.
 `plotVolcano,DESeqResults` <-  # nolint
     function(
         object,
-        alpha = NULL,
+        alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         genes = NULL,
@@ -92,29 +92,29 @@ NULL
         baseMeanCol <- "baseMean"
         lfcCol <- "log2FoldChange"
         if ("svalue" %in% names(object)) {
-            testCol <- "svalue"  # nocov
+            alphaCol <- "svalue"  # nocov
         } else {
-            testCol <- "padj"
+            alphaCol <- "padj"
         }
-        negLogTestCol <- camelCase(paste("neg", "log10", testCol))
+        negLogAlphaCol <- camelCase(paste("neg", "log10", alphaCol))
         ## Note that `lfcShrink()` doesn't return `stat` column.
         if ("stat" %in% names(object)) {
             rankCol <- "stat"
         } else {
-            rankCol <- negLogTestCol
+            rankCol <- negLogAlphaCol
         }
-        if (is.null(alpha)) {
-            alpha <- metadata(object)[["alpha"]]
+        if (is.null(alphaThreshold)) {
+            alphaThreshold <- alphaThreshold(object)
         }
         if (is.null(lfcThreshold)) {
-            lfcThreshold <- metadata(object)[["lfcThreshold"]]
+            lfcThreshold <- lfcThreshold(object)
+        }
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- baseMeanThreshold(object)
         }
         lfcShrinkType <- lfcShrinkType(object)
-        if (is.null(baseMeanThreshold)) {
-            baseMeanThreshold <- 1L
-        }
         assert(
-            isAlpha(alpha),
+            isAlpha(alphaThreshold),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
             isString(lfcShrinkType),
@@ -138,9 +138,9 @@ NULL
         return <- match.arg(return)
         data <- as(object, "DataFrame")
         data <- camelCase(data)
-        assert(isSubset(c(baseMeanCol, lfcCol, testCol), colnames(data)))
+        assert(isSubset(c(baseMeanCol, lfcCol, alphaCol), colnames(data)))
         ## Remove genes with NA adjusted P values.
-        keep <- which(!is.na(data[[testCol]]))
+        keep <- which(!is.na(data[[alphaCol]]))
         data <- data[keep, , drop = FALSE]
         keep <- which(data[[baseMeanCol]] >= baseMeanThreshold)
         data <- data[keep, , drop = FALSE]
@@ -148,7 +148,7 @@ NULL
         ## `Inf` values resulting from log transformation. This will also define
         ## the upper bound of the y-axis. Then calculate the rank score, which
         ## is used for `ntop`.
-        data[[negLogTestCol]] <- -log10(data[[testCol]] + ylim)
+        data[[negLogAlphaCol]] <- -log10(data[[alphaCol]] + ylim)
         data[["rankScore"]] <- abs(data[[rankCol]])
         data <- data[
             order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE
@@ -156,8 +156,8 @@ NULL
         data[["rank"]] <- seq_len(nrow(data))
         data <- .addIsDECol(
             data = data,
-            testCol = testCol,
-            alpha = alpha,
+            alphaCol = alphaCol,
+            alphaThreshold = alphaThreshold,
             lfcThreshold = lfcThreshold,
             baseMeanThreshold = baseMeanThreshold
         )
@@ -203,7 +203,7 @@ NULL
         ## P value density -----------------------------------------------------
         pvalueHist <- ggplot(
             data = as_tibble(data, rownames = NULL),
-            mapping = aes(x = !!sym(negLogTestCol))
+            mapping = aes(x = !!sym(negLogAlphaCol))
         ) +
             geom_density(
                 color = NA,
@@ -227,7 +227,7 @@ NULL
 
         ## Volcano plot --------------------------------------------------------
         sep <- "; "
-        subtitle <- paste0("alpha: ", alpha)
+        subtitle <- paste0("alpha < ", alphaThreshold)
         if (lfcThreshold > 0L) {
             subtitle <- paste0(
                 subtitle, sep,
@@ -250,7 +250,7 @@ NULL
             data = as_tibble(data, rownames = NULL),
             mapping = aes(
                 x = !!sym(lfcCol),
-                y = !!sym(negLogTestCol),
+                y = !!sym(negLogAlphaCol),
                 color = !!sym("isDE")
             )
         ) +
@@ -362,27 +362,16 @@ setMethod(
 
 
 
-## Updated 2019-11-19.
+## Updated 2020-08-04.
 `plotVolcano,DESeqAnalysis` <-  # nolint
     function(
         object,
         i,
-        lfcShrink = TRUE,
+        lfcShrink = NULL,
         ...
     ) {
-        ## nocov start
-        call <- match.call()
-        ## results
-        if ("results" %in% names(call)) {
-            stop("'results' is defunct in favor of 'i'.")
-        }
-        rm(call)
-        ## nocov end
         validObject(object)
-        assert(
-            isScalar(i),
-            isFlag(lfcShrink)
-        )
+        assert(isScalar(i))
         ## Return `NULL` for objects that don't contain gene symbol mappings.
         gene2symbol <- tryCatch(
             expr = suppressMessages({
