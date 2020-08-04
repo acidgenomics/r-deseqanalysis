@@ -31,7 +31,6 @@ NULL
 
 `baseMeanThreshold,Annotated` <-  # nolint
     function(object) {
-        validObject(object)
         x <- metadata(object)[["baseMeanThreshold"]]
         if (is.null(x)) {
             x <- 0L
@@ -60,7 +59,6 @@ setMethod(
     function(object, value) {
         assert(isAlpha(value))
         metadata(object)[["baseMeanThreshold"]] <- value
-        validObject(object)
         object
     }
 
