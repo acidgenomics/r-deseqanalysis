@@ -51,7 +51,7 @@ NULL
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
-        if (is.null(alpha)) {
+        if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(res)
         }
         if (is.null(lfcThreshold)) {
