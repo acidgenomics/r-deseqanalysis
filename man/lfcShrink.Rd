@@ -2,17 +2,28 @@
 % Please edit documentation in R/AllGenerics.R, R/lfcShrink-methods.R
 \name{lfcShrink}
 \alias{lfcShrink}
+\alias{lfcShrink<-}
 \alias{lfcShrink,DESeqDataSet-method}
+\alias{lfcShrink,DESeqAnalysis-method}
+\alias{lfcShrink<-,DESeqAnalysis,logical-method}
 \title{Return shrunken log2 fold change values?}
 \usage{
 lfcShrink(object, ...)
 
+lfcShrink(object, ...) <- value
+
 \S4method{lfcShrink}{DESeqDataSet}(object, ...)
+
+\S4method{lfcShrink}{DESeqAnalysis}(object)
+
+\S4method{lfcShrink}{DESeqAnalysis,logical}(object) <- value
 }
 \arguments{
 \item{object}{Object.}
 
 \item{...}{Additional arguments.}
+
+\item{value}{Value to assign.}
 }
 \value{
 \code{logical(1)}.
