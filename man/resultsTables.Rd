@@ -11,7 +11,7 @@ resultsTables(object, ...)
 \S4method{resultsTables}{DESeqResults}(
   object,
   DESeqDataSet = NULL,
-  alpha = NULL,
+  alphaThreshold = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
   return = c("tbl_df", "DataFrameList"),
@@ -21,9 +21,9 @@ resultsTables(object, ...)
 \S4method{resultsTables}{DESeqAnalysis}(
   object,
   i,
-  lfcShrink = TRUE,
   extra = TRUE,
-  alpha = NULL,
+  lfcShrink = NULL,
+  alphaThreshold = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
   return = c("tbl_df", "DataFrameList")
@@ -34,7 +34,7 @@ resultsTables(object, ...)
 
 \item{DESeqDataSet}{\code{DESeqDataSet} or \code{NULL}.}
 
-\item{alpha}{\code{numeric(1)} or \code{NULL}.
+\item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 
@@ -63,11 +63,12 @@ Uses \link[base:match.arg]{match.arg()}.
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
 
-\item{lfcShrink}{\code{logical(1)}.
-Use shrunken log2 fold change (LFC) values.}
-
 \item{extra}{\code{logical(1)}.
 Include row data and normalized counts from internal \code{DESeqDataSet}.}
+
+\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
+Use shrunken log2 fold change (LFC) values.
+If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
 }
 \value{
 \code{list}.
@@ -82,7 +83,7 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 \code{all} table), are arranged by adjusted \emph{P} value.
 }
 \note{
-Updated 2019-12-18.
+Updated 2020-08-04.
 
 It is generally recommended to not apply post hoc log fold change
 cutoffs. If a specific effect size is desired, instead run

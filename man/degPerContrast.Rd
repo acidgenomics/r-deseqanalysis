@@ -11,7 +11,7 @@ degPerContrast(object, ...)
   object,
   direction = c("both", "up", "down"),
   n = FALSE,
-  return = c("DataFrame", "list"),
+  return = c("matrix", "list"),
   ...
 )
 }
@@ -29,6 +29,14 @@ Number to include.}
 \item{return}{\code{character(1)}.
 Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
 to the first argument in the \code{character} vector.}
+}
+\value{
+\itemize{
+\item \code{matrix}: Matrix containing numbers of DEGs per contrast.
+Intended primarily for use with \code{\link[=plotDEGStackedBar]{plotDEGStackedBar()}}.
+\item \code{list}: Named vector containing the DEG identifiers.
+Intended primarily for use with \code{\link[=plotDEGUpset]{plotDEGUpset()}}.
+}
 }
 \description{
 Summary of differentially expressed genes per contrast

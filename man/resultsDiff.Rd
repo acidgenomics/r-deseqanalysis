@@ -36,10 +36,6 @@ Note that \code{x}/\code{i} represents \code{A} and \code{y}/\code{j} \code{B} i
 \item \code{"union"}: Return genes called as DE in either contrast.
 }}
 
-\item{alpha}{\code{numeric(1)} or \code{NULL}.
-Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
-defined in the object.}
-
 \item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
 Log (base 2) fold change ratio cutoff threshold.
 If left \code{NULL}, will use the cutoff defined in the object.}
@@ -59,8 +55,9 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
 
-\item{lfcShrink}{\code{logical(1)}.
-Use shrunken log2 fold change (LFC) values.}
+\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
+Use shrunken log2 fold change (LFC) values.
+If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
 
 \item{...}{Additional arguments.}
 }
@@ -81,11 +78,6 @@ Updated 2020-08-04.
 }
 \examples{
 data(deseq)
-
-## DESeqResults ====
-x <- results(deseq, i = 1L)
-y <- results(deseq, i = 2L)
-resultsDiff(x = x, y = y)
 
 ## DESeqAnalysis ====
 object <- deseq

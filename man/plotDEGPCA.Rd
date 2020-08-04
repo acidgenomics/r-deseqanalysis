@@ -11,7 +11,7 @@ plotDEGPCA(object, ...)
 \S4method{plotDEGPCA}{DESeqResults}(
   object,
   DESeqTransform,
-  alpha = NULL,
+  alphaThreshold = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
   direction = c("both", "up", "down"),
@@ -25,7 +25,7 @@ plotDEGPCA(object, ...)
 
 \item{DESeqTransform}{\code{DESeqTransform}.}
 
-\item{alpha}{\code{numeric(1)} or \code{NULL}.
+\item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 

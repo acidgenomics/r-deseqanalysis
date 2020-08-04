@@ -9,7 +9,7 @@ plotDEGStackedBar(object, ...)
 
 \S4method{plotDEGStackedBar}{DESeqAnalysis}(
   object,
-  alpha = NULL,
+  alphaThreshold = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
   fill = getOption(x = "acid.fill.discrete", default =
@@ -20,7 +20,7 @@ plotDEGStackedBar(object, ...)
 \arguments{
 \item{object}{Object.}
 
-\item{alpha}{\code{numeric(1)} or \code{NULL}.
+\item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 

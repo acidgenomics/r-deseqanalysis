@@ -10,7 +10,7 @@ export(object, ...)
 
 \S4method{export}{DESeqDataSet}(object, name = NULL, dir = ".", compress = FALSE)
 
-\S4method{export}{DESeqAnalysis}(object, name = NULL, dir = ".", compress = FALSE, lfcShrink = TRUE)
+\S4method{export}{DESeqAnalysis}(object, name = NULL, dir = ".", compress = FALSE)
 }
 \arguments{
 \item{object}{Object.}
@@ -24,9 +24,6 @@ Directory path.}
 \item{compress}{\code{logical(1)}.
 Apply gzip compression to all files.}
 
-\item{lfcShrink}{\code{logical(1)}.
-Use shrunken log2 fold change (LFC) values.}
-
 \item{...}{Additional arguments.}
 }
 \value{
@@ -39,7 +36,7 @@ Export data out of R and write to disk.
 Size-factor normalized coutns and FPKM values are calculated on the fly
 and exported automatically.
 
-Updated 2020-03-16.
+Updated 2020-08-04.
 }
 \examples{
 data(deseq)
