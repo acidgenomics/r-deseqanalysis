@@ -65,8 +65,8 @@ NULL
             direction = direction
         )
         if (length(deg) < .minDEGThreshold) {
-            message(sprintf(
-                fmt = "Fewer than %s DEGs to plot. Skipping.",
+            cli_alert_warning(sprintf(
+                fmt = "Fewer than %s DEG to plot. Skipping.",
                 .minDEGThreshold
             ))
             return()

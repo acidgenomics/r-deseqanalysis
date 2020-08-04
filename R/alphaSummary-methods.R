@@ -68,10 +68,7 @@ NULL
         } else {
             caption <- resultsNames(object)[[1L]]
         }
-        message(sprintf(
-            "%s\nAlpha levels: %s",
-            caption, toString(alpha)
-        ))
+        cli_alert_info(caption)
         data <- vapply(
             X = alpha,
             FUN = function(alpha) {

@@ -108,7 +108,7 @@ NULL
             isString(contrast),
             assert(grepl("_vs_", contrast))
         )
-        message(sprintf("Contrast: %s", contrast))
+        cli_dl(c("Contrast" = contrast))
         dds <- as(object, "DESeqDataSet")
         colData <- colData(dds)
         assert(hasRownames(colData))
@@ -124,11 +124,13 @@ NULL
         )
         assert(identical(sum(match), 1L))
         factorCol <- names(match)[match]
-        message(sprintf("Factor column: %s.", factorCol))
+        cli_dl(c("Factor column" = factorCol))
         ## Look for interaction effect (difference of differences).
         ## e.g. "group_B_vs_A_group_C_vs_A_effect".
         if (isTRUE(grepl(pattern = "_effect$", x = contrast))) {
-            message("Interaction effect (difference of differences) detected.")
+            cli_alert_info(
+                "Interaction effect (difference of differences) detected."
+            )
             interaction <- TRUE
             x <- contrast
             x <- sub("_effect$", "", x)
@@ -137,13 +139,13 @@ NULL
                 substr(x = x, start = loc[1L, 1L], stop = loc[2L, 1L] - 2L)
             contrast2 <-
                 substr(x = x, start = loc[2L, 1L], stop = nchar(x))
-            message(sprintf("Contrast 1: %s.", contrast1))
+            cli_dl(c("Contrast 1" = contrast1))
             samples1 <- .contrastSamples(
                 dds = dds,
                 contrast = contrast1,
                 factorCol = factorCol
             )
-            message(sprintf("Contrast 2: %s.", contrast2))
+            cli_dl(c("Contrast 2" = contrast2))
             samples2 <- .contrastSamples(
                 dds = dds,
                 contrast = contrast2,

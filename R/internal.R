@@ -63,7 +63,7 @@
 
 #' Map contrast vector to coefficient
 #'
-#' @note Updated 2019-09-17.
+#' @note Updated 2020-08-04.
 #' @noRd
 .contrast2coef <- function(contrast, resultsNames) {
     assert(
@@ -79,15 +79,18 @@
         table = resultsNames
     )
     assert(isInt(coef), !is.na(coef))
-    message(sprintf("Contrast: %s\nCoef: %d", resultsNames[[coef]], coef))
+    cli_alert_dl(
+        c("contrast" = resultsNames[[coef]]),
+        c("coef" = coef)
+    )
     coef
 }
 
 
 
-## Updated 2019-07-23.
+## Updated 2020-08-04.
 .ddsMsg <- function() {
-    message(sprintf(
+    cli_alert_info(sprintf(
         "Generating DESeqDataSet with DESeq2 %s.",
         packageVersion("DESeq2")
     ))
@@ -114,7 +117,6 @@
     )
     validObject(object)
     validObject(DESeqDataSet)
-    message("Joining size factor adjusted normalized counts.")
     counts <- counts(DESeqDataSet, normalized = TRUE)
     out <- cbind(object, counts)
     ## Ensure we're not changing the object class on return.
@@ -156,7 +158,6 @@
     )
     validObject(object)
     validObject(DESeqDataSet)
-    message("Joining row annotations.")
     ## SummarizedExperiment inconsistently handles rownames on rowData.
     ## Ensure they are set here before continuing.
     rownames <- rownames(DESeqDataSet)
