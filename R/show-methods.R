@@ -29,8 +29,9 @@ NULL
             transformType = transformType(object),
             resultsNames = resultsNames(object),
             alphaThreshold = alphaThreshold(object),
-            lfcThreshold = lfcThreshold(object),
+            lfcShrink = lfcShrink(object),
             lfcShrinkType = lfcShrinkType(object),
+            lfcThreshold = lfcThreshold(object),
             baseMeanThreshold = baseMeanThreshold(object)
         ))
     }
