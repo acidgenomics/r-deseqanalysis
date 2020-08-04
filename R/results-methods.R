@@ -58,14 +58,6 @@ setMethod(
         lfcShrink = NULL,
         ...
     ) {
-        ## nocov start
-        call <- match.call()
-        if ("results" %in% names(call)) {
-            stop("'results' is defunct in favor of 'i'.")
-        }
-        assert(isSubset(setdiff(names(call), ""), names(formals())))
-        rm(call)
-        ## nocov end
         if (is.null(lfcShrink)) {
             lfcShrink <- lfcShrink(object)
         }
