@@ -43,42 +43,18 @@ NULL
         validObject(y)
         assert(
             areDisjointSets(resultsNames(x), resultsNames(y)),
-            identical(
-                x = x@data@assays,
-                y = y@data@assays
-            ),
-            identical(
-                x = x@data@colData,
-                y = y@data@colData
-            ),
-            identical(
-                x = x@data@design,
-                y = y@data@design
-            ),
-            identical(
-                x = x@data@elementMetadata,
-                y = y@data@elementMetadata
-            ),
-            identical(
-                x = x@data@metadata,
-                y = y@data@metadata
-            ),
-            identical(
-                x = x@data@rowRanges,
-                y = y@data@rowRanges
-            ),
-            identical(
-                x = x@transform,
-                y = y@transform
-            )
+            identical(x@data@assays, y@data@assays),
+            identical(x@data@colData, y@data@colData),
+            identical(x@data@design, y@data@design),
+            identical(x@data@elementMetadata, y@data@elementMetadata),
+            identical(x@data@metadata, y@data@metadata),
+            identical(x@data@rowRanges, y@data@rowRanges),
+            identical(x@transform, y@transform)
         )
-        message(paste(
-            "Combining results into single DESeqAnalysis object.",
-            "x:",
-            printString(resultsNames(x)),
-            "y:",
-            printString(resultsNames(y)),
-            sep = "\n"
+        cli_alert_info("Combining results into single DESeqAnalysis object.")
+        cli_dl(c(
+            "x" = printString(resultsNames(x)),
+            "y" = printString(resultsNames(y))
         ))
         data <- x@data
         transform <- x@transform

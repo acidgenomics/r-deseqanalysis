@@ -26,10 +26,11 @@ NULL
         if (!isTRUE(.hasSlot(object, "metadata"))) {
             if (isTRUE(verbose)) {
                 ## nocov start
-                message(
-                    "Legacy object < 0.1.8 detected.\n",
-                    "Updating to support metadata slot."
-                )
+                cli_alert_warning(paste(
+                    "Legacy object < 0.1.8 detected.",
+                    "Updating to support metadata slot.",
+                    sep = "\n"
+                ))
                 ## nocov end
             }
         }
