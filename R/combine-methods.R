@@ -35,7 +35,7 @@ NULL
 
 
 
-## Updated 2020-01-03.
+## Updated 2020-08-04.
 `combine,DESeqAnalysis` <-  # nolint
     function(x, y) {
         validObject(x)
@@ -88,12 +88,18 @@ NULL
         } else {
             lfcShrink <- c(x@lfcShrink, y@lfcShrink)
         }
-        DESeqAnalysis(
+        out <- DESeqAnalysis(
             data = data,
             transform = transform,
             results = results,
             lfcShrink = lfcShrink
         )
+        if (!identical(names(metadata(x)), names(metadata(out)))) {
+            diff <- setdiff(names(metadata(x)), names(metadata(out)))
+            meta <- c(metadata(out), metadata(x)[diff])
+            metadata(out) <- meta
+        }
+        out
     }
 
 
