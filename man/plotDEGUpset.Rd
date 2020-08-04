@@ -47,5 +47,7 @@ Updated 2020-08-04.
 }
 \examples{
 data(deseq)
+
+## DESeqAnalysis ====
 plotDEGUpset(deseq)
 }

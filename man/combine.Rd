@@ -37,6 +37,7 @@ Updated 2020-08-04.
 \examples{
 data(deseq)
 
+## DESeqAnalysis ====
 x <- deseq
 y <- deseq
 resultsNames(x) <- paste0("x_", resultsNames(x))
