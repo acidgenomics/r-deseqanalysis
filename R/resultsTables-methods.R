@@ -68,7 +68,7 @@ NULL
 ## https://github.com/hbc/bcbioRNASeq/blob/v0.2.10/R/resultsTables-methods.R
 
 ## Note that this method is used in bcbioRNASeq F1000 paper.
-## Updated 2019-11-12.
+## Updated 2020-08-04.
 `resultsTables,DESeqResults` <-  # nolint
     function(
         object,
