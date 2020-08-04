@@ -5,6 +5,8 @@
 #' @seealso [DESeq2::DESeqTransform()].
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' transformType(deseq)
 NULL
 

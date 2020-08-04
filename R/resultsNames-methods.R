@@ -8,6 +8,8 @@
 #'
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' resultsNames(deseq)
 NULL
 

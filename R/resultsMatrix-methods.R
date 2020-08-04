@@ -23,6 +23,8 @@
 #'
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' x <- resultsMatrix(deseq)
 #' head(x)
 NULL

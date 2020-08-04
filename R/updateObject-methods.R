@@ -12,6 +12,8 @@
 #'
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' updateObject(deseq)
 NULL
 
