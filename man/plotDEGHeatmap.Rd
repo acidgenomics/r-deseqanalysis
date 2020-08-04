@@ -11,7 +11,7 @@ plotDEGHeatmap(object, ...)
 \S4method{plotDEGHeatmap}{DESeqResults}(
   object,
   DESeqTransform,
-  alpha = NULL,
+  alphaThreshold = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
   direction = c("both", "up", "down"),
@@ -20,14 +20,14 @@ plotDEGHeatmap(object, ...)
   ...
 )
 
-\S4method{plotDEGHeatmap}{DESeqAnalysis}(object, i, contrastSamples = FALSE, lfcShrink = TRUE, ...)
+\S4method{plotDEGHeatmap}{DESeqAnalysis}(object, i, contrastSamples = FALSE, lfcShrink = NULL, ...)
 }
 \arguments{
 \item{object}{Object.}
 
 \item{DESeqTransform}{\code{DESeqTransform}.}
 
-\item{alpha}{\code{numeric(1)} or \code{NULL}.
+\item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 
@@ -63,8 +63,9 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
 contrasts (e.g. interaction effect).}
 
-\item{lfcShrink}{\code{logical(1)}.
-Use shrunken log2 fold change (LFC) values.}
+\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
+Use shrunken log2 fold change (LFC) values.
+If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
 }
 \value{
 Plot.
@@ -89,7 +90,7 @@ method defined in acidplots.
 }}
 
 \note{
-Updated 2020-07-28.
+Updated 2020-08-04.
 }
 \examples{
 data(deseq)

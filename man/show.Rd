@@ -17,7 +17,7 @@
 Show an object
 }
 \note{
-Updated 2019-11-13.
+Updated 2020-08-04.
 }
 \examples{
 data(deseq)
