@@ -93,8 +93,6 @@ setMethod(
         contrastName(data) <- name
         if (isTRUE(lfcShrink)) {
             msg <- paste(name, "(shrunken LFC)")
-        } else {
-            msg <- paste(name, "(unshrunken LFC)")
         }
         message(msg)
         validObject(data)
