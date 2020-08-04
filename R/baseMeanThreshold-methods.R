@@ -35,10 +35,7 @@ NULL
         if (is.null(x)) {
             x <- 0L
         }
-        assert(
-            isNumber(x),
-            isNonNegative(x)
-        )
+        assert(isNumber(x), isNonNegative(x))
         x
     }
 
@@ -57,7 +54,7 @@ setMethod(
 ## Updated 2020-08-04.
 `baseMeanThreshold<-,Annotated,numeric` <-  # nolint
     function(object, value) {
-        assert(isAlpha(value))
+        assert(isNumber(x), isNonNegative(x))
         metadata(object)[["baseMeanThreshold"]] <- value
         object
     }
