@@ -3,17 +3,17 @@
 \name{baseMeanThreshold}
 \alias{baseMeanThreshold}
 \alias{baseMeanThreshold<-}
-\alias{baseMeanThreshold,DESeqAnalysis-method}
-\alias{baseMeanThreshold<-,DESeqAnalysis,numeric-method}
+\alias{baseMeanThreshold,Annotated-method}
+\alias{baseMeanThreshold<-,Annotated,numeric-method}
 \title{Base mean threshold}
 \usage{
 baseMeanThreshold(object, ...)
 
 baseMeanThreshold(object, ...) <- value
 
-\S4method{baseMeanThreshold}{DESeqAnalysis}(object)
+\S4method{baseMeanThreshold}{Annotated}(object)
 
-\S4method{baseMeanThreshold}{DESeqAnalysis,numeric}(object) <- value
+\S4method{baseMeanThreshold}{Annotated,numeric}(object) <- value
 }
 \arguments{
 \item{object}{Object.}
