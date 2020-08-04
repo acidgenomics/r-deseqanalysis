@@ -13,8 +13,7 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' x <- deseq
-#' correlation(x = x, i = 1L, j = 2L)
+#' correlation(deseq, i = 1L, j = 2L)
 NULL
 
 
