@@ -45,6 +45,7 @@
 #'   change values.
 #'
 #' @examples
+#' ## DESeqDataSet ====
 #' dds <- DESeq2::makeExampleDESeqDataSet(n = 1000L, m = 12L)
 #' dds$condition <- factor(rep(LETTERS[seq_len(4L)], each = 3L))
 #' dds <- DESeq2::DESeq(dds)
