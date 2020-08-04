@@ -11,7 +11,7 @@ plotMA(object, ...)
 
 \S4method{plotMA}{DESeqResults}(
   object,
-  alpha = NULL,
+  alphaThreshold = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
   genes = NULL,
@@ -26,14 +26,12 @@ plotMA(object, ...)
   return = c("ggplot", "DataFrame")
 )
 
-\S4method{plotMA}{DESeqAnalysis}(object, i, lfcShrink = TRUE, ...)
+\S4method{plotMA}{DESeqAnalysis}(object, i, lfcShrink = NULL, ...)
 }
 \arguments{
-\item{object}{
-    A data object, typically containing count values from an RNA-Seq experiment or microarray intensity values.
-  }
+\item{object}{Object.}
 
-\item{alpha}{\code{numeric(1)} or \code{NULL}.
+\item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 
@@ -79,8 +77,9 @@ to the first argument in the \code{character} vector.}
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
 
-\item{lfcShrink}{\code{logical(1)}.
-Use shrunken log2 fold change (LFC) values.}
+\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
+Use shrunken log2 fold change (LFC) values.
+If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
 
 \item{...}{Additional arguments.}
 }
@@ -88,8 +87,7 @@ Use shrunken log2 fold change (LFC) values.}
 \code{ggplot}.
 }
 \description{
-A generic function which produces an MA-plot for an object containing microarray, RNA-Seq
-  or other data.
+MA-plot: plot differences versus averages for high-throughput data
 }
 \details{
 An MA plot is an application of a Bland–Altman plot for visual
@@ -104,7 +102,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2020-07-29.
+Updated 2020-08-04.
 }
 \section{plotMA2 aliases}{
 
