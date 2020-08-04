@@ -3,6 +3,8 @@
 #' @name plotDEGStackedBar
 #' @inherit acidgenerics::plotDEGStackedBar
 #' @note Updated 2020-08-04.
+#' @inheritParams acidroxygen::params
+#' @param ... Additional arguments.
 #' @examples
 #' data(deseq)
 #' plotDEGStackedBar(deseq)
