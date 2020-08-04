@@ -5,6 +5,7 @@
 \alias{baseMeanThreshold<-}
 \alias{baseMeanThreshold,Annotated-method}
 \alias{baseMeanThreshold<-,Annotated,numeric-method}
+\alias{baseMeanThreshold<-,Annotated,NULL-method}
 \title{Base mean threshold}
 \usage{
 baseMeanThreshold(object, ...)
@@ -14,6 +15,8 @@ baseMeanThreshold(object, ...) <- value
 \S4method{baseMeanThreshold}{Annotated}(object)
 
 \S4method{baseMeanThreshold}{Annotated,numeric}(object) <- value
+
+\S4method{baseMeanThreshold}{Annotated,`NULL`}(object) <- value
 }
 \arguments{
 \item{object}{Object.}
