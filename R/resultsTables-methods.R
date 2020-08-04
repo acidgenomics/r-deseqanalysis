@@ -1,6 +1,6 @@
 #' @name resultsTables
 #' @inherit acidgenerics::resultsTables
-#' @note Updated 2019-12-18.
+#' @note Updated 2020-08-04.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -73,7 +73,7 @@ NULL
     function(
         object,
         DESeqDataSet = NULL,  # nolint
-        alpha = NULL,
+        alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         return = c("tbl_df", "DataFrameList"),
@@ -86,6 +86,12 @@ NULL
         ## Legacy bcbioRNASeq arguments ----------------------------------------
         ## nocov start
         call <- match.call()
+        if (isSubset("alpha", names(call))) {
+            stop(
+                "'alpha' argument is defunct.\n",
+                "Use 'alphaThreshold' instead."
+            )
+        }
         if (isSubset("dir", names(call))) {
             stop(
                 "'dir' argument is defunct.\n",
@@ -135,7 +141,7 @@ NULL
         ## Get the DEG character vectors, which we'll use against the rownames.
         both <- deg(
             object = object,
-            alpha = alpha,
+            alphaThreshold = alphaThreshold,
             lfcThreshold = lfcThreshold,
             baseMeanThreshold = baseMeanThreshold,
             direction = "both"
@@ -146,13 +152,13 @@ NULL
         } else {
             up <- deg(
                 object = object,
-                alpha = alpha,
+                alphaThreshold = alphaThreshold,
                 lfcThreshold = lfcThreshold,
                 direction = "up"
             )
             down <- deg(
                 object = object,
-                alpha = alpha,
+                alphaThreshold = alphaThreshold,
                 lfcThreshold = lfcThreshold,
                 direction = "down"
             )
@@ -185,35 +191,28 @@ setMethod(
 
 
 
-## Updated 2020-07-29.
+## Updated 2020-08-04.
 `resultsTables,DESeqAnalysis` <-  # nolint
     function(
         object,
         i,
-        lfcShrink = TRUE,
         extra = TRUE,
-        alpha = NULL,
+        lfcShrink = NULL,
+        alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         return = c("tbl_df", "DataFrameList")
     ) {
         ## nocov start
         call <- match.call()
-        ## results
         if ("results" %in% names(call)) {
             stop("'results' is defunct in favor of 'i'.")
         }
-        assert(isSubset(
-            x = setdiff(names(call), ""),
-            y = names(formals())
-        ))
+        assert(isSubset(setdiff(names(call), ""), names(formals())))
         rm(call)
         ## nocov end
         validObject(object)
-        assert(
-            isFlag(lfcShrink),
-            isFlag(extra)
-        )
+        assert(isFlag(extra))
         return <- match.arg(return)
         ## Note that this will use the shrunken LFC values, if slotted.
         res <- results(object, i = i, lfcShrink = lfcShrink)
@@ -233,7 +232,7 @@ setMethod(
         resultsTables(
             object = res,
             DESeqDataSet = dds,
-            alpha = alpha,
+            alphaThreshold = alphaThreshold,
             lfcThreshold = lfcThreshold,
             baseMeanThreshold = baseMeanThreshold,
             return = return
