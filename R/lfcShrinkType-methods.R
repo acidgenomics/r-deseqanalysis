@@ -42,13 +42,12 @@ setMethod(
 
 
 
-## Updated 2019-07-23.
+## Updated 2020-08-04.
 `lfcShrinkType,DESeqAnalysis` <-  # nolint
     function(object) {
         validObject(object)
-        lfcShrink <- slot(object, "lfcShrink")
-        if (!hasLength(lfcShrink)) return(NULL)
-        lfcShrinkType(lfcShrink[[1L]])
+        if (!isTRUE(lfcShrink(object))) return(NULL)
+        lfcShrinkType(slot(object, "lfcShrink")[[1L]])
     }
 
 
