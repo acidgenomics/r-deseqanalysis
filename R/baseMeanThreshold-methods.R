@@ -54,7 +54,7 @@ setMethod(
 ## Updated 2020-08-04.
 `baseMeanThreshold<-,Annotated,numeric` <-  # nolint
     function(object, value) {
-        assert(isNumber(x), isNonNegative(x))
+        assert(isNumber(value), isNonNegative(value))
         metadata(object)[["baseMeanThreshold"]] <- value
         object
     }
@@ -70,4 +70,26 @@ setReplaceMethod(
         value = "numeric"
     ),
     definition = `baseMeanThreshold<-,Annotated,numeric`
+)
+
+
+
+## Updated 2020-08-04.
+`baseMeanThreshold<-,Annotated,NULL` <-  # nolint
+    function(object, value) {
+        metadata(object)[["baseMeanThreshold"]] <- value
+        object
+    }
+
+
+
+#' @rdname baseMeanThreshold
+#' @export
+setReplaceMethod(
+    f = "baseMeanThreshold",
+    signature = signature(
+        object = "Annotated",
+        value = "NULL"
+    ),
+    definition = `baseMeanThreshold<-,Annotated,NULL`
 )
