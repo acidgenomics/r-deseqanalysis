@@ -38,7 +38,7 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2020-08-04.
 `alphaSummary,DESeqDataSet` <-  # nolint
     function(
         object,
@@ -58,13 +58,11 @@ NULL
             isAny(contrast, classes = c("character", "NULL")),
             isString(name, nullOK = TRUE)
         )
-
         ## Either `contrast` or `name`.
         ## If neither are defined, we're checking the intercept.
         if (!is.null(contrast) && !is.null(name)) {
             stop("Specify either 'contrast' or 'name'.")
         }
-
         ## Generate an automatic caption.
         if (!is.null(contrast)) {
             caption <- paste(contrast, collapse = " ")
@@ -73,12 +71,10 @@ NULL
         } else {
             caption <- resultsNames(object)[[1L]]
         }
-
         message(sprintf(
             "%s\nAlpha levels: %s",
             caption, toString(alpha)
         ))
-
         data <- vapply(
             X = alpha,
             FUN = function(alpha) {
@@ -117,7 +113,6 @@ NULL
             FUN.VALUE = integer(4L)
         )
         colnames(data) <- alpha
-
         data
     }
 
