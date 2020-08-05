@@ -175,41 +175,20 @@ setMethod(
 
 
 
-## Updated 2020-08-04.
+## Extra mode: Get the DESeqDataSet, and humanize the sample names. Note that
+## we're not calling `humanize()` here on the DESeqDataSet, because we want to
+## keep the gene identifiers in the row names. Use human-friendly sample names,
+## defined by the `sampleName` column in `colData`. We're using this downstream
+## when joining the normalized counts.
+##
+## Updated 2020-08-05.
 `resultsTables,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        extra = TRUE,
-        alphaThreshold = NULL,
-        lfcShrink = NULL,
-        lfcThreshold = NULL,
-        baseMeanThreshold = NULL,
-        return = c("tbl_df", "DataFrameList")
-    ) {
+    function(object, i, extra = TRUE, ...) {
         validObject(object)
         assert(isFlag(extra))
-        return <- match.arg(return)
-        if (is.null(alphaThreshold)) {
-            alphaThreshold <- alphaThreshold(object)
-        }
-        if (is.null(lfcThreshold)) {
-            lfcThreshold <- lfcThreshold(object)
-        }
-        if (is.null(baseMeanThreshold)) {
-            baseMeanThreshold <- baseMeanThreshold(object)
-        }
-        ## Note that this will use the shrunken LFC values, if slotted.
-        res <- results(object, i = i, lfcShrink = lfcShrink)
-        ## Include extra annotations, if desired.
+        res <- results(object, i = i)
         if (isTRUE(extra)) {
-            ## Get the DESeqDataSet, and humanize the sample names. Note that
-            ## we're not calling `humanize()` here on the DESeqDataSet, because
-            ## we want to keep the gene identifiers in the row names.
             dds <- as(object, "DESeqDataSet")
-            ## Always attempt to use human-friendly sample names, defined by the
-            ## `sampleName` column in `colData`. We're using this downstream
-            ## when joining the normalized counts.
             dds <- convertSampleIDsToNames(dds)
         } else {
             dds <- NULL
@@ -217,10 +196,10 @@ setMethod(
         resultsTables(
             object = res,
             DESeqDataSet = dds,
-            alphaThreshold = alphaThreshold,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold,
-            return = return
+            alphaThreshold = alphaThreshold(object),
+            lfcThreshold = lfcThreshold(object),
+            baseMeanThreshold = baseMeanThreshold(object),
+            ...
         )
     }
 

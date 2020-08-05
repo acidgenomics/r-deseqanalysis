@@ -1,6 +1,6 @@
 #' @name resultsDiff
 #' @inherit acidgenerics::resultsDiff
-#' @note Updated 2020-08-04.
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -102,45 +102,12 @@ setMethod(
 
 
 
-## Updated 2020-08-04.
+## Updated 2020-08-05.
 `resultsDiff,DESeqAnalysis,missing` <-  # nolint
-    function(
-        x,
-        y = NULL,
-        i,
-        j,
-        alphaThreshold = NULL,
-        lfcShrink = NULL,
-        lfcThreshold = NULL,
-        baseMeanThreshold = NULL,
-        ...
-    ) {
-        validObject(x)
-        if (is.null(alphaThreshold)) {
-            alphaThreshold <- alphaThreshold(object)
-        }
-        if (is.null(lfcThreshold)) {
-            lfcThreshold <- lfcThreshold(object)
-        }
-        if (is.null(baseMeanThreshold)) {
-            baseMeanThreshold <- baseMeanThreshold(object)
-        }
-        res1 <- results(
-            object = x,
-            i = i,
-            lfcShrink = lfcShrink
-        )
-        res2 <- results(
-            object = x,
-            i = j,
-            lfcShrink = lfcShrink
-        )
+    function(x, y = NULL, i, j, ...) {
         resultsDiff(
-            x = res1,
-            y = res2,
-            alphaThreshold = alphaThreshold,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold,
+            x = results(x, i = i),
+            y = results(x, i = j),
             ...
         )
     }
