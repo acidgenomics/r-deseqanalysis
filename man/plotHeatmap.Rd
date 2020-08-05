@@ -33,7 +33,7 @@ plotQuantileHeatmap(object, ...)
 Construct a simple heatmap.
 }
 \note{
-Updated 2019-11-07.
+Updated 2020-08-04.
 }
 \section{Scaling}{
 

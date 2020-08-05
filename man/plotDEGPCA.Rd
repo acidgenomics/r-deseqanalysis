@@ -73,7 +73,7 @@ must contain/extend a \code{SummarizedExperiment}.
 }}
 
 \note{
-Updated 2020-07-29.
+Updated 2020-08-04.
 }
 \examples{
 data(deseq)

@@ -42,8 +42,6 @@ NULL
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
-        interestingGroups(dt) <-
-            matchInterestingGroups(dt, interestingGroups)
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(res)
         }

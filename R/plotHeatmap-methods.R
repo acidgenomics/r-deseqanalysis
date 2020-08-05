@@ -1,6 +1,6 @@
 #' @name plotHeatmap
 #' @inherit acidplots::plotHeatmap
-#' @note Updated 2019-11-07.
+#' @note Updated 2020-08-04.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
