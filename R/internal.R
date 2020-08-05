@@ -207,30 +207,31 @@
 
 ## Updated 2020-08-04.
 .thresholdLabel <- function(
+    n,
+    direction,
     alphaThreshold,
     lfcShrinkType,
     lfcThreshold,
     baseMeanThreshold
 ) {
     sep <- "; "
-    x <- paste0("alpha < ", alphaThreshold)
+    if (is.null(n)) {
+        x <- NULL
+    } else {
+        x <- paste0("n = ", n, sep)
+    }
+    if (direction != "both") {
+        x <- paste0(x, "direction: ", direction, sep)
+    }
+    x <- paste0(x, "alpha < ", alphaThreshold)
     if (lfcThreshold > 0L) {
-        x <- paste0(
-            x, sep,
-            "lfc >= ", lfcThreshold
-        )
+        x <- paste0(x, sep, "lfc >= ", lfcThreshold)
     }
     if (lfcShrinkType != "unshrunken") {
-        x <- paste0(
-            x, sep,
-            "lfcShrink: ", lfcShrinkType
-        )
+        x <- paste0(x, sep,"lfcShrink: ", lfcShrinkType)
     }
     if (baseMeanThreshold > 1L) {
-        x <- paste0(
-            x, sep,
-            "baseMean >= ", baseMeanThreshold
-        )
+        x <- paste0(x, sep, "baseMean >= ", baseMeanThreshold)
     }
     x
 }
