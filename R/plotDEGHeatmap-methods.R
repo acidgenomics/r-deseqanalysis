@@ -1,7 +1,3 @@
-## FIXME THIS NEEDS TO SUPPORT INTERESTING GROUPS BETTER.
-
-
-
 #' @name plotDEGHeatmap
 #' @inherit acidgenerics::plotDEGHeatmap
 #' @note Updated 2020-08-04.
