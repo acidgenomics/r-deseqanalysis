@@ -181,8 +181,8 @@ setMethod(
         object,
         i,
         extra = TRUE,
-        lfcShrink = NULL,
         alphaThreshold = NULL,
+        lfcShrink = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         return = c("tbl_df", "DataFrameList")
@@ -190,6 +190,15 @@ setMethod(
         validObject(object)
         assert(isFlag(extra))
         return <- match.arg(return)
+        if (is.null(alphaThreshold)) {
+            alphaThreshold <- alphaThreshold(object)
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- lfcThreshold(object)
+        }
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- baseMeanThreshold(object)
+        }
         ## Note that this will use the shrunken LFC values, if slotted.
         res <- results(object, i = i, lfcShrink = lfcShrink)
         ## Include extra annotations, if desired.
