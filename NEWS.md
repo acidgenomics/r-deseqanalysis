@@ -1,4 +1,4 @@
-## DESeqAnalysis 0.3.0
+## DESeqAnalysis 0.3.0 (2020-08-05)
 
 ### Major changes
 
