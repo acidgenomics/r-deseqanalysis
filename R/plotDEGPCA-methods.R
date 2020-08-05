@@ -1,10 +1,6 @@
-## FIXME THIS NEEDS TO SUPPORT INTERESTING GROUPS BETTER.
-
-
-
 #' @name plotDEGPCA
 #' @inherit acidgenerics::plotDEGPCA
-#' @note Updated 2020-07-29.
+#' @note Updated 2020-08-04.
 #'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams acidplots::plotPCA
@@ -46,6 +42,8 @@ NULL
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
+        interestingGroups(dt) <-
+            matchInterestingGroups(dt, interestingGroups)
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(res)
         }
