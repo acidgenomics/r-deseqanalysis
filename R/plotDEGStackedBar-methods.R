@@ -28,6 +28,7 @@ NULL
     function(
         object,
         alphaThreshold = NULL,
+        lfcShrink = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         fill,
@@ -35,6 +36,16 @@ NULL
     ) {
         validObject(object)
         assert(isFlag(flip))
+        if (is.null(alphaThreshold)) {
+            alphaThreshold <- alphaThreshold(object)
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- lfcThreshold(object)
+        }
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- baseMeanThreshold(object)
+        }
+        lfcShrinkType <- lfcShrinkType(object)
         mat <- degPerContrast(
             object = object,
             alphaThreshold = alphaThreshold,
@@ -72,7 +83,13 @@ NULL
             labs(
                 x = "contrast",
                 y = "differentially expressed genes",
-                fill = "direction"
+                fill = "direction",
+                subtitle = .thresholdLabel(
+                    alphaThreshold = alphaThreshold,
+                    lfcShrinkType = lfcShrinkType,
+                    lfcThreshold = lfcThreshold,
+                    baseMeanThreshold = baseMeanThreshold
+                )
             )
         if (isTRUE(flip)) {
             p <- acid_coord_flip(p)
