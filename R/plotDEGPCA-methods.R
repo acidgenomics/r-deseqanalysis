@@ -1,3 +1,7 @@
+## FIXME THIS NEEDS TO SUPPORT INTERESTING GROUPS BETTER.
+
+
+
 #' @name plotDEGPCA
 #' @inherit acidgenerics::plotDEGPCA
 #' @note Updated 2020-07-29.
@@ -51,6 +55,7 @@ NULL
         if (is.null(baseMeanThreshold)) {
             baseMeanThreshold <- baseMeanThreshold(res)
         }
+        lfcShrinkType <- lfcShrinkType(res)
         assert(
             is(res, "DESeqResults"),
             is(dt, "DESeqTransform"),
@@ -73,32 +78,19 @@ NULL
         }
         ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
-        ## Titles.
-        title <- contrastName(res)
-        sep <- "; "
-        subtitle <- paste0(
-            length(deg), " genes", sep,
-            "direction: ", direction, sep,
-            "alpha < ", alphaThreshold
-        )
-        if (lfcThreshold > 0L) {
-            subtitle <- paste0(
-                subtitle, sep,
-                "lfc >=", lfcThreshold
-            )
-        }
-        if (baseMeanThreshold > 0L) {
-            subtitle <- paste0(
-                subtitle, sep,
-                "baseMean >=", baseMeanThreshold
-            )
-        }
         ## Using SummarizedExperiment method here.
         args <- list(
             object = as(dt, "RangedSummarizedExperiment"),
             ntop = Inf,
-            title = title,
-            subtitle = subtitle
+            title = contrastName(res),
+            subtitle = .thresholdLabel(
+                n = length(deg),
+                direction = direction,
+                alphaThreshold = alphaThreshold,
+                lfcShrinkType = lfcShrinkType,
+                lfcThreshold = lfcThreshold,
+                baseMeanThreshold = baseMeanThreshold
+            )
         )
         args <- c(args, list(...))
         do.call(what = plotPCA, args = args)
