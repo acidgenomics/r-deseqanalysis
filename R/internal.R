@@ -79,7 +79,7 @@
         table = resultsNames
     )
     assert(isInt(coef), !is.na(coef))
-    cli_alert_dl(
+    cli_dl(
         c("contrast" = resultsNames[[coef]]),
         c("coef" = coef)
     )
