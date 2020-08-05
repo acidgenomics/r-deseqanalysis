@@ -19,17 +19,7 @@ resultsDiff(x, y, ...)
   direction = c("both", "up", "down")
 )
 
-\S4method{resultsDiff}{DESeqAnalysis,missingOrNULL}(
-  x,
-  y = NULL,
-  i,
-  j,
-  alphaThreshold = NULL,
-  lfcShrink = NULL,
-  lfcThreshold = NULL,
-  baseMeanThreshold = NULL,
-  ...
-)
+\S4method{resultsDiff}{DESeqAnalysis,missingOrNULL}(x, y = NULL, i, j, ...)
 }
 \arguments{
 \item{x}{Object.}
@@ -75,10 +65,6 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
 
-\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
-Use shrunken log2 fold change (LFC) values.
-If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
-
 \item{...}{Additional arguments.}
 }
 \value{
@@ -94,7 +80,7 @@ Relative difference of results
 }}
 
 \note{
-Updated 2020-08-04.
+Updated 2020-08-05.
 }
 \examples{
 data(deseq)
