@@ -226,26 +226,6 @@ NULL
             )
 
         ## Volcano plot --------------------------------------------------------
-        sep <- "; "
-        subtitle <- paste0("alpha < ", alphaThreshold)
-        if (lfcThreshold > 0L) {
-            subtitle <- paste0(
-                subtitle, sep,
-                "lfc >= ", lfcThreshold
-            )
-        }
-        if (lfcShrinkType != "unshrunken") {
-            subtitle <- paste0(
-                subtitle, sep,
-                "lfcShrink: ", lfcShrinkType
-            )
-        }
-        if (baseMeanThreshold > 1L) {
-            subtitle <- paste0(
-                subtitle, sep,
-                "baseMean >= ", baseMeanThreshold
-            )
-        }
         p <- ggplot(
             data = as_tibble(data, rownames = NULL),
             mapping = aes(
@@ -269,7 +249,12 @@ NULL
             guides(color = FALSE) +
             labs(
                 title = contrastName(object),
-                subtitle = subtitle,
+                subtitle = .thresholdLabel(
+                    alphaThreshold = alphaThreshold,
+                    lfcShrinkType = lfcShrinkType,
+                    lfcThreshold = lfcThreshold,
+                    baseMeanThreshold = baseMeanThreshold
+                ),
                 x = "log2 fold change",
                 y = "-log10 adj p value"
             )
