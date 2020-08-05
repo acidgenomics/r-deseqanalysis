@@ -104,7 +104,7 @@ setMethod(
 
 
 
-## Updated 2020-08-04.
+## Updated 2020-08-05.
 `plotDEGPCA,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -113,24 +113,25 @@ setMethod(
         ...
     ) {
         validObject(object)
-        assert(
-            isScalar(i),
-            isFlag(contrastSamples)
-        )
+        assert(isFlag(contrastSamples))
         ## Note that LFC values aren't used for this plot, just the DEGs, which
         ## are used to subset the DESeqTransform counts.
         res <- results(object, i = i, lfcShrink = FALSE)
-        ## Using the variance-stabilized counts for visualization.
         dt <- as(object, "DESeqTransform")
-        ## Subset the DESeqTransform, if necessary.
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, i = i)
             assert(isSubset(samples, colnames(dt)))
             dt <- dt[, samples, drop = FALSE]
             dt <- droplevels(dt)
         }
-        ## Passing through to DESeqResults/DESeqTransform method here.
-        plotDEGPCA(object = res, DESeqTransform = dt, ...)
+        plotDEGPCA(
+            object = res,
+            DESeqTransform = dt,
+            alphaThreshold = alphaThreshold(object),
+            lfcThreshold = lfcThreshold(object),
+            baseMeanThreshold = baseMeanThreshold(object),
+            ...
+        )
     }
 
 
