@@ -93,16 +93,17 @@ sampleData(object)
 plotDEGStackedBar(object)
 ```
 
-```{r plot-deg-upset}
-ggsave(
-    filename = file.path(
+```{r plot-deg-upset, include=FALSE}
+pdf(
+    file = file.path(
         params$output_dir,
         "plot-deg-upset.pdf"
     ),
-    width = 10,
-    height = 10,
-    plot = plotDEGUpset(object)
+    width = 15,
+    height = 10
 )
+plotDEGUpset(object)
+dev.off()
 ```
 
 # MA plot {.tabset}
