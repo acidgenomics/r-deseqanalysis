@@ -106,17 +106,9 @@ setMethod(
 
 ## Updated 2020-08-05.
 `plotDEGPCA,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        contrastSamples = FALSE,
-        ...
-    ) {
-        validObject(object)
+    function(object, i, contrastSamples = FALSE, ...) {
         assert(isFlag(contrastSamples))
-        ## Note that LFC values aren't used for this plot, just the DEGs, which
-        ## are used to subset the DESeqTransform counts.
-        res <- results(object, i = i, lfcShrink = FALSE)
+        res <- results(object, i = i)
         dt <- as(object, "DESeqTransform")
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, i = i)
