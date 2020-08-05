@@ -1,6 +1,6 @@
 #' @name plotDEGHeatmap
 #' @inherit acidgenerics::plotDEGHeatmap
-#' @note Updated 2020-08-04.
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidplots::plotHeatmap
 #' @inheritParams acidroxygen::params
@@ -124,51 +124,25 @@ setMethod(
 
 
 
-## Updated 2020-08-04.
+## Updated 2020-08-05.
 `plotDEGHeatmap,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        contrastSamples = FALSE,
-        alphaThreshold = NULL,
-        lfcShrink = NULL,
-        lfcThreshold = NULL,
-        baseMeanThreshold = NULL,
-        ...
-    ) {
+    function(object, i, contrastSamples = FALSE, ...) {
         validObject(object)
-        assert(
-            isScalar(i),
-            isFlag(contrastSamples)
-        )
-        if (is.null(alphaThreshold)) {
-            alphaThreshold <- alphaThreshold(object)
-        }
-        if (is.null(lfcThreshold)) {
-            lfcThreshold <- lfcThreshold(object)
-        }
-        if (is.null(baseMeanThreshold)) {
-            baseMeanThreshold <- baseMeanThreshold(object)
-        }
-        ## Note use of `res` here instead of `results`, since we need to check
-        ## the original `results` input below in `contrastSamples()` call.
-        res <- results(object, i = i, lfcShrink = lfcShrink)
-        ## We're using the variance-stabilized counts for visualization here.
+        assert(isFlag(contrastSamples))
+        res <- results(object, i = i)
         dt <- as(object, "DESeqTransform")
-        ## Subset the DESeqTransform, if necessary.
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, i = i)
             assert(isSubset(samples, colnames(dt)))
             dt <- dt[, samples, drop = FALSE]
             dt <- droplevels(dt)
         }
-        ## Passing to DESeqResults/DESeqTransform method.
         plotDEGHeatmap(
             object = res,
             DESeqTransform = dt,
-            alphaThreshold = alphaThreshold,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold,
+            alphaThreshold = alphaThreshold(object),
+            lfcThreshold = lfcThreshold(object),
+            baseMeanThreshold = baseMeanThreshold(object),
             ...
         )
     }
