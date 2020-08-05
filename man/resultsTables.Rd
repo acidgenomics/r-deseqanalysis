@@ -14,8 +14,7 @@ resultsTables(object, ...)
   alphaThreshold = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
-  return = c("tbl_df", "DataFrameList"),
-  ...
+  return = c("tbl_df", "DataFrameList")
 )
 
 \S4method{resultsTables}{DESeqAnalysis}(object, i, extra = TRUE, ...)
@@ -46,8 +45,6 @@ Uses \link[base:match.arg]{match.arg()}.
 \item \code{tbl_df}: Returns \code{list} of \code{tbl_df} containing \code{"rowname"} column.
 }}
 
-\item{...}{Additional arguments.}
-
 \item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
 \code{character} vectors, empty (\code{missing}), or \code{NULL}.
 
@@ -56,6 +53,8 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 
 \item{extra}{\code{logical(1)}.
 Include row data and normalized counts from internal \code{DESeqDataSet}.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{list}.
@@ -70,7 +69,11 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 \code{all} table), are arranged by adjusted \emph{P} value.
 }
 \note{
-Updated 2020-08-04.
+This function is used in the bcbioRNASeq F1000 paper. Supported
+arguments have changed significantly from the bcbioRNASeq v0.2 release
+series. Previous formals:
+
+Updated 2020-08-05.
 
 It is generally recommended to not apply post hoc log fold change
 cutoffs. If a specific effect size is desired, instead run

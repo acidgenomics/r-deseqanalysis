@@ -37,7 +37,7 @@ Flip x and y axes. Recommended for plots containing many samples.}
 Stacked bar plot of DEGs
 }
 \note{
-Updated 2020-08-04.
+Updated 2020-08-05.
 }
 \examples{
 data(deseq)
