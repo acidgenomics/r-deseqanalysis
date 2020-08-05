@@ -128,7 +128,7 @@
 <span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='kw'>DESeqDataSet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>)
 
 <span class='co'># S4 method for list</span>
 <span class='fu'>topTables</span>(<span class='no'>object</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10L</span>, <span class='kw'>contrast</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -156,12 +156,6 @@ Number of genes (per direction) to report.</p></td>
 <p>For more information:</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/help.html'>help</a></span>(<span class='kw'>topic</span> <span class='kw'>=</span> <span class='st'>"Extract"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"base"</span>)</pre></td>
     </tr>
     <tr>
-      <th>lfcShrink</th>
-      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> or <code>NULL</code>.
-Use shrunken log2 fold change (LFC) values.
-If <code>NULL</code>, inherits value defined in <code><a href='lfcShrink.html'>lfcShrink()</a></code>.</p></td>
-    </tr>
-    <tr>
       <th>contrast</th>
       <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> or <code>NULL</code>.
 Contrast name.</p></td>
@@ -187,15 +181,34 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
 </ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2020-08-04.</p>
+    <p>Updated 2020-08-05.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='error'>Error in .local(object, ...): Assert failure.</span>
-#&gt; <span class='error'>[1] isSubset(setdiff(names(call), ""), names(formals())) is not TRUE.</span>
-#&gt; <span class='error'>Cause: 'setdiff(names(call), "")' has elements not in 'names(formals())': lfcShrink</span></div><div class='input'>
+<span class='fu'>topTables</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 38 differentially expressed genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 24 upregulated genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 14 downregulated genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; 
+#&gt; 
+#&gt; Table: condition_B_vs_A (upregulated)
+#&gt; 
+#&gt; |        | baseMean|lfc  |padj     |broadClass |geneName |description                                        |
+#&gt; |:-------|--------:|:----|:--------|:----------|:--------|:--------------------------------------------------|
+#&gt; |gene338 |      236|2.89 |3.79e-09 |coding     |RNF14    |ring finger protein 14                             |
+#&gt; |gene214 |      474|2.00 |6.73e-07 |coding     |AASS     |aminoadipate-semialdehyde synthase                 |
+#&gt; |gene028 |       83|2.60 |3.52e-06 |coding     |HECW1    |HECT, C2 and WW domain containing E3 ubiquitin ... |
+#&gt; |gene112 |       76|2.11 |9.52e-05 |coding     |LAMP2    |lysosomal associated membrane protein 2            |
+#&gt; |gene465 |      117|1.88 |9.52e-05 |coding     |IFNGR1   |interferon gamma receptor 1                        |
+#&gt; 
+#&gt; 
+#&gt; Table: condition_B_vs_A (downregulated)
+#&gt; 
+#&gt; |        | baseMean|lfc   |padj     |broadClass |geneName |description                                        |
+#&gt; |:-------|--------:|:-----|:--------|:----------|:--------|:--------------------------------------------------|
+#&gt; |gene380 |       61|-3.09 |6.73e-07 |coding     |WWTR1    |WW domain containing transcription regulator 1     |
+#&gt; |gene401 |      261|-1.96 |9.52e-05 |coding     |MNAT1    |MNAT1 component of CDK activating kinase           |
+#&gt; |gene494 |       27|-3.36 |9.52e-05 |coding     |EIPR1    |EARP complex and GARP complex interacting prote... |
+#&gt; |gene119 |       83|-1.74 |2.92e-04 |coding     |TMEM98   |transmembrane protein 98                           |
+#&gt; |gene232 |        6|-6.72 |2.96e-04 |coding     |CSDE1    |cold shock domain containing E1                    |</div><div class='input'>
 <span class='co'>## DESeqResults 'resultsTables()' list ====</span>
 <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='input'><span class='no'>resTbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='resultsTables.html'>resultsTables</a></span>(<span class='no'>res</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"tbl_df"</span>)</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 38 differentially expressed genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 24 upregulated genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 14 downregulated genes (alpha &lt; 0.01)</span></div><div class='input'><span class='fu'>topTables</span>(<span class='no'>resTbl</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>)</div><div class='output co'>#&gt; 
 #&gt; 

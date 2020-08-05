@@ -168,7 +168,10 @@ too error-prone.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>contrastSamples</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='error'>Error in .local(object, ...): unused argument (lfcShrink = FALSE)</span></div></pre>
+<span class='fu'>contrastSamples</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>Contrast: condition_B_vs_A</span></div><div class='output co'>#&gt; <span class='message'>Factor column: condition</span></div><div class='output co'>#&gt; <span class='message'>Numerator samples: sample07, sample08, sample09, sample10, sample11,</span>
+#&gt; <span class='message'>  sample12</span></div><div class='output co'>#&gt; <span class='message'>Denominator samples: sample01, sample02, sample03, sample04,</span>
+#&gt; <span class='message'>  sample05, sample06</span></div><div class='output co'>#&gt;  [1] "sample01" "sample02" "sample03" "sample04" "sample05" "sample06"
+#&gt;  [7] "sample07" "sample08" "sample09" "sample10" "sample11" "sample12"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

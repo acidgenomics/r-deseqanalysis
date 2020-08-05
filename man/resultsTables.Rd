@@ -69,10 +69,6 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 \code{all} table), are arranged by adjusted \emph{P} value.
 }
 \note{
-This function is used in the bcbioRNASeq F1000 paper. Supported
-arguments have changed significantly from the bcbioRNASeq v0.2 release
-series. Previous formals:
-
 Updated 2020-08-05.
 
 It is generally recommended to not apply post hoc log fold change
