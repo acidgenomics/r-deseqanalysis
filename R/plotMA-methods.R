@@ -185,12 +185,6 @@ NULL
         floor <- min(floor(log10BaseMean))
         ceiling <- max(ceiling(log10BaseMean))
         xBreaks <- 10L ^ seq(from = floor, to = ceiling, by = 1L)
-        subtitle <- .thresholdLabel(
-            alphaThreshold = alphaThreshold,
-            lfcShrinkType = lfcShrinkType,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold
-        )
         p <- ggplot(
             data = as_tibble(data, rownames = NULL),
             mapping = aes(
@@ -219,7 +213,12 @@ NULL
             guides(color = FALSE) +
             labs(
                 title = contrastName(object),
-                subtitle = subtitle,
+                subtitle = .thresholdLabel(
+                    alphaThreshold = alphaThreshold,
+                    lfcShrinkType = lfcShrinkType,
+                    lfcThreshold = lfcThreshold,
+                    baseMeanThreshold = baseMeanThreshold
+                ),
                 x = "mean expression across all samples",
                 y = "log2 fold change"
             )
