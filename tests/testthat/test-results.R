@@ -20,15 +20,3 @@ test_that("Match failure", {
         regexp = "XXX"
     )
 })
-
-test_that("lfcShrink results requested, but not slotted", {
-    object <- deseq
-    object@lfcShrink <- list()
-    expect_true(validObject(object))
-    x <- results(object, i = 1L, lfcShrink = FALSE)
-    expect_s4_class(x, "DESeqResults")
-    expect_error(
-        object = results(object, i = 1L, lfcShrink = TRUE),
-        regexp = "lfcShrink"
-    )
-})

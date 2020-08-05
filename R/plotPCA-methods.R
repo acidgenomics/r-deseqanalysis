@@ -1,6 +1,6 @@
 #' @name plotPCA
 #' @inherit acidplots::plotPCA
-#' @note Updated 2019-09-17.
+#' @note Updated 2020-08-04.
 #'
 #' @details Passes to `SummarizedExperiment` defined in acidplots package.
 #'
@@ -9,10 +9,6 @@
 #'
 #' ## DESeqAnalysis ====
 #' plotPCA(deseq)
-#'
-#' ## DESeqTransform ====
-#' dt <- as(deseq, "DESeqTransform")
-#' plotPCA(dt)
 NULL
 
 

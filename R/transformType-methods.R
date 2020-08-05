@@ -1,17 +1,22 @@
-#' Variance-stabilizing transformation type
-#'
 #' @name transformType
-#' @note Updated 2019-08-20.
-#'
-#' @inheritParams acidroxygen::params
-#'
-#' @return `character(1)`.
-#'
+#' @inherit acidgenerics::transformType
+#' @note Updated 2020-08-04.
+#' @param ... Additional arguments.
 #' @seealso [DESeq2::DESeqTransform()].
-#'
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' transformType(deseq)
+NULL
+
+
+
+#' @rdname transformType
+#' @name transformType
+#' @importFrom acidgenerics transformType
+#' @usage transformType(object, ...)
+#' @export
 NULL
 
 

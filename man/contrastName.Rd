@@ -12,7 +12,7 @@ contrastName(object, ...)
 
 contrastName(object, ...) <- value
 
-\S4method{contrastName}{DESeqResults}(object, format = c("resultsNames", "title"), useStash = TRUE)
+\S4method{contrastName}{DESeqResults}(object, .format = c("resultsNames", "title"), .useStash = TRUE)
 
 \S4method{contrastName}{DESeqResults,character}(object) <- value
 
@@ -21,7 +21,7 @@ contrastName(object, ...) <- value
 \arguments{
 \item{object}{Object.}
 
-\item{format}{\code{character(1)}.
+\item{.format}{\code{character(1)}.
 Name format to return:
 \itemize{
 \item \code{resultsNames}: Attempt to matching the conventions in
@@ -29,7 +29,7 @@ Name format to return:
 \item \code{title}: Human readable, for plot titles and/or table captions.
 }}
 
-\item{useStash}{\code{logical(1)}.
+\item{.useStash}{\code{logical(1)}.
 Check for \code{contrastName} metadata stash in \code{DESeqResults} object. Intended
 for use with \code{DESeqAnalysis} methods.}
 
@@ -51,14 +51,10 @@ Contrast name.
 Contrast name
 }
 \note{
-Updated 2019-11-08.
+Updated 2020-08-04.
 }
 \examples{
 data(deseq)
-
-## DESeqResults ====
-object <- as(deseq, "DESeqResults")
-contrastName(object)
 
 ## DESeqAnalysis ====
 contrastName(deseq, i = 1L)

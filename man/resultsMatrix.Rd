@@ -58,6 +58,8 @@ Updated 2019-11-12.
 }
 \examples{
 data(deseq)
+
+## DESeqAnalysis ====
 x <- resultsMatrix(deseq)
 head(x)
 }

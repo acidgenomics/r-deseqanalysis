@@ -1,6 +1,6 @@
 #' @name combine
 #' @inherit BiocGenerics::combine return title
-#' @note Updated 2020-01-03.
+#' @note Updated 2020-08-04.
 #'
 #' @details
 #' Combines the results from 2 separate `DESeqAnalysis` objects. Note that the
@@ -15,6 +15,7 @@
 #' @examples
 #' data(deseq)
 #'
+#' ## DESeqAnalysis ====
 #' x <- deseq
 #' y <- deseq
 #' resultsNames(x) <- paste0("x_", resultsNames(x))
@@ -35,49 +36,25 @@ NULL
 
 
 
-## Updated 2020-01-03.
+## Updated 2020-08-04.
 `combine,DESeqAnalysis` <-  # nolint
     function(x, y) {
         validObject(x)
         validObject(y)
         assert(
             areDisjointSets(resultsNames(x), resultsNames(y)),
-            identical(
-                x = x@data@assays,
-                y = y@data@assays
-            ),
-            identical(
-                x = x@data@colData,
-                y = y@data@colData
-            ),
-            identical(
-                x = x@data@design,
-                y = y@data@design
-            ),
-            identical(
-                x = x@data@elementMetadata,
-                y = y@data@elementMetadata
-            ),
-            identical(
-                x = x@data@metadata,
-                y = y@data@metadata
-            ),
-            identical(
-                x = x@data@rowRanges,
-                y = y@data@rowRanges
-            ),
-            identical(
-                x = x@transform,
-                y = y@transform
-            )
+            identical(x@data@assays, y@data@assays),
+            identical(x@data@colData, y@data@colData),
+            identical(x@data@design, y@data@design),
+            identical(x@data@elementMetadata, y@data@elementMetadata),
+            identical(x@data@metadata, y@data@metadata),
+            identical(x@data@rowRanges, y@data@rowRanges),
+            identical(x@transform, y@transform)
         )
-        message(paste(
-            "Combining results into single DESeqAnalysis object.",
-            "x:",
-            printString(resultsNames(x)),
-            "y:",
-            printString(resultsNames(y)),
-            sep = "\n"
+        cli_alert_info("Combining results into single DESeqAnalysis object.")
+        cli_dl(c(
+            "x" = printString(resultsNames(x)),
+            "y" = printString(resultsNames(y))
         ))
         data <- x@data
         transform <- x@transform
@@ -88,12 +65,18 @@ NULL
         } else {
             lfcShrink <- c(x@lfcShrink, y@lfcShrink)
         }
-        DESeqAnalysis(
+        out <- DESeqAnalysis(
             data = data,
             transform = transform,
             results = results,
             lfcShrink = lfcShrink
         )
+        if (!identical(names(metadata(x)), names(metadata(out)))) {
+            diff <- setdiff(names(metadata(x)), names(metadata(out)))
+            meta <- c(metadata(out), metadata(x)[diff])
+            metadata(out) <- meta
+        }
+        out
     }
 
 

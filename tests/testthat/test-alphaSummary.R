@@ -2,7 +2,7 @@ context("alphaSummary")
 
 test_that("Default, no contrast specified.", {
     object <- alphaSummary(
-        object = dds,
+        object = deseq,
         contrast = c("condition", "B", "A")
     )
     expect_is(object, "matrix")
@@ -37,16 +37,16 @@ test_that("Default, no contrast specified.", {
 test_that("Contrast vector or name", {
     expect_identical(
         object = alphaSummary(
-            object = dds,
+            object = deseq,
             name = "condition_B_vs_A"
         ),
         expected = alphaSummary(
-            object = dds,
+            object = deseq,
             contrast = c("condition", "B", "A")
         )
     )
     expect_error(
-        alphaSummary(dds, contrast = "aaa", name = "bbb"),
+        alphaSummary(deseq, contrast = "aaa", name = "bbb"),
         "Specify either 'contrast' or 'name'."
     )
 })

@@ -1,6 +1,6 @@
 #' @name plotHeatmap
 #' @inherit acidplots::plotHeatmap
-#' @note Updated 2019-11-07.
+#' @note Updated 2020-08-04.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -43,7 +43,10 @@ NULL
 `plotHeatmap,DESeqAnalysis` <-  # nolint
     function(object, ...) {
         validObject(object)
-        message("Using DESeqTransform ", transformType(object), " counts.")
+        cli_alert_info(paste0(
+            "Using {.var DESeqTransform} ",
+            "{.var ", transformType(object), "} counts."
+        ))
         dt <- as(object, "DESeqTransform")
         plotHeatmap(dt, ...)
     }
@@ -63,7 +66,10 @@ setMethod(
 `plotCorrelationHeatmap,DESeqAnalysis` <-  # nolint
     function(object, ...) {
         validObject(object)
-        message("Using DESeqTransform ", transformType(object), " counts.")
+        cli_alert_info(paste0(
+            "Using {.var DESeqTransform} ",
+            "{.var ", transformType(object), "} counts."
+        ))
         dt <- as(object, "DESeqTransform")
         plotCorrelationHeatmap(dt, ...)
     }
@@ -83,7 +89,10 @@ setMethod(
 `plotQuantileHeatmap,DESeqAnalysis` <-  # nolint
     function(object, ...) {
         validObject(object)
-        message("Using DESeqTransform ", transformType(object), " counts.")
+        cli_alert_info(paste0(
+            "Using {.var DESeqTransform} ",
+            "{.var ", transformType(object), "} counts."
+        ))
         dt <- as(object, "DESeqTransform")
         plotQuantileHeatmap(dt, ...)
     }

@@ -18,8 +18,9 @@
 #'   contrasts (e.g. interaction effect).
 #' @param i `character(1)` or `integer(1)`.
 #'   `DESeqResults` contrast name or position in `results` slot.
-#' @param lfcShrink `logical(1)`.
+#' @param lfcShrink `logical(1)` or `NULL`.
 #'   Use shrunken log2 fold change (LFC) values.
+#'   If `NULL`, inherits value defined in [lfcShrink()].
 #' @param name `character(1)`.
 #'   Name of the individual effect (coefficient) for building a results table.
 #'   Use this argument rather than `contrast` for continuous variables.

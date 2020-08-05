@@ -1,7 +1,7 @@
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
-#' @inherit BiocGenerics::plotMA
-#' @note Updated 2020-07-29.
+#' @inherit BiocGenerics::plotMA title
+#' @note Updated 2020-08-05.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual
@@ -19,9 +19,9 @@
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'
-#' @return `ggplot`.
-#'
 #' @seealso [DESeq2::plotMA()].
+#'
+#' @return `ggplot`.
 #'
 #' @examples
 #' data(deseq)
@@ -65,11 +65,11 @@ NULL
 
 
 
-## Updated 2020-07-29.
+## Updated 2020-08-04.
 `plotMA,DESeqResults` <-  # nolint
     function(
         object,
-        alpha = NULL,
+        alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         genes = NULL,
@@ -82,16 +82,15 @@ NULL
             nonsignificant = acidplots::lightPalette[["gray"]]
         ),
         pointSize = 2L,
-        pointAlpha = 0.8,
-        return = c("ggplot", "DataFrame")
+        pointAlpha = 0.8
     ) {
         validObject(object)
         baseMeanCol <- "baseMean"
         lfcCol <- "log2FoldChange"
         if ("svalue" %in% names(object)) {
-            testCol <- "svalue"  # nocov
+            alphaCol <- "svalue"  # nocov
         } else {
-            testCol <- "padj"
+            alphaCol <- "padj"
         }
         ## Note that `lfcShrink()` doesn't return `stat` column.
         if ("stat" %in% names(object)) {
@@ -99,23 +98,27 @@ NULL
         } else {
             rankCol <- lfcCol
         }
-        if (is.null(alpha)) {
-            alpha <- metadata(object)[["alpha"]]
+        if (is.null(alphaThreshold)) {
+            alphaThreshold <- alphaThreshold(object)
         }
         if (is.null(lfcThreshold)) {
-            lfcThreshold <- metadata(object)[["lfcThreshold"]]
+            lfcThreshold <- lfcThreshold(object)
         }
-        lfcShrinkType <- lfcShrinkType(object)
         if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- baseMeanThreshold(object)
+        }
+        ## We're applying log10 transformation on axis, so gate the minimum.
+        if (baseMeanThreshold < 1L) {
             baseMeanThreshold <- 1L
         }
+        lfcShrinkType <- lfcShrinkType(object)
         assert(
-            isAlpha(alpha),
+            isAlpha(alphaThreshold),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
             isString(lfcShrinkType),
             isNumber(baseMeanThreshold),
-            isNonNegative(baseMeanThreshold),
+            isPositive(baseMeanThreshold),
             isAny(genes, classes = c("character", "NULL")),
             isAny(gene2symbol, classes = c("Gene2Symbol", "NULL")),
             isCharacter(pointColor),
@@ -130,7 +133,6 @@ NULL
             isNonNegative(ntop)
         )
         direction <- match.arg(direction)
-        return <- match.arg(return)
         ## Genes or ntop, but not both.
         if (!is.null(genes) && ntop > 0L) {
             stop("Specify either 'genes' or 'ntop'.")
@@ -138,7 +140,7 @@ NULL
         data <- as(object, "DataFrame")
         data <- camelCase(data)
         assert(isSubset(
-            x = c(baseMeanCol, lfcCol, rankCol, testCol),
+            x = c(baseMeanCol, lfcCol, rankCol, alphaCol),
             y = colnames(data)
         ))
         ## Remove genes with very low expression.
@@ -151,17 +153,14 @@ NULL
         data[["rank"]] <- seq_len(nrow(data))
         data <- .addIsDECol(
             data = data,
-            testCol = testCol,
-            alpha = alpha,
+            alphaCol = alphaCol,
+            alphaThreshold = alphaThreshold,
             lfcCol = lfcCol,
             lfcThreshold = lfcThreshold,
             baseMeanCol = baseMeanCol,
             baseMeanThreshold = baseMeanThreshold
         )
-        assert(isSubset(
-            x = c("isDE", "rank", "rankScore"),
-            y = colnames(data)
-        ))
+        assert(isSubset(c("isDE", "rank", "rankScore"), colnames(data)))
         ## Apply directional filtering, if desired.
         if (direction == "up") {
             keep <- which(data[[lfcCol]] > 0L)
@@ -172,39 +171,14 @@ NULL
         }
         ## Check for no genes passing cutoffs and early return.
         if (!hasRows(data)) {
-            message("No genes passed cutoffs.")
+            cli_alert_warning("No genes passed cutoffs.")
             return()
         }
-        ## Early return the data, if desired.
-        if (identical(return, "DataFrame")) {
-            return(data)
-        }
-
-        ## MA plot -------------------------------------------------------------
+        ## MA plot.
         log10BaseMean <- log10(data[["baseMean"]])
         floor <- min(floor(log10BaseMean))
         ceiling <- max(ceiling(log10BaseMean))
         xBreaks <- 10L ^ seq(from = floor, to = ceiling, by = 1L)
-        sep <- "; "
-        subtitle <- paste0("alpha: ", alpha)
-        if (lfcThreshold > 0L) {
-            subtitle <- paste0(
-                subtitle, sep,
-                "lfc >= ", lfcThreshold
-            )
-        }
-        if (lfcShrinkType != "unshrunken") {
-            subtitle <- paste0(
-                subtitle, sep,
-                "lfcShrink: ", lfcShrinkType
-            )
-        }
-        if (baseMeanThreshold > 1L) {
-            subtitle <- paste0(
-                subtitle, sep,
-                "baseMean >= ", baseMeanThreshold
-            )
-        }
         p <- ggplot(
             data = as_tibble(data, rownames = NULL),
             mapping = aes(
@@ -233,11 +207,17 @@ NULL
             guides(color = FALSE) +
             labs(
                 title = contrastName(object),
-                subtitle = subtitle,
+                subtitle = .thresholdLabel(
+                    n = sum(data[["isDE"]] != 0L),
+                    direction = direction,
+                    alphaThreshold = alphaThreshold,
+                    lfcShrinkType = lfcShrinkType,
+                    lfcThreshold = lfcThreshold,
+                    baseMeanThreshold = baseMeanThreshold
+                ),
                 x = "mean expression across all samples",
                 y = "log2 fold change"
             )
-
         ## Color the significant points.
         ## Note that we're using direction-specific coloring by default.
         if (isCharacter(pointColor)) {
@@ -250,8 +230,7 @@ NULL
                     )
                 )
         }
-
-        ## Gene text labels ----------------------------------------------------
+        ## Gene text labels.
         ## Get the genes to visualize when `ntop` is declared.
         if (isTRUE(ntop > 0L)) {
             assert(
@@ -291,8 +270,6 @@ NULL
                     )
                 )
         }
-
-        ## Return --------------------------------------------------------------
         p
     }
 
@@ -308,42 +285,20 @@ setMethod(
 
 
 
-## Updated 2019-11-19.
+## Updated 2020-08-05.
 `plotMA,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        lfcShrink = TRUE,
-        ...
-    ) {
-        ## nocov start
-        call <- match.call()
-        ## results
-        if ("results" %in% names(call)) {
-            stop("'results' is defunct in favor of 'i'.")
-        }
-        rm(call)
-        ## nocov end
-        validObject(object)
-        assert(
-            isScalar(i),
-            isFlag(lfcShrink)
-        )
-        ## Return `NULL` for objects that don't contain gene symbol mappings.
-        gene2symbol <- tryCatch(
-            expr = suppressMessages({
-                Gene2Symbol(as(object, "DESeqDataSet"))
-            }),
-            error = function(e) NULL
-        )
-        ## Handoff to DESeqResults method.
+    function(object, i, ...) {
         plotMA(
-            object = results(
-                object = object,
-                i = i,
-                lfcShrink = lfcShrink
+            object = results(object, i = i),
+            gene2symbol = tryCatch(
+                expr = suppressMessages({
+                    Gene2Symbol(as(object, "DESeqDataSet"))
+                }),
+                error = function(e) NULL
             ),
-            gene2symbol = gene2symbol,
+            alphaThreshold = alphaThreshold(object),
+            lfcThreshold = lfcThreshold(object),
+            baseMeanThreshold = baseMeanThreshold(object),
             ...
         )
     }

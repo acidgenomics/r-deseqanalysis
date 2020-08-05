@@ -1,6 +1,6 @@
 #' @name resultsTables
 #' @inherit acidgenerics::resultsTables
-#' @note Updated 2019-12-18.
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -64,64 +64,19 @@ NULL
 
 
 
-## bcbioRNASeq v0.2 release series defaults:
-## https://github.com/hbc/bcbioRNASeq/blob/v0.2.10/R/resultsTables-methods.R
-
-## Note that this method is used in bcbioRNASeq F1000 paper.
-## Updated 2019-11-12.
+## Updated 2020-08-05.
 `resultsTables,DESeqResults` <-  # nolint
     function(
         object,
         DESeqDataSet = NULL,  # nolint
-        alpha = NULL,
+        alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
-        return = c("tbl_df", "DataFrameList"),
-        ...
+        return = c("tbl_df", "DataFrameList")
     ) {
         validObject(object)
         assert(isAny(DESeqDataSet, c("DESeqDataSet", "NULL")))
         return <- match.arg(return)
-
-        ## Legacy bcbioRNASeq arguments ----------------------------------------
-        ## nocov start
-        call <- match.call()
-        if (isSubset("dir", names(call))) {
-            stop(
-                "'dir' argument is defunct.\n",
-                "Use 'export()' instead."
-            )
-        }
-        if (isSubset("dropboxDir", names(call))) {
-            stop(
-                "'dropboxDir' argument is defunct.\n",
-                "Use 'copyToDropbox()' instead."
-            )
-        }
-        if (isSubset("headerLevel", names(call))) {
-            stop("'headerLevel' argument is defunct.")
-        }
-        if (isSubset("rdsToken", names(call))) {
-            stop(
-                "'rdsToken' argument is defunct.\n",
-                "Use 'copyToDropbox()' instead."
-            )
-        }
-        if (isSubset("summary", names(call))) {
-            stop("'summary' argument is defunct.")
-        }
-        if (isSubset("write", names(call))) {
-            stop(
-                "'write' argument is defunct.\n",
-                "Use 'export()' instead."
-            )
-        }
-        assert(isSubset(setdiff(names(call), ""), names(formals())))
-        rm(call)
-        ## nocov end
-
-        ## Prepare results -----------------------------------------------------
-        ## Join row data and counts from DESeqDataSet.
         if (is(DESeqDataSet, "DESeqDataSet")) {
             object <- .joinRowData(
                 object = object,
@@ -132,38 +87,34 @@ NULL
                 DESeqDataSet = DESeqDataSet
             )
         }
-        ## Get the DEG character vectors, which we'll use against the rownames.
         both <- deg(
             object = object,
-            alpha = alpha,
+            alphaThreshold = alphaThreshold,
             lfcThreshold = lfcThreshold,
             baseMeanThreshold = baseMeanThreshold,
             direction = "both"
         )
-        ## Early return if there are not DEGs.
         if (!hasLength(both)) {
             out <- list(all = object)
         } else {
             up <- deg(
                 object = object,
-                alpha = alpha,
+                alphaThreshold = alphaThreshold,
                 lfcThreshold = lfcThreshold,
                 direction = "up"
             )
             down <- deg(
                 object = object,
-                alpha = alpha,
+                alphaThreshold = alphaThreshold,
                 lfcThreshold = lfcThreshold,
                 direction = "down"
             )
-            ## Prepare the return list.
             out <- list(
                 all = object,
                 up = object[up, , drop = FALSE],
                 down = object[down, , drop = FALSE],
                 both = object[both, , drop = FALSE]
             )
-            ## Filter out empty up/down tables.
             out <- Filter(f = hasRows, x = out)
         }
         switch(
@@ -185,47 +136,20 @@ setMethod(
 
 
 
-## Updated 2020-07-29.
+## Extra mode: Get the DESeqDataSet, and humanize the sample names. Note that
+## we're not calling `humanize()` here on the DESeqDataSet, because we want to
+## keep the gene identifiers in the row names. Use human-friendly sample names,
+## defined by the `sampleName` column in `colData`. We're using this downstream
+## when joining the normalized counts.
+##
+## Updated 2020-08-05.
 `resultsTables,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        lfcShrink = TRUE,
-        extra = TRUE,
-        alpha = NULL,
-        lfcThreshold = NULL,
-        baseMeanThreshold = NULL,
-        return = c("tbl_df", "DataFrameList")
-    ) {
-        ## nocov start
-        call <- match.call()
-        ## results
-        if ("results" %in% names(call)) {
-            stop("'results' is defunct in favor of 'i'.")
-        }
-        assert(isSubset(
-            x = setdiff(names(call), ""),
-            y = names(formals())
-        ))
-        rm(call)
-        ## nocov end
+    function(object, i, extra = TRUE, ...) {
         validObject(object)
-        assert(
-            isFlag(lfcShrink),
-            isFlag(extra)
-        )
-        return <- match.arg(return)
-        ## Note that this will use the shrunken LFC values, if slotted.
-        res <- results(object, i = i, lfcShrink = lfcShrink)
-        ## Include extra annotations, if desired.
+        assert(isFlag(extra))
+        res <- results(object, i = i)
         if (isTRUE(extra)) {
-            ## Get the DESeqDataSet, and humanize the sample names. Note that
-            ## we're not calling `humanize()` here on the DESeqDataSet, because
-            ## we want to keep the gene identifiers in the row names.
             dds <- as(object, "DESeqDataSet")
-            ## Always attempt to use human-friendly sample names, defined by the
-            ## `sampleName` column in `colData`. We're using this downstream
-            ## when joining the normalized counts.
             dds <- convertSampleIDsToNames(dds)
         } else {
             dds <- NULL
@@ -233,10 +157,10 @@ setMethod(
         resultsTables(
             object = res,
             DESeqDataSet = dds,
-            alpha = alpha,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold,
-            return = return
+            alphaThreshold = alphaThreshold(object),
+            lfcThreshold = lfcThreshold(object),
+            baseMeanThreshold = baseMeanThreshold(object),
+            ...
         )
     }
 

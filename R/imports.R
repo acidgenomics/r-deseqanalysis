@@ -6,8 +6,7 @@
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom BiocGenerics updateObject
-#' @importFrom DESeq2 DESeq counts design fpkm lfcShrink nbinomWaldTest
-#'   priorInfo
+#' @importFrom DESeq2 DESeq counts design fpkm nbinomWaldTest priorInfo
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors DataFrame SimpleList as.data.frame cbind complete.cases
 #'   cor do.call head mcols mcols<- metadata metadata<- na.omit
@@ -17,10 +16,9 @@
 #' @importFrom basejump Gene2Symbol as_tibble autopadZeros camelCase
 #'   convertSampleIDsToNames decode droplevels import initDir
 #'   interestingGroups<- leftJoin makeNames mapGenesToRownames markdownHeader
-#'   markdownList matchInterestingGroups matchesGene2Symbol melt metadata2
-#'   metadata2<- printString realpath removeNA showSlotInfo snakeCase
-#'   standardizeCall
-#' @importFrom cli cli_alert_info
+#'   markdownList matchesGene2Symbol melt metadata2 metadata2<- printString
+#'   realpath removeNA showSlotInfo snakeCase standardizeCall
+#' @importFrom cli cli_alert cli_alert_info cli_alert_warning cli_dl
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_bar
 #'   geom_density geom_hline geom_point geom_text geom_vline ggplot guides labs

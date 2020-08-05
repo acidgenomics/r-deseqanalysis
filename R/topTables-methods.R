@@ -1,6 +1,6 @@
 #' @name topTables
 #' @inherit acidgenerics::topTables
-#' @note Updated 2019-11-12.
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -14,12 +14,12 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' topTables(deseq, i = 1L, n = 5L, lfcShrink = TRUE)
+#' topTables(deseq, i = 1L, n = 5L)
 #'
 #' ## DESeqResults 'resultsTables()' list ====
-#' res <- results(deseq, i = 1L, lfcShrink = TRUE)
+#' res <- results(deseq, i = 1L)
 #' resTbl <- resultsTables(res, return = "tbl_df")
-#' topTables(resTbl)
+#' topTables(resTbl, n = 5L)
 NULL
 
 
@@ -174,30 +174,12 @@ setMethod(
 
 
 
-## Updated 2019-09-10.
+## Updated 2020-08-05.
 `topTables,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        n = 10L,
-        lfcShrink = TRUE
-    ) {
-        ## nocov start
-        call <- match.call()
-        ## results
-        if ("results" %in% names(call)) {
-            stop("'results' is defunct in favor of 'i'.")
-        }
-        assert(isSubset(
-            x = setdiff(names(call), ""),
-            y = names(formals())
-        ))
-        rm(call)
-        ## nocov end
+    function(object, i, n = 10L) {
         list <- resultsTables(
             object = object,
             i = i,
-            lfcShrink = lfcShrink,
             extra = TRUE,
             return = "DataFrameList"
         )

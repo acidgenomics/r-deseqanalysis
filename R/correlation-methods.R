@@ -2,7 +2,7 @@
 #'
 #' @name correlation
 #' @inherit basejump::correlation
-#' @note Updated 2019-12-18.
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
 #' @param col `character(1)`.
@@ -10,17 +10,10 @@
 #' @param ... Additional arguments.
 #'
 #' @examples
-#' ## Working example currently only has 1 contrast slotted.
 #' data(deseq)
 #'
-#' ## DESeqResults ====
-#' x <- results(deseq, i = 1L, lfcShrink = FALSE)
-#' y <- results(deseq, i = 2L, lfcShrink = FALSE)
-#' correlation(x = x, y = y)
-#'
 #' ## DESeqAnalysis ====
-#' x <- deseq
-#' correlation(x = x, i = 1L, j = 2L)
+#' correlation(deseq, i = 1L, j = 2L)
 NULL
 
 
@@ -79,14 +72,21 @@ setMethod(
 
 
 
-## Updated 2019-12-18.
+## Updated 2020-08-05.
 `correlation,DESeqAnalysis,missing` <-  # nolint
-    function(x, y = NULL, i, j, col = "log2FoldChange", method) {
+    function(
+        x,
+        y = NULL,
+        i,
+        j,
+        col = "log2FoldChange",
+        method
+    ) {
         assert(!identical(i, j))
         method <- match.arg(method)
         correlation(
-            x = results(object = x, i = i, lfcShrink = FALSE),
-            y = results(object = x, i = j, lfcShrink = FALSE),
+            x = results(object = x, i = i),
+            y = results(object = x, i = j),
             method = method
         )
     }

@@ -32,11 +32,12 @@ names. The \code{lfcShrink} slot is optional but must be either defined in both
 objects or \code{NULL} in both objects.
 }
 \note{
-Updated 2020-01-03.
+Updated 2020-08-04.
 }
 \examples{
 data(deseq)
 
+## DESeqAnalysis ====
 x <- deseq
 y <- deseq
 resultsNames(x) <- paste0("x_", resultsNames(x))

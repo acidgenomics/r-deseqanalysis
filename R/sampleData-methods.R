@@ -6,6 +6,8 @@
 #'
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' x <- sampleData(deseq)
 #' head(x)
 NULL

@@ -45,21 +45,22 @@
 #'   change values.
 #'
 #' @examples
-#' dds <- DESeq2::makeExampleDESeqDataSet(n = 1000L, m = 12L)
-#' dds$condition <- factor(rep(LETTERS[seq_len(4L)], each = 3L))
-#' dds <- DESeq2::DESeq(dds)
-#' resultsNames(dds)
-#'
-#' ## Contrast C vs. B.
-#' contrast <- c(factor = "condition", numerator = "C", denominator = "B")
-#'
-#' ## Unshrunken DESeqResults.
-#' res <- DESeq2::results(dds, contrast = contrast)
-#' class(res)
-#' lfcShrinkType(res)
-#'
-#' ## Shrunken DESeqResults, using apeglm via `lfcShrink()`.
+#' ## DESeqDataSet ====
 #' if (requireNamespace("apeglm", quietly = TRUE)) {
+#'     dds <- DESeq2::makeExampleDESeqDataSet(n = 1000L, m = 12L)
+#'     dds$condition <- factor(rep(LETTERS[seq_len(4L)], each = 3L))
+#'     dds <- DESeq2::DESeq(dds)
+#'     resultsNames(dds)
+#'
+#'     ## Contrast C vs. B.
+#'     contrast <- c(factor = "condition", numerator = "C", denominator = "B")
+#'
+#'     ## Unshrunken DESeqResults.
+#'     res <- DESeq2::results(dds, contrast = contrast)
+#'     class(res)
+#'     lfcShrinkType(res)
+#'
+#'     ## Shrunken DESeqResults, using apeglm via `lfcShrink()`.
 #'     shrink <- apeglmResults(dds, contrast = contrast)
 #'     class(shrink)
 #'     lfcShrinkType(shrink)
@@ -68,7 +69,7 @@ NULL
 
 
 
-## Updated 2019-11-19.
+## Updated 2020-08-04.
 `apeglmResults,DESeqDataSet` <-  # nolint
     function(object, contrast, ...) {
         validObject(object)
@@ -89,17 +90,16 @@ NULL
         assert(is.factor(group))
         group <- relevel(x = group, ref = denominator)
         colData(object)[[factor]] <- group
-        message(sprintf(
-            fmt = "Design: %s",
-            paste0(as.character(design(object)), collapse = "")
-        ))
+        cli_dl(
+            c("design" = paste0(as.character(design(object)), collapse = ""))
+        )
         object <- DESeq(object)
         resultsNames <- resultsNames(object)
         ## Match the contrast to coef, based on resultsNames.
         coef <- .contrast2coef(contrast = contrast, resultsNames = resultsNames)
-        ## Quiet down about citation, it's too noisy.
+        ## Quiet down about apeglm citation, it's too noisy.
         suppressMessages({
-            shrink <- lfcShrink(
+            shrink <- DESeq2::lfcShrink(
                 dds = object,
                 type = "apeglm",
                 coef = coef,
@@ -148,7 +148,6 @@ NULL
                 )
             )
         }
-        ## Return.
         shrink
     }
 

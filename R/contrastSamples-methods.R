@@ -1,6 +1,6 @@
 #' @name contrastSamples
 #' @inherit acidgenerics::contrastSamples
-#' @note Updated 2019-12-18.
+#' @note Updated 2020-08-04.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -37,7 +37,7 @@ NULL
 
 ## This has been split out to an internal function, so we can support
 ## interaction effect (difference of differences) contrasts more easily.
-## Updated 2019-12-18.
+## Updated 2020-08-04.
 .contrastSamples <- function(
     dds,
     contrast,
@@ -66,43 +66,24 @@ NULL
     assert(isSubset(numeratorCol, factor))
     numerator <- samples[factor %in% numeratorCol]
     assert(hasLength(numerator))
-    message(sprintf(
-        "Numerator samples: %s.",
-        toString(numerator, width = 200L)
-    ))
+    cli_dl(c("Numerator samples" = toString(numerator, width = 200L)))
     ## Denominator.
     denominatorCol <- match[1L, 3L]
     assert(isSubset(denominatorCol, factor))
     denominator <- samples[factor %in% denominatorCol]
     assert(hasLength(denominator))
-    message(sprintf(
-        "Denominator samples: %s.",
-        toString(denominator, width = 200L)
-    ))
-    ## Return.
+    cli_dl(c("Denominator samples" = toString(denominator, width = 200L)))
     sort(c(numerator, denominator))
 }
 
 
 
-## Updated 2019-12-18.
+## Updated 2020-08-05.
 `contrastSamples,DESeqAnalysis` <-  # nolint
     function(object, i, ...) {
-        ## nocov start
-        call <- match.call()
-        ## results
-        if ("results" %in% names(call)) {
-            stop("'results' is defunct in favor of 'i'.")
-        }
-        assert(isSubset(
-            x = setdiff(names(call), ""),
-            y = names(formals())
-        ))
-        rm(call)
-        ## nocov end
         validObject(object)
         suppressMessages({
-            res <- results(object = object, i = i, lfcShrink = FALSE)
+            res <- results(object, i = i)
         })
         ## If we've defined a subset of samples for the contrast, stash them
         ## in DESeqResults metadata. Otherwise, there's no way to trace this
@@ -113,14 +94,14 @@ NULL
         }
         contrast <- contrastName(
             object = res,
-            format = "resultsNames",
-            useStash = FALSE
+            .format = "resultsNames",
+            .useStash = FALSE
         )
         assert(
             isString(contrast),
             assert(grepl("_vs_", contrast))
         )
-        message(sprintf("Contrast: %s", contrast))
+        cli_dl(c("Contrast" = contrast))
         dds <- as(object, "DESeqDataSet")
         colData <- colData(dds)
         assert(hasRownames(colData))
@@ -136,11 +117,13 @@ NULL
         )
         assert(identical(sum(match), 1L))
         factorCol <- names(match)[match]
-        message(sprintf("Factor column: %s.", factorCol))
+        cli_dl(c("Factor column" = factorCol))
         ## Look for interaction effect (difference of differences).
         ## e.g. "group_B_vs_A_group_C_vs_A_effect".
         if (isTRUE(grepl(pattern = "_effect$", x = contrast))) {
-            message("Interaction effect (difference of differences) detected.")
+            cli_alert_info(
+                "Interaction effect (difference of differences) detected."
+            )
             interaction <- TRUE
             x <- contrast
             x <- sub("_effect$", "", x)
@@ -149,13 +132,13 @@ NULL
                 substr(x = x, start = loc[1L, 1L], stop = loc[2L, 1L] - 2L)
             contrast2 <-
                 substr(x = x, start = loc[2L, 1L], stop = nchar(x))
-            message(sprintf("Contrast 1: %s.", contrast1))
+            cli_dl(c("Contrast 1" = contrast1))
             samples1 <- .contrastSamples(
                 dds = dds,
                 contrast = contrast1,
                 factorCol = factorCol
             )
-            message(sprintf("Contrast 2: %s.", contrast2))
+            cli_dl(c("Contrast 2" = contrast2))
             samples2 <- .contrastSamples(
                 dds = dds,
                 contrast = contrast2,

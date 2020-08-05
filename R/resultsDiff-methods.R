@@ -1,11 +1,6 @@
-# j param is missing.
-
-
-
-#' Relative difference of DESeq results
-#'
 #' @name resultsDiff
-#' @note Updated 2019-12-17.
+#' @inherit acidgenerics::resultsDiff
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -17,33 +12,35 @@
 #'   - `"intersect"`: Return only genes called as DE in both contrasts.
 #'   - `"union"`: Return genes called as DE in either contrast.
 #'
-#' @return Named `numeric`.
-#'   Names correspond to the genes (row names).
-#'
 #' @examples
 #' data(deseq)
 #'
-#' ## DESeqResults ====
-#' x <- results(deseq, i = 1L)
-#' y <- results(deseq, i = 2L)
-#' resultsDiff(x = x, y = y)
-#'
 #' ## DESeqAnalysis ====
-#' object <- deseq
-#' resultsDiff(object, i = 1L, j = 2L)
+#' diff <- resultsDiff(deseq, i = 1L, j = 2L)
+#' head(diff)
 NULL
 
 
 
-## Updated 2019-12-17.
+#' @rdname resultsDiff
+#' @name resultsDiff
+#' @importFrom acidgenerics resultsDiff
+#' @usage resultsDiff(x, y, ...)
+#' @export
+NULL
+
+
+
+## Updated 2020-08-04.
 `resultsDiff,DESeqResults,DESeqResults` <-  # nolint
     function(
         x,
         y,
         col = c("log2FoldChange", "stat"),
         deg = c("no", "intersect", "union"),
-        alpha = NULL,
+        alphaThreshold = NULL,
         lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         direction = c("both", "up", "down")
     ) {
         validObject(x)
@@ -55,20 +52,22 @@ NULL
             identical(dimnames(x), dimnames(y)),
             isSubset(col, colnames(x))
         )
-        message(sprintf("Calculating relative difference of '%s'.", col))
+        cli_alert(sprintf("Calculating relative difference of {.var %s}.", col))
         diff <- x[[col]] - y[[col]]
         names(diff) <- rownames(x)
         if (!identical(deg, "no")) {
             degX <- deg(
                 object = x,
-                alpha = alpha,
+                alphaThreshold = alphaThreshold,
                 lfcThreshold = lfcThreshold,
+                baseMeanThreshold = baseMeanThreshold,
                 direction = direction
             )
             degY <- deg(
                 object = y,
-                alpha = alpha,
+                alphaThreshold = alphaThreshold,
                 lfcThreshold = lfcThreshold,
+                baseMeanThreshold = baseMeanThreshold,
                 direction = direction
             )
             genes <- switch(
@@ -79,7 +78,10 @@ NULL
             if (!hasLength(genes)) {
                 return(NULL)
             }
-            message(sprintf("Returning %s of DEGs (%d).", deg, length(genes)))
+            cli_alert_info(sprintf(
+                "Returning %s of DEGs (%d).",
+                deg, length(genes)
+            ))
             diff <- diff[genes]
         }
         diff
@@ -100,21 +102,14 @@ setMethod(
 
 
 
-## Updated 2019-12-17.
+## Updated 2020-08-05.
 `resultsDiff,DESeqAnalysis,missing` <-  # nolint
-    function(x, y = NULL, i, j, lfcShrink = TRUE, ...) {
-        validObject(x)
-        res1 <- results(
-            object = x,
-            i = i,
-            lfcShrink = lfcShrink
+    function(x, y = NULL, i, j, ...) {
+        resultsDiff(
+            x = results(x, i = i),
+            y = results(x, i = j),
+            ...
         )
-        res2 <- results(
-            object = x,
-            i = j,
-            lfcShrink = lfcShrink
-        )
-        resultsDiff(x = res1, y = res2, ...)
     }
 
 
