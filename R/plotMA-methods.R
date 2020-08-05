@@ -185,26 +185,12 @@ NULL
         floor <- min(floor(log10BaseMean))
         ceiling <- max(ceiling(log10BaseMean))
         xBreaks <- 10L ^ seq(from = floor, to = ceiling, by = 1L)
-        sep <- "; "
-        subtitle <- paste0("alpha < ", alphaThreshold)
-        if (lfcThreshold > 0L) {
-            subtitle <- paste0(
-                subtitle, sep,
-                "lfc >= ", lfcThreshold
-            )
-        }
-        if (lfcShrinkType != "unshrunken") {
-            subtitle <- paste0(
-                subtitle, sep,
-                "lfcShrink: ", lfcShrinkType
-            )
-        }
-        if (baseMeanThreshold > 1L) {
-            subtitle <- paste0(
-                subtitle, sep,
-                "baseMean >= ", baseMeanThreshold
-            )
-        }
+        subtitle <- .thresholdLabel(
+            alphaThreshold = alphaThreshold,
+            lfcShrinkType = lfcShrinkType,
+            lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold
+        )
         p <- ggplot(
             data = as_tibble(data, rownames = NULL),
             mapping = aes(

@@ -205,6 +205,38 @@
 
 
 
+## Updated 2020-08-04.
+.thresholdLabel <- function(
+    alphaThreshold,
+    lfcShrinkType,
+    lfcThreshold,
+    baseMeanThreshold
+) {
+    sep <- "; "
+    x <- paste0("alpha < ", alphaThreshold)
+    if (lfcThreshold > 0L) {
+        x <- paste0(
+            x, sep,
+            "lfc >= ", lfcThreshold
+        )
+    }
+    if (lfcShrinkType != "unshrunken") {
+        x <- paste0(
+            x, sep,
+            "lfcShrink: ", lfcShrinkType
+        )
+    }
+    if (baseMeanThreshold > 1L) {
+        x <- paste0(
+            x, sep,
+            "baseMean >= ", baseMeanThreshold
+        )
+    }
+    x
+}
+
+
+
 ## Updated 2019-07-23.
 .transformCountsAxisLabel <- function(object) {
     paste(transformType(object), "counts (log2)")
