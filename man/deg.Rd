@@ -17,7 +17,15 @@ deg(object, ...)
   quiet = FALSE
 )
 
-\S4method{deg}{DESeqAnalysis}(object, i, ...)
+\S4method{deg}{DESeqAnalysis}(
+  object,
+  i,
+  alphaThreshold = NULL,
+  lfcShrink = NULL,
+  lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{Object.}
@@ -46,6 +54,10 @@ Perform command quietly, suppressing messages.}
 
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
+
+\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
+Use shrunken log2 fold change (LFC) values.
+If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
 
 \item{...}{Additional arguments.}
 }

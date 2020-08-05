@@ -20,7 +20,16 @@ plotDEGHeatmap(object, ...)
   ...
 )
 
-\S4method{plotDEGHeatmap}{DESeqAnalysis}(object, i, contrastSamples = FALSE, lfcShrink = NULL, ...)
+\S4method{plotDEGHeatmap}{DESeqAnalysis}(
+  object,
+  i,
+  contrastSamples = FALSE,
+  alphaThreshold = NULL,
+  lfcShrink = NULL,
+  lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{Object.}

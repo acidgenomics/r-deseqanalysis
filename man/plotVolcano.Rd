@@ -27,7 +27,15 @@ plotVolcano(object, ...)
   return = c("ggplot", "DataFrame")
 )
 
-\S4method{plotVolcano}{DESeqAnalysis}(object, i, lfcShrink = NULL, ...)
+\S4method{plotVolcano}{DESeqAnalysis}(
+  object,
+  i,
+  alphaThreshold = NULL,
+  lfcShrink = NULL,
+  lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{Object.}
