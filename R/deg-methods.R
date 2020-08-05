@@ -145,6 +145,7 @@ setMethod(
         object,
         i,
         alphaThreshold = NULL,
+        lfcShrink = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         ...
@@ -158,7 +159,7 @@ setMethod(
         if (is.null(baseMeanThreshold)) {
             baseMeanThreshold <- baseMeanThreshold(object)
         }
-        res <- results(object = object, i = i, lfcShrink = FALSE)
+        res <- results(object = object, i = i, lfcShrink = lfcShrink)
         deg(
             object = res,
             alphaThreshold = alphaThreshold,

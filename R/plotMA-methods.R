@@ -309,11 +309,23 @@ setMethod(
     function(
         object,
         i,
+        alphaThreshold = NULL,
         lfcShrink = NULL,
+        lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         ...
     ) {
         validObject(object)
         assert(isScalar(i))
+        if (is.null(alphaThreshold)) {
+            alphaThreshold <- alphaThreshold(object)
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- lfcThreshold(object)
+        }
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- baseMeanThreshold(object)
+        }
         ## Return `NULL` for objects that don't contain gene symbol mappings.
         gene2symbol <- tryCatch(
             expr = suppressMessages({
@@ -322,13 +334,13 @@ setMethod(
             error = function(e) NULL
         )
         ## Handoff to DESeqResults method.
+        res <- results(object = object, i = i, lfcShrink = lfcShrink)
         plotMA(
-            object = results(
-                object = object,
-                i = i,
-                lfcShrink = lfcShrink
-            ),
+            object = res,
             gene2symbol = gene2symbol,
+            alphaThreshold = alphaThreshold,
+            lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold,
             ...
         )
     }
