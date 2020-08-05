@@ -250,6 +250,8 @@ NULL
             labs(
                 title = contrastName(object),
                 subtitle = .thresholdLabel(
+                    n = sum(data[["isDE"]] != 0L),
+                    direction = direction,
                     alphaThreshold = alphaThreshold,
                     lfcShrinkType = lfcShrinkType,
                     lfcThreshold = lfcThreshold,
