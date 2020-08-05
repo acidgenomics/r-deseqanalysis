@@ -78,12 +78,12 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2020-08-05.
 `contrastSamples,DESeqAnalysis` <-  # nolint
     function(object, i, ...) {
         validObject(object)
         suppressMessages({
-            res <- results(object = object, i = i, lfcShrink = FALSE)
+            res <- results(object, i = i)
         })
         ## If we've defined a subset of samples for the contrast, stash them
         ## in DESeqResults metadata. Otherwise, there's no way to trace this
