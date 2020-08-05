@@ -27,15 +27,7 @@ plotVolcano(object, ...)
   return = c("ggplot", "DataFrame")
 )
 
-\S4method{plotVolcano}{DESeqAnalysis}(
-  object,
-  i,
-  alphaThreshold = NULL,
-  lfcShrink = NULL,
-  lfcThreshold = NULL,
-  baseMeanThreshold = NULL,
-  ...
-)
+\S4method{plotVolcano}{DESeqAnalysis}(object, i, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -93,10 +85,6 @@ to the first argument in the \code{character} vector.}
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
 
-\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
-Use shrunken log2 fold change (LFC) values.
-If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
-
 \item{...}{Additional arguments.}
 }
 \value{
@@ -112,7 +100,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2020-08-04.
+Updated 2020-08-05.
 }
 \examples{
 data(deseq)

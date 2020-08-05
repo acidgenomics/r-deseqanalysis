@@ -18,16 +18,7 @@ resultsTables(object, ...)
   ...
 )
 
-\S4method{resultsTables}{DESeqAnalysis}(
-  object,
-  i,
-  extra = TRUE,
-  alphaThreshold = NULL,
-  lfcShrink = NULL,
-  lfcThreshold = NULL,
-  baseMeanThreshold = NULL,
-  return = c("tbl_df", "DataFrameList")
-)
+\S4method{resultsTables}{DESeqAnalysis}(object, i, extra = TRUE, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -65,10 +56,6 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 
 \item{extra}{\code{logical(1)}.
 Include row data and normalized counts from internal \code{DESeqDataSet}.}
-
-\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
-Use shrunken log2 fold change (LFC) values.
-If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
 }
 \value{
 \code{list}.

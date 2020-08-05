@@ -20,16 +20,7 @@ plotDEGHeatmap(object, ...)
   ...
 )
 
-\S4method{plotDEGHeatmap}{DESeqAnalysis}(
-  object,
-  i,
-  contrastSamples = FALSE,
-  alphaThreshold = NULL,
-  lfcShrink = NULL,
-  lfcThreshold = NULL,
-  baseMeanThreshold = NULL,
-  ...
-)
+\S4method{plotDEGHeatmap}{DESeqAnalysis}(object, i, contrastSamples = FALSE, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -71,10 +62,6 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 \strong{Experimental}. Only include the samples used to define the contrast
 passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
 contrasts (e.g. interaction effect).}
-
-\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
-Use shrunken log2 fold change (LFC) values.
-If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
 }
 \value{
 Plot.
@@ -99,7 +86,7 @@ method defined in acidplots.
 }}
 
 \note{
-Updated 2020-08-04.
+Updated 2020-08-05.
 }
 \examples{
 data(deseq)

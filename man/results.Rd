@@ -10,7 +10,7 @@ results(object, ...)
 
 \S4method{results}{DESeqDataSet}(object, ...)
 
-\S4method{results}{DESeqAnalysis}(object, i, lfcShrink = NULL, ...)
+\S4method{results}{DESeqAnalysis}(object, i)
 }
 \arguments{
 \item{object}{Object.}
@@ -22,10 +22,6 @@ results(object, ...)
 
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
-
-\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
-Use shrunken log2 fold change (LFC) values.
-If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
 }
 \value{
 \code{DESeqResults}.
@@ -34,7 +30,7 @@ If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.
 Results
 }
 \note{
-Updated 2020-08-04.
+Updated 2020-08-05.
 }
 \examples{
 data(deseq)

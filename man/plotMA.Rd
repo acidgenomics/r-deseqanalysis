@@ -25,15 +25,7 @@ plotMA(object, ...)
   pointAlpha = 0.8
 )
 
-\S4method{plotMA}{DESeqAnalysis}(
-  object,
-  i,
-  alphaThreshold = NULL,
-  lfcShrink = NULL,
-  lfcThreshold = NULL,
-  baseMeanThreshold = NULL,
-  ...
-)
+\S4method{plotMA}{DESeqAnalysis}(object, i, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -80,10 +72,6 @@ Alpha transparency level.}
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
 
-\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
-Use shrunken log2 fold change (LFC) values.
-If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
-
 \item{...}{Additional arguments.}
 }
 \value{
@@ -105,7 +93,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2020-08-04.
+Updated 2020-08-05.
 }
 \section{plotMA2 aliases}{
 

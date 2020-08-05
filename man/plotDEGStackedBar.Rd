@@ -9,10 +9,6 @@ plotDEGStackedBar(object, ...)
 
 \S4method{plotDEGStackedBar}{DESeqAnalysis}(
   object,
-  alphaThreshold = NULL,
-  lfcShrink = NULL,
-  lfcThreshold = NULL,
-  baseMeanThreshold = NULL,
   fill = getOption(x = "acid.fill.discrete", default =
     acidplots::scale_fill_synesthesia_d()),
   flip = TRUE
@@ -20,19 +16,6 @@ plotDEGStackedBar(object, ...)
 }
 \arguments{
 \item{object}{Object.}
-
-\item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
-Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
-defined in the object.}
-
-\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
-Log (base 2) fold change ratio cutoff threshold.
-If left \code{NULL}, will use the cutoff defined in the object.}
-
-\item{baseMeanThreshold}{\code{numeric(1)} or \code{NULL}.
-Base mean (i.e. average expression across all samples) threshold.
-If left \code{NULL}, will use the cutoff defined in the object.
-Applies in general to DESeq2 RNA-seq differential expression output.}
 
 \item{fill}{\code{ggproto}/\code{ScaleDiscrete}.
 Desired ggplot2 fill scale. Must supply discrete values. When set to
