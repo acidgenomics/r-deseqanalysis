@@ -109,10 +109,22 @@ setMethod(
         y = NULL,
         i,
         j,
+        alphaThreshold = NULL,
         lfcShrink = NULL,
+        lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         ...
     ) {
         validObject(x)
+        if (is.null(alphaThreshold)) {
+            alphaThreshold <- alphaThreshold(object)
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- lfcThreshold(object)
+        }
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- baseMeanThreshold(object)
+        }
         res1 <- results(
             object = x,
             i = i,
@@ -123,7 +135,14 @@ setMethod(
             i = j,
             lfcShrink = lfcShrink
         )
-        resultsDiff(x = res1, y = res2, ...)
+        resultsDiff(
+            x = res1,
+            y = res2,
+            alphaThreshold = alphaThreshold,
+            lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold,
+            ...
+        )
     }
 
 
