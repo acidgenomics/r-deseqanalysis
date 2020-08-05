@@ -11,7 +11,7 @@ topTables(object, ...)
 
 \S4method{topTables}{DESeqResults}(object, DESeqDataSet = NULL, n = 10L)
 
-\S4method{topTables}{DESeqAnalysis}(object, i, n = 10L, lfcShrink = NULL)
+\S4method{topTables}{DESeqAnalysis}(object, i, n = 10L)
 
 \S4method{topTables}{list}(object, n = 10L, contrast = NULL)
 }
@@ -28,10 +28,6 @@ Number of genes (per direction) to report.}
 
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
-
-\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
-Use shrunken log2 fold change (LFC) values.
-If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
 
 \item{contrast}{\code{character(1)} or \code{NULL}.
 Contrast name.}
@@ -54,7 +50,7 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
 }}
 
 \note{
-Updated 2020-08-04.
+Updated 2020-08-05.
 }
 \examples{
 data(deseq)

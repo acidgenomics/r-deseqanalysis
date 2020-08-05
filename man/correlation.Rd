@@ -53,7 +53,7 @@ If \code{NULL}, calculates correlation matrix only on the primary assay.}
 Correlation
 }
 \note{
-Updated 2020-08-04.
+Updated 2020-08-05.
 }
 \examples{
 data(deseq)

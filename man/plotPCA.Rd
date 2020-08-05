@@ -22,8 +22,7 @@ plotPCA(object, ...)
   pointSize = getOption(x = "acid.point.size", default = 3L),
   title = "PCA",
   subtitle = NULL,
-  return = c("ggplot", "DataFrame"),
-  ...
+  return = c("ggplot", "DataFrame")
 )
 
 \S4method{plotPCA}{DESeqAnalysis}(object, ...)
