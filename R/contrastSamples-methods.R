@@ -37,7 +37,7 @@ NULL
 
 ## This has been split out to an internal function, so we can support
 ## interaction effect (difference of differences) contrasts more easily.
-## Updated 2019-12-18.
+## Updated 2020-08-04.
 .contrastSamples <- function(
     dds,
     contrast,
@@ -66,20 +66,13 @@ NULL
     assert(isSubset(numeratorCol, factor))
     numerator <- samples[factor %in% numeratorCol]
     assert(hasLength(numerator))
-    message(sprintf(
-        "Numerator samples: %s.",
-        toString(numerator, width = 200L)
-    ))
+    cli_dl(c("Numerator samples" = toString(numerator, width = 200L)))
     ## Denominator.
     denominatorCol <- match[1L, 3L]
     assert(isSubset(denominatorCol, factor))
     denominator <- samples[factor %in% denominatorCol]
     assert(hasLength(denominator))
-    message(sprintf(
-        "Denominator samples: %s.",
-        toString(denominator, width = 200L)
-    ))
-    ## Return.
+    cli_dl(c("Denominator samples" = toString(denominator, width = 200L)))
     sort(c(numerator, denominator))
 }
 

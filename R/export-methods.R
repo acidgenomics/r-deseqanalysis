@@ -162,7 +162,7 @@ setMethod(
         rm(name)
         files <- list()
         ## DESeqDataSet.
-        message("Exporting DESeqDataSet to 'data'.")
+        cli_alert("Exporting {.var DESeqDataSet} to {.path data}.")
         files[["data"]] <-
             export(
                 object = as(object, "DESeqDataSet"),
@@ -171,7 +171,7 @@ setMethod(
                 compress = compress
             )
         ## DESeqTransform.
-        message("Exporting DESeqTransform to 'transform'.")
+        cli_alert("Exporting {.var DESeqTransform} to {.path transform}.")
         files[["transform"]] <-
             export(
                 object = as(object, "DESeqTransform"),
@@ -180,7 +180,9 @@ setMethod(
                 compress = compress
             )
         ## DEG results tables.
-        message("Exporting DESeqResults tables to 'resultsTables'.")
+        cli_alert(
+            "Exporting {.var DESeqResults} tables to {.path resultsTables}."
+        )
         files[["resultsTables"]] <-
             .exportResultsTables(
                 object = object,
@@ -188,7 +190,9 @@ setMethod(
                 compress = compress
             )
         ## Combined results matrices.
-        message("Exporting DESeqResults matrices to 'resultsMatrices'.")
+        cli_alert(
+            "Exporting {.var DESeqResults} matrices to {.path resultsMatrices}."
+        )
         files[["resultsMatrices"]] <-
             .exportResultsMatrices(
                 object = object,
