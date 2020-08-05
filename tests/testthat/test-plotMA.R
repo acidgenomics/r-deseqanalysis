@@ -5,7 +5,6 @@ args <- list(object = deseq, i = 1L)
 test_that("DESeqAnalysis", {
     x <- do.call(plotMA, args)
     expect_is(x, "ggplot")
-
     ## Check geom classes.
     geomtype <- vapply(
         X = x[["layers"]],
@@ -18,7 +17,6 @@ test_that("DESeqAnalysis", {
         object = geomtype,
         expected = c("GeomHline", "GeomPoint", "GeomLogticks")
     )
-
     ## Check plot labels.
     expect_identical(
         object = x[["labels"]][["y"]],
@@ -66,16 +64,4 @@ test_that("Label specific genes", {
         )
     )
     expect_is(x, "ggplot")
-})
-
-test_that("DataFrame return", {
-    x <- do.call(
-        what = plotMA,
-        args = c(
-            args,
-            list(return = "DataFrame")
-        )
-    )
-    expect_s4_class(x, "DataFrame")
-    expect_true("isDE" %in% colnames(x))
 })
