@@ -1,6 +1,6 @@
 #' @name plotDEGUpset
 #' @inherit acidgenerics::plotDEGUpset
-#' @note Updated 2020-08-04.
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -24,21 +24,15 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2020-08-05.
 `plotDEGUpset,DESeqAnalysis` <-  # nolint
     function(
         object,
-        alphaThreshold = NULL,
-        lfcThreshold = NULL,
-        baseMeanThreshold = NULL,
         direction = c("both", "up", "down")
     ) {
         direction <- match.arg(direction)
         degPerContrast <- degPerContrast(
             object = object,
-            alphaThreshold = alphaThreshold,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold,
             direction = direction,
             return = "list"
         )

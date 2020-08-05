@@ -2,8 +2,9 @@
 #'
 #' @name plotDEGStackedBar
 #' @inherit acidgenerics::plotDEGStackedBar
-#' @note Updated 2020-08-04.
+#' @note Updated 2020-08-05.
 #' @inheritParams acidroxygen::params
+#' @inheritParams params
 #' @param ... Additional arguments.
 #' @examples
 #' data(deseq)
@@ -23,35 +24,14 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2020-08-05.
 `plotDEGStackedBar,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        alphaThreshold = NULL,
-        lfcShrink = NULL,
-        lfcThreshold = NULL,
-        baseMeanThreshold = NULL,
-        fill,
-        flip = TRUE
-    ) {
+    function(object, fill, flip = TRUE) {
         validObject(object)
         assert(isFlag(flip))
         direction <- "both"
-        if (is.null(alphaThreshold)) {
-            alphaThreshold <- alphaThreshold(object)
-        }
-        if (is.null(lfcThreshold)) {
-            lfcThreshold <- lfcThreshold(object)
-        }
-        if (is.null(baseMeanThreshold)) {
-            baseMeanThreshold <- baseMeanThreshold(object)
-        }
-        lfcShrinkType <- lfcShrinkType(object)
         mat <- degPerContrast(
             object = object,
-            alphaThreshold = alphaThreshold,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold,
             direction = direction,
             return = "matrix"
         )
@@ -89,10 +69,10 @@ NULL
                 subtitle = .thresholdLabel(
                     n = NULL,
                     direction = direction,
-                    alphaThreshold = alphaThreshold,
-                    lfcShrinkType = lfcShrinkType,
-                    lfcThreshold = lfcThreshold,
-                    baseMeanThreshold = baseMeanThreshold
+                    alphaThreshold = alphaThreshold(object),
+                    lfcShrinkType = lfcShrinkType(object),
+                    lfcThreshold = lfcThreshold(object),
+                    baseMeanThreshold = baseMeanThreshold(object)
                 )
             )
         if (isTRUE(flip)) {
