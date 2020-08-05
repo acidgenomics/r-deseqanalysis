@@ -228,7 +228,7 @@
         x <- paste0(x, sep, "lfc >= ", lfcThreshold)
     }
     if (lfcShrinkType != "unshrunken") {
-        x <- paste0(x, sep,"lfcShrink: ", lfcShrinkType)
+        x <- paste0(x, sep, "lfcShrink: ", lfcShrinkType)
     }
     if (baseMeanThreshold > 1L) {
         x <- paste0(x, sep, "baseMean >= ", baseMeanThreshold)

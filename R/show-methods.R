@@ -41,7 +41,7 @@ NULL
             }
             list[["lfcThreshold"]] <- lfcThreshold
         }
-        baseMeanThreshold = baseMeanThreshold(object)
+        baseMeanThreshold <- baseMeanThreshold(object)
         if (baseMeanThreshold > 0L) {
             list[["baseMeanThreshold"]] <- baseMeanThreshold
         }
