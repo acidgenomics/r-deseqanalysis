@@ -25,15 +25,24 @@ NULL
         ## Show information about the DESeqDataSet.
         ddsInfo <- paste0("  ", capture.output(show(dds))[-1L])
         cat("data:", ddsInfo, sep = "\n")
-        showSlotInfo(list(
+        list <- list(
             transformType = transformType(object),
             resultsNames = resultsNames(object),
-            alphaThreshold = alphaThreshold(object),
-            lfcShrink = lfcShrink(object),
-            lfcShrinkType = lfcShrinkType(object),
-            lfcThreshold = lfcThreshold(object),
-            baseMeanThreshold = baseMeanThreshold(object)
-        ))
+            alphaThreshold = alphaThreshold(object)
+        )
+        lfcShrink <- lfcShrink(object)
+        if (isTRUE(lfcShrink)) {
+            list[["lfcShrinkType"]] <- lfcShrinkType(object)
+        }
+        lfcThreshold <- lfcThreshold(object)
+        if (lfcThreshold > 0L) {
+            list[["lfcThreshold"]] <- lfcThreshold
+        }
+        baseMeanThreshold = baseMeanThreshold(object)
+        if (baseMeanThreshold > 0L) {
+            list[["baseMeanThreshold"]] <- baseMeanThreshold
+        }
+        showSlotInfo(list)
     }
 
 
