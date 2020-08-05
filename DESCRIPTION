@@ -32,7 +32,7 @@ Imports:
     S4Vectors,
     SummarizedExperiment,
     acidgenerics (>= 0.3.9),
-    acidplots (>= 0.2.30),
+    acidplots (>= 0.2.32),
     cli (>= 2.0),
     cowplot (>= 1.0),
     ggplot2 (>= 3.3),
