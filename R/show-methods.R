@@ -36,6 +36,9 @@ NULL
         }
         lfcThreshold <- lfcThreshold(object)
         if (lfcThreshold > 0L) {
+            if (lfcThreshold(results(object, i = 1L)) == 0L) {
+                lfcThreshold <- paste(lfcThreshold, "(post-hoc)")
+            }
             list[["lfcThreshold"]] <- lfcThreshold
         }
         baseMeanThreshold = baseMeanThreshold(object)
