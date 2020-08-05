@@ -1,6 +1,6 @@
 #' @name deg
 #' @inherit acidgenerics::deg
-#' @note Updated 2020-08-04.
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -139,32 +139,14 @@ setMethod(
 
 
 
-## Updated 2020-08-04.
+## Updated 2020-08-05.
 `deg,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        alphaThreshold = NULL,
-        lfcShrink = NULL,
-        lfcThreshold = NULL,
-        baseMeanThreshold = NULL,
-        ...
-    ) {
-        if (is.null(alphaThreshold)) {
-            alphaThreshold <- alphaThreshold(object)
-        }
-        if (is.null(lfcThreshold)) {
-            lfcThreshold <- lfcThreshold(object)
-        }
-        if (is.null(baseMeanThreshold)) {
-            baseMeanThreshold <- baseMeanThreshold(object)
-        }
-        res <- results(object = object, i = i, lfcShrink = lfcShrink)
+    function(object, i, ...) {
         deg(
-            object = res,
-            alphaThreshold = alphaThreshold,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold,
+            object = results(object, i = i),
+            alphaThreshold = alphaThreshold(object),
+            lfcThreshold = lfcThreshold(object),
+            baseMeanThreshold = baseMeanThreshold(object),
             ...
         )
     }

@@ -1,7 +1,7 @@
 #' Results
 #'
 #' @name results
-#' @note Updated 2020-08-04.
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -71,7 +71,7 @@ setMethod(
                 "Shrunken LFC values were requested, ",
                 "but object does not contain DESeqResults ",
                 "defined in 'lfcShrink' slot.\n",
-                "Set 'lfcShrink(object) <- FALSE'."
+                "Set 'lfcShrink(object) <- NULL'."
             )
         }
         resultsList <- slot(object, name = slotName)

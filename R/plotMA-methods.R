@@ -1,7 +1,7 @@
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @inherit BiocGenerics::plotMA title
-#' @note Updated 2020-08-04.
+#' @note Updated 2020-08-05.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual
@@ -285,43 +285,20 @@ setMethod(
 
 
 
-## Updated 2020-08-04.
+## Updated 2020-08-05.
 `plotMA,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        alphaThreshold = NULL,
-        lfcShrink = NULL,
-        lfcThreshold = NULL,
-        baseMeanThreshold = NULL,
-        ...
-    ) {
-        validObject(object)
-        assert(isScalar(i))
-        if (is.null(alphaThreshold)) {
-            alphaThreshold <- alphaThreshold(object)
-        }
-        if (is.null(lfcThreshold)) {
-            lfcThreshold <- lfcThreshold(object)
-        }
-        if (is.null(baseMeanThreshold)) {
-            baseMeanThreshold <- baseMeanThreshold(object)
-        }
-        ## Return `NULL` for objects that don't contain gene symbol mappings.
-        gene2symbol <- tryCatch(
-            expr = suppressMessages({
-                Gene2Symbol(as(object, "DESeqDataSet"))
-            }),
-            error = function(e) NULL
-        )
-        ## Handoff to DESeqResults method.
-        res <- results(object = object, i = i, lfcShrink = lfcShrink)
+    function(object, i, ...) {
         plotMA(
-            object = res,
-            gene2symbol = gene2symbol,
-            alphaThreshold = alphaThreshold,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold,
+            object = results(object, i = i),
+            gene2symbol = tryCatch(
+                expr = suppressMessages({
+                    Gene2Symbol(as(object, "DESeqDataSet"))
+                }),
+                error = function(e) NULL
+            ),
+            alphaThreshold = alphaThreshold(object),
+            lfcThreshold = lfcThreshold(object),
+            baseMeanThreshold = baseMeanThreshold(object),
             ...
         )
     }
