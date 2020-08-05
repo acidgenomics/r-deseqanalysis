@@ -82,8 +82,7 @@ NULL
             nonsignificant = acidplots::lightPalette[["gray"]]
         ),
         pointSize = 2L,
-        pointAlpha = 0.8,
-        return = c("ggplot", "DataFrame")
+        pointAlpha = 0.8
     ) {
         validObject(object)
         baseMeanCol <- "baseMean"
@@ -134,7 +133,6 @@ NULL
             isNonNegative(ntop)
         )
         direction <- match.arg(direction)
-        return <- match.arg(return)
         ## Genes or ntop, but not both.
         if (!is.null(genes) && ntop > 0L) {
             stop("Specify either 'genes' or 'ntop'.")
@@ -176,10 +174,6 @@ NULL
             cli_alert_warning("No genes passed cutoffs.")
             return()
         }
-        ## Early return the data, if desired.
-        if (identical(return, "DataFrame")) {
-            return(data)
-        }
         ## MA plot.
         log10BaseMean <- log10(data[["baseMean"]])
         floor <- min(floor(log10BaseMean))
@@ -214,6 +208,8 @@ NULL
             labs(
                 title = contrastName(object),
                 subtitle = .thresholdLabel(
+                    n = sum(data[["isDE"]] != 0L),
+                    direction = direction,
                     alphaThreshold = alphaThreshold,
                     lfcShrinkType = lfcShrinkType,
                     lfcThreshold = lfcThreshold,
