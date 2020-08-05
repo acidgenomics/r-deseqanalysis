@@ -133,6 +133,7 @@ setMethod(
     function(
         object,
         i,
+        interestingGroups = NULL,
         contrastSamples = FALSE,
         alphaThreshold = NULL,
         lfcShrink = NULL,
@@ -159,6 +160,8 @@ setMethod(
         res <- results(object, i = i, lfcShrink = lfcShrink)
         ## We're using the variance-stabilized counts for visualization here.
         dt <- as(object, "DESeqTransform")
+        interestingGroups(dt) <-
+            matchInterestingGroups(dt, interestingGroups)
         ## Subset the DESeqTransform, if necessary.
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, i = i)
