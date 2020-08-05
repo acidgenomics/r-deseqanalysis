@@ -36,6 +36,7 @@ NULL
     ) {
         validObject(object)
         assert(isFlag(flip))
+        direction <- "both"
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
@@ -51,7 +52,7 @@ NULL
             alphaThreshold = alphaThreshold,
             lfcThreshold = lfcThreshold,
             baseMeanThreshold = baseMeanThreshold,
-            direction = "both",
+            direction = direction,
             return = "matrix"
         )
         data <- as.data.frame(mat)
@@ -84,7 +85,10 @@ NULL
                 x = "contrast",
                 y = "differentially expressed genes",
                 fill = "direction",
+                title = "Differentially expressed genes per contrast",
                 subtitle = .thresholdLabel(
+                    n = NULL,
+                    direction = direction,
                     alphaThreshold = alphaThreshold,
                     lfcShrinkType = lfcShrinkType,
                     lfcThreshold = lfcThreshold,
