@@ -1,6 +1,10 @@
 #' @name resultsTables
 #' @inherit acidgenerics::resultsTables
-#' @note Updated 2020-08-04.
+#' @note This function is used in the bcbioRNASeq F1000 paper. Supported
+#'   arguments have changed significantly from the bcbioRNASeq v0.2 release
+#'   series. Previous formals:
+##   https://github.com/hbc/bcbioRNASeq/blob/v0.2.10/R/resultsTables-methods.R
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -64,10 +68,7 @@ NULL
 
 
 
-## Note that this method is used in bcbioRNASeq F1000 paper.
-## bcbioRNASeq v0.2 release series defaults:
-## https://github.com/hbc/bcbioRNASeq/blob/v0.2.10/R/resultsTables-methods.R
-## Updated 2020-08-04.
+## Updated 2020-08-05.
 `resultsTables,DESeqResults` <-  # nolint
     function(
         object,
@@ -75,44 +76,8 @@ NULL
         alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
-        return = c("tbl_df", "DataFrameList"),
-        ...
+        return = c("tbl_df", "DataFrameList")
     ) {
-        ## nocov start
-        call <- match.call()
-        if (isSubset("dir", names(call))) {
-            stop(
-                "'dir' argument is defunct.\n",
-                "Use 'export()' instead."
-            )
-        }
-        if (isSubset("dropboxDir", names(call))) {
-            stop(
-                "'dropboxDir' argument is defunct.\n",
-                "Use 'copyToDropbox()' instead."
-            )
-        }
-        if (isSubset("headerLevel", names(call))) {
-            stop("'headerLevel' argument is defunct.")
-        }
-        if (isSubset("rdsToken", names(call))) {
-            stop(
-                "'rdsToken' argument is defunct.\n",
-                "Use 'copyToDropbox()' instead."
-            )
-        }
-        if (isSubset("summary", names(call))) {
-            stop("'summary' argument is defunct.")
-        }
-        if (isSubset("write", names(call))) {
-            stop(
-                "'write' argument is defunct.\n",
-                "Use 'export()' instead."
-            )
-        }
-        assert(isSubset(setdiff(names(call), ""), names(formals())))
-        rm(call)
-        ## nocov end
         validObject(object)
         assert(isAny(DESeqDataSet, c("DESeqDataSet", "NULL")))
         return <- match.arg(return)

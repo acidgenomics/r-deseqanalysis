@@ -2,6 +2,24 @@
 
 ### Major changes
 
+- `DESeqAnalysis` object now supports stashing of threshold metadata:
+    - `alphaThreshold`.
+    - `lfcShrink`: whether to use (adaptie) shrunken LFC values or not.
+    - `lfcThreshold` (for post-hoc cutoffs).
+    - `baseMeanThreshold`.
+  These are defined in the `metadata` slot of the object and can be accessed/
+  modified with corresponding S4 generics.
+- Updated default differential expression R Markdown template to support
+  additional parameters:
+    - alpha_threshold
+    - base_mean_threshold
+    - contrast_samples
+    - lfc_shrink
+    - lfc_threshold
+
+### Minor changes
+
+- Switched to cli package for more informative messages.
 
 ## DESeqAnalysis 0.2.21 (2020-07-29)
 

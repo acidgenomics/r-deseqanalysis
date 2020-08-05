@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Relative difference of DESeq results — resultsDiff • DESeqAnalysis</title>
+<title>Relative difference of results — resultsDiff • DESeqAnalysis</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Relative difference of DESeq results — resultsDiff" />
-<meta property="og:description" content="Relative difference of DESeq results" />
+<meta property="og:title" content="Relative difference of results — resultsDiff" />
+<meta property="og:description" content="Relative difference of results" />
 
 
 
@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.21</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -113,13 +113,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Relative difference of DESeq results</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/resultsDiff-methods.R'><code>R/resultsDiff-methods.R</code></a></small>
+    <h1>Relative difference of results</h1>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/resultsDiff-methods.R'><code>R/resultsDiff-methods.R</code></a></small>
     <div class="hidden name"><code>resultsDiff.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Relative difference of DESeq results</p>
+    <p>Relative difference of results</p>
     </div>
 
     <pre class="usage"><span class='fu'>resultsDiff</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)
@@ -130,13 +130,14 @@
   <span class='no'>y</span>,
   <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>),
   <span class='kw'>deg</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"no"</span>, <span class='st'>"intersect"</span>, <span class='st'>"union"</span>),
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>alphaThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>baseMeanThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>)
 )
 
 <span class='co'># S4 method for DESeqAnalysis,missingOrNULL</span>
-<span class='fu'>resultsDiff</span>(<span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>i</span>, <span class='no'>j</span>, <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>resultsDiff</span>(<span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>i</span>, <span class='no'>j</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,10 +149,6 @@
     <tr>
       <th>y</th>
       <td><p>Object.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments.</p></td>
     </tr>
     <tr>
       <th>col</th>
@@ -168,7 +165,7 @@ Note that <code>x</code>/<code>i</code> represents <code>A</code> and <code>y</c
 </ul></td>
     </tr>
     <tr>
-      <th>alpha</th>
+      <th>alphaThreshold</th>
       <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
 Adjusted P value ("alpha") cutoff. If left <code>NULL</code>, will use the cutoff
 defined in the object.</p></td>
@@ -178,6 +175,13 @@ defined in the object.</p></td>
       <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
 Log (base 2) fold change ratio cutoff threshold.
 If left <code>NULL</code>, will use the cutoff defined in the object.</p></td>
+    </tr>
+    <tr>
+      <th>baseMeanThreshold</th>
+      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
+Base mean (i.e. average expression across all samples) threshold.
+If left <code>NULL</code>, will use the cutoff defined in the object.
+Applies in general to DESeq2 RNA-seq differential expression output.</p></td>
     </tr>
     <tr>
       <th>direction</th>
@@ -197,16 +201,15 @@ Include <code>"both"</code>, <code>"up"</code>, or <code>"down"</code> direction
 <p>For more information:</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/help.html'>help</a></span>(<span class='kw'>topic</span> <span class='kw'>=</span> <span class='st'>"Extract"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"base"</span>)</pre></td>
     </tr>
     <tr>
-      <th>lfcShrink</th>
-      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
-Use shrunken log2 fold change (LFC) values.</p></td>
+      <th>...</th>
+      <td><p>Additional arguments.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Named <code>numeric</code>.
-Names correspond to the genes (row names).</p>
+Names correspond to the features (i.e. genes) analyzed.</p>
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     
@@ -215,382 +218,14 @@ Names correspond to the genes (row names).</p>
 </ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-12-17.</p>
+    <p>Updated 2020-08-05.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
-<span class='co'>## DESeqResults ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='input'><span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>2L</span>)</div><div class='output co'>#&gt; <span class='message'>treatment_D_vs_C (unshrunken LFC)</span></div><div class='input'><span class='fu'>resultsDiff</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt; <span class='message'>Calculating relative difference of 'log2FoldChange'.</span></div><div class='output co'>#&gt;      gene001      gene002      gene003      gene004      gene005      gene006 
-#&gt;  0.135429419  0.998536314  0.763499604 -2.142890353  0.114218708 -1.607047388 
-#&gt;      gene007      gene008      gene009      gene010      gene011      gene012 
-#&gt; -2.939731586 -0.526484303  0.236730899 -1.511212910 -0.829753533  3.060766630 
-#&gt;      gene013      gene014      gene015      gene016      gene017      gene018 
-#&gt; -0.620917722  1.484750928  0.278251727  0.581340878 -2.403994904 -0.004540839 
-#&gt;      gene019      gene020      gene021      gene022      gene023      gene024 
-#&gt; -0.122104982  0.394530719  0.629255693  0.278199106 -0.726850132 -1.008569200 
-#&gt;      gene025      gene026      gene027      gene028      gene029      gene030 
-#&gt;  0.338402342  0.943227343  1.856925865  2.947011701 -0.552418060  2.973923079 
-#&gt;      gene031      gene032      gene033      gene034      gene035      gene036 
-#&gt; -0.275888530 -3.263337504  0.261257433 -0.706321703 -2.144035072 -0.410440054 
-#&gt;      gene037      gene038      gene039      gene040      gene041      gene042 
-#&gt;  0.143855066 -1.057093971 -1.325673480  0.972879217 -3.906341676 -0.084882877 
-#&gt;      gene043      gene044      gene045      gene046      gene047      gene048 
-#&gt;  1.332057955 -1.159007363  0.211213044  0.394284926 -0.537981055  0.838287229 
-#&gt;      gene049      gene050      gene051      gene052      gene053      gene054 
-#&gt; -3.097811366 -0.461236625  0.537142067 -0.059455809 -1.970548399  0.862244123 
-#&gt;      gene055      gene056      gene057      gene058      gene059      gene060 
-#&gt;  1.669786803  3.378546101  2.376824552  1.103561300 -2.538256728 -1.376892644 
-#&gt;      gene061      gene062      gene063      gene064      gene065      gene066 
-#&gt;  0.628332216  1.247987382  0.712635069 -2.410204919  0.412006035 -0.521643910 
-#&gt;      gene067      gene068      gene069      gene070      gene071      gene072 
-#&gt;  2.010138991  0.520042935 -0.490243593 -0.978651703  0.822776872 -3.275548878 
-#&gt;      gene073      gene074      gene075      gene076      gene077      gene078 
-#&gt; -0.152667019 -0.099903125 -0.376039386 -0.239093121  3.357648398  1.286998050 
-#&gt;      gene079      gene080      gene081      gene082      gene083      gene084 
-#&gt;  0.110655772  1.851781384 -0.249063656  1.146170342 -1.042732860 -1.608784383 
-#&gt;      gene085      gene086      gene087      gene088      gene089      gene090 
-#&gt; -3.451070577 -1.668388592  0.787902233  1.528894233 -0.177587628 -0.280531304 
-#&gt;      gene091      gene092      gene093      gene094      gene095      gene096 
-#&gt;  1.724766602 -1.504265309 -4.069293353  0.096039843 -1.059212295  0.984766740 
-#&gt;      gene097      gene098      gene099      gene100      gene101      gene102 
-#&gt; -4.128092515 -1.842973337 -0.920986185  2.409066062  1.364686949  2.883312037 
-#&gt;      gene103      gene104      gene105      gene106      gene107      gene108 
-#&gt;  0.674964202 -0.919981767 -1.346785124 -0.027219461 -0.568062440 -0.494808270 
-#&gt;      gene109      gene110      gene111      gene112      gene113      gene114 
-#&gt;  4.100911664  0.592096455  1.664522228  1.039456901  0.793808319  0.560993081 
-#&gt;      gene115      gene116      gene117      gene118      gene119      gene120 
-#&gt; -0.004032814  0.238144340 -0.797069506 -0.584891333 -1.579094750  0.031927050 
-#&gt;      gene121      gene122      gene123      gene124      gene125      gene126 
-#&gt; -1.398488741  0.156008705  2.092805064 -1.228595623 -0.979421379  0.398811070 
-#&gt;      gene127      gene128      gene129      gene130      gene131      gene132 
-#&gt;  0.014327305  3.760040221 -1.057097757 -1.217057508  1.415188127 -1.965801428 
-#&gt;      gene133      gene134      gene135      gene136      gene137      gene138 
-#&gt;  0.259181409  0.530204426 -0.953520825  0.902350341  2.811984338 -0.953522181 
-#&gt;      gene139      gene140      gene141      gene142      gene143      gene144 
-#&gt; -0.144552703  1.242026304 -0.921643136 -1.600436066 -1.202661830 -1.044781587 
-#&gt;      gene145      gene146      gene147      gene148      gene149      gene150 
-#&gt; -0.113792480 -4.780121444  1.040293678 -0.523895169 -2.293260794 -0.457699815 
-#&gt;      gene151      gene152      gene153      gene154      gene155      gene156 
-#&gt; -2.987750203 -0.806033661 -1.178259197 -0.198374743  3.298193043  0.601999037 
-#&gt;      gene157      gene158      gene159      gene160      gene161      gene162 
-#&gt; -0.015917679  0.962188346 -1.021948326 -0.458889727 -0.178925779 -0.781423269 
-#&gt;      gene163      gene164      gene165      gene166      gene167      gene168 
-#&gt;  0.075404699  3.220767686  0.704645024 -0.522536227 -0.792762595  2.328173407 
-#&gt;      gene169      gene170      gene171      gene172      gene173      gene174 
-#&gt; -2.001922026  1.081571693  3.098664494  0.528054592 -1.985855041 -0.890353838 
-#&gt;      gene175      gene176      gene177      gene178      gene179      gene180 
-#&gt; -0.354540774  4.991187915  0.674958150 -0.202091998 -1.621687814  0.246718501 
-#&gt;      gene181      gene182      gene183      gene184      gene185      gene186 
-#&gt;  1.431569888 -3.249815185 -3.765930748 -0.694408576  1.642350035 -1.980880137 
-#&gt;      gene187      gene188      gene189      gene190      gene191      gene192 
-#&gt; -0.569844614  1.517301040 -1.888689567 -2.279152669 -2.004929244 -0.431028927 
-#&gt;      gene193      gene194      gene195      gene196      gene197      gene198 
-#&gt; -0.857740668  0.143771396  1.229683175 -1.116310429 -0.345826097  3.591278692 
-#&gt;      gene199      gene200      gene201      gene202      gene203      gene204 
-#&gt;  0.010650502 -0.617596562  0.030364431  1.227494917  0.314499903 -0.366656328 
-#&gt;      gene205      gene206      gene207      gene208      gene209      gene210 
-#&gt; -3.083329417 -1.115223146  0.388005936 -1.604263613 -1.297867763  1.207298059 
-#&gt;      gene211      gene212      gene213      gene214      gene215      gene216 
-#&gt;  0.898807167  1.436885149  0.106223245  1.903022342 -0.555835160  0.548824900 
-#&gt;      gene217      gene218      gene219      gene220      gene221      gene222 
-#&gt;  0.501493465  0.866480733  1.584496217  0.944763892  0.737409049 -0.028156341 
-#&gt;      gene223      gene224      gene225      gene226      gene227      gene228 
-#&gt; -0.142813265  1.292537344 -0.884760564  4.045755545  0.186224303  1.550543573 
-#&gt;      gene229      gene230      gene231      gene232      gene233      gene234 
-#&gt;  2.770005711 -0.047067558  0.817072510 -4.848441991 -0.840915547 -1.736438691 
-#&gt;      gene235      gene236      gene237      gene238      gene239      gene240 
-#&gt;  0.226124194  0.271982576  2.008485734 -0.440415800 -2.502772603  1.567720894 
-#&gt;      gene241      gene242      gene243      gene244      gene245      gene246 
-#&gt;  0.587401246 -0.836117765  1.665524853 -0.464377512 -0.855067413 -1.205451206 
-#&gt;      gene247      gene248      gene249      gene250      gene251      gene252 
-#&gt;  0.979355277  1.184603187 -0.731932251  0.210204474 -2.257300861 -0.446552880 
-#&gt;      gene253      gene254      gene255      gene256      gene257      gene258 
-#&gt;  2.675166385 -1.316889905 -0.604642025 -0.095306619  2.263890766  0.119198847 
-#&gt;      gene259      gene260      gene261      gene262      gene263      gene264 
-#&gt; -1.705228495  0.609512589 -1.570856214  0.138099614 -0.166628801  0.626028040 
-#&gt;      gene265      gene266      gene267      gene268      gene269      gene270 
-#&gt; -2.969818366 -1.487221658  1.504565170 -0.655670802 -3.265865332 -0.894104377 
-#&gt;      gene271      gene272      gene273      gene274      gene275      gene276 
-#&gt; -0.526393560  1.261121138 -2.784793396 -0.043330962 -1.088683222 -0.623163316 
-#&gt;      gene277      gene278      gene279      gene280      gene281      gene282 
-#&gt;           NA  0.478429613 -3.226350551  1.202999505 -0.034630843 -0.098330212 
-#&gt;      gene283      gene284      gene285      gene286      gene287      gene288 
-#&gt; -0.388587454  0.620374782 -0.170861492  0.910965469  1.880818304 -2.749884974 
-#&gt;      gene289      gene290      gene291      gene292      gene293      gene294 
-#&gt; -2.074919716 -1.003053162 -2.522421841  0.519834572  1.983727598 -1.219505125 
-#&gt;      gene295      gene296      gene297      gene298      gene299      gene300 
-#&gt;  1.291034758  0.771948976  1.420236309 -1.563169219  1.390523154 -3.157001188 
-#&gt;      gene301      gene302      gene303      gene304      gene305      gene306 
-#&gt;  0.995145511  1.305428321 -0.827937905  4.522984645 -1.417095280 -0.170480146 
-#&gt;      gene307      gene308      gene309      gene310      gene311      gene312 
-#&gt;  0.876907676  0.312887043  0.326072440 -0.238011035 -0.420151474  2.639492484 
-#&gt;      gene313      gene314      gene315      gene316      gene317      gene318 
-#&gt; -0.996881289  0.006146566  3.303070700  0.277640304 -0.310187288 -2.794823455 
-#&gt;      gene319      gene320      gene321      gene322      gene323      gene324 
-#&gt;  1.357224380  0.588952875  0.097667669 -0.952159886 -0.891914624 -0.472831408 
-#&gt;      gene325      gene326      gene327      gene328      gene329      gene330 
-#&gt;  0.916905690 -0.362600241 -0.148887528 -0.526622534  1.774455699 -4.537760463 
-#&gt;      gene331      gene332      gene333      gene334      gene335      gene336 
-#&gt;  0.809854785 -0.391051450 -0.317781523 -0.614193799 -4.384546250 -0.076599537 
-#&gt;      gene337      gene338      gene339      gene340      gene341      gene342 
-#&gt; -0.623251901  3.564425696  1.459480747 -0.096705076  0.614996864 -0.607726216 
-#&gt;      gene343      gene344      gene345      gene346      gene347      gene348 
-#&gt; -1.057097047 -1.393720373 -0.792557601 -0.095306619 -0.123033554 -2.597634332 
-#&gt;      gene349      gene350      gene351      gene352      gene353      gene354 
-#&gt;  4.675332893  0.864963733 -1.460653353  1.485343605 -0.677576429 -3.735835706 
-#&gt;      gene355      gene356      gene357      gene358      gene359      gene360 
-#&gt;  1.155851029 -1.442962943  1.328764869  2.221477047 -0.576126564  0.569603856 
-#&gt;      gene361      gene362      gene363      gene364      gene365      gene366 
-#&gt; -0.637583474  2.380233966 -0.308049076 -1.100317798 -0.010705403  3.027368447 
-#&gt;      gene367      gene368      gene369      gene370      gene371      gene372 
-#&gt; -1.057100508 -1.033432802 -1.393395063 -1.875522172 -0.245832497 -0.065059408 
-#&gt;      gene373      gene374      gene375      gene376      gene377      gene378 
-#&gt; -0.149670043  0.942919369  0.309478350  0.353994271  0.393096461  2.113051993 
-#&gt;      gene379      gene380      gene381      gene382      gene383      gene384 
-#&gt; -5.517859792 -2.438888579 -1.708216048  0.512116310 -0.184676662  0.321003030 
-#&gt;      gene385      gene386      gene387      gene388      gene389      gene390 
-#&gt; -3.366056073 -1.371153751  0.269776837  1.314349619  0.629009731 -0.744227464 
-#&gt;      gene391      gene392      gene393      gene394      gene395      gene396 
-#&gt; -0.041820440 -0.704528901  0.165510430  0.107109740  1.135626959  0.216157390 
-#&gt;      gene397      gene398      gene399      gene400      gene401      gene402 
-#&gt;  3.307611426 -1.677624172 -0.119979547 -0.367770010 -1.568911793 -1.494433513 
-#&gt;      gene403      gene404      gene405      gene406      gene407      gene408 
-#&gt;  0.514651997  1.787764053  0.028258757 -0.332227165 -1.576205959  0.432481683 
-#&gt;      gene409      gene410      gene411      gene412      gene413      gene414 
-#&gt; -1.279059242 -1.625261786 -0.066556247 -1.820460723 -1.346737470 -0.544498097 
-#&gt;      gene415      gene416      gene417      gene418      gene419      gene420 
-#&gt;  0.936715725  0.688346825  2.340425055 -0.104052275 -0.211711174 -0.838048001 
-#&gt;      gene421      gene422      gene423      gene424      gene425      gene426 
-#&gt; -0.357397463 -3.023981215  0.010728595 -1.457138394  0.589306836  1.103526285 
-#&gt;      gene427      gene428      gene429      gene430      gene431      gene432 
-#&gt; -0.947106668  0.836328864 -2.859237016 -2.505870975  1.910930989  1.466076010 
-#&gt;      gene433      gene434      gene435      gene436      gene437      gene438 
-#&gt;  0.322925457  1.846357556  3.950437231 -1.446885666 -1.351216507  0.140444997 
-#&gt;      gene439      gene440      gene441      gene442      gene443      gene444 
-#&gt;  0.056040900 -1.068742253 -0.259902683 -0.087805680  2.747616228 -4.560490385 
-#&gt;      gene445      gene446      gene447      gene448      gene449      gene450 
-#&gt; -0.402390143  1.177928013  0.823470662 -1.289542732  1.063256047 -3.194912926 
-#&gt;      gene451      gene452      gene453      gene454      gene455      gene456 
-#&gt; -1.537105468  1.067733918  0.468905351  0.900843079  0.325531441 -0.431249122 
-#&gt;      gene457      gene458      gene459      gene460      gene461      gene462 
-#&gt;  0.354439877 -1.321277276 -1.878318315 -1.583642414 -0.933811088 -3.464047706 
-#&gt;      gene463      gene464      gene465      gene466      gene467      gene468 
-#&gt; -2.936562753 -0.351943280  2.161921690 -0.748147109 -2.977375470  0.811450763 
-#&gt;      gene469      gene470      gene471      gene472      gene473      gene474 
-#&gt; -0.664559628 -1.502638531  2.155447182  0.368451732  0.204515957  0.113877428 
-#&gt;      gene475      gene476      gene477      gene478      gene479      gene480 
-#&gt;  0.211396757 -0.674516809  0.991905814  1.872739085 -2.403229560 -0.286098021 
-#&gt;      gene481      gene482      gene483      gene484      gene485      gene486 
-#&gt;  0.878571995  0.377998787  1.870907757 -1.122368311 -0.820057809 -0.354125039 
-#&gt;      gene487      gene488      gene489      gene490      gene491      gene492 
-#&gt;  0.866480733 -0.855963467 -2.576960718  1.187377022 -0.843930915 -0.293518064 
-#&gt;      gene493      gene494      gene495      gene496      gene497      gene498 
-#&gt;  0.972592014 -2.842828849  0.808596202  1.607361638  1.226284171  3.069360165 
-#&gt;      gene499      gene500 
-#&gt;  0.840007165 -0.737040293 </div><div class='input'>
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='no'>object</span> <span class='kw'>&lt;-</span> <span class='no'>deseq</span>
-<span class='fu'>resultsDiff</span>(<span class='no'>object</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>2L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>treatment_D_vs_C (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>Calculating relative difference of 'log2FoldChange'.</span></div><div class='output co'>#&gt;       gene001       gene002       gene003       gene004       gene005 
-#&gt;  0.6676517264  0.2241710266  0.1687927632  0.0153596933 -0.2239665320 
-#&gt;       gene006       gene007       gene008       gene009       gene010 
-#&gt; -0.5732946778 -1.8727938184 -0.0183509294 -0.3947941265 -0.0006928087 
-#&gt;       gene011       gene012       gene013       gene014       gene015 
-#&gt; -0.2704492038  0.1007829424 -0.0785694340  0.1860848260  0.6096471809 
-#&gt;       gene016       gene017       gene018       gene019       gene020 
-#&gt; -0.0723576694 -0.1542258686  0.0289448553  0.3298941113  0.2147923247 
-#&gt;       gene021       gene022       gene023       gene024       gene025 
-#&gt;  0.0655920219  0.6473071153 -0.4879692927 -1.2057037011  0.0500677391 
-#&gt;       gene026       gene027       gene028       gene029       gene030 
-#&gt;  0.1155508969  1.2195259047  2.6089898067 -0.1318270944  1.9619761723 
-#&gt;       gene031       gene032       gene033       gene034       gene035 
-#&gt; -0.2917950690 -0.3639006028 -0.0522546581  0.1377694993 -1.2908766590 
-#&gt;       gene036       gene037       gene038       gene039       gene040 
-#&gt; -0.2394997039 -0.0051738129 -0.0701495516 -0.5763582871  0.5564052328 
-#&gt;       gene041       gene042       gene043       gene044       gene045 
-#&gt; -0.7548740614  0.0140539691  0.5589827000 -0.4771782247  0.0084874762 
-#&gt;       gene046       gene047       gene048       gene049       gene050 
-#&gt; -0.1766554434 -0.2272478969  0.3204349847 -0.4120338172 -0.4373501837 
-#&gt;       gene051       gene052       gene053       gene054       gene055 
-#&gt;  0.2961622369 -0.3350745216 -0.2650486563  0.9193906647  1.2002157270 
-#&gt;       gene056       gene057       gene058       gene059       gene060 
-#&gt;  0.1663868827  1.4803895440  0.3723097991 -0.0153437867 -1.6879788172 
-#&gt;       gene061       gene062       gene063       gene064       gene065 
-#&gt;  0.4680718592  1.1560177509  0.2843868006 -0.0923404985  0.5618400353 
-#&gt;       gene066       gene067       gene068       gene069       gene070 
-#&gt; -0.1825125762  0.9849830243 -0.3526421378  0.0860684030  0.5684313837 
-#&gt;       gene071       gene072       gene073       gene074       gene075 
-#&gt;  0.4043362551 -0.2761173746 -0.0349943452  0.2550471953 -0.2732950143 
-#&gt;       gene076       gene077       gene078       gene079       gene080 
-#&gt; -0.0210261058  0.0011539291  0.1201983253 -0.0901549177  0.9133997333 
-#&gt;       gene081       gene082       gene083       gene084       gene085 
-#&gt;  0.4395450270  0.3768848588 -0.1347200295 -1.6144538636 -0.0238326639 
-#&gt;       gene086       gene087       gene088       gene089       gene090 
-#&gt; -0.5182733670  0.9778342943  0.5174353615 -0.1154349417 -0.4014136037 
-#&gt;       gene091       gene092       gene093       gene094       gene095 
-#&gt;  0.4661320424 -0.3522304649 -0.2823241790 -0.0934052060 -1.4675002364 
-#&gt;       gene096       gene097       gene098       gene099       gene100 
-#&gt;  0.3587150400 -0.0179859881 -0.5610244018 -0.7801832628  0.0254020765 
-#&gt;       gene101       gene102       gene103       gene104       gene105 
-#&gt;  1.1442073430 -0.0471669966  0.2502289897 -0.2395888907 -0.9610439494 
-#&gt;       gene106       gene107       gene108       gene109       gene110 
-#&gt; -0.0709498007 -0.8219652269  0.1480645195  2.9456916709 -0.0122949672 
-#&gt;       gene111       gene112       gene113       gene114       gene115 
-#&gt;  0.2839370577  2.0544948698  1.1626483286  0.5053793788  0.2421696832 
-#&gt;       gene116       gene117       gene118       gene119       gene120 
-#&gt;  0.0844107247 -0.0803013184 -0.5643669555 -1.7188430046 -0.0870387085 
-#&gt;       gene121       gene122       gene123       gene124       gene125 
-#&gt; -0.7980706799  0.1763067762 -1.0104358820 -0.5043484459 -0.8508696070 
-#&gt;       gene126       gene127       gene128       gene129       gene130 
-#&gt; -0.4504774952  0.0831771809  0.1292491327 -0.1079701896 -0.9943569067 
-#&gt;       gene131       gene132       gene133       gene134       gene135 
-#&gt;  1.3826404211 -0.9152158633  0.3566664771  1.1007520297 -0.3313569211 
-#&gt;       gene136       gene137       gene138       gene139       gene140 
-#&gt;  0.2902511729  0.3819533476 -0.4829485883 -0.1836136600  0.5848265961 
-#&gt;       gene141       gene142       gene143       gene144       gene145 
-#&gt; -0.7516164933  0.0115963418  0.1017852364 -0.4912890991 -0.1845558255 
-#&gt;       gene146       gene147       gene148       gene149       gene150 
-#&gt; -0.2219967606  0.1585005646 -0.3802636904 -0.5885573062 -0.4115767283 
-#&gt;       gene151       gene152       gene153       gene154       gene155 
-#&gt; -0.0099764194 -0.2917020108 -0.4031625973  0.1065319651  3.1197567110 
-#&gt;       gene156       gene157       gene158       gene159       gene160 
-#&gt; -0.1320299247 -0.2261490925  0.1351444158 -0.0702447068 -0.0247901562 
-#&gt;       gene161       gene162       gene163       gene164       gene165 
-#&gt; -0.1741981203 -0.4681943806  0.5815107427  0.2924012595 -0.2507584978 
-#&gt;       gene166       gene167       gene168       gene169       gene170 
-#&gt;  0.0594556387 -0.0832269792 -0.0962487170 -0.9773632455  1.4085227431 
-#&gt;       gene171       gene172       gene173       gene174       gene175 
-#&gt;  0.1777955268  0.2944941419 -0.0617194432 -0.0280248217  0.3283323247 
-#&gt;       gene176       gene177       gene178       gene179       gene180 
-#&gt;  0.0641623273  0.3988852297 -0.2398614102 -0.1370347362 -0.2759183528 
-#&gt;       gene181       gene182       gene183       gene184       gene185 
-#&gt;  1.0221041920 -0.2893786396 -0.0967568222 -0.1675586694  1.7921365752 
-#&gt;       gene186       gene187       gene188       gene189       gene190 
-#&gt; -0.1198040204 -0.1059813220  0.7403619469 -0.1471387643 -0.1548959113 
-#&gt;       gene191       gene192       gene193       gene194       gene195 
-#&gt; -0.8463582529 -0.5388246104 -1.3156340055  0.7417535773  1.2138944247 
-#&gt;       gene196       gene197       gene198       gene199       gene200 
-#&gt; -1.1079384610  0.0204635851  0.0479272083  0.1895427253 -0.3146934376 
-#&gt;       gene201       gene202       gene203       gene204       gene205 
-#&gt; -0.3922634486  0.8106479422 -0.0229905338  0.0470393544 -0.2854608746 
-#&gt;       gene206       gene207       gene208       gene209       gene210 
-#&gt; -0.6979760083 -0.0867551531 -1.9314930181 -0.9667665575  1.3723604915 
-#&gt;       gene211       gene212       gene213       gene214       gene215 
-#&gt; -0.0896271182  0.7006349984 -0.0193539607  1.9862334539 -0.3252713486 
-#&gt;       gene216       gene217       gene218       gene219       gene220 
-#&gt;  0.2964298274 -0.4028042447  0.0511856459  1.2764356751  0.9073659288 
-#&gt;       gene221       gene222       gene223       gene224       gene225 
-#&gt;  0.7533420126  0.1600860043  0.0278880018  0.7117787538 -0.7395444984 
-#&gt;       gene226       gene227       gene228       gene229       gene230 
-#&gt;  0.2136189237  0.3429540564  0.5444512699  0.3729581205 -1.1055078673 
-#&gt;       gene231       gene232       gene233       gene234       gene235 
-#&gt;  0.2456387695 -6.7022193528 -0.8597032979 -0.3026552867 -0.4017424531 
-#&gt;       gene236       gene237       gene238       gene239       gene240 
-#&gt; -0.0176484792  1.6883558728 -0.1672806231 -0.0725960446  1.1733813890 
-#&gt;       gene241       gene242       gene243       gene244       gene245 
-#&gt;  0.7615544027 -0.8680982746  2.3723478523 -0.1774254408 -0.4059439893 
-#&gt;       gene246       gene247       gene248       gene249       gene250 
-#&gt; -0.2656085629 -0.4635897928  1.4758045217 -0.0890749230  1.7212608298 
-#&gt;       gene251       gene252       gene253       gene254       gene255 
-#&gt; -0.1453297058  0.0547650269  0.5232943656 -0.7011403312 -0.4677582008 
-#&gt;       gene256       gene257       gene258       gene259       gene260 
-#&gt; -0.0468365070  1.6221563778 -0.0300761383 -0.9625221404  0.7914931813 
-#&gt;       gene261       gene262       gene263       gene264       gene265 
-#&gt;  0.1765005315 -0.0689887734  0.2337515630  0.7127446968 -0.1796949851 
-#&gt;       gene266       gene267       gene268       gene269       gene270 
-#&gt; -0.1911308204  1.2618303269  0.1462374279 -3.3079098702  0.1663482084 
-#&gt;       gene271       gene272       gene273       gene274       gene275 
-#&gt; -0.0313159199  0.8147534110 -0.1500831336  0.1447881184 -0.0442479433 
-#&gt;       gene276       gene277       gene278       gene279       gene280 
-#&gt; -0.4845768976            NA  0.2717819620 -1.6574870277 -0.3449685584 
-#&gt;       gene281       gene282       gene283       gene284       gene285 
-#&gt; -0.3016521226  0.2072272439 -0.3766610266  0.4810194506  0.0213107299 
-#&gt;       gene286       gene287       gene288       gene289       gene290 
-#&gt;  0.5067749563  0.2721229300 -2.3847602590 -0.1519456457 -0.3167277857 
-#&gt;       gene291       gene292       gene293       gene294       gene295 
-#&gt; -0.5854478130  0.3881046101  0.3735970101 -1.2748073208  0.1358954465 
-#&gt;       gene296       gene297       gene298       gene299       gene300 
-#&gt;  1.2665548086  0.3445965234 -1.2724121154  1.6966259904 -2.3838202014 
-#&gt;       gene301       gene302       gene303       gene304       gene305 
-#&gt;  0.8262027771  0.5857884460 -0.7287057659  0.6772679372 -0.8957897453 
-#&gt;       gene306       gene307       gene308       gene309       gene310 
-#&gt; -0.3978157546  0.4905001998 -0.3272537196  0.1416372159 -0.0409401435 
-#&gt;       gene311       gene312       gene313       gene314       gene315 
-#&gt;  0.0287165722  0.4482851766 -0.7198037005 -0.4710533681  2.3729013029 
-#&gt;       gene316       gene317       gene318       gene319       gene320 
-#&gt; -0.4441805548  0.5588034354 -0.1669727732  0.3207413715  0.8376489100 
-#&gt;       gene321       gene322       gene323       gene324       gene325 
-#&gt; -0.0519185151 -1.2550130676 -0.4552468480 -0.7450934384  0.3410960277 
-#&gt;       gene326       gene327       gene328       gene329       gene330 
-#&gt;  0.1842233294 -0.1276118202 -0.0892794755  0.5691439406 -0.4982582771 
-#&gt;       gene331       gene332       gene333       gene334       gene335 
-#&gt;  0.3706977625  0.2075531935 -0.2795324467 -0.3390643393 -0.4008198410 
-#&gt;       gene336       gene337       gene338       gene339       gene340 
-#&gt;  0.0842416129  0.1182363297  2.9124079435  0.0235659711 -0.0372101064 
-#&gt;       gene341       gene342       gene343       gene344       gene345 
-#&gt;  0.4948693557 -0.3508325868 -0.1064224790 -1.0393954432 -0.3878989080 
-#&gt;       gene346       gene347       gene348       gene349       gene350 
-#&gt; -0.0544205823 -0.2307333656 -0.8940839423  0.0159222669  0.4296336973 
-#&gt;       gene351       gene352       gene353       gene354       gene355 
-#&gt; -1.1352012908  1.8988849543 -0.2385024459  0.1691288136 -0.0294196888 
-#&gt;       gene356       gene357       gene358       gene359       gene360 
-#&gt; -0.6401959216  0.8691805618  1.7715033037 -0.2838685925 -0.4751898050 
-#&gt;       gene361       gene362       gene363       gene364       gene365 
-#&gt; -0.1662391077  0.5665962643  0.0683200436 -0.5165106886  0.2342716540 
-#&gt;       gene366       gene367       gene368       gene369       gene370 
-#&gt;  0.2792490552 -0.1064037764 -0.7147544298 -0.0887748380 -1.3727922334 
-#&gt;       gene371       gene372       gene373       gene374       gene375 
-#&gt; -0.1511360220 -0.0149447503 -0.1490955354 -0.0708792452 -0.1090617995 
-#&gt;       gene376       gene377       gene378       gene379       gene380 
-#&gt; -0.2580620403  0.3126648766  0.3124499901 -0.8242964379 -3.0651942168 
-#&gt;       gene381       gene382       gene383       gene384       gene385 
-#&gt; -0.7471910149  0.9335725099  0.0737907828 -0.5428960244 -0.4444017328 
-#&gt;       gene386       gene387       gene388       gene389       gene390 
-#&gt; -0.1850665940  0.5133233368  0.1283057190  0.0801447369 -0.6880815239 
-#&gt;       gene391       gene392       gene393       gene394       gene395 
-#&gt; -0.3326953179 -0.0672197723  0.1720008180  0.0360173511  0.7097919898 
-#&gt;       gene396       gene397       gene398       gene399       gene400 
-#&gt;  0.4335097129  0.0513815557 -0.8497656099 -0.2055610666 -0.6306530356 
-#&gt;       gene401       gene402       gene403       gene404       gene405 
-#&gt; -1.9299581560  0.0960763782  0.1999605444  1.5427272925  0.2065625622 
-#&gt;       gene406       gene407       gene408       gene409       gene410 
-#&gt; -0.1863310703 -1.1990044629 -0.0150151289 -0.2903706469 -0.1327995715 
-#&gt;       gene411       gene412       gene413       gene414       gene415 
-#&gt;  0.1160069807 -0.8817621000 -0.3898470994 -0.5075079717 -0.1222210624 
-#&gt;       gene416       gene417       gene418       gene419       gene420 
-#&gt;  0.7997606770  2.3836414216 -0.2469546996 -0.1184224901 -0.0697028255 
-#&gt;       gene421       gene422       gene423       gene424       gene425 
-#&gt; -0.4668595920 -0.2001201409  0.0861878857 -0.8912600098 -0.0511340419 
-#&gt;       gene426       gene427       gene428       gene429       gene430 
-#&gt;  0.1736998115 -0.0536460596  0.4942104303 -0.1206813014 -0.0870455845 
-#&gt;       gene431       gene432       gene433       gene434       gene435 
-#&gt;  1.5016436310 -0.0309980816 -0.0129874070 -0.0020701695  3.0504894491 
-#&gt;       gene436       gene437       gene438       gene439       gene440 
-#&gt; -0.3962802437 -1.2291909873 -0.4498084476  0.0797963124  0.2488835443 
-#&gt;       gene441       gene442       gene443       gene444       gene445 
-#&gt; -0.0741054685 -0.2833670277  0.0736622207 -0.3111492507 -0.5868095346 
-#&gt;       gene446       gene447       gene448       gene449       gene450 
-#&gt;  0.6351796245  0.2728257745 -0.0404429626  0.4937058186 -0.1276556815 
-#&gt;       gene451       gene452       gene453       gene454       gene455 
-#&gt; -0.5342311119  0.5117431437 -0.1872689514 -0.2184553653 -0.0399267646 
-#&gt;       gene456       gene457       gene458       gene459       gene460 
-#&gt; -0.4475891207  0.2323199425 -1.4554335436 -0.0367333880 -0.3318098961 
-#&gt;       gene461       gene462       gene463       gene464       gene465 
-#&gt;  0.0873057779 -0.8143291719 -2.8017283343 -0.3109719577  1.8861318657 
-#&gt;       gene466       gene467       gene468       gene469       gene470 
-#&gt; -0.3350122327 -0.5761915066  0.4578837887 -0.6345913775 -1.0264435783 
-#&gt;       gene471       gene472       gene473       gene474       gene475 
-#&gt; -0.0545819461  0.2293655869  0.0854032885 -0.1283135235  0.2196258402 
-#&gt;       gene476       gene477       gene478       gene479       gene480 
-#&gt; -0.0876316083  0.2836177690  0.8120917492 -1.3351002471 -0.2218759697 
-#&gt;       gene481       gene482       gene483       gene484       gene485 
-#&gt;  0.1047685887  1.1114429293  1.1071076897 -0.2106659623 -0.9412176852 
-#&gt;       gene486       gene487       gene488       gene489       gene490 
-#&gt; -0.7651954519  0.0512393202 -0.6418288049 -0.0171688288  1.0063111885 
-#&gt;       gene491       gene492       gene493       gene494       gene495 
-#&gt;  0.0290138304 -0.2173342210  0.4465724891 -3.3424383510  1.4752535733 
-#&gt;       gene496       gene497       gene498       gene499       gene500 
-#&gt;  0.1742854222  0.2154481243  0.0811705815  0.0406903419 -0.2771004730 </div></pre>
+<span class='no'>diff</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsDiff</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>2L</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> treatment_D_vs_C (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>→ Calculating relative difference of </span><span style='color: #000000;background-color: #BBBBBB;'>`log2FoldChange`</span><span>.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>diff</span>)</div><div class='output co'>#&gt;     gene001     gene002     gene003     gene004     gene005     gene006 
+#&gt;  0.66765173  0.22417103  0.16879276  0.01535969 -0.22396653 -0.57329468 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

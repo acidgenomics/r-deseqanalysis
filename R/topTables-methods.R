@@ -1,6 +1,6 @@
 #' @name topTables
 #' @inherit acidgenerics::topTables
-#' @note Updated 2020-08-04.
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -174,18 +174,12 @@ setMethod(
 
 
 
-## Updated 2020-08-04.
+## Updated 2020-08-05.
 `topTables,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        n = 10L,
-        lfcShrink = NULL
-    ) {
+    function(object, i, n = 10L) {
         list <- resultsTables(
             object = object,
             i = i,
-            lfcShrink = lfcShrink,
             extra = TRUE,
             return = "DataFrameList"
         )

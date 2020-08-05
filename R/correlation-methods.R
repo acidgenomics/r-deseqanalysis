@@ -2,7 +2,7 @@
 #'
 #' @name correlation
 #' @inherit basejump::correlation
-#' @note Updated 2020-08-04.
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
 #' @param col `character(1)`.
@@ -72,7 +72,7 @@ setMethod(
 
 
 
-## Updated 2020-08-04.
+## Updated 2020-08-05.
 `correlation,DESeqAnalysis,missing` <-  # nolint
     function(
         x,
@@ -85,8 +85,8 @@ setMethod(
         assert(!identical(i, j))
         method <- match.arg(method)
         correlation(
-            x = results(object = x, i = i, lfcShrink = FALSE),
-            y = results(object = x, i = j, lfcShrink = FALSE),
+            x = results(object = x, i = i),
+            y = results(object = x, i = j),
             method = method
         )
     }
