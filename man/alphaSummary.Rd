@@ -3,6 +3,7 @@
 \name{alphaSummary}
 \alias{alphaSummary}
 \alias{alphaSummary,DESeqDataSet-method}
+\alias{alphaSummary,DESeqAnalysis-method}
 \title{Alpha level cutoff summary statistics}
 \usage{
 alphaSummary(object, ...)
@@ -13,6 +14,8 @@ alphaSummary(object, ...)
   contrast = NULL,
   name = NULL
 )
+
+\S4method{alphaSummary}{DESeqAnalysis}(object, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -50,12 +53,9 @@ Updated 2019-08-20.
 \examples{
 data(deseq)
 
-## DESeqDataSet ====
-dds <- as(deseq, "DESeqDataSet")
-resultsNames(dds)
-alphaSummary(dds)
-alphaSummary(dds, contrast = c("condition", "B", "A"))
-alphaSummary(dds, name = "condition_B_vs_A")
+## DESeqAnalysis ====
+alphaSummary(deseq, contrast = c("condition", "B", "A"))
+alphaSummary(deseq, name = "condition_B_vs_A")
 }
 \seealso{
 \itemize{

@@ -1,6 +1,6 @@
 #' @name plotDEGUpset
 #' @inherit acidgenerics::plotDEGUpset
-#' @note Updated 2020-07-28.
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -8,6 +8,8 @@
 #'
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' plotDEGUpset(deseq)
 NULL
 
@@ -22,23 +24,17 @@ NULL
 
 
 
-## Updated 2020-07-28.
+## Updated 2020-08-05.
 `plotDEGUpset,DESeqAnalysis` <-  # nolint
     function(
         object,
-        alpha = NULL,
-        lfcThreshold = NULL,
-        baseMeanThreshold = NULL,
         direction = c("both", "up", "down")
     ) {
         direction <- match.arg(direction)
-        degPerContrast <- .degPerContrast(
+        degPerContrast <- degPerContrast(
             object = object,
-            alpha = alpha,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold,
             direction = direction,
-            n = FALSE
+            return = "list"
         )
         ## This will collapse the nested lists into a single flat list.
         listInput <- do.call(what = c, args = degPerContrast)

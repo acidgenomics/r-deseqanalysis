@@ -22,8 +22,7 @@ plotPCA(object, ...)
   pointSize = getOption(x = "acid.point.size", default = 3L),
   title = "PCA",
   subtitle = NULL,
-  return = c("ggplot", "DataFrame"),
-  ...
+  return = c("ggplot", "DataFrame")
 )
 
 \S4method{plotPCA}{DESeqAnalysis}(object, ...)
@@ -89,7 +88,7 @@ method.
 }}
 
 \note{
-Updated 2019-09-17.
+Updated 2020-08-04.
 }
 \section{Principal component analysis}{
 
@@ -109,10 +108,6 @@ data(deseq)
 
 ## DESeqAnalysis ====
 plotPCA(deseq)
-
-## DESeqTransform ====
-dt <- as(deseq, "DESeqTransform")
-plotPCA(dt)
 }
 \references{
 Jolliffe, et al., 2002.

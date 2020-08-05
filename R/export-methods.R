@@ -2,7 +2,7 @@
 #' @inherit acidgenerics::export
 #' @note Size-factor normalized coutns and FPKM values are calculated on the fly
 #' and exported automatically.
-#' @note Updated 2020-03-16.
+#' @note Updated 2020-08-04.
 #'
 #' @inheritParams pipette::export
 #' @inheritParams params
@@ -60,12 +60,11 @@ NULL
 
 ## Here we are looping across each contrast and writing out DEG tables.
 ## Note: We don't need to support humanize mode because `geneName` is required.
-## Updated 2019-11-08.
-.exportResultsTables <- function(object, dir, compress, lfcShrink) {
+## Updated 2020-08-04.
+.exportResultsTables <- function(object, dir, compress) {
     assert(
         is(object, "DESeqAnalysis"),
-        isFlag(compress),
-        isFlag(lfcShrink)
+        isFlag(compress)
     )
     resultsNames <- resultsNames(object)
     out <- lapply(
@@ -74,12 +73,11 @@ NULL
             data <- resultsTables(
                 object = object,
                 i = i,
-                lfcShrink = lfcShrink,
                 extra = TRUE,
                 return = "tbl_df"
             )
             if (is.null(data)) {
-                return(invisible())
+                return()
             }
             files <- file.path(dir, i, paste0(names(data), ".csv"))
             if (isTRUE(compress)) {
@@ -140,20 +138,18 @@ setMethod(
 
 
 
-## Updated 2019-11-12.
+## Updated 2020-08-04.
 `export,DESeqAnalysis` <-  # nolint
     function(
         object,
         name = NULL,
         dir = ".",
-        compress = FALSE,
-        lfcShrink = TRUE
+        compress = FALSE
     ) {
         validObject(object)
         assert(
             isString(name, nullOK = TRUE),
-            isFlag(compress),
-            isFlag(lfcShrink)
+            isFlag(compress)
         )
         call <- standardizeCall()
         assert(isString(name, nullOK = TRUE))
@@ -166,7 +162,7 @@ setMethod(
         rm(name)
         files <- list()
         ## DESeqDataSet.
-        message("Exporting DESeqDataSet to 'data'.")
+        cli_alert("Exporting {.var DESeqDataSet} to {.path data}.")
         files[["data"]] <-
             export(
                 object = as(object, "DESeqDataSet"),
@@ -175,7 +171,7 @@ setMethod(
                 compress = compress
             )
         ## DESeqTransform.
-        message("Exporting DESeqTransform to 'transform'.")
+        cli_alert("Exporting {.var DESeqTransform} to {.path transform}.")
         files[["transform"]] <-
             export(
                 object = as(object, "DESeqTransform"),
@@ -184,16 +180,19 @@ setMethod(
                 compress = compress
             )
         ## DEG results tables.
-        message("Exporting DESeqResults tables to 'resultsTables'.")
+        cli_alert(
+            "Exporting {.var DESeqResults} tables to {.path resultsTables}."
+        )
         files[["resultsTables"]] <-
             .exportResultsTables(
                 object = object,
                 dir = file.path(dir, "resultsTables"),
-                compress = compress,
-                lfcShrink = lfcShrink
+                compress = compress
             )
         ## Combined results matrices.
-        message("Exporting DESeqResults matrices to 'resultsMatrices'.")
+        cli_alert(
+            "Exporting {.var DESeqResults} matrices to {.path resultsMatrices}."
+        )
         files[["resultsMatrices"]] <-
             .exportResultsMatrices(
                 object = object,

@@ -5,8 +5,7 @@ test_that("DESeqAnalysis", {
         object = deseq,
         name = "AAA",
         dir = "XXX",
-        compress = TRUE,
-        lfcShrink = TRUE
+        compress = TRUE
     )
     prefix <- realpath(file.path("XXX", "AAA"))
     resTblPrefix <- file.path(prefix, "resultsTables")

@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.21</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -128,24 +128,14 @@
 <span class='fu'>resultsTables</span>(
   <span class='no'>object</span>,
   <span class='kw'>DESeqDataSet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>baseMeanThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"tbl_df"</span>, <span class='st'>"DataFrameList"</span>),
-  <span class='no'>...</span>
-)
-
-<span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>resultsTables</span>(
-  <span class='no'>object</span>,
-  <span class='no'>i</span>,
-  <span class='kw'>lfcShrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>extra</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>alphaThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>baseMeanThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"tbl_df"</span>, <span class='st'>"DataFrameList"</span>)
-)</pre>
+)
+
+<span class='co'># S4 method for DESeqAnalysis</span>
+<span class='fu'>resultsTables</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='kw'>extra</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,7 +149,7 @@
       <td><p><code>DESeqDataSet</code> or <code>NULL</code>.</p></td>
     </tr>
     <tr>
-      <th>alpha</th>
+      <th>alphaThreshold</th>
       <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
 Adjusted P value ("alpha") cutoff. If left <code>NULL</code>, will use the cutoff
 defined in the object.</p></td>
@@ -187,24 +177,19 @@ Uses <a href='https://rdrr.io/r/base/match.arg.html'>match.arg()</a>.</p><ul>
 </ul></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Additional arguments.</p></td>
-    </tr>
-    <tr>
       <th>i</th>
       <td><p>Indices specifying elements to extract or replace. Indices are <code>numeric</code> or
 <code>character</code> vectors, empty (<code>missing</code>), or <code>NULL</code>.</p>
 <p>For more information:</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/help.html'>help</a></span>(<span class='kw'>topic</span> <span class='kw'>=</span> <span class='st'>"Extract"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"base"</span>)</pre></td>
     </tr>
     <tr>
-      <th>lfcShrink</th>
-      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
-Use shrunken log2 fold change (LFC) values.</p></td>
-    </tr>
-    <tr>
       <th>extra</th>
       <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
 Include row data and normalized counts from internal <code>DESeqDataSet</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments.</p></td>
     </tr>
     </table>
 
@@ -219,7 +204,7 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 <code>all</code> table), are arranged by adjusted <em>P</em> value.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-12-18.</p>
+    <p>Updated 2020-08-05.</p>
 <p>It is generally recommended to not apply post hoc log fold change
 cutoffs. If a specific effect size is desired, instead run
 <code><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>DESeq2::results()</a></code> using the <code>lfcThreshold</code> parameter. Refer to the DESeq2
@@ -243,11 +228,11 @@ used for overrepresentation testing but should NOT be used for GSEA.</p></li>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsTables</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'><span style='color: #BBBB00;'>!</span><span> Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 38 differentially expressed genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 24 upregulated genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 14 downregulated genes (alpha &lt; 0.01)</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "all"  "up"   "down" "both"</div><div class='input'>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsTables</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> Returning with the sample names unmodified.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 38 differentially expressed genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 24 upregulated genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 14 downregulated genes (alpha &lt; 0.01)</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "all"  "up"   "down" "both"</div><div class='input'>
 <span class='co'>## DESeqResults ====</span>
 <span class='co'>## Use of DESeqAnalysis is encouraged instead of this approach.</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>condition_B_vs_A (unshrunken LFC)</span></div><div class='input'><span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.html'>as</a></span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsTables</span>(<span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>res</span>, <span class='kw'>DESeqDataSet</span> <span class='kw'>=</span> <span class='no'>dds</span>)</div><div class='output co'>#&gt; <span class='message'>Joining row annotations.</span></div><div class='output co'>#&gt; <span class='message'>Joining size factor adjusted normalized counts.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 38 differentially expressed genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 24 upregulated genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 14 downregulated genes (alpha &lt; 0.01)</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "all"  "up"   "down" "both"</div></span></pre>
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='input'><span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.html'>as</a></span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsTables</span>(<span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>res</span>, <span class='kw'>DESeqDataSet</span> <span class='kw'>=</span> <span class='no'>dds</span>)</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 38 differentially expressed genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 24 upregulated genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 14 downregulated genes (alpha &lt; 0.01)</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "all"  "up"   "down" "both"</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

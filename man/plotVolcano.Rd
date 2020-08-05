@@ -10,7 +10,7 @@ plotVolcano(object, ...)
 
 \S4method{plotVolcano}{DESeqResults}(
   object,
-  alpha = NULL,
+  alphaThreshold = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
   genes = NULL,
@@ -27,12 +27,12 @@ plotVolcano(object, ...)
   return = c("ggplot", "DataFrame")
 )
 
-\S4method{plotVolcano}{DESeqAnalysis}(object, i, lfcShrink = TRUE, ...)
+\S4method{plotVolcano}{DESeqAnalysis}(object, i, ...)
 }
 \arguments{
 \item{object}{Object.}
 
-\item{alpha}{\code{numeric(1)} or \code{NULL}.
+\item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 
@@ -85,9 +85,6 @@ to the first argument in the \code{character} vector.}
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
 
-\item{lfcShrink}{\code{logical(1)}.
-Use shrunken log2 fold change (LFC) values.}
-
 \item{...}{Additional arguments.}
 }
 \value{
@@ -103,7 +100,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2020-07-29.
+Updated 2020-08-05.
 }
 \examples{
 data(deseq)

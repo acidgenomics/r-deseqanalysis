@@ -1,16 +1,6 @@
-## Note that `NULL` arguments aren't passing through as expected with
-## `matchArgsToDoCall()`. Look into fixing this in a future goalie release.
-## For example, `color = NULL` doesn't pass as expected.
-
-
-
-#' Plot base mean distribution
-#'
-#' The base mean is the mean of normalized counts of all samples, normalizing
-#' for sequencing depth.
-#'
 #' @name plotBaseMean
-#' @note Updated 2019-10-15.
+#' @inherit acidgenerics::plotBaseMean
+#' @note Updated 2020-08-04.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -27,7 +17,18 @@
 #'
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' plotBaseMean(deseq)
+NULL
+
+
+
+#' @rdname plotBaseMean
+#' @name plotBaseMean
+#' @importFrom acidgenerics plotBaseMean
+#' @usage plotBaseMean(object, ...)
+#' @export
 NULL
 
 
@@ -72,7 +73,7 @@ NULL
             ## Inform the user about how many zero count features were dropped.
             if (any(!keep)) {
                 n <- sum(!keep, na.rm = TRUE)
-                message(sprintf(
+                cli_alert_info(sprintf(
                     "Removing %d zero-count %s.",
                     n,
                     ngettext(
@@ -87,12 +88,13 @@ NULL
         ## Log transform.
         if (!identical(trans, "identity")) {
             if (isTRUE(summary)) {
-                message(
-                    "Summary prior to transformation:\n",
-                    printString(round(summary(object), digits = 2L))
-                )
+                cli_alert_info(paste(
+                    "Summary prior to transformation:",
+                    printString(round(summary(object), digits = 2L)),
+                    sep = "\n"
+                ))
             }
-            message(sprintf("Applying '%s(x + 1)' transformation.", trans))
+            cli_alert(sprintf("Applying '%s(x + 1)' transformation.", trans))
             fun <- get(
                 x = trans,
                 envir = asNamespace("base"),
@@ -103,7 +105,11 @@ NULL
         }
         if (isTRUE(summary)) {
             summaryValues <- summary(object)
-            message(printString(round(summaryValues, digits = 2L)))
+            cli_alert_info(paste(
+                "Summary after transformation:",
+                printString(round(summaryValues, digits = 2L)),
+                sep = "\n"
+            ))
         }
         ## Plot.
         size <- 1L
@@ -192,10 +198,11 @@ setMethod(
 
 
 
-## Updated 2019-09-17.
+## Updated 2020-08-04.
 `plotBaseMean,DESeqDataSet` <-  # nolint
     function(object, ...) {
-        plotBaseMean(object = rowMeans(counts(object, normalized = TRUE)))
+        object <- rowMeans(counts(object, normalized = TRUE))
+        plotBaseMean(object, ...)
     }
 
 
@@ -212,10 +219,11 @@ setMethod(
 
 
 
-## Updated 2019-09-17.
+## Updated 2020-08-04.
 `plotBaseMean,DESeqResults` <-  # nolint
     function(object, ...) {
-        plotBaseMean(object = object[["baseMean"]], ...)
+        object <- object[["baseMean"]]
+        plotBaseMean(object, ...)
     }
 
 
@@ -231,10 +239,11 @@ setMethod(
 
 
 
-## Updated 2019-10-15.
+## Updated 2020-08-04.
 `plotBaseMean,DESeqAnalysis` <-  # nolint
     function(object, ...) {
-        plotBaseMean(object = as(object, "DESeqDataSet"), ...)
+        object <- as(object, "DESeqDataSet")
+        plotBaseMean(object, ...)
     }
 
 

@@ -1,7 +1,7 @@
 #' Results
 #'
 #' @name results
-#' @note Updated 2019-12-18.
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -12,11 +12,8 @@
 #' @examples
 #' data(deseq)
 #'
-#' x <- results(deseq, i = 2L, lfcShrink = FALSE)
-#' class(x)
-#' colnames(x)
-#'
-#' x <- results(deseq, i = 1L, lfcShrink = TRUE)
+#' ## DESeqAnalysis ====
+#' x <- results(deseq, i = 1L)
 #' class(x)
 #' colnames(x)
 NULL
@@ -50,60 +47,43 @@ setMethod(
 
 
 
-## Updated 2019-12-18.
+## Updated 2020-08-05.
 `results,DESeqAnalysis` <-  # nolint
-    function(object, i, lfcShrink = FALSE, ...) {
-        ## nocov start
-        call <- match.call()
-        ## results
-        if ("results" %in% names(call)) {
-            stop("'results' is defunct in favor of 'i'.")
-        }
-        assert(isSubset(
-            x = setdiff(names(call), ""),
-            y = names(formals())
-        ))
-        rm(call)
-        ## nocov end
-        assert(
-            is(object, "DESeqAnalysis"),
-            isScalar(i),
-            isFlag(lfcShrink)
-        )
+    function(object, i) {
+        validObject(object)
+        assert(isScalar(i))
         if (isCharacter(i)) {
             assert(isSubset(i, resultsNames(object)))
         }
-        ## Match the results.
+        lfcShrink <- lfcShrink(object)
         if (identical(lfcShrink, FALSE)) {
             slotName <- "results"
         } else if (
             isTRUE(lfcShrink) &&
-            hasLength(object@lfcShrink)
+            hasLength(slot(object, name = "lfcShrink"))
         ) {
             slotName <- "lfcShrink"
         } else if (
             isTRUE(lfcShrink) &&
-            !hasLength(object@lfcShrink)
+            !hasLength(slot(object, name = "lfcShrink"))
         ) {
             stop(
                 "Shrunken LFC values were requested, ",
                 "but object does not contain DESeqResults ",
                 "defined in 'lfcShrink' slot.\n",
-                "Set 'lfcShrink = FALSE'."
+                "Set 'lfcShrink(object) <- NULL'."
             )
         }
         resultsList <- slot(object, name = slotName)
         data <- resultsList[[i]]
         assert(is(data, "DESeqResults"))
-        ## Slot the contrast name into DESeqResults metadata.
         name <- contrastName(object, i = i)
         contrastName(data) <- name
+        msg <- name
         if (isTRUE(lfcShrink)) {
-            msg <- paste(name, "(shrunken LFC)")
-        } else {
-            msg <- paste(name, "(unshrunken LFC)")
+            msg <- paste(msg, "(shrunken LFC)")
         }
-        message(msg)
+        cli_alert_info(msg)
         validObject(data)
         data
     }

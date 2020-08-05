@@ -1,6 +1,6 @@
 #' @name deg
 #' @inherit acidgenerics::deg
-#' @note Updated 2020-07-29.
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -30,28 +30,28 @@ NULL
 ## Note that we're not sorting the identifiers here by LFC or P value.
 ## It's just performing a simple subset to get the identifiers as a character.
 ##
-## Updated 2020-07-29.
+## Updated 2020-08-04.
 `deg,DESeqResults` <-  # nolint
     function(
         object,
-        alpha = NULL,
+        alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         direction = c("both", "up", "down"),
         quiet = FALSE
     ) {
         validObject(object)
-        if (is.null(alpha)) {
-            alpha <- metadata(object)[["alpha"]]
+        if (is.null(alphaThreshold)) {
+            alphaThreshold <- alphaThreshold(object)
         }
         if (is.null(lfcThreshold)) {
-            lfcThreshold <- metadata(object)[["lfcThreshold"]]
+            lfcThreshold <- lfcThreshold(object)
         }
         if (is.null(baseMeanThreshold)) {
-            baseMeanThreshold <- 0L
+            baseMeanThreshold <- baseMeanThreshold(object)
         }
         assert(
-            isAlpha(alpha),
+            isAlpha(alphaThreshold),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
             isNumber(baseMeanThreshold),
@@ -68,7 +68,7 @@ NULL
         assert(isSubset(cols, colnames(data)))
         data <- data[, cols, drop = FALSE]
         ## Apply alpha cutoff.
-        keep <- which(data[[alphaCol]] < alpha)
+        keep <- which(data[[alphaCol]] < alphaThreshold)
         data <- data[keep, , drop = FALSE]
         ## Apply LFC threshold cutoff.
         if (lfcThreshold > 0L) {
@@ -108,7 +108,7 @@ NULL
                     msg2 = "genes"
                 )
             )
-            status <- paste0(status, " (alpha < ", alpha)
+            status <- paste0(status, " (alpha < ", alphaThreshold)
             if (lfcThreshold > 0L) {
                 status <- paste0(
                     status, sep,
@@ -139,23 +139,16 @@ setMethod(
 
 
 
-## Updated 2019-12-18.
+## Updated 2020-08-05.
 `deg,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        ...
-    ) {
-        ## nocov start
-        call <- match.call()
-        ## results
-        if ("results" %in% names(call)) {
-            stop("'results' is defunct in favor of 'i'.")
-        }
-        rm(call)
-        ## nocov end
-        res <- results(object = object, i = i, lfcShrink = FALSE)
-        deg(object = res, ...)
+    function(object, i, ...) {
+        deg(
+            object = results(object, i = i),
+            alphaThreshold = alphaThreshold(object),
+            lfcThreshold = lfcThreshold(object),
+            baseMeanThreshold = baseMeanThreshold(object),
+            ...
+        )
     }
 
 

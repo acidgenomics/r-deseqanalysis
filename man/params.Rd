@@ -26,8 +26,9 @@ contrasts (e.g. interaction effect).}
 \item{i}{\code{character(1)} or \code{integer(1)}.
 \code{DESeqResults} contrast name or position in \code{results} slot.}
 
-\item{lfcShrink}{\code{logical(1)}.
-Use shrunken log2 fold change (LFC) values.}
+\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
+Use shrunken log2 fold change (LFC) values.
+If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
 
 \item{name}{\code{character(1)}.
 Name of the individual effect (coefficient) for building a results table.

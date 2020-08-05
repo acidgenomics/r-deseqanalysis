@@ -9,55 +9,11 @@ setGeneric(
 
 
 
-#' @rdname lfcShrinkType
+#' @rdname degPerContrast
 #' @export
 setGeneric(
-    name = "lfcShrinkType",
+    name = "degPerContrast",
     def = function(object, ...) {
-        standardGeneric("lfcShrinkType")
-    }
-)
-
-
-
-#' @rdname plotBaseMean
-#' @export
-setGeneric(
-    name = "plotBaseMean",
-    def = function(object, ...) {
-        standardGeneric("plotBaseMean")
-    }
-)
-
-
-
-#' @rdname plotDEGStackedBar
-#' @export
-setGeneric(
-    name = "plotDEGStackedBar",
-    def = function(object, ...) {
-        standardGeneric("plotDEGStackedBar")
-    }
-)
-
-
-
-#' @rdname resultsDiff
-#' @export
-setGeneric(
-    name = "resultsDiff",
-    def = function(x, y, ...) {
-        standardGeneric("resultsDiff")
-    }
-)
-
-
-
-#' @rdname transformType
-#' @export
-setGeneric(
-    name = "transformType",
-    def = function(object, ...) {
-        standardGeneric("transformType")
+        standardGeneric("degPerContrast")
     }
 )

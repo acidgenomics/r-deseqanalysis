@@ -2,7 +2,7 @@
 #'
 #' @name show
 #' @inherit methods::show params return title
-#' @note Updated 2019-11-13.
+#' @note Updated 2020-08-04.
 #'
 #' @examples
 #' data(deseq)
@@ -13,33 +13,39 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2020-08-04.
 `show,DESeqAnalysis` <-  # nolint
     function(object) {
         validObject(object)
         dds <- as(object, "DESeqDataSet")
-
         cat(paste0(
             class(object), " ", metadata(object)[["version"]], "; ",
             "DESeq2 ", metadata(dds)[["version"]]
         ), sep = "\n")
-
         ## Show information about the DESeqDataSet.
         ddsInfo <- paste0("  ", capture.output(show(dds))[-1L])
         cat("data:", ddsInfo, sep = "\n")
-
-
-        res <- as(object, "DESeqResults")
-        alpha <- metadata(res)[["alpha"]]
-        lfcThreshold <- metadata(res)[["lfcThreshold"]]
-
-        showSlotInfo(list(
+        list <- list(
             transformType = transformType(object),
             resultsNames = resultsNames(object),
-            alpha = alpha,
-            lfcThreshold = lfcThreshold,
-            lfcShrinkType = lfcShrinkType(object)
-        ))
+            alphaThreshold = alphaThreshold(object)
+        )
+        lfcShrink <- lfcShrink(object)
+        if (isTRUE(lfcShrink)) {
+            list[["lfcShrinkType"]] <- lfcShrinkType(object)
+        }
+        lfcThreshold <- lfcThreshold(object)
+        if (lfcThreshold > 0L) {
+            if (lfcThreshold(results(object, i = 1L)) == 0L) {
+                lfcThreshold <- paste(lfcThreshold, "(post-hoc)")
+            }
+            list[["lfcThreshold"]] <- lfcThreshold
+        }
+        baseMeanThreshold <- baseMeanThreshold(object)
+        if (baseMeanThreshold > 0L) {
+            list[["baseMeanThreshold"]] <- baseMeanThreshold
+        }
+        showSlotInfo(list)
     }
 
 

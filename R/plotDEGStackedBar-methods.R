@@ -1,41 +1,41 @@
 #' Stacked bar plot of DEGs
 #'
 #' @name plotDEGStackedBar
-#' @note Updated 2020-07-28.
-#'
+#' @inherit acidgenerics::plotDEGStackedBar
+#' @note Updated 2020-08-05.
 #' @inheritParams acidroxygen::params
-#'
-#' @return Plot.
-#'
+#' @inheritParams params
+#' @param ... Additional arguments.
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' plotDEGStackedBar(deseq)
 NULL
 
 
 
-## Updated 2020-07-28.
+#' @rdname plotDEGStackedBar
+#' @name plotDEGStackedBar
+#' @importFrom acidgenerics plotDEGStackedBar
+#' @usage plotDEGStackedBar(object, ...)
+#' @export
+NULL
+
+
+
+## Updated 2020-08-05.
 `plotDEGStackedBar,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        alpha = NULL,
-        lfcThreshold = NULL,
-        baseMeanThreshold = NULL,
-        fill,
-        flip = TRUE
-    ) {
+    function(object, fill, flip = TRUE) {
         validObject(object)
         assert(isFlag(flip))
         direction <- "both"
-        degPerContrast <- .degPerContrast(
+        mat <- degPerContrast(
             object = object,
-            alpha = alpha,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold,
             direction = direction,
-            n = TRUE
+            return = "matrix"
         )
-        data <- as.data.frame(degPerContrast)
+        data <- as.data.frame(mat)
         ## Reorder the factor levels, so we can rank from most DEG to least.
         levels <- names(sort(colSums(data), decreasing = TRUE))
         data <- as.data.frame(melt(
@@ -64,7 +64,16 @@ NULL
             labs(
                 x = "contrast",
                 y = "differentially expressed genes",
-                fill = "direction"
+                fill = "direction",
+                title = "Differentially expressed genes per contrast",
+                subtitle = .thresholdLabel(
+                    n = NULL,
+                    direction = direction,
+                    alphaThreshold = alphaThreshold(object),
+                    lfcShrinkType = lfcShrinkType(object),
+                    lfcThreshold = lfcThreshold(object),
+                    baseMeanThreshold = baseMeanThreshold(object)
+                )
             )
         if (isTRUE(flip)) {
             p <- acid_coord_flip(p)

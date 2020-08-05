@@ -32,6 +32,8 @@ Updated 2019-08-20.
 }
 \examples{
 data(deseq)
+
+## DESeqAnalysis ====
 x <- sampleData(deseq)
 head(x)
 }

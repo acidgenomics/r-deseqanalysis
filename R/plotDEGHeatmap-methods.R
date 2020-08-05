@@ -1,6 +1,6 @@
 #' @name plotDEGHeatmap
 #' @inherit acidgenerics::plotDEGHeatmap
-#' @note Updated 2020-07-28.
+#' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidplots::plotHeatmap
 #' @inheritParams acidroxygen::params
@@ -33,12 +33,12 @@ NULL
 ## This method is used in F1000 paper and needs to be included. Note that in
 ## newer versions of bcbioRNASeq, this step won't work because we've slotted the
 ## rlog/vst counts in as a matrix instead of DESeqTransform.
-## Updated 2020-07-28.
+## Updated 2020-08-04.
 `plotDEGHeatmap,DESeqResults` <-  # nolint
     function(
         object,
         DESeqTransform,  # nolint
-        alpha = NULL,
+        alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         direction = c("both", "up", "down"),
@@ -51,33 +51,33 @@ NULL
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
-        if (is.null(alpha)) {
-            alpha <- metadata(res)[["alpha"]]
+        if (is.null(alphaThreshold)) {
+            alphaThreshold <- alphaThreshold(res)
         }
         if (is.null(lfcThreshold)) {
-            lfcThreshold <- metadata(res)[["lfcThreshold"]]
+            lfcThreshold <- lfcThreshold(res)
         }
-        lfcShrinkType <- lfcShrinkType(object)
         if (is.null(baseMeanThreshold)) {
-            baseMeanThreshold <- 0L
+            baseMeanThreshold <- baseMeanThreshold(res)
         }
+        lfcShrinkType <- lfcShrinkType(res)
         assert(
             is(res, "DESeqResults"),
             is(dt, "DESeqTransform"),
-            identical(rownames(object), rownames(DESeqTransform)),
+            identical(rownames(res), rownames(dt)),
             isFlag(title) || isCharacter(title) || is.null(title),
             isFlag(subtitle)
         )
         direction <- match.arg(direction)
         deg <- deg(
             object = res,
-            alpha = alpha,
+            alphaThreshold = alphaThreshold,
             lfcThreshold = lfcThreshold,
             baseMeanThreshold = baseMeanThreshold,
             direction = direction
         )
         if (length(deg) < .minDEGThreshold) {
-            message(sprintf(
+            cli_alert_warning(sprintf(
                 fmt = "Fewer than %s DEGs to plot. Skipping.",
                 .minDEGThreshold
             ))
@@ -87,36 +87,20 @@ NULL
         dt <- dt[deg, , drop = FALSE]
         ## Title.
         if (isTRUE(title)) {
-            title <- contrastName(res, format = "title")
+            title <- contrastName(res, .format = "title")
         } else if (identical(title, FALSE)) {
             title <- NULL
         }
         if (isString(title) && isTRUE(subtitle)) {
-            sep <- "; "
-            title <- paste0(
-                title, "\n",
-                length(deg), " genes", sep,
-                "direction: ", direction, sep,
-                "alpha < ", alpha
+            subtitle <- .thresholdLabel(
+                n = length(deg),
+                direction = direction,
+                alphaThreshold = alphaThreshold,
+                lfcShrinkType = lfcShrinkType,
+                lfcThreshold = lfcThreshold,
+                baseMeanThreshold = baseMeanThreshold
             )
-            if (lfcThreshold > 0L) {
-                title <- paste0(
-                    title, sep,
-                    "lfc >= ", lfcThreshold
-                )
-            }
-            if (lfcShrinkType != "unshrunken") {
-                title <- paste0(
-                    title, sep,
-                    "lfcShrink: ", lfcShrinkType
-                )
-            }
-            if (baseMeanThreshold > 0L) {
-                title <- paste0(
-                    title, sep,
-                    "baseMean >= ", baseMeanThreshold
-                )
-            }
+            title <- paste(title, subtitle, sep = "\n")
         }
         ## Using SummarizedExperiment method defined in acidplots here.
         args <- list(
@@ -140,45 +124,25 @@ setMethod(
 
 
 
-## Updated 2019-11-08.
+## Updated 2020-08-05.
 `plotDEGHeatmap,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        contrastSamples = FALSE,
-        lfcShrink = TRUE,
-        ...
-    ) {
-        ## nocov start
-        call <- match.call()
-        ## results
-        if ("results" %in% names(call)) {
-            stop("'results' is defunct in favor of 'i'.")
-        }
-        rm(call)
-        ## nocov end
+    function(object, i, contrastSamples = FALSE, ...) {
         validObject(object)
-        assert(
-            isScalar(i),
-            isFlag(contrastSamples),
-            isFlag(lfcShrink)
-        )
-        ## Note use of `res` here instead of `results`, since we need to check
-        ## the original `results` input below in `contrastSamples()` call.
-        res <- results(object, i = i, lfcShrink = lfcShrink)
-        ## We're using the variance-stabilized counts for visualization here.
+        assert(isFlag(contrastSamples))
+        res <- results(object, i = i)
         dt <- as(object, "DESeqTransform")
-        ## Subset the DESeqTransform, if necessary.
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, i = i)
             assert(isSubset(samples, colnames(dt)))
             dt <- dt[, samples, drop = FALSE]
             dt <- droplevels(dt)
         }
-        ## Passing to DESeqResults/DESeqTransform method.
         plotDEGHeatmap(
             object = res,
             DESeqTransform = dt,
+            alphaThreshold = alphaThreshold(object),
+            lfcThreshold = lfcThreshold(object),
+            baseMeanThreshold = baseMeanThreshold(object),
             ...
         )
     }

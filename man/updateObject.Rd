@@ -91,7 +91,7 @@ Updating objects is primarily useful when an object has been
   \code{object} cannot be determined by accessing known slots.
 }
 \note{
-Updated 2020-05-11.
+Updated 2020-08-04.
 }
 \section{\code{DESeqAnalysis}}{
 
@@ -103,6 +103,8 @@ package versions must be updated to account for this change.
 
 \examples{
 data(deseq)
+
+## DESeqAnalysis ====
 updateObject(deseq)
 }
 \seealso{

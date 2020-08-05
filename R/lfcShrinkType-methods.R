@@ -1,25 +1,29 @@
-#' Shrunken log2 fold change (LFC) type
-#'
 #' @name lfcShrinkType
-#' @note Updated 2019-08-20.
-#'
-#' @inheritParams acidroxygen::params
-#'
-#' @return `character(1)`.
-#'
+#' @inherit acidgenerics::lfcShrinkType
+#' @note Updated 2020-08-04.
+#' @param ... Additional arguments.
 #' @seealso [DESeq2::lfcShrink()].
-#'
 #' @examples
 #' data(deseq)
+#'
+#' ## DESeqAnalysis ====
 #' lfcShrinkType(deseq)
 NULL
 
 
 
-## Updated 2019-07-23.
+#' @rdname lfcShrinkType
+#' @name lfcShrinkType
+#' @importFrom acidgenerics lfcShrinkType
+#' @usage lfcShrinkType(object, ...)
+#' @export
+NULL
+
+
+
+## Updated 2020-08-04.
 `lfcShrinkType,DESeqResults` <-  # nolint
     function(object) {
-        validObject(object)
         pi <- priorInfo(object)
         if (isSubset("type", names(pi))) {
             type <- pi[["type"]]
@@ -42,13 +46,11 @@ setMethod(
 
 
 
-## Updated 2019-07-23.
+## Updated 2020-08-04.
 `lfcShrinkType,DESeqAnalysis` <-  # nolint
     function(object) {
-        validObject(object)
-        lfcShrink <- slot(object, "lfcShrink")
-        if (!hasLength(lfcShrink)) return(NULL)
-        lfcShrinkType(lfcShrink[[1L]])
+        if (!isTRUE(lfcShrink(object))) return(NULL)
+        lfcShrinkType(slot(object, "lfcShrink")[[1L]])
     }
 
 

@@ -10,7 +10,7 @@ deg(object, ...)
 
 \S4method{deg}{DESeqResults}(
   object,
-  alpha = NULL,
+  alphaThreshold = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
   direction = c("both", "up", "down"),
@@ -22,7 +22,7 @@ deg(object, ...)
 \arguments{
 \item{object}{Object.}
 
-\item{alpha}{\code{numeric(1)} or \code{NULL}.
+\item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 
@@ -57,7 +57,7 @@ Gene identifiers.
 Differentially expressed genes
 }
 \note{
-Updated 2020-07-29.
+Updated 2020-08-05.
 }
 \examples{
 data(deseq)

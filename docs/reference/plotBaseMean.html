@@ -75,7 +75,7 @@ for sequencing depth." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.21</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -115,7 +115,7 @@ for sequencing depth." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot base mean distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/plotBaseMean-methods.R'><code>R/plotBaseMean-methods.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/plotBaseMean-methods.R'><code>R/plotBaseMean-methods.R</code></a></small>
     <div class="hidden name"><code>plotBaseMean.Rd</code></div>
     </div>
 
@@ -155,10 +155,6 @@ for sequencing depth.</p>
       <td><p>Object.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Additional arguments.</p></td>
-    </tr>
-    <tr>
       <th>nonzero</th>
       <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
 Remove zero-count features (genes).</p></td>
@@ -188,6 +184,10 @@ are desired, we recommend using <code><a href='https://ggplot2.tidyverse.org/ref
 ggplot2 labels.
 See <code><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ggplot2::labs()</a></code> for details.</p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -206,7 +206,7 @@ Passes to <code>numeric</code> method.</p></li>
 </ul>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-10-15.</p>
+    <p>Updated 2020-08-04.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'>
@@ -218,10 +218,13 @@ Passes to <code>numeric</code> method.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
-<span class='fu'>plotBaseMean</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'>Removing 1 zero-count feature.</span></div><div class='output co'>#&gt; <span class='message'>Summary prior to transformation:</span>
-#&gt; <span class='message'>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
-#&gt; <span class='message'>   0.07    5.53   18.06   48.90   53.93 1020.58 </span></div><div class='output co'>#&gt; <span class='message'>Applying 'log10(x + 1)' transformation.</span></div><div class='output co'>#&gt; <span class='message'>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
-#&gt; <span class='message'>   0.03    0.81    1.28    1.28    1.74    3.01 </span></div><div class='img'><img src='plotBaseMean-1.png' alt='' width='700' height='433' /></div></pre>
+
+<span class='co'>## DESeqAnalysis ====</span>
+<span class='fu'>plotBaseMean</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> Removing 1 zero-count feature.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> Summary prior to transformation:</span>
+#&gt; <span class='message'>Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
+#&gt; <span class='message'>0.07    5.53   18.06   48.90   53.93 1020.58 </span></div><div class='output co'>#&gt; <span class='message'>→ Applying 'log10(x + 1)' transformation.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> Summary after transformation:</span>
+#&gt; <span class='message'>Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
+#&gt; <span class='message'>0.03    0.81    1.28    1.28    1.74    3.01 </span></div><div class='img'><img src='plotBaseMean-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
