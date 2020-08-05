@@ -16,9 +16,8 @@
 #' @importFrom basejump Gene2Symbol as_tibble autopadZeros camelCase
 #'   convertSampleIDsToNames decode droplevels import initDir
 #'   interestingGroups<- leftJoin makeNames mapGenesToRownames markdownHeader
-#'   markdownList matchInterestingGroups matchesGene2Symbol melt metadata2
-#'   metadata2<- printString realpath removeNA showSlotInfo snakeCase
-#'   standardizeCall
+#'   markdownList matchesGene2Symbol melt metadata2 metadata2<- printString
+#'   realpath removeNA showSlotInfo snakeCase standardizeCall
 #' @importFrom cli cli_alert cli_alert_info cli_alert_warning cli_dl
 #' @importFrom cowplot draw_plot ggdraw
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_bar
