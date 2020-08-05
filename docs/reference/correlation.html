@@ -187,7 +187,7 @@ If <code>NULL</code>, calculates correlation matrix only on the primary assay.</
     <p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>matrix</code>.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2020-08-04.</p>
+    <p>Updated 2020-08-05.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'>
@@ -204,7 +204,7 @@ If <code>NULL</code>, calculates correlation matrix only on the primary assay.</
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>correlation</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>2L</span>)</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'correlation': unused argument (lfcShrink = FALSE)</span></div></pre>
+<span class='fu'>correlation</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>2L</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> treatment_D_vs_C (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>→ Calculating pearson correlation on 499 values.</span></div><div class='output co'>#&gt; [1] 0.1814384</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -1,9 +1,5 @@
 #' @name resultsTables
 #' @inherit acidgenerics::resultsTables
-#' @note This function is used in the bcbioRNASeq F1000 paper. Supported
-#'   arguments have changed significantly from the bcbioRNASeq v0.2 release
-#'   series. Previous formals:
-##   https://github.com/hbc/bcbioRNASeq/blob/v0.2.10/R/resultsTables-methods.R
 #' @note Updated 2020-08-05.
 #'
 #' @inheritParams acidroxygen::params
