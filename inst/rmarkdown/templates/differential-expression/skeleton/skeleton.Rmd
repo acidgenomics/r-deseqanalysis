@@ -1,7 +1,7 @@
 ---
-## Updated 2020-07-22.
+## Updated 2020-08-05.
 params:
-  title: "Differential expression using DESeq2"
+  title: "Differential expression with DESeq2"
   
   ## Use DESeqAnalysis object as input.
   ## - Standard: Load from file on disk, either RDS or RDA.
@@ -14,7 +14,17 @@ params:
   
   ## Use log2 fold change values with adaptive shrinkage applied.
   ## Refer to `DESeq2::lfcShrink()` for details.
-  lfc_shrink: FALSE
+  ## Enabled by default, if defined in object.
+  ## Can override default setting with TRUE/FALSE boolean flag.
+  lfc_shrink: NULL
+  
+  ## Post-hoc filters for differential expression results.
+  ## These will inherit values defined in object when left NULL.
+  alpha_threshold: NULL
+  lfc_threshold: NULL
+  base_mean_threshold: NULL
+  
+  contrast_samples: TRUE
   
   output_dir: !r file.path("results", Sys.Date(), "differential-expression")
 
@@ -25,7 +35,6 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, cache=FALSE, message=FALSE}
-library(DESeq2)
 library(DESeqAnalysis)
 prepareTemplate()
 source("_setup.R")
@@ -55,8 +64,19 @@ stopifnot(
     is(object, "DESeqAnalysis"),
     isTRUE(nzchar(name))
 )
-## Note that DESeq2 will mask the S4 generic.
-resultsNames <- DESeqAnalysis::resultsNames(object)
+if (!is.null(params$alpha_threshold)) {
+    alphaThreshold(object) <- params$alpha_threshold
+}
+if (!is.null(params$lfc_shrink)) {
+    lfcShrink(object) <- params$lfc_shrink
+}
+if (!is.null(params$lfc_threshold)) {
+    lfcThreshold(object) <- params$lfc_threshold
+}
+if (!is.null(params$base_mean_threshold)) {
+    baseMeanThreshold(object) <- base_mean_threshold
+}
+resultsNames <- resultsNames(object)
 invisible(validObject(object))
 print(object)
 ```
@@ -67,21 +87,35 @@ print(object)
 sampleData(object)
 ```
 
+# DEG summary
+
+```{r plot-deg-stacked-bar}
+plotDEGStackedBar(object)
+```
+
+```{r plot-deg-upset}
+ggsave(
+    filename = file.path(
+        params$output_dir,
+        "plot-deg-upset.pdf"
+    ),
+    width = 10,
+    height = 10,
+    plot = plotDEGUpset(object)
+)
+```
+
 # MA plot {.tabset}
 
 An MA plot compares transformed counts on `M` (log ratio) and `A` (mean average) scales [@Yang2002-sx].
 
 ```{r plot-ma, results="asis"}
 invisible(mapply(
-    results = resultsNames,
+    i = resultsNames,
     MoreArgs = list(object = object),
-    FUN = function(object, results) {
-        markdownHeader(results, level = 2L, asis = TRUE)
-        print(plotMA(
-            object = object,
-            i = results,
-            lfcShrink = params$lfc_shrink
-        ))
+    FUN = function(object, i) {
+        markdownHeader(i, level = 2L, asis = TRUE)
+        print(plotMA(object = object, i = i))
     },
     SIMPLIFY = FALSE,
     USE.NAMES = TRUE
@@ -94,15 +128,11 @@ A volcano plot compares significance (BH-adjusted *P* value) against fold change
 
 ```{r plot-volcano, results="asis"}
 invisible(mapply(
-    results = resultsNames,
+    i = resultsNames,
     MoreArgs = list(object = object),
-    FUN = function(object, results) {
-        markdownHeader(results, level = 2L, asis = TRUE)
-        print(plotVolcano(
-            object = object,
-            i = results,
-            lfcShrink = params$lfc_shrink
-        ))
+    FUN = function(object, i) {
+        markdownHeader(i, level = 2L, asis = TRUE)
+        print(plotVolcano(object = object, i = i))
     },
     SIMPLIFY = FALSE,
     USE.NAMES = TRUE
@@ -113,16 +143,16 @@ invisible(mapply(
 
 ```{r plot-deg-pca, results="asis"}
 invisible(mapply(
-    results = resultsNames,
+    i = resultsNames,
     MoreArgs = list(
         object = object,
-        contrastSamples = TRUE
+        contrastSamples = params$contrast_samples
     ),
-    FUN = function(object, results, contrastSamples) {
-        markdownHeader(results, level = 2L, asis = TRUE)
+    FUN = function(object, i, contrastSamples) {
+        markdownHeader(i, level = 2L, asis = TRUE)
         print(plotDEGPCA(
             object = object,
-            i = results,
+            i = i,
             contrastSamples = contrastSamples
         ))
     },
@@ -137,18 +167,17 @@ This plot shows only differentially expressed genes on a per-sample basis. We ha
 
 ```{r plot-deg-heatmap, results="asis"}
 invisible(mapply(
-    results = resultsNames,
+    i = resultsNames,
     MoreArgs = list(
         object = object,
-        contrastSamples = TRUE
+        contrastSamples = params$contrast_samples
     ),
-    FUN = function(object, results, contrastSamples) {
-        markdownHeader(results, level = 2L, asis = TRUE)
+    FUN = function(object, i, contrastSamples) {
+        markdownHeader(i, level = 2L, asis = TRUE)
         plotDEGHeatmap(
             object = object,
-            i = results,
-            contrastSamples = contrastSamples,
-            lfcShrink = params$lfc_shrink
+            i = i,
+            contrastSamples = contrastSamples
         )
     },
     SIMPLIFY = FALSE,
@@ -162,18 +191,17 @@ Only the top up- and down-regulated genes (arranged by adjusted *P* value) are s
 
 ```{r top-tables, results="asis"}
 invisible(mapply(
-    results = resultsNames,
+    i = resultsNames,
     MoreArgs = list(
         object = object,
         n = 25L
     ),
-    FUN = function(object, results, n) {
-        markdownHeader(results, level = 2L, asis = TRUE)
+    FUN = function(object, i, n) {
+        markdownHeader(i, level = 2L, asis = TRUE)
         topTables(
             object = object,
-            i = results,
-            n = n,
-            lfcShrink = params$lfc_shrink
+            i = i,
+            n = n
         )
     },
     SIMPLIFY = FALSE,
@@ -203,8 +231,7 @@ export(
     object = object,
     name = name,
     dir = params$output_dir,
-    compress = FALSE,
-    lfcShrink = params$lfc_shrink
+    compress = FALSE
 )
 ```
 
