@@ -1,3 +1,7 @@
+## FIXME THIS NEEDS TO SUPPORT INTERESTING GROUPS BETTER.
+
+
+
 #' @name plotDEGHeatmap
 #' @inherit acidgenerics::plotDEGHeatmap
 #' @note Updated 2020-08-04.
@@ -92,31 +96,15 @@ NULL
             title <- NULL
         }
         if (isString(title) && isTRUE(subtitle)) {
-            sep <- "; "
-            title <- paste0(
-                title, "\n",
-                length(deg), " genes", sep,
-                "direction: ", direction, sep,
-                "alpha < ", alphaThreshold
+            subtitle <- .thresholdLabel(
+                n = length(deg),
+                direction = direction,
+                alphaThreshold = alphaThreshold,
+                lfcShrinkType = lfcShrinkType,
+                lfcThreshold = lfcThreshold,
+                baseMeanThreshold = baseMeanThreshold
             )
-            if (lfcThreshold > 0L) {
-                title <- paste0(
-                    title, sep,
-                    "lfc >= ", lfcThreshold
-                )
-            }
-            if (lfcShrinkType != "unshrunken") {
-                title <- paste0(
-                    title, sep,
-                    "lfcShrink: ", lfcShrinkType
-                )
-            }
-            if (baseMeanThreshold > 0L) {
-                title <- paste0(
-                    title, sep,
-                    "baseMean >= ", baseMeanThreshold
-                )
-            }
+            title <- paste(title, subtitle, sep = "\n")
         }
         ## Using SummarizedExperiment method defined in acidplots here.
         args <- list(
@@ -146,7 +134,10 @@ setMethod(
         object,
         i,
         contrastSamples = FALSE,
+        alphaThreshold = NULL,
         lfcShrink = NULL,
+        lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         ...
     ) {
         validObject(object)
@@ -154,6 +145,15 @@ setMethod(
             isScalar(i),
             isFlag(contrastSamples)
         )
+        if (is.null(alphaThreshold)) {
+            alphaThreshold <- alphaThreshold(object)
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- lfcThreshold(object)
+        }
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- baseMeanThreshold(object)
+        }
         ## Note use of `res` here instead of `results`, since we need to check
         ## the original `results` input below in `contrastSamples()` call.
         res <- results(object, i = i, lfcShrink = lfcShrink)
@@ -170,6 +170,9 @@ setMethod(
         plotDEGHeatmap(
             object = res,
             DESeqTransform = dt,
+            alphaThreshold = alphaThreshold,
+            lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold,
             ...
         )
     }
