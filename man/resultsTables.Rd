@@ -22,8 +22,8 @@ resultsTables(object, ...)
   object,
   i,
   extra = TRUE,
-  lfcShrink = NULL,
   alphaThreshold = NULL,
+  lfcShrink = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
   return = c("tbl_df", "DataFrameList")

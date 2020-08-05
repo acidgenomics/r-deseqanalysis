@@ -10,6 +10,7 @@ plotDEGStackedBar(object, ...)
 \S4method{plotDEGStackedBar}{DESeqAnalysis}(
   object,
   alphaThreshold = NULL,
+  lfcShrink = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
   fill = getOption(x = "acid.fill.discrete", default =

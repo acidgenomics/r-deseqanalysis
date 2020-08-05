@@ -22,11 +22,18 @@ plotMA(object, ...)
     acidplots::lightPalette[["orange"]], nonsignificant =
     acidplots::lightPalette[["gray"]]),
   pointSize = 2L,
-  pointAlpha = 0.8,
-  return = c("ggplot", "DataFrame")
+  pointAlpha = 0.8
 )
 
-\S4method{plotMA}{DESeqAnalysis}(object, i, lfcShrink = NULL, ...)
+\S4method{plotMA}{DESeqAnalysis}(
+  object,
+  i,
+  alphaThreshold = NULL,
+  lfcShrink = NULL,
+  lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{Object.}
@@ -66,10 +73,6 @@ In the range of 1-3 is generally recommended.}
 
 \item{pointAlpha}{\code{numeric(1)} (\code{0}-\code{1}).
 Alpha transparency level.}
-
-\item{return}{\code{character(1)}.
-Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
-to the first argument in the \code{character} vector.}
 
 \item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
 \code{character} vectors, empty (\code{missing}), or \code{NULL}.

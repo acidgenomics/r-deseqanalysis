@@ -19,7 +19,17 @@ resultsDiff(x, y, ...)
   direction = c("both", "up", "down")
 )
 
-\S4method{resultsDiff}{DESeqAnalysis,missingOrNULL}(x, y = NULL, i, j, lfcShrink = NULL, ...)
+\S4method{resultsDiff}{DESeqAnalysis,missingOrNULL}(
+  x,
+  y = NULL,
+  i,
+  j,
+  alphaThreshold = NULL,
+  lfcShrink = NULL,
+  lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{Object.}
