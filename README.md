@@ -20,17 +20,35 @@ Sys.setenv(R_REMOTES_UPGRADE = "always")
 remotes::install_github("acidgenomics/DESeqAnalysis")
 ```
 
-### [conda][] method
+### [Conda][] method
 
-Configure [conda][] to use the [bioconda][] channels.
+Configure [Conda][] to use the [Bioconda][] channels.
 
 ```sh
-conda install -c bioconda r-deseqanalysis
+# Don't install recipe into base environment.
+name="r-deseqanalysis"
+conda create --name="$name" "$name"
+conda activate "$name"
+R
 ```
 
-[BiocManager]: https://cran.r-project.org/package=BiocManager
-[Bioconductor]: https://bioconductor.org/
-[DESeq2]: https://bioconductor.org/packages/DESeq2/
-[R]: https://www.r-project.org/
+### [Docker][] method
+
+```sh
+image="acidgenomics/r-rnaseq"
+workdir="/mnt/work"
+docker pull "$image"
+docker run -it \
+    --volume="${PWD}:${workdir}" \
+    --workdir="$workdir" \
+    "$image" \
+    R
+```
+
+[biocmanager]: https://cran.r-project.org/package=BiocManager
 [bioconda]: https://bioconda.github.io/
+[bioconductor]: https://bioconductor.org/
 [conda]: https://conda.io/
+[deseq2]: https://bioconductor.org/packages/DESeq2/
+[docker]: https://www.docker.com/
+[r]: https://www.r-project.org/
