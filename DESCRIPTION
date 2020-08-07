@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.3.0
-Date: 2020-08-05
+Version: 0.3.1
+Date: 2020-08-07
 Authors@R: c(
     person(
         given = "Michael",
@@ -24,8 +24,8 @@ Encoding: UTF-8
 LazyData: false
 Depends:
     R (>= 4.0),
-    basejump (>= 0.12.9),
-    DESeq2 (>= 1.28.1)
+    basejump (>= 0.12.10),
+    DESeq2 (>= 1.28)
 Imports:
     BiocGenerics,
     IRanges,
@@ -46,11 +46,11 @@ Imports:
     utils
 Suggests:
     BiocStyle,
-    apeglm (>= 1.10.0),
+    apeglm (>= 1.10),
     ashr (>= 2.2.47),
     roxygen2,
     testthat,
-    tximport (>= 1.16.1),
+    tximport (>= 1.16),
     viridis
 Remotes:
     acidgenomics/acidgenerics,
