@@ -1,3 +1,9 @@
+## DESeqAnalysis 0.3.1 (2020-08-07)
+
+### Minor changes
+
+- Adjusted minimum dependency versions so package will build on bioconda.
+
 ## DESeqAnalysis 0.3.0 (2020-08-05)
 
 ### Major changes
