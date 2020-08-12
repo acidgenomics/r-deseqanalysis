@@ -1,7 +1,8 @@
 #' @name plotDEGUpset
 #' @inherit acidgenerics::plotDEGUpset
-#' @note Updated 2020-08-05.
+#' @note Updated 2020-08-12.
 #'
+#' @inheritParams degPerContrast
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
@@ -24,23 +25,22 @@ NULL
 
 
 
-## Updated 2020-08-05.
+## Updated 2020-08-12.
 `plotDEGUpset,DESeqAnalysis` <-  # nolint
     function(
         object,
+        i = NULL,
         direction = c("both", "up", "down")
     ) {
         direction <- match.arg(direction)
         degPerContrast <- degPerContrast(
             object = object,
+            i = i,
             direction = direction,
             return = "list"
         )
-        ## This will collapse the nested lists into a single flat list.
         listInput <- do.call(what = c, args = degPerContrast)
-        ## Using "_" instead of "." for name concatenation.
         names(listInput) <- makeNames(names(listInput), unique = TRUE)
-        ## Suppressing message about contrast not having up/down DEG overlap.
         suppressMessages({
             plotUpset(listInput)
         })

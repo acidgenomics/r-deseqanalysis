@@ -2,10 +2,13 @@
 #'
 #' @name plotDEGStackedBar
 #' @inherit acidgenerics::plotDEGStackedBar
-#' @note Updated 2020-08-05.
+#' @note Updated 2020-08-12.
+#'
+#' @inheritParams degPerContrast
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
+#'
 #' @examples
 #' data(deseq)
 #'
@@ -24,14 +27,21 @@ NULL
 
 
 
-## Updated 2020-08-05.
+## Updated 2020-08-12.
 `plotDEGStackedBar,DESeqAnalysis` <-  # nolint
-    function(object, fill, flip = TRUE) {
+    function(
+        object,
+        i = NULL,
+        direction = c("both", "up", "down"),
+        fill,
+        flip = TRUE
+    ) {
         validObject(object)
         assert(isFlag(flip))
-        direction <- "both"
+        direction <- match.arg(direction)
         mat <- degPerContrast(
             object = object,
+            i = i,
             direction = direction,
             return = "matrix"
         )
