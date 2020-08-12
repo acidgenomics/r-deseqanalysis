@@ -7,10 +7,14 @@
 \usage{
 plotDEGUpset(object, ...)
 
-\S4method{plotDEGUpset}{DESeqAnalysis}(object, direction = c("both", "up", "down"))
+\S4method{plotDEGUpset}{DESeqAnalysis}(object, i = NULL, direction = c("both", "up", "down"))
 }
 \arguments{
 \item{object}{Object.}
+
+\item{i}{\code{character}, \code{numeric}, or \code{NULL}.
+Names or range of results to include in plot.
+If set \code{NULL}, include all results.}
 
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
@@ -24,7 +28,7 @@ Plot.
 UpSet plot of directional DEG intersections across contrasts
 }
 \note{
-Updated 2020-08-05.
+Updated 2020-08-12.
 }
 \examples{
 data(deseq)
