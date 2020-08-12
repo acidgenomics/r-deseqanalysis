@@ -1,3 +1,13 @@
+## DESeqAnalysis 0.3.2 (2020-08-12)
+
+### Minor changes
+
+- Added `i` argument support to `degPerContrast`, and the plotting functions
+  `plotDEGUpset` and `plotStackedBar`, which call `degPerContrast` internally.
+  This allows the user to pick specific contrasts of interest to plot.
+- `plotDEGStackedBar`: Now allowing the user to pick only up- or down-regulated
+  genes, which can be useful.
+
 ## DESeqAnalysis 0.3.1 (2020-08-07)
 
 ### Minor changes

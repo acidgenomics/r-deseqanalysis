@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.3.1
-Date: 2020-08-07
+Version: 0.3.2
+Date: 2020-08-12
 Authors@R: c(
     person(
         given = "Michael",
@@ -36,7 +36,7 @@ Imports:
     cli (>= 2.0),
     cowplot (>= 1.0),
     ggplot2 (>= 3.3),
-    goalie (>= 0.4.6),
+    goalie (>= 0.4.8),
     knitr,
     methods,
     rlang (>= 0.4),

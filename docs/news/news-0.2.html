@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -124,9 +124,9 @@
     <div id="deseqanalysis-021-2019-07-30" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-021-2019-07-30" class="anchor"></a>DESeqAnalysis 0.2.1 (2019-07-30)</h2>
-<div id="minor-changes-19" class="section level3">
+<div id="minor-changes-20" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-19" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-20" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Updated basejump dependencies.</li>
 <li>Improved code coverage and documentation.</li>
@@ -145,9 +145,9 @@
 <code>plotBaseMean</code>: Quickly visualize the count distribution across all samples.</li>
 </ul>
 </div>
-<div id="minor-changes-18" class="section level3">
+<div id="minor-changes-19" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-18" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-19" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Improved Dockerized Travis CI configuration, using new Rcheck repo.</li>
 </ul>
@@ -156,9 +156,9 @@
     <div id="deseqanalysis-023-2019-08-06" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-023-2019-08-06" class="anchor"></a>DESeqAnalysis 0.2.3 (2019-08-06)</h2>
-<div id="minor-changes-17" class="section level3">
+<div id="minor-changes-18" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-17" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-18" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Improved documentation consistency by using shared roxygen params from new acidroxygen package.</li>
 <li>Updated basejump dependency versions.</li>
@@ -168,9 +168,9 @@
     <div id="deseqanalysis-024-2019-08-20" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-024-2019-08-20" class="anchor"></a>DESeqAnalysis 0.2.4 (2019-08-20)</h2>
-<div id="minor-changes-16" class="section level3">
+<div id="minor-changes-17" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-16" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-17" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Removed dplyr dependencies in <code>plotMA</code> and <code>plotVolcano</code>. Reworked internal code using base R methods against <code>DataFrame</code> class instead of <code>tbl_df</code>.</li>
 <li>Split out documentation on S4 generator functions into separate Rd files.</li>
@@ -183,9 +183,9 @@
     <div id="deseqanalysis-025-2019-08-27" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-025-2019-08-27" class="anchor"></a>DESeqAnalysis 0.2.5 (2019-08-27)</h2>
-<div id="minor-changes-15" class="section level3">
+<div id="minor-changes-16" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-15" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-16" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Requiring R 3.6. Updated basejump and Bioconductor dependencies.</li>
 <li>Improved consistency of <code>DataFrame</code> usage inside <code>plotMA</code> and <code>plotVolcano</code>, using our <code>leftJoin</code> method internally.</li>
@@ -207,9 +207,9 @@
     <div id="deseqanalysis-027-2019-09-11" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-027-2019-09-11" class="anchor"></a>DESeqAnalysis 0.2.7 (2019-09-11)</h2>
-<div id="minor-changes-14" class="section level3">
+<div id="minor-changes-15" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-14" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-15" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Bug fixes for contrast name handling with user-defined resultsNames. <code>DESeqAnalysis</code> methods now stash contrast name into <code>metadata</code> as <code>contrastName</code> for <code>DESeqResults</code> objects, which allows for easier contrast name handling inside plotting and other markdown functions. We needed to add a new <code>useStash</code> argument for <code>contrastName</code> that disables this behavior, so <code>contrastSamples</code> can pull the samples from a pairwise contrast easily.</li>
 </ul>
@@ -233,9 +233,9 @@
 <li>Now attached DESeq2 automatically via “Depends” in <code>DESCRIPTION</code>.</li>
 </ul>
 </div>
-<div id="minor-changes-13" class="section level3">
+<div id="minor-changes-14" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-13" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-14" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>
 <code>plotBaseMean</code>: Added argument support to define colors and disable summary statistics lines. Simplified internal passthrough in <code>DESeqAnalysis</code>, <code>DESeqDataSet</code>, and <code>DESeqResults</code> methods.</li>
@@ -259,9 +259,9 @@
     <div id="deseqanalysis-0210-2019-10-16" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0210-2019-10-16" class="anchor"></a>DESeqAnalysis 0.2.10 (2019-10-16)</h2>
-<div id="minor-changes-12" class="section level3">
+<div id="minor-changes-13" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-12" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-13" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>
 <code>plotDEGHeatmap</code>, <code>plotDEGPCA</code>: Hardened methods against input with very few DEGs (less than 10). Simplified internal method passthrough to no longer rely upon <code>matchArgsToDoCall</code> function.</li>
@@ -280,9 +280,9 @@
 <li>Renamed <code>results</code> argument to <code>i</code> for <code>DESeqAnalysis</code> methods, where applicable. This improves consistency with Bioconductor conventions (similar to <code>assay</code> method, which also uses <code>i</code> for position). Note that previous usage of <code>results</code> is now defunct and should intentionally error.</li>
 </ul>
 </div>
-<div id="minor-changes-11" class="section level3">
+<div id="minor-changes-12" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-11" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-12" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>
 <code>resultsMatrix</code>: Added support for <code>baseMean</code> aggregation, and improved documentation.</li>
@@ -296,9 +296,9 @@
     <div id="deseqanalysis-0212-2019-11-18" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0212-2019-11-18" class="anchor"></a>DESeqAnalysis 0.2.12 (2019-11-18)</h2>
-<div id="minor-changes-10" class="section level3">
+<div id="minor-changes-11" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-10" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-11" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>
 <code>plotCounts</code>: Added method support for <code>DESeqTransform</code>. Also added a <code>transform</code> argument to <code>DESeqAnalysis</code> method, which allows the user to easily plot variance-stabilized counts using the slotted <code>DESeqTransform</code> object.</li>
@@ -308,9 +308,9 @@
     <div id="deseqanalysis-0213-2019-11-19" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0213-2019-11-19" class="anchor"></a>DESeqAnalysis 0.2.13 (2019-11-19)</h2>
-<div id="minor-changes-9" class="section level3">
+<div id="minor-changes-10" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-9" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-10" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Deprecated <code>apeglmContrast</code> in favor of modified S4 method approach now defined in <code>apeglmResults</code>. The internal code is otherwise unmodified.</li>
 <li>
@@ -321,9 +321,9 @@
     <div id="deseqanalysis-0214-2019-12-04" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0214-2019-12-04" class="anchor"></a>DESeqAnalysis 0.2.14 (2019-12-04)</h2>
-<div id="minor-changes-8" class="section level3">
+<div id="minor-changes-9" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-8" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-9" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>
 <code>deg</code>: Fixed <code>DESeqAnalysis</code> method passthrough to <code>DESeqResults</code>, allowing use of <code>alpha</code> and <code>lfcThreshold</code>, for post-hoc cutoffs.</li>
@@ -333,9 +333,9 @@
     <div id="deseqanalysis-0215-2019-12-13" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0215-2019-12-13" class="anchor"></a>DESeqAnalysis 0.2.15 (2019-12-13)</h2>
-<div id="minor-changes-7" class="section level3">
+<div id="minor-changes-8" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-7" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-8" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Now allowing the user to override internal <code>alpha</code> and <code>lfcThreshold</code> for these plots: <code>plotDEGHeatmap</code>, <code>plotDEGPCA</code>, <code>plotDEGUpset</code>, <code>plotMA</code>, <code>plotVolcano</code>.</li>
 </ul>
@@ -352,9 +352,9 @@
 <code>resultsDiff</code>: Compare the effect difference between two <code>DESeqResults</code> contrasts. Useful for evaluating the relative effect of compounds, RNAi clones, CRISPR guides, for example.</li>
 </ul>
 </div>
-<div id="minor-changes-6" class="section level3">
+<div id="minor-changes-7" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-6" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-7" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>
 <code>contrastSamples</code>: Added support for interaction effect (difference of differences) contrasts. For example: “group_B_vs_A_group_C_vs_A_effect”.</li>
@@ -381,9 +381,9 @@
     <div id="deseqanalysis-0218-2020-01-20" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0218-2020-01-20" class="anchor"></a>DESeqAnalysis 0.2.18 (2020-01-20)</h2>
-<div id="minor-changes-5" class="section level3">
+<div id="minor-changes-6" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-5" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-6" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Updated basejump dependencies. Namely, bioverbs package has been renamed to acidgenerics, prior to CRAN submission.</li>
 </ul>
@@ -392,9 +392,9 @@
     <div id="deseqanalysis-0219-2020-03-16" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0219-2020-03-16" class="anchor"></a>DESeqAnalysis 0.2.19 (2020-03-16)</h2>
-<div id="minor-changes-4" class="section level3">
+<div id="minor-changes-5" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-4" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-5" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Resaved example test data set, using Ensembl 99 annotations.</li>
 <li>Updated documentation using roxygen2 v7.1.</li>
@@ -404,9 +404,9 @@
     <div id="deseqanalysis-0220-2020-05-12" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-0220-2020-05-12" class="anchor"></a>DESeqAnalysis 0.2.20 (2020-05-12)</h2>
-<div id="minor-changes-3" class="section level3">
+<div id="minor-changes-4" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-3" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-4" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Split out <code>setValidity</code> call separately from <code>setClass</code>.</li>
 <li>
@@ -425,9 +425,9 @@
 <li>Reworked internal code that handles DEG extraction. Note that <code>lfcThreshold</code> and <code>baseMeanThreshold</code> now use <code><a href="https://rdrr.io/r/base/Comparison.html">&gt;=</a></code> logic rather than previous <code><a href="https://rdrr.io/r/base/Comparison.html">&gt;</a></code> approach. The alpha cutoff still uses <code><a href="https://rdrr.io/r/base/Comparison.html">&gt;</a></code> operator logic.</li>
 </ul>
 </div>
-<div id="minor-changes-2" class="section level3">
+<div id="minor-changes-3" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-2" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-3" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Removed UpSetR dependency, in preparation for future switch to ggupset.</li>
 </ul>
