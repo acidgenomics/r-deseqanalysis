@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Differentially expressed genes — deg • DESeqAnalysis</title>
+<title>Summary of differentially expressed genes per contrast — degPerContrast • DESeqAnalysis</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Differentially expressed genes — deg" />
-<meta property="og:description" content="Differentially expressed genes" />
+<meta property="og:title" content="Summary of differentially expressed genes per contrast — degPerContrast" />
+<meta property="og:description" content="Summary of differentially expressed genes per contrast" />
 
 
 
@@ -113,29 +113,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Differentially expressed genes</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/deg-methods.R'><code>R/deg-methods.R</code></a></small>
-    <div class="hidden name"><code>deg.Rd</code></div>
+    <h1>Summary of differentially expressed genes per contrast</h1>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/degPerContrast-methods.R'><code>R/degPerContrast-methods.R</code></a></small>
+    <div class="hidden name"><code>degPerContrast.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Differentially expressed genes</p>
+    <p>Summary of differentially expressed genes per contrast</p>
     </div>
 
-    <pre class="usage"><span class='fu'>deg</span>(<span class='no'>object</span>, <span class='no'>...</span>)
-
-<span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>deg</span>(
-  <span class='no'>object</span>,
-  <span class='kw'>alphaThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>baseMeanThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
-  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)
+    <pre class="usage"><span class='fu'>degPerContrast</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>deg</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>degPerContrast</span>(
+  <span class='no'>object</span>,
+  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
+  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"matrix"</span>, <span class='st'>"list"</span>),
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,23 +141,8 @@
       <td><p>Object.</p></td>
     </tr>
     <tr>
-      <th>alphaThreshold</th>
-      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
-Adjusted P value ("alpha") cutoff. If left <code>NULL</code>, will use the cutoff
-defined in the object.</p></td>
-    </tr>
-    <tr>
-      <th>lfcThreshold</th>
-      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
-Log (base 2) fold change ratio cutoff threshold.
-If left <code>NULL</code>, will use the cutoff defined in the object.</p></td>
-    </tr>
-    <tr>
-      <th>baseMeanThreshold</th>
-      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
-Base mean (i.e. average expression across all samples) threshold.
-If left <code>NULL</code>, will use the cutoff defined in the object.
-Applies in general to DESeq2 RNA-seq differential expression output.</p></td>
+      <th>...</th>
+      <td><p>Passthrough arguments to <code><a href='deg.html'>deg()</a></code>.</p></td>
     </tr>
     <tr>
       <th>direction</th>
@@ -169,35 +150,39 @@ Applies in general to DESeq2 RNA-seq differential expression output.</p></td>
 Include <code>"both"</code>, <code>"up"</code>, or <code>"down"</code> directions.</p></td>
     </tr>
     <tr>
-      <th>quiet</th>
-      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
-Perform command quietly, suppressing messages.</p></td>
+      <th>n</th>
+      <td><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>.
+Number to include.</p></td>
     </tr>
     <tr>
-      <th>i</th>
-      <td><p>Indices specifying elements to extract or replace. Indices are <code>numeric</code> or
-<code>character</code> vectors, empty (<code>missing</code>), or <code>NULL</code>.</p>
-<p>For more information:</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/help.html'>help</a></span>(<span class='kw'>topic</span> <span class='kw'>=</span> <span class='st'>"Extract"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"base"</span>)</pre></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments.</p></td>
+      <th>return</th>
+      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
+Return type. Uses <code><a href='https://rdrr.io/r/base/match.arg.html'>match.arg()</a></code> internally and defaults
+to the first argument in the <code>character</code> vector.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>character</code>.
-Gene identifiers.</p>
+    
+<ul>
+<li><p><code>matrix</code>: Matrix containing numbers of DEGs per contrast.
+Intended primarily for use with <code><a href='plotDEGStackedBar.html'>plotDEGStackedBar()</a></code>.</p></li>
+<li><p><code>list</code>: Named vector containing the DEG identifiers.
+Intended primarily for use with <code><a href='plotDEGUpset.html'>plotDEGUpset()</a></code>.</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2020-08-05.</p>
+    <p>Updated 2020-08-04.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>deg</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 38 differentially expressed genes (alpha &lt; 0.01)</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "gene338" "gene214" "gene380" "gene028" "gene112" "gene401"</div></span></pre>
+<span class='fu'>degPerContrast</span>(<span class='no'>deseq</span>)</div><div class='output co'>#&gt;      condition_B_vs_A treatment_D_vs_C
+#&gt; down               14                0
+#&gt; up                 24                0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
