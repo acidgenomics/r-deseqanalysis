@@ -9,6 +9,8 @@ plotDEGStackedBar(object, ...)
 
 \S4method{plotDEGStackedBar}{DESeqAnalysis}(
   object,
+  i = NULL,
+  direction = c("both", "up", "down"),
   fill = getOption(x = "acid.fill.discrete", default =
     acidplots::scale_fill_synesthesia_d()),
   flip = TRUE
@@ -16,6 +18,13 @@ plotDEGStackedBar(object, ...)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{i}{\code{character}, \code{numeric}, or \code{NULL}.
+Names or range of results to include in plot.
+If set \code{NULL}, include all results.}
+
+\item{direction}{\code{character(1)}.
+Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
 \item{fill}{\code{ggproto}/\code{ScaleDiscrete}.
 Desired ggplot2 fill scale. Must supply discrete values. When set to
@@ -37,7 +46,7 @@ Flip x and y axes. Recommended for plots containing many samples.}
 Stacked bar plot of DEGs
 }
 \note{
-Updated 2020-08-05.
+Updated 2020-08-12.
 }
 \examples{
 data(deseq)

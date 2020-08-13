@@ -1,9 +1,12 @@
 #' Summary of differentially expressed genes per contrast
 #'
 #' @name degPerContrast
-#' @note Updated 2020-08-04.
+#' @note Updated 2020-08-12.
 #'
 #' @inheritParams acidroxygen::params
+#' @param i `character`, `numeric`, or `NULL`.
+#'   Names or range of results to include in plot.
+#'   If set `NULL`, include all results.
 #' @param ... Passthrough arguments to [deg()].
 #'
 #' @return
@@ -21,10 +24,11 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2020-08-12.
 `degPerContrast,DESeqAnalysis` <-  # nolint
     function(
         object,
+        i = NULL,
         direction = c("both", "up", "down"),
         n = FALSE,
         return = c("matrix", "list"),
@@ -33,14 +37,11 @@ NULL
         assert(isFlag(n))
         direction <- match.arg(direction)
         return <- match.arg(return)
-        n <- switch(
-            EXPR = return,
-            "matrix" = TRUE,
-            "list" = FALSE
-        )
+        if (is.null(i)) i <- resultsNames(object)
+        n <- switch(EXPR = return, "matrix" = TRUE, "list" = FALSE)
         suppressMessages({
             list <- mapply(
-                i = resultsNames(object),
+                i = i,
                 MoreArgs = list(object = object),
                 FUN = function(i, object) {
                     if (isSubset(direction, c("both", "down"))) {
