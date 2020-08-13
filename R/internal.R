@@ -63,7 +63,7 @@
 
 #' Map contrast vector to coefficient
 #'
-#' @note Updated 2020-08-04.
+#' @note Updated 2020-08-13.
 #' @noRd
 .contrast2coef <- function(contrast, resultsNames) {
     assert(
@@ -79,10 +79,10 @@
         table = resultsNames
     )
     assert(isInt(coef), !is.na(coef))
-    cli_dl(
-        c("contrast" = resultsNames[[coef]]),
-        c("coef" = coef)
-    )
+    cli_dl(c(
+        "contrast" = as.character(resultsNames[[coef]]),
+        "coef" = as.character(coef)
+    ))
     coef
 }
 
