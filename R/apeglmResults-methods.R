@@ -97,7 +97,7 @@ NULL
         resultsNames <- resultsNames(object)
         ## Match the contrast to coef, based on resultsNames.
         coef <- .contrast2coef(contrast = contrast, resultsNames = resultsNames)
-        ## Quiet down about apeglm citation, it's too noisy.
+        ## Quiet down apeglm citation message, it's too noisy.
         suppressMessages({
             shrink <- DESeq2::lfcShrink(
                 dds = object,

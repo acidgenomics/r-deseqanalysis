@@ -9,6 +9,7 @@ degPerContrast(object, ...)
 
 \S4method{degPerContrast}{DESeqAnalysis}(
   object,
+  i = NULL,
   direction = c("both", "up", "down"),
   n = FALSE,
   return = c("matrix", "list"),
@@ -19,6 +20,10 @@ degPerContrast(object, ...)
 \item{object}{Object.}
 
 \item{...}{Passthrough arguments to \code{\link[=deg]{deg()}}.}
+
+\item{i}{\code{character}, \code{numeric}, or \code{NULL}.
+Names or range of results to include in plot.
+If set \code{NULL}, include all results.}
 
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
@@ -42,7 +47,7 @@ Intended primarily for use with \code{\link[=plotDEGUpset]{plotDEGUpset()}}.
 Summary of differentially expressed genes per contrast
 }
 \note{
-Updated 2020-08-04.
+Updated 2020-08-12.
 }
 \examples{
 data(deseq)
