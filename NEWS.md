@@ -1,4 +1,4 @@
-## DESeqAnalysis 0.3.2 (2020-08-12)
+## DESeqAnalysis 0.3.2 (2020-08-13)
 
 ### Minor changes
 
@@ -7,6 +7,7 @@
   This allows the user to pick specific contrasts of interest to plot.
 - `plotDEGStackedBar`: Now allowing the user to pick only up- or down-regulated
   genes, which can be useful.
+- Bug fix for `apeglmResults` cli display code.
 
 ## DESeqAnalysis 0.3.1 (2020-08-07)
 
