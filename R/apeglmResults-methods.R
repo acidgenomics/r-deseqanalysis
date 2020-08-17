@@ -12,7 +12,7 @@
 #' [`DESeq()`][DESeq2::DESeq], followed by [`lfcShrink()`][DESeq2::lfcShrink].
 #'
 #' @name apeglmResults
-#' @note Updated 2019-11-19.
+#' @note Updated 2020-08-17.
 #'
 #' @inheritParams acidroxygen::params
 #' @param contrast `character(3)`.
@@ -26,10 +26,8 @@
 #'   Numerator and denominator values correspond to grouping factor column.
 #'   See [`results()`] for details. Note that we're intentionally being more
 #'   strict about the input format here.
-#' @param ... Passes to [`lfcShrink()`][DESeq2::lfcShrink], with
-#'   `type = "apeglm"` and `coef` automatically defined. Optionally can pass
-#'   unshrunken `DESeqResults` via `res` argument here and this will set
-#'   `alpha`, `lfcThreshold` automatically.
+#' @param res `DESeqResults`.
+#'   Results containing unshrunken LFC values, generated with `results()`.
 #'
 #' @seealso
 #' - "Extended section on shrinkage estimators" section of DESeq2 vignette,
@@ -61,7 +59,11 @@
 #'     lfcShrinkType(res)
 #'
 #'     ## Shrunken DESeqResults, using apeglm via `lfcShrink()`.
-#'     shrink <- apeglmResults(dds, contrast = contrast)
+#'     shrink <- apeglmResults(
+#'         object = dds,
+#'         contrast = contrast,
+#'         res = res
+#'     )
 #'     class(shrink)
 #'     lfcShrinkType(shrink)
 #' }
@@ -69,19 +71,27 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Useful for avoiding this issue:
+## type='apeglm' shrinkage only for use with 'coef'
+## Updated 2020-08-17.
 `apeglmResults,DESeqDataSet` <-  # nolint
-    function(object, contrast, ...) {
+    function(
+            object,
+            contrast,
+            res,
+            ...
+        ) {
         validObject(object)
-        dots <- list(...)
+        requireNamespaces("apeglm")
         assert(
-            requireNamespace("apeglm", quietly = TRUE),
-            areDisjointSets(c("coef", "type"), names(dots)),
+            isCharacter(resultsNames(object)),
             isCharacter(contrast),
             hasLength(contrast, n = 3L),
             isSubset(contrast[[1L]], names(colData(object))),
-            isCharacter(resultsNames(object))
+            is(res, "DESeqResults")
         )
+        lfcThreshold <- lfcThreshold(res)
+        parallel <- TRUE
         factor <- contrast[[1L]]
         numerator <- contrast[[2L]]
         denominator <- contrast[[3L]]
@@ -93,7 +103,7 @@ NULL
         cli_dl(
             c("design" = paste0(as.character(design(object)), collapse = ""))
         )
-        object <- DESeq(object)
+        object <- DESeq(object = object, parallel = parallel)
         resultsNames <- resultsNames(object)
         ## Match the contrast to coef, based on resultsNames.
         coef <- .contrast2coef(contrast = contrast, resultsNames = resultsNames)
@@ -101,53 +111,31 @@ NULL
         suppressMessages({
             shrink <- DESeq2::lfcShrink(
                 dds = object,
-                type = "apeglm",
                 coef = coef,
-                ...
+                res = res,
+                type = "apeglm",
+                lfcThreshold = lfcThreshold,
+                parallel = parallel
             )
         })
         assert(
             is(shrink, "DESeqResults"),
-            identical(lfcShrinkType(shrink), "apeglm")
-        )
-        ## Check that unshruken DESeqResults matches, if user passes in.
-        if (is(dots[["res"]], "DESeqResults")) {
-            res <- dots[["res"]]
-            assert(
-                identical(
-                    x = lfcShrinkType(res),
-                    y = "unshrunken"
-                ),
-                identical(
-                    x = metadata(res)[["alpha"]],
-                    y = metadata(shrink)[["alpha"]]
-                ),
-                identical(
-                    x = metadata(res)[["lfcThreshold"]],
-                    y = metadata(shrink)[["lfcThreshold"]]
-                ),
-                identical(
-                    x = res[["baseMean"]],
-                    y = shrink[["baseMean"]]
-                ),
-                !identical(
-                    x = res[["log2FoldChange"]],
-                    y = shrink[["log2FoldChange"]]
-                ),
-                !identical(
-                    x = res[["stat"]],
-                    y = shrink[["stat"]]
-                ),
-                identical(
-                    x = res[["pvalue"]],
-                    y = shrink[["pvalue"]]
-                ),
-                identical(
-                    x = res[["padj"]],
-                    y = shrink[["padj"]]
-                )
+            identical(lfcShrinkType(shrink), "apeglm"),
+            identical(lfcShrinkType(res), "unshrunken"),
+            identical(res[["baseMean"]], shrink[["baseMean"]]),
+            !identical(res[["log2FoldChange"]], shrink[["log2FoldChange"]]),
+            !identical(res[["stat"]], shrink[["stat"]]),
+            identical(res[["pvalue"]], shrink[["pvalue"]]),
+            identical(res[["padj"]], shrink[["padj"]]),
+            identical(
+                x = metadata(res)[["alpha"]],
+                y = metadata(shrink)[["alpha"]]
+            ),
+            identical(
+                x = metadata(res)[["lfcThreshold"]],
+                y = metadata(shrink)[["lfcThreshold"]]
             )
-        }
+        )
         shrink
     }
 

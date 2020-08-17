@@ -7,15 +7,12 @@
 \usage{
 apeglmResults(object, ...)
 
-\S4method{apeglmResults}{DESeqDataSet}(object, contrast, ...)
+\S4method{apeglmResults}{DESeqDataSet}(object, contrast, res, lfcThreshold = 0L, ...)
 }
 \arguments{
 \item{object}{Object.}
 
-\item{...}{Passes to \code{\link[DESeq2:lfcShrink]{lfcShrink()}}, with
-\code{type = "apeglm"} and \code{coef} automatically defined. Optionally can pass
-unshrunken \code{DESeqResults} via \code{res} argument here and this will set
-\code{alpha}, \code{lfcThreshold} automatically.}
+\item{...}{Additional arguments.}
 
 \item{contrast}{\code{character(3)}.
 Pairwise contrast vector:
@@ -29,6 +26,13 @@ Pairwise contrast vector:
 Numerator and denominator values correspond to grouping factor column.
 See \code{\link[=results]{results()}} for details. Note that we're intentionally being more
 strict about the input format here.}
+
+\item{res}{\code{DESeqResults}.
+Results containing unshrunken LFC values, generated with \code{results()}.}
+
+\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
+Log (base 2) fold change ratio cutoff threshold.
+If left \code{NULL}, will use the cutoff defined in the object.}
 }
 \value{
 \code{DESeqResults}, with apeglm adaptive shrinkage applied to fold
@@ -48,7 +52,7 @@ Runs \code{\link[DESeq2:nbinomWaldTest]{nbinomWaldTest()}} via
 \code{\link[DESeq2:DESeq]{DESeq()}}, followed by \code{\link[DESeq2:lfcShrink]{lfcShrink()}}.
 }
 \note{
-Updated 2019-11-19.
+Updated 2020-08-17.
 }
 \examples{
 ## DESeqDataSet ====
@@ -67,7 +71,11 @@ if (requireNamespace("apeglm", quietly = TRUE)) {
     lfcShrinkType(res)
 
     ## Shrunken DESeqResults, using apeglm via `lfcShrink()`.
-    shrink <- apeglmResults(dds, contrast = contrast)
+    shrink <- apeglmResults(
+        object = dds,
+        contrast = contrast,
+        res = res
+    )
     class(shrink)
     lfcShrinkType(shrink)
 }
