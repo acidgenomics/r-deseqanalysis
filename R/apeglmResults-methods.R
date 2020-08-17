@@ -59,7 +59,11 @@
 #'     lfcShrinkType(res)
 #'
 #'     ## Shrunken DESeqResults, using apeglm via `lfcShrink()`.
-#'     shrink <- apeglmResults(dds, contrast = contrast)
+#'     shrink <- apeglmResults(
+#'         object = dds,
+#'         contrast = contrast,
+#'         res = res
+#'     )
 #'     class(shrink)
 #'     lfcShrinkType(shrink)
 #' }
@@ -75,7 +79,6 @@ NULL
             object,
             contrast,
             res,
-            lfcThreshold = 0L,
             ...
         ) {
         validObject(object)
@@ -85,9 +88,9 @@ NULL
             isCharacter(contrast),
             hasLength(contrast, n = 3L),
             isSubset(contrast[[1L]], names(colData(object))),
-            is(res, "DESeqResults"),
-            isNumber(lfcThreshold), isNonNegative(lfcThreshold)
+            is(res, "DESeqResults")
         )
+        lfcThreshold <- lfcThreshold(res)
         parallel <- TRUE
         factor <- contrast[[1L]]
         numerator <- contrast[[2L]]
