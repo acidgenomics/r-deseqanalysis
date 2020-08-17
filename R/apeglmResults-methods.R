@@ -12,7 +12,7 @@
 #' [`DESeq()`][DESeq2::DESeq], followed by [`lfcShrink()`][DESeq2::lfcShrink].
 #'
 #' @name apeglmResults
-#' @note Updated 2019-11-19.
+#' @note Updated 2020-08-17.
 #'
 #' @inheritParams acidroxygen::params
 #' @param contrast `character(3)`.
@@ -26,10 +26,8 @@
 #'   Numerator and denominator values correspond to grouping factor column.
 #'   See [`results()`] for details. Note that we're intentionally being more
 #'   strict about the input format here.
-#' @param ... Passes to [`lfcShrink()`][DESeq2::lfcShrink], with
-#'   `type = "apeglm"` and `coef` automatically defined. Optionally can pass
-#'   unshrunken `DESeqResults` via `res` argument here and this will set
-#'   `alpha`, `lfcThreshold` automatically.
+#' @param res `DESeqResults`.
+#'   Results containing unshrunken LFC values, generated with `results()`.
 #'
 #' @seealso
 #' - "Extended section on shrinkage estimators" section of DESeq2 vignette,
@@ -69,19 +67,27 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Useful for avoiding this issue:
+## type='apeglm' shrinkage only for use with 'coef'
+## Updated 2020-08-17.
 `apeglmResults,DESeqDataSet` <-  # nolint
-    function(object, contrast, ...) {
+    function(
+            object,
+            contrast,
+            res,
+            lfcThreshold = 0L,
+            ...
+        ) {
         validObject(object)
-        dots <- list(...)
+        requireNamespaces("apeglm")
         assert(
-            requireNamespace("apeglm", quietly = TRUE),
-            areDisjointSets(c("coef", "type"), names(dots)),
             isCharacter(contrast),
             hasLength(contrast, n = 3L),
             isSubset(contrast[[1L]], names(colData(object))),
-            isCharacter(resultsNames(object))
+            isCharacter(resultsNames(object)),
+            isNumber(lfcThreshold), isNonNegative(lfcThreshold)
         )
+        parallel <- TRUE
         factor <- contrast[[1L]]
         numerator <- contrast[[2L]]
         denominator <- contrast[[3L]]
@@ -93,7 +99,7 @@ NULL
         cli_dl(
             c("design" = paste0(as.character(design(object)), collapse = ""))
         )
-        object <- DESeq(object)
+        object <- DESeq(object = object, parallel = parallel)
         resultsNames <- resultsNames(object)
         ## Match the contrast to coef, based on resultsNames.
         coef <- .contrast2coef(contrast = contrast, resultsNames = resultsNames)
@@ -101,9 +107,10 @@ NULL
         suppressMessages({
             shrink <- DESeq2::lfcShrink(
                 dds = object,
-                type = "apeglm",
                 coef = coef,
-                ...
+                type = "apeglm",
+                lfcThreshold = lfcThreshold,
+                parallel = parallel
             )
         })
         assert(
