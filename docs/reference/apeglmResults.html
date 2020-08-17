@@ -76,7 +76,7 @@ manually relevel factor reference levels to use the required coef argument." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
       </span>
     </div>
 
@@ -129,7 +129,7 @@ manually relevel factor reference levels to use the required <code>coef</code> a
     <pre class="usage"><span class='fu'>apeglmResults</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for DESeqDataSet</span>
-<span class='fu'>apeglmResults</span>(<span class='no'>object</span>, <span class='no'>contrast</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>apeglmResults</span>(<span class='no'>object</span>, <span class='no'>contrast</span>, <span class='no'>res</span>, <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,10 +140,7 @@ manually relevel factor reference levels to use the required <code>coef</code> a
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Passes to <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>lfcShrink()</a></code>, with
-<code>type = "apeglm"</code> and <code>coef</code> automatically defined. Optionally can pass
-unshrunken <code>DESeqResults</code> via <code>res</code> argument here and this will set
-<code>alpha</code>, <code>lfcThreshold</code> automatically.</p></td>
+      <td><p>Additional arguments.</p></td>
     </tr>
     <tr>
       <th>contrast</th>
@@ -158,6 +155,17 @@ Pairwise contrast vector:</p><ol>
 <p>Numerator and denominator values correspond to grouping factor column.
 See <code><a href='results.html'>results()</a></code> for details. Note that we're intentionally being more
 strict about the input format here.</p></td>
+    </tr>
+    <tr>
+      <th>res</th>
+      <td><p><code>DESeqResults</code>.
+Results containing unshrunken LFC values, generated with <code><a href='results.html'>results()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>lfcThreshold</th>
+      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> or <code>NULL</code>.
+Log (base 2) fold change ratio cutoff threshold.
+If left <code>NULL</code>, will use the cutoff defined in the object.</p></td>
     </tr>
     </table>
 
@@ -174,7 +182,7 @@ to values in <code><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>results
 <code><a href='https://rdrr.io/pkg/DESeq2/man/DESeq.html'>DESeq()</a></code>, followed by <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>lfcShrink()</a></code>.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2019-11-19.</p>
+    <p>Updated 2020-08-17.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'>
@@ -210,7 +218,7 @@ be used with apeglm <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html
     <span class='no'>shrink</span> <span class='kw'>&lt;-</span> <span class='fu'>apeglmResults</span>(<span class='no'>dds</span>, <span class='kw'>contrast</span> <span class='kw'>=</span> <span class='no'>contrast</span>)
     <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>shrink</span>)
     <span class='fu'><a href='lfcShrinkType.html'>lfcShrinkType</a></span>(<span class='no'>shrink</span>)
-}</div><div class='output co'>#&gt; <span class='message'>estimating size factors</span></div><div class='output co'>#&gt; <span class='message'>estimating dispersions</span></div><div class='output co'>#&gt; <span class='message'>gene-wise dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>mean-dispersion relationship</span></div><div class='output co'>#&gt; <span class='message'>final dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>fitting model and testing</span></div><div class='output co'>#&gt; <span class='message'>design: ~condition</span></div><div class='output co'>#&gt; <span class='message'>using pre-existing size factors</span></div><div class='output co'>#&gt; <span class='message'>estimating dispersions</span></div><div class='output co'>#&gt; <span class='message'>found already estimated dispersions, replacing these</span></div><div class='output co'>#&gt; <span class='message'>gene-wise dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>mean-dispersion relationship</span></div><div class='output co'>#&gt; <span class='message'>final dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>fitting model and testing</span></div><div class='output co'>#&gt; <span class='message'>  contrast: condition_C_vs_B</span></div><div class='output co'>#&gt; [1] "apeglm"</div></pre>
+}</div><div class='output co'>#&gt; <span class='message'>estimating size factors</span></div><div class='output co'>#&gt; <span class='message'>estimating dispersions</span></div><div class='output co'>#&gt; <span class='message'>gene-wise dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>mean-dispersion relationship</span></div><div class='output co'>#&gt; <span class='message'>final dispersion estimates</span></div><div class='output co'>#&gt; <span class='message'>fitting model and testing</span></div><div class='output co'>#&gt; <span class='message'>design: ~condition</span></div><div class='output co'>#&gt; <span class='message'>using pre-existing size factors</span></div><div class='output co'>#&gt; <span class='message'>estimating dispersions</span></div><div class='output co'>#&gt; <span class='message'>gene-wise dispersion estimates: 6 workers</span></div><div class='output co'>#&gt; <span class='message'>mean-dispersion relationship</span></div><div class='output co'>#&gt; <span class='message'>final dispersion estimates, fitting model and testing: 6 workers</span></div><div class='output co'>#&gt; <span class='message'>contrast: condition_C_vs_B</span></div><div class='output co'>#&gt; <span class='message'>coef: 3</span></div><div class='output co'>#&gt; <span class='error'>Error in dots[["res"]]: object of type 'closure' is not subsettable</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
