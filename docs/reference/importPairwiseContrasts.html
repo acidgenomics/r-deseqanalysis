@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
       </span>
     </div>
 
@@ -176,7 +176,7 @@ Named list of pairwise character vectors containing: "group", "numerator",
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/contrasts.csv"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"DESeqAnalysis"</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>importPairwiseContrasts</span>(<span class='no'>file</span>)</div><div class='output co'>#&gt; <span class='message'>→ Importing <span style='color: #0000BB;'>contrasts.csv</span><span> at </span><span style='color: #0000BB;'>/private/var/folders/l1/8y8sjzmn15v49jgrqglghcfr0000gn/T/RtmpLbUVb6/temp_libpath122e12159d18/DESeqAnalysis/extdata</span><span> using </span><span style='color: #0000BB;'>vroom</span><span>::</span><span style='color: #000000;background-color: #BBBBBB;'>`vroom()`</span><span>.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; $dox_induction_control
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>importPairwiseContrasts</span>(<span class='no'>file</span>)</div><div class='output co'>#&gt; <span class='message'>→ Importing <span style='color: #0000BB;'>contrasts.csv</span><span> at </span><span style='color: #0000BB;'>/private/var/folders/l1/8y8sjzmn15v49jgrqglghcfr0000gn/T/RtmpwVYKji/temp_libpath5ddf723a8978/DESeqAnalysis/extdata</span><span> using </span><span style='color: #0000BB;'>vroom</span><span>::</span><span style='color: #000000;background-color: #BBBBBB;'>`vroom()`</span><span>.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; $dox_induction_control
 #&gt;       group   numerator denominator 
 #&gt;     "group"         "B"         "A" 
 #&gt; 

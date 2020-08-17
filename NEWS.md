@@ -1,3 +1,11 @@
+## DESeqAnalysis 0.3.3 (2020-08-17)
+
+### Minor changes
+
+- `apeglmResults`: Simplified default arguments and disabled `...` passthrough
+  to `lfcShrink`, which is a bit confusing. Note that `DESeq` and `lfcShrink`
+  are now called internally with `parallel = TRUE`.
+
 ## DESeqAnalysis 0.3.2 (2020-08-13)
 
 ### Minor changes
