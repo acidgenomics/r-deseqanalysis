@@ -81,10 +81,11 @@ NULL
         validObject(object)
         requireNamespaces("apeglm")
         assert(
+            isCharacter(resultsNames(object)),
             isCharacter(contrast),
             hasLength(contrast, n = 3L),
             isSubset(contrast[[1L]], names(colData(object))),
-            isCharacter(resultsNames(object)),
+            is(res, "DESeqResults"),
             isNumber(lfcThreshold), isNonNegative(lfcThreshold)
         )
         parallel <- TRUE
@@ -108,6 +109,7 @@ NULL
             shrink <- DESeq2::lfcShrink(
                 dds = object,
                 coef = coef,
+                res = res,
                 type = "apeglm",
                 lfcThreshold = lfcThreshold,
                 parallel = parallel
@@ -115,46 +117,22 @@ NULL
         })
         assert(
             is(shrink, "DESeqResults"),
-            identical(lfcShrinkType(shrink), "apeglm")
-        )
-        ## Check that unshruken DESeqResults matches, if user passes in.
-        if (is(dots[["res"]], "DESeqResults")) {
-            res <- dots[["res"]]
-            assert(
-                identical(
-                    x = lfcShrinkType(res),
-                    y = "unshrunken"
-                ),
-                identical(
-                    x = metadata(res)[["alpha"]],
-                    y = metadata(shrink)[["alpha"]]
-                ),
-                identical(
-                    x = metadata(res)[["lfcThreshold"]],
-                    y = metadata(shrink)[["lfcThreshold"]]
-                ),
-                identical(
-                    x = res[["baseMean"]],
-                    y = shrink[["baseMean"]]
-                ),
-                !identical(
-                    x = res[["log2FoldChange"]],
-                    y = shrink[["log2FoldChange"]]
-                ),
-                !identical(
-                    x = res[["stat"]],
-                    y = shrink[["stat"]]
-                ),
-                identical(
-                    x = res[["pvalue"]],
-                    y = shrink[["pvalue"]]
-                ),
-                identical(
-                    x = res[["padj"]],
-                    y = shrink[["padj"]]
-                )
+            identical(lfcShrinkType(shrink), "apeglm"),
+            identical(lfcShrinkType(res), "unshrunken"),
+            identical(res[["baseMean"]], shrink[["baseMean"]]),
+            !identical(res[["log2FoldChange"]], shrink[["log2FoldChange"]]),
+            !identical(res[["stat"]], shrink[["stat"]]),
+            identical(res[["pvalue"]], shrink[["pvalue"]]),
+            identical(res[["padj"]], shrink[["padj"]]),
+            identical(
+                x = metadata(res)[["alpha"]],
+                y = metadata(shrink)[["alpha"]]
+            ),
+            identical(
+                x = metadata(res)[["lfcThreshold"]],
+                y = metadata(shrink)[["lfcThreshold"]]
             )
-        }
+        )
         shrink
     }
 
