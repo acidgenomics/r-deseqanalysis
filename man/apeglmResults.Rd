@@ -71,7 +71,11 @@ if (requireNamespace("apeglm", quietly = TRUE)) {
     lfcShrinkType(res)
 
     ## Shrunken DESeqResults, using apeglm via `lfcShrink()`.
-    shrink <- apeglmResults(dds, contrast = contrast)
+    shrink <- apeglmResults(
+        object = dds,
+        contrast = contrast,
+        res = res
+    )
     class(shrink)
     lfcShrinkType(shrink)
 }
