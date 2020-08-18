@@ -50,6 +50,7 @@ NULL
         validObject(object)
         assert(isFlag(rowData))
         value <- match.arg(value)
+        ## FIXME Can we phase this out in favor of looping on `results()`?
         slotName <- .whichResults(object, value)
         results <- slot(object, name = slotName)
         assert(

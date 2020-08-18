@@ -49,14 +49,13 @@ NULL
         direction <- match.arg(direction)
         return <- match.arg(return)
         if (is.null(i)) i <- resultsNames(object)
-        suppressMessages({
-            list <- lapply(
-                X = i,
-                FUN = deg,
-                object = object,
-                direction = direction
-            )
-        })
+        list <- lapply(
+            X = i,
+            FUN = deg,
+            object = object,
+            direction = direction
+        )
+        names(list) <- i
         mat <- intersectionMatrix(list)
         count <- sort(rowSums(mat), decreasing = TRUE)
         switch(
