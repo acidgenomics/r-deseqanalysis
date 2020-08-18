@@ -1,3 +1,10 @@
+## DESeqAnalysis 0.3.4 (2020-08-18)
+
+### New functions
+
+- `degIntersection`: Utility function that will return the number of times a
+  DEG is detected across contrasts.
+
 ## DESeqAnalysis 0.3.3 (2020-08-17)
 
 ### Minor changes

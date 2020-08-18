@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Summary of differentially expressed genes per contrast — degPerContrast • DESeqAnalysis</title>
+<title>Base mean threshold — degPerContrast • DESeqAnalysis</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Summary of differentially expressed genes per contrast — degPerContrast" />
-<meta property="og:description" content="Summary of differentially expressed genes per contrast" />
+<meta property="og:title" content="Base mean threshold — degPerContrast" />
+<meta property="og:description" content="Base mean threshold" />
 
 
 
@@ -113,13 +113,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Summary of differentially expressed genes per contrast</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/degPerContrast-methods.R'><code>R/degPerContrast-methods.R</code></a></small>
+    <h1>Base mean threshold</h1>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/DESeqAnalysis/blob/master/R/degPerContrast-methods.R'><code>R/degPerContrast-methods.R</code></a></small>
     <div class="hidden name"><code>degPerContrast.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Summary of differentially expressed genes per contrast</p>
+    <p>Base mean threshold</p>
     </div>
 
     <pre class="usage"><span class='fu'>degPerContrast</span>(<span class='no'>object</span>, <span class='no'>...</span>)
@@ -142,13 +142,9 @@
       <td><p>Object.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Passthrough arguments to <code><a href='deg.html'>deg()</a></code>.</p></td>
-    </tr>
-    <tr>
       <th>i</th>
       <td><p><code>character</code>, <code>numeric</code>, or <code>NULL</code>.
-Names or range of results to include in plot.
+Names or range of results.
 If set <code>NULL</code>, include all results.</p></td>
     </tr>
     <tr>
@@ -158,14 +154,18 @@ Include <code>"both"</code>, <code>"up"</code>, or <code>"down"</code> direction
     </tr>
     <tr>
       <th>n</th>
-      <td><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>.
-Number to include.</p></td>
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
+Return as count, instead of gene vector.</p></td>
     </tr>
     <tr>
       <th>return</th>
       <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
 Return type. Uses <code><a href='https://rdrr.io/r/base/match.arg.html'>match.arg()</a></code> internally and defaults
 to the first argument in the <code>character</code> vector.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Passthrough arguments to <code><a href='deg.html'>deg()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -181,7 +181,7 @@ Intended primarily for use with <code><a href='plotDEGUpset.html'>plotDEGUpset()
 
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2020-08-12.</p>
+    <p>Updated 2020-08-18.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
