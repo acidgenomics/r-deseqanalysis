@@ -20,7 +20,7 @@ plotDEGStackedBar(object, ...)
 \item{object}{Object.}
 
 \item{i}{\code{character}, \code{numeric}, or \code{NULL}.
-Names or range of results to include in plot.
+Names or range of results.
 If set \code{NULL}, include all results.}
 
 \item{direction}{\code{character(1)}.
