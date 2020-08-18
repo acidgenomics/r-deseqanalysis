@@ -70,7 +70,7 @@ NULL
                 fmt = "Fewer than %s DEG to plot. Skipping.",
                 .minDEGThreshold
             ))
-            return()
+            return(invisible())
         }
         ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
