@@ -7,15 +7,21 @@
 #'   Names or range of results.
 #'   If set `NULL`, include all results.
 #' @param return `character(1)`.
-#'   Return intersection count or ratio.
+#'   Return intersection matrix, count per contrast, or ratio.
 #' @param ... Passthrough arguments to [deg()].
 #'
 #' @examples
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' x <- degIntersection(deseq)
-#' head(x)
+#' mat <- degIntersection(deseq, return = "matrix")
+#' head(mat)
+#'
+#' count <- degIntersection(deseq, return = "count")
+#' head(count)
+#'
+#' ratio <- degIntersection(deseq, return = "ratio")
+#' head(ratio)
 NULL
 
 
@@ -34,7 +40,7 @@ NULL
     function(
         object,
         i = NULL,
-        return = c("count", "ratio"),
+        return = c("matrix", "count", "ratio"),
         ...
     ) {
         return <- match.arg(return)
@@ -49,6 +55,7 @@ NULL
         count <- sort(rowSums(mat), decreasing = TRUE)
         switch(
             EXPR = return,
+            "matrix" = mat,
             "count" = count,
             "ratio" = count / length(list)
         )
