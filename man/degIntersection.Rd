@@ -7,7 +7,7 @@
 \usage{
 degIntersection(object, ...)
 
-\S4method{degIntersection}{DESeqAnalysis}(object, i = NULL, return = c("count", "ratio"), ...)
+\S4method{degIntersection}{DESeqAnalysis}(object, i = NULL, return = c("matrix", "count", "ratio"), ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -17,7 +17,7 @@ Names or range of results.
 If set \code{NULL}, include all results.}
 
 \item{return}{\code{character(1)}.
-Return intersection count or ratio.}
+Return intersection matrix, count per contrast, or ratio.}
 
 \item{...}{Passthrough arguments to \code{\link[=deg]{deg()}}.}
 }
