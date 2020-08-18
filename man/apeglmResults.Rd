@@ -7,7 +7,7 @@
 \usage{
 apeglmResults(object, ...)
 
-\S4method{apeglmResults}{DESeqDataSet}(object, contrast, res, lfcThreshold = 0L, ...)
+\S4method{apeglmResults}{DESeqDataSet}(object, contrast, res, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -29,10 +29,6 @@ strict about the input format here.}
 
 \item{res}{\code{DESeqResults}.
 Results containing unshrunken LFC values, generated with \code{results()}.}
-
-\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
-Log (base 2) fold change ratio cutoff threshold.
-If left \code{NULL}, will use the cutoff defined in the object.}
 }
 \value{
 \code{DESeqResults}, with apeglm adaptive shrinkage applied to fold

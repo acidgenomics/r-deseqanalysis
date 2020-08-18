@@ -1,12 +1,13 @@
-#' Summary of differentially expressed genes per contrast
-#'
 #' @name degPerContrast
-#' @note Updated 2020-08-12.
+#' @inherit acidgenerics::baseMeanThreshold
+#' @note Updated 2020-08-18.
 #'
 #' @inheritParams acidroxygen::params
 #' @param i `character`, `numeric`, or `NULL`.
-#'   Names or range of results to include in plot.
+#'   Names or range of results.
 #'   If set `NULL`, include all results.
+#' @param n `logical(1)`.
+#'   Return as count, instead of gene vector.
 #' @param ... Passthrough arguments to [deg()].
 #'
 #' @return
@@ -20,6 +21,15 @@
 #'
 #' ## DESeqAnalysis ====
 #' degPerContrast(deseq)
+NULL
+
+
+
+#' @rdname degPerContrast
+#' @name degPerContrast
+#' @importFrom acidgenerics degPerContrast
+#' @usage degPerContrast(object, ...)
+#' @export
 NULL
 
 
