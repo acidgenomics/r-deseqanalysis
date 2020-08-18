@@ -49,14 +49,20 @@ NULL
         direction <- match.arg(direction)
         return <- match.arg(return)
         if (is.null(i)) i <- resultsNames(object)
-        list <- lapply(
-            X = i,
-            FUN = deg,
-            object = object,
-            direction = direction
-        )
+        suppressMessages({
+            list <- lapply(
+                X = i,
+                FUN = deg,
+                object = object,
+                direction = direction
+            )
+        })
         names(list) <- i
         mat <- intersectionMatrix(list)
+        cli_alert(sprintf(
+            "Returning intersection %s of %s %s-regulated DEGs.",
+            return, nrow(mat), direction
+        ))
         count <- sort(rowSums(mat), decreasing = TRUE)
         switch(
             EXPR = return,
