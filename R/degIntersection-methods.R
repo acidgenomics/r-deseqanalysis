@@ -6,6 +6,9 @@
 #' @param i `character`, `numeric`, or `NULL`.
 #'   Names or range of results.
 #'   If set `NULL`, include all results.
+#' @param direction `character(1)`.
+#'   Include "up" or "down" directions.
+#'   Must be directional, and intentionally does not support "both".
 #' @param return `character(1)`.
 #'   Return intersection matrix, count per contrast, or ratio.
 #' @param ... Passthrough arguments to [deg()].
@@ -40,17 +43,20 @@ NULL
     function(
         object,
         i = NULL,
-        return = c("matrix", "count", "ratio"),
-        ...
+        direction = c("up", "down"),
+        return = c("matrix", "count", "ratio")
     ) {
+        direction <- match.arg(direction)
         return <- match.arg(return)
         if (is.null(i)) i <- resultsNames(object)
-        list <- lapply(
-            X = i,
-            FUN = deg,
-            object = object,
-            ... = ...
-        )
+        suppressMessages({
+            list <- lapply(
+                X = i,
+                FUN = deg,
+                object = object,
+                direction = direction
+            )
+        })
         mat <- intersectionMatrix(list)
         count <- sort(rowSums(mat), decreasing = TRUE)
         switch(

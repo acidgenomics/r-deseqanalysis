@@ -7,7 +7,12 @@
 \usage{
 degIntersection(object, ...)
 
-\S4method{degIntersection}{DESeqAnalysis}(object, i = NULL, return = c("matrix", "count", "ratio"), ...)
+\S4method{degIntersection}{DESeqAnalysis}(
+  object,
+  i = NULL,
+  direction = c("up", "down"),
+  return = c("matrix", "count", "ratio")
+)
 }
 \arguments{
 \item{object}{Object.}
@@ -15,6 +20,10 @@ degIntersection(object, ...)
 \item{i}{\code{character}, \code{numeric}, or \code{NULL}.
 Names or range of results.
 If set \code{NULL}, include all results.}
+
+\item{direction}{\code{character(1)}.
+Include "up" or "down" directions.
+Must be directional, and intentionally does not support "both".}
 
 \item{return}{\code{character(1)}.
 Return intersection matrix, count per contrast, or ratio.}
@@ -36,6 +45,12 @@ Updated 2020-08-18.
 data(deseq)
 
 ## DESeqAnalysis ====
-x <- degIntersection(deseq)
-head(x)
+mat <- degIntersection(deseq, return = "matrix")
+head(mat)
+
+count <- degIntersection(deseq, return = "count")
+head(count)
+
+ratio <- degIntersection(deseq, return = "ratio")
+head(ratio)
 }
