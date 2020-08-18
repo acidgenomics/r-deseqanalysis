@@ -20,14 +20,14 @@ degPerContrast(object, ...)
 \item{object}{Object.}
 
 \item{i}{\code{character}, \code{numeric}, or \code{NULL}.
-Names or range of results to include in plot.
+Names or range of results.
 If set \code{NULL}, include all results.}
 
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
-\item{n}{\code{integer(1)}.
-Number to include.}
+\item{n}{\code{logical(1)}.
+Return as count, instead of gene vector.}
 
 \item{return}{\code{character(1)}.
 Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults

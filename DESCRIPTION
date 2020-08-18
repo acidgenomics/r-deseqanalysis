@@ -24,7 +24,7 @@ Encoding: UTF-8
 LazyData: false
 Depends:
     R (>= 4.0),
-    basejump (>= 0.12.11),
+    basejump (>= 0.12.12),
     DESeq2 (>= 1.28)
 Imports:
     BiocGenerics,
