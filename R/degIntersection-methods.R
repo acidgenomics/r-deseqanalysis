@@ -57,7 +57,12 @@ NULL
                 direction = direction
             )
         })
+        names(list) <- i
         mat <- intersectionMatrix(list)
+        cli_alert(sprintf(
+            "Returning intersection %s of %s %s-regulated DEGs.",
+            return, nrow(mat), direction
+        ))
         count <- sort(rowSums(mat), decreasing = TRUE)
         switch(
             EXPR = return,
