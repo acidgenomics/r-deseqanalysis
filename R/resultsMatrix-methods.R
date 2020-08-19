@@ -3,7 +3,7 @@
 #' Generate an aggregate matrix of `DESeqResults` column values per contrast.
 #'
 #' @name resultsMatrix
-#' @note Updated 2019-11-12.
+#' @note Updated 2020-08-19.
 #'
 #' @param object `DESeqAnalysis`.
 #' @param value `character(1)`.
@@ -40,7 +40,7 @@ NULL
 
 
 
-## Updated 2019-10-24.
+## Updated 2020-08-19.
 `resultsMatrix,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -50,8 +50,7 @@ NULL
         validObject(object)
         assert(isFlag(rowData))
         value <- match.arg(value)
-        ## FIXME Can we phase this out in favor of looping on `results()`?
-        slotName <- .whichResults(object, value)
+        slotName <- .whichResults(object, value = value)
         results <- slot(object, name = slotName)
         assert(
             is.list(results),
