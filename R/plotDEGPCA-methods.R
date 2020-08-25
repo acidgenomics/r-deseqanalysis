@@ -1,6 +1,6 @@
 #' @name plotDEGPCA
 #' @inherit acidgenerics::plotDEGPCA
-#' @note Updated 2020-08-04.
+#' @note Updated 2020-08-25.
 #'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams acidplots::plotPCA
@@ -26,7 +26,7 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2020-08-25.
 `plotDEGPCA,DESeqResults` <-  # nolint
     function(
         object,
@@ -58,19 +58,21 @@ NULL
             identical(rownames(res), rownames(dt))
         )
         direction <- match.arg(direction)
-        deg <- deg(
-            object = res,
-            alphaThreshold = alphaThreshold,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold,
-            direction = direction
-        )
+        suppressMessages({
+            deg <- deg(
+                object = res,
+                alphaThreshold = alphaThreshold,
+                lfcThreshold = lfcThreshold,
+                baseMeanThreshold = baseMeanThreshold,
+                direction = direction
+            )
+        })
         if (length(deg) < .minDEGThreshold) {
             cli_alert_warning(sprintf(
                 fmt = "Fewer than %s DEG to plot. Skipping.",
                 .minDEGThreshold
             ))
-            return(invisible())
+            return(invisible(NULL))
         }
         ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
@@ -78,14 +80,16 @@ NULL
         args <- list(
             object = as(dt, "RangedSummarizedExperiment"),
             ntop = Inf,
-            title = contrastName(res),
-            subtitle = .thresholdLabel(
-                n = length(deg),
-                direction = direction,
-                alphaThreshold = alphaThreshold,
-                lfcShrinkType = lfcShrinkType,
-                lfcThreshold = lfcThreshold,
-                baseMeanThreshold = baseMeanThreshold
+            labels = list(
+                title = contrastName(res),
+                subtitle = .thresholdLabel(
+                    n = length(deg),
+                    direction = direction,
+                    alphaThreshold = alphaThreshold,
+                    lfcShrinkType = lfcShrinkType,
+                    lfcThreshold = lfcThreshold,
+                    baseMeanThreshold = baseMeanThreshold
+                )
             )
         )
         args <- c(args, list(...))
@@ -104,11 +108,13 @@ setMethod(
 
 
 
-## Updated 2020-08-05.
+## Updated 2020-08-25.
 `plotDEGPCA,DESeqAnalysis` <-  # nolint
     function(object, i, contrastSamples = FALSE, ...) {
         assert(isFlag(contrastSamples))
-        res <- results(object, i = i)
+        suppressMessages({
+            res <- results(object, i = i)
+        })
         dt <- as(object, "DESeqTransform")
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, i = i)

@@ -77,7 +77,7 @@ NULL
                 return = "tbl_df"
             )
             if (is.null(data)) {
-                return(invisible())
+                return(invisible(NULL))
             }
             files <- file.path(dir, i, paste0(names(data), ".csv"))
             if (isTRUE(compress)) {

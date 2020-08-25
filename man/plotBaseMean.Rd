@@ -15,8 +15,8 @@ plotBaseMean(object, ...)
   nonzero = TRUE,
   trans = c("log10", "log2", "identity"),
   summary = TRUE,
-  color = getOption(x = "acid.color.discrete", default =
-    acidplots::scale_color_synesthesia_d()),
+  color = getOption(x = "acid.color.discrete", default = getOption(x =
+    "ggplot2.discrete.colour", default = acidplots::scale_color_synesthesia_d())),
   labels = list(title = "Base mean distribution", subtitle = NULL, x =
     "average expression across all samples", y = "density", color = "summary")
 )

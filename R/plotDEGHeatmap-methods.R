@@ -69,19 +69,21 @@ NULL
             isFlag(subtitle)
         )
         direction <- match.arg(direction)
-        deg <- deg(
-            object = res,
-            alphaThreshold = alphaThreshold,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold,
-            direction = direction
-        )
+        suppressMessages({
+            deg <- deg(
+                object = res,
+                alphaThreshold = alphaThreshold,
+                lfcThreshold = lfcThreshold,
+                baseMeanThreshold = baseMeanThreshold,
+                direction = direction
+            )
+        })
         if (length(deg) < .minDEGThreshold) {
             cli_alert_warning(sprintf(
                 fmt = "Fewer than %s DEGs to plot. Skipping.",
                 .minDEGThreshold
             ))
-            return(invisible())
+            return(invisible(NULL))
         }
         ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
@@ -124,12 +126,14 @@ setMethod(
 
 
 
-## Updated 2020-08-05.
+## Updated 2020-08-25.
 `plotDEGHeatmap,DESeqAnalysis` <-  # nolint
     function(object, i, contrastSamples = FALSE, ...) {
         validObject(object)
         assert(isFlag(contrastSamples))
-        res <- results(object, i = i)
+        suppressMessages({
+            res <- results(object, i = i)
+        })
         dt <- as(object, "DESeqTransform")
         if (isTRUE(contrastSamples)) {
             samples <- contrastSamples(object, i = i)

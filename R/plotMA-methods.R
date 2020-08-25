@@ -172,7 +172,7 @@ NULL
         ## Check for no genes passing cutoffs and early return.
         if (!hasRows(data)) {
             cli_alert_warning("No genes passed cutoffs.")
-            return(invisible())
+            return(invisible(NULL))
         }
         ## MA plot.
         log10BaseMean <- log10(data[["baseMean"]])
