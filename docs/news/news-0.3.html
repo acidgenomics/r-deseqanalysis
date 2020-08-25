@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -147,9 +147,9 @@
 </li>
 </ul>
 </div>
-<div id="minor-changes-3" class="section level3">
+<div id="minor-changes-5" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-3" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-5" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Switched to cli package for more informative messages.</li>
 </ul>
@@ -158,9 +158,9 @@
     <div id="deseqanalysis-031-2020-08-07" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-031-2020-08-07" class="anchor"></a>DESeqAnalysis 0.3.1 (2020-08-07)</h2>
-<div id="minor-changes-2" class="section level3">
+<div id="minor-changes-4" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-2" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-4" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Adjusted minimum dependency versions so package will build on bioconda.</li>
 </ul>
@@ -169,9 +169,9 @@
     <div id="deseqanalysis-032-2020-08-13" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-032-2020-08-13" class="anchor"></a>DESeqAnalysis 0.3.2 (2020-08-13)</h2>
-<div id="minor-changes-1" class="section level3">
+<div id="minor-changes-3" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-1" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-3" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>Added <code>i</code> argument support to <code>degPerContrast</code>, and the plotting functions <code>plotDEGUpset</code> and <code>plotStackedBar</code>, which call <code>degPerContrast</code> internally. This allows the user to pick specific contrasts of interest to plot.</li>
 <li>
@@ -183,9 +183,9 @@
     <div id="deseqanalysis-033-2020-08-17" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-033-2020-08-17" class="anchor"></a>DESeqAnalysis 0.3.3 (2020-08-17)</h2>
-<div id="minor-changes" class="section level3">
+<div id="minor-changes-2" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes" class="anchor"></a>Minor changes</h3>
+<a href="#minor-changes-2" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>
 <code>apeglmResults</code>: Simplified default arguments and disabled <code>...</code> passthrough to <code>lfcShrink</code>, which is a bit confusing. Note that <code>DESeq</code> and <code>lfcShrink</code> are now called internally with <code>parallel = TRUE</code>.</li>
@@ -207,10 +207,27 @@
     <div id="deseqanalysis-035-2020-08-18" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deseqanalysis-035-2020-08-18" class="anchor"></a>DESeqAnalysis 0.3.5 (2020-08-18)</h2>
+<div id="minor-changes-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-changes-1" class="anchor"></a>Minor changes</h3>
 <ul>
 <li>
 <code>degIntersection</code>: Bug fix for column names not returning as expected.</li>
 </ul>
+</div>
+</div>
+    <div id="deseqanalysis-036-2020-08-25" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deseqanalysis-036-2020-08-25" class="anchor"></a>DESeqAnalysis 0.3.6 (2020-08-25)</h2>
+<div id="minor-changes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-changes" class="anchor"></a>Minor changes</h3>
+<ul>
+<li>
+<code>plotDEGPCA</code>: Updated internal <code>title</code> and <code>subtitle</code> handoff to <code>plotPCA</code>.</li>
+<li>Quieted down messages in <code>plotDEG*</code> functions. This information is shown in the plots and doesn’t need to be messaged.</li>
+</ul>
+</div>
 </div>
   </div>
 

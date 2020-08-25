@@ -1,4 +1,14 @@
+## DESeqAnalysis 0.3.6 (2020-08-25)
+
+### Minor changes
+
+- `plotDEGPCA`: Updated internal `title` and `subtitle` handoff to `plotPCA`.
+- Quieted down messages in `plotDEG*` functions. This information is shown in
+  the plots and doesn't need to be messaged.
+
 ## DESeqAnalysis 0.3.5 (2020-08-18)
+
+### Minor changes
 
 - `degIntersection`: Bug fix for column names not returning as expected.
 

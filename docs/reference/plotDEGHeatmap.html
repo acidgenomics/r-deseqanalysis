@@ -77,7 +77,7 @@ plotHeatmap() are also supported by this function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -235,8 +235,7 @@ method defined in acidplots.</p></li>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotDEGHeatmap</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 38 differentially expressed genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'>→ Scaling matrix per row (z-score).</span></div><div class='output co'>#&gt; <span class='message'>→ Performing hierarchical clustering.</span>
-#&gt; <span class='message'>Using </span><span style='color: #000000;background-color: #BBBBBB;'>`hclust()`</span><span> method </span><span style='color: #000000;background-color: #BBBBBB;'>`"ward.D2"`</span><span>.</span></div><div class='output co'>#&gt; <span class='message'>→ Arranging rows using </span><span style='color: #000000;background-color: #BBBBBB;'>`hclust()`</span><span>.</span></div><div class='output co'>#&gt; <span class='message'>→ Arranging columns using </span><span style='color: #000000;background-color: #BBBBBB;'>`hclust()`</span><span>.</span></div><div class='img'><img src='plotDEGHeatmap-1.png' alt='' width='700' height='433' /></div></span></pre>
+<span class='fu'>plotDEGHeatmap</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>→ Scaling matrix per row (z-score).</span></div><div class='output co'>#&gt; <span class='message'>→ Performing hierarchical clustering with <span style='color: #000000;background-color: #BBBBBB;'>`hclust()`</span><span> method </span><span style='color: #000000;background-color: #BBBBBB;'>`"ward.D2"`</span><span>.</span></div><div class='img'><img src='plotDEGHeatmap-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
