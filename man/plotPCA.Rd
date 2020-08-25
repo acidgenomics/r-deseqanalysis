@@ -17,12 +17,10 @@ plotPCA(object, ...)
   interestingGroups = NULL,
   ntop = 500L,
   label = getOption(x = "acid.label", default = FALSE),
-  color = getOption(x = "acid.color.discrete", default =
-    acidplots::scale_color_synesthesia_d()),
+  color = getOption(x = "acid.color.discrete", default = getOption(x =
+    "ggplot2.discrete.colour", default = acidplots::scale_color_synesthesia_d())),
   pointSize = getOption(x = "acid.point.size", default = 3L),
-  title = "PCA",
-  subtitle = NULL,
-  return = c("ggplot", "DataFrame")
+  labels = list(title = "PCA", subtitle = NULL)
 )
 
 \S4method{plotPCA}{DESeqAnalysis}(object, ...)
@@ -58,15 +56,9 @@ To set the discrete color palette globally, use:\preformatted{options(acid.color
 Point size for dots in the plot.
 In the range of 1-3 is generally recommended.}
 
-\item{title}{\code{character(1)}.
-Title.}
-
-\item{subtitle}{\code{character(1)}.
-Subtitle.}
-
-\item{return}{\code{character(1)}.
-Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
-to the first argument in the \code{character} vector.}
+\item{labels}{\code{list}.
+ggplot2 labels.
+See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
 }
 \value{
 \code{ggplot} or \code{DataFrame}.
