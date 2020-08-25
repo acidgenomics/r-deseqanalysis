@@ -11,8 +11,8 @@ plotDEGStackedBar(object, ...)
   object,
   i = NULL,
   direction = c("both", "up", "down"),
-  fill = getOption(x = "acid.fill.discrete", default =
-    acidplots::scale_fill_synesthesia_d()),
+  fill = getOption(x = "acid.fill.discrete", default = getOption(x =
+    "ggplot2.discrete.fill", default = acidplots::scale_fill_synesthesia_d())),
   flip = TRUE
 )
 }

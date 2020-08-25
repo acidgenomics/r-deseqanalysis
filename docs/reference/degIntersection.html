@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -175,19 +175,16 @@ lowest. Gene identifiers are defined as the names.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'>degIntersection</span>(<span class='no'>deseq</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"matrix"</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>mat</span>)</div><div class='output co'>#&gt;         [,1]  [,2]
-#&gt; gene027 TRUE FALSE
-#&gt; gene028 TRUE FALSE
-#&gt; gene030 TRUE FALSE
-#&gt; gene057 TRUE FALSE
-#&gt; gene109 TRUE FALSE
-#&gt; gene112 TRUE FALSE</div><div class='input'>
-<span class='no'>count</span> <span class='kw'>&lt;-</span> <span class='fu'>degIntersection</span>(<span class='no'>deseq</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"count"</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>count</span>)</div><div class='output co'>#&gt; gene027 gene028 gene030 gene057 gene109 gene112 
+<span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'>degIntersection</span>(<span class='no'>deseq</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"matrix"</span>)</div><div class='output co'>#&gt; <span class='message'>→ Returning intersection matrix of 24 up-regulated DEGs.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>mat</span>)</div><div class='output co'>#&gt;         condition_B_vs_A treatment_D_vs_C
+#&gt; gene027             TRUE            FALSE
+#&gt; gene028             TRUE            FALSE
+#&gt; gene030             TRUE            FALSE
+#&gt; gene057             TRUE            FALSE
+#&gt; gene109             TRUE            FALSE
+#&gt; gene112             TRUE            FALSE</div><div class='input'>
+<span class='no'>count</span> <span class='kw'>&lt;-</span> <span class='fu'>degIntersection</span>(<span class='no'>deseq</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"count"</span>)</div><div class='output co'>#&gt; <span class='message'>→ Returning intersection count of 24 up-regulated DEGs.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>count</span>)</div><div class='output co'>#&gt; gene027 gene028 gene030 gene057 gene109 gene112 
 #&gt;       1       1       1       1       1       1 </div><div class='input'>
-<span class='no'>ratio</span> <span class='kw'>&lt;-</span> <span class='fu'>degIntersection</span>(<span class='no'>deseq</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"ratio"</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>ratio</span>)</div><div class='output co'>#&gt; gene027 gene028 gene030 gene057 gene109 gene112 
+<span class='no'>ratio</span> <span class='kw'>&lt;-</span> <span class='fu'>degIntersection</span>(<span class='no'>deseq</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='st'>"ratio"</span>)</div><div class='output co'>#&gt; <span class='message'>→ Returning intersection ratio of 24 up-regulated DEGs.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>ratio</span>)</div><div class='output co'>#&gt; gene027 gene028 gene030 gene057 gene109 gene112 
 #&gt;     0.5     0.5     0.5     0.5     0.5     0.5 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
