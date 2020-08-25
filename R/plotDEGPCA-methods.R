@@ -1,6 +1,6 @@
 #' @name plotDEGPCA
 #' @inherit acidgenerics::plotDEGPCA
-#' @note Updated 2020-08-04.
+#' @note Updated 2020-08-25.
 #'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams acidplots::plotPCA
@@ -26,7 +26,7 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2020-08-25.
 `plotDEGPCA,DESeqResults` <-  # nolint
     function(
         object,
@@ -70,7 +70,7 @@ NULL
                 fmt = "Fewer than %s DEG to plot. Skipping.",
                 .minDEGThreshold
             ))
-            return(invisible())
+            return(invisible(NULL))
         }
         ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
@@ -78,14 +78,16 @@ NULL
         args <- list(
             object = as(dt, "RangedSummarizedExperiment"),
             ntop = Inf,
-            title = contrastName(res),
-            subtitle = .thresholdLabel(
-                n = length(deg),
-                direction = direction,
-                alphaThreshold = alphaThreshold,
-                lfcShrinkType = lfcShrinkType,
-                lfcThreshold = lfcThreshold,
-                baseMeanThreshold = baseMeanThreshold
+            labels = list(
+                title = contrastName(res),
+                subtitle = .thresholdLabel(
+                    n = length(deg),
+                    direction = direction,
+                    alphaThreshold = alphaThreshold,
+                    lfcShrinkType = lfcShrinkType,
+                    lfcThreshold = lfcThreshold,
+                    baseMeanThreshold = baseMeanThreshold
+                )
             )
         )
         args <- c(args, list(...))
