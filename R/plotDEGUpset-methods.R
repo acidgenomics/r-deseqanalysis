@@ -1,11 +1,11 @@
 #' @name plotDEGUpset
 #' @inherit acidgenerics::plotDEGUpset
-#' @note Updated 2020-08-12.
+#' @note Updated 2020-08-25.
 #'
 #' @inheritParams degPerContrast
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
-#' @param ... Additional arguments.
+#' @param ... Passthrough arguments to [acidplots::plotUpset()].
 #'
 #' @examples
 #' data(deseq)
@@ -25,12 +25,13 @@ NULL
 
 
 
-## Updated 2020-08-12.
+## Updated 2020-08-25.
 `plotDEGUpset,DESeqAnalysis` <-  # nolint
     function(
         object,
         i = NULL,
-        direction = c("both", "up", "down")
+        direction = c("both", "up", "down"),
+        ...
     ) {
         direction <- match.arg(direction)
         degPerContrast <- degPerContrast(
@@ -39,11 +40,9 @@ NULL
             direction = direction,
             return = "list"
         )
-        listInput <- do.call(what = c, args = degPerContrast)
-        names(listInput) <- makeNames(names(listInput), unique = TRUE)
-        suppressMessages({
-            plotUpset(listInput)
-        })
+        list <- do.call(what = c, args = degPerContrast)
+        names(list) <- makeNames(names(list), unique = TRUE)
+        plotUpset(list, ...)
     }
 
 
