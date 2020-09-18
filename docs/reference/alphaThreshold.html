@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -95,6 +95,12 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="https://acidgenomics.com/">
+    <span class="fas fa fas fa-vial fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/acidgenomics/DESeqAnalysis/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -122,21 +128,21 @@
     <p>Alpha threshold</p>
     </div>
 
-    <pre class="usage"><span class='fu'>alphaThreshold</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>alphaThreshold</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
 
-<span class='fu'>alphaThreshold</span>(<span class='no'>object</span>, <span class='no'>...</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+<span class='fu'>alphaThreshold</span>(<span class='kw'>object</span>, <span class='kw'>...</span>) <span class='op'>&lt;-</span> <span class='kw'>value</span>
 
 <span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>alphaThreshold</span>(<span class='no'>object</span>)
+<span class='fu'>alphaThreshold</span>(<span class='kw'>object</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>alphaThreshold</span>(<span class='no'>object</span>)
+<span class='fu'>alphaThreshold</span>(<span class='kw'>object</span>)
 
 <span class='co'># S4 method for DESeqAnalysis,numeric</span>
-<span class='fu'>alphaThreshold</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+<span class='fu'>alphaThreshold</span>(<span class='kw'>object</span>) <span class='op'>&lt;-</span> <span class='kw'>value</span>
 
 <span class='co'># S4 method for DESeqAnalysis,`NULL`</span>
-<span class='fu'>alphaThreshold</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span></pre>
+<span class='fu'>alphaThreshold</span>(<span class='kw'>object</span>) <span class='op'>&lt;-</span> <span class='kw'>value</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,12 +170,13 @@ Alpha cutoff level.</p>
     <p>Updated 2020-08-04.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='no'>object</span> <span class='kw'>&lt;-</span> <span class='no'>deseq</span>
-<span class='fu'>alphaThreshold</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='fl'>0.05</span>
-<span class='fu'>alphaThreshold</span>(<span class='no'>object</span>)</div><div class='output co'>#&gt; [1] 0.05</div></pre>
+<span class='kw'>object</span> <span class='op'>&lt;-</span> <span class='kw'>deseq</span>
+<span class='fu'>alphaThreshold</span>(<span class='kw'>object</span>) <span class='op'>&lt;-</span> <span class='fl'>0.05</span>
+<span class='fu'>alphaThreshold</span>(<span class='kw'>object</span>)
+</div><div class='output co'>#&gt; [1] 0.05</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -185,7 +192,7 @@ Alpha cutoff level.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

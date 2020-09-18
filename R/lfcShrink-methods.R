@@ -45,12 +45,12 @@ setMethod(
 
 
 
-## Updated 2020-08-04.
+## Updated 2020-09-18.
 `lfcShrink,DESeqAnalysis` <-  # nolint
     function(object) {
         ok <- metadata(object)[["lfcShrink"]]
         if (is.logical(ok)) return(ok)
-        ok <- hasLength(slot(object, "lfcShrink"))
+        ok <- as.logical(hasLength(slot(object, "lfcShrink")))
         ok
     }
 

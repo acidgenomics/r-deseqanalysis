@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -95,6 +95,12 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="https://acidgenomics.com/">
+    <span class="fas fa fas fa-vial fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/acidgenomics/DESeqAnalysis/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -123,9 +129,9 @@
     </div>
 
     <pre class="usage"><span class='fu'>prepareTximportFiles</span>(
-  <span class='no'>files</span>,
-  <span class='kw'>makeNames</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"makeNames"</span>, <span class='st'>"snakeCase"</span>, <span class='st'>"camelCase"</span>),
-  <span class='kw'>exists</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>files</span>,
+  makeNames = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"makeNames"</span>, <span class='st'>"snakeCase"</span>, <span class='st'>"camelCase"</span>),
+  exists = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -148,7 +154,7 @@ See basejump toolkit for details.</p></td>
       <th>exists</th>
       <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>.
 Check if requested input exists on disk.
-Runs <code><a href='https://rdrr.io/pkg/basejump/man/reexports.html'>realpath()</a></code> internally.</p></td>
+Runs <code>realpath()</code> internally.</p></td>
     </tr>
     </table>
 
@@ -172,12 +178,14 @@ Return quant file paths, with valid sample names automatically applied.</p>
     <p>Updated 2019-10-09.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
+    <pre class="examples"><div class='input'><span class='kw'>files</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
     <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"salmon"</span>, <span class='st'>"1-sample-A"</span>, <span class='st'>"quant.sf"</span>),
     <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"salmon"</span>, <span class='st'>"2-sample-B"</span>, <span class='st'>"quant.sf"</span>)
 )
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>files</span>)</div><div class='output co'>#&gt; [1] "salmon/1-sample-A/quant.sf" "salmon/2-sample-B/quant.sf"</div><div class='input'><span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'>prepareTximportFiles</span>(<span class='no'>files</span>, <span class='kw'>makeNames</span> <span class='kw'>=</span> <span class='st'>"snakeCase"</span>, <span class='kw'>exists</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>files</span>)</div><div class='output co'>#&gt;                  x1_sample_a                  x2_sample_b 
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>files</span>)
+</div><div class='output co'>#&gt; [1] "salmon/1-sample-A/quant.sf" "salmon/2-sample-B/quant.sf"</div><div class='input'><span class='kw'>files</span> <span class='op'>&lt;-</span> <span class='fu'>prepareTximportFiles</span>(<span class='kw'>files</span>, makeNames = <span class='st'>"snakeCase"</span>, exists = <span class='fl'>FALSE</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>files</span>)
+</div><div class='output co'>#&gt;                  x1_sample_a                  x2_sample_b 
 #&gt; "salmon/1-sample-A/quant.sf" "salmon/2-sample-B/quant.sf" </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -194,7 +202,7 @@ Return quant file paths, with valid sample names automatically applied.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

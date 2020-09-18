@@ -1,7 +1,7 @@
 #' Results
 #'
 #' @name results
-#' @note Updated 2020-08-05.
+#' @note Updated 2020-09-18.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
@@ -47,7 +47,7 @@ setMethod(
 
 
 
-## Updated 2020-08-05.
+## Updated 2020-09-18.
 `results,DESeqAnalysis` <-  # nolint
     function(object, i) {
         validObject(object)
@@ -56,7 +56,7 @@ setMethod(
             assert(isSubset(i, resultsNames(object)))
         }
         lfcShrink <- lfcShrink(object)
-        if (identical(lfcShrink, FALSE)) {
+        if (!isTRUE(lfcShrink)) {
             slotName <- "results"
         } else if (
             isTRUE(lfcShrink) &&
