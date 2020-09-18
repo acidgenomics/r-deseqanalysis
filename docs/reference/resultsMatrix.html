@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -95,6 +95,12 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="https://acidgenomics.com/">
+    <span class="fas fa fas fa-vial fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/acidgenomics/DESeqAnalysis/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -122,20 +128,20 @@
     <p>Generate an aggregate matrix of <code>DESeqResults</code> column values per contrast.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>resultsMatrix</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>resultsMatrix</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
 
 <span class='co'># S4 method for DESeqAnalysis</span>
 <span class='fu'>resultsMatrix</span>(
-  <span class='no'>object</span>,
-  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>),
-  <span class='kw'>rowData</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>object</span>,
+  value = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>),
+  rowData = <span class='fl'>FALSE</span>
 )
 
 <span class='co'># S4 method for DESeqAnalysisList</span>
 <span class='fu'>resultsMatrix</span>(
-  <span class='no'>object</span>,
-  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>),
-  <span class='kw'>rowData</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>object</span>,
+  value = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>, <span class='st'>"padj"</span>),
+  rowData = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -187,11 +193,12 @@ are automatically prefixed to the column names.</p></li>
     <p>Updated 2020-08-19.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsMatrix</span>(<span class='no'>deseq</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;         condition_B_vs_A treatment_D_vs_C
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'>resultsMatrix</span>(<span class='kw'>deseq</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>x</span>)
+</div><div class='output co'>#&gt;         condition_B_vs_A treatment_D_vs_C
 #&gt; gene001       0.68113957     1.348785e-02
 #&gt; gene002       0.21751307    -6.657954e-03
 #&gt; gene003       0.16882225     2.948482e-05
@@ -213,7 +220,7 @@ are automatically prefixed to the column names.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
