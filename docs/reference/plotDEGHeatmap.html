@@ -77,7 +77,7 @@ plotHeatmap() are also supported by this function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -98,6 +98,12 @@ plotHeatmap() are also supported by this function." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="https://acidgenomics.com/">
+    <span class="fas fa fas fa-vial fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/acidgenomics/DESeqAnalysis/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -128,23 +134,23 @@ manual input of a gene vector. All of the optional parameters for
 <code><a href='https://rdrr.io/pkg/acidgenerics/man/plotHeatmap.html'>plotHeatmap()</a></code> are also supported by this function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>plotDEGHeatmap</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
 
 <span class='co'># S4 method for DESeqResults</span>
 <span class='fu'>plotDEGHeatmap</span>(
-  <span class='no'>object</span>,
-  <span class='no'>DESeqTransform</span>,
-  <span class='kw'>alphaThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>baseMeanThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>object</span>,
+  <span class='kw'>DESeqTransform</span>,
+  alphaThreshold = <span class='kw'>NULL</span>,
+  lfcThreshold = <span class='kw'>NULL</span>,
+  baseMeanThreshold = <span class='kw'>NULL</span>,
+  direction = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
+  title = <span class='fl'>TRUE</span>,
+  subtitle = <span class='fl'>TRUE</span>,
+  <span class='kw'>...</span>
 )
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotDEGHeatmap</span>(<span class='no'>object</span>, <span class='no'>i</span>, <span class='kw'>contrastSamples</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>plotDEGHeatmap</span>(<span class='kw'>object</span>, <span class='kw'>i</span>, contrastSamples = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -200,7 +206,8 @@ Include subtitle containing DEG information?</p></td>
       <th>i</th>
       <td><p>Indices specifying elements to extract or replace. Indices are <code>numeric</code> or
 <code>character</code> vectors, empty (<code>missing</code>), or <code>NULL</code>.</p>
-<p>For more information:</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/help.html'>help</a></span>(<span class='kw'>topic</span> <span class='kw'>=</span> <span class='st'>"Extract"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"base"</span>)</pre></td>
+<p>For more information:</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/help.html'>help</a></span>(topic = <span class='st'>"Extract"</span>, package = <span class='st'>"base"</span>)
+</pre></td>
     </tr>
     <tr>
       <th>contrastSamples</th>
@@ -232,10 +239,11 @@ method defined in acidplots.</p></li>
     <p>Updated 2020-08-05.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotDEGHeatmap</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; <span class='message'>→ Scaling matrix per row (z-score).</span></div><div class='output co'>#&gt; <span class='message'>→ Performing hierarchical clustering with <span style='color: #000000;background-color: #BBBBBB;'>`hclust()`</span><span> method </span><span style='color: #000000;background-color: #BBBBBB;'>`"ward.D2"`</span><span>.</span></div><div class='img'><img src='plotDEGHeatmap-1.png' alt='' width='700' height='433' /></div></span></pre>
+<span class='fu'>plotDEGHeatmap</span>(<span class='kw'>deseq</span>, i = <span class='fl'>1L</span>)
+</div><div class='output co'>#&gt; <span class='message'>→ Scaling matrix per row (z-score).</span></div><div class='output co'>#&gt; <span class='message'>→ Performing hierarchical clustering with <span style='color: #000000;background-color: #BBBBBB;'>`hclust()`</span><span> method </span><span style='color: #000000;background-color: #BBBBBB;'>`"ward.D2"`</span><span>.</span></div><div class='img'><img src='plotDEGHeatmap-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -251,7 +259,7 @@ method defined in acidplots.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

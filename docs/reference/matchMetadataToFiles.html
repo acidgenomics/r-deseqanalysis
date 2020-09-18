@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -95,6 +95,12 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="https://acidgenomics.com/">
+    <span class="fas fa fas fa-vial fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/acidgenomics/DESeqAnalysis/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -122,7 +128,7 @@
     <p>Match user metadata to file names used for tximport</p>
     </div>
 
-    <pre class="usage"><span class='fu'>matchMetadataToFiles</span>(<span class='no'>metadata</span>, <span class='no'>files</span>)</pre>
+    <pre class="usage"><span class='fu'>matchMetadataToFiles</span>(<span class='kw'>metadata</span>, <span class='kw'>files</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,23 +157,26 @@ first column. Original values are stashed in "originalSampleID".</p>
     <p>Updated 2020-08-04.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>metadata</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-    <span class='kw'>sampleID</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>4L</span>), <span class='st'>"sample"</span>, <span class='no'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>4L</span>)], <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>),
-    <span class='kw'>condition</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>2L</span>)], <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>2L</span>)
+    <pre class="examples"><div class='input'><span class='kw'>metadata</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+    sampleID = <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>4L</span>), <span class='st'>"sample"</span>, <span class='kw'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>4L</span>)], sep = <span class='st'>"_"</span>),
+    condition = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='kw'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>2L</span>)], times = <span class='fl'>2L</span>)
 )
-<span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(
+<span class='kw'>files</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(
     <span class='st'>"salmon"</span>,
-    <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>4L</span>), <span class='st'>"sample"</span>, <span class='no'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>4L</span>)], <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"-"</span>),
+    <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>4L</span>), <span class='st'>"sample"</span>, <span class='kw'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>4L</span>)], sep = <span class='st'>"-"</span>),
     <span class='st'>"quant.sf"</span>
 )
 <span class='co'>## The function will match regardless of row order in user metadata.</span>
-<span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='no'>files</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>metadata</span>)</div><div class='output co'>#&gt;     sampleID condition
+<span class='kw'>files</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='kw'>files</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>metadata</span>)
+</div><div class='output co'>#&gt;     sampleID condition
 #&gt; 1 1_sample_A         A
 #&gt; 2 2_sample_B         B
 #&gt; 3 3_sample_C         A
-#&gt; 4 4_sample_D         B</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>files</span>)</div><div class='output co'>#&gt; [1] "salmon/4-sample-D/quant.sf" "salmon/3-sample-C/quant.sf"
-#&gt; [3] "salmon/2-sample-B/quant.sf" "salmon/1-sample-A/quant.sf"</div><div class='input'><span class='fu'>matchMetadataToFiles</span>(<span class='kw'>metadata</span> <span class='kw'>=</span> <span class='no'>metadata</span>, <span class='kw'>files</span> <span class='kw'>=</span> <span class='no'>files</span>)</div><div class='output co'>#&gt;     sampleID condition originalSampleID
+#&gt; 4 4_sample_D         B</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>files</span>)
+</div><div class='output co'>#&gt; [1] "salmon/4-sample-D/quant.sf" "salmon/3-sample-C/quant.sf"
+#&gt; [3] "salmon/2-sample-B/quant.sf" "salmon/1-sample-A/quant.sf"</div><div class='input'><span class='fu'>matchMetadataToFiles</span>(metadata = <span class='kw'>metadata</span>, files = <span class='kw'>files</span>)
+</div><div class='output co'>#&gt;     sampleID condition originalSampleID
 #&gt; 1 1-sample-A         A       1_sample_A
 #&gt; 2 2-sample-B         B       2_sample_B
 #&gt; 3 3-sample-C         A       3_sample_C
@@ -187,7 +196,7 @@ first column. Original values are stashed in "originalSampleID".</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

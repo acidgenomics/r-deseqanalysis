@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -95,6 +95,12 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="https://acidgenomics.com/">
+    <span class="fas fa fas fa-vial fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/acidgenomics/DESeqAnalysis/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -122,22 +128,22 @@
     <p>Relative difference of results</p>
     </div>
 
-    <pre class="usage"><span class='fu'>resultsDiff</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>resultsDiff</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, <span class='kw'>...</span>)
 
 <span class='co'># S4 method for DESeqResults,DESeqResults</span>
 <span class='fu'>resultsDiff</span>(
-  <span class='no'>x</span>,
-  <span class='no'>y</span>,
-  <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>),
-  <span class='kw'>deg</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"no"</span>, <span class='st'>"intersect"</span>, <span class='st'>"union"</span>),
-  <span class='kw'>alphaThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lfcThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>baseMeanThreshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>)
+  <span class='kw'>x</span>,
+  <span class='kw'>y</span>,
+  col = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"log2FoldChange"</span>, <span class='st'>"stat"</span>),
+  deg = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"no"</span>, <span class='st'>"intersect"</span>, <span class='st'>"union"</span>),
+  alphaThreshold = <span class='kw'>NULL</span>,
+  lfcThreshold = <span class='kw'>NULL</span>,
+  baseMeanThreshold = <span class='kw'>NULL</span>,
+  direction = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>)
 )
 
 <span class='co'># S4 method for DESeqAnalysis,missingOrNULL</span>
-<span class='fu'>resultsDiff</span>(<span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>i</span>, <span class='no'>j</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>resultsDiff</span>(<span class='kw'>x</span>, y = <span class='kw'>NULL</span>, <span class='kw'>i</span>, <span class='kw'>j</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -192,13 +198,15 @@ Include <code>"both"</code>, <code>"up"</code>, or <code>"down"</code> direction
       <th>i</th>
       <td><p>Indices specifying elements to extract or replace. Indices are <code>numeric</code> or
 <code>character</code> vectors, empty (<code>missing</code>), or <code>NULL</code>.</p>
-<p>For more information:</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/help.html'>help</a></span>(<span class='kw'>topic</span> <span class='kw'>=</span> <span class='st'>"Extract"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"base"</span>)</pre></td>
+<p>For more information:</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/help.html'>help</a></span>(topic = <span class='st'>"Extract"</span>, package = <span class='st'>"base"</span>)
+</pre></td>
     </tr>
     <tr>
       <th>j</th>
       <td><p>Indices specifying elements to extract or replace. Indices are <code>numeric</code> or
 <code>character</code> vectors, empty (<code>missing</code>), or <code>NULL</code>.</p>
-<p>For more information:</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/help.html'>help</a></span>(<span class='kw'>topic</span> <span class='kw'>=</span> <span class='st'>"Extract"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"base"</span>)</pre></td>
+<p>For more information:</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/help.html'>help</a></span>(topic = <span class='st'>"Extract"</span>, package = <span class='st'>"base"</span>)
+</pre></td>
     </tr>
     <tr>
       <th>...</th>
@@ -221,10 +229,12 @@ Names correspond to the features (i.e. genes) analyzed.</p>
     <p>Updated 2020-08-05.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='no'>diff</span> <span class='kw'>&lt;-</span> <span class='fu'>resultsDiff</span>(<span class='no'>deseq</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>2L</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> treatment_D_vs_C (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>→ Calculating relative difference of </span><span style='color: #000000;background-color: #BBBBBB;'>`log2FoldChange`</span><span>.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>diff</span>)</div><div class='output co'>#&gt;     gene001     gene002     gene003     gene004     gene005     gene006 
+<span class='kw'>diff</span> <span class='op'>&lt;-</span> <span class='fu'>resultsDiff</span>(<span class='kw'>deseq</span>, i = <span class='fl'>1L</span>, j = <span class='fl'>2L</span>)
+</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> treatment_D_vs_C (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>→ Calculating relative difference of </span><span style='color: #000000;background-color: #BBBBBB;'>`log2FoldChange`</span><span>.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>diff</span>)
+</div><div class='output co'>#&gt;     gene001     gene002     gene003     gene004     gene005     gene006 
 #&gt;  0.66765173  0.22417103  0.16879276  0.01535969 -0.22396653 -0.57329468 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -241,7 +251,7 @@ Names correspond to the features (i.e. genes) analyzed.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

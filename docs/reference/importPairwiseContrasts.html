@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -95,6 +95,12 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="https://acidgenomics.com/">
+    <span class="fas fa fas fa-vial fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/acidgenomics/DESeqAnalysis/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -123,11 +129,11 @@
     </div>
 
     <pre class="usage"><span class='fu'>importPairwiseContrasts</span>(
-  <span class='no'>file</span>,
-  <span class='kw'>groupCol</span> <span class='kw'>=</span> <span class='st'>"group"</span>,
-  <span class='kw'>numeratorCol</span> <span class='kw'>=</span> <span class='st'>"numerator"</span>,
-  <span class='kw'>denominatorCol</span> <span class='kw'>=</span> <span class='st'>"denominator"</span>,
-  <span class='kw'>namesCol</span> <span class='kw'>=</span> <span class='st'>"description"</span>
+  <span class='kw'>file</span>,
+  groupCol = <span class='st'>"group"</span>,
+  numeratorCol = <span class='st'>"numerator"</span>,
+  denominatorCol = <span class='st'>"denominator"</span>,
+  namesCol = <span class='st'>"description"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -175,8 +181,10 @@ Named list of pairwise character vectors containing: "group", "numerator",
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/DESeq2/man/results.html'>DESeq2::results()</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/contrasts.csv"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"DESeqAnalysis"</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>importPairwiseContrasts</span>(<span class='no'>file</span>)</div><div class='output co'>#&gt; <span class='message'>→ Importing <span style='color: #0000BB;'>contrasts.csv</span><span> at </span><span style='color: #0000BB;'>/private/var/folders/l1/8y8sjzmn15v49jgrqglghcfr0000gn/T/Rtmp2cByVm/temp_libpathde5c468b2d1e/DESeqAnalysis/extdata</span><span> using </span><span style='color: #0000BB;'>vroom</span><span>::</span><span style='color: #000000;background-color: #BBBBBB;'>`vroom()`</span><span>.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; $dox_induction_control
+    <pre class="examples"><div class='input'><span class='kw'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/contrasts.csv"</span>, package = <span class='st'>"DESeqAnalysis"</span>)
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'>importPairwiseContrasts</span>(<span class='kw'>file</span>)
+</div><div class='output co'>#&gt; <span class='message'>→ Importing <span style='color: #0000BB;'>contrasts.csv</span><span> at </span><span style='color: #0000BB;'>/private/var/folders/l1/8y8sjzmn15v49jgrqglghcfr0000gn/T/RtmpNPypS7/temp_libpath1501d2b20b1c5/DESeqAnalysis/extdata</span><span> using </span><span style='color: #0000BB;'>vroom</span><span>::</span><span style='color: #000000;background-color: #BBBBBB;'>`vroom()`</span><span>.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>x</span>)
+</div><div class='output co'>#&gt; $dox_induction_control
 #&gt;       group   numerator denominator 
 #&gt;     "group"         "B"         "A" 
 #&gt; 
@@ -199,7 +207,7 @@ Named list of pairwise character vectors containing: "group", "numerator",
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
