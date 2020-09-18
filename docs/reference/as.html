@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -95,6 +95,12 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="https://acidgenomics.com/">
+    <span class="fas fa fas fa-vial fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/acidgenomics/DESeqAnalysis/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -140,21 +146,26 @@ corresponds to results containing log2 fold change (LFC) values that <em>have
 not been shrunken</em> using <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcShrink.html'>DESeq2::lfcShrink()</a></code>.</p></li>
 </ul>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Michael Steinbaugh</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>deseq</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>deseq</span>)
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='no'>dds</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>dds</span>)</div><div class='output co'>#&gt; class: DESeqDataSet 
+<span class='kw'>dds</span> <span class='op'>&lt;-</span> <span class='fu'>as</span>(<span class='kw'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>dds</span>)
+</div><div class='output co'>#&gt; class: DESeqDataSet 
 #&gt; dim: 500 12 
 #&gt; metadata(3): version date interestingGroups
 #&gt; assays(4): counts mu H cooks
 #&gt; rownames(500): gene001 gene002 ... gene499 gene500
 #&gt; rowData names(38): broadClass description ... deviance maxCooks
 #&gt; colnames(12): sample01 sample02 ... sample11 sample12
-#&gt; colData names(3): condition treatment sizeFactor</div><div class='input'><span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqTransform"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>dt</span>)</div><div class='output co'>#&gt; class: DESeqTransform 
+#&gt; colData names(3): condition treatment sizeFactor</div><div class='input'><span class='kw'>dt</span> <span class='op'>&lt;-</span> <span class='fu'>as</span>(<span class='kw'>deseq</span>, <span class='st'>"DESeqTransform"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>dt</span>)
+</div><div class='output co'>#&gt; class: DESeqTransform 
 #&gt; dim: 500 12 
 #&gt; metadata(3): version date interestingGroups
 #&gt; assays(1): ''
@@ -162,8 +173,9 @@ not been shrunken</em> using <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcSh
 #&gt; rowData names(38): broadClass description ... dispGeneIter dispFit
 #&gt; colnames(12): sample01 sample02 ... sample11 sample12
 #&gt; colData names(3): condition treatment sizeFactor</div><div class='input'><span class='co'>## Pulls the first results slotted.</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>deseq</span>, <span class='st'>"DESeqResults"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; 
+<span class='kw'>res</span> <span class='op'>&lt;-</span> <span class='fu'>as</span>(<span class='kw'>deseq</span>, <span class='st'>"DESeqResults"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>res</span>)
+</div><div class='output co'>#&gt; 
 #&gt; out of 499 with nonzero total read count
 #&gt; adjusted p-value &lt; 0.01
 #&gt; LFC &gt; 0 (up)       : 24, 4.8%
@@ -189,7 +201,7 @@ not been shrunken</em> using <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcSh
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

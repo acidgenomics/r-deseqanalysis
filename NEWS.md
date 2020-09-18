@@ -5,6 +5,7 @@
 - `results`: Bug fix for logical check on `lfcShrink` return. The internal
   use of `identical` here is too strict, as `lfcShrink` can return cause
   attribute from goalie.
+- `lfcShrink`: Hardened logical return, ensure goalie cause attribute removal.
 
 ## DESeqAnalysis 0.3.6 (2020-08-25)
 
