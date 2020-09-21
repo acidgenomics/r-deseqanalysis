@@ -259,6 +259,8 @@
 <li>Migrated <code>extra</code> mode internal code from <code>resultsTables</code> directly into <code>results</code>, so we can hand-off to new methods defined in acidgsea package that depend on <code>DESeqResults</code> object (i.e. <code>geneSetResults</code>). The <code>resultsTables</code> function still behaves the same as previous releases.</li>
 <li>
 <code>plotDEGStackedBar</code>: Added support for <code>orderBySize</code> argument.</li>
+<li>
+<code>degPerContrast</code>: Removed unnecessary <code>n</code> argument; use <code>return</code> instead.</li>
 </ul>
 </div>
 </div>
