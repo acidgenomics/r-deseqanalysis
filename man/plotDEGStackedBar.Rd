@@ -11,6 +11,8 @@ plotDEGStackedBar(object, ...)
   object,
   i = NULL,
   direction = c("both", "up", "down"),
+  orderBySize = FALSE,
+  label = TRUE,
   fill = getOption(x = "acid.fill.discrete", default = getOption(x =
     "ggplot2.discrete.fill", default = acidplots::scale_fill_synesthesia_d())),
   flip = TRUE
@@ -25,6 +27,12 @@ If set \code{NULL}, include all results.}
 
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
+
+\item{orderBySize}{\code{logical(1)}.
+Order contrasts by DEG set size.}
+
+\item{label}{\code{logical(1)}.
+Label the number of DEGs per contrast on the plot.}
 
 \item{fill}{\code{ggproto}/\code{ScaleDiscrete}.
 Desired ggplot2 fill scale. Must supply discrete values. When set to
@@ -46,7 +54,7 @@ Flip x and y axes. Recommended for plots containing many samples.}
 Stacked bar plot of DEGs
 }
 \note{
-Updated 2020-08-12.
+Updated 2020-09-21.
 }
 \examples{
 data(deseq)
