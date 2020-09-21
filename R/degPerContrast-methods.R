@@ -1,13 +1,11 @@
 #' @name degPerContrast
 #' @inherit acidgenerics::baseMeanThreshold
-#' @note Updated 2020-08-18.
+#' @note Updated 2020-09-21.
 #'
 #' @inheritParams acidroxygen::params
 #' @param i `character`, `numeric`, or `NULL`.
 #'   Names or range of results.
 #'   If set `NULL`, include all results.
-#' @param n `logical(1)`.
-#'   Return as count, instead of gene vector.
 #' @param ... Passthrough arguments to [deg()].
 #'
 #' @return
@@ -34,20 +32,25 @@ NULL
 
 
 
-## Updated 2020-08-12.
+## Updated 2020-09-21.
 `degPerContrast,DESeqAnalysis` <-  # nolint
     function(
         object,
         i = NULL,
         direction = c("both", "up", "down"),
-        n = FALSE,
         return = c("matrix", "list"),
         ...
     ) {
         assert(isFlag(n))
         direction <- match.arg(direction)
         return <- match.arg(return)
-        if (is.null(i)) i <- resultsNames(object)
+        resultsNames <- resultsNames(object)
+        if (is.null(i)) {
+            i <- resultsNames
+        } else if (is.numeric(i)) {
+            i <- resultsNames[i]
+        }
+        assert(isSubset(i, resultsNames))
         n <- switch(EXPR = return, "matrix" = TRUE, "list" = FALSE)
         suppressMessages({
             list <- mapply(
