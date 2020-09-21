@@ -2,11 +2,15 @@
 #'
 #' @name plotDEGStackedBar
 #' @inherit acidgenerics::plotDEGStackedBar
-#' @note Updated 2020-08-12.
+#' @note Updated 2020-09-21.
 #'
 #' @inheritParams degPerContrast
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
+#' @param orderBySize `logical(1)`.
+#'   Order contrasts by DEG set size.
+#' @param label `logical(1)`.
+#'   Label the number of DEGs per contrast on the plot.
 #' @param ... Additional arguments.
 #'
 #' @examples
@@ -27,18 +31,27 @@ NULL
 
 
 
-## Updated 2020-08-12.
+## Updated 2020-09-21.
 `plotDEGStackedBar,DESeqAnalysis` <-  # nolint
     function(
         object,
         i = NULL,
         direction = c("both", "up", "down"),
+        orderBySize = FALSE,
+        label = TRUE,
         fill,
         flip = TRUE
     ) {
         validObject(object)
-        assert(isFlag(flip))
+        assert(
+            isFlag(orderBySize),
+            isFlag(label),
+            isFlag(flip)
+        )
         direction <- match.arg(direction)
+
+        ## FIXME NEED TO FIX THIS NAMING WHEN `I` IS SET.
+
         mat <- degPerContrast(
             object = object,
             i = i,
@@ -47,16 +60,17 @@ NULL
         )
         data <- as.data.frame(mat)
         ## Reorder the factor levels, so we can rank from most DEG to least.
-        levels <- names(sort(colSums(data), decreasing = TRUE))
+        if (isTRUE(orderBySize)) {
+            levels <- names(sort(colSums(data), decreasing = TRUE))
+        }
         data <- as.data.frame(melt(
             object = t(data),
             colnames = c("rowname", "colname", "value")
         ))
         assert(is.factor(data[["rowname"]]))
-        data[["rowname"]] <- factor(
-            x = data[["rowname"]],
-            levels = levels
-        )
+        if (isTRUE(orderBySize)) {
+            data[["rowname"]] <- factor(x = data[["rowname"]], levels = levels)
+        }
         p <- ggplot(
             data = data,
             mapping = aes(
@@ -66,25 +80,30 @@ NULL
                 label = !!sym("value")
             )
         ) +
-            geom_bar(stat = "identity") +
-            geom_text(
+            geom_bar(
+                color = "black",
+                stat = "identity"
+            )
+        if (isTRUE(label)) {
+            p <- p + geom_text(
                 size = 3L,
                 position = position_stack(vjust = 0.5)
-            ) +
-            labs(
-                x = "contrast",
-                y = "differentially expressed genes",
-                fill = "direction",
-                title = "Differentially expressed genes per contrast",
-                subtitle = .thresholdLabel(
-                    n = NULL,
-                    direction = direction,
-                    alphaThreshold = alphaThreshold(object),
-                    lfcShrinkType = lfcShrinkType(object),
-                    lfcThreshold = lfcThreshold(object),
-                    baseMeanThreshold = baseMeanThreshold(object)
-                )
             )
+        }
+        p <- p + labs(
+            x = "contrast",
+            y = "differentially expressed genes",
+            fill = "direction",
+            title = "Differentially expressed genes per contrast",
+            subtitle = .thresholdLabel(
+                n = NULL,
+                direction = direction,
+                alphaThreshold = alphaThreshold(object),
+                lfcShrinkType = lfcShrinkType(object),
+                lfcThreshold = lfcThreshold(object),
+                baseMeanThreshold = baseMeanThreshold(object)
+            )
+        )
         if (isTRUE(flip)) {
             p <- acid_coord_flip(p)
         }

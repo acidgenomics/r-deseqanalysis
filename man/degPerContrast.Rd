@@ -11,7 +11,6 @@ degPerContrast(object, ...)
   object,
   i = NULL,
   direction = c("both", "up", "down"),
-  n = FALSE,
   return = c("matrix", "list"),
   ...
 )
@@ -25,9 +24,6 @@ If set \code{NULL}, include all results.}
 
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
-
-\item{n}{\code{logical(1)}.
-Return as count, instead of gene vector.}
 
 \item{return}{\code{character(1)}.
 Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
@@ -47,7 +43,7 @@ Intended primarily for use with \code{\link[=plotDEGUpset]{plotDEGUpset()}}.
 Base mean threshold
 }
 \note{
-Updated 2020-08-18.
+Updated 2020-09-21.
 }
 \examples{
 data(deseq)
