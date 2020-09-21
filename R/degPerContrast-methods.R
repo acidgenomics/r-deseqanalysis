@@ -41,9 +41,9 @@ NULL
         return = c("matrix", "list"),
         ...
     ) {
-        assert(isFlag(n))
         direction <- match.arg(direction)
         return <- match.arg(return)
+        n <- switch(EXPR = return, "matrix" = TRUE, "list" = FALSE)
         resultsNames <- resultsNames(object)
         if (is.null(i)) {
             i <- resultsNames
@@ -51,7 +51,6 @@ NULL
             i <- resultsNames[i]
         }
         assert(isSubset(i, resultsNames))
-        n <- switch(EXPR = return, "matrix" = TRUE, "list" = FALSE)
         suppressMessages({
             list <- mapply(
                 i = i,
