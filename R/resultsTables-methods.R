@@ -1,9 +1,10 @@
 #' @name resultsTables
 #' @inherit acidgenerics::resultsTables
-#' @note Updated 2020-08-05.
+#' @note Updated 2020-09-21.
 #'
-#' @inheritParams acidroxygen::params
 #' @inheritParams params
+#' @inheritParams results
+#' @inheritParams acidroxygen::params
 #' @param ... Additional arguments.
 #'
 #' @details
@@ -26,8 +27,6 @@
 #' - `both`: Bidirectional DEGs (up- and down-regulated). This table can be
 #'   used for overrepresentation testing but should NOT be used for GSEA.
 #'
-#' @param extra `logical(1)`.
-#'   Include row data and normalized counts from internal `DESeqDataSet`.
 #' @param return `character(1)`.
 #'   Type of data frame to return as a list.
 #'   Uses [match.arg()][base::match.arg].
@@ -44,13 +43,6 @@
 #' ## DESeqAnalysis ====
 #' x <- resultsTables(deseq, i = 1L)
 #' names(x)
-#'
-#' ## DESeqResults ====
-#' ## Use of DESeqAnalysis is encouraged instead of this approach.
-#' res <- results(deseq, i = 1L)
-#' dds <- as(deseq, "DESeqDataSet")
-#' x <- resultsTables(object = res, DESeqDataSet = dds)
-#' names(x)
 NULL
 
 
@@ -64,11 +56,10 @@ NULL
 
 
 
-## Updated 2020-08-05.
+## Updated 2020-09-21.
 `resultsTables,DESeqResults` <-  # nolint
     function(
         object,
-        DESeqDataSet = NULL,  # nolint
         alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
@@ -77,16 +68,6 @@ NULL
         validObject(object)
         assert(isAny(DESeqDataSet, c("DESeqDataSet", "NULL")))
         return <- match.arg(return)
-        if (is(DESeqDataSet, "DESeqDataSet")) {
-            object <- .joinRowData(
-                object = object,
-                DESeqDataSet = DESeqDataSet
-            )
-            object <- .joinCounts(
-                object = object,
-                DESeqDataSet = DESeqDataSet
-            )
-        }
         both <- deg(
             object = object,
             alphaThreshold = alphaThreshold,
@@ -136,27 +117,12 @@ setMethod(
 
 
 
-## Extra mode: Get the DESeqDataSet, and humanize the sample names. Note that
-## we're not calling `humanize()` here on the DESeqDataSet, because we want to
-## keep the gene identifiers in the row names. Use human-friendly sample names,
-## defined by the `sampleName` column in `colData`. We're using this downstream
-## when joining the normalized counts.
-##
-## Updated 2020-08-05.
+## Updated 2020-09-21.
 `resultsTables,DESeqAnalysis` <-  # nolint
     function(object, i, extra = TRUE, ...) {
         validObject(object)
-        assert(isFlag(extra))
-        res <- results(object, i = i)
-        if (isTRUE(extra)) {
-            dds <- as(object, "DESeqDataSet")
-            dds <- convertSampleIDsToNames(dds)
-        } else {
-            dds <- NULL
-        }
         resultsTables(
-            object = res,
-            DESeqDataSet = dds,
+            object = results(object = object, i = i, extra = extra),
             alphaThreshold = alphaThreshold(object),
             lfcThreshold = lfcThreshold(object),
             baseMeanThreshold = baseMeanThreshold(object),

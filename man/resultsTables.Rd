@@ -10,7 +10,6 @@ resultsTables(object, ...)
 
 \S4method{resultsTables}{DESeqResults}(
   object,
-  DESeqDataSet = NULL,
   alphaThreshold = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
@@ -21,8 +20,6 @@ resultsTables(object, ...)
 }
 \arguments{
 \item{object}{Object.}
-
-\item{DESeqDataSet}{\code{DESeqDataSet} or \code{NULL}.}
 
 \item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
@@ -45,14 +42,12 @@ Uses \link[base:match.arg]{match.arg()}.
 \item \code{tbl_df}: Returns \code{list} of \code{tbl_df} containing \code{"rowname"} column.
 }}
 
-\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
-\code{character} vectors, empty (\code{missing}), or \code{NULL}.
-
-For more information:\preformatted{help(topic = "Extract", package = "base")
-}}
+\item{i}{\code{character(1)} or \code{integer(1)}.
+\code{DESeqResults} contrast name or position in \code{results} slot.}
 
 \item{extra}{\code{logical(1)}.
-Include row data and normalized counts from internal \code{DESeqDataSet}.}
+Include row data (i.e. gene metadata) and normalized counts from the
+internal \code{DESeqDataSet}.}
 
 \item{...}{Additional arguments.}
 }
@@ -69,7 +64,7 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 \code{all} table), are arranged by adjusted \emph{P} value.
 }
 \note{
-Updated 2020-08-05.
+Updated 2020-09-21.
 
 It is generally recommended to not apply post hoc log fold change
 cutoffs. If a specific effect size is desired, instead run
@@ -94,12 +89,5 @@ data(deseq)
 
 ## DESeqAnalysis ====
 x <- resultsTables(deseq, i = 1L)
-names(x)
-
-## DESeqResults ====
-## Use of DESeqAnalysis is encouraged instead of this approach.
-res <- results(deseq, i = 1L)
-dds <- as(deseq, "DESeqDataSet")
-x <- resultsTables(object = res, DESeqDataSet = dds)
 names(x)
 }
