@@ -1,3 +1,13 @@
+## DESeqAnalysis 0.3.8 (2020-09-21)
+
+### Minor changes
+
+- Migrated `extra` mode internal code from `resultsTables` directly into
+  `results`, so we can hand-off to new methods defined in acidgsea package
+  that depend on `DESeqResults` object (i.e. `geneSetResults`). The
+  `resultsTables` function still behaves the same as previous releases.
+- `plotDEGStackedBar`: Added support for `orderBySize` argument.
+
 ## DESeqAnalysis 0.3.7 (2020-09-18)
 
 ### Minor changes
