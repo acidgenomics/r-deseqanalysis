@@ -7,6 +7,7 @@
   that depend on `DESeqResults` object (i.e. `geneSetResults`). The
   `resultsTables` function still behaves the same as previous releases.
 - `plotDEGStackedBar`: Added support for `orderBySize` argument.
+- `degPerContrast`: Removed unnecessary `n` argument; use `return` instead.
 
 ## DESeqAnalysis 0.3.7 (2020-09-18)
 
