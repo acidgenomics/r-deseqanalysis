@@ -49,9 +49,6 @@ NULL
             isFlag(flip)
         )
         direction <- match.arg(direction)
-
-        ## FIXME NEED TO FIX THIS NAMING WHEN `I` IS SET.
-
         mat <- degPerContrast(
             object = object,
             i = i,
