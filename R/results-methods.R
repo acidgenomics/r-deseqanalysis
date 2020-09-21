@@ -1,10 +1,21 @@
 #' Results
 #'
 #' @name results
-#' @note Updated 2020-09-18.
+#' @note Updated 2020-09-21.
+#'
+#' @section Extra mode:
+#'
+#' Get the `DESeqDataSet`, and humanize the sample names. Note that we're not
+#' calling `humanize()` here on the `DESeqDataSet`, because we want to keep the
+#' gene identifiers in the row names. Use human-friendly sample names, defined
+#' by the `sampleName` column in `colData`. We're using this downstream when
+#' joining the normalized counts.
 #'
 #' @inheritParams acidroxygen::params
 #' @inheritParams params
+#' @param extra `logical(1)`.
+#'   Include row data (i.e. gene metadata) and normalized counts from the
+#'   internal `DESeqDataSet`.
 #' @param ... Additional arguments.
 #'
 #' @return `DESeqResults`.
@@ -47,11 +58,14 @@ setMethod(
 
 
 
-## Updated 2020-09-18.
+## Updated 2020-09-21.
 `results,DESeqAnalysis` <-  # nolint
-    function(object, i) {
+    function(object, i, extra = FALSE) {
         validObject(object)
-        assert(isScalar(i))
+        assert(
+            isScalar(i),
+            isFlag(extra)
+        )
         if (isCharacter(i)) {
             assert(isSubset(i, resultsNames(object)))
         }
@@ -74,18 +88,28 @@ setMethod(
                 "Set 'lfcShrink(object) <- NULL'."
             )
         }
-        resultsList <- slot(object, name = slotName)
-        data <- resultsList[[i]]
-        assert(is(data, "DESeqResults"))
+        resList <- slot(object, name = slotName)
+        res <- resList[[i]]
+        assert(is(res, "DESeqResults"))
+        if (isTRUE(extra)) {
+            dds <- as(object, "DESeqDataSet")
+            ## This step ensures we humanize the sample names, when possible.
+            suppressMessages({
+                dds <- convertSampleIDsToNames(dds)
+            })
+            res <- .joinRowData(object = res, DESeqDataSet = dds)
+            res <- .joinCounts(object = res, DESeqDataSet = dds)
+            assert(is(res, "DESeqResults"))
+        }
         name <- contrastName(object, i = i)
-        contrastName(data) <- name
+        contrastName(res) <- name
         msg <- name
         if (isTRUE(lfcShrink)) {
             msg <- paste(msg, "(shrunken LFC)")
         }
         cli_alert_info(msg)
-        validObject(data)
-        data
+        validObject(res)
+        res
     }
 
 
