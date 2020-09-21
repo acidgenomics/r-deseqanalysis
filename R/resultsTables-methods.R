@@ -66,7 +66,6 @@ NULL
         return = c("tbl_df", "DataFrameList")
     ) {
         validObject(object)
-        assert(isAny(DESeqDataSet, c("DESeqDataSet", "NULL")))
         return <- match.arg(return)
         both <- deg(
             object = object,
