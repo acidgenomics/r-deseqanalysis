@@ -10,7 +10,7 @@ results(object, ...)
 
 \S4method{results}{DESeqDataSet}(object, ...)
 
-\S4method{results}{DESeqAnalysis}(object, i)
+\S4method{results}{DESeqAnalysis}(object, i, extra = FALSE)
 }
 \arguments{
 \item{object}{Object.}
@@ -22,6 +22,10 @@ results(object, ...)
 
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
+
+\item{extra}{\code{logical(1)}.
+Include row data (i.e. gene metadata) and normalized counts from the
+internal \code{DESeqDataSet}.}
 }
 \value{
 \code{DESeqResults}.
@@ -30,8 +34,18 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 Results
 }
 \note{
-Updated 2020-08-05.
+Updated 2020-09-21.
 }
+\section{Extra mode}{
+
+
+Get the \code{DESeqDataSet}, and humanize the sample names. Note that we're not
+calling \code{humanize()} here on the \code{DESeqDataSet}, because we want to keep the
+gene identifiers in the row names. Use human-friendly sample names, defined
+by the \code{sampleName} column in \code{colData}. We're using this downstream when
+joining the normalized counts.
+}
+
 \examples{
 data(deseq)
 
