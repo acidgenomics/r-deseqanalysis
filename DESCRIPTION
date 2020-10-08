@@ -31,8 +31,8 @@ Imports:
     IRanges,
     S4Vectors,
     SummarizedExperiment,
-    acidgenerics (>= 0.3.11),
-    acidplots (>= 0.2.35),
+    AcidGenerics (>= 0.3.11),
+    AcidPlots (>= 0.2.35),
     cli (>= 2.0),
     cowplot (>= 1.0),
     ggplot2 (>= 3.3),
@@ -52,11 +52,6 @@ Suggests:
     testthat,
     tximport (>= 1.16),
     viridis
-Remotes:
-    acidgenomics/acidgenerics,
-    acidgenomics/acidplots,
-    acidgenomics/basejump,
-    acidgenomics/goalie
 biocViews:
     DataRepresentation,
     DifferentialExpression,

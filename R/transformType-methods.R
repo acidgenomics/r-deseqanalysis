@@ -1,5 +1,5 @@
 #' @name transformType
-#' @inherit acidgenerics::transformType
+#' @inherit AcidGenerics::transformType
 #' @note Updated 2020-08-04.
 #' @param ... Additional arguments.
 #' @seealso [DESeq2::DESeqTransform()].
@@ -14,7 +14,7 @@ NULL
 
 #' @rdname transformType
 #' @name transformType
-#' @importFrom acidgenerics transformType
+#' @importFrom AcidGenerics transformType
 #' @usage transformType(object, ...)
 #' @export
 NULL

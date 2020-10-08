@@ -7,8 +7,8 @@ library(basejump)  # 0.12.4
 library(DESeq2)    # 1.26.0
 library(apeglm)    # 1.8.0
 
-stopifnot(packageVersion("acidtest") >= "0.3.0")
-data(RangedSummarizedExperiment, package = "acidtest")
+stopifnot(packageVersion("AcidTest") >= "0.3.0")
+data(RangedSummarizedExperiment, package = "AcidTest")
 rse <- RangedSummarizedExperiment
 
 ## Restrict to 2 MB.

@@ -1,8 +1,8 @@
 #' @name resultsNames
-#' @inherit acidgenerics::resultsNames
+#' @inherit AcidGenerics::resultsNames
 #' @note Updated 2019-09-10.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'
@@ -17,14 +17,14 @@ NULL
 
 #' @rdname resultsNames
 #' @name resultsNames
-#' @importFrom acidgenerics resultsNames
+#' @importFrom AcidGenerics resultsNames
 #' @usage resultsNames(object, ...)
 #' @export
 NULL
 
 #' @rdname resultsNames
 #' @name resultsNames<-
-#' @importFrom acidgenerics resultsNames<-
+#' @importFrom AcidGenerics resultsNames<-
 #' @usage resultsNames(object, ...) <- value
 #' @export
 NULL
@@ -97,14 +97,14 @@ setReplaceMethod(
 ## contrastNames aliases =======================================================
 #' @rdname resultsNames
 #' @name contrastNames
-#' @importFrom acidgenerics contrastNames
+#' @importFrom AcidGenerics contrastNames
 #' @usage contrastNames(object, ...)
 #' @export
 NULL
 
 #' @rdname resultsNames
 #' @name contrastNames<-
-#' @importFrom acidgenerics contrastNames<-
+#' @importFrom AcidGenerics contrastNames<-
 #' @usage contrastNames(object, ...) <- value
 #' @export
 NULL

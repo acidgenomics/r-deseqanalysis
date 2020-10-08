@@ -1,5 +1,5 @@
 #' @name baseMeanThreshold
-#' @inherit acidgenerics::baseMeanThreshold
+#' @inherit AcidGenerics::baseMeanThreshold
 #' @note Updated 2020-08-04.
 #' @param ... Additional arguments.
 #' @examples
@@ -15,14 +15,14 @@ NULL
 
 #' @rdname baseMeanThreshold
 #' @name baseMeanThreshold
-#' @importFrom acidgenerics baseMeanThreshold
+#' @importFrom AcidGenerics baseMeanThreshold
 #' @usage baseMeanThreshold(object, ...)
 #' @export
 NULL
 
 #' @rdname baseMeanThreshold
 #' @name baseMeanThreshold<-
-#' @importFrom acidgenerics baseMeanThreshold<-
+#' @importFrom AcidGenerics baseMeanThreshold<-
 #' @usage baseMeanThreshold(object, ...) <- value
 #' @export
 NULL

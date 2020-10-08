@@ -1,8 +1,8 @@
 #' @name resultsDiff
-#' @inherit acidgenerics::resultsDiff
+#' @inherit AcidGenerics::resultsDiff
 #' @note Updated 2020-08-05.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param col `character(1)`.
 #'   Column to use for difference calculation (subtraction).
@@ -24,7 +24,7 @@ NULL
 
 #' @rdname resultsDiff
 #' @name resultsDiff
-#' @importFrom acidgenerics resultsDiff
+#' @importFrom AcidGenerics resultsDiff
 #' @usage resultsDiff(x, y, ...)
 #' @export
 NULL

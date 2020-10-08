@@ -1,11 +1,11 @@
 #' @name plotDEGUpset
-#' @inherit acidgenerics::plotDEGUpset
+#' @inherit AcidGenerics::plotDEGUpset
 #' @note Updated 2020-08-25.
 #'
 #' @inheritParams degPerContrast
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
-#' @param ... Passthrough arguments to [acidplots::plotUpset()].
+#' @param ... Passthrough arguments to [AcidPlots::plotUpset()].
 #'
 #' @examples
 #' data(deseq)
@@ -18,7 +18,7 @@ NULL
 
 #' @rdname plotDEGUpset
 #' @name plotDEGUpset
-#' @importFrom acidgenerics plotDEGUpset
+#' @importFrom AcidGenerics plotDEGUpset
 #' @usage plotDEGUpset(object, ...)
 #' @export
 NULL

@@ -1,5 +1,5 @@
 #' @name lfcShrinkType
-#' @inherit acidgenerics::lfcShrinkType
+#' @inherit AcidGenerics::lfcShrinkType
 #' @note Updated 2020-08-04.
 #' @param ... Additional arguments.
 #' @seealso [DESeq2::lfcShrink()].
@@ -14,7 +14,7 @@ NULL
 
 #' @rdname lfcShrinkType
 #' @name lfcShrinkType
-#' @importFrom acidgenerics lfcShrinkType
+#' @importFrom AcidGenerics lfcShrinkType
 #' @usage lfcShrinkType(object, ...)
 #' @export
 NULL

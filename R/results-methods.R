@@ -11,7 +11,7 @@
 #' by the `sampleName` column in `colData`. We're using this downstream when
 #' joining the normalized counts.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param extra `logical(1)`.
 #'   Include row data (i.e. gene metadata) and normalized counts from the
@@ -33,7 +33,7 @@ NULL
 
 #' @rdname results
 #' @name results
-#' @importFrom acidgenerics results
+#' @importFrom AcidGenerics results
 #' @usage results(object, ...)
 #' @export
 NULL

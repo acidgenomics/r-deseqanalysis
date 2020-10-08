@@ -33,7 +33,7 @@ NULL
 
 #' @rdname resultsMatrix
 #' @name resultsMatrix
-#' @importFrom acidgenerics resultsMatrix
+#' @importFrom AcidGenerics resultsMatrix
 #' @usage resultsMatrix(object, ...)
 #' @export
 NULL
@@ -86,7 +86,7 @@ NULL
             out <- mat
         }
         metadata2(out, which = "DESeqAnalysis") <- list(
-            version = packageVersion("DESeqAnalysis"),
+            version = packageVersion(packageName()),
             date = Sys.Date(),
             slotName = slotName,
             value = value
@@ -138,7 +138,7 @@ setMethod(
             )
         }
         metadata2(out, which = "DESeqAnalysis") <- list(
-            version = packageVersion("DESeqAnalysis"),
+            version = packageVersion(packageName()),
             date = Sys.Date(),
             slotName = slotName,
             value = value

@@ -15,7 +15,7 @@
 #' geneplotter instead of ggplot2. I prefer using ggplot2 instead, so the
 #' primary methods defined here in the package mask DESeq2.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'
@@ -77,9 +77,9 @@ NULL
         ntop = 0L,
         direction = c("both", "up", "down"),
         pointColor = c(
-            downregulated = acidplots::lightPalette[["purple"]],
-            upregulated = acidplots::lightPalette[["orange"]],
-            nonsignificant = acidplots::lightPalette[["gray"]]
+            downregulated = AcidPlots::lightPalette[["purple"]],
+            upregulated = AcidPlots::lightPalette[["orange"]],
+            nonsignificant = AcidPlots::lightPalette[["gray"]]
         ),
         pointSize = 2L,
         pointAlpha = 0.8

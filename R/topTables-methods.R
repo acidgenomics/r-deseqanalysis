@@ -1,8 +1,8 @@
 #' @name topTables
-#' @inherit acidgenerics::topTables
+#' @inherit AcidGenerics::topTables
 #' @note Updated 2020-08-05.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param contrast `character(1)` or `NULL`.
 #'   Contrast name.
@@ -26,7 +26,7 @@ NULL
 
 #' @rdname topTables
 #' @name topTables
-#' @importFrom acidgenerics topTables
+#' @importFrom AcidGenerics topTables
 #' @usage topTables(object, ...)
 #' @export
 NULL

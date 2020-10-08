@@ -1,8 +1,8 @@
 #' @name plotHeatmap
-#' @inherit acidplots::plotHeatmap
+#' @inherit AcidPlots::plotHeatmap
 #' @note Updated 2020-08-04.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'
@@ -19,21 +19,21 @@ NULL
 
 #' @rdname plotHeatmap
 #' @name plotHeatmap
-#' @importFrom acidgenerics plotHeatmap
+#' @importFrom AcidGenerics plotHeatmap
 #' @usage plotHeatmap(object, ...)
 #' @export
 NULL
 
 #' @rdname plotHeatmap
 #' @name plotCorrelationHeatmap
-#' @importFrom acidgenerics plotCorrelationHeatmap
+#' @importFrom AcidGenerics plotCorrelationHeatmap
 #' @usage plotCorrelationHeatmap(object, ...)
 #' @export
 NULL
 
 #' @rdname plotHeatmap
 #' @name plotQuantileHeatmap
-#' @importFrom acidgenerics plotQuantileHeatmap
+#' @importFrom AcidGenerics plotQuantileHeatmap
 #' @usage plotQuantileHeatmap(object, ...)
 #' @export
 NULL

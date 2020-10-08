@@ -1,8 +1,8 @@
 #' @name plotBaseMean
-#' @inherit acidgenerics::plotBaseMean
+#' @inherit AcidGenerics::plotBaseMean
 #' @note Updated 2020-08-04.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param nonzero `logical(1)`.
 #'   Remove zero-count features (genes).
@@ -26,7 +26,7 @@ NULL
 
 #' @rdname plotBaseMean
 #' @name plotBaseMean
-#' @importFrom acidgenerics plotBaseMean
+#' @importFrom AcidGenerics plotBaseMean
 #' @usage plotBaseMean(object, ...)
 #' @export
 NULL

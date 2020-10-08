@@ -1,5 +1,5 @@
 #' @name alphaThreshold
-#' @inherit acidgenerics::alphaThreshold
+#' @inherit AcidGenerics::alphaThreshold
 #' @note Updated 2020-08-04.
 #' @param ... Additional arguments.
 #' @examples
@@ -15,14 +15,14 @@ NULL
 
 #' @rdname alphaThreshold
 #' @name alphaThreshold
-#' @importFrom acidgenerics alphaThreshold
+#' @importFrom AcidGenerics alphaThreshold
 #' @usage alphaThreshold(object, ...)
 #' @export
 NULL
 
 #' @rdname alphaThreshold
 #' @name alphaThreshold<-
-#' @importFrom acidgenerics alphaThreshold<-
+#' @importFrom AcidGenerics alphaThreshold<-
 #' @usage alphaThreshold(object, ...) <- value
 #' @export
 NULL

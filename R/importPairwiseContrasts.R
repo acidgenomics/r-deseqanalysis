@@ -3,7 +3,7 @@
 #' @export
 #' @note Updated 2019-09-09.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @param groupCol `character(1)`.
 #'   Group column name in [`colData()`][SummarizedExperiment::colData] of
 #'   `DESeqDataSet`. Corresponds to value in [`design()`][DESeq2::design].

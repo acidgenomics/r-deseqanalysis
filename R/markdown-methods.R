@@ -2,7 +2,7 @@
 #' @inherit basejump::markdown
 #' @note Updated 2019-09-10.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @param ... Additional arguments.
 #'
 #' @examples
@@ -16,7 +16,7 @@ NULL
 
 #' @rdname markdown
 #' @name markdown
-#' @importFrom acidgenerics markdown
+#' @importFrom AcidGenerics markdown
 #' @usage markdown(object, ...)
 #' @export
 NULL

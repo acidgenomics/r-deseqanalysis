@@ -1,8 +1,8 @@
 #' @name plotCounts
-#' @inherit acidplots::plotCounts
+#' @inherit AcidPlots::plotCounts
 #' @note Updated 2019-12-18.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param transform `logical(1)`.
 #'   Plot log2 variance-stabilized transform counts, defined internally in
@@ -26,7 +26,7 @@ NULL
 
 #' @rdname plotCounts
 #' @name plotCounts
-#' @importFrom acidgenerics plotCounts
+#' @importFrom AcidGenerics plotCounts
 #' @usage plotCounts(object, ...)
 #' @export
 NULL
@@ -54,7 +54,7 @@ NULL
 
 #' @describeIn plotCounts Plot size factor (i.e. library size) adjusted
 #'   normalized counts. Arguments pass through to `SummarizedExperiment` method
-#'   defined in acidplots package.
+#'   defined in AcidPlots package.
 #' @export
 setMethod(
     f = "plotCounts",

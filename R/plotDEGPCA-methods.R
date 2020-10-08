@@ -1,10 +1,10 @@
 #' @name plotDEGPCA
-#' @inherit acidgenerics::plotDEGPCA
+#' @inherit AcidGenerics::plotDEGPCA
 #' @note Updated 2020-08-25.
 #'
 #' @inheritParams plotDEGHeatmap
-#' @inheritParams acidplots::plotPCA
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidPlots::plotPCA
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'
@@ -19,7 +19,7 @@ NULL
 
 #' @rdname plotDEGPCA
 #' @name plotDEGPCA
-#' @importFrom acidgenerics plotDEGPCA
+#' @importFrom AcidGenerics plotDEGPCA
 #' @usage plotDEGPCA(object, ...)
 #' @export
 NULL

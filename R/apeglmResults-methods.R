@@ -14,7 +14,7 @@
 #' @name apeglmResults
 #' @note Updated 2020-08-17.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @param contrast `character(3)`.
 #'   Pairwise contrast vector:
 #'

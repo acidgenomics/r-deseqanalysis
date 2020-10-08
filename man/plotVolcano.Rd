@@ -17,9 +17,9 @@ plotVolcano(object, ...)
   gene2symbol = NULL,
   ntop = 0L,
   direction = c("both", "up", "down"),
-  pointColor = c(downregulated = acidplots::lightPalette[["purple"]], upregulated =
-    acidplots::lightPalette[["orange"]], nonsignificant =
-    acidplots::lightPalette[["gray"]]),
+  pointColor = c(downregulated = AcidPlots::lightPalette[["purple"]], upregulated =
+    AcidPlots::lightPalette[["orange"]], nonsignificant =
+    AcidPlots::lightPalette[["gray"]]),
   pointSize = 2L,
   pointAlpha = 0.8,
   ylim = 1e-10,

@@ -1,8 +1,8 @@
 #' @name plotPCA
-#' @inherit acidplots::plotPCA
+#' @inherit AcidPlots::plotPCA
 #' @note Updated 2020-08-04.
 #'
-#' @details Passes to `SummarizedExperiment` defined in acidplots package.
+#' @details Passes to `SummarizedExperiment` defined in AcidPlots package.
 #'
 #' @examples
 #' data(deseq)
@@ -45,13 +45,13 @@ setMethod(
     getMethod(
         f = "plotPCA",
         signature = "SummarizedExperiment",
-        where = "acidplots"
+        where = "AcidPlots"
     )
 
 
 
 #' @describeIn plotPCA Passes to `SummarizedExperiment` method defined in
-#'   acidplots package. Uses values defined in
+#'   AcidPlots package. Uses values defined in
 #'   [`assay()`][SummarizedExperiment::assay].
 #' @export
 setMethod(

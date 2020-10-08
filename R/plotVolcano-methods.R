@@ -1,9 +1,9 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
-#' @inherit acidgenerics::plotVolcano
+#' @inherit AcidGenerics::plotVolcano
 #' @note Updated 2020-08-05.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param ylim `numeric(1)`.
 #'   Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets
@@ -59,7 +59,7 @@ NULL
 
 #' @rdname plotVolcano
 #' @name plotVolcano
-#' @importFrom acidgenerics plotVolcano
+#' @importFrom AcidGenerics plotVolcano
 #' @usage plotVolcano(object, ...)
 #' @export
 NULL
@@ -78,9 +78,9 @@ NULL
         ntop = 0L,
         direction = c("both", "up", "down"),
         pointColor = c(
-            downregulated = acidplots::lightPalette[["purple"]],
-            upregulated = acidplots::lightPalette[["orange"]],
-            nonsignificant = acidplots::lightPalette[["gray"]]
+            downregulated = AcidPlots::lightPalette[["purple"]],
+            upregulated = AcidPlots::lightPalette[["orange"]],
+            nonsignificant = AcidPlots::lightPalette[["gray"]]
         ),
         pointSize = 2L,
         pointAlpha = 0.8,

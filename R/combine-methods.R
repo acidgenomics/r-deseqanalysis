@@ -9,7 +9,7 @@
 #' names. The `lfcShrink` slot is optional but must be either defined in both
 #' objects or `NULL` in both objects.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @param ... Additional arguments.
 #'
 #' @examples

@@ -4,7 +4,7 @@
 #' @inherit basejump::correlation
 #' @note Updated 2020-08-05.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @param col `character(1)`.
 #'   Column name.
 #' @param ... Additional arguments.
