@@ -18,7 +18,7 @@ plotPCA(object, ...)
   ntop = 500L,
   label = getOption(x = "acid.label", default = FALSE),
   color = getOption(x = "acid.color.discrete", default = getOption(x =
-    "ggplot2.discrete.colour", default = acidplots::scale_color_synesthesia_d())),
+    "ggplot2.discrete.colour", default = AcidPlots::scale_color_synesthesia_d())),
   pointSize = getOption(x = "acid.point.size", default = 3L),
   labels = list(title = "PCA", subtitle = NULL)
 )
@@ -67,12 +67,12 @@ See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
 Principal component analysis plot
 }
 \details{
-Passes to \code{SummarizedExperiment} defined in acidplots package.
+Passes to \code{SummarizedExperiment} defined in AcidPlots package.
 }
 \section{Functions}{
 \itemize{
 \item \code{plotPCA,DESeqTransform-method}: Passes to \code{SummarizedExperiment} method defined in
-acidplots package. Uses values defined in
+AcidPlots package. Uses values defined in
 \code{\link[SummarizedExperiment:SummarizedExperiment-class]{assay()}}.
 
 \item \code{plotPCA,DESeqAnalysis-method}: Extracts \code{DESeqTransform} and passes to corresponding

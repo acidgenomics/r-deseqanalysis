@@ -1,10 +1,10 @@
 #' @name resultsTables
-#' @inherit acidgenerics::resultsTables
+#' @inherit AcidGenerics::resultsTables
 #' @note Updated 2020-09-21.
 #'
 #' @inheritParams params
 #' @inheritParams results
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @param ... Additional arguments.
 #'
 #' @details
@@ -49,7 +49,7 @@ NULL
 
 #' @rdname resultsTables
 #' @name resultsTables
-#' @importFrom acidgenerics resultsTables
+#' @importFrom AcidGenerics resultsTables
 #' @usage resultsTables(object, ...)
 #' @export
 NULL

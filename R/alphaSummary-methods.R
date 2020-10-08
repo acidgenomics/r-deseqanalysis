@@ -1,10 +1,10 @@
 #' @name alphaSummary
 #' @author Michael Steinbaugh, Lorena Patano
-#' @inherit acidgenerics::alphaSummary
+#' @inherit AcidGenerics::alphaSummary
 #' @note Updated 2019-08-20.
 #'
 #' @inheritParams params
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @param ... Additional arguments.
 #'
 #' @details
@@ -28,7 +28,7 @@ NULL
 
 #' @rdname alphaSummary
 #' @name alphaSummary
-#' @importFrom acidgenerics alphaSummary
+#' @importFrom AcidGenerics alphaSummary
 #' @usage alphaSummary(object, ...)
 #' @export
 NULL

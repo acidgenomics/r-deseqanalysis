@@ -1,11 +1,11 @@
 #' Stacked bar plot of DEGs
 #'
 #' @name plotDEGStackedBar
-#' @inherit acidgenerics::plotDEGStackedBar
+#' @inherit AcidGenerics::plotDEGStackedBar
 #' @note Updated 2020-09-21.
 #'
 #' @inheritParams degPerContrast
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param orderBySize `logical(1)`.
 #'   Order contrasts by DEG set size.
@@ -24,7 +24,7 @@ NULL
 
 #' @rdname plotDEGStackedBar
 #' @name plotDEGStackedBar
-#' @importFrom acidgenerics plotDEGStackedBar
+#' @importFrom AcidGenerics plotDEGStackedBar
 #' @usage plotDEGStackedBar(object, ...)
 #' @export
 NULL

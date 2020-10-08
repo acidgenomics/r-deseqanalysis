@@ -1,8 +1,8 @@
 #' @name degPerContrast
-#' @inherit acidgenerics::baseMeanThreshold
+#' @inherit AcidGenerics::baseMeanThreshold
 #' @note Updated 2020-09-21.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @param i `character`, `numeric`, or `NULL`.
 #'   Names or range of results.
 #'   If set `NULL`, include all results.
@@ -25,7 +25,7 @@ NULL
 
 #' @rdname degPerContrast
 #' @name degPerContrast
-#' @importFrom acidgenerics degPerContrast
+#' @importFrom AcidGenerics degPerContrast
 #' @usage degPerContrast(object, ...)
 #' @export
 NULL

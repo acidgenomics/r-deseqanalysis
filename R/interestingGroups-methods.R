@@ -1,8 +1,8 @@
 #' @name interestingGroups
-#' @inherit acidgenerics::interestingGroups
+#' @inherit AcidGenerics::interestingGroups
 #' @note Updated 2020-08-04.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @param ... Additional arguments.
 #'
 #' @examples

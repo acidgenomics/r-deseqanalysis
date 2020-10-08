@@ -4,8 +4,8 @@
 
 
 #' @name deprecated
-#' @inherit acidroxygen::deprecated description examples return seealso title
-#' @inheritParams acidroxygen::params
+#' @inherit AcidRoxygen::deprecated description examples return seealso title
+#' @inheritParams AcidRoxygen::params
 #' @keywords internal
 NULL
 

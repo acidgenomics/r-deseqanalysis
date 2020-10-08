@@ -42,7 +42,7 @@ Plot counts
 \itemize{
 \item \code{plotCounts,DESeqDataSet-method}: Plot size factor (i.e. library size) adjusted
 normalized counts. Arguments pass through to \code{SummarizedExperiment} method
-defined in acidplots package.
+defined in AcidPlots package.
 
 \item \code{plotCounts,DESeqTransform-method}: Plot log2 variance-stabilized transformed counts.
 

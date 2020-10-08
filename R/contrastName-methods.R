@@ -1,8 +1,8 @@
 #' @name contrastName
-#' @inherit acidgenerics::contrastName
+#' @inherit AcidGenerics::contrastName
 #' @note Updated 2020-08-04.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param .format `character(1)`.
 #'   Name format to return:
@@ -30,14 +30,14 @@ NULL
 
 #' @rdname contrastName
 #' @name contrastName
-#' @importFrom acidgenerics contrastName
+#' @importFrom AcidGenerics contrastName
 #' @usage contrastName(object, ...)
 #' @export
 NULL
 
 #' @rdname contrastName
 #' @name contrastName<-
-#' @importFrom acidgenerics contrastName<-
+#' @importFrom AcidGenerics contrastName<-
 #' @usage contrastName(object, ...) <- value
 #' @export
 NULL

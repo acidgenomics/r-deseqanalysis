@@ -1,3 +1,3 @@
 globalVariables(".")
-.version <- packageVersion("DESeqAnalysis")
+.version <- packageVersion(packageName())
 .minDEGThreshold <- 10L

@@ -1,8 +1,8 @@
 #' @name degIntersection
-#' @inherit acidgenerics::degIntersection
+#' @inherit AcidGenerics::degIntersection
 #' @note Updated 2020-08-18.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @param i `character`, `numeric`, or `NULL`.
 #'   Names or range of results.
 #'   If set `NULL`, include all results.
@@ -31,7 +31,7 @@ NULL
 
 #' @rdname degIntersection
 #' @name degIntersection
-#' @importFrom acidgenerics degIntersection
+#' @importFrom AcidGenerics degIntersection
 #' @usage degIntersection(object, ...)
 #' @export
 NULL

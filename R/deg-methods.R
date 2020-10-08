@@ -1,8 +1,8 @@
 #' @name deg
-#' @inherit acidgenerics::deg
+#' @inherit AcidGenerics::deg
 #' @note Updated 2020-08-05.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'
@@ -18,7 +18,7 @@ NULL
 
 #' @rdname deg
 #' @name deg
-#' @importFrom acidgenerics deg
+#' @importFrom AcidGenerics deg
 #' @usage deg(object, ...)
 #' @export
 NULL

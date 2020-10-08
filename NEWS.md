@@ -122,7 +122,7 @@
 ### Minor changes
 
 - Updated basejump dependencies. Namely, bioverbs package has been renamed to
-  acidgenerics, prior to CRAN submission.
+  AcidGenerics, prior to CRAN submission.
 
 ## DESeqAnalysis 0.2.17 (2020-01-03)
 
@@ -173,7 +173,7 @@
 - Deprecated `apeglmContrast` in favor of modified S4 method approach now
   defined in `apeglmResults`. The internal code is otherwise unmodified.
 - `plotDEGHeatmap`: Simplified argument handling and internal passthrough to
-  `plotHeatmap` `SummarizedExperiment` method defined in acidplots.
+  `plotHeatmap` `SummarizedExperiment` method defined in AcidPlots.
 
 ## DESeqAnalysis 0.2.12 (2019-11-18)
 
@@ -202,7 +202,7 @@
 - Updated dependencies to require Bioconductor 3.10 release.
 - Added `plotHeatmap`, `plotCorrelationHeatmap`, and `plotQuantileHeatmap`
   method support, which extracts `DESeqTransform` object internally and hands
-  off to `SummarizedExperiment` methods defined in [acidplots][].
+  off to `SummarizedExperiment` methods defined in [AcidPlots][].
 
 ## DESeqAnalysis 0.2.10 (2019-10-16)
 
@@ -284,7 +284,7 @@
 ### Minor changes
 
 - Improved documentation consistency by using shared roxygen params from new
-  acidroxygen package.
+  AcidRoxygen package.
 - Updated basejump dependency versions.
 
 ## DESeqAnalysis 0.2.2 (2019-08-02)
@@ -343,7 +343,7 @@ Version bump, reflecting change in basejump dependency.
 ### Major changes
 
 - `plotDEGHeatmap`: Improved default color breaks. Now defaults to
-  blue-black-yellow default color scheme (see `acidplots::blueYellow`).
+  blue-black-yellow default color scheme (see `AcidPlots::blueYellow`).
 - Removed internal `.matchResults` function in favor of consistently using
   `results` instead throughout the package.
 
@@ -367,7 +367,7 @@ Version bump, reflecting change in basejump dependency.
 
 ### Minor changes
 
-- NAMESPACE and documentation updates, incorporating new [acidplots][] package.
+- NAMESPACE and documentation updates, incorporating new [AcidPlots][] package.
 
 ## DESeqAnalysis 0.1.17 (2019-04-08)
 
@@ -611,7 +611,7 @@ valid when checked using `validObject`. They can be updated using
 Initial release. Some of the functions defined in this package have been
 migrated from my [bcbioRNASeq][] R package.
 
-[acidplots]: https://acidplots.acidgenomics.com/
+[AcidPlots]: https://AcidPlots.acidgenomics.com/
 [Acid Genomics]: https://acidgenomics.com/
 [AppVeyor CI]: https://www.appveyor.com/
 [basejump]: https://basejump.acidgenomics.com/

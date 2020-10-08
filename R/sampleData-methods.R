@@ -1,5 +1,5 @@
 #' @name sampleData
-#' @inherit acidgenerics::sampleData
+#' @inherit AcidGenerics::sampleData
 #' @note Updated 2019-08-20.
 #'
 #' @param ... Additional arguments.
@@ -16,7 +16,7 @@ NULL
 
 #' @rdname sampleData
 #' @name sampleData
-#' @importFrom acidgenerics sampleData
+#' @importFrom AcidGenerics sampleData
 #' @usage sampleData(object, ...)
 #' @export
 NULL

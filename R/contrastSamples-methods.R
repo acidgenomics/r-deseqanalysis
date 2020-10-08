@@ -1,8 +1,8 @@
 #' @name contrastSamples
-#' @inherit acidgenerics::contrastSamples
+#' @inherit AcidGenerics::contrastSamples
 #' @note Updated 2020-08-04.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'
@@ -28,7 +28,7 @@ NULL
 
 #' @rdname contrastSamples
 #' @name contrastSamples
-#' @importFrom acidgenerics contrastSamples
+#' @importFrom AcidGenerics contrastSamples
 #' @usage contrastSamples(object, ...)
 #' @export
 NULL

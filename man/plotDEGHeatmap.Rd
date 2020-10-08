@@ -67,10 +67,10 @@ contrasts (e.g. interaction effect).}
 Plot.
 }
 \description{
-This function is an extension of \code{\link[acidgenerics:plotHeatmap]{plotHeatmap()}} that is optimized for
+This function is an extension of \code{\link[AcidGenerics:plotHeatmap]{plotHeatmap()}} that is optimized for
 automatic handling differentially expressed genes, rather than requiring
 manual input of a gene vector. All of the optional parameters for
-\code{\link[acidgenerics:plotHeatmap]{plotHeatmap()}} are also supported by this function.
+\code{\link[AcidGenerics:plotHeatmap]{plotHeatmap()}} are also supported by this function.
 }
 \details{
 To adjust the annotation columns, modify the
@@ -80,7 +80,7 @@ must contain a \code{SummarizedExperiment}.
 \section{Functions}{
 \itemize{
 \item \code{plotDEGHeatmap,DESeqResults-method}: Passes to \code{plotHeatmap()} \code{SummarizedExperiment}
-method defined in acidplots.
+method defined in AcidPlots.
 
 \item \code{plotDEGHeatmap,DESeqAnalysis-method}: Passes to \code{DESeqResults} method.
 }}

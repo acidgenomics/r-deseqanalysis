@@ -1,5 +1,5 @@
 #' @name params
-#' @inherit acidroxygen::params return title
+#' @inherit AcidRoxygen::params return title
 #' @keywords internal
 #'
 #' @param DESeqDataSet `DESeqDataSet` or `NULL`.

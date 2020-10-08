@@ -11,7 +11,7 @@
 #' @importFrom S4Vectors DataFrame SimpleList as.data.frame cbind complete.cases
 #'   cor do.call head mcols mcols<- metadata metadata<- na.omit
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
-#' @importFrom acidplots acid_coord_flip acid_geom_label_repel matchLabels
+#' @importFrom AcidPlots acid_coord_flip acid_geom_label_repel matchLabels
 #'   plotHeatmap scale_color_synesthesia_d plotCounts plotPCA plotUpset
 #' @importFrom basejump Gene2Symbol as_tibble autopadZeros camelCase
 #'   convertSampleIDsToNames decode droplevels import initDir

@@ -1,5 +1,5 @@
 #' @name lfcShrink
-#' @inherit acidgenerics::lfcShrink
+#' @inherit AcidGenerics::lfcShrink
 #' @note Updated 2020-08-04.
 #' @seealso [DESeq2::lfcShrink()].
 #' @examples
@@ -13,14 +13,14 @@ NULL
 
 #' @rdname lfcShrink
 #' @name lfcShrink
-#' @importFrom acidgenerics lfcShrink
+#' @importFrom AcidGenerics lfcShrink
 #' @usage lfcShrink(object, ...)
 #' @export
 NULL
 
 #' @rdname lfcShrink
 #' @name lfcShrink<-
-#' @importFrom acidgenerics lfcShrink<-
+#' @importFrom AcidGenerics lfcShrink<-
 #' @usage lfcShrink(object, ...) <- value
 #' @export
 NULL

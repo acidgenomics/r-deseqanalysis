@@ -1,9 +1,9 @@
 #' @name plotDEGHeatmap
-#' @inherit acidgenerics::plotDEGHeatmap
+#' @inherit AcidGenerics::plotDEGHeatmap
 #' @note Updated 2020-08-05.
 #'
-#' @inheritParams acidplots::plotHeatmap
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidPlots::plotHeatmap
+#' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param title `logical(1)`, `character(1)`.
 #'   Include contrast name as title?
@@ -23,7 +23,7 @@ NULL
 
 #' @rdname plotDEGHeatmap
 #' @name plotDEGHeatmap
-#' @importFrom acidgenerics plotDEGHeatmap
+#' @importFrom AcidGenerics plotDEGHeatmap
 #' @usage plotDEGHeatmap(object, ...)
 #' @export
 NULL
@@ -104,7 +104,7 @@ NULL
             )
             title <- paste(title, subtitle, sep = "\n")
         }
-        ## Using SummarizedExperiment method defined in acidplots here.
+        ## Using SummarizedExperiment method defined in AcidPlots here.
         args <- list(
             object = as(dt, "RangedSummarizedExperiment"),
             title = title
@@ -116,7 +116,7 @@ NULL
 
 
 #' @describeIn plotDEGHeatmap Passes to `plotHeatmap()` `SummarizedExperiment`
-#'   method defined in acidplots.
+#'   method defined in AcidPlots.
 #' @export
 setMethod(
     f = "plotDEGHeatmap",

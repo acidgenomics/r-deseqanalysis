@@ -1,5 +1,5 @@
 #' @name export
-#' @inherit acidgenerics::export
+#' @inherit AcidGenerics::export
 #' @note Size-factor normalized coutns and FPKM values are calculated on the fly
 #' and exported automatically.
 #' @note Updated 2020-08-04.
@@ -22,7 +22,7 @@ NULL
 
 #' @rdname export
 #' @name export
-#' @importFrom acidgenerics export
+#' @importFrom AcidGenerics export
 #' @usage export(object, ...)
 #' @export
 NULL
