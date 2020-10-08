@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.9</span>
       </span>
     </div>
 
@@ -128,10 +128,10 @@
     <p>UpSet plot of directional DEG intersections across contrasts</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plotDEGUpset</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>plotDEGUpset</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotDEGUpset</span>(<span class='kw'>object</span>, i = <span class='kw'>NULL</span>, direction = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>), <span class='kw'>...</span>)</pre>
+<span class='fu'>plotDEGUpset</span><span class='op'>(</span><span class='va'>object</span>, i <span class='op'>=</span> <span class='cn'>NULL</span>, direction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,7 +153,7 @@ Include <code>"both"</code>, <code>"up"</code>, or <code>"down"</code> direction
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Passthrough arguments to <code><a href='https://rdrr.io/pkg/acidplots/man/plotUpset.html'>acidplots::plotUpset()</a></code>.</p></td>
+      <td><p>Passthrough arguments to <code><a href='https://acidplots.acidgenomics.com/reference/plotUpset.html'>AcidPlots::plotUpset()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -165,10 +165,10 @@ Include <code>"both"</code>, <code>"up"</code>, or <code>"down"</code> direction
     <p>Updated 2020-08-25.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>deseq</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>deseq</span><span class='op'>)</span>
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotDEGUpset</span>(<span class='kw'>deseq</span>)
+<span class='fu'>plotDEGUpset</span><span class='op'>(</span><span class='va'>deseq</span><span class='op'>)</span>
 </div><div class='img'><img src='plotDEGUpset-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

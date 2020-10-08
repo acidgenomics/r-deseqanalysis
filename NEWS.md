@@ -1,3 +1,9 @@
+## DESeqAnalysis 0.3.9 (2020-10-08)
+
+### Minor changes
+
+- Updated package dependency version requirements.
+
 ## DESeqAnalysis 0.3.8 (2020-09-21)
 
 ### Minor changes

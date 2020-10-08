@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.9</span>
       </span>
     </div>
 
@@ -151,11 +151,11 @@ not been shrunken</em> using <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcSh
     <p>Michael Steinbaugh</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>deseq</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>deseq</span><span class='op'>)</span>
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='kw'>dds</span> <span class='op'>&lt;-</span> <span class='fu'>as</span>(<span class='kw'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>dds</span>)
+<span class='va'>dds</span> <span class='op'>&lt;-</span> <span class='fu'>as</span><span class='op'>(</span><span class='va'>deseq</span>, <span class='st'>"DESeqDataSet"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>dds</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; class: DESeqDataSet 
 #&gt; dim: 500 12 
 #&gt; metadata(3): version date interestingGroups
@@ -163,8 +163,8 @@ not been shrunken</em> using <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcSh
 #&gt; rownames(500): gene001 gene002 ... gene499 gene500
 #&gt; rowData names(38): broadClass description ... deviance maxCooks
 #&gt; colnames(12): sample01 sample02 ... sample11 sample12
-#&gt; colData names(3): condition treatment sizeFactor</div><div class='input'><span class='kw'>dt</span> <span class='op'>&lt;-</span> <span class='fu'>as</span>(<span class='kw'>deseq</span>, <span class='st'>"DESeqTransform"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>dt</span>)
+#&gt; colData names(3): condition treatment sizeFactor</div><div class='input'><span class='va'>dt</span> <span class='op'>&lt;-</span> <span class='fu'>as</span><span class='op'>(</span><span class='va'>deseq</span>, <span class='st'>"DESeqTransform"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>dt</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; class: DESeqTransform 
 #&gt; dim: 500 12 
 #&gt; metadata(3): version date interestingGroups
@@ -173,8 +173,8 @@ not been shrunken</em> using <code><a href='https://rdrr.io/pkg/DESeq2/man/lfcSh
 #&gt; rowData names(38): broadClass description ... dispGeneIter dispFit
 #&gt; colnames(12): sample01 sample02 ... sample11 sample12
 #&gt; colData names(3): condition treatment sizeFactor</div><div class='input'><span class='co'>## Pulls the first results slotted.</span>
-<span class='kw'>res</span> <span class='op'>&lt;-</span> <span class='fu'>as</span>(<span class='kw'>deseq</span>, <span class='st'>"DESeqResults"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>res</span>)
+<span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'>as</span><span class='op'>(</span><span class='va'>deseq</span>, <span class='st'>"DESeqResults"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; out of 499 with nonzero total read count
 #&gt; adjusted p-value &lt; 0.01

@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.9</span>
       </span>
     </div>
 
@@ -128,27 +128,27 @@
     <p>MA-plot: plot differences versus averages for high-throughput data</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plotMA</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>plotMA</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for DESeqResults</span>
-<span class='fu'>plotMA</span>(
-  <span class='kw'>object</span>,
-  alphaThreshold = <span class='kw'>NULL</span>,
-  lfcThreshold = <span class='kw'>NULL</span>,
-  baseMeanThreshold = <span class='kw'>NULL</span>,
-  genes = <span class='kw'>NULL</span>,
-  gene2symbol = <span class='kw'>NULL</span>,
-  ntop = <span class='fl'>0L</span>,
-  direction = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span>),
-  pointColor = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(downregulated = <span class='kw'>acidplots</span>::<span class='kw'><a href='https://rdrr.io/pkg/acidplots/man/palettes.html'>lightPalette</a></span>[[<span class='st'>"purple"</span>]], upregulated =
-    <span class='kw'>acidplots</span>::<span class='kw'><a href='https://rdrr.io/pkg/acidplots/man/palettes.html'>lightPalette</a></span>[[<span class='st'>"orange"</span>]], nonsignificant =
-    <span class='kw'>acidplots</span>::<span class='kw'><a href='https://rdrr.io/pkg/acidplots/man/palettes.html'>lightPalette</a></span>[[<span class='st'>"gray"</span>]]),
-  pointSize = <span class='fl'>2L</span>,
-  pointAlpha = <span class='fl'>0.8</span>
-)
+<span class='fu'>plotMA</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  alphaThreshold <span class='op'>=</span> <span class='cn'>NULL</span>,
+  lfcThreshold <span class='op'>=</span> <span class='cn'>NULL</span>,
+  baseMeanThreshold <span class='op'>=</span> <span class='cn'>NULL</span>,
+  genes <span class='op'>=</span> <span class='cn'>NULL</span>,
+  gene2symbol <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ntop <span class='op'>=</span> <span class='fl'>0L</span>,
+  direction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"both"</span>, <span class='st'>"up"</span>, <span class='st'>"down"</span><span class='op'>)</span>,
+  pointColor <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>downregulated <span class='op'>=</span> <span class='fu'>AcidPlots</span><span class='fu'>::</span><span class='va'><a href='https://acidplots.acidgenomics.com/reference/palettes.html'>lightPalette</a></span><span class='op'>[[</span><span class='st'>"purple"</span><span class='op'>]</span><span class='op'>]</span>, upregulated <span class='op'>=</span>
+    <span class='fu'>AcidPlots</span><span class='fu'>::</span><span class='va'><a href='https://acidplots.acidgenomics.com/reference/palettes.html'>lightPalette</a></span><span class='op'>[[</span><span class='st'>"orange"</span><span class='op'>]</span><span class='op'>]</span>, nonsignificant <span class='op'>=</span>
+    <span class='fu'>AcidPlots</span><span class='fu'>::</span><span class='va'><a href='https://acidplots.acidgenomics.com/reference/palettes.html'>lightPalette</a></span><span class='op'>[[</span><span class='st'>"gray"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>,
+  pointSize <span class='op'>=</span> <span class='fl'>2L</span>,
+  pointAlpha <span class='op'>=</span> <span class='fl'>0.8</span>
+<span class='op'>)</span>
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotMA</span>(<span class='kw'>object</span>, <span class='kw'>i</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'>plotMA</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>i</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -217,7 +217,7 @@ Alpha transparency level.</p></td>
       <th>i</th>
       <td><p>Indices specifying elements to extract or replace. Indices are <code>numeric</code> or
 <code>character</code> vectors, empty (<code>missing</code>), or <code>NULL</code>.</p>
-<p>For more information:</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/help.html'>help</a></span>(topic = <span class='st'>"Extract"</span>, package = <span class='st'>"base"</span>)
+<p>For more information:</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/help.html'>help</a></span><span class='op'>(</span>topic <span class='op'>=</span> <span class='st'>"Extract"</span>, package <span class='op'>=</span> <span class='st'>"base"</span><span class='op'>)</span>
 </pre></td>
     </tr>
     <tr>
@@ -261,34 +261,34 @@ primary methods defined here in the package mask DESeq2.</p>
     <p>Michael Steinbaugh, Rory Kirchner</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>deseq</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>deseq</span><span class='op'>)</span>
 
 <span class='co'>## Get genes from DESeqDataSet.</span>
-<span class='kw'>dds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.html'>as</a></span>(<span class='kw'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)
-<span class='kw'>genes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='kw'>dds</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>genes</span>)
+<span class='va'>dds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.html'>as</a></span><span class='op'>(</span><span class='va'>deseq</span>, <span class='st'>"DESeqDataSet"</span><span class='op'>)</span>
+<span class='va'>genes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>dds</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>genes</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "gene001" "gene002" "gene003" "gene004" "gene005" "gene006"</div><div class='input'>
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotMA</span>(<span class='kw'>deseq</span>, i = <span class='fl'>1L</span>)
+<span class='fu'>plotMA</span><span class='op'>(</span><span class='va'>deseq</span>, i <span class='op'>=</span> <span class='fl'>1L</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotMA-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Customize the colors.</span>
-<span class='fu'>plotMA</span>(
-    object = <span class='kw'>deseq</span>,
-    i = <span class='fl'>1L</span>,
-    pointColor = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
-        downregulated = <span class='st'>"red"</span>,
-        nonsignificant = <span class='st'>"black"</span>,
-        upregulated = <span class='st'>"green"</span>
-    )
-)
+<span class='fu'>plotMA</span><span class='op'>(</span>
+    object <span class='op'>=</span> <span class='va'>deseq</span>,
+    i <span class='op'>=</span> <span class='fl'>1L</span>,
+    pointColor <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+        downregulated <span class='op'>=</span> <span class='st'>"red"</span>,
+        nonsignificant <span class='op'>=</span> <span class='st'>"black"</span>,
+        upregulated <span class='op'>=</span> <span class='st'>"green"</span>
+    <span class='op'>)</span>
+<span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotMA-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Directional support (up or down).</span>
-<span class='fu'>plotMA</span>(<span class='kw'>deseq</span>, i = <span class='fl'>1L</span>, direction = <span class='st'>"up"</span>, ntop = <span class='fl'>5L</span>)
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotMA-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotMA</span>(<span class='kw'>deseq</span>, i = <span class='fl'>1L</span>, direction = <span class='st'>"down"</span>, ntop = <span class='fl'>5L</span>)
+<span class='fu'>plotMA</span><span class='op'>(</span><span class='va'>deseq</span>, i <span class='op'>=</span> <span class='fl'>1L</span>, direction <span class='op'>=</span> <span class='st'>"up"</span>, ntop <span class='op'>=</span> <span class='fl'>5L</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotMA-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotMA</span><span class='op'>(</span><span class='va'>deseq</span>, i <span class='op'>=</span> <span class='fl'>1L</span>, direction <span class='op'>=</span> <span class='st'>"down"</span>, ntop <span class='op'>=</span> <span class='fl'>5L</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotMA-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Label genes manually.</span>
 <span class='co'>## Note that either gene IDs or names (symbols) are supported.</span>
-<span class='fu'>plotMA</span>(<span class='kw'>deseq</span>, i = <span class='fl'>1L</span>, genes = <span class='kw'>genes</span>)
+<span class='fu'>plotMA</span><span class='op'>(</span><span class='va'>deseq</span>, i <span class='op'>=</span> <span class='fl'>1L</span>, genes <span class='op'>=</span> <span class='va'>genes</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='img'><img src='plotMA-5.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
