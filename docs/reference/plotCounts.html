@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.9</span>
       </span>
     </div>
 
@@ -128,16 +128,16 @@
     <p>Plot counts</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plotCounts</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>plotCounts</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for DESeqDataSet</span>
-<span class='fu'>plotCounts</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
+<span class='fu'>plotCounts</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for DESeqTransform</span>
-<span class='fu'>plotCounts</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
+<span class='fu'>plotCounts</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotCounts</span>(<span class='kw'>object</span>, <span class='kw'>...</span>, samples = <span class='kw'>NULL</span>, transform = <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>plotCounts</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span>, samples <span class='op'>=</span> <span class='cn'>NULL</span>, transform <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -179,7 +179,7 @@ size factor adjusted counts from <code>DESeqDataSet</code>.</p></td>
 <ul>
 <li><p><code>plotCounts,DESeqDataSet-method</code>: Plot size factor (i.e. library size) adjusted
 normalized counts. Arguments pass through to <code>SummarizedExperiment</code> method
-defined in acidplots package.</p></li>
+defined in AcidPlots package.</p></li>
 <li><p><code>plotCounts,DESeqTransform-method</code>: Plot log2 variance-stabilized transformed counts.</p></li>
 <li><p><code>plotCounts,DESeqAnalysis-method</code>: Plot either <code>DESeqDataSet</code> normalized counts or
 <code>DESeqTransform</code> log2 variance-stabilized counts.</p></li>
@@ -192,15 +192,15 @@ defined in acidplots package.</p></li>
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/DESeq2/man/plotCounts.html'>DESeq2::plotCounts()</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>deseq</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>deseq</span><span class='op'>)</span>
 
 <span class='co'>## Get genes from working example.</span>
-<span class='kw'>genes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='fu'><a href='as.html'>as</a></span>(<span class='kw'>deseq</span>, <span class='st'>"DESeqDataSet"</span>)))
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>genes</span>)
+<span class='va'>genes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='fu'><a href='as.html'>as</a></span><span class='op'>(</span><span class='va'>deseq</span>, <span class='st'>"DESeqDataSet"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>genes</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "gene001" "gene002" "gene003" "gene004" "gene005" "gene006"</div><div class='input'>
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotCounts</span>(<span class='kw'>deseq</span>, genes = <span class='kw'>genes</span>, style = <span class='st'>"facet"</span>)
-</div><div class='img'><img src='plotCounts-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotCounts</span>(<span class='kw'>deseq</span>, genes = <span class='kw'>genes</span>, style = <span class='st'>"wide"</span>)
+<span class='fu'>plotCounts</span><span class='op'>(</span><span class='va'>deseq</span>, genes <span class='op'>=</span> <span class='va'>genes</span>, style <span class='op'>=</span> <span class='st'>"facet"</span><span class='op'>)</span>
+</div><div class='img'><img src='plotCounts-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotCounts</span><span class='op'>(</span><span class='va'>deseq</span>, genes <span class='op'>=</span> <span class='va'>genes</span>, style <span class='op'>=</span> <span class='st'>"wide"</span><span class='op'>)</span>
 </div><div class='img'><img src='plotCounts-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

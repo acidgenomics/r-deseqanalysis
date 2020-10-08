@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.9</span>
       </span>
     </div>
 
@@ -128,20 +128,20 @@
     <p>Construct a simple heatmap.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plotHeatmap</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>plotHeatmap</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>plotCorrelationHeatmap</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
+<span class='fu'>plotCorrelationHeatmap</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>plotQuantileHeatmap</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
-
-<span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotHeatmap</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
+<span class='fu'>plotQuantileHeatmap</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotCorrelationHeatmap</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
+<span class='fu'>plotHeatmap</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>plotQuantileHeatmap</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'>plotCorrelationHeatmap</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S4 method for DESeqAnalysis</span>
+<span class='fu'>plotQuantileHeatmap</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,7 +173,7 @@
 <li><p>sigma: standard deviation.</p></li>
 <li><p>x: raw score (e.g. count matrix).</p></li>
 <li><p>z: standard score (z-score).</p></li>
-</ul><pre><span class='kw'>z</span> <span class='op'>=</span> (<span class='kw'>x</span> <span class='op'>-</span> <span class='kw'>mu</span>) <span class='op'>/</span> <span class='kw'>sigma</span>
+</ul><pre><span class='va'>z</span> <span class='op'>=</span> <span class='op'>(</span><span class='va'>x</span> <span class='op'>-</span> <span class='va'>mu</span><span class='op'>)</span> <span class='op'>/</span> <span class='va'>sigma</span>
 </pre>
 
 <p>See also:</p><ul>
@@ -200,9 +200,9 @@ NA/NaN/Inf in foreign function call
 you can attempt to pass an <code>hclust</code> object to these arguments. This is
 recommended as an alternate approach to be used with
 <code><a href='https://rdrr.io/pkg/pheatmap/man/pheatmap.html'>pheatmap()</a></code>, which is called internally by our
-plotting code. Here's how this can be accomplished:</p><pre><span class='kw'>mat</span> <span class='op'>&lt;-</span> <span class='fu'>assay</span>(<span class='kw'>mat</span>)
-<span class='kw'>dist</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/dist.html'>dist</a></span>(<span class='kw'>mat</span>)
-<span class='kw'>hclust</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/hclust.html'>hclust</a></span>(<span class='kw'>dist</span>, method = <span class='st'>"ward.D2"</span>)
+plotting code. Here's how this can be accomplished:</p><pre><span class='va'>mat</span> <span class='op'>&lt;-</span> <span class='fu'>assay</span><span class='op'>(</span><span class='va'>mat</span><span class='op'>)</span>
+<span class='va'>dist</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/dist.html'>dist</a></span><span class='op'>(</span><span class='va'>mat</span><span class='op'>)</span>
+<span class='va'>hclust</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/hclust.html'>hclust</a></span><span class='op'>(</span><span class='va'>dist</span>, method <span class='op'>=</span> <span class='st'>"ward.D2"</span><span class='op'>)</span>
 </pre>
 
 
@@ -221,12 +221,12 @@ plotting code. Here's how this can be accomplished:</p><pre><span class='kw'>mat
     <p>Michael Steinbaugh, Rory Kirchner</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>deseq</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>deseq</span><span class='op'>)</span>
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='fu'>plotHeatmap</span>(<span class='kw'>deseq</span>)
-</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> Using </span><span style='color: #000000;background-color: #BBBBBB;'>`DESeqTransform`</span><span> </span><span style='color: #000000;background-color: #BBBBBB;'>`varianceStabilizingTransformation`</span><span> counts.</span></div><div class='output co'>#&gt; <span class='message'>→ Scaling matrix per row (z-score).</span></div><div class='output co'>#&gt; <span class='message'>→ Performing hierarchical clustering with </span><span style='color: #000000;background-color: #BBBBBB;'>`hclust()`</span><span> method </span><span style='color: #000000;background-color: #BBBBBB;'>`"ward.D2"`</span><span>.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> </span><span style='color: #000000;background-color: #BBBBBB;'>`hclust()`</span><span> row calculation failed.</span></div><div class='img'><img src='plotHeatmap-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotCorrelationHeatmap</span>(<span class='kw'>deseq</span>)
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> Using </span><span style='color: #000000;background-color: #BBBBBB;'>`DESeqTransform`</span><span> </span><span style='color: #000000;background-color: #BBBBBB;'>`varianceStabilizingTransformation`</span><span> counts.</span></div><div class='output co'>#&gt; <span class='message'>→ Calculating correlation matrix using </span><span style='color: #000000;background-color: #BBBBBB;'>`pearson`</span><span> method.</span></div><div class='img'><img src='plotHeatmap-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotQuantileHeatmap</span>(<span class='kw'>deseq</span>)
+<span class='fu'>plotHeatmap</span><span class='op'>(</span><span class='va'>deseq</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> Using </span><span style='color: #000000;background-color: #BBBBBB;'>`DESeqTransform`</span><span> </span><span style='color: #000000;background-color: #BBBBBB;'>`varianceStabilizingTransformation`</span><span> counts.</span></div><div class='output co'>#&gt; <span class='message'>→ Scaling matrix per row (z-score).</span></div><div class='output co'>#&gt; <span class='message'>→ Performing hierarchical clustering with </span><span style='color: #000000;background-color: #BBBBBB;'>`hclust()`</span><span> method </span><span style='color: #000000;background-color: #BBBBBB;'>`"ward.D2"`</span><span>.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> </span><span style='color: #000000;background-color: #BBBBBB;'>`hclust()`</span><span> row calculation failed.</span></div><div class='img'><img src='plotHeatmap-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotCorrelationHeatmap</span><span class='op'>(</span><span class='va'>deseq</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> Using </span><span style='color: #000000;background-color: #BBBBBB;'>`DESeqTransform`</span><span> </span><span style='color: #000000;background-color: #BBBBBB;'>`varianceStabilizingTransformation`</span><span> counts.</span></div><div class='output co'>#&gt; <span class='message'>→ Calculating correlation matrix using </span><span style='color: #000000;background-color: #BBBBBB;'>`pearson`</span><span> method.</span></div><div class='img'><img src='plotHeatmap-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plotQuantileHeatmap</span><span class='op'>(</span><span class='va'>deseq</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> Using </span><span style='color: #000000;background-color: #BBBBBB;'>`DESeqTransform`</span><span> </span><span style='color: #000000;background-color: #BBBBBB;'>`varianceStabilizingTransformation`</span><span> counts.</span></div><div class='img'><img src='plotHeatmap-3.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

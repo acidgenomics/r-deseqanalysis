@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.9</span>
       </span>
     </div>
 
@@ -128,15 +128,15 @@
     <p>Intersection of differentially expressed genes</p>
     </div>
 
-    <pre class="usage"><span class='fu'>degIntersection</span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>degIntersection</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for DESeqAnalysis</span>
-<span class='fu'>degIntersection</span>(
-  <span class='kw'>object</span>,
-  i = <span class='kw'>NULL</span>,
-  direction = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"up"</span>, <span class='st'>"down"</span>),
-  return = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"matrix"</span>, <span class='st'>"count"</span>, <span class='st'>"ratio"</span>)
-)</pre>
+<span class='fu'>degIntersection</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  i <span class='op'>=</span> <span class='cn'>NULL</span>,
+  direction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"up"</span>, <span class='st'>"down"</span><span class='op'>)</span>,
+  return <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"matrix"</span>, <span class='st'>"count"</span>, <span class='st'>"ratio"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,11 +178,11 @@ lowest. Gene identifiers are defined as the names.</p>
     <p>Updated 2020-08-18.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>deseq</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>deseq</span><span class='op'>)</span>
 
 <span class='co'>## DESeqAnalysis ====</span>
-<span class='kw'>mat</span> <span class='op'>&lt;-</span> <span class='fu'>degIntersection</span>(<span class='kw'>deseq</span>, return = <span class='st'>"matrix"</span>)
-</div><div class='output co'>#&gt; <span class='message'>→ Returning intersection matrix of 24 up-regulated DEGs.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>mat</span>)
+<span class='va'>mat</span> <span class='op'>&lt;-</span> <span class='fu'>degIntersection</span><span class='op'>(</span><span class='va'>deseq</span>, return <span class='op'>=</span> <span class='st'>"matrix"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>→ Returning intersection matrix of 24 up-regulated DEGs.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>mat</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;         condition_B_vs_A treatment_D_vs_C
 #&gt; gene027             TRUE            FALSE
 #&gt; gene028             TRUE            FALSE
@@ -190,12 +190,12 @@ lowest. Gene identifiers are defined as the names.</p>
 #&gt; gene057             TRUE            FALSE
 #&gt; gene109             TRUE            FALSE
 #&gt; gene112             TRUE            FALSE</div><div class='input'>
-<span class='kw'>count</span> <span class='op'>&lt;-</span> <span class='fu'>degIntersection</span>(<span class='kw'>deseq</span>, return = <span class='st'>"count"</span>)
-</div><div class='output co'>#&gt; <span class='message'>→ Returning intersection count of 24 up-regulated DEGs.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>count</span>)
+<span class='va'>count</span> <span class='op'>&lt;-</span> <span class='fu'>degIntersection</span><span class='op'>(</span><span class='va'>deseq</span>, return <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>→ Returning intersection count of 24 up-regulated DEGs.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>count</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; gene027 gene028 gene030 gene057 gene109 gene112 
 #&gt;       1       1       1       1       1       1 </div><div class='input'>
-<span class='kw'>ratio</span> <span class='op'>&lt;-</span> <span class='fu'>degIntersection</span>(<span class='kw'>deseq</span>, return = <span class='st'>"ratio"</span>)
-</div><div class='output co'>#&gt; <span class='message'>→ Returning intersection ratio of 24 up-regulated DEGs.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>ratio</span>)
+<span class='va'>ratio</span> <span class='op'>&lt;-</span> <span class='fu'>degIntersection</span><span class='op'>(</span><span class='va'>deseq</span>, return <span class='op'>=</span> <span class='st'>"ratio"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>→ Returning intersection ratio of 24 up-regulated DEGs.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>ratio</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; gene027 gene028 gene030 gene057 gene109 gene112 
 #&gt;     0.5     0.5     0.5     0.5     0.5     0.5 </div></pre>
   </div>
