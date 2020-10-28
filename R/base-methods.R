@@ -7,6 +7,8 @@
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams BiocGenerics::colnames
 #'
+#' @return Varies, dependending on function.
+#'
 #' @examples
 #' data(deseq)
 #'

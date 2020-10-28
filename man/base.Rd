@@ -32,6 +32,9 @@
     these arguments.
   }
 }
+\value{
+Varies, dependending on function.
+}
 \description{
 Base methods
 }
