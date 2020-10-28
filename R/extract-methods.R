@@ -13,29 +13,15 @@
 #' @examples
 #' data(deseq)
 #' object <- deseq
+#' dim(object)
 #'
-#' ## Minimum of 100 genes, 2 samples.
-#' genes <- head(rownames(object), 100L)
+#' genes <- head(rownames(object), 50L)
 #' head(genes)
 #' samples <- head(colnames(object), 2L)
 #' head(samples)
 #'
-#' ## Extract by sample name.
-#' object[, samples]
-#'
-#' ## Extract by gene list.
-#' object[genes, ]
-#'
-#' ## Extract by both genes and samples.
 #' x <- object[genes, samples]
 #' print(x)
-#' assayNames(x)
-#'
-#' ## Fast subsetting, by skipping DESeq2 recalculations.
-#' ## Note that `normalized`, `rlog`, and `vst` assays will be removed.
-#' x <- object[, samples, recalculate = FALSE]
-#' print(x)
-#' names(assays(x))
 NULL
 
 
