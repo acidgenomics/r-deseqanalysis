@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.10</span>
       </span>
     </div>
 
@@ -201,16 +201,8 @@ Use this argument rather than <code>contrast</code> for continuous variables.</p
 
 <span class='co'>## DESeqAnalysis ====</span>
 <span class='fu'>alphaSummary</span><span class='op'>(</span><span class='va'>deseq</span>, contrast <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"condition"</span>, <span class='st'>"B"</span>, <span class='st'>"A"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> condition B A</span></div><div class='output co'>#&gt;                0.1 0.05 0.01 0.001 1e-06
-#&gt; LFC &gt; 0 (up)    48   36   24    15     2
-#&gt; LFC &lt; 0 (down)  39   22   14     8     1
-#&gt; outliers [1]     0    0    0     0     0
-#&gt; low counts [2] 116  116   58   271     0</div><div class='input'><span class='fu'>alphaSummary</span><span class='op'>(</span><span class='va'>deseq</span>, name <span class='op'>=</span> <span class='st'>"condition_B_vs_A"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A</span></div><div class='output co'>#&gt;                0.1 0.05 0.01 0.001 1e-06
-#&gt; LFC &gt; 0 (up)    48   36   24    15     2
-#&gt; LFC &lt; 0 (down)  39   22   14     8     1
-#&gt; outliers [1]     0    0    0     0     0
-#&gt; low counts [2] 116  116   58   271     0</div></span></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in alphaSummary(deseq, contrast = c("condition", "B", "A")): could not find function "alphaSummary"</span></div><div class='input'><span class='fu'>alphaSummary</span><span class='op'>(</span><span class='va'>deseq</span>, name <span class='op'>=</span> <span class='st'>"condition_B_vs_A"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in alphaSummary(deseq, name = "condition_B_vs_A"): could not find function "alphaSummary"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

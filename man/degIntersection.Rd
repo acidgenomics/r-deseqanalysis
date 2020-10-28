@@ -67,4 +67,8 @@ head(count)
 ratio <- degIntersection(deseq, return = "ratio")
 class(ratio)
 head(ratio)
+
+names <- degIntersection(deseq, i = c(1L, 2L), return = "names")
+class(names)
+head(names)
 }

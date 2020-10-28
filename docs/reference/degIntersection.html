@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.10</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@
   <span class='va'>object</span>,
   i <span class='op'>=</span> <span class='cn'>NULL</span>,
   direction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"up"</span>, <span class='st'>"down"</span><span class='op'>)</span>,
-  return <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"matrix"</span>, <span class='st'>"count"</span>, <span class='st'>"ratio"</span><span class='op'>)</span>
+  return <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"matrix"</span>, <span class='st'>"count"</span>, <span class='st'>"ratio"</span>, <span class='st'>"names"</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -159,8 +159,17 @@ Must be directional, and intentionally does not support "both".</p></td>
     </tr>
     <tr>
       <th>return</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
-Return intersection matrix, count per contrast, or ratio.</p></td>
+      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.</p><ul>
+<li><p><code>"matrix"</code>: <code>logical matrix</code>;
+Intersection matrix.</p></li>
+<li><p><code>"count"</code>: <code>integer</code>;
+Number of times the gene is significant across contrasts.</p></li>
+<li><p><code>"ratio"</code>: <code>numeric</code>;
+The ratio of how many times the gene is significant across contrasts.</p></li>
+<li><p><code>"names"</code>: <code>character</code>;
+Names of genes that intersect across all contrasts defined.
+Input of specific contrasts with <code>i</code> argument is recommended here.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>...</th>
@@ -175,29 +184,36 @@ Integer denoting the number of intersections, sorted from highest to
 lowest. Gene identifiers are defined as the names.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Updated 2020-08-18.</p>
+    <p>Updated 2020-10-28.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>deseq</span><span class='op'>)</span>
 
 <span class='co'>## DESeqAnalysis ====</span>
 <span class='va'>mat</span> <span class='op'>&lt;-</span> <span class='fu'>degIntersection</span><span class='op'>(</span><span class='va'>deseq</span>, return <span class='op'>=</span> <span class='st'>"matrix"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>→ Returning intersection matrix of 24 up-regulated DEGs.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>mat</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;         condition_B_vs_A treatment_D_vs_C
-#&gt; gene027             TRUE            FALSE
-#&gt; gene028             TRUE            FALSE
-#&gt; gene030             TRUE            FALSE
-#&gt; gene057             TRUE            FALSE
-#&gt; gene109             TRUE            FALSE
-#&gt; gene112             TRUE            FALSE</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in degIntersection(deseq, return = "matrix"): could not find function "degIntersection"</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>mat</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'mat' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/typeof.html'>type</a></span><span class='op'>(</span><span class='va'>mat</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'type': object 'mat' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>mat</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'head': object 'mat' not found</span></div><div class='input'>
 <span class='va'>count</span> <span class='op'>&lt;-</span> <span class='fu'>degIntersection</span><span class='op'>(</span><span class='va'>deseq</span>, return <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>→ Returning intersection count of 24 up-regulated DEGs.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>count</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; gene027 gene028 gene030 gene057 gene109 gene112 
-#&gt;       1       1       1       1       1       1 </div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in degIntersection(deseq, return = "count"): could not find function "degIntersection"</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>count</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "function"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>count</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                                                               
+#&gt; 1 function (x, idxs = NULL, value = TRUE, na.rm = FALSE, ...) 
+#&gt; 2 {                                                           
+#&gt; 3     if (!is.vector(x)) {                                    
+#&gt; 4         stop("Argument 'x' must be a vector: ", mode(x)[1L])
+#&gt; 5     }                                                       
+#&gt; 6     if (length(value) != 1L) {                              </div><div class='input'>
 <span class='va'>ratio</span> <span class='op'>&lt;-</span> <span class='fu'>degIntersection</span><span class='op'>(</span><span class='va'>deseq</span>, return <span class='op'>=</span> <span class='st'>"ratio"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>→ Returning intersection ratio of 24 up-regulated DEGs.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>ratio</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; gene027 gene028 gene030 gene057 gene109 gene112 
-#&gt;     0.5     0.5     0.5     0.5     0.5     0.5 </div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in degIntersection(deseq, return = "ratio"): could not find function "degIntersection"</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>ratio</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'ratio' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>ratio</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'head': object 'ratio' not found</span></div><div class='input'>
+<span class='va'>names</span> <span class='op'>&lt;-</span> <span class='fu'>degIntersection</span><span class='op'>(</span><span class='va'>deseq</span>, i <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1L</span>, <span class='fl'>2L</span><span class='op'>)</span>, return <span class='op'>=</span> <span class='st'>"names"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in degIntersection(deseq, i = c(1L, 2L), return = "names"): could not find function "degIntersection"</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>names</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "function"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>names</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                      
+#&gt; 1 .Primitive("names")</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -5,7 +5,7 @@
 \alias{deseq}
 \title{DESeq2 example analysis}
 \format{
-An object of class \code{DESeqAnalysis} of length 1.
+An object of class \code{DESeqAnalysis} with 500 rows and 12 columns.
 }
 \usage{
 deseq

@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.10</span>
       </span>
     </div>
 
@@ -195,54 +195,12 @@ F1000 v2 workflow paper. Otherwise, we now recommend using the
 
 <span class='co'>## DESeqAnalysis ====</span>
 <span class='fu'>topTables</span><span class='op'>(</span><span class='va'>deseq</span>, i <span class='op'>=</span> <span class='fl'>1L</span>, n <span class='op'>=</span> <span class='fl'>5L</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 38 differentially expressed genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 24 upregulated genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 14 downregulated genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; 
-#&gt; 
-#&gt; Table: condition_B_vs_A (upregulated)
-#&gt; 
-#&gt; |        | baseMean|lfc  |padj     |broadClass |geneName |description                                        |
-#&gt; |:-------|--------:|:----|:--------|:----------|:--------|:--------------------------------------------------|
-#&gt; |gene338 |      236|2.89 |3.79e-09 |coding     |RNF14    |ring finger protein 14                             |
-#&gt; |gene214 |      474|2.00 |6.73e-07 |coding     |AASS     |aminoadipate-semialdehyde synthase                 |
-#&gt; |gene028 |       83|2.60 |3.52e-06 |coding     |HECW1    |HECT, C2 and WW domain containing E3 ubiquitin ... |
-#&gt; |gene112 |       76|2.11 |9.52e-05 |coding     |LAMP2    |lysosomal associated membrane protein 2            |
-#&gt; |gene465 |      117|1.88 |9.52e-05 |coding     |IFNGR1   |interferon gamma receptor 1                        |
-#&gt; 
-#&gt; 
-#&gt; Table: condition_B_vs_A (downregulated)
-#&gt; 
-#&gt; |        | baseMean|lfc   |padj     |broadClass |geneName |description                                        |
-#&gt; |:-------|--------:|:-----|:--------|:----------|:--------|:--------------------------------------------------|
-#&gt; |gene380 |       61|-3.09 |6.73e-07 |coding     |WWTR1    |WW domain containing transcription regulator 1     |
-#&gt; |gene401 |      261|-1.96 |9.52e-05 |coding     |MNAT1    |MNAT1 component of CDK activating kinase           |
-#&gt; |gene494 |       27|-3.36 |9.52e-05 |coding     |EIPR1    |EARP complex and GARP complex interacting prote... |
-#&gt; |gene119 |       83|-1.74 |2.92e-04 |coding     |TMEM98   |transmembrane protein 98                           |
-#&gt; |gene232 |        6|-6.72 |2.96e-04 |coding     |CSDE1    |cold shock domain containing E1                    |</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in topTables(deseq, i = 1L, n = 5L): could not find function "topTables"</span></div><div class='input'>
 <span class='co'>## DESeqResults 'resultsTables()' list ====</span>
 <span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='results.html'>results</a></span><span class='op'>(</span><span class='va'>deseq</span>, i <span class='op'>=</span> <span class='fl'>1L</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='input'><span class='va'>resTbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='resultsTables.html'>resultsTables</a></span><span class='op'>(</span><span class='va'>res</span>, return <span class='op'>=</span> <span class='st'>"tbl_df"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 38 differentially expressed genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 24 upregulated genes (alpha &lt; 0.01)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 14 downregulated genes (alpha &lt; 0.01)</span></div><div class='input'><span class='fu'>topTables</span><span class='op'>(</span><span class='va'>resTbl</span>, n <span class='op'>=</span> <span class='fl'>5L</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; 
-#&gt; Table: upregulated
-#&gt; 
-#&gt; |        | baseMean|lfc  |padj     |
-#&gt; |:-------|--------:|:----|:--------|
-#&gt; |gene338 |      236|2.89 |3.79e-09 |
-#&gt; |gene214 |      474|2.00 |6.73e-07 |
-#&gt; |gene028 |       83|2.60 |3.52e-06 |
-#&gt; |gene112 |       76|2.11 |9.52e-05 |
-#&gt; |gene465 |      117|1.88 |9.52e-05 |
-#&gt; 
-#&gt; 
-#&gt; Table: downregulated
-#&gt; 
-#&gt; |        | baseMean|lfc   |padj     |
-#&gt; |:-------|--------:|:-----|:--------|
-#&gt; |gene380 |       61|-3.09 |6.73e-07 |
-#&gt; |gene401 |      261|-1.96 |9.52e-05 |
-#&gt; |gene494 |       27|-3.36 |9.52e-05 |
-#&gt; |gene119 |       83|-1.74 |2.92e-04 |
-#&gt; |gene232 |        6|-6.72 |2.96e-04 |</div></span></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in results(deseq, i = 1L): is(object, "DESeqDataSet") is not TRUE</span></div><div class='input'><span class='va'>resTbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='resultsTables.html'>resultsTables</a></span><span class='op'>(</span><span class='va'>res</span>, return <span class='op'>=</span> <span class='st'>"tbl_df"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in resultsTables(res, return = "tbl_df"): could not find function "resultsTables"</span></div><div class='input'><span class='fu'>topTables</span><span class='op'>(</span><span class='va'>resTbl</span>, n <span class='op'>=</span> <span class='fl'>5L</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in topTables(resTbl, n = 5L): could not find function "topTables"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
