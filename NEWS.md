@@ -4,6 +4,8 @@
 
 - Added subsetting extract method support via `[` for `DESeqAnalysis` class.
   Code works internally similar to method defined for `bcbioRNASeq`.
+- Added method support for some important base methods: `rownames`, `colnames`,
+  `names`, and `dimnames` for `DESeqAnalysis` class.
 
 ### Minor changes
 
