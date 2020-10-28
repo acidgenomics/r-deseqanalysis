@@ -233,14 +233,9 @@ Names correspond to the features (i.e. genes) analyzed.</p>
 
 <span class='co'>## DESeqAnalysis ====</span>
 <span class='va'>diff</span> <span class='op'>&lt;-</span> <span class='fu'>resultsDiff</span><span class='op'>(</span><span class='va'>deseq</span>, i <span class='op'>=</span> <span class='fl'>1L</span>, j <span class='op'>=</span> <span class='fl'>2L</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in resultsDiff(deseq, i = 1L, j = 2L): could not find function "resultsDiff"</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>diff</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                                                                                   
-#&gt; 1 new("standardGeneric", .Data = function (x, ...)                                
-#&gt; 2 standardGeneric("diff"), generic = structure("diff", package = "base"),         
-#&gt; 3     package = "base", group = list(), valueClass = character(0),                
-#&gt; 4     signature = "x", default = new("derivedDefaultMethod", .Data = function (x, 
-#&gt; 5         ...)                                                                    
-#&gt; 6     UseMethod("diff"), target = new("signature", .Data = "ANY",                 </div></pre>
+</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> treatment_D_vs_C (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'>→ Calculating relative difference of </span><span style='color: #262626;background-color: #DADADA;'>`log2FoldChange`</span><span>.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>diff</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;     gene001     gene002     gene003     gene004     gene005     gene006 
+#&gt;  0.66765173  0.22417103  0.16879276  0.01535969 -0.22396653 -0.57329468 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

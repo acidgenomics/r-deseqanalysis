@@ -229,7 +229,11 @@ Passes to <code>numeric</code> method.</p></li>
 
 <span class='co'>## DESeqAnalysis ====</span>
 <span class='fu'>plotBaseMean</span><span class='op'>(</span><span class='va'>deseq</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in plotBaseMean(deseq): could not find function "plotBaseMean"</span></div></pre>
+</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> Removing 1 zero-count feature.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> Summary prior to transformation:</span>
+#&gt; <span class='message'>Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
+#&gt; <span class='message'>0.07    5.53   18.06   48.90   53.93 1020.58 </span></div><div class='output co'>#&gt; <span class='message'>→ Applying 'log10(x + 1)' transformation.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> Summary after transformation:</span>
+#&gt; <span class='message'>Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
+#&gt; <span class='message'>0.03    0.81    1.28    1.28    1.74    3.01 </span></div><div class='img'><img src='plotBaseMean-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

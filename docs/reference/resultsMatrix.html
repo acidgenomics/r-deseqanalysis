@@ -197,8 +197,14 @@ are automatically prefixed to the column names.</p></li>
 
 <span class='co'>## DESeqAnalysis ====</span>
 <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>resultsMatrix</span><span class='op'>(</span><span class='va'>deseq</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in resultsMatrix(deseq): could not find function "resultsMatrix"</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'head': object 'x' not found</span></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         condition_B_vs_A treatment_D_vs_C
+#&gt; gene001       0.68113957     1.348785e-02
+#&gt; gene002       0.21751307    -6.657954e-03
+#&gt; gene003       0.16882225     2.948482e-05
+#&gt; gene004       0.02745442     1.209473e-02
+#&gt; gene005      -0.23444214    -1.047561e-02
+#&gt; gene006      -0.56577498     7.519695e-03</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
