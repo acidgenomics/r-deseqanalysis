@@ -23,7 +23,7 @@ NULL
 
 
 ## Updated 2020-10-28.
-`colnames,DESeqAnalysis` <-
+`colnames,DESeqAnalysis` <-  # nolint
     function(x) {
         colnames(as(x, "DESeqDataSet"))
     }
@@ -43,7 +43,7 @@ setMethod(
 
 
 ## Updated 2020-10-28.
-`dim,DESeqAnalysis` <-
+`dim,DESeqAnalysis` <-  # nolint
     function(x) {
         dim(as(x, "DESeqDataSet"))
     }
@@ -61,7 +61,7 @@ setMethod(
 
 
 ## Updated 2020-10-28.
-`dimnames,DESeqAnalysis` <-
+`dimnames,DESeqAnalysis` <-  # nolint
     function(x) {
         dimnames(as(x, "DESeqDataSet"))
     }
@@ -79,7 +79,7 @@ setMethod(
 
 
 ## Updated 2020-10-28.
-`names,DESeqAnalysis` <-
+`names,DESeqAnalysis` <-  # nolint
     function(x) {
         names(as(x, "DESeqDataSet"))
     }
@@ -97,7 +97,7 @@ setMethod(
 
 
 ## Updated 2020-10-28.
-`rownames,DESeqAnalysis` <-
+`rownames,DESeqAnalysis` <-  # nolint
     function(x) {
         rownames(as(x, "DESeqDataSet"))
     }
