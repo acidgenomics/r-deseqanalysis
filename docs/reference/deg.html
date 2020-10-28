@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DESeqAnalysis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.10</span>
       </span>
     </div>
 
@@ -205,8 +205,8 @@ Gene identifiers.</p>
 
 <span class='co'>## DESeqAnalysis ====</span>
 <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>deg</span><span class='op'>(</span><span class='va'>deseq</span>, i <span class='op'>=</span> <span class='fl'>1L</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span><span> condition_B_vs_A (shrunken LFC)</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> 38 differentially expressed genes (alpha &lt; 0.01)</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "gene338" "gene214" "gene380" "gene028" "gene112" "gene401"</div></span></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in deg(deseq, i = 1L): could not find function "deg"</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'head': object 'x' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
