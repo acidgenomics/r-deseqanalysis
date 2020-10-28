@@ -11,7 +11,7 @@ degIntersection(object, ...)
   object,
   i = NULL,
   direction = c("up", "down"),
-  return = c("matrix", "count", "ratio")
+  return = c("matrix", "count", "ratio", "names")
 )
 }
 \arguments{
@@ -26,7 +26,17 @@ Include "up" or "down" directions.
 Must be directional, and intentionally does not support "both".}
 
 \item{return}{\code{character(1)}.
-Return intersection matrix, count per contrast, or ratio.}
+\itemize{
+\item \code{"matrix"}: \verb{logical matrix};
+Intersection matrix.
+\item \code{"count"}: \code{integer};
+Number of times the gene is significant across contrasts.
+\item \code{"ratio"}: \code{numeric};
+The ratio of how many times the gene is significant across contrasts.
+\item \code{"names"}: \code{character};
+Names of genes that intersect across all contrasts defined.
+Input of specific contrasts with \code{i} argument is recommended here.
+}}
 
 \item{...}{Passthrough arguments to \code{\link[=deg]{deg()}}.}
 }
@@ -39,18 +49,22 @@ lowest. Gene identifiers are defined as the names.
 Intersection of differentially expressed genes
 }
 \note{
-Updated 2020-08-18.
+Updated 2020-10-28.
 }
 \examples{
 data(deseq)
 
 ## DESeqAnalysis ====
 mat <- degIntersection(deseq, return = "matrix")
+class(mat)
+type(mat)
 head(mat)
 
 count <- degIntersection(deseq, return = "count")
+class(count)
 head(count)
 
 ratio <- degIntersection(deseq, return = "ratio")
+class(ratio)
 head(ratio)
 }
