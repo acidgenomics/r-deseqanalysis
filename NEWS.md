@@ -1,3 +1,17 @@
+## DESeqAnalysis 0.3.10 (2020-10-28)
+
+### Major changes
+
+- Added subsetting extract method support via `[` for `DESeqAnalysis` class.
+  Code works internally similar to method defined for `bcbioRNASeq`.
+- Added method support for some important base methods: `rownames`, `colnames`,
+  `names`, and `dimnames` for `DESeqAnalysis` class.
+
+### Minor changes
+
+- `degIntersection`: Added `return = "names"` option, which is useful for
+  generating intersection subset tables.
+
 ## DESeqAnalysis 0.3.9 (2020-10-08)
 
 ### Minor changes

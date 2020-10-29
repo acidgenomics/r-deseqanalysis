@@ -1,13 +1,26 @@
 context("degIntersection")
 
 test_that("DESeqAnalysis", {
-    ## Intersection matrix.
-    object <- degIntersection(deseq, return = "matrix")
-    expect_is(object, "matrix")
-    ## Number of intersections.
-    object <- degIntersection(deseq, return = "count")
-    expect_is(object, "numeric")
-    ## Intersection ratio.
-    object <- degIntersection(deseq, return = "ratio")
-    expect_is(object, "numeric")
+    mapply(
+        return = c(
+            "matrix",
+            "count",
+            "ratio",
+            "names"
+        ),
+        class = c(
+            "matrix",
+            "integer",
+            "numeric",
+            "character"
+        ),
+        MoreArgs = list(object = deseq),
+        FUN = function(object, return, class) {
+            expect_is(
+                object = degIntersection(object, return = return),
+                class = class
+            )
+        },
+        SIMPLIFY = FALSE
+    )
 })

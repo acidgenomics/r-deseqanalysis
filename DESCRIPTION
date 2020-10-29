@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.3.9
-Date: 2020-10-08
+Version: 0.3.10
+Date: 2020-10-28
 Authors@R: c(
     person(
         given = "Michael",
@@ -24,7 +24,7 @@ Encoding: UTF-8
 LazyData: false
 Depends:
     R (>= 4.0),
-    basejump (>= 0.13.1),
+    basejump (>= 0.13.2),
     DESeq2 (>= 1.28)
 Imports:
     AcidGenerics (>= 0.4.0),
