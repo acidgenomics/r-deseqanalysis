@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.3.10
-Date: 2020-10-28
+Version: 0.3.11
+Date: 2020-12-07
 Authors@R: c(
     person(
         given = "Michael",
@@ -24,10 +24,10 @@ Encoding: UTF-8
 LazyData: false
 Depends:
     R (>= 4.0),
-    basejump (>= 0.13.2),
+    basejump (>= 0.13.4),
     DESeq2 (>= 1.28)
 Imports:
-    AcidGenerics (>= 0.4.0),
+    AcidGenerics (>= 0.4.1),
     AcidPlots (>= 0.3.0),
     BiocGenerics,
     IRanges,
@@ -36,7 +36,7 @@ Imports:
     cli (>= 2.0),
     cowplot (>= 1.0),
     ggplot2 (>= 3.3),
-    goalie (>= 0.4.9),
+    goalie (>= 0.4.11),
     knitr,
     methods,
     rlang (>= 0.4),
