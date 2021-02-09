@@ -12,12 +12,15 @@
 #'
 #' @return `data.frame`.
 #' Modified metadata frame, with updated sample identifiers in slotted in
-#' first column. Original values are stashed in "originalSampleID".
+#' first column. Original values are stashed in "originalSampleId".
 #'
 #' @examples
 #' metadata <- data.frame(
-#'     sampleID = paste(seq_len(4L), "sample", LETTERS[seq_len(4L)], sep = "_"),
-#'     condition = rep(LETTERS[seq_len(2L)], times = 2L)
+#'     "sampleId" = paste(
+#'         seq_len(4L), "sample", LETTERS[seq_len(4L)],
+#'         sep = "_"
+#'     ),
+#'     "condition" = rep(LETTERS[seq_len(2L)], times = 2L)
 #' )
 #' files <- file.path(
 #'     "salmon",
@@ -32,7 +35,7 @@
 matchMetadataToFiles <- function(metadata, files) {
     assert(
         is.data.frame(metadata),
-        areDisjointSets("originalSampleID", colnames(metadata)),
+        areDisjointSets("originalSampleId", colnames(metadata)),
         isCharacter(files)
     )
     metaSampleNames <- as.character(metadata[[1L]])
@@ -71,6 +74,6 @@ matchMetadataToFiles <- function(metadata, files) {
     ))
     out <- metadata
     out[[1L]] <- map[["files"]]
-    out[["originalSampleID"]] <- metadata[[1L]]
+    out[["originalSampleId"]] <- metadata[[1L]]
     out
 }

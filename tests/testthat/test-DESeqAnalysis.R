@@ -3,7 +3,7 @@ context("DESeqAnalysis")
 test_that("DESeqAnalysis", {
     data <- DESeq2::makeExampleDESeqDataSet()
     rowRanges <- emptyRanges(names = rownames(data))
-    mcols(rowRanges)[["geneID"]] <- paste0("id", seq_len(length(rowRanges)))
+    mcols(rowRanges)[["geneId"]] <- paste0("id", seq_len(length(rowRanges)))
     mcols(rowRanges)[["geneName"]] <- paste0("name", seq_len(length(rowRanges)))
     rowRanges(data) <- rowRanges
     data <- DESeq2::DESeq(data)

@@ -2,7 +2,7 @@ data(deseq, envir = environment())
 
 dds <- as(deseq, "DESeqDataSet")
 g2s <- Gene2Symbol(dds)
-geneIDs <- head(g2s[["geneID"]])
+geneIds <- head(g2s[["geneId"]])
 geneNames <- head(g2s[["geneName"]])
 
 ## nolint start
