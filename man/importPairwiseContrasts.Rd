@@ -28,7 +28,7 @@ Denominator column name in contrasts file.}
 
 \item{namesCol}{\code{character(1)}.
 Column in contrasts file to used to define the names of the contrast list.
-Values will be sanitized into \code{\link[basejump:snakeCase]{snakeCase()}}.}
+Values will be sanitized into \code{\link[basejump:reexports]{snakeCase()}}.}
 }
 \value{
 \code{list}.

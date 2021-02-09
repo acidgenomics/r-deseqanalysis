@@ -1,8 +1,8 @@
 #' Correlation
 #'
 #' @name correlation
-#' @inherit basejump::correlation
-#' @note Updated 2020-08-05.
+#' @inherit AcidExperiment::correlation
+#' @note Updated 2021-02-09.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @param col `character(1)`.

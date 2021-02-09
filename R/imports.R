@@ -1,7 +1,7 @@
 #' @importClassesFrom DESeq2 DESeqDataSet DESeqTransform
 #' @importClassesFrom SummarizedExperiment RangedSummarizedExperiment
 #'   SummarizedExperiment
-#' @importClassesFrom basejump Tx2Gene
+#' @importClassesFrom basejump Tx2Gene missingOrNULL
 #'
 #' @importMethodsFrom basejump coerce
 #'
