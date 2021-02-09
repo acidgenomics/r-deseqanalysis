@@ -18,7 +18,7 @@ Sanitize return from \code{\link[=prepareTximportFiles]{prepareTximportFiles()}}
 \value{
 \code{data.frame}.
 Modified metadata frame, with updated sample identifiers in slotted in
-first column. Original values are stashed in "originalSampleID".
+first column. Original values are stashed in "originalSampleId".
 }
 \description{
 Match user metadata to file names used for tximport
@@ -28,8 +28,11 @@ Updated 2020-08-04.
 }
 \examples{
 metadata <- data.frame(
-    sampleID = paste(seq_len(4L), "sample", LETTERS[seq_len(4L)], sep = "_"),
-    condition = rep(LETTERS[seq_len(2L)], times = 2L)
+    "sampleId" = paste(
+        seq_len(4L), "sample", LETTERS[seq_len(4L)],
+        sep = "_"
+    ),
+    "condition" = rep(LETTERS[seq_len(2L)], times = 2L)
 )
 files <- file.path(
     "salmon",

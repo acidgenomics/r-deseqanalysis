@@ -37,7 +37,7 @@ Runs the following internal comments:
 \item Extract sample directory name from quant file using
 \code{\link[base:basename]{dirname()}} and \code{\link[base:basename]{basename()}}.
 \item Autopad zeros, if necessary, via
-\code{\link[basejump:autopadZeros]{autopadZeros()}}.
+\code{\link[basejump:reexports]{autopadZeros()}}.
 \item Sanitizes names with \code{\link[syntactic:snakeCase]{snakeCase()}}.
 \item Sorts files alphabetically.
 }
