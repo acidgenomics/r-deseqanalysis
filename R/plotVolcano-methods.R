@@ -96,7 +96,10 @@ NULL
         } else {
             alphaCol <- "padj"
         }
-        negLogAlphaCol <- camelCase(paste("neg", "log10", alphaCol))
+        negLogAlphaCol <- camelCase(
+            object = paste("neg", "log10", alphaCol),
+            strict = TRUE
+        )
         ## Note that `lfcShrink()` doesn't return `stat` column.
         if ("stat" %in% names(object)) {
             rankCol <- "stat"
@@ -137,7 +140,7 @@ NULL
         direction <- match.arg(direction)
         return <- match.arg(return)
         data <- as(object, "DataFrame")
-        data <- camelCase(data)
+        data <- camelCase(data, strict = TRUE)
         assert(isSubset(c(baseMeanCol, lfcCol, alphaCol), colnames(data)))
         ## Remove genes with NA adjusted P values.
         keep <- which(!is.na(data[[alphaCol]]))

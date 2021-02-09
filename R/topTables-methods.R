@@ -81,7 +81,7 @@ NULL
             isPositive(n)
         )
         ## Ensure columns are in camel case.
-        object <- camelCase(object)
+        object <- camelCase(object, strict = TRUE)
         ## Select minimal columns of interest.
         required <- c(
             "baseMean",

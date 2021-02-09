@@ -138,7 +138,7 @@ NULL
             stop("Specify either 'genes' or 'ntop'.")
         }
         data <- as(object, "DataFrame")
-        data <- camelCase(data)
+        data <- camelCase(data, strict = TRUE)
         assert(isSubset(
             x = c(baseMeanCol, lfcCol, rankCol, alphaCol),
             y = colnames(data)
