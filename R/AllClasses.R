@@ -1,5 +1,6 @@
 ## > showClass("missingOrNULL")
-setClassUnion(name = "missingOrNULL", members = c("missing", "NULL"))
+## FIXME INHERIT THIS FROM BASEJUMP.
+## > setClassUnion(name = "missingOrNULL", members = c("missing", "NULL"))
 
 
 
@@ -67,31 +68,40 @@ setValidity(
         results <- slot(object, "results")
         lfcShrink <- slot(object, "lfcShrink")
         ok <- validate(
-            ## DESeqDataSet and DESeqTransform must correspond.
             identical(dimnames(data), dimnames(transform)),
-            ## Gene metadata must be defined in rowRanges.
-            isSubset(
-                x = c("geneID", "geneName"),
-                y = names(mcols(rowRanges(data)))
-            ),
-            isSubset(
-                x = c("geneID", "geneName"),
-                y = names(mcols(rowRanges(transform)))
-            ),
-            ## results and lfcShrink must be list.
+            msg = "DESeqDataSet and DESeqTransform must correspond."
+        )
+        if (!isTRUE(ok)) return(ok)
+        ok <- validate(
+            hasNames(mcols(rowRanges(data))),
+            hasNames(mcols(rowRanges(transform))),
+            msg = "Gene metadata must be defined in rowRanges."
+        )
+        if (!isTRUE(ok)) return(ok)
+        ok <- validate(
             is.list(results),
             is.list(lfcShrink),
-            ## DESeqDataSet and DESeqResults must correspond.
+            msg = "results and lfcShrink must be list."
+        )
+        if (!isTRUE(ok)) return(ok)
+        ok <- validate(
             all(bapply(
                 X = results,
                 FUN = function(x) {
                     identical(rownames(x), rownames(data))
                 }
             )),
-            ## DESeqResults list must be named.
+            msg = "DESeqDataSet and DESeqResults must correspond."
+        )
+        if (!isTRUE(ok)) return(ok)
+        ok <- validate(
             hasValidNames(results),
-            ## Require package version in metadata.
-            is(metadata(object)[["version"]], "package_version")
+            msg = "DESeqResults list must be named."
+        )
+        if (!isTRUE(ok)) return(ok)
+        ok <- validate(
+            is(metadata(object)[["version"]], "package_version"),
+            msg = "Require package version in metadata."
         )
         if (!isTRUE(ok)) return(ok)
         ## Alpha levels in the slotted results must be identical.
@@ -104,10 +114,8 @@ setValidity(
         )
         ok <- validate(length(unique(alphas)) == 1L)
         if (!isTRUE(ok)) return(ok)
-        ## Note that `lfcShrink` slot is currently optional, but that may change
-        ## in a future update.
+        ## Note that `lfcShrink` slot is currently optional.
         if (hasLength(lfcShrink)) {
-            ## Unshrunken and shrunken DESeqResults must correspond.
             ok <- validate(
                 identical(names(results), names(lfcShrink)),
                 all(mapply(
@@ -117,7 +125,8 @@ setValidity(
                         identical(rownames(unshrunken), rownames(shrunken))
                     },
                     SIMPLIFY = TRUE
-                ))
+                )),
+                msg = "Unshrunken and shrunken DESeqResults must correspond."
             )
             if (!isTRUE(ok)) return(ok)
             ## Ensure that DESeqResults slotted into `lfcShrink` is actually
@@ -128,9 +137,11 @@ setValidity(
                 FUN = lfcShrinkType,
                 FUN.VALUE = character(1L)
             )
-            ok <- validate(length(unique(shrinkTypes)) == 1L)
+            ok <- validate(
+                length(unique(shrinkTypes)) == 1L,
+                msg = "Invalid shrink type."
+            )
             if (!isTRUE(ok)) return(ok)
-            ## lfcShrink alpha must match the results alpha.
             ok <- validate(
                 identical(
                     vapply(
@@ -147,7 +158,8 @@ setValidity(
                         },
                         FUN.VALUE = numeric(1L)
                     )
-                )
+                ),
+                msg = "lfcShrink alpha must match the results alpha."
             )
             if (!isTRUE(ok)) return(ok)
         }
