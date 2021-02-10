@@ -42,8 +42,8 @@ NULL
             identical(x@data@rowRanges, y@data@rowRanges),
             identical(x@transform, y@transform)
         )
-        cli_alert_info("Combining results into single DESeqAnalysis object.")
-        cli_dl(c(
+        alertInfo("Combining results into single DESeqAnalysis object.")
+        dl(c(
             "x" = printString(resultsNames(x)),
             "y" = printString(resultsNames(y))
         ))

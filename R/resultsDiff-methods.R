@@ -43,7 +43,7 @@ NULL
             identical(dimnames(x), dimnames(y)),
             isSubset(col, colnames(x))
         )
-        cli_alert(sprintf("Calculating relative difference of {.var %s}.", col))
+        alert(sprintf("Calculating relative difference of {.var %s}.", col))
         diff <- x[[col]] - y[[col]]
         names(diff) <- rownames(x)
         if (!identical(deg, "no")) {
@@ -69,7 +69,7 @@ NULL
             if (!hasLength(genes)) {
                 return(NULL)
             }
-            cli_alert_info(sprintf(
+            alertInfo(sprintf(
                 "Returning %s of DEGs (%d).",
                 deg, length(genes)
             ))

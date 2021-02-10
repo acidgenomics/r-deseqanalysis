@@ -100,9 +100,7 @@ NULL
         assert(is.factor(group))
         group <- relevel(x = group, ref = denominator)
         colData(object)[[factor]] <- group
-        cli_dl(
-            c("design" = paste0(as.character(design(object)), collapse = ""))
-        )
+        dl(c("design" = paste0(as.character(design(object)), collapse = "")))
         object <- DESeq(object = object, parallel = parallel)
         resultsNames <- resultsNames(object)
         ## Match the contrast to coef, based on resultsNames.

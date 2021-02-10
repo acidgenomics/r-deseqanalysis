@@ -98,7 +98,7 @@ setMethod(
         if (isTRUE(lfcShrink)) {
             msg <- paste(msg, "(shrunken LFC)")
         }
-        cli_alert_info(msg)
+        alertInfo(msg)
         validObject(res)
         res
     }

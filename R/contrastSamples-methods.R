@@ -57,13 +57,13 @@ NULL
     assert(isSubset(numeratorCol, factor))
     numerator <- samples[factor %in% numeratorCol]
     assert(hasLength(numerator))
-    cli_dl(c("Numerator samples" = toString(numerator, width = 200L)))
+    dl(c("Numerator samples" = toString(numerator, width = 200L)))
     ## Denominator.
     denominatorCol <- match[1L, 3L]
     assert(isSubset(denominatorCol, factor))
     denominator <- samples[factor %in% denominatorCol]
     assert(hasLength(denominator))
-    cli_dl(c("Denominator samples" = toString(denominator, width = 200L)))
+    dl(c("Denominator samples" = toString(denominator, width = 200L)))
     sort(c(numerator, denominator))
 }
 
@@ -92,7 +92,7 @@ NULL
             isString(contrast),
             assert(grepl("_vs_", contrast))
         )
-        cli_dl(c("Contrast" = contrast))
+        dl(c("Contrast" = contrast))
         dds <- as(object, "DESeqDataSet")
         colData <- colData(dds)
         assert(hasRownames(colData))
@@ -108,11 +108,11 @@ NULL
         )
         assert(identical(sum(match), 1L))
         factorCol <- names(match)[match]
-        cli_dl(c("Factor column" = factorCol))
+        dl(c("Factor column" = factorCol))
         ## Look for interaction effect (difference of differences).
         ## e.g. "group_B_vs_A_group_C_vs_A_effect".
         if (isTRUE(grepl(pattern = "_effect$", x = contrast))) {
-            cli_alert_info(
+            alertInfo(
                 "Interaction effect (difference of differences) detected."
             )
             interaction <- TRUE
@@ -123,13 +123,13 @@ NULL
                 substr(x = x, start = loc[1L, 1L], stop = loc[2L, 1L] - 2L)
             contrast2 <-
                 substr(x = x, start = loc[2L, 1L], stop = nchar(x))
-            cli_dl(c("Contrast 1" = contrast1))
+            dl(c("Contrast 1" = contrast1))
             samples1 <- .contrastSamples(
                 dds = dds,
                 contrast = contrast1,
                 factorCol = factorCol
             )
-            cli_dl(c("Contrast 2" = contrast2))
+            dl(c("Contrast 2" = contrast2))
             samples2 <- .contrastSamples(
                 dds = dds,
                 contrast = contrast2,

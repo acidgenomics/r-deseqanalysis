@@ -26,7 +26,7 @@ NULL
         if (!isTRUE(.hasSlot(object, "metadata"))) {
             if (isTRUE(verbose)) {
                 ## nocov start
-                cli_alert_warning(paste(
+                alertWarning(paste(
                     "Legacy object < 0.1.8 detected.",
                     "Updating to support metadata slot.",
                     sep = "\n"

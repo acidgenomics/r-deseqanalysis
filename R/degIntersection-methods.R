@@ -66,7 +66,7 @@ NULL
         })
         names(list) <- i
         mat <- intersectionMatrix(list)
-        cli_alert(sprintf(
+        alert(sprintf(
             "Returning intersection %s of %s %s-regulated DEGs.",
             return, nrow(mat), direction
         ))
