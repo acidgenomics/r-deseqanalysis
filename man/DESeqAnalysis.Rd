@@ -34,7 +34,7 @@ Updated 2019-08-20.
 }
 \examples{
 data <- DESeq2::makeExampleDESeqDataSet()
-rowRanges <- emptyRanges(names = rownames(data))
+rowRanges <- basejump::emptyRanges(names = rownames(data))
 mcols(rowRanges)[["geneId"]] <- paste0("id", seq_len(length(rowRanges)))
 mcols(rowRanges)[["geneName"]] <- paste0("name", seq_len(length(rowRanges)))
 rowRanges(data) <- rowRanges
