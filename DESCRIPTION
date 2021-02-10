@@ -2,7 +2,7 @@ Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
 Version: 0.3.11
-Date: 2021-02-09
+Date: 2021-02-10
 Authors@R: c(
     person(
         given = "Michael",
@@ -27,21 +27,13 @@ Depends:
     DESeq2 (>= 1.28)
 Imports:
     AcidGenerics (>= 0.5.9),
-    AcidPlots (>= 0.3.1),
-    IRanges,
-    S4Vectors,
-    SummarizedExperiment,
-    basejump (>= 0.14.2),
-    cowplot (>= 1.0),
+    AcidPlots (>= 0.3.2),
+    basejump (>= 0.14.3),
     ggplot2 (>= 3.3),
-    goalie (>= 0.4.9),
-    knitr,
+    goalie (>= 0.4.14),
     methods,
     rlang (>= 0.4),
-    scales,
-    stats,
-    stringr (>= 1.4),
-    utils
+    stringr (>= 1.4)
 Suggests:
     apeglm (>= 1.10),
     ashr (>= 2.2),
