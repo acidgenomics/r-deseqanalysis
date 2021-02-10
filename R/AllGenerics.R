@@ -33,3 +33,12 @@ NULL
 #' @usage plotPCA(object, ...)
 #' @export
 NULL
+
+
+
+#' @rdname updateObject
+#' @name updateObject
+#' @importFrom AcidGenerics updateObject
+#' @usage updateObject(object, ..., verbose = FALSE)
+#' @export
+NULL

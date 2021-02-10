@@ -1,6 +1,6 @@
 #' @name topTables
 #' @inherit AcidGenerics::topTables
-#' @note Updated 2020-08-05.
+#' @note Updated 2021-02-10.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -36,6 +36,7 @@ NULL
 ## Updated 2019-08-20.
 .topKables <-  # nolint
     function(object, contrast, n) {
+        requireNamespaces("knitr")
         assert(
             is(object, "DataFrameList") || is.null(object),
             isString(contrast, nullOK = TRUE),
@@ -45,7 +46,7 @@ NULL
         ## Upregulated genes.
         up <- object[["up"]]
         if (hasLength(up)) {
-            show(kable(
+            show(knitr::kable(
                 x = as.data.frame(.topTable(up, n = n)),
                 caption = ifelse(
                     test = is.null(contrast),
@@ -57,7 +58,7 @@ NULL
         ## Downregulated genes.
         down <- object[["down"]]
         if (hasLength(down)) {
-            show(kable(
+            show(knitr::kable(
                 x = as.data.frame(.topTable(down, n = n)),
                 caption = ifelse(
                     test = is.null(contrast),
