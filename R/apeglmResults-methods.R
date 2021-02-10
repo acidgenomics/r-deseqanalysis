@@ -35,9 +35,9 @@
 #'   be used with apeglm [`lfcShrink()`][DESeq2::lfcShrink].
 #' - [apeglm::apeglm()].
 #' - [DESeq2::lfcShrink()].
-#' - [stats::model.matrix()].
 #' - [DESeq2::resultsNames()].
 #' - [DESeq2::DESeq()].
+#' - `stats::model.matrix()`.
 #'
 #' @return `DESeqResults`, with apeglm adaptive shrinkage applied to fold
 #'   change values.

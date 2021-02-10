@@ -12,22 +12,6 @@ NULL
 
 
 
-#' @rdname lfcThreshold
-#' @name lfcThreshold
-#' @importFrom AcidGenerics lfcThreshold
-#' @usage lfcThreshold(object, ...)
-#' @export
-NULL
-
-#' @rdname lfcThreshold
-#' @name lfcThreshold<-
-#' @importFrom AcidGenerics lfcThreshold<-
-#' @usage lfcThreshold(object, ...) <- value
-#' @export
-NULL
-
-
-
 ## Updated 2020-08-04.
 `lfcThreshold,DESeqResults` <-  # nolint
     function(object) {

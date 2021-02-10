@@ -47,15 +47,6 @@ NULL
 
 
 
-#' @rdname resultsTables
-#' @name resultsTables
-#' @importFrom AcidGenerics resultsTables
-#' @usage resultsTables(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2020-09-21.
 `resultsTables,DESeqResults` <-  # nolint
     function(

@@ -24,15 +24,6 @@ NULL
 
 
 
-#' @rdname topTables
-#' @name topTables
-#' @importFrom AcidGenerics topTables
-#' @usage topTables(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2019-08-20.
 .topKables <-  # nolint
     function(object, contrast, n) {

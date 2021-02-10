@@ -57,15 +57,6 @@ NULL
 
 
 
-#' @rdname plotVolcano
-#' @name plotVolcano
-#' @importFrom AcidGenerics plotVolcano
-#' @usage plotVolcano(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2020-08-04.
 `plotVolcano,DESeqResults` <-  # nolint
     function(

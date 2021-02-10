@@ -22,15 +22,6 @@ NULL
 
 
 
-#' @rdname resultsDiff
-#' @name resultsDiff
-#' @importFrom AcidGenerics resultsDiff
-#' @usage resultsDiff(x, y, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2020-08-04.
 `resultsDiff,DESeqResults,DESeqResults` <-  # nolint
     function(

@@ -16,15 +16,6 @@ NULL
 
 
 
-#' @rdname plotDEGUpset
-#' @name plotDEGUpset
-#' @importFrom AcidGenerics plotDEGUpset
-#' @usage plotDEGUpset(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2020-08-25.
 `plotDEGUpset,DESeqAnalysis` <-  # nolint
     function(

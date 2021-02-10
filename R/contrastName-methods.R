@@ -28,22 +28,6 @@ NULL
 
 
 
-#' @rdname contrastName
-#' @name contrastName
-#' @importFrom AcidGenerics contrastName
-#' @usage contrastName(object, ...)
-#' @export
-NULL
-
-#' @rdname contrastName
-#' @name contrastName<-
-#' @importFrom AcidGenerics contrastName<-
-#' @usage contrastName(object, ...) <- value
-#' @export
-NULL
-
-
-
 ## Updated 2020-08-04.
 `contrastName,DESeqResults` <-  # nolint
     function(

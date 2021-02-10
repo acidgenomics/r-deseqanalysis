@@ -31,15 +31,6 @@ NULL
 
 
 
-#' @rdname results
-#' @name results
-#' @importFrom AcidGenerics results
-#' @usage results(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2019-07-23.
 `results,DESeqDataSet` <-  # nolint
     function(object, ...) {

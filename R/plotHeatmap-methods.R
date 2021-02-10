@@ -17,29 +17,6 @@ NULL
 
 
 
-#' @rdname plotHeatmap
-#' @name plotHeatmap
-#' @importFrom AcidGenerics plotHeatmap
-#' @usage plotHeatmap(object, ...)
-#' @export
-NULL
-
-#' @rdname plotHeatmap
-#' @name plotCorrelationHeatmap
-#' @importFrom AcidGenerics plotCorrelationHeatmap
-#' @usage plotCorrelationHeatmap(object, ...)
-#' @export
-NULL
-
-#' @rdname plotHeatmap
-#' @name plotQuantileHeatmap
-#' @importFrom AcidGenerics plotQuantileHeatmap
-#' @usage plotQuantileHeatmap(object, ...)
-#' @export
-NULL
-
-
-
 `plotHeatmap,DESeqAnalysis` <-  # nolint
     function(object, ...) {
         validObject(object)
