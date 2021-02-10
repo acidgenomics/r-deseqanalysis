@@ -83,8 +83,8 @@ which explains how to manually define \code{coef} argument which can
 be used with apeglm \code{\link[DESeq2:lfcShrink]{lfcShrink()}}.
 \item \code{\link[apeglm:apeglm]{apeglm::apeglm()}}.
 \item \code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}}.
-\item \code{\link[stats:model.matrix]{stats::model.matrix()}}.
 \item \code{\link[DESeq2:results]{DESeq2::resultsNames()}}.
 \item \code{\link[DESeq2:DESeq]{DESeq2::DESeq()}}.
+\item \code{stats::model.matrix()}.
 }
 }
