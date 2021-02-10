@@ -10,9 +10,9 @@ Toolkit for performing differential expression with
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://deseqanalysis.acidgenomics.com/}
-  \item \url{https://github.com/acidgenomics/DESeqAnalysis/}
-  \item Report bugs at \url{https://github.com/acidgenomics/DESeqAnalysis/issues/}
+  \item \url{https://r.acidgenomics.com/packages/deseqanalysis/}
+  \item \url{https://github.com/acidgenomics/r-deseqanalysis/}
+  \item Report bugs at \url{https://github.com/acidgenomics/r-deseqanalysis/issues/}
 }
 
 }

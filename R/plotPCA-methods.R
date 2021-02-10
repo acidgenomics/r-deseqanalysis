@@ -13,15 +13,6 @@ NULL
 
 
 
-#' @rdname plotPCA
-#' @name plotPCA
-#' @importFrom BiocGenerics plotPCA
-#' @usage plotPCA(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2020-07-28.
 `plotPCA,DESeqDataSet` <-  # nolint
     function(object, ...) {

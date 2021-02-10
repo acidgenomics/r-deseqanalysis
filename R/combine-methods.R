@@ -1,5 +1,5 @@
 #' @name combine
-#' @inherit BiocGenerics::combine return title
+#' @inherit AcidGenerics::combine
 #' @note Updated 2020-08-04.
 #'
 #' @details
@@ -23,15 +23,6 @@
 #'
 #' object <- combine(x, y)
 #' resultsNames(object)
-NULL
-
-
-
-#' @rdname combine
-#' @name combine
-#' @importFrom BiocGenerics combine
-#' @usage combine(x, y, ...)
-#' @export
 NULL
 
 

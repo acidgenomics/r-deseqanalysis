@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.3.10
-Date: 2020-10-28
+Version: 0.3.11
+Date: 2021-02-09
 Authors@R: c(
     person(
         given = "Michael",
@@ -16,24 +16,22 @@ Authors@R: c(
         role = c("cph", "fnd")
     ))
 URL:
-    https://deseqanalysis.acidgenomics.com/,
-    https://github.com/acidgenomics/DESeqAnalysis/
-BugReports: https://github.com/acidgenomics/DESeqAnalysis/issues/
+    https://r.acidgenomics.com/packages/deseqanalysis/,
+    https://github.com/acidgenomics/r-deseqanalysis/
+BugReports: https://github.com/acidgenomics/r-deseqanalysis/issues/
 License: GPL-3
 Encoding: UTF-8
 LazyData: false
 Depends:
     R (>= 4.0),
-    basejump (>= 0.13.2),
     DESeq2 (>= 1.28)
 Imports:
-    AcidGenerics (>= 0.4.0),
-    AcidPlots (>= 0.3.0),
-    BiocGenerics,
+    AcidGenerics (>= 0.5.9),
+    AcidPlots (>= 0.3.1),
     IRanges,
     S4Vectors,
     SummarizedExperiment,
-    cli (>= 2.0),
+    basejump (>= 0.14.2),
     cowplot (>= 1.0),
     ggplot2 (>= 3.3),
     goalie (>= 0.4.9),
@@ -45,13 +43,10 @@ Imports:
     stringr (>= 1.4),
     utils
 Suggests:
-    BiocStyle,
     apeglm (>= 1.10),
     ashr (>= 2.2),
-    roxygen2,
     testthat,
-    tximport (>= 1.16),
-    viridis
+    tximport (>= 1.16)
 biocViews:
     DataRepresentation,
     DifferentialExpression,

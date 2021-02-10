@@ -5,7 +5,7 @@
 #' @note Updated 2020-10-28.
 #'
 #' @inheritParams AcidRoxygen::params
-#' @inheritParams BiocGenerics::colnames
+#' @inheritParams base::colnames
 #'
 #' @return Varies, dependending on function.
 #'
