@@ -26,15 +26,6 @@ NULL
 
 
 
-#' @rdname alphaSummary
-#' @name alphaSummary
-#' @importFrom AcidGenerics alphaSummary
-#' @usage alphaSummary(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2020-08-04.
 `alphaSummary,DESeqDataSet` <-  # nolint
     function(

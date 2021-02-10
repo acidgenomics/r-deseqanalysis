@@ -1,3 +1,10 @@
+## DESeqAnalysis 0.3.11 (2021-02-10)
+
+### Minor changes
+
+- NAMESPACE updates, simplifying the number of imported packages following
+  the basejump v0.14 release.
+
 ## DESeqAnalysis 0.3.10 (2020-10-28)
 
 ### Major changes

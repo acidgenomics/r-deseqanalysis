@@ -12,25 +12,24 @@
 ## FIXME NEED TO USE ACIDCLI INSTEAD OF CLI HERE.
 
 #' @importClassesFrom DESeq2 DESeqDataSet DESeqTransform
-#' @importClassesFrom SummarizedExperiment RangedSummarizedExperiment
-#'   SummarizedExperiment
-#' @importClassesFrom basejump DataFrameList Tx2Gene missingOrNULL
+#' @importClassesFrom basejump DataFrameList RangedSummarizedExperiment
+#'   SummarizedExperiment Tx2Gene missingOrNULL
 #'
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom DESeq2 DESeq counts design fpkm nbinomWaldTest priorInfo
-#' @importFrom S4Vectors DataFrame SimpleList as.data.frame cbind complete.cases
-#'   cor do.call head mcols mcols<- metadata metadata<- na.omit
-#' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
-#' @importFrom AcidPlots acid_coord_flip acid_geom_label_repel matchLabels
-#'   plotHeatmap scale_color_synesthesia_d plotCounts plotPCA plotUpset
-#' @importFrom basejump Gene2Symbol DataFrameList as_tibble autopadZeros
-#'   camelCase convertSampleIDsToNames decode droplevels import initDir
-#'   interestingGroups<- intersectionMatrix leftJoin makeNames
-#'   mapGenesToRownames markdownHeader markdownList matchesGene2Symbol melt
-#'   metadata2 metadata2<- printString realpath removeNA requireNamespaces
-#'   showSlotInfo snakeCase standardizeCall
-#' @importFrom cowplot draw_plot ggdraw
+#' @importFrom AcidPlots acid_coord_flip acid_geom_label_repel draw_plot ggdraw
+#'   matchLabels plotHeatmap pretty_breaks scale_color_synesthesia_d plotCounts
+#'   plotPCA plotUpset
+#' @importFrom basejump DataFrame DataFrameList Gene2Symbol SimpleList
+#'   as.data.frame as_tibble assays assays<- autopadZeros camelCase
+#'   capture.output cbind colData colData<- complete.cases
+#'   convertSampleIDsToNames cor decode do.call droplevels getS3method head
+#'   import initDir interestingGroups<- intersectionMatrix leftJoin makeNames
+#'   mapGenesToRownames markdownHeader markdownList matchesGene2Symbol mcols
+#'   mcols<- melt metadata metadata<- metadata2 metadata2<- model.matrix na.omit
+#'   packageName packageVersion printString realpath relevel removeNA
+#'   requireNamespaces rowData showSlotInfo snakeCase standardizeCall
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_bar
 #'   geom_density geom_hline geom_point geom_text geom_vline ggplot guides labs
 #'   position_stack scale_color_manual scale_x_continuous scale_y_continuous
@@ -40,11 +39,8 @@
 #'   hasValidDimnames hasValidNames isAFile isAlpha isAny isCharacter isFlag
 #'   isGGScale isHeaderLevel isInRange isInt isNonNegative isNumber isPercentage
 #'   isPositive isScalar isString isSubset validate
-#' @importFrom methods as is new prototype setClass setValidity show slot slot<-
-#'   validObject .hasSlot
+#' @importFrom methods as is new prototype setClass setGeneric setValidity show
+#'   slot slot<- validObject .hasSlot
 #' @importFrom rlang !! sym
-#' @importFrom scales log_breaks pretty_breaks
-#' @importFrom stats model.matrix relevel
 #' @importFrom stringr str_locate_all str_match str_trunc
-#' @importFrom utils capture.output getS3method packageName packageVersion
 NULL

@@ -9,6 +9,13 @@ setGeneric(
 
 
 
+#' @rdname alphaSummary
+#' @name alphaSummary
+#' @importFrom AcidGenerics alphaSummary
+#' @usage alphaSummary(object, ...)
+#' @export
+NULL
+
 #' @rdname combine
 #' @name combine
 #' @importFrom AcidGenerics combine
