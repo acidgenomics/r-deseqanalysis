@@ -24,15 +24,6 @@ NULL
 
 
 
-#' @rdname plotBaseMean
-#' @name plotBaseMean
-#' @importFrom AcidGenerics plotBaseMean
-#' @usage plotBaseMean(object, ...)
-#' @export
-NULL
-
-
-
 ## If outliers have been replaced:
 ## nolint start
 ## > all(rowMeans(counts(dds, normalized=TRUE, replaced=TRUE)) == res$baseMean)

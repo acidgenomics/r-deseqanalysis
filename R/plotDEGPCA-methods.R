@@ -17,15 +17,6 @@ NULL
 
 
 
-#' @rdname plotDEGPCA
-#' @name plotDEGPCA
-#' @importFrom AcidGenerics plotDEGPCA
-#' @usage plotDEGPCA(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2020-08-25.
 `plotDEGPCA,DESeqResults` <-  # nolint
     function(

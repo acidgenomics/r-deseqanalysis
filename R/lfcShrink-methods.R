@@ -11,22 +11,6 @@ NULL
 
 
 
-#' @rdname lfcShrink
-#' @name lfcShrink
-#' @importFrom AcidGenerics lfcShrink
-#' @usage lfcShrink(object, ...)
-#' @export
-NULL
-
-#' @rdname lfcShrink
-#' @name lfcShrink<-
-#' @importFrom AcidGenerics lfcShrink<-
-#' @usage lfcShrink(object, ...) <- value
-#' @export
-NULL
-
-
-
 ## Updated 2020-08-04.
 `lfcShrink,DESeqDataSet` <-  # nolint
     function(object, ...) {

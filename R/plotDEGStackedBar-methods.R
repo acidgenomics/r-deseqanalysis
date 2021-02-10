@@ -22,15 +22,6 @@ NULL
 
 
 
-#' @rdname plotDEGStackedBar
-#' @name plotDEGStackedBar
-#' @importFrom AcidGenerics plotDEGStackedBar
-#' @usage plotDEGStackedBar(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2020-09-21.
 `plotDEGStackedBar,DESeqAnalysis` <-  # nolint
     function(

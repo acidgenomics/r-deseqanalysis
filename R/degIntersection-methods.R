@@ -45,15 +45,6 @@ NULL
 
 
 
-#' @rdname degIntersection
-#' @name degIntersection
-#' @importFrom AcidGenerics degIntersection
-#' @usage degIntersection(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2020-10-28.
 `degIntersection,DESeqAnalysis` <-  # nolint
     function(

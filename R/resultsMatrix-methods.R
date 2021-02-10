@@ -31,15 +31,6 @@ NULL
 
 
 
-#' @rdname resultsMatrix
-#' @name resultsMatrix
-#' @importFrom AcidGenerics resultsMatrix
-#' @usage resultsMatrix(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2020-08-19.
 `resultsMatrix,DESeqAnalysis` <-  # nolint
     function(

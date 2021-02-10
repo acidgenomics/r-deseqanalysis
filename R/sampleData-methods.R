@@ -14,15 +14,6 @@ NULL
 
 
 
-#' @rdname sampleData
-#' @name sampleData
-#' @importFrom AcidGenerics sampleData
-#' @usage sampleData(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2019-08-20.
 `sampleData,DESeqAnalysis` <-  # nolint
     function(object) {

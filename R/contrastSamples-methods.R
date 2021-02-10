@@ -26,15 +26,6 @@ NULL
 
 
 
-#' @rdname contrastSamples
-#' @name contrastSamples
-#' @importFrom AcidGenerics contrastSamples
-#' @usage contrastSamples(object, ...)
-#' @export
-NULL
-
-
-
 ## This has been split out to an internal function, so we can support
 ## interaction effect (difference of differences) contrasts more easily.
 ## Updated 2020-08-04.

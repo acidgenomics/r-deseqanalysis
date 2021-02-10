@@ -16,15 +16,6 @@ NULL
 
 
 
-#' @rdname deg
-#' @name deg
-#' @importFrom AcidGenerics deg
-#' @usage deg(object, ...)
-#' @export
-NULL
-
-
-
 ## Get differential expressed genes (DEGs) from DESeqResults table.
 ##
 ## Note that we're not sorting the identifiers here by LFC or P value.

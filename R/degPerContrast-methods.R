@@ -23,15 +23,6 @@ NULL
 
 
 
-#' @rdname degPerContrast
-#' @name degPerContrast
-#' @importFrom AcidGenerics degPerContrast
-#' @usage degPerContrast(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2020-09-21.
 `degPerContrast,DESeqAnalysis` <-  # nolint
     function(

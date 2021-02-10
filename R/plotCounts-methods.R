@@ -24,15 +24,6 @@ NULL
 
 
 
-#' @rdname plotCounts
-#' @name plotCounts
-#' @importFrom AcidGenerics plotCounts
-#' @usage plotCounts(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2019-11-18.
 `plotCounts,DESeqDataSet` <-  # nolint
     function(object, ...) {

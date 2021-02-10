@@ -20,15 +20,6 @@ NULL
 
 
 
-#' @rdname export
-#' @name export
-#' @importFrom AcidGenerics export
-#' @usage export(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2019-11-12.
 .exportResultsMatrices <- function(object, dir, compress) {
     assert(

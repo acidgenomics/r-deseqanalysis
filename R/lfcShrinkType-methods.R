@@ -12,15 +12,6 @@ NULL
 
 
 
-#' @rdname lfcShrinkType
-#' @name lfcShrinkType
-#' @importFrom AcidGenerics lfcShrinkType
-#' @usage lfcShrinkType(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2020-08-04.
 `lfcShrinkType,DESeqResults` <-  # nolint
     function(object) {

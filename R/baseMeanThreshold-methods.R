@@ -13,22 +13,6 @@ NULL
 
 
 
-#' @rdname baseMeanThreshold
-#' @name baseMeanThreshold
-#' @importFrom AcidGenerics baseMeanThreshold
-#' @usage baseMeanThreshold(object, ...)
-#' @export
-NULL
-
-#' @rdname baseMeanThreshold
-#' @name baseMeanThreshold<-
-#' @importFrom AcidGenerics baseMeanThreshold<-
-#' @usage baseMeanThreshold(object, ...) <- value
-#' @export
-NULL
-
-
-
 ## Updated 2020-08-04.
 `baseMeanThreshold,DESeqAnalysis` <-  # nolint
     function(object) {

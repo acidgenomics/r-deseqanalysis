@@ -18,16 +18,7 @@ NULL
 
 
 
-#' @rdname correlation
-#' @name correlation
-#' @importFrom basejump correlation
-#' @usage correlation(x, y, ...)
-#' @export
-NULL
-
-
-
-method <- formals(stats::cor)[["method"]]
+method <- formals(basejump::cor)[["method"]]
 
 
 

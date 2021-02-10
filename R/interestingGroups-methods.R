@@ -18,22 +18,6 @@ NULL
 
 
 
-#' @rdname interestingGroups
-#' @name interestingGroups
-#' @importFrom basejump interestingGroups
-#' @usage interestingGroups(object, ...)
-#' @export
-NULL
-
-#' @rdname interestingGroups
-#' @name interestingGroups<-
-#' @importFrom basejump interestingGroups<-
-#' @usage interestingGroups(object, ...)  <- value
-#' @export
-NULL
-
-
-
 ## Updated 2020-08-04.
 `interestingGroups,DESeqAnalysis` <-  # nolint
     function(object) {

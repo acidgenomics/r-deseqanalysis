@@ -12,15 +12,6 @@ NULL
 
 
 
-#' @rdname transformType
-#' @name transformType
-#' @importFrom AcidGenerics transformType
-#' @usage transformType(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2019-07-23.
 `transformType,DESeqTransform` <-  # nolint
     function(object) {
