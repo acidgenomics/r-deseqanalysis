@@ -61,7 +61,7 @@ ggplot2 labels.
 See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
 }
 \value{
-\code{ggplot} or \code{DataFrame}.
+\code{ggplot}.
 }
 \description{
 Principal component analysis plot
@@ -95,6 +95,15 @@ a way to look at how samples are clustering.
 
 }
 
+\section{\code{SingleCellExperiment}}{
+
+
+
+The \code{SingleCellExperiment} method that visualizes dimension reduction data
+slotted in \code{reducedDims()} is defined in pointillism package.
+
+}
+
 \examples{
 data(deseq)
 
@@ -105,12 +114,7 @@ plotPCA(deseq)
 Jolliffe, et al., 2002.
 }
 \seealso{
-\code{DESeq2::plotPCA()}.
-
-We're using a modified version of the \code{DESeqTransform} method here.\preformatted{methodFunction(
-    f = "plotPCA",
-    signature = "DESeqTransform",
-    package = "DESeq2"
-)
+\itemize{
+\item \code{DESeq2::plotPCA()}.
 }
 }
