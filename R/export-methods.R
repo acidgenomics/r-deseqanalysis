@@ -1,11 +1,11 @@
 #' @name export
-#' @inherit AcidGenerics::export
-#' @note Size-factor normalized coutns and FPKM values are calculated on the fly
-#' and exported automatically.
-#' @note Updated 2020-08-04.
+#' @inherit AcidExperiment::export
+#' @note Updated 2021-02-10.
 #'
-#' @inheritParams pipette::export
-#' @inheritParams params
+#' @details
+#' Size-factor normalized coutns and FPKM values are calculated on the fly and
+#' exported automatically.
+#'
 #' @param ... Additional arguments.
 #'
 #' @examples
