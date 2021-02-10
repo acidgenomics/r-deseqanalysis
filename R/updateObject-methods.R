@@ -1,6 +1,6 @@
 #' @name updateObject
-#' @inherit BiocGenerics::updateObject
-#' @note Updated 2020-08-04.
+#' @inherit AcidGenerics::updateObject
+#' @note Updated 2021-02-10.
 #'
 #' @section `DESeqAnalysis`:
 #'

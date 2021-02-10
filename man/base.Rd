@@ -22,15 +22,9 @@
 \arguments{
 \item{x}{Object.}
 
-\item{do.NULL}{
-    See \code{?base::\link[base]{rownames}} for a description of
-    these arguments.
-  }
+\item{do.NULL}{logical. If \code{FALSE} and names are \code{NULL}, names are created.}
 
-\item{prefix}{
-    See \code{?base::\link[base]{rownames}} for a description of
-    these arguments.
-  }
+\item{prefix}{for created names.}
 }
 \value{
 Varies, dependending on function.

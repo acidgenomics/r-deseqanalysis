@@ -1,6 +1,6 @@
 #' @name plotMA
+#' @inherit AcidGenerics::plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
-#' @inherit BiocGenerics::plotMA title
 #' @note Updated 2020-08-05.
 #'
 #' @details
@@ -52,15 +52,6 @@
 #' ## Label genes manually.
 #' ## Note that either gene IDs or names (symbols) are supported.
 #' plotMA(deseq, i = 1L, genes = genes)
-NULL
-
-
-
-#' @rdname plotMA
-#' @name plotMA
-#' @importFrom BiocGenerics plotMA
-#' @usage plotMA(object, ...)
-#' @export
 NULL
 
 
