@@ -55,7 +55,7 @@ matchMetadataToFiles <- function(metadata, files) {
     ## Return the sanitized name of file if defined.
     ## This gets slotted by `prepareTximportFiles()` return.
     if (hasNames(files)) {
-        cli_alert("Returning {.var names(files)} in data frame.")
+        alert("Returning {.var names(files)} in data frame.")
         fileSampleNames <- names(files)
     }
     map <- data.frame(

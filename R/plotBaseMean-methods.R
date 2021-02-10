@@ -64,7 +64,7 @@ NULL
             ## Inform the user about how many zero count features were dropped.
             if (any(!keep)) {
                 n <- sum(!keep, na.rm = TRUE)
-                cli_alert_info(sprintf(
+                alertInfo(sprintf(
                     "Removing %d zero-count %s.",
                     n,
                     ngettext(
@@ -79,13 +79,13 @@ NULL
         ## Log transform.
         if (!identical(trans, "identity")) {
             if (isTRUE(summary)) {
-                cli_alert_info(paste(
+                alertInfo(paste(
                     "Summary prior to transformation:",
                     printString(round(summary(object), digits = 2L)),
                     sep = "\n"
                 ))
             }
-            cli_alert(sprintf("Applying '%s(x + 1)' transformation.", trans))
+            alert(sprintf("Applying '%s(x + 1)' transformation.", trans))
             fun <- get(
                 x = trans,
                 envir = asNamespace("base"),
@@ -96,7 +96,7 @@ NULL
         }
         if (isTRUE(summary)) {
             summaryValues <- summary(object)
-            cli_alert_info(paste(
+            alertInfo(paste(
                 "Summary after transformation:",
                 printString(round(summaryValues, digits = 2L)),
                 sep = "\n"

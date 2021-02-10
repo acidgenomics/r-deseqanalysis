@@ -59,7 +59,7 @@ NULL
         } else {
             caption <- resultsNames(object)[[1L]]
         }
-        cli_alert_info(caption)
+        alertInfo(caption)
         data <- vapply(
             X = alpha,
             FUN = function(alpha) {

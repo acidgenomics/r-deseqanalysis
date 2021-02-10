@@ -79,7 +79,7 @@
         table = resultsNames
     )
     assert(isInt(coef), !is.na(coef))
-    cli_dl(c(
+    dl(c(
         "contrast" = as.character(resultsNames[[coef]]),
         "coef" = as.character(coef)
     ))
@@ -90,7 +90,7 @@
 
 ## Updated 2020-08-04.
 .ddsMsg <- function() {
-    cli_alert_info(sprintf(
+    alertInfo(sprintf(
         "Generating DESeqDataSet with DESeq2 %s.",
         packageVersion("DESeq2")
     ))

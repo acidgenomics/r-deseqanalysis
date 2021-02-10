@@ -113,7 +113,7 @@ NULL
                 )
             }
             status <- paste0(status, ")")
-            cli_alert_info(status)
+            alertInfo(status)
         }
         deg
     }

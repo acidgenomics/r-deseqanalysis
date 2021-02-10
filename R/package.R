@@ -9,8 +9,6 @@
 
 
 
-## FIXME NEED TO USE ACIDCLI INSTEAD OF CLI HERE.
-
 #' @importClassesFrom DESeq2 DESeqDataSet DESeqTransform
 #' @importClassesFrom basejump DataFrameList RangedSummarizedExperiment
 #'   SummarizedExperiment Tx2Gene missingOrNULL
@@ -21,10 +19,10 @@
 #' @importFrom AcidPlots acid_coord_flip acid_geom_label_repel draw_plot ggdraw
 #'   matchLabels plotHeatmap pretty_breaks scale_color_synesthesia_d plotCounts
 #'   plotPCA plotUpset
-#' @importFrom basejump DataFrame DataFrameList Gene2Symbol SimpleList
-#'   as.data.frame as_tibble assays assays<- autopadZeros camelCase
-#'   capture.output cbind colData colData<- complete.cases
-#'   convertSampleIDsToNames cor decode do.call droplevels formalsList
+#' @importFrom basejump DataFrame DataFrameList Gene2Symbol SimpleList alert
+#'   alertInfo alertWarning as.data.frame as_tibble assays assays<- autopadZeros
+#'   camelCase capture.output cbind colData colData<- complete.cases
+#'   convertSampleIDsToNames cor decode dl do.call droplevels formalsList
 #'   getS3method head import initDir interestingGroups<- intersectionMatrix
 #'   leftJoin makeNames mapGenesToRownames markdownHeader markdownList
 #'   matchesGene2Symbol mcols mcols<- melt metadata metadata<- metadata2
