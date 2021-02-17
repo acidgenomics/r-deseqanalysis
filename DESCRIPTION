@@ -36,6 +36,7 @@ Imports:
 Suggests:
     apeglm (>= 1.12),
     ashr (>= 2.2),
+    knitr,
     testthat,
     tximport (>= 1.18)
 biocViews:
