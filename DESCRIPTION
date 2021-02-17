@@ -24,22 +24,21 @@ Encoding: UTF-8
 LazyData: false
 Depends:
     R (>= 4.0),
-    DESeq2 (>= 1.28)
+    DESeq2 (>= 1.30)
 Imports:
-    AcidGenerics (>= 0.5.10),
-    AcidPlots (>= 0.3.2),
-    basejump (>= 0.14.3),
+    AcidGenerics (>= 0.5.14),
+    AcidPlots (>= 0.3.3),
+    basejump (>= 0.14.8),
     ggplot2 (>= 3.3),
     goalie (>= 0.4.14),
     methods,
     rlang (>= 0.4),
     stringr (>= 1.4)
 Suggests:
-    apeglm (>= 1.10),
+    apeglm (>= 1.12),
     ashr (>= 2.2),
-    knitr,
     testthat,
-    tximport (>= 1.16)
+    tximport (>= 1.18)
 biocViews:
     DataRepresentation,
     DifferentialExpression,
@@ -50,5 +49,4 @@ biocViews:
     Visualization
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-VignetteBuilder: knitr
 Additional_repositories: https://r.acidgenomics.com
