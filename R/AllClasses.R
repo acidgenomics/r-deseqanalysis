@@ -26,7 +26,7 @@
 #'
 #' @author Michael Steinbaugh
 #' @export
-#' @note Updated 2020-05-11.
+#' @note Updated 2021-02-17.
 #'
 #' @slot data `DESeqDataSet`.
 #' @slot transform `DESeqTransform`.
@@ -64,12 +64,6 @@ setValidity(
         ok <- validate(
             identical(dimnames(data), dimnames(transform)),
             msg = "DESeqDataSet and DESeqTransform must correspond."
-        )
-        if (!isTRUE(ok)) return(ok)
-        ok <- validate(
-            hasNames(mcols(rowRanges(data))),
-            hasNames(mcols(rowRanges(transform))),
-            msg = "Gene metadata must be defined in rowRanges."
         )
         if (!isTRUE(ok)) return(ok)
         ok <- validate(

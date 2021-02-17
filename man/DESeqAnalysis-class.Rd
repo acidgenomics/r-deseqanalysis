@@ -29,7 +29,7 @@ those defined in \code{results}. Otherwise, can set as empty list (\code{list()}
 }}
 
 \note{
-Updated 2020-05-11.
+Updated 2021-02-17.
 }
 \section{DESeqDataSet}{
 

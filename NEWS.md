@@ -1,3 +1,10 @@
+## DESeqAnalysis 0.3.12 (2021-02-17)
+
+### Minor changes
+
+- `DESeqAnalysis`: Relaxed check for gene identifiers in `mcols` of `rowRanges`
+  of nested `DESeqDataSet` inside data slot. Resolves issue #61.
+
 ## DESeqAnalysis 0.3.11 (2021-02-10)
 
 ### Minor changes
