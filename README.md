@@ -46,7 +46,6 @@ docker run -it \
     R
 ```
 
-[biocmanager]: https://cran.r-project.org/package=BiocManager
 [bioconda]: https://bioconda.github.io/
 [bioconductor]: https://bioconductor.org/
 [conda]: https://conda.io/
