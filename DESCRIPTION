@@ -19,7 +19,7 @@ URL:
     https://r.acidgenomics.com/packages/deseqanalysis/,
     https://github.com/acidgenomics/r-deseqanalysis/
 BugReports: https://github.com/acidgenomics/r-deseqanalysis/issues/
-License: GPL-3
+License: AGPL-3
 Encoding: UTF-8
 LazyData: false
 Depends:
