@@ -4,6 +4,8 @@
 
 - `DESeqAnalysis`: Relaxed check for gene identifiers in `mcols` of `rowRanges`
   of nested `DESeqDataSet` inside data slot. Resolves issue #61.
+- Updated internal dependencies. Now requiring basejump v0.14.8+, which
+  also depends on at least Bioconductor 3.12.
 
 ## DESeqAnalysis 0.3.11 (2021-02-10)
 
