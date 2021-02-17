@@ -36,7 +36,7 @@ R
 ### [Docker][] method
 
 ```sh
-image="acidgenomics/r-rnaseq"
+image="acidgenomics/r-deseqanalysis"
 workdir="/mnt/work"
 docker pull "$image"
 docker run -it \
