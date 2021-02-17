@@ -16,9 +16,9 @@
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom DESeq2 DESeq counts design fpkm nbinomWaldTest priorInfo
-#' @importFrom AcidPlots !! acid_coord_flip acid_geom_label_repel draw_plot ggdraw
-#'   matchLabels plotHeatmap pretty_breaks scale_color_synesthesia_d plotCounts
-#'   plotPCA plotUpset sym
+#' @importFrom AcidPlots !! acid_coord_flip acid_geom_label_repel draw_plot
+#'   ggdraw matchLabels plotHeatmap pretty_breaks scale_color_synesthesia_d
+#'   plotCounts plotPCA plotUpset sym
 #' @importFrom basejump DataFrame DataFrameList Gene2Symbol SimpleList alert
 #'   alertInfo alertWarning as.data.frame as_tibble assays assays<- autopadZeros
 #'   camelCase capture.output cbind colData colData<- complete.cases
