@@ -207,35 +207,44 @@
 
 
 
-## FIXME CAN WE SHOW DOWN / UP MORE CLEARLY?
-
-## Updated 2021-03-03.
+#' Threshold label that goes in subtitle for plot on DESeqResults
+#'
+#' @note Updated 2021-03-03.
+#' @noRd
 .thresholdLabel <- function(
-    data,
+    object,
     direction,
     alphaThreshold,
     lfcShrinkType,
     lfcThreshold,
     baseMeanThreshold
 ) {
-    assert(
-        is(data, "DataFrame"),
-        assert(isSubset("isDeg", colnames(data)))
-    )
-
-
-
-
+    assert(is(object, "DESeqResults"))
     sep <- "; "
-    if (is.null(n)) {
-        x <- NULL
-    } else {
-        x <- paste0("n = ", n, sep)
+    n <- vapply(
+        X = switch(
+            EXPR = direction,
+            "both" = c("up", "down"),
+            direction
+        ),
+        FUN = function(direction) {
+            length(deg(
+                object = object,
+                direction = direction,
+                alphaThreshold = alphaThreshold,
+                lfcThreshold = lfcThreshold,
+                baseMeanThreshold = baseMeanThreshold,
+                quiet = TRUE
+            ))
+        },
+        FUN.VALUE = integer(1L),
+        USE.NAMES = TRUE
+    )
+    x <- paste("n", "=", sum(n))
+    if (sum(n) > 0L) {
+        x <- paste0(x, sep, paste(names(n), n, sep = ": ", collapse = sep))
     }
-    if (direction != "both") {
-        x <- paste0(x, "direction: ", direction, sep)
-    }
-    x <- paste0(x, "alpha < ", alphaThreshold)
+    x <- paste0(x, sep, "alpha < ", alphaThreshold)
     if (lfcThreshold > 0L) {
         x <- paste0(x, sep, "lfc >= ", lfcThreshold)
     }
