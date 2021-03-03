@@ -23,6 +23,8 @@ plotVolcano(object, ...)
   pointSize = 2L,
   pointAlpha = 0.8,
   ylim = 1e-10,
+  labels = list(title = NULL, subtitle = NULL, x = "log2 fold change", y =
+    "-log10 adj p value"),
   histograms = FALSE,
   return = c("ggplot", "DataFrame")
 )
@@ -72,6 +74,10 @@ Alpha transparency level.}
 Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets
 containing highly significant P values (e.g. \code{1e-100}).}
 
+\item{labels}{\code{list}.
+ggplot2 labels.
+See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
+
 \item{histograms}{\code{logical(1)}.
 Show LFC and P value histograms.}
 
@@ -100,7 +106,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2020-08-05.
+Updated 2021-03-03.
 }
 \examples{
 data(deseq)

@@ -5,6 +5,7 @@
 \alias{lfcThreshold<-}
 \alias{lfcThreshold,DESeqResults-method}
 \alias{lfcThreshold,DESeqAnalysis-method}
+\alias{lfcThreshold<-,DESeqResults,numeric-method}
 \alias{lfcThreshold<-,DESeqAnalysis,numeric-method}
 \alias{lfcThreshold<-,DESeqAnalysis,NULL-method}
 \title{Log2 fold change threshold}
@@ -16,6 +17,8 @@ lfcThreshold(object, ...) <- value
 \S4method{lfcThreshold}{DESeqResults}(object)
 
 \S4method{lfcThreshold}{DESeqAnalysis}(object)
+
+\S4method{lfcThreshold}{DESeqResults,numeric}(object) <- value
 
 \S4method{lfcThreshold}{DESeqAnalysis,numeric}(object) <- value
 
