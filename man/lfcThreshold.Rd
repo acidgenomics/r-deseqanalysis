@@ -34,8 +34,11 @@ lfcThreshold(object, ...) <- value
 \description{
 Log2 fold change threshold
 }
+\details{
+Assumes \code{0} by default if unset.
+}
 \note{
-Updated 2019-08-06.
+Updated 2021-03-03.
 }
 \examples{
 data(deseq)

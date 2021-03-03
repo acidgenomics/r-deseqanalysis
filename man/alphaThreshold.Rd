@@ -35,6 +35,9 @@ Alpha cutoff level.
 \description{
 Alpha threshold
 }
+\details{
+Assumes \code{0.01} by default if unset.
+}
 \note{
 Updated 2020-08-04.
 }
