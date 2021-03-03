@@ -22,7 +22,9 @@ plotMA(object, ...)
     AcidPlots::lightPalette[["orange"]], nonsignificant =
     AcidPlots::lightPalette[["gray"]]),
   pointSize = 2L,
-  pointAlpha = 0.8
+  pointAlpha = 0.8,
+  labels = list(title = NULL, subtitle = NULL, x =
+    "mean expression across all samples", y = "log2 fold change")
 )
 
 \S4method{plotMA}{DESeqAnalysis}(object, i, ...)
@@ -65,6 +67,10 @@ In the range of 1-3 is generally recommended.}
 
 \item{pointAlpha}{\code{numeric(1)} (\code{0}-\code{1}).
 Alpha transparency level.}
+
+\item{labels}{\code{list}.
+ggplot2 labels.
+See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
 
 \item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
 \code{character} vectors, empty (\code{missing}), or \code{NULL}.
