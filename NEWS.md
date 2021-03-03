@@ -1,3 +1,11 @@
+## DESeqAnalysis 0.3.13 (UNRELEASED)
+
+### Minor changes
+
+- Improved information in subtitles for MA, volcano, and other DEG plots.
+- `alphaThreshold` and `lfcThreshold` return sensible defaults for minimal
+  `DESeqResults` objects created by coercion of a `DataFrame` directly.
+
 ## DESeqAnalysis 0.3.12 (2021-02-17)
 
 ### Minor changes
