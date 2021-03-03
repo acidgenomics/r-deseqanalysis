@@ -1,11 +1,12 @@
-## FIXME THIS SHOULD RETURN A DEFAULT INSTEAD OF ERRORING?
-
-
-
 #' @name alphaThreshold
 #' @inherit AcidGenerics::alphaThreshold
 #' @note Updated 2020-08-04.
+#'
+#' @details
+#' Assumes `0.01` by default if unset.
+#'
 #' @param ... Additional arguments.
+#'
 #' @examples
 #' data(deseq)
 #'
@@ -17,10 +18,11 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2021-03-03.
 `alphaThreshold,DESeqResults` <-  # nolint
     function(object) {
         x <- metadata(object)[["alpha"]]
+        if (is.null(x)) x <- 0.01
         assert(isAlpha(x))
         x
     }

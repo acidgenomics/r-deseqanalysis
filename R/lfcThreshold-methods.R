@@ -1,7 +1,12 @@
 #' @name lfcThreshold
 #' @inherit AcidGenerics::lfcThreshold
-#' @note Updated 2019-08-06.
+#' @note Updated 2021-03-03.
+#'
+#' @details
+#' Assumes `0` by default if unset.
+#'
 #' @param ... Additional arguments.
+#'
 #' @examples
 #' data(deseq)
 #'
@@ -12,10 +17,11 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2021-03-03.
 `lfcThreshold,DESeqResults` <-  # nolint
     function(object) {
         x <- metadata(object)[["lfcThreshold"]]
+        if (is.null(x)) x <- 0L
         assert(isNumber(x), isNonNegative(x))
         x
     }
