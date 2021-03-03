@@ -219,9 +219,8 @@ NULL
             )
         }
         if (is.null(labels[["subtitle"]])) {
-            ## FIXME SHOW NUMBER DOWN AND UP.
             labels[["subtitle"]] <- .thresholdLabel(
-                n = sum(data[["isDeg"]] != 0L),
+                object = object,
                 direction = direction,
                 alphaThreshold = alphaThreshold,
                 lfcShrinkType = lfcShrinkType,
