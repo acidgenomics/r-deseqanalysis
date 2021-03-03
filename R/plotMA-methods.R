@@ -1,3 +1,7 @@
+## FIXME THIS IS ERRORING FOR MINIMAL DESEQRESULTS.
+
+
+
 #' @name plotMA
 #' @inherit AcidGenerics::plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
