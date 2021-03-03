@@ -1,6 +1,6 @@
 #' @name plotDEGHeatmap
 #' @inherit AcidGenerics::plotDEGHeatmap
-#' @note Updated 2020-08-05.
+#' @note Updated 2021-03-03.
 #'
 #' @inheritParams AcidPlots::plotHeatmap
 #' @inheritParams AcidRoxygen::params
@@ -24,7 +24,7 @@ NULL
 ## This method is used in F1000 paper and needs to be included. Note that in
 ## newer versions of bcbioRNASeq, this step won't work because we've slotted the
 ## rlog/vst counts in as a matrix instead of DESeqTransform.
-## Updated 2020-08-04.
+## Updated 2021-03-03.
 `plotDEGHeatmap,DESeqResults` <-  # nolint
     function(
         object,
@@ -85,9 +85,8 @@ NULL
             title <- NULL
         }
         if (isString(title) && isTRUE(subtitle)) {
-            ## FIXME REWORK THIS.
             subtitle <- .thresholdLabel(
-                n = length(deg),
+                object = object,
                 direction = direction,
                 alphaThreshold = alphaThreshold,
                 lfcShrinkType = lfcShrinkType,

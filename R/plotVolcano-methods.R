@@ -1,3 +1,7 @@
+## FIXME Need to gate LFC at +/- 10 here by default.
+
+
+
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit AcidGenerics::plotVolcano
@@ -261,9 +265,8 @@ NULL
             )
         }
         if (is.null(labels[["subtitle"]])) {
-            ## FIXME SHOW NUMBER DOWN AND UP.
             labels[["subtitle"]] <- .thresholdLabel(
-                n = sum(data[["isDeg"]] != 0L),
+                object = object,
                 direction = direction,
                 alphaThreshold = alphaThreshold,
                 lfcShrinkType = lfcShrinkType,

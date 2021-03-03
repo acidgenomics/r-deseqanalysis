@@ -1,3 +1,7 @@
+## FIXME Need to gate LFC at +/- 10 here by default.
+
+
+
 #' @name plotMA
 #' @inherit AcidGenerics::plotMA
 #' @author Michael Steinbaugh, Rory Kirchner

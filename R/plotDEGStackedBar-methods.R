@@ -2,7 +2,7 @@
 #'
 #' @name plotDEGStackedBar
 #' @inherit AcidGenerics::plotDEGStackedBar
-#' @note Updated 2020-09-21.
+#' @note Updated 2021-03-03.
 #'
 #' @inheritParams degPerContrast
 #' @inheritParams AcidRoxygen::params
@@ -22,7 +22,7 @@ NULL
 
 
 
-## Updated 2020-09-21.
+## Updated 2021-03-03.
 `plotDEGStackedBar,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -83,9 +83,8 @@ NULL
             y = "differentially expressed genes",
             fill = "direction",
             title = "Differentially expressed genes per contrast",
-            ## FIXME REWORK THIS.
             subtitle = .thresholdLabel(
-                n = NULL,
+                object = object,
                 direction = direction,
                 alphaThreshold = alphaThreshold(object),
                 lfcShrinkType = lfcShrinkType(object),

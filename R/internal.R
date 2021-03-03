@@ -219,32 +219,38 @@
     lfcThreshold,
     baseMeanThreshold
 ) {
-    assert(is(object, "DESeqResults"))
+    assert(isAny(object, c("DESeqAnalysis", "DESeqResults")))
+    x <- character()
     sep <- "; "
-    n <- vapply(
-        X = switch(
-            EXPR = direction,
-            "both" = c("up", "down"),
-            direction
-        ),
-        FUN = function(direction) {
-            length(deg(
-                object = object,
-                direction = direction,
-                alphaThreshold = alphaThreshold,
-                lfcThreshold = lfcThreshold,
-                baseMeanThreshold = baseMeanThreshold,
-                quiet = TRUE
-            ))
-        },
-        FUN.VALUE = integer(1L),
-        USE.NAMES = TRUE
-    )
-    x <- paste("n", "=", sum(n))
-    if (direction == "both" && sum(n) > 0L) {
-        x <- paste0(x, sep, paste(names(n), n, sep = ": ", collapse = sep))
+    if (is(object, "DESeqResults")) {
+        n <- vapply(
+            X = switch(
+                EXPR = direction,
+                "both" = c("up", "down"),
+                direction
+            ),
+            FUN = function(direction) {
+                length(deg(
+                    object = object,
+                    direction = direction,
+                    alphaThreshold = alphaThreshold,
+                    lfcThreshold = lfcThreshold,
+                    baseMeanThreshold = baseMeanThreshold,
+                    quiet = TRUE
+                ))
+            },
+            FUN.VALUE = integer(1L),
+            USE.NAMES = TRUE
+        )
+        x <- paste0(x, paste("n", "=", sum(n)))
+        if (direction == "both" && sum(n) > 0L) {
+            x <- paste0(x, sep, paste(names(n), n, sep = ": ", collapse = sep))
+        } else {
+            x <- paste0(x, " (", direction, ")")
+        }
+        x <- paste0(x, sep)
     }
-    x <- paste0(x, sep, "alpha < ", alphaThreshold)
+    x <- paste0(x, "alpha < ", alphaThreshold)
     if (lfcThreshold > 0L) {
         x <- paste0(x, sep, "lfc >= ", lfcThreshold)
     }
