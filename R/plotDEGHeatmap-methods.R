@@ -85,6 +85,7 @@ NULL
             title <- NULL
         }
         if (isString(title) && isTRUE(subtitle)) {
+            ## FIXME REWORK THIS.
             subtitle <- .thresholdLabel(
                 n = length(deg),
                 direction = direction,

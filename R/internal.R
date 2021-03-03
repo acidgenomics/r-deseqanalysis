@@ -1,14 +1,17 @@
 #' Calculate a numeric vector to define the colors
+#'
 #' @note Updated 2020-08-04.
+#' @noRd
+#'
 #' @details
 #' - test: P value or S value.
 #' - lfc: log2 fold change cutoff.
+#'
 #' @return `integer`.
 #' - `-1`: downregulated
 #' -  `0`: not significant
 #' -  `1`: upregulated
-#' @noRd
-.addIsDECol <- function(
+.addIsDegCol <- function(
     data,
     alphaCol = "padj",
     alphaThreshold,
@@ -19,7 +22,7 @@
 ) {
     cols <- c(alphaCol, lfcCol, baseMeanCol)
     assert(isSubset(cols, colnames(data)))
-    isDE <- mapply(
+    isDeg <- mapply(
         test = data[[alphaCol]],
         lfc = data[[lfcCol]],
         baseMean = data[[baseMeanCol]],
@@ -54,8 +57,7 @@
         SIMPLIFY = TRUE,
         USE.NAMES = FALSE
     )
-    isDE <- as.factor(isDE)
-    data[["isDE"]] <- isDE
+    data[["isDeg"]] <- as.factor(isDeg)
     data
 }
 
@@ -205,15 +207,25 @@
 
 
 
-## Updated 2020-08-04.
+## FIXME CAN WE SHOW DOWN / UP MORE CLEARLY?
+
+## Updated 2021-03-03.
 .thresholdLabel <- function(
-    n,
+    data,
     direction,
     alphaThreshold,
     lfcShrinkType,
     lfcThreshold,
     baseMeanThreshold
 ) {
+    assert(
+        is(data, "DataFrame"),
+        assert(isSubset("isDeg", colnames(data)))
+    )
+
+
+
+
     sep <- "; "
     if (is.null(n)) {
         x <- NULL

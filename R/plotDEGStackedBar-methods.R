@@ -83,6 +83,7 @@ NULL
             y = "differentially expressed genes",
             fill = "direction",
             title = "Differentially expressed genes per contrast",
+            ## FIXME REWORK THIS.
             subtitle = .thresholdLabel(
                 n = NULL,
                 direction = direction,

@@ -1,11 +1,7 @@
-## FIXME THIS IS ERRORING FOR MINIMAL DESEQRESULTS.
-
-
-
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit AcidGenerics::plotVolcano
-#' @note Updated 2020-08-05.
+#' @note Updated 2021-03-03.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -80,7 +76,15 @@ NULL
         pointSize = 2L,
         pointAlpha = 0.8,
         ylim = 1e-10,
+        ## NOTE Consider reworking the NULL as TRUE here?
+        labels = list(
+            title = NULL,
+            subtitle = NULL,
+            x = "log2 fold change",
+            y = "-log10 adj p value"
+        ),
         histograms = FALSE,
+        ## NOTE Consider removing this option?
         return = c("ggplot", "DataFrame")
     ) {
         validObject(object)
@@ -132,7 +136,14 @@ NULL
             isInRange(ylim, lower = 1e-100, upper = 1e-3),
             isFlag(histograms)
         )
+        if (isTRUE(histograms)) {
+            assert(identical(return, "ggplot"))
+        }
         direction <- match.arg(direction)
+        labels <- matchLabels(
+            labels = labels,
+            choices = eval(formals()[["labels"]])
+        )
         return <- match.arg(return)
         data <- as(object, "DataFrame")
         data <- camelCase(data, strict = TRUE)
@@ -152,14 +163,14 @@ NULL
             order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE
         ]
         data[["rank"]] <- seq_len(nrow(data))
-        data <- .addIsDECol(
+        data <- .addIsDegCol(
             data = data,
             alphaCol = alphaCol,
             alphaThreshold = alphaThreshold,
             lfcThreshold = lfcThreshold,
             baseMeanThreshold = baseMeanThreshold
         )
-        assert(isSubset(c("isDE", "rank", "rankScore"), colnames(data)))
+        assert(isSubset(c("isDeg", "rank", "rankScore"), colnames(data)))
         ## Apply directional filtering, if desired.
         if (direction == "up") {
             keep <- which(data[[lfcCol]] > 0L)
@@ -172,7 +183,6 @@ NULL
         if (identical(return, "DataFrame")) {
             return(data)
         }
-
         ## LFC density ---------------------------------------------------------
         lfcHist <- ggplot(
             data = as_tibble(data, rownames = NULL),
@@ -197,7 +207,6 @@ NULL
                 axis.text.y = element_blank(),
                 axis.ticks.y = element_blank()
             )
-
         ## P value density -----------------------------------------------------
         pvalueHist <- ggplot(
             data = as_tibble(data, rownames = NULL),
@@ -222,14 +231,13 @@ NULL
                 axis.text.y = element_blank(),
                 axis.ticks.y = element_blank()
             )
-
         ## Volcano plot --------------------------------------------------------
         p <- ggplot(
             data = as_tibble(data, rownames = NULL),
             mapping = aes(
                 x = !!sym(lfcCol),
                 y = !!sym(negLogAlphaCol),
-                color = !!sym("isDE")
+                color = !!sym("isDeg")
             )
         ) +
             geom_vline(
@@ -244,21 +252,26 @@ NULL
             ) +
             scale_x_continuous(breaks = pretty_breaks()) +
             scale_y_continuous(breaks = pretty_breaks()) +
-            guides(color = FALSE) +
-            labs(
-                title = contrastName(object),
-                subtitle = .thresholdLabel(
-                    n = sum(data[["isDE"]] != 0L),
-                    direction = direction,
-                    alphaThreshold = alphaThreshold,
-                    lfcShrinkType = lfcShrinkType,
-                    lfcThreshold = lfcThreshold,
-                    baseMeanThreshold = baseMeanThreshold
-                ),
-                x = "log2 fold change",
-                y = "-log10 adj p value"
+            guides(color = FALSE)
+        ## Labels.
+        if (is.null(labels[["title"]])) {
+            labels[["title"]] <- tryCatch(
+                expr = contrastName(object),
+                error = function(e) NULL
             )
-
+        }
+        if (is.null(labels[["subtitle"]])) {
+            ## FIXME SHOW NUMBER DOWN AND UP.
+            labels[["subtitle"]] <- .thresholdLabel(
+                n = sum(data[["isDeg"]] != 0L),
+                direction = direction,
+                alphaThreshold = alphaThreshold,
+                lfcShrinkType = lfcShrinkType,
+                lfcThreshold = lfcThreshold,
+                baseMeanThreshold = baseMeanThreshold
+            )
+        }
+        p <- p + do.call(what = labs, args = labels)
         if (isCharacter(pointColor)) {
             p <- p +
                 scale_color_manual(
@@ -269,7 +282,6 @@ NULL
                     )
                 )
         }
-
         ## Gene text labels ----------------------------------------------------
         ## Get the genes to visualize when `ntop` is declared.
         if (isTRUE(ntop > 0L)) {
@@ -310,7 +322,6 @@ NULL
                     )
                 )
         }
-
         ## Return --------------------------------------------------------------
         if (isTRUE(histograms)) {
             ggdraw() +
