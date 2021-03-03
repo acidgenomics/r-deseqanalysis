@@ -241,7 +241,7 @@
         USE.NAMES = TRUE
     )
     x <- paste("n", "=", sum(n))
-    if (sum(n) > 0L) {
+    if (direction == "both" && sum(n) > 0L) {
         x <- paste0(x, sep, paste(names(n), n, sep = ": ", collapse = sep))
     }
     x <- paste0(x, sep, "alpha < ", alphaThreshold)
