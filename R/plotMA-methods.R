@@ -1,11 +1,7 @@
-## FIXME THIS IS ERRORING FOR MINIMAL DESEQRESULTS.
-
-
-
 #' @name plotMA
 #' @inherit AcidGenerics::plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
-#' @note Updated 2020-08-05.
+#' @note Updated 2021-03-03.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual
@@ -60,6 +56,8 @@ NULL
 
 
 
+## FIXME NEED TO ALLOW USER TO SET TITLE, SUBTITLE, AND AXES?
+
 ## Updated 2020-08-04.
 `plotMA,DESeqResults` <-  # nolint
     function(
@@ -77,7 +75,14 @@ NULL
             nonsignificant = AcidPlots::lightPalette[["gray"]]
         ),
         pointSize = 2L,
-        pointAlpha = 0.8
+        pointAlpha = 0.8,
+        ## NOTE Consider reworking the NULL as TRUE here?
+        labels = list(
+            title = NULL,
+            subtitle = NULL,
+            x = "mean expression across all samples",
+            y = "log2 fold change"
+        )
     ) {
         validObject(object)
         baseMeanCol <- "baseMean"
@@ -126,6 +131,10 @@ NULL
             isPercentage(pointAlpha),
             isInt(ntop),
             isNonNegative(ntop)
+        )
+        labels <- matchLabels(
+            labels = labels,
+            choices = eval(formals()[["labels"]])
         )
         direction <- match.arg(direction)
         ## Genes or ntop, but not both.
@@ -199,20 +208,25 @@ NULL
             ) +
             scale_y_continuous(breaks = pretty_breaks()) +
             annotation_logticks(sides = "b") +
-            guides(color = FALSE) +
-            labs(
-                title = contrastName(object),
-                subtitle = .thresholdLabel(
-                    n = sum(data[["isDE"]] != 0L),
-                    direction = direction,
-                    alphaThreshold = alphaThreshold,
-                    lfcShrinkType = lfcShrinkType,
-                    lfcThreshold = lfcThreshold,
-                    baseMeanThreshold = baseMeanThreshold
-                ),
-                x = "mean expression across all samples",
-                y = "log2 fold change"
+            guides(color = FALSE)
+        ## Labels.
+        if (is.null(labels[["title"]])) {
+            labels[["title"]] <- tryCatch(
+                expr = contrastName(object),
+                error = function(e) NULL
             )
+        }
+        if (is.null(labels[["subtitle"]])) {
+            labels[["subtitle"]] <- .thresholdLabel(
+                n = sum(data[["isDE"]] != 0L),
+                direction = direction,
+                alphaThreshold = alphaThreshold,
+                lfcShrinkType = lfcShrinkType,
+                lfcThreshold = lfcThreshold,
+                baseMeanThreshold = baseMeanThreshold
+            )
+        }
+        p <- p + do.call(what = labs, args = labels)
         ## Color the significant points.
         ## Note that we're using direction-specific coloring by default.
         if (isCharacter(pointColor)) {
