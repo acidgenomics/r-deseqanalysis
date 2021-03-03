@@ -28,16 +28,6 @@ NULL
 
 
 
-#' @rdname lfcThreshold
-#' @export
-setMethod(
-    f = "lfcThreshold",
-    signature = signature("DESeqResults"),
-    definition = `lfcThreshold,DESeqResults`
-)
-
-
-
 ## Updated 2020-08-04.
 `lfcThreshold,DESeqAnalysis` <-  # nolint
     function(object) {
@@ -51,6 +41,41 @@ setMethod(
 
 
 
+## Updated 2021-03-03.
+`lfcThreshold<-,DESeqResults,numeric` <-  # nolint
+    function(object, value) {
+        assert(isScalar(value), isNonNegative(value))
+        metadata(object)[["lfcThreshold"]] <- value
+        object
+    }
+
+
+
+## Updated 2021-03-03.
+`lfcThreshold<-,DESeqAnalysis,numeric` <-  # nolint
+    `lfcThreshold<-,DESeqResults,numeric`
+
+
+
+## Updated 2020-08-04.
+`lfcThreshold<-,DESeqAnalysis,NULL` <-  # nolint
+    function(object, value) {
+        metadata(object)[["lfcThreshold"]] <- value
+        object
+    }
+
+
+
+#' @rdname lfcThreshold
+#' @export
+setMethod(
+    f = "lfcThreshold",
+    signature = signature("DESeqResults"),
+    definition = `lfcThreshold,DESeqResults`
+)
+
+
+
 #' @rdname lfcThreshold
 #' @export
 setMethod(
@@ -61,13 +86,16 @@ setMethod(
 
 
 
-## Updated 2020-08-04.
-`lfcThreshold<-,DESeqAnalysis,numeric` <-  # nolint
-    function(object, value) {
-        assert(isScalar(value), isNonNegative(value))
-        metadata(object)[["lfcThreshold"]] <- value
-        object
-    }
+#' @rdname lfcThreshold
+#' @export
+setReplaceMethod(
+    f = "lfcThreshold",
+    signature = signature(
+        object = "DESeqResults",
+        value = "numeric"
+    ),
+    definition = `lfcThreshold<-,DESeqResults,numeric`
+)
 
 
 
@@ -81,15 +109,6 @@ setReplaceMethod(
     ),
     definition = `lfcThreshold<-,DESeqAnalysis,numeric`
 )
-
-
-
-## Updated 2020-08-04.
-`lfcThreshold<-,DESeqAnalysis,NULL` <-  # nolint
-    function(object, value) {
-        metadata(object)[["lfcThreshold"]] <- value
-        object
-    }
 
 
 

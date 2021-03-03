@@ -1,6 +1,6 @@
 #' @name alphaThreshold
 #' @inherit AcidGenerics::alphaThreshold
-#' @note Updated 2020-08-04.
+#' @note Updated 2021-03-03.
 #'
 #' @details
 #' Assumes `0.01` by default if unset.
@@ -29,16 +29,6 @@ NULL
 
 
 
-#' @rdname alphaThreshold
-#' @export
-setMethod(
-    f = "alphaThreshold",
-    signature = signature("DESeqResults"),
-    definition = `alphaThreshold,DESeqResults`
-)
-
-
-
 ## Updated 2020-08-04.
 `alphaThreshold,DESeqAnalysis` <-  # nolint
     function(object) {
@@ -52,13 +42,13 @@ setMethod(
 
 
 
-#' @rdname alphaThreshold
-#' @export
-setMethod(
-    f = "alphaThreshold",
-    signature = signature("DESeqAnalysis"),
-    definition = `alphaThreshold,DESeqAnalysis`
-)
+## Updated 2021-03-03.
+`alphaThreshold<-,DESeqResults,numeric` <-  # nolint
+    function(object, value) {
+        assert(isAlpha(value))
+        metadata(object)[["alpha"]] <- value
+        object
+    }
 
 
 
@@ -72,6 +62,48 @@ setMethod(
 
 
 
+## Updated 2020-08-04.
+`alphaThreshold<-,DESeqAnalysis,NULL` <-  # nolint
+    function(object, value) {
+        metadata(object)[["alphaThreshold"]] <- value
+        object
+    }
+
+
+
+#' @rdname alphaThreshold
+#' @export
+setMethod(
+    f = "alphaThreshold",
+    signature = signature("DESeqResults"),
+    definition = `alphaThreshold,DESeqResults`
+)
+
+
+
+#' @rdname alphaThreshold
+#' @export
+setMethod(
+    f = "alphaThreshold",
+    signature = signature("DESeqAnalysis"),
+    definition = `alphaThreshold,DESeqAnalysis`
+)
+
+
+
+#' @rdname alphaThreshold
+#' @export
+setReplaceMethod(
+    f = "alphaThreshold",
+    signature = signature(
+        object = "DESeqResults",
+        value = "numeric"
+    ),
+    definition = `alphaThreshold<-,DESeqResults,numeric`
+)
+
+
+
 #' @rdname alphaThreshold
 #' @export
 setReplaceMethod(
@@ -82,15 +114,6 @@ setReplaceMethod(
     ),
     definition = `alphaThreshold<-,DESeqAnalysis,numeric`
 )
-
-
-
-## Updated 2020-08-04.
-`alphaThreshold<-,DESeqAnalysis,NULL` <-  # nolint
-    function(object, value) {
-        metadata(object)[["alphaThreshold"]] <- value
-        object
-    }
 
 
 
