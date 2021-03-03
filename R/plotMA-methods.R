@@ -56,9 +56,7 @@ NULL
 
 
 
-## FIXME NEED TO ALLOW USER TO SET TITLE, SUBTITLE, AND AXES?
-
-## Updated 2020-08-04.
+## Updated 2021-03-03.
 `plotMA,DESeqResults` <-  # nolint
     function(
         object,
@@ -132,11 +130,11 @@ NULL
             isInt(ntop),
             isNonNegative(ntop)
         )
+        direction <- match.arg(direction)
         labels <- matchLabels(
             labels = labels,
             choices = eval(formals()[["labels"]])
         )
-        direction <- match.arg(direction)
         ## Genes or ntop, but not both.
         if (!is.null(genes) && ntop > 0L) {
             stop("Specify either 'genes' or 'ntop'.")
@@ -155,7 +153,7 @@ NULL
             order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE
         ]
         data[["rank"]] <- seq_len(nrow(data))
-        data <- .addIsDECol(
+        data <- .addIsDegCol(
             data = data,
             alphaCol = alphaCol,
             alphaThreshold = alphaThreshold,
@@ -164,15 +162,19 @@ NULL
             baseMeanCol = baseMeanCol,
             baseMeanThreshold = baseMeanThreshold
         )
-        assert(isSubset(c("isDE", "rank", "rankScore"), colnames(data)))
+        assert(isSubset(c("isDeg", "rank", "rankScore"), colnames(data)))
         ## Apply directional filtering, if desired.
-        if (direction == "up") {
-            keep <- which(data[[lfcCol]] > 0L)
-            data <- data[keep, , drop = FALSE]
-        } else if (direction == "down") {
-            keep <- which(data[[lfcCol]] < 0L)
-            data <- data[keep, , drop = FALSE]
-        }
+        switch(
+            EXPR = direction,
+            "up" = {
+                keep <- which(data[[lfcCol]] > 0L)
+                data <- data[keep, , drop = FALSE]
+            },
+            "down" = {
+                keep <- which(data[[lfcCol]] < 0L)
+                data <- data[keep, , drop = FALSE]
+            }
+        )
         ## Check for no genes passing cutoffs and early return.
         if (!hasRows(data)) {
             alertWarning("No genes passed cutoffs.")
@@ -188,7 +190,7 @@ NULL
             mapping = aes(
                 x = !!sym("baseMean"),
                 y = !!sym(lfcCol),
-                color = !!sym("isDE")
+                color = !!sym("isDeg")
             )
         ) +
             geom_hline(
@@ -217,8 +219,9 @@ NULL
             )
         }
         if (is.null(labels[["subtitle"]])) {
+            ## FIXME SHOW NUMBER DOWN AND UP.
             labels[["subtitle"]] <- .thresholdLabel(
-                n = sum(data[["isDE"]] != 0L),
+                n = sum(data[["isDeg"]] != 0L),
                 direction = direction,
                 alphaThreshold = alphaThreshold,
                 lfcShrinkType = lfcShrinkType,

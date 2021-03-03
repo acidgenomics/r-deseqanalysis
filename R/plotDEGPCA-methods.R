@@ -73,6 +73,7 @@ NULL
             ntop = Inf,
             labels = list(
                 title = contrastName(res),
+                ## FIXME REWORK THIS.
                 subtitle = .thresholdLabel(
                     n = length(deg),
                     direction = direction,
