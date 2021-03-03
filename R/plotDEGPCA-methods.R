@@ -1,6 +1,6 @@
 #' @name plotDEGPCA
 #' @inherit AcidGenerics::plotDEGPCA
-#' @note Updated 2020-08-25.
+#' @note Updated 2021-03-03.
 #'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams AcidPlots::plotPCA
@@ -17,7 +17,7 @@ NULL
 
 
 
-## Updated 2020-08-25.
+## Updated 2021-03-03.
 `plotDEGPCA,DESeqResults` <-  # nolint
     function(
         object,
@@ -73,9 +73,8 @@ NULL
             ntop = Inf,
             labels = list(
                 title = contrastName(res),
-                ## FIXME REWORK THIS.
                 subtitle = .thresholdLabel(
-                    n = length(deg),
+                    object = object,
                     direction = direction,
                     alphaThreshold = alphaThreshold,
                     lfcShrinkType = lfcShrinkType,
