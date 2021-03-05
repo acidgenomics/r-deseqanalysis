@@ -1,6 +1,10 @@
+## FIXME DESeqAnalysis method needs to support `alphaThreshold`...
+
+
+
 #' @name resultsTables
 #' @inherit AcidGenerics::resultsTables
-#' @note Updated 2020-09-21.
+#' @note Updated 2021-03-05.
 #'
 #' @inheritParams params
 #' @inheritParams results
@@ -107,15 +111,32 @@ setMethod(
 
 
 
-## Updated 2020-09-21.
+## Updated 2021-03-05.
 `resultsTables,DESeqAnalysis` <-  # nolint
-    function(object, i, extra = TRUE, ...) {
+    function(
+        object,
+        i,
+        alphaThreshold = NULL,
+        lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
+        extra = TRUE,
+        ...
+    ) {
         validObject(object)
+        if (is.null(alphaThreshold)) {
+            alphaThreshold <- alphaThreshold(object)
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- lfcThreshold(object)
+        }
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- baseMeanThreshold(object)
+        }
         resultsTables(
             object = results(object = object, i = i, extra = extra),
-            alphaThreshold = alphaThreshold(object),
-            lfcThreshold = lfcThreshold(object),
-            baseMeanThreshold = baseMeanThreshold(object),
+            alphaThreshold = alphaThreshold,
+            lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold,
             ...
         )
     }

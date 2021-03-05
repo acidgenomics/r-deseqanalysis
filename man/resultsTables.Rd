@@ -16,7 +16,15 @@ resultsTables(object, ...)
   return = c("tbl_df", "DataFrameList")
 )
 
-\S4method{resultsTables}{DESeqAnalysis}(object, i, extra = TRUE, ...)
+\S4method{resultsTables}{DESeqAnalysis}(
+  object,
+  i,
+  alphaThreshold = NULL,
+  lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
+  extra = TRUE,
+  ...
+)
 }
 \arguments{
 \item{object}{Object.}
@@ -64,7 +72,7 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 \code{all} table), are arranged by adjusted \emph{P} value.
 }
 \note{
-Updated 2020-09-21.
+Updated 2021-03-05.
 
 It is generally recommended to not apply post hoc log fold change
 cutoffs. If a specific effect size is desired, instead run
