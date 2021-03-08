@@ -1,3 +1,8 @@
+## FIXME NEED TO ALLOW INTERSECTION ACROSS 2 DESEQANALYSIS OBJECTS.
+## FIXME NEED TO ADD J ARGUMENT HERE?
+
+
+
 #' @name degIntersection
 #' @inherit AcidGenerics::degIntersection
 #' @note Updated 2020-10-28.
