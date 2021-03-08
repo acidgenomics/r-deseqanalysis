@@ -9,17 +9,25 @@ degIntersection(object, ...)
 
 \S4method{degIntersection}{DESeqAnalysis}(
   object,
+  ...,
   i = NULL,
+  alphaThreshold = NULL,
+  lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
   direction = c("up", "down"),
   return = c("matrix", "count", "ratio", "names")
 )
 }
 \arguments{
-\item{object}{Object.}
+\item{object, ...}{Object and/or other objects of same class.
+Function is parameterized.}
 
 \item{i}{\code{character}, \code{numeric}, or \code{NULL}.
 Names or range of results.
-If set \code{NULL}, include all results.}
+If set \code{NULL}, include all results per object.
+When passing in multiple objects, specify the desired results as a \code{list}
+with length matching the number of input objects, containing either
+\code{character} or \code{numeric} corresponding to each object.}
 
 \item{direction}{\code{character(1)}.
 Include "up" or "down" directions.
@@ -37,8 +45,6 @@ The ratio of how many times the gene is significant across contrasts.
 Names of genes that intersect across all contrasts defined.
 Input of specific contrasts with \code{i} argument is recommended here.
 }}
-
-\item{...}{Passthrough arguments to \code{\link[=deg]{deg()}}.}
 }
 \value{
 \code{integer}.
@@ -49,7 +55,7 @@ lowest. Gene identifiers are defined as the names.
 Intersection of differentially expressed genes
 }
 \note{
-Updated 2020-10-28.
+Updated 2021-03-08.
 }
 \examples{
 data(deseq)

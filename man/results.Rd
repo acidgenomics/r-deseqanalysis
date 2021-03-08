@@ -34,7 +34,7 @@ internal \code{DESeqDataSet}.}
 Results
 }
 \note{
-Updated 2020-09-21.
+Updated 2021-03-08.
 }
 \section{Extra mode}{
 

@@ -1,7 +1,7 @@
 #' Results
 #'
 #' @name results
-#' @note Updated 2020-09-21.
+#' @note Updated 2021-03-08.
 #'
 #' @section Extra mode:
 #'
@@ -49,7 +49,7 @@ setMethod(
 
 
 
-## Updated 2020-09-21.
+## Updated 2021-03-08.
 `results,DESeqAnalysis` <-  # nolint
     function(object, i, extra = FALSE) {
         validObject(object)
@@ -98,7 +98,7 @@ setMethod(
         if (isTRUE(lfcShrink)) {
             msg <- paste(msg, "(shrunken LFC)")
         }
-        alertInfo(msg)
+        alert(msg)
         validObject(res)
         res
     }

@@ -1,16 +1,20 @@
-## FIXME NEED TO ALLOW INTERSECTION ACROSS 2 DESEQANALYSIS OBJECTS.
-## FIXME NEED TO ADD J ARGUMENT HERE?
+## FIXME ADD SUPPORT FOR DESEQRESULTS PASSED IN DIRECTLY HERE???
 
 
 
 #' @name degIntersection
-#' @inherit AcidGenerics::degIntersection
-#' @note Updated 2020-10-28.
+#' @inherit AcidGenerics::degIntersection return title
+#' @note Updated 2021-03-08.
 #'
-#' @inheritParams AcidRoxygen::params
+#' @param object,...
+#'   Object and/or other objects of same class.
+#'   Function is parameterized.
 #' @param i `character`, `numeric`, or `NULL`.
 #'   Names or range of results.
-#'   If set `NULL`, include all results.
+#'   If set `NULL`, include all results per object.
+#'   When passing in multiple objects, specify the desired results as a `list`
+#'   with length matching the number of input objects, containing either
+#'   `character` or `numeric` corresponding to each object.
 #' @param direction `character(1)`.
 #'   Include "up" or "down" directions.
 #'   Must be directional, and intentionally does not support "both".
@@ -24,7 +28,6 @@
 #'   - `"names"`: `character`;
 #'     Names of genes that intersect across all contrasts defined.
 #'     Input of specific contrasts with `i` argument is recommended here.
-#' @param ... Passthrough arguments to [deg()].
 #'
 #' @examples
 #' data(deseq)
@@ -50,47 +53,107 @@ NULL
 
 
 
-## Updated 2020-10-28.
+## FIXME CONSIDER REWORKING THIS TO DISPATCH ON DESEQRESULTS METHOD...
+
+## Updated 2021-03-08.
 `degIntersection,DESeqAnalysis` <-  # nolint
     function(
         object,
+        ...,
         i = NULL,
+        alphaThreshold = NULL,
+        lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
         direction = c("up", "down"),
         return = c("matrix", "count", "ratio", "names")
     ) {
+        objects <- append(x = list(object), values = list(...))
+        if (is.null(i)) {
+            i <- lapply(X = objects, FUN = resultsNames)
+        }
+        assert(areSameLength(objects, i))
+        if (is.null(alphaThreshold)) {
+            alphaThreshold <- alphaThreshold(object)
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- lfcThreshold(object)
+        }
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- baseMeanThreshold(object)
+        }
         direction <- match.arg(direction)
         return <- match.arg(return)
-        if (is.null(i)) i <- resultsNames(object)
-        suppressMessages({
-            list <- lapply(
-                X = i,
-                FUN = deg,
-                object = object,
-                direction = direction
-            )
-        })
-        names(list) <- i
-        mat <- intersectionMatrix(list)
+        x <- mapply(
+            object = objects,
+            i = i,
+            MoreArgs = list(
+                "alphaThreshold" = alphaThreshold,
+                "lfcThreshold" = lfcThreshold,
+                "baseMeanThreshold" = baseMeanThreshold,
+                "direction" = direction,
+                "return" = return
+            ),
+            FUN = function(
+                object,
+                i,
+                alphaThreshold,
+                lfcThreshold,
+                baseMeanThreshold,
+                direction,
+                return
+            ) {
+                validObject(object)
+                x <- lapply(
+                    X = i,
+                    FUN = deg,
+                    object = object,
+                    alphaThreshold = alphaThreshold,
+                    lfcThreshold = lfcThreshold,
+                    baseMeanThreshold = baseMeanThreshold,
+                    direction = direction,
+                    quiet = TRUE
+                )
+                names(x) <- i
+                x
+            },
+            SIMPLIFY = FALSE,
+            USE.NAMES = FALSE
+        )
+        x <- unlist(x = x, recursive = FALSE, use.names = TRUE)
+        assert(hasNames(x))
+        if (any(duplicated(names(x)))) {
+            dupes <- names(x)[duplicated(names(x))]
+            stop(sprintf(
+                "%d duplicate %s: %s.",
+                length(dupes),
+                ngettext(
+                    n = length(dupes),
+                    msg1 = "contrast",
+                    msg2 = "contrasts"
+                ),
+                toString(dupes, width = 200L)
+            ))
+        }
+        mat <- intersectionMatrix(x)
         alert(sprintf(
             "Returning intersection %s of %s %s-regulated DEGs.",
             return, nrow(mat), direction
         ))
         count <- rowSums(mat)
         mode(count) <- "integer"
-        out <- switch(
+        switch(
             EXPR = return,
-            "matrix" = mat,
             "count" = count,
-            "ratio" = {
-                count / length(list)
-            },
+            "matrix" = mat,
             "names" = {
                 x <- apply(X = mat, MARGIN = 1L, FUN = all)
                 x <- names(x)[x]
                 x
+            },
+            "ratio" = {
+                count / length(x)
             }
         )
-        out
     }
 
 
