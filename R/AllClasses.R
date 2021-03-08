@@ -190,3 +190,40 @@ setValidity(
         TRUE
     }
 )
+
+
+
+#' List containing related DESeqResults objects
+#'
+#' @author Michael Steinbaugh
+#' @export
+#' @note Updated 2021-03-08.
+#' @return `DESeqResultsList`.
+setClass(
+    Class = "DESeqResultsList",
+    contains = "SimpleList"
+)
+setValidity(
+    Class = "DESeqResultsList",
+    method = function(object) {
+        ## Currently allowing an empty list.
+        if (!hasLength(object)) return(TRUE)
+        ## Require that all objects in list are named.
+        ok <- validate(hasValidNames(object))
+        if (!isTRUE(ok)) return(ok)
+        ## Check that all of the elements in the list are DESeqAnalysis.
+        ok <- validate(all(bapply(
+            X = object,
+            FUN = function(object) {
+                is(object, "DESeqResults")
+            }
+        )))
+        if (!isTRUE(ok)) return(ok)
+        ## Ensure that all slotted DESeqResults objects are valid.
+        ok <- validate(all(bapply(object, validObject)))
+        if (!isTRUE(ok)) return(ok)
+        ## FIXME Ensure that all rownames are identical.
+        ## FIXME The generator function should take care of this.
+        TRUE
+    }
+)
