@@ -1,3 +1,25 @@
+#' @rdname DESeqAnalysisList
+#' @export
+setGeneric(
+    name = "DESeqAnalysisList",
+    def = function(object, ...) {
+        standardGeneric("DESeqAnalysisList")
+    }
+)
+
+
+
+#' @rdname DESeqResultsList
+#' @export
+setGeneric(
+    name = "DESeqResultsList",
+    def = function(object, ...) {
+        standardGeneric("DESeqResultsList")
+    }
+)
+
+
+
 #' @rdname apeglmResults
 #' @export
 setGeneric(
