@@ -1,7 +1,3 @@
-## FIXME DESeqAnalysis method needs to support `alphaThreshold`...
-
-
-
 #' @name resultsTables
 #' @inherit AcidGenerics::resultsTables
 #' @note Updated 2021-03-05.
