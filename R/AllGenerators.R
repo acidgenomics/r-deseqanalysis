@@ -1,3 +1,9 @@
+#' @include AllGenerics.R
+NULL
+
+
+
+## DESeqAnalysis ===============================================================
 #' @inherit DESeqAnalysis-class title description return
 #' @export
 #' @note Updated 2019-08-20.
@@ -75,31 +81,125 @@ DESeqAnalysis <-  # nolint
 
 
 
-## Note that this will automatically assign name.
-## Updated 2019-07-23.
-.coerceResultsToList <- function(from) {
-    assert(is(from, "DESeqResults"))
-    to <- list(from)
-    names(to) <- makeNames(contrastName(from))
-    to
+## DESeqAnalysisList ===========================================================
+#' @name DESeqAnalysisList
+#' @inherit DESeqAnalysisList-class title description return
+#' @note Updated 2021-03-08.
+#'
+#' @param ... `DESeqAnalysis` objects or named `list`.
+#'
+#' @examples
+#' data(deseq)
+#' x <- DESeqAnalysisList(deseq)
+#' x
+NULL
+
+
+
+## Updated 2021-03-08.
+`DESeqAnalysisList,list` <- function(object) {  # nolint
+    assert(hasLength(object), hasNames(object))
+    new(Class = "DESeqAnalysisList", object)
 }
+
+
+
+## Updated 2021-03-08.
+`DESeqAnalysisList,SimpleList` <-  # nolint
+    `DESeqAnalysisList,list`
 
 
 
 ## How to get names of dot arguments.
 ## https://stackoverflow.com/questions/51259346
 
+## Updated 2021-03-08.
+`DESeqAnalysisList,DESeqAnalysis` <-  # nolint
+    function(object, ...) {
+        mc <- match.call(expand.dots = FALSE)
+        l <- append(x = list(object), values = list(...))
+        names(l) <- c(
+            as.character(mc[[2L]]),
+            as.character(mc[["..."]])
+        )
+        new(Class = "DESeqAnalysisList", l)
+    }
 
 
-#' @inherit DESeqAnalysisList-class title description return
+
+## Updated 2021-03-08.
+`DESeqAnalysisList,missing` <-  # nolint
+    function(object) {
+        new(Class = "DESeqAnalysisList", list())
+    }
+
+
+
+#' @rdname DESeqAnalysisList
 #' @export
-#' @note Updated 2019-08-20.
-#' @param ... `DESeqAnalysis` objects.
+setMethod(
+    f = "DESeqAnalysisList",
+    signature = signature("list"),
+    definition = `DESeqAnalysisList,list`
+)
+
+
+
+#' @rdname DESeqAnalysisList
+#' @export
+setMethod(
+    f = "DESeqAnalysisList",
+    signature = signature("SimpleList"),
+    definition = `DESeqAnalysisList,SimpleList`
+)
+
+
+
+#' @rdname DESeqAnalysisList
+#' @export
+setMethod(
+    f = "DESeqAnalysisList",
+    signature = signature("DESeqAnalysis"),
+    definition = `DESeqAnalysisList,DESeqAnalysis`
+)
+
+
+
+#' @rdname DESeqAnalysisList
+#' @export
+setMethod(
+    f = "DESeqAnalysisList",
+    signature = signature("missing"),
+    definition = `DESeqAnalysisList,missing`
+)
+
+
+
+## DESeqResultsList ============================================================
+#' @name DESeqResultsList
+#' @inherit DESeqResultsList-class title description return
+#' @note Updated 2021-03-08.
+#'
+#' @param ... `DESeqResults` objects or named `list`.
+#'
 #' @examples
 #' data(deseq)
-#' x <- DESeqAnalysisList(deseq)
+#' x <- DESeqResultsList(deseq)
 #' x
-DESeqAnalysisList <- function(...) {  # nolint
+
+
+## Updated 2021-03-08.
+`DESeqResultsList,missing` <-  # nolint
+    function(object) {
+        new(Class = "DESeqAnalysisList", list())
+    }
+
+
+
+## FIXME ALLOW THIS TO DISPATCH ON DESEQANALYSIS?
+
+
+`DESeqResultsList,list` <- function(...) {  # nolint
     mc <- match.call(expand.dots = FALSE)
     dots <- list(...)
     dotsNames <- as.character(mc[["..."]])
