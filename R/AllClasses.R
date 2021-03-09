@@ -159,13 +159,11 @@ setValidity(
 
 
 ## DESeqAnalysisList ===========================================================
-## FIXME Consider requiring that all rownames are identical here.
-
 #' List containing related DESeq2 analyses
 #'
 #' @author Michael Steinbaugh
 #' @export
-#' @note Updated 2020-05-11.
+#' @note Updated 2021-03-09.
 #' @return `DESeqAnalysisList`.
 setClass(
     Class = "DESeqAnalysisList",
@@ -180,17 +178,43 @@ setValidity(
         ok <- validate(hasValidNames(object))
         if (!isTRUE(ok)) return(ok)
         ## Check that all of the elements in the list are DESeqAnalysis.
-        ok <- validate(all(bapply(
-            X = object,
-            FUN = function(object) {
-                is(object, "DESeqAnalysis")
-            }
-        )))
+        ok <- validate(
+            all(bapply(
+                X = object,
+                FUN = function(object) {
+                    is(object, "DESeqAnalysis")
+                }
+            )),
+            msg = "Not a list of DESeqAnalysis objects."
+        )
         if (!isTRUE(ok)) return(ok)
         ## Ensure that all slotted DESeqAnalysis objects are valid.
         ## This step can be slow for large objects.
-        ok <- validate(all(bapply(object, validObject)))
+        ok <- validate(
+            all(bapply(object, validObject)),
+            msg = "Not all DESeqAnalysis objects are valid."
+        )
         if (!isTRUE(ok)) return(ok)
+        ## Check that all rownames in slotted DESeqResults are identical.
+        rn <- rownames(object[[1L]])
+        ok <- validate(
+            isCharacter(rn),
+            msg = "Row names in first DESeqAnalysis are invalid."
+        )
+        if (!isTRUE(ok)) return(ok)
+        ok <- bapply(
+            X = object,
+            rn = rn,
+            FUN = function(x, rn) {
+                identical(rownames(x), rn)
+            }
+        )
+        if (!all(ok)) {
+            return(sprintf(
+                "Row names mismatch in: %s.",
+                toString(names(ok)[!ok], width = 200L)
+            ))
+        }
         TRUE
     }
 )
@@ -198,13 +222,11 @@ setValidity(
 
 
 ## DESeqResultsList ============================================================
-## FIXME Consider requiring that all rownames are identical here.
-
 #' List containing related DESeqResults objects
 #'
 #' @author Michael Steinbaugh
 #' @export
-#' @note Updated 2021-03-08.
+#' @note Updated 2021-03-09.
 #' @return `DESeqResultsList`.
 setClass(
     Class = "DESeqResultsList",
@@ -219,16 +241,42 @@ setValidity(
         ok <- validate(hasValidNames(object))
         if (!isTRUE(ok)) return(ok)
         ## Check that all of the elements in the list are DESeqAnalysis.
-        ok <- validate(all(bapply(
-            X = object,
-            FUN = function(object) {
-                is(object, "DESeqResults")
-            }
-        )))
+        ok <- validate(
+            all(bapply(
+                X = object,
+                FUN = function(object) {
+                    is(object, "DESeqResults")
+                }
+            )),
+            msg = "Not a list of DESeqResults objects."
+        )
         if (!isTRUE(ok)) return(ok)
         ## Ensure that all slotted DESeqResults objects are valid.
-        ok <- validate(all(bapply(object, validObject)))
+        ok <- validate(
+            all(bapply(object, validObject)),
+            msg = "Not all DESeqResults in list are valid."
+        )
         if (!isTRUE(ok)) return(ok)
+        ## Check that all rownames in slotted DESeqResults are identical.
+        rn <- rownames(object[[1L]])
+        ok <- validate(
+            isCharacter(rn),
+            msg = "Row names in first DESeqResults are invalid."
+        )
+        if (!isTRUE(ok)) return(ok)
+        ok <- bapply(
+            X = object,
+            rn = rn,
+            FUN = function(x, rn) {
+                identical(rownames(x), rn)
+            }
+        )
+        if (!all(ok)) {
+            return(sprintf(
+                "Row names mismatch in: %s.",
+                toString(names(ok)[!ok], width = 200L)
+            ))
+        }
         TRUE
     }
 )
