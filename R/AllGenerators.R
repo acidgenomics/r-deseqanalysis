@@ -267,7 +267,9 @@ NULL
                 slotName
             ))
         }
-        out
+        out <- SimpleList(out)
+        metadata(out) <- list("lfcShrink" = lfcShrink)
+        new(Class = "DESeqResultsList", out)
     }
 
 
