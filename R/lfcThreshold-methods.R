@@ -1,3 +1,8 @@
+## FIXME NEED TO RETHINK THIS WITH DESEQRESULTSLIST.
+## FIXME NEED TO RETHINK THIS WITH DESEQANALYSISLIST SUPPORT.
+
+
+
 #' @name lfcThreshold
 #' @inherit AcidGenerics::lfcThreshold
 #' @note Updated 2021-03-03.

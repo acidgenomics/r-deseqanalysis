@@ -1,3 +1,7 @@
+## FIXME NEED TO RETHINK THIS WITH DESEQANALYSISLIST SUPPORT.
+
+
+
 #' @name transformType
 #' @inherit AcidGenerics::transformType
 #' @note Updated 2020-08-04.

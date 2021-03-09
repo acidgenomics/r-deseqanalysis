@@ -10,7 +10,7 @@ results(object, ...)
 
 \S4method{results}{DESeqDataSet}(object, ...)
 
-\S4method{results}{DESeqAnalysis}(object, i, extra = FALSE)
+\S4method{results}{DESeqAnalysis}(object, i, lfcShrink = NULL, extra = FALSE)
 }
 \arguments{
 \item{object}{Object.}
@@ -22,6 +22,10 @@ results(object, ...)
 
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
+
+\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
+Use shrunken log2 fold change (LFC) values.
+If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
 
 \item{extra}{\code{logical(1)}.
 Include row data (i.e. gene metadata) and normalized counts from the
