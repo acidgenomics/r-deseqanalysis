@@ -66,15 +66,14 @@ setAs(
 
 
 #' @rdname as
-#' @name coerce,DESeqAnalysis,DESeqResults-method
-## Updated 2019-07-23.
+#' @name coerce,DESeqAnalysis,DESeqResultsList-method
+## Updated 2021-03-09.
 setAs(
     from = "DESeqAnalysis",
-    to = "DESeqResults",
+    to = "DESeqResultsList",
     function(from) {
         validObject(from)
-        to <- slot(from, "results")[[1L]]
-        validObject(to)
+        to <- DESeqResultsList(from)
         to
     }
 )
