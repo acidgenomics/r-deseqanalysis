@@ -6,7 +6,7 @@ NULL
 ## DESeqAnalysis ===============================================================
 #' @inherit DESeqAnalysis-class title description return
 #' @export
-#' @note Updated 2019-08-20.
+#' @note Updated 2021-03-09.
 #'
 #' @param data `DESeqDataSet`.
 #' @param transform `DESeqTransform`.
@@ -82,9 +82,11 @@ DESeqAnalysis <-  # nolint
 
 
 ## DESeqAnalysisList ===========================================================
+## FIXME Consider requiring that all rownames are identical here.
+
 #' @name DESeqAnalysisList
 #' @inherit DESeqAnalysisList-class title description return
-#' @note Updated 2021-03-08.
+#' @note Updated 2021-03-09.
 #'
 #' @param ... `DESeqAnalysis` objects or named `list`.
 #'
@@ -176,6 +178,8 @@ setMethod(
 
 
 ## DESeqResultsList ============================================================
+## FIXME Consider requiring that all rownames are identical here.
+
 #' @name DESeqResultsList
 #' @inherit DESeqResultsList-class title description return
 #' @note Updated 2021-03-09.
@@ -192,7 +196,6 @@ NULL
 
 ## Updated 2021-03-09.
 `DESeqResultsList,list` <- function(object) {  # nolint
-    assert(hasLength(object), hasNames(object))
     new(Class = "DESeqResultsList", object)
 }
 
