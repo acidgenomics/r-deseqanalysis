@@ -6,7 +6,7 @@
 #' @exportMethod coerce
 #' @importFrom methods coerce
 #' @inherit methods::as return title
-#' @note Updated 2019-11-12.
+#' @note Updated 2021-03-09.
 #'
 #' @section DESeqAnalysis:
 #'
@@ -14,9 +14,7 @@
 #'
 #' - `DESeqDataSet`.
 #' - `DESeqTransform`.
-#' - `DESeqResults`. Extracts the first results slotted. Note that this
-#'   corresponds to results containing log2 fold change (LFC) values that *have
-#'   not been shrunken* using [DESeq2::lfcShrink()].
+#' - `DESeqResultsList`.
 #'
 #' @examples
 #' data(deseq)
@@ -26,9 +24,8 @@
 #' print(dds)
 #' dt <- as(deseq, "DESeqTransform")
 #' print(dt)
-#' ## Pulls the first results slotted.
-#' res <- as(deseq, "DESeqResults")
-#' summary(res)
+#' resList <- as(deseq, "DESeqResultsList")
+#' print(names(resList))
 NULL
 
 
