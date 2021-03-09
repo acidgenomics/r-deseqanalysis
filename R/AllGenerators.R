@@ -186,36 +186,99 @@ setMethod(
 #' data(deseq)
 #' x <- DESeqResultsList(deseq)
 #' x
+NULL
+
+
+
+## Updated 2021-03-09.
+`DESeqResultsList,list` <- function(object) {  # nolint
+    assert(hasLength(object), hasNames(object))
+    new(Class = "DESeqResultsList", object)
+}
+
+
+
+`DESeqResultsList,SimpleList` <-  # nolint
+    `DESeqResultsList,list`
+
+
+
+## Updated 2021-03-09.
+`DESeqResultsList,DESeqResults` <-  # nolint
+    function(object, ...) {
+        mc <- match.call(expand.dots = FALSE)
+        l <- append(x = list(object), values = list(...))
+        names(l) <- c(
+            as.character(mc[[2L]]),
+            as.character(mc[["..."]])
+        )
+        new(Class = "DESeqResultsList", l)
+    }
+
+
+
+## FIXME MAKE THIS THE PRIMARY METHOD FOR EXTRACTING, WHICH IS CURRENTLY USED
+## IN RESULTS FUNCTION...
+## Updated 2021-03-09.
+`DESeqResultsList,DESeqAnalysis` <-  # nolint
+    function(object) {
+        stop("FIXME")
+    }
+
 
 
 ## Updated 2021-03-08.
 `DESeqResultsList,missing` <-  # nolint
     function(object) {
-        new(Class = "DESeqAnalysisList", list())
+        new(Class = "DESeqResultsList", list())
     }
 
 
 
-## FIXME ALLOW THIS TO DISPATCH ON DESEQANALYSIS?
+#' @rdname DESeqResultsList
+#' @export
+setMethod(
+    f = "DESeqResultsList",
+    signature = signature("list"),
+    definition = `DESeqResultsList,list`
+)
 
 
-`DESeqResultsList,list` <- function(...) {  # nolint
-    mc <- match.call(expand.dots = FALSE)
-    dots <- list(...)
-    dotsNames <- as.character(mc[["..."]])
-    ## Look to see if the user passed in a list.
-    if (
-        hasLength(dots, n = 1L) &&
-        is.list(dots[[1L]])
-    ) {
-        data <- dots[[1L]]
-    } else {
-        data <- dots
-        ## Here we're capturing the object names if the user doesn't pass the
-        ## arguments in as named key value pairs.
-        if (is.null(names(data))) {
-            names(data) <- dotsNames
-        }
-    }
-    new(Class = "DESeqAnalysisList", data)
-}
+
+#' @rdname DESeqResultsList
+#' @export
+setMethod(
+    f = "DESeqResultsList",
+    signature = signature("SimpleList"),
+    definition = `DESeqResultsList,SimpleList`
+)
+
+
+
+#' @rdname DESeqResultsList
+#' @export
+setMethod(
+    f = "DESeqResultsList",
+    signature = signature("DESeqResults"),
+    definition = `DESeqResultsList,DESeqResults`
+)
+
+
+
+#' @rdname DESeqResultsList
+#' @export
+setMethod(
+    f = "DESeqResultsList",
+    signature = signature("DESeqAnalysis"),
+    definition = `DESeqResultsList,DESeqAnalysis`
+)
+
+
+
+#' @rdname DESeqResultsList
+#' @export
+setMethod(
+    f = "DESeqResultsList",
+    signature = signature("missing"),
+    definition = `DESeqResultsList,missing`
+)
