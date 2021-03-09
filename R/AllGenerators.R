@@ -178,14 +178,14 @@ setMethod(
 ## DESeqResultsList ============================================================
 #' @name DESeqResultsList
 #' @inherit DESeqResultsList-class title description return
-#' @note Updated 2021-03-08.
+#' @note Updated 2021-03-09.
 #'
 #' @param ... `DESeqResults` objects or named `list`.
 #'
 #' @examples
 #' data(deseq)
 #' x <- DESeqResultsList(deseq)
-#' x
+#' print(names(x))
 NULL
 
 
@@ -198,6 +198,7 @@ NULL
 
 
 
+## Updated 2021-03-09.
 `DESeqResultsList,SimpleList` <-  # nolint
     `DESeqResultsList,list`
 
@@ -217,12 +218,35 @@ NULL
 
 
 
-## FIXME MAKE THIS THE PRIMARY METHOD FOR EXTRACTING, WHICH IS CURRENTLY USED
-## IN RESULTS FUNCTION...
 ## Updated 2021-03-09.
 `DESeqResultsList,DESeqAnalysis` <-  # nolint
     function(object) {
-        stop("FIXME")
+        validObject(object)
+        lfcShrink <- lfcShrink(object)
+        if (!isTRUE(lfcShrink)) {
+            slotName <- "results"
+        } else if (
+            isTRUE(lfcShrink) &&
+            hasLength(slot(object, name = "lfcShrink"))
+        ) {
+            slotName <- "lfcShrink"
+        } else if (
+            isTRUE(lfcShrink) &&
+            !hasLength(slot(object, name = "lfcShrink"))
+        ) {
+            stop(
+                "Shrunken LFC values were requested, ",
+                "but object does not contain DESeqResults ",
+                "defined in 'lfcShrink' slot.\n",
+                "Set 'lfcShrink(object) <- NULL'."
+            )
+        }
+        out <- slot(object, name = slotName)
+        assert(
+            is.list(out),
+            hasNames(out)
+        )
+        out
     }
 
 
