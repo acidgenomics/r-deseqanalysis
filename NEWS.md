@@ -1,4 +1,13 @@
-## DESeqAnalysis 0.3.13 (2021-03-05)
+## DESeqAnalysis 0.4.0 (2021-03-09)
+
+### New classes
+
+- `DESeqResultsList`: New class and corresponding generator function that
+  enables quick looping operations across related `DESeqResults` objects. This
+  can be useful instead of `DESeqAnalysisList` approach for cases where we
+  don't have all of the original `DESeqDataSet` objects used to generate the
+  corresponding `DESeqResults`, which can happen with commercial sequencing
+  vendors and analysis platforms.
 
 ### Minor changes
 
