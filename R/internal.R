@@ -63,6 +63,22 @@
 
 
 
+#' Coerce a DESeqResults object to named list
+#'
+#' @note Updated 2019-07-23.
+#' @noRd
+#'
+#' @details
+#' Note that this will automatically assign name.
+.coerceResultsToList <- function(from) {
+    assert(is(from, "DESeqResults"))
+    to <- list(from)
+    names(to) <- makeNames(contrastName(from))
+    to
+}
+
+
+
 #' Map contrast vector to coefficient
 #'
 #' @note Updated 2020-08-13.
