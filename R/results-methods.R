@@ -49,9 +49,14 @@ setMethod(
 
 
 
-## Updated 2021-03-08.
+## Updated 2021-03-09.
 `results,DESeqAnalysis` <-  # nolint
-    function(object, i, extra = FALSE) {
+    function(
+        object,
+        i,
+        lfcShrink = NULL,
+        extra = FALSE
+    ) {
         validObject(object)
         assert(
             isScalar(i),
@@ -60,28 +65,18 @@ setMethod(
         if (isCharacter(i)) {
             assert(isSubset(i, resultsNames(object)))
         }
-        lfcShrink <- lfcShrink(object)
-        if (!isTRUE(lfcShrink)) {
-            slotName <- "results"
-        } else if (
-            isTRUE(lfcShrink) &&
-            hasLength(slot(object, name = "lfcShrink"))
-        ) {
-            slotName <- "lfcShrink"
-        } else if (
-            isTRUE(lfcShrink) &&
-            !hasLength(slot(object, name = "lfcShrink"))
-        ) {
-            stop(
-                "Shrunken LFC values were requested, ",
-                "but object does not contain DESeqResults ",
-                "defined in 'lfcShrink' slot.\n",
-                "Set 'lfcShrink(object) <- NULL'."
-            )
-        }
-        resList <- slot(object, name = slotName)
+        resList <- DESeqResultsList(
+            object = object,
+            lfcShrink = lfcShrink,
+            quiet = TRUE
+        )
+        lfcShrink <- metadata(resList)[["lfcShrink"]]
         res <- resList[[i]]
-        assert(is(res, "DESeqResults"))
+        assert(
+            is(resList, "DESeqResultsList"),
+            isFlag(lfcShrink),
+            is(res, "DESeqResults")
+        )
         if (isTRUE(extra)) {
             dds <- as(object, "DESeqDataSet")
             ## This step ensures we humanize the sample names, when possible.
