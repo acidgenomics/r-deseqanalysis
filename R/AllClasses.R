@@ -1,3 +1,4 @@
+## DESeqAnalysis ===============================================================
 #' DESeq2 differential expression analysis
 #'
 #' Class containing all elements generated during differential expression
@@ -157,6 +158,9 @@ setValidity(
 
 
 
+## DESeqAnalysisList ===========================================================
+## FIXME Consider requiring that all rownames are identical here.
+
 #' List containing related DESeq2 analyses
 #'
 #' @author Michael Steinbaugh
@@ -172,7 +176,7 @@ setValidity(
     method = function(object) {
         ## Currently allowing an empty list.
         if (!hasLength(object)) return(TRUE)
-        ## Require that all objects in list are named.
+        ## Require that all objects in list are named, without duplicates.
         ok <- validate(hasValidNames(object))
         if (!isTRUE(ok)) return(ok)
         ## Check that all of the elements in the list are DESeqAnalysis.
@@ -192,6 +196,9 @@ setValidity(
 )
 
 
+
+## DESeqResultsList ============================================================
+## FIXME Consider requiring that all rownames are identical here.
 
 #' List containing related DESeqResults objects
 #'
@@ -222,8 +229,6 @@ setValidity(
         ## Ensure that all slotted DESeqResults objects are valid.
         ok <- validate(all(bapply(object, validObject)))
         if (!isTRUE(ok)) return(ok)
-        ## FIXME Ensure that all rownames are identical.
-        ## FIXME The generator function should take care of this.
         TRUE
     }
 )
