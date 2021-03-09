@@ -70,7 +70,7 @@ setAs(
     to = "DESeqResultsList",
     function(from) {
         validObject(from)
-        to <- DESeqResultsList(from)
+        to <- DESeqResultsList(from, quiet = TRUE)
         to
     }
 )
