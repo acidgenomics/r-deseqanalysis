@@ -2,32 +2,41 @@
 % Please edit documentation in R/AllGenerics.R, R/degIntersection-methods.R
 \name{degIntersection}
 \alias{degIntersection}
+\alias{degIntersection,DESeqResultsList-method}
 \alias{degIntersection,DESeqAnalysis-method}
+\alias{degIntersection,DESeqAnalysisList-method}
 \title{Intersection of differentially expressed genes}
 \usage{
 degIntersection(object, ...)
 
-\S4method{degIntersection}{DESeqAnalysis}(
+\S4method{degIntersection}{DESeqResultsList}(
   object,
-  ...,
-  i = NULL,
   alphaThreshold = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
   direction = c("up", "down"),
   return = c("matrix", "count", "ratio", "names")
 )
+
+\S4method{degIntersection}{DESeqAnalysis}(object, i = NULL, ...)
+
+\S4method{degIntersection}{DESeqAnalysisList}(object, i = NULL)
 }
 \arguments{
-\item{object, ...}{Object and/or other objects of same class.
-Function is parameterized.}
+\item{object}{Object.}
 
-\item{i}{\code{character}, \code{numeric}, or \code{NULL}.
-Names or range of results.
-If set \code{NULL}, include all results per object.
-When passing in multiple objects, specify the desired results as a \code{list}
-with length matching the number of input objects, containing either
-\code{character} or \code{numeric} corresponding to each object.}
+\item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
+Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
+defined in the object.}
+
+\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
+Log (base 2) fold change ratio cutoff threshold.
+If left \code{NULL}, will use the cutoff defined in the object.}
+
+\item{baseMeanThreshold}{\code{numeric(1)} or \code{NULL}.
+Base mean (i.e. average expression across all samples) threshold.
+If left \code{NULL}, will use the cutoff defined in the object.
+Applies in general to DESeq2 RNA-seq differential expression output.}
 
 \item{direction}{\code{character(1)}.
 Include "up" or "down" directions.
@@ -45,6 +54,15 @@ The ratio of how many times the gene is significant across contrasts.
 Names of genes that intersect across all contrasts defined.
 Input of specific contrasts with \code{i} argument is recommended here.
 }}
+
+\item{i}{\code{character}, \code{numeric}, or \code{NULL}.
+Names or range of results.
+If set \code{NULL}, include all results per object.
+When passing in multiple objects, specify the desired results as a \code{list}
+with length matching the number of input objects, containing either
+\code{character} or \code{numeric} corresponding to each object.}
+
+\item{...}{Passthrough arguments to \code{DESeqResultsList} method.}
 }
 \value{
 \code{integer}.
@@ -55,7 +73,7 @@ lowest. Gene identifiers are defined as the names.
 Intersection of differentially expressed genes
 }
 \note{
-Updated 2021-03-08.
+Updated 2021-03-09.
 }
 \examples{
 data(deseq)
@@ -77,4 +95,8 @@ head(ratio)
 names <- degIntersection(deseq, i = c(1L, 2L), return = "names")
 class(names)
 head(names)
+
+## DESeqAnalysisList ====
+object <- DESeqAnalysisList(list("object1" = deseq, "object2" = deseq))
+print(object)
 }

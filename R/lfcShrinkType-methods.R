@@ -1,3 +1,7 @@
+## FIXME NEED TO RETHINK THIS WITH DESEQRESULTSLIST.
+
+
+
 #' @name lfcShrinkType
 #' @inherit AcidGenerics::lfcShrinkType
 #' @note Updated 2020-08-04.

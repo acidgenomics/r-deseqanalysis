@@ -5,13 +5,13 @@
 \alias{coerce}
 \alias{coerce,DESeqAnalysis,DESeqDataSet-method}
 \alias{coerce,DESeqAnalysis,DESeqTransform-method}
-\alias{coerce,DESeqAnalysis,DESeqResults-method}
+\alias{coerce,DESeqAnalysis,DESeqResultsList-method}
 \title{Force an object to belong to a class}
 \description{
 Force an object to belong to a class
 }
 \note{
-Updated 2019-11-12.
+Updated 2021-03-09.
 }
 \section{DESeqAnalysis}{
 
@@ -20,9 +20,7 @@ Supported coercion methods will extract any of these internal objects:
 \itemize{
 \item \code{DESeqDataSet}.
 \item \code{DESeqTransform}.
-\item \code{DESeqResults}. Extracts the first results slotted. Note that this
-corresponds to results containing log2 fold change (LFC) values that \emph{have
-not been shrunken} using \code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}}.
+\item \code{DESeqResultsList}.
 }
 }
 
@@ -34,9 +32,8 @@ dds <- as(deseq, "DESeqDataSet")
 print(dds)
 dt <- as(deseq, "DESeqTransform")
 print(dt)
-## Pulls the first results slotted.
-res <- as(deseq, "DESeqResults")
-summary(res)
+resList <- as(deseq, "DESeqResultsList")
+print(names(resList))
 }
 \author{
 Michael Steinbaugh

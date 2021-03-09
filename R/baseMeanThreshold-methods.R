@@ -1,3 +1,8 @@
+## FIXME NEED TO RETHINK THIS WITH DESEQRESULTSLIST.
+## FIXME NEED TO RETHINK THIS WITH DESEQANALYSISLIST SUPPORT.
+
+
+
 #' @name baseMeanThreshold
 #' @inherit AcidGenerics::baseMeanThreshold
 #' @note Updated 2021-03-03.
@@ -17,13 +22,32 @@ NULL
 `baseMeanThreshold,DESeqResults` <-  # nolint
     function(object) {
         x <- metadata(object)[["baseMeanThreshold"]]
-        if (is.null(x)) x <- 0L
+        if (is.null(x)) {
+            x <- 0L
+        }
         assert(isNumber(x), isNonNegative(x))
         x
     }
 
 
 
+## Updated 2021-03-03.
+`baseMeanThreshold,DESeqResultsList` <-  # nolint
+    function(object) {
+        x <- metadata(object)[["baseMeanThreshold"]]
+        if (is.null(x)) {
+            x <- metadata(object[[1L]])[["baseMeanThreshold"]]
+        }
+        if (is.null(x)) {
+            x <- 0L
+        }
+        assert(isNumber(x), isNonNegative(x))
+        x
+    }
+
+
+
+## FIXME RETHINK THIS ONE...
 ## Updated 2021-03-03.
 `baseMeanThreshold,DESeqAnalysis` <-  # nolint
     `baseMeanThreshold,DESeqResults`
