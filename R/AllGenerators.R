@@ -220,9 +220,19 @@ NULL
 
 ## Updated 2021-03-09.
 `DESeqResultsList,DESeqAnalysis` <-  # nolint
-    function(object) {
+    function(
+        object,
+        lfcShrink = NULL,
+        quiet = FALSE
+    ) {
         validObject(object)
-        lfcShrink <- lfcShrink(object)
+        if (is.null(lfcShrink)) {
+            lfcShrink <- lfcShrink(object)
+        }
+        assert(
+            isFlag(lfcShrink),
+            isFlag(quiet)
+        )
         if (!isTRUE(lfcShrink)) {
             slotName <- "results"
         } else if (
@@ -246,6 +256,17 @@ NULL
             is.list(out),
             hasNames(out)
         )
+        if (isFALSE(quiet)) {
+            alertInfo(sprintf(
+                "Returning %s results from {.var %s} slot.",
+                switch(
+                    EXPR = slotName,
+                    "lfcShrink" = "shrunken",
+                    "results" = "unshrunken"
+                ),
+                slotName
+            ))
+        }
         out
     }
 
