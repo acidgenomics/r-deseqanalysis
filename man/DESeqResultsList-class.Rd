@@ -11,7 +11,7 @@
 List containing related DESeqResults objects
 }
 \note{
-Updated 2021-03-08.
+Updated 2021-03-09.
 }
 \author{
 Michael Steinbaugh

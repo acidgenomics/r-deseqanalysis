@@ -3,26 +3,26 @@
 \name{alphaThreshold}
 \alias{alphaThreshold}
 \alias{alphaThreshold<-}
-\alias{alphaThreshold,DESeqResults-method}
 \alias{alphaThreshold,DESeqAnalysis-method}
-\alias{alphaThreshold<-,DESeqResults,numeric-method}
+\alias{alphaThreshold,DESeqResults-method}
 \alias{alphaThreshold<-,DESeqAnalysis,numeric-method}
 \alias{alphaThreshold<-,DESeqAnalysis,NULL-method}
+\alias{alphaThreshold<-,DESeqResults,numeric-method}
 \title{Alpha threshold}
 \usage{
 alphaThreshold(object, ...)
 
 alphaThreshold(object, ...) <- value
 
-\S4method{alphaThreshold}{DESeqResults}(object)
-
 \S4method{alphaThreshold}{DESeqAnalysis}(object)
 
-\S4method{alphaThreshold}{DESeqResults,numeric}(object) <- value
+\S4method{alphaThreshold}{DESeqResults}(object)
 
 \S4method{alphaThreshold}{DESeqAnalysis,numeric}(object) <- value
 
 \S4method{alphaThreshold}{DESeqAnalysis,`NULL`}(object) <- value
+
+\S4method{alphaThreshold}{DESeqResults,numeric}(object) <- value
 }
 \arguments{
 \item{object}{Object.}
@@ -42,7 +42,7 @@ Alpha threshold
 Assumes \code{0.01} by default if unset.
 }
 \note{
-Updated 2021-03-03.
+Updated 2021-03-10.
 }
 \examples{
 data(deseq)

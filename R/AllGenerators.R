@@ -82,7 +82,7 @@ DESeqAnalysis <-  # nolint
 
 
 ## DESeqAnalysisList ===========================================================
-## FIXME Consider requiring that all rownames are identical here.
+## FIXME Require that all rownames are identical in slotted objects.
 
 #' @name DESeqAnalysisList
 #' @inherit DESeqAnalysisList-class title description return
