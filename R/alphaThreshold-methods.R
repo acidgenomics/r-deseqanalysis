@@ -47,11 +47,13 @@ NULL
 
 
 ## Other methods slot "alphaThreshold" instead of "alpha".
-## Updated 2021-03-03.
+## Updated 2021-03-10.
 `alphaThreshold,DESeqResults` <-  # nolint
     function(object) {
         x <- metadata(object)[["alpha"]]
-        if (is.null(x)) x <- 0.01
+        if (is.null(x)) {
+            x <- 0.01
+        }
         assert(isAlpha(x))
         x
     }
