@@ -277,6 +277,18 @@ NULL
 
 
 
+## Coercion to `SimpleList` here doesn't unlist like we'd want here.
+## Updated 2021-03-10.
+`DESeqResultsList,DESeqAnalysisList` <-  # nolint
+    function(object, ...) {
+        x <- lapply(X = object, FUN = DESeqResultsList, ...)
+        x <- lapply(X = x, FUN = as.list)
+        x <- unlist(x, recursive = FALSE, use.names = TRUE)
+        new(Class = "DESeqResultsList", x)
+    }
+
+
+
 ## Updated 2021-03-08.
 `DESeqResultsList,missing` <-  # nolint
     function(object) {
@@ -321,6 +333,16 @@ setMethod(
     f = "DESeqResultsList",
     signature = signature("DESeqAnalysis"),
     definition = `DESeqResultsList,DESeqAnalysis`
+)
+
+
+
+#' @rdname DESeqResultsList
+#' @export
+setMethod(
+    f = "DESeqResultsList",
+    signature = signature("DESeqAnalysisList"),
+    definition = `DESeqResultsList,DESeqAnalysisList`
 )
 
 
