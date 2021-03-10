@@ -6,6 +6,7 @@
 \alias{DESeqResultsList,SimpleList-method}
 \alias{DESeqResultsList,DESeqResults-method}
 \alias{DESeqResultsList,DESeqAnalysis-method}
+\alias{DESeqResultsList,DESeqAnalysisList-method}
 \alias{DESeqResultsList,missing-method}
 \title{List containing related DESeqResults objects}
 \usage{
@@ -18,6 +19,8 @@ DESeqResultsList(object, ...)
 \S4method{DESeqResultsList}{DESeqResults}(object, ...)
 
 \S4method{DESeqResultsList}{DESeqAnalysis}(object, lfcShrink = NULL, quiet = FALSE)
+
+\S4method{DESeqResultsList}{DESeqAnalysisList}(object, ...)
 
 \S4method{DESeqResultsList}{missing}(object)
 }
