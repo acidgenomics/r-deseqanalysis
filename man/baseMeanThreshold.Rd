@@ -3,29 +3,37 @@
 \name{baseMeanThreshold}
 \alias{baseMeanThreshold}
 \alias{baseMeanThreshold<-}
-\alias{baseMeanThreshold,DESeqResults-method}
 \alias{baseMeanThreshold,DESeqAnalysis-method}
-\alias{baseMeanThreshold<-,DESeqResults,numeric-method}
-\alias{baseMeanThreshold<-,DESeqResults,NULL-method}
+\alias{baseMeanThreshold,DESeqAnalysisList-method}
+\alias{baseMeanThreshold,DESeqResults-method}
+\alias{baseMeanThreshold,DESeqResultsList-method}
 \alias{baseMeanThreshold<-,DESeqAnalysis,numeric-method}
 \alias{baseMeanThreshold<-,DESeqAnalysis,NULL-method}
+\alias{baseMeanThreshold<-,DESeqResults,numeric-method}
+\alias{baseMeanThreshold<-,DESeqResults,NULL-method}
 \title{Base mean threshold}
 \usage{
 baseMeanThreshold(object, ...)
 
 baseMeanThreshold(object, ...) <- value
 
-\S4method{baseMeanThreshold}{DESeqResults}(object)
-
 \S4method{baseMeanThreshold}{DESeqAnalysis}(object)
 
-\S4method{baseMeanThreshold}{DESeqResults,numeric}(object) <- value
+\S4method{baseMeanThreshold}{DESeqAnalysisList}(object)
 
-\S4method{baseMeanThreshold}{DESeqResults,`NULL`}(object) <- value
+\S4method{baseMeanThreshold}{DESeqResults}(object)
+
+\S4method{baseMeanThreshold}{DESeqResultsList}(object)
 
 \S4method{baseMeanThreshold}{DESeqAnalysis,numeric}(object) <- value
 
 \S4method{baseMeanThreshold}{DESeqAnalysis,`NULL`}(object) <- value
+
+\S4method{baseMeanThreshold}{DESeqResults}(object)
+
+\S4method{baseMeanThreshold}{DESeqResults,numeric}(object) <- value
+
+\S4method{baseMeanThreshold}{DESeqResults,`NULL`}(object) <- value
 }
 \arguments{
 \item{object}{Object.}
@@ -42,7 +50,7 @@ Base mean cutoff level.
 Base mean threshold
 }
 \note{
-Updated 2021-03-03.
+Updated 2021-03-10.
 }
 \examples{
 data(deseq)
