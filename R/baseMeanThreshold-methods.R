@@ -1,11 +1,6 @@
-## FIXME NEED TO RETHINK THIS WITH DESEQRESULTSLIST.
-## FIXME NEED TO RETHINK THIS WITH DESEQANALYSISLIST SUPPORT.
-
-
-
 #' @name baseMeanThreshold
 #' @inherit AcidGenerics::baseMeanThreshold
-#' @note Updated 2021-03-03.
+#' @note Updated 2021-03-10.
 #' @param ... Additional arguments.
 #' @examples
 #' data(deseq)
@@ -18,8 +13,8 @@ NULL
 
 
 
-## Updated 2021-03-03.
-`baseMeanThreshold,DESeqResults` <-  # nolint
+## Updated 2021-03-10.
+`baseMeanThreshold,DESeqAnalysis` <-  # nolint
     function(object) {
         x <- metadata(object)[["baseMeanThreshold"]]
         if (is.null(x)) {
@@ -31,15 +26,31 @@ NULL
 
 
 
+## Updated 2021-03-10.
+`baseMeanThreshold,DESeqAnalysisList` <-  # nolint
+    function(object) {
+        x <- metadata(object)[["baseMeanThreshold"]]
+        if (is.null(x)) {
+            x <- baseMeanThreshold(object[[1L]])
+        }
+        assert(isNumber(x), isNonNegative(x))
+        x
+    }
+
+
+
 ## Updated 2021-03-03.
+`baseMeanThreshold,DESeqResults` <-  # nolint
+    `baseMeanThreshold,DESeqAnalysis`
+
+
+
+## Updated 2021-03-10.
 `baseMeanThreshold,DESeqResultsList` <-  # nolint
     function(object) {
         x <- metadata(object)[["baseMeanThreshold"]]
         if (is.null(x)) {
-            x <- metadata(object[[1L]])[["baseMeanThreshold"]]
-        }
-        if (is.null(x)) {
-            x <- 0L
+            x <- baseMeanThreshold(object[[1L]])
         }
         assert(isNumber(x), isNonNegative(x))
         x
@@ -47,10 +58,9 @@ NULL
 
 
 
-## FIXME RETHINK THIS ONE...
-## Updated 2021-03-03.
-`baseMeanThreshold,DESeqAnalysis` <-  # nolint
-    `baseMeanThreshold,DESeqResults`
+
+## FIXME DESeqAnalysisList
+## FIXME DESeqResultsList
 
 
 
@@ -89,6 +99,26 @@ NULL
 #' @export
 setMethod(
     f = "baseMeanThreshold",
+    signature = signature("DESeqAnalysis"),
+    definition = `baseMeanThreshold,DESeqAnalysis`
+)
+
+
+
+#' @rdname baseMeanThreshold
+#' @export
+setMethod(
+    f = "baseMeanThreshold",
+    signature = signature("DESeqAnalysisList"),
+    definition = `baseMeanThreshold,DESeqAnalysisList`
+)
+
+
+
+#' @rdname baseMeanThreshold
+#' @export
+setMethod(
+    f = "baseMeanThreshold",
     signature = signature("DESeqResults"),
     definition = `baseMeanThreshold,DESeqResults`
 )
@@ -99,8 +129,48 @@ setMethod(
 #' @export
 setMethod(
     f = "baseMeanThreshold",
-    signature = signature("DESeqAnalysis"),
-    definition = `baseMeanThreshold,DESeqAnalysis`
+    signature = signature("DESeqResultsList"),
+    definition = `baseMeanThreshold,DESeqResultsList`
+)
+
+
+
+#' @rdname baseMeanThreshold
+#' @export
+setReplaceMethod(
+    f = "baseMeanThreshold",
+    signature = signature(
+        object = "DESeqAnalysis",
+        value = "numeric"
+    ),
+    definition = `baseMeanThreshold<-,DESeqAnalysis,numeric`
+)
+
+
+
+#' @rdname baseMeanThreshold
+#' @export
+setReplaceMethod(
+    f = "baseMeanThreshold",
+    signature = signature(
+        object = "DESeqAnalysis",
+        value = "NULL"
+    ),
+    definition = `baseMeanThreshold<-,DESeqAnalysis,NULL`
+)
+
+
+
+## FIXME DESeqAnalysisList
+
+
+
+#' @rdname baseMeanThreshold
+#' @export
+setMethod(
+    f = "baseMeanThreshold",
+    signature = signature("DESeqResults"),
+    definition = `baseMeanThreshold,DESeqResults`
 )
 
 
@@ -131,26 +201,4 @@ setReplaceMethod(
 
 
 
-#' @rdname baseMeanThreshold
-#' @export
-setReplaceMethod(
-    f = "baseMeanThreshold",
-    signature = signature(
-        object = "DESeqAnalysis",
-        value = "numeric"
-    ),
-    definition = `baseMeanThreshold<-,DESeqAnalysis,numeric`
-)
-
-
-
-#' @rdname baseMeanThreshold
-#' @export
-setReplaceMethod(
-    f = "baseMeanThreshold",
-    signature = signature(
-        object = "DESeqAnalysis",
-        value = "NULL"
-    ),
-    definition = `baseMeanThreshold<-,DESeqAnalysis,NULL`
-)
+## FIXME DESeqResultsList
