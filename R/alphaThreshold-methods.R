@@ -5,7 +5,7 @@
 
 #' @name alphaThreshold
 #' @inherit AcidGenerics::alphaThreshold
-#' @note Updated 2021-03-03.
+#' @note Updated 2021-03-10.
 #'
 #' @details
 #' Assumes `0.01` by default if unset.
@@ -23,17 +23,6 @@ NULL
 
 
 
-## Updated 2021-03-03.
-`alphaThreshold,DESeqResults` <-  # nolint
-    function(object) {
-        x <- metadata(object)[["alpha"]]
-        if (is.null(x)) x <- 0.01
-        assert(isAlpha(x))
-        x
-    }
-
-
-
 ## Updated 2020-08-04.
 `alphaThreshold,DESeqAnalysis` <-  # nolint
     function(object) {
@@ -48,11 +37,12 @@ NULL
 
 
 ## Updated 2021-03-03.
-`alphaThreshold<-,DESeqResults,numeric` <-  # nolint
-    function(object, value) {
-        assert(isAlpha(value))
-        metadata(object)[["alpha"]] <- value
-        object
+`alphaThreshold,DESeqResults` <-  # nolint
+    function(object) {
+        x <- metadata(object)[["alpha"]]
+        if (is.null(x)) x <- 0.01
+        assert(isAlpha(x))
+        x
     }
 
 
@@ -76,13 +66,13 @@ NULL
 
 
 
-#' @rdname alphaThreshold
-#' @export
-setMethod(
-    f = "alphaThreshold",
-    signature = signature("DESeqResults"),
-    definition = `alphaThreshold,DESeqResults`
-)
+## Updated 2021-03-03.
+`alphaThreshold<-,DESeqResults,numeric` <-  # nolint
+    function(object, value) {
+        assert(isAlpha(value))
+        metadata(object)[["alpha"]] <- value
+        object
+    }
 
 
 
@@ -98,13 +88,10 @@ setMethod(
 
 #' @rdname alphaThreshold
 #' @export
-setReplaceMethod(
+setMethod(
     f = "alphaThreshold",
-    signature = signature(
-        object = "DESeqResults",
-        value = "numeric"
-    ),
-    definition = `alphaThreshold<-,DESeqResults,numeric`
+    signature = signature("DESeqResults"),
+    definition = `alphaThreshold,DESeqResults`
 )
 
 
@@ -131,4 +118,17 @@ setReplaceMethod(
         value = "NULL"
     ),
     definition = `alphaThreshold<-,DESeqAnalysis,NULL`
+)
+
+
+
+#' @rdname alphaThreshold
+#' @export
+setReplaceMethod(
+    f = "alphaThreshold",
+    signature = signature(
+        object = "DESeqResults",
+        value = "numeric"
+    ),
+    definition = `alphaThreshold<-,DESeqResults,numeric`
 )
