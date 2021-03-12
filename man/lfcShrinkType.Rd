@@ -3,14 +3,20 @@
 \name{lfcShrinkType}
 \alias{lfcShrinkType}
 \alias{lfcShrinkType,DESeqAnalysis-method}
+\alias{lfcShrinkType,DESeqAnalysisList-method}
 \alias{lfcShrinkType,DESeqResults-method}
+\alias{lfcShrinkType,DESeqResultsList-method}
 \title{Shrunken log2 fold change (LFC) type}
 \usage{
 lfcShrinkType(object, ...)
 
 \S4method{lfcShrinkType}{DESeqAnalysis}(object)
 
+\S4method{lfcShrinkType}{DESeqAnalysisList}(object)
+
 \S4method{lfcShrinkType}{DESeqResults}(object)
+
+\S4method{lfcShrinkType}{DESeqResultsList}(object)
 }
 \arguments{
 \item{object}{Object.}
