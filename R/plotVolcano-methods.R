@@ -1,4 +1,4 @@
-## FIXME Need to gate LFC at +/- 10 here by default.
+## NOTE Consider gating LFC at +/- 10 here by default.
 
 
 

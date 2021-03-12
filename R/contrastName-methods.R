@@ -1,3 +1,7 @@
+## FIXME RETHINK THIS, DONT EXPORT?
+
+
+
 #' @name contrastName
 #' @inherit AcidGenerics::contrastName
 #' @note Updated 2020-08-04.
@@ -32,6 +36,7 @@ NULL
 `contrastName,DESeqResults` <-  # nolint
     function(
         object,
+        ## FIXME REWORK THIS...FUNKY.
         .format = c("resultsNames", "title"),
         .useStash = TRUE
     ) {
