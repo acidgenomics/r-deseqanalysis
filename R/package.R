@@ -25,7 +25,7 @@
 #'   matchesGene2Symbol mcols mcols<- melt metadata metadata<- metadata2
 #'   metadata2<- model.matrix na.omit packageName packageVersion printString
 #'   realpath relevel removeNA requireNamespaces rowData showSlotInfo snakeCase
-#'   standardizeCall
+#'   standardizeCall str_locate_all str_match str_trunc
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_bar
 #'   geom_density geom_hline geom_point geom_text geom_vline ggplot guides labs
 #'   position_stack scale_color_manual scale_x_continuous scale_y_continuous
@@ -37,5 +37,4 @@
 #'   isPositive isScalar isString isSubset validate
 #' @importFrom methods as is new prototype setClass setGeneric setValidity show
 #'   slot slot<- validObject .hasSlot
-#' @importFrom stringr str_locate_all str_match str_trunc
 "_PACKAGE"
