@@ -1,7 +1,3 @@
-## FIXME Match the method support to alphaThreshold.
-
-
-
 #' @name lfcThreshold
 #' @inherit AcidGenerics::lfcThreshold
 #' @note Updated 2021-03-12.
@@ -21,12 +17,13 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2021-03-12.
 `lfcThreshold,DESeqAnalysis` <-  # nolint
     function(object) {
         x <- metadata(object)[["lfcThreshold"]]
         if (is.null(x)) {
-            x <- lfcThreshold(slot(object, "results")[[1L]])
+            resList <- DESeqResultsList(object, quiet = TRUE)
+            x <- lfcThreshold(resList)
         }
         assert(isNumber(x), isNonNegative(x))
         x
@@ -38,7 +35,12 @@ NULL
 `lfcThreshold,DESeqAnalysisList` <-  # nolint
     function(object) {
         assert(hasLength(object))
-        lfcThreshold(object[[1L]])
+        x <- metadata(object)[["lfcThreshold"]]
+        if (is.null(x)) {
+            x <- lfcThreshold(object[[1L]])
+        }
+        assert(isNumber(x), isNonNegative(x))
+        x
     }
 
 
@@ -60,7 +62,12 @@ NULL
 `lfcThreshold,DESeqResultsList` <-  # nolint
     function(object) {
         assert(hasLength(object))
-        lfcThreshold(object[[1L]])
+        x <- metadata(object)[["lfcThreshold"]]
+        if (is.null(x)) {
+            x <- lfcThreshold(object[[1L]])
+        }
+        assert(isNumber(x), isNonNegative(x))
+        x
     }
 
 
@@ -84,9 +91,27 @@ NULL
 
 
 
+## Updated 2021-03-13.
+`lfcThreshold<-,DESeqAnalysisList,numeric` <-  # nolint
+    `lfcThreshold<-,DESeqAnalysis,numeric`
+
+
+
+## Updated 2021-03-13.
+`lfcThreshold<-,DESeqAnalysisList,NULL` <-  # nolint
+    `lfcThreshold<-,DESeqAnalysis,NULL`
+
+
+
 ## Updated 2021-03-12.
 `lfcThreshold<-,DESeqResults,numeric` <-  # nolint
     `lfcThreshold<-,DESeqAnalysis,numeric`
+
+
+
+## Updated 2021-03-13.
+`lfcThreshold<-,DESeqResultsList,numeric` <-  # nolint
+    `lfcThreshold<-,DESeqResults,numeric`
 
 
 
@@ -161,8 +186,47 @@ setReplaceMethod(
 setReplaceMethod(
     f = "lfcThreshold",
     signature = signature(
+        object = "DESeqAnalysisList",
+        value = "numeric"
+    ),
+    definition = `lfcThreshold<-,DESeqAnalysisList,numeric`
+)
+
+
+
+#' @rdname lfcThreshold
+#' @export
+setReplaceMethod(
+    f = "lfcThreshold",
+    signature = signature(
+        object = "DESeqAnalysisList",
+        value = "NULL"
+    ),
+    definition = `lfcThreshold<-,DESeqAnalysisList,NULL`
+)
+
+
+
+#' @rdname lfcThreshold
+#' @export
+setReplaceMethod(
+    f = "lfcThreshold",
+    signature = signature(
         object = "DESeqResults",
         value = "numeric"
     ),
     definition = `lfcThreshold<-,DESeqResults,numeric`
+)
+
+
+
+#' @rdname lfcThreshold
+#' @export
+setReplaceMethod(
+    f = "lfcThreshold",
+    signature = signature(
+        object = "DESeqResultsList",
+        value = "numeric"
+    ),
+    definition = `lfcThreshold<-,DESeqResultsList,numeric`
 )
