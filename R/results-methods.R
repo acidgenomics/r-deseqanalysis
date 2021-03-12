@@ -1,7 +1,7 @@
 #' Results
 #'
 #' @name results
-#' @note Updated 2021-03-08.
+#' @note Updated 2021-03-12.
 #'
 #' @section Extra mode:
 #'
@@ -55,12 +55,14 @@ setMethod(
         object,
         i,
         lfcShrink = NULL,
-        extra = FALSE
+        extra = FALSE,
+        quiet = FALSE
     ) {
         validObject(object)
         assert(
             isScalar(i),
-            isFlag(extra)
+            isFlag(extra),
+            isFlag(quiet)
         )
         if (isCharacter(i)) {
             assert(isSubset(i, resultsNames(object)))
@@ -93,7 +95,9 @@ setMethod(
         if (isTRUE(lfcShrink)) {
             msg <- paste(msg, "(shrunken LFC)")
         }
-        alert(msg)
+        if (isFALSE(quiet)) {
+            alert(msg)
+        }
         validObject(res)
         res
     }
