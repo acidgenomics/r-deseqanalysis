@@ -2,15 +2,15 @@
 % Please edit documentation in R/AllGenerics.R, R/lfcShrinkType-methods.R
 \name{lfcShrinkType}
 \alias{lfcShrinkType}
-\alias{lfcShrinkType,DESeqResults-method}
 \alias{lfcShrinkType,DESeqAnalysis-method}
+\alias{lfcShrinkType,DESeqResults-method}
 \title{Shrunken log2 fold change (LFC) type}
 \usage{
 lfcShrinkType(object, ...)
 
-\S4method{lfcShrinkType}{DESeqResults}(object)
-
 \S4method{lfcShrinkType}{DESeqAnalysis}(object)
+
+\S4method{lfcShrinkType}{DESeqResults}(object)
 }
 \arguments{
 \item{object}{Object.}
@@ -25,7 +25,7 @@ Name of adaptive shrinkage method applied (e.g. "apeglm" or "ashr").
 Shrunken log2 fold change (LFC) type
 }
 \note{
-Updated 2020-08-04.
+Updated 2021-03-12.
 }
 \examples{
 data(deseq)
