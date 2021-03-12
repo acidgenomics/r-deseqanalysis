@@ -1,6 +1,10 @@
+## FIXME THIS NEEDS A REWORK.
+
+
+
 #' @name degIntersection
 #' @inherit AcidGenerics::degIntersection return title
-#' @note Updated 2021-03-09.
+#' @note Updated 2021-03-12.
 #'
 #' @inheritParams AcidRoxygen::params
 #'
@@ -53,119 +57,21 @@ NULL
 
 
 
-## FIXME NO METHOD FOR DESEQRESULTSLIST...NEED TO GET THIS...
+## FIXME CONSIDER REWORKING THIS TO DISPATCH ON DESEQRESULTS METHOD...
+## FIXME THE PARAMETERIZED VERSION NEEDS TO WORK ON DESEQANALYSISLIST...
 
-## Updated 2021-03-08.
-`degIntersection,DESeqResultsList` <-  # nolint
+
+## Updated 2021-03-12.
+`degIntersection,DESeqAnalysis` <-  # nolint
     function(
         object,
+        i = NULL,
         alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         direction = c("up", "down"),
         return = c("matrix", "count", "ratio", "names")
     ) {
-        if (is.null(alphaThreshold)) {
-            alphaThreshold <- alphaThreshold(object)
-        }
-        if (is.null(lfcThreshold)) {
-            lfcThreshold <- lfcThreshold(object)
-        }
-        if (is.null(baseMeanThreshold)) {
-            baseMeanThreshold <- baseMeanThreshold(object)
-        }
-        direction <- match.arg(direction)
-        return <- match.arg(return)
-        ## FIXME DONT NEED THE I PART HERE???
-
-        x <- mapply(
-            object = object,
-            i = names(object),
-            MoreArgs = list(
-                "alphaThreshold" = alphaThreshold,
-                "lfcThreshold" = lfcThreshold,
-                "baseMeanThreshold" = baseMeanThreshold,
-                "direction" = direction,
-                "return" = return
-            ),
-            FUN = function(
-                object,
-                i,
-                alphaThreshold,
-                lfcThreshold,
-                baseMeanThreshold,
-                direction,
-                return
-            ) {
-                validObject(object)
-                x <- lapply(
-                    X = i,
-                    FUN = deg,
-                    object = object,
-                    alphaThreshold = alphaThreshold,
-                    lfcThreshold = lfcThreshold,
-                    baseMeanThreshold = baseMeanThreshold,
-                    direction = direction,
-                    quiet = TRUE
-                )
-                names(x) <- i
-                x
-            },
-            SIMPLIFY = FALSE,
-            USE.NAMES = FALSE
-        )
-        x <- unlist(x = x, recursive = FALSE, use.names = TRUE)
-        assert(hasNames(x))
-        if (any(duplicated(names(x)))) {
-            dupes <- names(x)[duplicated(names(x))]
-            stop(sprintf(
-                "%d duplicate %s: %s.",
-                length(dupes),
-                ngettext(
-                    n = length(dupes),
-                    msg1 = "contrast",
-                    msg2 = "contrasts"
-                ),
-                toString(dupes, width = 200L)
-            ))
-        }
-        mat <- intersectionMatrix(x)
-        alert(sprintf(
-            "Returning intersection %s of %s %s-regulated DEGs.",
-            return, nrow(mat), direction
-        ))
-        count <- rowSums(mat)
-        mode(count) <- "integer"
-        switch(
-            EXPR = return,
-            "count" = count,
-            "matrix" = mat,
-            "names" = {
-                x <- apply(X = mat, MARGIN = 1L, FUN = all)
-                x <- names(x)[x]
-                x
-            },
-            "ratio" = {
-                count / length(x)
-            }
-        )
-
-    }
-
-
-
-## FIXME CONSIDER REWORKING THIS TO DISPATCH ON DESEQRESULTS METHOD...
-## FIXME THE PARAMETERIZED VERSION NEEDS TO WORK ON DESEQANALYSISLIST...
-
-
-## Updated 2021-03-08.
-`degIntersection,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i = NULL,
-        ...
-    ) {
-        objects <- append(x = list(object), values = list(...))
         if (is.null(i)) {
             i <- lapply(X = objects, FUN = resultsNames)
         }
@@ -267,13 +173,72 @@ NULL
 
 
 
-#' @rdname degIntersection
-#' @export
-setMethod(
-    f = "degIntersection",
-    signature = signature("DESeqResultsList"),
-    definition = `degIntersection,DESeqResultsList`
-)
+## Updated 2021-03-12.
+`degIntersection,DESeqResultsList` <-  # nolint
+    function(
+        object,
+        alphaThreshold = NULL,
+        lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
+        direction = c("up", "down"),
+        return = c("matrix", "count", "ratio", "names")
+    ) {
+        validObject(object)
+        if (is.null(alphaThreshold)) {
+            alphaThreshold <- alphaThreshold(object)
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- lfcThreshold(object)
+        }
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- baseMeanThreshold(object)
+        }
+        direction <- match.arg(direction)
+        return <- match.arg(return)
+        x <- lapply(
+            X = object,
+            FUN = deg,
+            alphaThreshold = alphaThreshold,
+            lfcThreshold = lfcThreshold,
+            baseMeanThreshold = baseMeanThreshold,
+            direction = direction,
+            quiet = TRUE
+        )
+        assert(hasNames(x))
+        if (any(duplicated(names(x)))) {
+            dupes <- names(x)[duplicated(names(x))]
+            stop(sprintf(
+                "%d duplicate %s: %s.",
+                length(dupes),
+                ngettext(
+                    n = length(dupes),
+                    msg1 = "contrast",
+                    msg2 = "contrasts"
+                ),
+                toString(dupes, width = 200L)
+            ))
+        }
+        mat <- intersectionMatrix(x)
+        alert(sprintf(
+            "Returning intersection %s of %s %s-regulated DEGs.",
+            return, nrow(mat), direction
+        ))
+        count <- rowSums(mat)
+        mode(count) <- "integer"
+        switch(
+            EXPR = return,
+            "count" = count,
+            "matrix" = mat,
+            "names" = {
+                x <- apply(X = mat, MARGIN = 1L, FUN = all)
+                x <- names(x)[x]
+                x
+            },
+            "ratio" = {
+                count / length(x)
+            }
+        )
+    }
 
 
 
@@ -293,4 +258,14 @@ setMethod(
     f = "degIntersection",
     signature = signature("DESeqAnalysisList"),
     definition = `degIntersection,DESeqAnalysisList`
+)
+
+
+
+#' @rdname degIntersection
+#' @export
+setMethod(
+    f = "degIntersection",
+    signature = signature("DESeqResultsList"),
+    definition = `degIntersection,DESeqResultsList`
 )

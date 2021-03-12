@@ -1,6 +1,6 @@
 #' @name contrastSamples
 #' @inherit AcidGenerics::contrastSamples
-#' @note Updated 2020-08-04.
+#' @note Updated 2021-03-12.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -83,6 +83,8 @@ NULL
         if (hasLength(samples)) {
             return(samples)
         }
+        ## FIXME RETHINK THIS APPROACH.
+        ## GET THE NAME FROM THE OBJECT INSTEAD...
         contrast <- contrastName(
             object = res,
             .format = "resultsNames",

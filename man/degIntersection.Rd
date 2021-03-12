@@ -2,12 +2,24 @@
 % Please edit documentation in R/AllGenerics.R, R/degIntersection-methods.R
 \name{degIntersection}
 \alias{degIntersection}
-\alias{degIntersection,DESeqResultsList-method}
 \alias{degIntersection,DESeqAnalysis-method}
 \alias{degIntersection,DESeqAnalysisList-method}
+\alias{degIntersection,DESeqResultsList-method}
 \title{Intersection of differentially expressed genes}
 \usage{
 degIntersection(object, ...)
+
+\S4method{degIntersection}{DESeqAnalysis}(
+  object,
+  i = NULL,
+  alphaThreshold = NULL,
+  lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
+  direction = c("up", "down"),
+  return = c("matrix", "count", "ratio", "names")
+)
+
+\S4method{degIntersection}{DESeqAnalysisList}(object, i = NULL)
 
 \S4method{degIntersection}{DESeqResultsList}(
   object,
@@ -17,13 +29,16 @@ degIntersection(object, ...)
   direction = c("up", "down"),
   return = c("matrix", "count", "ratio", "names")
 )
-
-\S4method{degIntersection}{DESeqAnalysis}(object, i = NULL, ...)
-
-\S4method{degIntersection}{DESeqAnalysisList}(object, i = NULL)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{i}{\code{character}, \code{numeric}, or \code{NULL}.
+Names or range of results.
+If set \code{NULL}, include all results per object.
+When passing in multiple objects, specify the desired results as a \code{list}
+with length matching the number of input objects, containing either
+\code{character} or \code{numeric} corresponding to each object.}
 
 \item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
@@ -55,13 +70,6 @@ Names of genes that intersect across all contrasts defined.
 Input of specific contrasts with \code{i} argument is recommended here.
 }}
 
-\item{i}{\code{character}, \code{numeric}, or \code{NULL}.
-Names or range of results.
-If set \code{NULL}, include all results per object.
-When passing in multiple objects, specify the desired results as a \code{list}
-with length matching the number of input objects, containing either
-\code{character} or \code{numeric} corresponding to each object.}
-
 \item{...}{Passthrough arguments to \code{DESeqResultsList} method.}
 }
 \value{
@@ -73,7 +81,7 @@ lowest. Gene identifiers are defined as the names.
 Intersection of differentially expressed genes
 }
 \note{
-Updated 2021-03-09.
+Updated 2021-03-12.
 }
 \examples{
 data(deseq)

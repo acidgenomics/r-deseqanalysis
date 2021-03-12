@@ -1,3 +1,8 @@
+## FIXME Add DESeqAnalysisList method support?
+## FIXME Add DESeqResultsList method support.
+
+
+
 #' @name resultsNames
 #' @inherit AcidGenerics::resultsNames
 #' @note Updated 2019-09-10.
@@ -73,72 +78,4 @@ setReplaceMethod(
         value = "character"
     ),
     definition = `resultsNames<-,DESeqAnalysis,character`
-)
-
-
-
-
-## contrastNames aliases =======================================================
-#' @rdname resultsNames
-#' @name contrastNames
-#' @importFrom AcidGenerics contrastNames
-#' @usage contrastNames(object, ...)
-#' @export
-NULL
-
-#' @rdname resultsNames
-#' @name contrastNames<-
-#' @importFrom AcidGenerics contrastNames<-
-#' @usage contrastNames(object, ...) <- value
-#' @export
-NULL
-
-
-
-`contrastNames,DESeqDataSet` <-  # nolint
-    `resultsNames,DESeqDataSet`
-
-
-
-#' @rdname resultsNames
-#' @export
-setMethod(
-    f = "contrastNames",
-    signature = signature("DESeqDataSet"),
-    definition = `contrastNames,DESeqDataSet`
-)
-
-
-
-## Updated 2019-07-23.
-`contrastNames,DESeqAnalysis` <-  # nolint
-    `resultsNames,DESeqAnalysis`
-
-
-
-#' @rdname resultsNames
-#' @export
-setMethod(
-    f = "contrastNames",
-    signature = signature("DESeqAnalysis"),
-    definition = `contrastNames,DESeqAnalysis`
-)
-
-
-
-## Updated 2019-09-10.
-`contrastNames<-,DESeqAnalysis,character` <-  # nolint
-    `resultsNames<-,DESeqAnalysis,character`
-
-
-
-#' @rdname resultsNames
-#' @export
-setReplaceMethod(
-    f = "contrastNames",
-    signature = signature(
-        object = "DESeqAnalysis",
-        value = "character"
-    ),
-    definition = `contrastNames<-,DESeqAnalysis,character`
 )

@@ -1,10 +1,6 @@
-## FIXME RETHINK THIS, DONT EXPORT?
-
-
-
 #' @name contrastName
 #' @inherit AcidGenerics::contrastName
-#' @note Updated 2020-08-04.
+#' @note Updated 2021-03-12.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -36,8 +32,10 @@ NULL
 `contrastName,DESeqResults` <-  # nolint
     function(
         object,
-        ## FIXME REWORK THIS...FUNKY.
+        ## FIXME Rethink this.
         .format = c("resultsNames", "title"),
+        ## FIXME Rethink this.
+        ## FIXME Take this out once we update contrastSamples.
         .useStash = TRUE
     ) {
         validObject(object)
