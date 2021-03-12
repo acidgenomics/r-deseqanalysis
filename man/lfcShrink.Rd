@@ -5,7 +5,9 @@
 \alias{lfcShrink<-}
 \alias{lfcShrink,DESeqDataSet-method}
 \alias{lfcShrink,DESeqAnalysis-method}
+\alias{lfcShrink,DESeqAnalysisList-method}
 \alias{lfcShrink<-,DESeqAnalysis,logical-method}
+\alias{lfcShrink<-,DESeqAnalysisList,logical-method}
 \title{Shrink log2 fold changes}
 \usage{
 lfcShrink(object, ...)
@@ -16,7 +18,11 @@ lfcShrink(object, ...) <- value
 
 \S4method{lfcShrink}{DESeqAnalysis}(object)
 
+\S4method{lfcShrink}{DESeqAnalysisList}(object)
+
 \S4method{lfcShrink}{DESeqAnalysis,logical}(object) <- value
+
+\S4method{lfcShrink}{DESeqAnalysisList,logical}(object) <- value
 }
 \arguments{
 \item{object}{Object.}
@@ -32,7 +38,7 @@ Varies, depending on object class.
 Shrink log2 fold changes
 }
 \note{
-Updated 2020-08-04.
+Updated 2021-03-12.
 }
 \examples{
 data(deseq)

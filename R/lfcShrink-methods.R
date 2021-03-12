@@ -1,12 +1,9 @@
-## FIXME NEED TO RETHINK THIS WITH DESEQRESULTSLIST.
-## FIXME NEED TO RETHINK THIS WITH DESEQANALYSISLIST SUPPORT.
-
-
-
 #' @name lfcShrink
 #' @inherit AcidGenerics::lfcShrink
-#' @note Updated 2020-08-04.
+#' @note Updated 2021-03-12.
+#'
 #' @seealso [DESeq2::lfcShrink()].
+#'
 #' @examples
 #' data(deseq)
 #'
@@ -24,16 +21,6 @@ NULL
 
 
 
-#' @rdname lfcShrink
-#' @export
-setMethod(
-    f = "lfcShrink",
-    signature = signature("DESeqDataSet"),
-    definition = `lfcShrink,DESeqDataSet`
-)
-
-
-
 ## Updated 2020-09-18.
 `lfcShrink,DESeqAnalysis` <-  # nolint
     function(object) {
@@ -45,13 +32,12 @@ setMethod(
 
 
 
-#' @rdname lfcShrink
-#' @export
-setMethod(
-    f = "lfcShrink",
-    signature = signature("DESeqAnalysis"),
-    definition = `lfcShrink,DESeqAnalysis`
-)
+## Updated 2021-03-12.
+`lfcShrink,DESeqAnalysisList` <-  # nolint
+    function(object) {
+        assert(hasLength(object))
+        lfcShrink(object[[1L]])
+    }
 
 
 
@@ -65,6 +51,49 @@ setMethod(
 
 
 
+## Updated 2020-08-04.
+`lfcShrink<-,DESeqAnalysisList,logical` <-  # nolint
+    function(object, value) {
+        assert(
+            hasLength(object),
+            isFlag(value)
+        )
+        metadata(object[[1L]])[["lfcShrink"]] <- value
+        object
+    }
+
+
+
+#' @rdname lfcShrink
+#' @export
+setMethod(
+    f = "lfcShrink",
+    signature = signature("DESeqDataSet"),
+    definition = `lfcShrink,DESeqDataSet`
+)
+
+
+
+#' @rdname lfcShrink
+#' @export
+setMethod(
+    f = "lfcShrink",
+    signature = signature("DESeqAnalysis"),
+    definition = `lfcShrink,DESeqAnalysis`
+)
+
+
+
+#' @rdname lfcShrink
+#' @export
+setMethod(
+    f = "lfcShrink",
+    signature = signature("DESeqAnalysisList"),
+    definition = `lfcShrink,DESeqAnalysisList`
+)
+
+
+
 #' @rdname lfcShrink
 #' @export
 setReplaceMethod(
@@ -74,4 +103,17 @@ setReplaceMethod(
         value = "logical"
     ),
     definition = `lfcShrink<-,DESeqAnalysis,logical`
+)
+
+
+
+#' @rdname lfcShrink
+#' @export
+setReplaceMethod(
+    f = "lfcShrink",
+    signature = signature(
+        object = "DESeqAnalysisList",
+        value = "logical"
+    ),
+    definition = `lfcShrink<-,DESeqAnalysisList,logical`
 )
