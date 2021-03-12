@@ -82,11 +82,9 @@ DESeqAnalysis <-  # nolint
 
 
 ## DESeqAnalysisList ===========================================================
-## FIXME Require that all rownames are identical in slotted objects.
-
 #' @name DESeqAnalysisList
 #' @inherit DESeqAnalysisList-class title description return
-#' @note Updated 2021-03-09.
+#' @note Updated 2021-03-12.
 #'
 #' @param ... `DESeqAnalysis` objects or named `list`.
 #'
@@ -98,34 +96,18 @@ NULL
 
 
 
-## Updated 2021-03-08.
-`DESeqAnalysisList,list` <- function(object) {  # nolint
-    assert(hasLength(object), hasNames(object))
-    new(Class = "DESeqAnalysisList", object)
-}
-
-
-
-## Updated 2021-03-08.
+## Updated 2021-03-12.
 `DESeqAnalysisList,SimpleList` <-  # nolint
-    `DESeqAnalysisList,list`
-
-
-
-## How to get names of dot arguments.
-## https://stackoverflow.com/questions/51259346
-
-## Updated 2021-03-08.
-`DESeqAnalysisList,DESeqAnalysis` <-  # nolint
-    function(object, ...) {
-        mc <- match.call(expand.dots = FALSE)
-        l <- append(x = list(object), values = list(...))
-        names(l) <- c(
-            as.character(mc[[2L]]),
-            as.character(mc[["..."]])
-        )
-        new(Class = "DESeqAnalysisList", l)
+    function(object) {
+        assert(hasLength(object), hasNames(object))
+        new(Class = "DESeqAnalysisList", object)
     }
+
+
+
+## Updated 2021-03-12.
+`DESeqAnalysisList,list` <-  # nolint
+    `DESeqAnalysisList,SimpleList`
 
 
 
@@ -134,16 +116,6 @@ NULL
     function(object) {
         new(Class = "DESeqAnalysisList", list())
     }
-
-
-
-#' @rdname DESeqAnalysisList
-#' @export
-setMethod(
-    f = "DESeqAnalysisList",
-    signature = signature("list"),
-    definition = `DESeqAnalysisList,list`
-)
 
 
 
@@ -161,8 +133,8 @@ setMethod(
 #' @export
 setMethod(
     f = "DESeqAnalysisList",
-    signature = signature("DESeqAnalysis"),
-    definition = `DESeqAnalysisList,DESeqAnalysis`
+    signature = signature("list"),
+    definition = `DESeqAnalysisList,list`
 )
 
 
@@ -178,11 +150,9 @@ setMethod(
 
 
 ## DESeqResultsList ============================================================
-## FIXME Consider requiring that all rownames are identical here.
-
 #' @name DESeqResultsList
 #' @inherit DESeqResultsList-class title description return
-#' @note Updated 2021-03-09.
+#' @note Updated 2021-03-12.
 #'
 #' @param ... `DESeqResults` objects or named `list`.
 #'
@@ -191,33 +161,6 @@ setMethod(
 #' x <- DESeqResultsList(deseq)
 #' print(names(x))
 NULL
-
-
-
-## Updated 2021-03-09.
-`DESeqResultsList,list` <- function(object) {  # nolint
-    new(Class = "DESeqResultsList", object)
-}
-
-
-
-## Updated 2021-03-09.
-`DESeqResultsList,SimpleList` <-  # nolint
-    `DESeqResultsList,list`
-
-
-
-## Updated 2021-03-09.
-`DESeqResultsList,DESeqResults` <-  # nolint
-    function(object, ...) {
-        mc <- match.call(expand.dots = FALSE)
-        l <- append(x = list(object), values = list(...))
-        names(l) <- c(
-            as.character(mc[[2L]]),
-            as.character(mc[["..."]])
-        )
-        new(Class = "DESeqResultsList", l)
-    }
 
 
 
@@ -289,41 +232,25 @@ NULL
 
 
 
+## Updated 2021-03-12.
+`DESeqResultsList,SimpleList` <-  # nolint
+    function(object) {
+        new(Class = "DESeqResultsList", object)
+    }
+
+
+
+## Updated 2021-03-12.
+`DESeqResultsList,list` <-  # nolint
+    `DESeqResultsList,SimpleList`
+
+
+
 ## Updated 2021-03-08.
 `DESeqResultsList,missing` <-  # nolint
     function(object) {
         new(Class = "DESeqResultsList", list())
     }
-
-
-
-#' @rdname DESeqResultsList
-#' @export
-setMethod(
-    f = "DESeqResultsList",
-    signature = signature("list"),
-    definition = `DESeqResultsList,list`
-)
-
-
-
-#' @rdname DESeqResultsList
-#' @export
-setMethod(
-    f = "DESeqResultsList",
-    signature = signature("SimpleList"),
-    definition = `DESeqResultsList,SimpleList`
-)
-
-
-
-#' @rdname DESeqResultsList
-#' @export
-setMethod(
-    f = "DESeqResultsList",
-    signature = signature("DESeqResults"),
-    definition = `DESeqResultsList,DESeqResults`
-)
 
 
 
@@ -343,6 +270,26 @@ setMethod(
     f = "DESeqResultsList",
     signature = signature("DESeqAnalysisList"),
     definition = `DESeqResultsList,DESeqAnalysisList`
+)
+
+
+
+#' @rdname DESeqResultsList
+#' @export
+setMethod(
+    f = "DESeqResultsList",
+    signature = signature("SimpleList"),
+    definition = `DESeqResultsList,SimpleList`
+)
+
+
+
+#' @rdname DESeqResultsList
+#' @export
+setMethod(
+    f = "DESeqResultsList",
+    signature = signature("list"),
+    definition = `DESeqResultsList,list`
 )
 
 
