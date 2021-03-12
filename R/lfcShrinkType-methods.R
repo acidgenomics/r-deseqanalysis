@@ -55,6 +55,15 @@ NULL
 
 
 
+## Updated 2021-03-12.
+`lfcShrinkType,DESeqResultsList` <-  # nolint
+    function(object) {
+        assert(hasLength(object))
+        lfcShrinkType(object[[1L]])
+    }
+
+
+
 #' @rdname lfcShrinkType
 #' @export
 setMethod(
@@ -69,6 +78,26 @@ setMethod(
 #' @export
 setMethod(
     f = "lfcShrinkType",
+    signature = signature("DESeqAnalysisList"),
+    definition = `lfcShrinkType,DESeqAnalysisList`
+)
+
+
+
+#' @rdname lfcShrinkType
+#' @export
+setMethod(
+    f = "lfcShrinkType",
     signature = signature("DESeqResults"),
     definition = `lfcShrinkType,DESeqResults`
+)
+
+
+
+#' @rdname lfcShrinkType
+#' @export
+setMethod(
+    f = "lfcShrinkType",
+    signature = signature("DESeqResultsList"),
+    definition = `lfcShrinkType,DESeqResultsList`
 )
