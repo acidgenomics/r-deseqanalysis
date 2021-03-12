@@ -2,19 +2,16 @@
 % Please edit documentation in R/AllGenerics.R, R/AllGenerators.R
 \name{DESeqAnalysisList}
 \alias{DESeqAnalysisList}
-\alias{DESeqAnalysisList,list-method}
 \alias{DESeqAnalysisList,SimpleList-method}
-\alias{DESeqAnalysisList,DESeqAnalysis-method}
+\alias{DESeqAnalysisList,list-method}
 \alias{DESeqAnalysisList,missing-method}
 \title{List containing related DESeq2 analyses}
 \usage{
 DESeqAnalysisList(object, ...)
 
-\S4method{DESeqAnalysisList}{list}(object)
-
 \S4method{DESeqAnalysisList}{SimpleList}(object)
 
-\S4method{DESeqAnalysisList}{DESeqAnalysis}(object, ...)
+\S4method{DESeqAnalysisList}{list}(object)
 
 \S4method{DESeqAnalysisList}{missing}(object)
 }
@@ -28,7 +25,7 @@ DESeqAnalysisList(object, ...)
 List containing related DESeq2 analyses
 }
 \note{
-Updated 2021-03-09.
+Updated 2021-03-12.
 }
 \examples{
 data(deseq)
