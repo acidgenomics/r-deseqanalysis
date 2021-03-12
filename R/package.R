@@ -5,10 +5,7 @@
 #'
 #' @aliases NULL
 #' @keywords internal
-"_PACKAGE"
-
-
-
+#'
 #' @importClassesFrom DESeq2 DESeqDataSet DESeqTransform
 #' @importClassesFrom basejump DataFrameList RangedSummarizedExperiment
 #'   SummarizedExperiment Tx2Gene missingOrNULL
@@ -41,4 +38,4 @@
 #' @importFrom methods as is new prototype setClass setGeneric setValidity show
 #'   slot slot<- validObject .hasSlot
 #' @importFrom stringr str_locate_all str_match str_trunc
-NULL
+"_PACKAGE"
