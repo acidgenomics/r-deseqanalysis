@@ -60,7 +60,7 @@ NULL
 
 
 
-## Updated 2021-03-10.
+## Updated 2021-03-12.
 `alphaThreshold,DESeqResultsList` <-  # nolint
     function(object) {
         assert(hasLength(object))
@@ -68,6 +68,7 @@ NULL
         if (is.null(x)) {
             x <- alphaThreshold(object[[1L]])
         }
+        assert(isAlpha(x))
         x
     }
 
