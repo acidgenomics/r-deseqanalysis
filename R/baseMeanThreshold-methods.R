@@ -1,6 +1,6 @@
 #' @name baseMeanThreshold
 #' @inherit AcidGenerics::baseMeanThreshold
-#' @note Updated 2021-03-10.
+#' @note Updated 2021-03-12.
 #' @param ... Additional arguments.
 #' @examples
 #' data(deseq)
@@ -58,14 +58,8 @@ NULL
 
 
 
-
-## FIXME DESeqAnalysisList
-## FIXME DESeqResultsList
-
-
-
-## Updated 2021-03-03.
-`baseMeanThreshold<-,DESeqResults,numeric` <-  # nolint
+## Updated 2021-03-12.
+`baseMeanThreshold<-,DESeqAnalysis,numeric` <-  # nolint
     function(object, value) {
         assert(isNumber(value), isNonNegative(value))
         metadata(object)[["baseMeanThreshold"]] <- value
@@ -74,8 +68,8 @@ NULL
 
 
 
-## Updated 2021-03-03.
-`baseMeanThreshold<-,DESeqResults,NULL` <-  # nolint
+## Updated 2021-03-12.
+`baseMeanThreshold<-,DESeqAnalysis,NULL` <-  # nolint
     function(object, value) {
         metadata(object)[["baseMeanThreshold"]] <- value
         object
@@ -83,14 +77,38 @@ NULL
 
 
 
-## Updated 2021-03-03.
-`baseMeanThreshold<-,DESeqAnalysis,numeric` <-  # nolint
+## Updated 2021-03-12.
+`baseMeanThreshold<-,DESeqAnalysisList,numeric` <-  # nolint
+    `baseMeanThreshold<-,DESeqAnalysis,numeric`
+
+
+
+## Updated 2021-03-12.
+`baseMeanThreshold<-,DESeqAnalysisList,NULL` <-  # nolint
+    `baseMeanThreshold<-,DESeqAnalysis,NULL`
+
+
+
+## Updated 2021-03-12.
+`baseMeanThreshold<-,DESeqResults,numeric` <-  # nolint
+    `baseMeanThreshold<-,DESeqAnalysis,numeric`
+
+
+
+## Updated 2021-03-12.
+`baseMeanThreshold<-,DESeqResults,NULL` <-  # nolint
+    `baseMeanThreshold<-,DESeqAnalysis,NULL`
+
+
+
+## Updated 2021-03-12.
+`baseMeanThreshold<-,DESeqResultsList,numeric` <-  # nolint
     `baseMeanThreshold<-,DESeqResults,numeric`
 
 
 
-## Updated 2021-03-03.
-`baseMeanThreshold<-,DESeqAnalysis,NULL` <-  # nolint
+## Updated 2021-03-12.
+`baseMeanThreshold<-,DESeqResultsList,NULL` <-  # nolint
     `baseMeanThreshold<-,DESeqResults,NULL`
 
 
@@ -161,16 +179,28 @@ setReplaceMethod(
 
 
 
-## FIXME DESeqAnalysisList
+#' @rdname baseMeanThreshold
+#' @export
+setReplaceMethod(
+    f = "baseMeanThreshold",
+    signature = signature(
+        object = "DESeqAnalysisList",
+        value = "numeric"
+    ),
+    definition = `baseMeanThreshold<-,DESeqAnalysisList,numeric`
+)
 
 
 
 #' @rdname baseMeanThreshold
 #' @export
-setMethod(
+setReplaceMethod(
     f = "baseMeanThreshold",
-    signature = signature("DESeqResults"),
-    definition = `baseMeanThreshold,DESeqResults`
+    signature = signature(
+        object = "DESeqAnalysisList",
+        value = "NULL"
+    ),
+    definition = `baseMeanThreshold<-,DESeqAnalysisList,NULL`
 )
 
 
@@ -201,4 +231,26 @@ setReplaceMethod(
 
 
 
-## FIXME DESeqResultsList
+#' @rdname baseMeanThreshold
+#' @export
+setReplaceMethod(
+    f = "baseMeanThreshold",
+    signature = signature(
+        object = "DESeqResultsList",
+        value = "numeric"
+    ),
+    definition = `baseMeanThreshold<-,DESeqResultsList,numeric`
+)
+
+
+
+#' @rdname baseMeanThreshold
+#' @export
+setReplaceMethod(
+    f = "baseMeanThreshold",
+    signature = signature(
+        object = "DESeqResultsList",
+        value = "NULL"
+    ),
+    definition = `baseMeanThreshold<-,DESeqResultsList,NULL`
+)
