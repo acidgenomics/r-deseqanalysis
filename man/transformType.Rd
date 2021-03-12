@@ -2,15 +2,18 @@
 % Please edit documentation in R/AllGenerics.R, R/transformType-methods.R
 \name{transformType}
 \alias{transformType}
-\alias{transformType,DESeqTransform-method}
 \alias{transformType,DESeqAnalysis-method}
+\alias{transformType,DESeqAnalysisList-method}
+\alias{transformType,DESeqTransform-method}
 \title{Variance-stabilizing transformation type}
 \usage{
 transformType(object, ...)
 
-\S4method{transformType}{DESeqTransform}(object)
-
 \S4method{transformType}{DESeqAnalysis}(object)
+
+\S4method{transformType}{DESeqAnalysisList}(object)
+
+\S4method{transformType}{DESeqTransform}(object)
 }
 \arguments{
 \item{object}{Object.}
@@ -25,7 +28,7 @@ Transformation method name.
 Variance-stabilizing transformation type
 }
 \note{
-Updated 2020-08-04.
+Updated 2021-03-12.
 }
 \examples{
 data(deseq)
