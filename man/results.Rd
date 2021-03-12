@@ -10,7 +10,7 @@ results(object, ...)
 
 \S4method{results}{DESeqDataSet}(object, ...)
 
-\S4method{results}{DESeqAnalysis}(object, i, lfcShrink = NULL, extra = FALSE)
+\S4method{results}{DESeqAnalysis}(object, i, lfcShrink = NULL, extra = FALSE, quiet = FALSE)
 }
 \arguments{
 \item{object}{Object.}
@@ -30,6 +30,9 @@ If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.
 \item{extra}{\code{logical(1)}.
 Include row data (i.e. gene metadata) and normalized counts from the
 internal \code{DESeqDataSet}.}
+
+\item{quiet}{\code{logical(1)}.
+Perform command quietly, suppressing messages.}
 }
 \value{
 \code{DESeqResults}.
@@ -38,7 +41,7 @@ internal \code{DESeqDataSet}.}
 Results
 }
 \note{
-Updated 2021-03-08.
+Updated 2021-03-12.
 }
 \section{Extra mode}{
 
