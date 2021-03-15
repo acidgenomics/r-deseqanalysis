@@ -1,6 +1,6 @@
 #' @name contrastSamples
 #' @inherit AcidGenerics::contrastSamples
-#' @note Updated 2021-03-12.
+#' @note Updated 2021-03-15.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -28,16 +28,18 @@ NULL
 
 ## This has been split out to an internal function, so we can support
 ## interaction effect (difference of differences) contrasts more easily.
-## Updated 2020-08-04.
+## Updated 2021-03-15.
 .contrastSamples <- function(
     dds,
     contrast,
-    factorCol
+    factorCol,
+    quiet = FALSE
 ) {
     assert(
         is(dds, "DESeqDataSet"),
         isString(contrast),
-        isString(factorCol)
+        isString(factorCol),
+        isFlag(quiet)
     )
     colData <- colData(dds)
     factor <- colData[[factorCol]]
@@ -57,25 +59,28 @@ NULL
     assert(isSubset(numeratorCol, factor))
     numerator <- samples[factor %in% numeratorCol]
     assert(hasLength(numerator))
-    dl(c("Numerator samples" = toString(numerator, width = 200L)))
+    if (isFALSE(quiet)) {
+        dl(c("Numerator samples" = toString(numerator, width = 200L)))
+    }
     ## Denominator.
     denominatorCol <- match[1L, 3L]
     assert(isSubset(denominatorCol, factor))
     denominator <- samples[factor %in% denominatorCol]
     assert(hasLength(denominator))
-    dl(c("Denominator samples" = toString(denominator, width = 200L)))
+    if (isFALSE(quiet)) {
+        dl(c("Denominator samples" = toString(denominator, width = 200L)))
+    }
     sort(c(numerator, denominator))
 }
 
 
 
-## Updated 2020-08-05.
+## Updated 2021-03-15.
 `contrastSamples,DESeqAnalysis` <-  # nolint
-    function(object, i, ...) {
+    function(object, i, quiet = FALSE) {
         validObject(object)
-        suppressMessages({
-            res <- results(object, i = i)
-        })
+        assert(isFlag(quiet))
+        res <- results(object, i = i, quiet = TRUE)
         ## If we've defined a subset of samples for the contrast, stash them
         ## in DESeqResults metadata. Otherwise, there's no way to trace this
         ## back to a match in DESeqDataSet.
@@ -83,18 +88,15 @@ NULL
         if (hasLength(samples)) {
             return(samples)
         }
-        ## FIXME RETHINK THIS APPROACH.
-        ## GET THE NAME FROM THE OBJECT INSTEAD...
-        contrast <- contrastName(
-            object = res,
-            .format = "resultsNames",
-            .useStash = FALSE
-        )
+        ## This step may error if we use a metadata stash, which is uncommon.
+        contrast <- contrastName(res, format = "resultsNames")
         assert(
             isString(contrast),
             assert(grepl("_vs_", contrast))
         )
-        dl(c("Contrast" = contrast))
+        if (isFALSE(quiet)) {
+            dl(c("Contrast" = contrast))
+        }
         dds <- as(object, "DESeqDataSet")
         colData <- colData(dds)
         assert(hasRownames(colData))
@@ -110,13 +112,17 @@ NULL
         )
         assert(identical(sum(match), 1L))
         factorCol <- names(match)[match]
-        dl(c("Factor column" = factorCol))
+        if (isFALSE(quiet)) {
+            dl(c("Factor column" = factorCol))
+        }
         ## Look for interaction effect (difference of differences).
         ## e.g. "group_B_vs_A_group_C_vs_A_effect".
         if (isTRUE(grepl(pattern = "_effect$", x = contrast))) {
-            alertInfo(
-                "Interaction effect (difference of differences) detected."
-            )
+            if (isFALSE(quiet)) {
+                alertInfo(
+                    "Interaction effect (difference of differences) detected."
+                )
+            }
             interaction <- TRUE
             x <- contrast
             x <- sub("_effect$", "", x)
@@ -125,17 +131,23 @@ NULL
                 substr(x = x, start = loc[1L, 1L], stop = loc[2L, 1L] - 2L)
             contrast2 <-
                 substr(x = x, start = loc[2L, 1L], stop = nchar(x))
-            dl(c("Contrast 1" = contrast1))
+            if (isFALSE(quiet)) {
+                dl(c("Contrast 1" = contrast1))
+            }
             samples1 <- .contrastSamples(
                 dds = dds,
                 contrast = contrast1,
-                factorCol = factorCol
+                factorCol = factorCol,
+                quiet = quiet
             )
-            dl(c("Contrast 2" = contrast2))
+            if (isFALSE(quiet)) {
+                dl(c("Contrast 2" = contrast2))
+            }
             samples2 <- .contrastSamples(
                 dds = dds,
                 contrast = contrast2,
-                factorCol = factorCol
+                factorCol = factorCol,
+                quiet = quiet
             )
             samples <- unique(c(samples1, samples2))
         } else {
@@ -143,7 +155,8 @@ NULL
             samples <- .contrastSamples(
                 dds = dds,
                 contrast = contrast,
-                factorCol = factorCol
+                factorCol = factorCol,
+                quiet = quiet
             )
         }
         samples

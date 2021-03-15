@@ -7,7 +7,7 @@
 \usage{
 contrastSamples(object, ...)
 
-\S4method{contrastSamples}{DESeqAnalysis}(object, i, ...)
+\S4method{contrastSamples}{DESeqAnalysis}(object, i, quiet = FALSE)
 }
 \arguments{
 \item{object}{Object.}
@@ -17,6 +17,9 @@ contrastSamples(object, ...)
 
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
+
+\item{quiet}{\code{logical(1)}.
+Perform command quietly, suppressing messages.}
 
 \item{...}{Additional arguments.}
 }
@@ -34,7 +37,7 @@ corresponding \code{DESeqResults} object. Note that this only works for simple
 comparisons.
 }
 \note{
-Updated 2021-03-12.
+Updated 2021-03-15.
 
 \strong{EXPERIMENTAL}. This approach will error intentionally for
 \code{DESeqResults} objects generated with complex contrasts (e.g. interaction
