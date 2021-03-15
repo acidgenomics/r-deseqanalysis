@@ -85,7 +85,7 @@ DESeqAnalysis <-  # nolint
 #' @inherit DESeqAnalysisList-class title description return
 #' @note Updated 2021-03-15.
 #'
-#' @param ... `DESeqAnalysis` objects or named `list`.
+#' @inheritParams AcidRoxygen::params
 #'
 #' @examples
 #' data(deseq)
@@ -151,9 +151,10 @@ setMethod(
 ## DESeqResultsList ============================================================
 #' @name DESeqResultsList
 #' @inherit DESeqResultsList-class title description return
-#' @note Updated 2021-03-12.
+#' @note Updated 2021-03-15.
 #'
-#' @param ... `DESeqResults` objects or named `list`.
+#' @inheritParams AcidRoxygen::params
+#' @inheritParams params
 #'
 #' @examples
 #' data(deseq)

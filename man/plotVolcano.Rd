@@ -31,7 +31,7 @@ plotVolcano(object, ...)
     AcidPlots::lightPalette[["gray"]]),
   pointSize = 2L,
   pointAlpha = 0.8,
-  limits = list(x = NULL, y = c(1e-10, 1)),
+  limits = list(x = NULL, y = c(1e-10, 1L)),
   labels = list(title = NULL, subtitle = NULL, x = "log2 fold change", y =
     "-log10 adj p value"),
   histograms = FALSE
@@ -94,10 +94,6 @@ See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
 
 \item{histograms}{\code{logical(1)}.
 Show LFC and P value histograms.}
-
-\item{ylim}{\code{numeric(1)}.
-Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets
-containing highly significant P values (e.g. \code{1e-100}).}
 }
 \value{
 \code{ggplot}.

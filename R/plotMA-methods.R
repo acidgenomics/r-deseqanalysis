@@ -267,7 +267,7 @@ NULL
             data[[lfcCol]][!ok[[2L]]] <- limits[["y"]][[2L]]
         }
         breaks <- list(
-            "x" = 10 ^ seq(
+            "x" = 10L ^ seq(
                 from = min(floor(log10(limits[["x"]][[1L]]))),
                 to = min(floor(log10(limits[["x"]][[2L]]))),
                 by = 1L

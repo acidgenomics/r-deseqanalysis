@@ -22,7 +22,16 @@ DESeqResultsList(object, ...)
 \S4method{DESeqResultsList}{missing}(object)
 }
 \arguments{
-\item{...}{\code{DESeqResults} objects or named \code{list}.}
+\item{object}{Object.}
+
+\item{...}{Additional arguments.}
+
+\item{lfcShrink}{\code{logical(1)} or \code{NULL}.
+Use shrunken log2 fold change (LFC) values.
+If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
+
+\item{quiet}{\code{logical(1)}.
+Perform command quietly, suppressing messages.}
 }
 \value{
 \code{DESeqResultsList}.
@@ -31,7 +40,7 @@ DESeqResultsList(object, ...)
 List containing related DESeqResults objects
 }
 \note{
-Updated 2021-03-12.
+Updated 2021-03-15.
 }
 \examples{
 data(deseq)

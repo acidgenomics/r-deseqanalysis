@@ -5,9 +5,6 @@
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
-#' @param ylim `numeric(1)`.
-#'   Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets
-#'   containing highly significant P values (e.g. `1e-100`).
 #' @param histograms `logical(1)`.
 #'   Show LFC and P value histograms.
 #' @param ... Additional arguments.
@@ -116,7 +113,7 @@ NULL
         pointAlpha = 0.8,
         limits = list(
             "x" = NULL,
-            "y" = c(1e-10, 1e+00)
+            "y" = c(1e-10, 1L)
         ),
         ## NOTE Consider reworking the NULL as TRUE here?
         labels = list(
@@ -245,7 +242,7 @@ NULL
         assert(
             hasLength(limits[["y"]], n = 2L),
             isInRange(limits[["y"]][[1L]], lower = 1e-100, upper = 1e-2),
-            isInRange(limits[["y"]][[2L]], lower = 1e-1, upper = 1e0)
+            isInRange(limits[["y"]][[2L]], lower = 1e-1, upper = 1L)
         )
         ok <- list(
             data[[alphaCol]] >= limits[["y"]][[1L]],
