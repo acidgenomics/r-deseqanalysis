@@ -1,10 +1,6 @@
-## FIXME THIS NEEDS A REWORK.
-
-
-
 #' @name degIntersection
 #' @inherit AcidGenerics::degIntersection return title
-#' @note Updated 2021-03-12.
+#' @note Updated 2021-03-15.
 #'
 #' @inheritParams AcidRoxygen::params
 #'
@@ -57,11 +53,15 @@ NULL
 
 
 
-## FIXME CONSIDER REWORKING THIS TO DISPATCH ON DESEQRESULTS METHOD...
-## FIXME THE PARAMETERIZED VERSION NEEDS TO WORK ON DESEQANALYSISLIST...
+## Updated 2021-03-15.
+.args <- list(
+    "direction" = c("up", "down"),
+    "return" = c("matrix", "count", "ratio", "names")
+)
 
 
-## Updated 2021-03-12.
+
+## Updated 2021-03-15.
 `degIntersection,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -69,107 +69,44 @@ NULL
         alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
-        direction = c("up", "down"),
-        return = c("matrix", "count", "ratio", "names")
+        direction,
+        return
     ) {
-        if (is.null(i)) {
-            i <- lapply(X = objects, FUN = resultsNames)
+        validObject(object)
+        resList <- DESeqResultsList(object = object, quiet = TRUE)
+        if (!is.null(i)) {
+            assert(length(i) > 1L)
+            resList <- resList[i]
         }
-        assert(areSameLength(objects, i))
-        if (is.null(alphaThreshold)) {
-            alphaThreshold <- alphaThreshold(object)
-        }
-        if (is.null(lfcThreshold)) {
-            lfcThreshold <- lfcThreshold(object)
-        }
-        if (is.null(baseMeanThreshold)) {
-            baseMeanThreshold <- baseMeanThreshold(object)
-        }
-        direction <- match.arg(direction)
-        return <- match.arg(return)
-        x <- mapply(
-            object = objects,
-            i = i,
-            MoreArgs = list(
-                "alphaThreshold" = alphaThreshold,
-                "lfcThreshold" = lfcThreshold,
-                "baseMeanThreshold" = baseMeanThreshold,
-                "direction" = direction,
-                "return" = return
+        degIntersection(
+            object = resList,
+            alphaThreshold = ifelse(
+                test = is.null(alphaThreshold),
+                yes = alphaThreshold(object),
+                no = alphaThreshold
             ),
-            FUN = function(
-                object,
-                i,
-                alphaThreshold,
-                lfcThreshold,
-                baseMeanThreshold,
-                direction,
-                return
-            ) {
-                validObject(object)
-                x <- lapply(
-                    X = i,
-                    FUN = deg,
-                    object = object,
-                    alphaThreshold = alphaThreshold,
-                    lfcThreshold = lfcThreshold,
-                    baseMeanThreshold = baseMeanThreshold,
-                    direction = direction,
-                    quiet = TRUE
-                )
-                names(x) <- i
-                x
-            },
-            SIMPLIFY = FALSE,
-            USE.NAMES = FALSE
-        )
-        x <- unlist(x = x, recursive = FALSE, use.names = TRUE)
-        assert(hasNames(x))
-        if (any(duplicated(names(x)))) {
-            dupes <- names(x)[duplicated(names(x))]
-            stop(sprintf(
-                "%d duplicate %s: %s.",
-                length(dupes),
-                ngettext(
-                    n = length(dupes),
-                    msg1 = "contrast",
-                    msg2 = "contrasts"
-                ),
-                toString(dupes, width = 200L)
-            ))
-        }
-        mat <- intersectionMatrix(x)
-        alert(sprintf(
-            "Returning intersection %s of %s %s-regulated DEGs.",
-            return, nrow(mat), direction
-        ))
-        count <- rowSums(mat)
-        mode(count) <- "integer"
-        switch(
-            EXPR = return,
-            "count" = count,
-            "matrix" = mat,
-            "names" = {
-                x <- apply(X = mat, MARGIN = 1L, FUN = all)
-                x <- names(x)[x]
-                x
-            },
-            "ratio" = {
-                count / length(x)
-            }
+            lfcThreshold = ifelse(
+                test = is.null(lfcThreshold),
+                yes = lfcThreshold(object),
+                no = lfcThreshold
+            ),
+            baseMeanThreshold = ifelse(
+                test = is.null(baseMeanThreshold),
+                yes = baseMeanThreshold(object),
+                no = baseMeanThreshold
+            ),
+            direction = match.arg(direction),
+            return = match.arg(return)
         )
     }
 
+formals(`degIntersection,DESeqAnalysis`)[names(.args)] <- .args
 
 
-## Updated 2021-03-09.
+
+## Updated 2021-03-15.
 `degIntersection,DESeqAnalysisList` <-  # nolint
-    function(
-        object,
-        i = NULL
-    ) {
-        stop("FIXME")
-    }
+    `degIntersection,DESeqAnalysis`
 
 
 
@@ -180,8 +117,8 @@ NULL
         alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
-        direction = c("up", "down"),
-        return = c("matrix", "count", "ratio", "names")
+        direction,
+        return
     ) {
         validObject(object)
         if (is.null(alphaThreshold)) {
@@ -239,6 +176,12 @@ NULL
             }
         )
     }
+
+formals(`degIntersection,DESeqResultsList`)[names(.args)] <- .args
+
+
+
+rm(.args)
 
 
 
