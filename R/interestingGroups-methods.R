@@ -1,6 +1,6 @@
 #' @name interestingGroups
 #' @inherit AcidGenerics::interestingGroups
-#' @note Updated 2020-08-04.
+#' @note Updated 2021-03-15.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @param ... Additional arguments.
@@ -27,16 +27,6 @@ NULL
 
 
 
-#' @rdname interestingGroups
-#' @export
-setMethod(
-    f = "interestingGroups",
-    signature = signature("DESeqAnalysis"),
-    definition = `interestingGroups,DESeqAnalysis`
-)
-
-
-
 ## Updated 2020-08-04.
 `interestingGroups<-,DESeqAnalysis,character` <-  # nolint
     function(object, value) {
@@ -51,6 +41,21 @@ setMethod(
 
 
 
+`interestingGroups<-,DESeqAnalysis,NULL` <-  # nolint
+    `interestingGroups<-,DESeqAnalysis,character`
+
+
+
+#' @rdname interestingGroups
+#' @export
+setMethod(
+    f = "interestingGroups",
+    signature = signature("DESeqAnalysis"),
+    definition = `interestingGroups,DESeqAnalysis`
+)
+
+
+
 #' @rdname interestingGroups
 #' @export
 setReplaceMethod(
@@ -61,11 +66,6 @@ setReplaceMethod(
     ),
     definition = `interestingGroups<-,DESeqAnalysis,character`
 )
-
-
-
-`interestingGroups<-,DESeqAnalysis,NULL` <-  # nolint
-    `interestingGroups<-,DESeqAnalysis,character`
 
 
 

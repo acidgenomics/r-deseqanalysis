@@ -22,7 +22,7 @@
 #' "denominator".
 #'
 #' @examples
-#' file <- system.file("extdata/contrasts.csv", package = "DESeqAnalysis")
+#' file <- system.file("extdata", "contrasts.csv", package = "DESeqAnalysis")
 #' x <- importPairwiseContrasts(file)
 #' print(x)
 importPairwiseContrasts <- function(
@@ -48,7 +48,7 @@ importPairwiseContrasts <- function(
     list <- mapply(
         numerator = data[["numerator"]],
         denominator = data[["denominator"]],
-        MoreArgs = list(group = groupCol),
+        MoreArgs = list("group" = groupCol),
         FUN = function(group, numerator, denominator) {
             c(
                 "group" = group,
