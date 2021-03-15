@@ -1,4 +1,4 @@
-## DESeqAnalysis 0.4.0 (2021-03-09)
+## DESeqAnalysis 0.4.0 (2021-03-15)
 
 ### New classes
 

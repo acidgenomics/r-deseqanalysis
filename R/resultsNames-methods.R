@@ -1,11 +1,6 @@
-## FIXME Add DESeqAnalysisList method support?
-## FIXME Add DESeqResultsList method support.
-
-
-
 #' @name resultsNames
 #' @inherit AcidGenerics::resultsNames
-#' @note Updated 2019-09-10.
+#' @note Updated 2021-03-15.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -20,6 +15,21 @@ NULL
 
 
 
+## Updated 2021-03-15.
+`resultsNames,DESeqAnalysis` <-  # nolint
+    function(object) {
+        resList <- DESeqResultsList(object, quiet = TRUE)
+        names(resList)
+    }
+
+
+
+## Updated 2021-03-15.
+`resultsNames,DESeqAnalysisList` <-  # nolint
+    `resultsNames,DESeqAnalysis`
+
+
+
 ## Updated 2019-07-23.
 `resultsNames,DESeqDataSet` <-  # nolint
     function(object) {
@@ -28,31 +38,11 @@ NULL
 
 
 
-#' @rdname resultsNames
-#' @export
-setMethod(
-    f = "resultsNames",
-    signature = signature("DESeqDataSet"),
-    definition = `resultsNames,DESeqDataSet`
-)
-
-
-
-## Updated 2019-07-23.
-`resultsNames,DESeqAnalysis` <-  # nolint
+## Updated 2021-03-15.
+`resultsNames,DESeqResultsList` <-  # nolint
     function(object) {
-        names(object@results)
+        names(object)
     }
-
-
-
-#' @rdname resultsNames
-#' @export
-setMethod(
-    f = "resultsNames",
-    signature = signature("DESeqAnalysis"),
-    definition = `resultsNames,DESeqAnalysis`
-)
 
 
 
@@ -69,6 +59,56 @@ setMethod(
 
 
 
+## Updated 2021-03-15.
+`resultsNames<-,DESeqResultsList,character` <-  # nolint
+    function(object, value) {
+        names(object) <- value
+        validObject(object)
+        object
+    }
+
+
+
+#' @rdname resultsNames
+#' @export
+setMethod(
+    f = "resultsNames",
+    signature = signature("DESeqAnalysis"),
+    definition = `resultsNames,DESeqAnalysis`
+)
+
+
+
+#' @rdname resultsNames
+#' @export
+setMethod(
+    f = "resultsNames",
+    signature = signature("DESeqAnalysisList"),
+    definition = `resultsNames,DESeqAnalysisList`
+)
+
+
+
+#' @rdname resultsNames
+#' @export
+setMethod(
+    f = "resultsNames",
+    signature = signature("DESeqDataSet"),
+    definition = `resultsNames,DESeqDataSet`
+)
+
+
+
+#' @rdname resultsNames
+#' @export
+setMethod(
+    f = "resultsNames",
+    signature = signature("DESeqResultsList"),
+    definition = `resultsNames,DESeqResultsList`
+)
+
+
+
 #' @rdname resultsNames
 #' @export
 setReplaceMethod(
@@ -78,4 +118,17 @@ setReplaceMethod(
         value = "character"
     ),
     definition = `resultsNames<-,DESeqAnalysis,character`
+)
+
+
+
+#' @rdname resultsNames
+#' @export
+setReplaceMethod(
+    f = "resultsNames",
+    signature = signature(
+        object = "DESeqResultsList",
+        value = "character"
+    ),
+    definition = `resultsNames<-,DESeqResultsList,character`
 )
