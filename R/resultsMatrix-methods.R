@@ -98,7 +98,7 @@ setMethod(
 
 
 
-## Updated 2019-10-24.
+## Updated 2021-03-15.
 `resultsMatrix,DESeqAnalysisList` <-  # nolint
     function(object, value, rowData) {
         validObject(object)
@@ -129,12 +129,13 @@ setMethod(
                 DESeqDataSet = as(object, "DESeqDataSet")
             )
         }
-        metadata2(out, which = "DESeqAnalysis") <- list(
-            version = packageVersion(packageName()),
-            date = Sys.Date(),
-            slotName = slotName,
-            value = value
-        )
+        metadata2(out, which = "DESeqAnalysis") <-
+            list(
+                "date" = Sys.Date(),
+                "packageVersion" = .pkgVersion,
+                "slotName" = slotName,
+                "value" = value
+            )
         out
     }
 

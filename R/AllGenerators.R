@@ -220,12 +220,13 @@ NULL
 
 
 ## Coercion to `SimpleList` here doesn't unlist like we'd want here.
-## Updated 2021-03-10.
+## Updated 2021-03-15.
 `DESeqResultsList,DESeqAnalysisList` <-  # nolint
     function(object, ...) {
         x <- lapply(X = object, FUN = DESeqResultsList, ...)
         x <- lapply(X = x, FUN = as.list)
         x <- unlist(x, recursive = FALSE, use.names = TRUE)
+        names(x) <- makeNames(names(x))
         new(Class = "DESeqResultsList", x)
     }
 
