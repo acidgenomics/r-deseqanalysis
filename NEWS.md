@@ -9,6 +9,13 @@
   corresponding `DESeqResults`, which can happen with commercial sequencing
   vendors and analysis platforms.
 
+### Major changes
+
+- Reworked and improved manual limit handling for `plotMA` and `plotVolcano`.
+  By default, this behavior is unchanged from previous release, but now
+  limit overrides can be defined similar to the approach in DESeq2 that uses
+  geneplotter engine internally.
+
 ### Minor changes
 
 - Improved information in subtitles for MA, volcano, and other DEG plots.
