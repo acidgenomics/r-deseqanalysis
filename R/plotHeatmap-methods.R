@@ -1,6 +1,6 @@
 #' @name plotHeatmap
 #' @inherit AcidPlots::plotHeatmap
-#' @note Updated 2020-08-04.
+#' @note Updated 2021-03-15.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -17,15 +17,44 @@ NULL
 
 
 
+## Updated 2021-03-15.
 `plotHeatmap,DESeqAnalysis` <-  # nolint
     function(object, ...) {
         validObject(object)
-        alertInfo(paste0(
-            "Using {.var DESeqTransform} ",
-            "{.var ", transformType(object), "} counts."
+        alertInfo(sprintf(
+            "Using {.var %s} {.var %s} counts.",
+            "DESeqTransform", transformType(object)
         ))
         dt <- as(object, "DESeqTransform")
         plotHeatmap(dt, ...)
+    }
+
+
+
+## Updated 2021-03-15.
+`plotCorrelationHeatmap,DESeqAnalysis` <-  # nolint
+    function(object, ...) {
+        validObject(object)
+        alertInfo(sprintf(
+            "Using {.var %s} {.var %s} counts.",
+            "DESeqTransform", transformType(object)
+        ))
+        dt <- as(object, "DESeqTransform")
+        plotCorrelationHeatmap(dt, ...)
+    }
+
+
+
+## Updated 2021-03-15.
+`plotQuantileHeatmap,DESeqAnalysis` <-  # nolint
+    function(object, ...) {
+        validObject(object)
+        alertInfo(sprintf(
+            "Using {.var %s} {.var %s} counts.",
+            "DESeqTransform", transformType(object)
+        ))
+        dt <- as(object, "DESeqTransform")
+        plotQuantileHeatmap(dt, ...)
     }
 
 
@@ -40,19 +69,6 @@ setMethod(
 
 
 
-`plotCorrelationHeatmap,DESeqAnalysis` <-  # nolint
-    function(object, ...) {
-        validObject(object)
-        alertInfo(paste0(
-            "Using {.var DESeqTransform} ",
-            "{.var ", transformType(object), "} counts."
-        ))
-        dt <- as(object, "DESeqTransform")
-        plotCorrelationHeatmap(dt, ...)
-    }
-
-
-
 #' @rdname plotHeatmap
 #' @export
 setMethod(
@@ -60,19 +76,6 @@ setMethod(
     signature = signature("DESeqAnalysis"),
     definition = `plotCorrelationHeatmap,DESeqAnalysis`
 )
-
-
-
-`plotQuantileHeatmap,DESeqAnalysis` <-  # nolint
-    function(object, ...) {
-        validObject(object)
-        alertInfo(paste0(
-            "Using {.var DESeqTransform} ",
-            "{.var ", transformType(object), "} counts."
-        ))
-        dt <- as(object, "DESeqTransform")
-        plotQuantileHeatmap(dt, ...)
-    }
 
 
 
