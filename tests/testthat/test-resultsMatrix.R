@@ -37,10 +37,10 @@ test_that("DESeqAnalysisList", {
     expect_identical(
         object = colnames(x),
         expected = c(
-            "object1.condition_B_vs_A",
-            "object1.treatment_D_vs_C",
-            "object2.condition_B_vs_A",
-            "object2.treatment_D_vs_C"
+            "object1_condition_B_vs_A",
+            "object1_treatment_D_vs_C",
+            "object2_condition_B_vs_A",
+            "object2_treatment_D_vs_C"
         )
     )
 })
