@@ -34,8 +34,7 @@ plotVolcano(object, ...)
   limits = list(x = NULL, y = c(1e-10, 1)),
   labels = list(title = NULL, subtitle = NULL, x = "log2 fold change", y =
     "-log10 adj p value"),
-  histograms = FALSE,
-  return = c("ggplot", "DataFrame")
+  histograms = FALSE
 )
 }
 \arguments{
@@ -95,10 +94,6 @@ See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
 
 \item{histograms}{\code{logical(1)}.
 Show LFC and P value histograms.}
-
-\item{return}{\code{character(1)}.
-Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
-to the first argument in the \code{character} vector.}
 
 \item{ylim}{\code{numeric(1)}.
 Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets

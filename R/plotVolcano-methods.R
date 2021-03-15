@@ -1,8 +1,3 @@
-## FIXME Improve the support for gating axes.
-## NOTE Consider gating LFC at +/- 10 here by default.
-
-
-
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit AcidGenerics::plotVolcano
@@ -101,7 +96,7 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2021-03-15.
 `plotVolcano,DESeqResults` <-  # nolint
     function(
         object,
@@ -119,7 +114,10 @@ NULL
         ),
         pointSize = 2L,
         pointAlpha = 0.8,
-        ylim = 1e-10,
+        limits = list(
+            "x" = NULL,
+            "y" = c(1e-10, 1e+00)
+        ),
         ## NOTE Consider reworking the NULL as TRUE here?
         labels = list(
             title = NULL,
@@ -127,28 +125,22 @@ NULL
             x = "log2 fold change",
             y = "-log10 adj p value"
         ),
-        histograms = FALSE,
-        ## NOTE Consider removing this option?
-        return = c("ggplot", "DataFrame")
+        histograms = FALSE
     ) {
         validObject(object)
         baseMeanCol <- "baseMean"
         lfcCol <- "log2FoldChange"
-        if ("svalue" %in% names(object)) {
-            alphaCol <- "svalue"  # nocov
-        } else {
-            alphaCol <- "padj"
-        }
-        negLogAlphaCol <- camelCase(
-            object = paste("neg", "log10", alphaCol),
-            strict = TRUE
+        alphaCol <- ifelse(
+            test = isTRUE(isSubset("svalue", names(object))),
+            yes = "svalue",
+            no = "padj"
         )
         ## Note that `lfcShrink()` doesn't return `stat` column.
-        if ("stat" %in% names(object)) {
-            rankCol <- "stat"
-        } else {
-            rankCol <- negLogAlphaCol
-        }
+        rankCol <- ifelse(
+            test = isTRUE(isSubset("stat", names(object))),
+            yes = "stat",
+            no = lfcCol
+        )
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
@@ -176,8 +168,8 @@ NULL
             isNumber(pointSize),
             isNonNegative(pointSize),
             isPercentage(pointAlpha),
-            isNumber(ylim),
-            isInRange(ylim, lower = 1e-100, upper = 1e-3),
+            is.list(limits),
+            areSetEqual(names(limits), c("x", "y")),
             isFlag(histograms)
         )
         direction <- match.arg(direction)
@@ -185,23 +177,14 @@ NULL
             labels = labels,
             choices = eval(formals()[["labels"]])
         )
-        return <- match.arg(return)
-        if (isTRUE(histograms)) {
-            assert(identical(return, "ggplot"))
-        }
         data <- as(object, "DataFrame")
-        data <- camelCase(data, strict = TRUE)
+        colnames(data) <- camelCase(colnames(data), strict = TRUE)
         assert(isSubset(c(baseMeanCol, lfcCol, alphaCol), colnames(data)))
         ## Remove genes with NA adjusted P values.
         keep <- which(!is.na(data[[alphaCol]]))
         data <- data[keep, , drop = FALSE]
         keep <- which(data[[baseMeanCol]] >= baseMeanThreshold)
         data <- data[keep, , drop = FALSE]
-        ## Negative log10 transform the test values. Add `ylim` here to prevent
-        ## `Inf` values resulting from log transformation. This will also define
-        ## the upper bound of the y-axis. Then calculate the rank score, which
-        ## is used for `ntop`.
-        data[[negLogAlphaCol]] <- -log10(data[[alphaCol]] + ylim)
         data[["rankScore"]] <- abs(data[[rankCol]])
         data <- data[
             order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE
@@ -216,66 +199,85 @@ NULL
         )
         assert(isSubset(c("isDeg", "rank", "rankScore"), colnames(data)))
         ## Apply directional filtering, if desired.
-        if (direction == "up") {
-            keep <- which(data[[lfcCol]] > 0L)
-            data <- data[keep, , drop = FALSE]
-        } else if (direction == "down") {
-            keep <- which(data[[lfcCol]] < 0L)
-            data <- data[keep, , drop = FALSE]
+        switch(
+            EXPR = direction,
+            "up" = {
+                keep <- which(data[[lfcCol]] > 0L)
+                data <- data[keep, , drop = FALSE]
+            },
+            "down" = {
+                keep <- which(data[[lfcCol]] < 0L)
+                data <- data[keep, , drop = FALSE]
+            }
+        )
+        ## Check for no genes passing cutoffs and early return.
+        if (!hasRows(data)) {
+            alertWarning("No genes passed cutoffs.")
+            return(invisible(NULL))
         }
-        ## Early return the data, if desired.
-        if (identical(return, "DataFrame")) {
-            return(data)
+        ## Define the limits and correct outliers, if necessary.
+        if (is.null(limits[["x"]])) {
+            limits[["x"]] <- c(
+                min(floor(data[[lfcCol]])),
+                max(ceiling(data[[lfcCol]]))
+            )
         }
-        ## LFC density ---------------------------------------------------------
-        lfcHist <- ggplot(
-            data = as_tibble(data, rownames = NULL),
-            mapping = aes(x = !!sym(lfcCol))
-        ) +
-            geom_density(
-                color = NA,
-                fill = pointColor[["nonsignificant"]]
-            ) +
-            scale_x_continuous(
-                breaks = pretty_breaks(),
-                expand = c(0L, 0L)
-            ) +
-            scale_y_continuous(expand = c(0L, 0L)) +
-            labs(
-                x = "log2 fold change",
-                y = NULL
-            ) +
-            guides(fill = FALSE) +
-            theme(
-                axis.line.y = element_blank(),
-                axis.text.y = element_blank(),
-                axis.ticks.y = element_blank()
-            )
-        ## P value density -----------------------------------------------------
-        pvalueHist <- ggplot(
-            data = as_tibble(data, rownames = NULL),
-            mapping = aes(x = !!sym(negLogAlphaCol))
-        ) +
-            geom_density(
-                color = NA,
-                fill = pointColor[["nonsignificant"]]
-            ) +
-            scale_x_continuous(
-                breaks = pretty_breaks(),
-                expand = c(0L, 0L)
-            ) +
-            scale_y_continuous(expand = c(0L, 0L)) +
-            labs(
-                x = "-log10 adj p value",
-                y = NULL
-            ) +
-            guides(fill = FALSE) +
-            theme(
-                axis.line.y = element_blank(),
-                axis.text.y = element_blank(),
-                axis.ticks.y = element_blank()
-            )
-        ## Volcano plot --------------------------------------------------------
+        assert(
+            hasLength(limits[["x"]], n = 2L),
+            isNegative(limits[["x"]][[1L]]),
+            isPositive(limits[["x"]][[2L]])
+        )
+        ok <- list(
+            data[[lfcCol]] >= limits[["x"]][[1L]],
+            data[[lfcCol]] <= limits[["x"]][[2L]]
+        )
+        if (!all(unlist(ok))) {
+            n <- sum(!unlist(ok))
+            alertWarning(sprintf(
+                "%d %s outside x-axis limits of {.var c(%s, %s)}.",
+                n,
+                ngettext(n = n, msg1 = "point", msg2 = "points"),
+                limits[["x"]][[1L]],
+                limits[["x"]][[2L]]
+            ))
+            data[[lfcCol]][!ok[[1L]]] <- limits[["x"]][[1L]]
+            data[[lfcCol]][!ok[[2L]]] <- limits[["x"]][[2L]]
+        }
+        if (is.null(limits[["y"]])) {
+            limits[["y"]] <- eval(formals()[["limits"]][["y"]])
+        }
+        assert(
+            hasLength(limits[["y"]], n = 2L),
+            isInRange(limits[["y"]][[1L]], lower = 1e-100, upper = 1e-2),
+            isInRange(limits[["y"]][[2L]], lower = 1e-1, upper = 1e0)
+        )
+        ok <- list(
+            data[[alphaCol]] >= limits[["y"]][[1L]],
+            data[[alphaCol]] <= limits[["y"]][[2L]]
+        )
+        if (!all(unlist(ok))) {
+            n <- sum(!unlist(ok))
+            alertWarning(sprintf(
+                "%d %s outside y-axis limits of {.var c(%s, %s)}.",
+                n,
+                ngettext(n = n, msg1 = "point", msg2 = "points"),
+                -log10(limits[["y"]][[2L]]),
+                -log10(limits[["y"]][[1L]])
+            ))
+            data[[alphaCol]][!ok[[1L]]] <- limits[["y"]][[1L]]
+            data[[alphaCol]][!ok[[2L]]] <- limits[["y"]][[2L]]
+        }
+        ## Now we are ready to -log10 transform the Y-axis.
+        limits[["y"]] <- rev(-log10(limits[["y"]]))
+        breaks <- list(
+            "x" = pretty_breaks(),
+            "y" = pretty_breaks()
+        )
+        negLogAlphaCol <- camelCase(
+            object = paste("neg", "log10", alphaCol),
+            strict = TRUE
+        )
+        data[[negLogAlphaCol]] <- -log10(data[[alphaCol]])
         p <- ggplot(
             data = as_tibble(data, rownames = NULL),
             mapping = aes(
@@ -294,8 +296,16 @@ NULL
                 size = pointSize,
                 stroke = 0L
             ) +
-            scale_x_continuous(breaks = pretty_breaks()) +
-            scale_y_continuous(breaks = pretty_breaks()) +
+            scale_x_continuous(
+                breaks = breaks[["x"]],
+                limits = limits[["x"]],
+                trans = "identity"
+            ) +
+            scale_y_continuous(
+                breaks = breaks[["y"]],
+                limits = limits[["y"]],
+                trans = "identity"
+            ) +
             guides(color = FALSE)
         ## Labels.
         if (is.null(labels[["title"]])) {
@@ -325,8 +335,7 @@ NULL
                     )
                 )
         }
-        ## Gene text labels ----------------------------------------------------
-        ## Get the genes to visualize when `ntop` is declared.
+        ## Gene text labels.
         if (isTRUE(ntop > 0L)) {
             assert(
                 hasRownames(data),
@@ -367,8 +376,52 @@ NULL
         }
         ## Return --------------------------------------------------------------
         if (isTRUE(histograms)) {
+            ## LFC density plot.
+            lfcHist <- ggplot(
+                data = as_tibble(data, rownames = NULL),
+                mapping = aes(x = !!sym(lfcCol))
+            ) +
+                geom_density(
+                    color = NA,
+                    fill = pointColor[["nonsignificant"]]
+                ) +
+                scale_x_continuous(
+                    breaks = breaks[["x"]],
+                    expand = c(0L, 0L),
+                    limits = limits[["x"]]
+                ) +
+                scale_y_continuous(expand = c(0L, 0L)) +
+                labs(x = labels[["x"]], y = NULL) +
+                guides(fill = FALSE) +
+                theme(
+                    axis.line.y = element_blank(),
+                    axis.text.y = element_blank(),
+                    axis.ticks.y = element_blank()
+                )
+            ## P value density plot.
+            pvalueHist <- ggplot(
+                data = as_tibble(data, rownames = NULL),
+                mapping = aes(x = !!sym(negLogAlphaCol))
+            ) +
+                geom_density(
+                    color = NA,
+                    fill = pointColor[["nonsignificant"]]
+                ) +
+                scale_x_continuous(
+                    breaks = breaks[["y"]],
+                    expand = c(0L, 0L),
+                    limits = limits[["y"]]
+                ) +
+                scale_y_continuous(expand = c(0L, 0L)) +
+                labs(x = labels[["y"]], y = NULL) +
+                guides(fill = FALSE) +
+                theme(
+                    axis.line.y = element_blank(),
+                    axis.text.y = element_blank(),
+                    axis.ticks.y = element_blank()
+                )
+            ## Coordinates are relative to lower left corner.
             ggdraw() +
-                ## Coordinates are relative to lower left corner
                 draw_plot(
                     plot = p,
                     x = 0L, y = 0.2,
