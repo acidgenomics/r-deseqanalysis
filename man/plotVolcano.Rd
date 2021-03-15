@@ -2,11 +2,20 @@
 % Please edit documentation in R/AllGenerics.R, R/plotVolcano-methods.R
 \name{plotVolcano}
 \alias{plotVolcano}
-\alias{plotVolcano,DESeqResults-method}
 \alias{plotVolcano,DESeqAnalysis-method}
+\alias{plotVolcano,DESeqResults-method}
 \title{Volcano plot}
 \usage{
 plotVolcano(object, ...)
+
+\S4method{plotVolcano}{DESeqAnalysis}(
+  object,
+  i,
+  alphaThreshold = NULL,
+  lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
+  ...
+)
 
 \S4method{plotVolcano}{DESeqResults}(
   object,
@@ -28,11 +37,15 @@ plotVolcano(object, ...)
   histograms = FALSE,
   return = c("ggplot", "DataFrame")
 )
-
-\S4method{plotVolcano}{DESeqAnalysis}(object, i, ...)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
 
 \item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
@@ -46,6 +59,8 @@ If left \code{NULL}, will use the cutoff defined in the object.}
 Base mean (i.e. average expression across all samples) threshold.
 If left \code{NULL}, will use the cutoff defined in the object.
 Applies in general to DESeq2 RNA-seq differential expression output.}
+
+\item{...}{Additional arguments.}
 
 \item{genes}{\code{character}.
 Gene identifiers.}
@@ -84,14 +99,6 @@ Show LFC and P value histograms.}
 \item{return}{\code{character(1)}.
 Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
 to the first argument in the \code{character} vector.}
-
-\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
-\code{character} vectors, empty (\code{missing}), or \code{NULL}.
-
-For more information:\preformatted{help(topic = "Extract", package = "base")
-}}
-
-\item{...}{Additional arguments.}
 }
 \value{
 \code{ggplot}.
@@ -106,7 +113,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2021-03-03.
+Updated 2021-03-15.
 }
 \examples{
 data(deseq)
