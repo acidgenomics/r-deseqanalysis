@@ -1,8 +1,3 @@
-## FIXME DESeqResultsList support?
-## FIXME DESeqAnalysisList support?
-
-
-
 #' @name topTables
 #' @inherit AcidGenerics::topTables
 #' @note Updated 2021-02-10.
