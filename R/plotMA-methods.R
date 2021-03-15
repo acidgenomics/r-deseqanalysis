@@ -1,8 +1,3 @@
-## FIXME Improve the support for gating axes.
-## NOTE Consider gating LFC at +/- 10 here by default.
-
-
-
 #' @name plotMA
 #' @inherit AcidGenerics::plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
@@ -16,9 +11,6 @@
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
-#' @param limits `list(2)`.
-#'   Named list containing `"x"` and `"y"` that define the lower and upper
-#'   limits for each axis. Set automatically by default when left `NULL`.
 #' @param ... Additional arguments.
 #'
 #' @seealso [DESeq2::plotMA()].
@@ -225,21 +217,60 @@ NULL
             return(invisible(NULL))
         }
         ## MA plot.
-        ## NOTE If the user changes the default axis limits, consider using
-        ## an approach similar to that in geneplotter, which labels points
-        ## outside the axis limits more clearly (with a triangle), rather than
-        ## dropping from the plot. This isn't easy to do currently in ggplot2.
         if (is.null(limits[["x"]])) {
             limits[["x"]] <- c(
                 min(floor(data[[baseMeanCol]])),
                 max(ceiling(data[[baseMeanCol]]))
             )
+        } else {
+            assert(
+                hasLength(limits[["x"]], n = 2L),
+                allArePositive(limits[["x"]])
+            )
+            ok <- list(
+                data[[baseMeanCol]] >= limits[["x"]][[1L]],
+                data[[baseMeanCol]] <= limits[["x"]][[2L]]
+            )
+            if (!all(unlist(ok))) {
+                n <- sum(!unlist(ok))
+                alertWarning(sprintf(
+                    "%d %s outside x-axis limits of {.var c(%s, %s)}.",
+                    n,
+                    ngettext(n = n, msg1 = "point", msg2 = "points"),
+                    limits[["x"]][[1L]],
+                    limits[["x"]][[2L]]
+                ))
+                data[[baseMeanCol]][!ok[[1L]]] <- limits[["x"]][[1L]]
+                data[[baseMeanCol]][!ok[[2L]]] <- limits[["x"]][[2L]]
+            }
         }
         if (is.null(limits[["y"]])) {
             limits[["y"]] <- c(
                 min(floor(data[[lfcCol]])),
                 max(ceiling(data[[lfcCol]]))
             )
+        } else {
+            assert(
+                hasLength(limits[["y"]], n = 2L),
+                isNegative(limits[["y"]][[1L]]),
+                isPositive(limits[["y"]][[2L]])
+            )
+            ok <- list(
+                data[[lfcCol]] >= limits[["y"]][[1L]],
+                data[[lfcCol]] <= limits[["y"]][[2L]]
+            )
+            if (!all(unlist(ok))) {
+                n <- sum(!unlist(ok))
+                alertWarning(sprintf(
+                    "%d %s outside y-axis limits of {.var c(%s, %s)}.",
+                    n,
+                    ngettext(n = n, msg1 = "point", msg2 = "points"),
+                    limits[["y"]][[1L]],
+                    limits[["y"]][[2L]]
+                ))
+                data[[lfcCol]][!ok[[1L]]] <- limits[["y"]][[1L]]
+                data[[lfcCol]][!ok[[2L]]] <- limits[["y"]][[2L]]
+            }
         }
         breaks <- list(
             "x" = 10 ^ seq(
@@ -267,7 +298,6 @@ NULL
                 size = pointSize,
                 stroke = 0L
             ) +
-            ## FIXME REWORK
             scale_x_continuous(
                 breaks = breaks[["x"]],
                 limits = limits[["x"]],

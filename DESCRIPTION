@@ -79,7 +79,6 @@ Collate:
     'lfcThreshold-methods.R'
     'matchMetadataToFiles.R'
     'package.R'
-    'params.R'
     'plotBaseMean-methods.R'
     'plotCounts-methods.R'
     'plotDEGHeatmap-methods.R'

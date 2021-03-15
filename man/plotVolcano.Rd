@@ -31,7 +31,7 @@ plotVolcano(object, ...)
     AcidPlots::lightPalette[["gray"]]),
   pointSize = 2L,
   pointAlpha = 0.8,
-  ylim = 1e-10,
+  limits = list(x = NULL, y = c(1e-10, 1)),
   labels = list(title = NULL, subtitle = NULL, x = "log2 fold change", y =
     "-log10 adj p value"),
   histograms = FALSE,
@@ -85,9 +85,9 @@ In the range of 1-3 is generally recommended.}
 \item{pointAlpha}{\code{numeric(1)} (\code{0}-\code{1}).
 Alpha transparency level.}
 
-\item{ylim}{\code{numeric(1)}.
-Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets
-containing highly significant P values (e.g. \code{1e-100}).}
+\item{limits}{\code{list(2)}.
+Named list containing \code{"x"} and \code{"y"} that define the lower and upper
+limits for each axis. Set automatically by default when left \code{NULL}.}
 
 \item{labels}{\code{list}.
 ggplot2 labels.
@@ -99,6 +99,10 @@ Show LFC and P value histograms.}
 \item{return}{\code{character(1)}.
 Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
 to the first argument in the \code{character} vector.}
+
+\item{ylim}{\code{numeric(1)}.
+Upper boundary limit for y-axis. Helps preserve dynamic range for gene sets
+containing highly significant P values (e.g. \code{1e-100}).}
 }
 \value{
 \code{ggplot}.
