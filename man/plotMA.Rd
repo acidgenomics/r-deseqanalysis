@@ -33,6 +33,7 @@ plotMA(object, ...)
     AcidPlots::lightPalette[["gray"]]),
   pointSize = 2L,
   pointAlpha = 0.8,
+  limits = list(x = NULL, y = NULL),
   labels = list(title = NULL, subtitle = NULL, x =
     "mean expression across all samples", y = "log2 fold change")
 )
@@ -83,6 +84,10 @@ In the range of 1-3 is generally recommended.}
 
 \item{pointAlpha}{\code{numeric(1)} (\code{0}-\code{1}).
 Alpha transparency level.}
+
+\item{limits}{\code{list(2)}.
+Named list containing \code{"x"} and \code{"y"} that define the lower and upper
+limits for each axis. Set automatically by default when left \code{NULL}.}
 
 \item{labels}{\code{list}.
 ggplot2 labels.

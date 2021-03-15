@@ -16,6 +16,9 @@
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
+#' @param limits `list(2)`.
+#'   Named list containing `"x"` and `"y"` that define the lower and upper
+#'   limits for each axis. Set automatically by default when left `NULL`.
 #' @param ... Additional arguments.
 #'
 #' @seealso [DESeq2::plotMA()].
@@ -94,7 +97,7 @@ NULL
 
 
 
-## Updated 2021-03-03.
+## Updated 2021-03-15.
 `plotMA,DESeqResults` <-  # nolint
     function(
         object,
@@ -112,6 +115,7 @@ NULL
         ),
         pointSize = 2L,
         pointAlpha = 0.8,
+        limits = list("x" = NULL, "y" = NULL),
         ## NOTE Consider reworking the NULL as TRUE here?
         labels = list(
             title = NULL,
@@ -123,17 +127,17 @@ NULL
         validObject(object)
         baseMeanCol <- "baseMean"
         lfcCol <- "log2FoldChange"
-        if ("svalue" %in% names(object)) {
-            alphaCol <- "svalue"  # nocov
-        } else {
-            alphaCol <- "padj"
-        }
+        alphaCol <- ifelse(
+            test = isTRUE(isSubset("svalue", names(object))),
+            yes = "svalue",
+            no = "padj"
+        )
         ## Note that `lfcShrink()` doesn't return `stat` column.
-        if ("stat" %in% names(object)) {
-            rankCol <- "stat"
-        } else {
-            rankCol <- lfcCol
-        }
+        rankCol <- ifelse(
+            test = isTRUE(isSubset("stat", names(object))),
+            yes = "stat",
+            no = lfcCol
+        )
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
@@ -144,7 +148,7 @@ NULL
             baseMeanThreshold <- baseMeanThreshold(object)
         }
         ## We're applying log10 transformation on axis, so gate the minimum.
-        if (baseMeanThreshold < 1L) {
+        if (isTRUE(baseMeanThreshold < 1L)) {
             baseMeanThreshold <- 1L
         }
         lfcShrinkType <- lfcShrinkType(object)
@@ -165,6 +169,8 @@ NULL
             isNumber(pointSize),
             isNonNegative(pointSize),
             isPercentage(pointAlpha),
+            is.list(limits),
+            areSetEqual(names(limits), c("x", "y")),
             isInt(ntop),
             isNonNegative(ntop)
         )
@@ -178,7 +184,7 @@ NULL
             stop("Specify either 'genes' or 'ntop'.")
         }
         data <- as(object, "DataFrame")
-        data <- camelCase(data, strict = TRUE)
+        colnames(data) <- camelCase(colnames(data), strict = TRUE)
         assert(isSubset(
             x = c(baseMeanCol, lfcCol, rankCol, alphaCol),
             y = colnames(data)
@@ -219,14 +225,34 @@ NULL
             return(invisible(NULL))
         }
         ## MA plot.
-        log10BaseMean <- log10(data[["baseMean"]])
-        floor <- min(floor(log10BaseMean))
-        ceiling <- max(ceiling(log10BaseMean))
-        xBreaks <- 10L ^ seq(from = floor, to = ceiling, by = 1L)
+        ## NOTE If the user changes the default axis limits, consider using
+        ## an approach similar to that in geneplotter, which labels points
+        ## outside the axis limits more clearly (with a triangle), rather than
+        ## dropping from the plot. This isn't easy to do currently in ggplot2.
+        if (is.null(limits[["x"]])) {
+            limits[["x"]] <- c(
+                min(floor(data[[baseMeanCol]])),
+                max(ceiling(data[[baseMeanCol]]))
+            )
+        }
+        if (is.null(limits[["y"]])) {
+            limits[["y"]] <- c(
+                min(floor(data[[lfcCol]])),
+                max(ceiling(data[[lfcCol]]))
+            )
+        }
+        breaks <- list(
+            "x" = 10 ^ seq(
+                from = min(floor(log10(limits[["x"]][[1L]]))),
+                to = min(floor(log10(limits[["x"]][[2L]]))),
+                by = 1L
+            ),
+            "y" = pretty_breaks()
+        )
         p <- ggplot(
             data = as_tibble(data, rownames = NULL),
             mapping = aes(
-                x = !!sym("baseMean"),
+                x = !!sym(baseMeanCol),
                 y = !!sym(lfcCol),
                 color = !!sym("isDeg")
             )
@@ -241,12 +267,17 @@ NULL
                 size = pointSize,
                 stroke = 0L
             ) +
+            ## FIXME REWORK
             scale_x_continuous(
-                breaks = xBreaks,
-                limits = c(baseMeanThreshold, NA),
+                breaks = breaks[["x"]],
+                limits = limits[["x"]],
                 trans = "log10"
             ) +
-            scale_y_continuous(breaks = pretty_breaks()) +
+            scale_y_continuous(
+                breaks = breaks[["y"]],
+                limits = limits[["y"]],
+                trans = "identity"
+            ) +
             annotation_logticks(sides = "b") +
             guides(color = FALSE)
         ## Labels.
