@@ -3,20 +3,29 @@
 \name{resultsNames}
 \alias{resultsNames}
 \alias{resultsNames<-}
-\alias{resultsNames,DESeqDataSet-method}
 \alias{resultsNames,DESeqAnalysis-method}
+\alias{resultsNames,DESeqAnalysisList-method}
+\alias{resultsNames,DESeqDataSet-method}
+\alias{resultsNames,DESeqResultsList-method}
 \alias{resultsNames<-,DESeqAnalysis,character-method}
+\alias{resultsNames<-,DESeqResultsList,character-method}
 \title{Results names}
 \usage{
 resultsNames(object, ...)
 
 resultsNames(object, ...) <- value
 
-\S4method{resultsNames}{DESeqDataSet}(object)
-
 \S4method{resultsNames}{DESeqAnalysis}(object)
 
+\S4method{resultsNames}{DESeqAnalysisList}(object)
+
+\S4method{resultsNames}{DESeqDataSet}(object)
+
+\S4method{resultsNames}{DESeqResultsList}(object)
+
 \S4method{resultsNames}{DESeqAnalysis,character}(object) <- value
+
+\S4method{resultsNames}{DESeqResultsList,character}(object) <- value
 }
 \arguments{
 \item{object}{Object.}
@@ -32,7 +41,7 @@ resultsNames(object, ...) <- value
 Results names
 }
 \note{
-Updated 2019-09-10.
+Updated 2021-03-15.
 }
 \examples{
 data(deseq)
