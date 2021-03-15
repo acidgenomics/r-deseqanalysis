@@ -3,37 +3,23 @@
 \name{contrastName}
 \alias{contrastName}
 \alias{contrastName<-}
+\alias{contrastName,DESeqAnalysis-method}
 \alias{contrastName,DESeqResults-method}
 \alias{contrastName<-,DESeqResults,character-method}
-\alias{contrastName,DESeqAnalysis-method}
 \title{Contrast name}
 \usage{
 contrastName(object, ...)
 
 contrastName(object, ...) <- value
 
-\S4method{contrastName}{DESeqResults}(object, .format = c("resultsNames", "title"), .useStash = TRUE)
+\S4method{contrastName}{DESeqAnalysis}(object, i, ...)
+
+\S4method{contrastName}{DESeqResults}(object, format = c("resultsNames", "title"))
 
 \S4method{contrastName}{DESeqResults,character}(object) <- value
-
-\S4method{contrastName}{DESeqAnalysis}(object, i, ...)
 }
 \arguments{
 \item{object}{Object.}
-
-\item{.format}{\code{character(1)}.
-Name format to return:
-\itemize{
-\item \code{resultsNames}: Attempt to matching the conventions in
-\code{\link[DESeq2:results]{resultsNames()}}.
-\item \code{title}: Human readable, for plot titles and/or table captions.
-}}
-
-\item{.useStash}{\code{logical(1)}.
-Check for \code{contrastName} metadata stash in \code{DESeqResults} object. Intended
-for use with \code{DESeqAnalysis} methods.}
-
-\item{value}{Value to assign.}
 
 \item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
 \code{character} vectors, empty (\code{missing}), or \code{NULL}.
@@ -42,6 +28,16 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
 
 \item{...}{Additional arguments.}
+
+\item{format}{\code{character(1)}.
+Name format to return:
+\itemize{
+\item \code{resultsNames}: Attempt to matching the conventions in
+\code{\link[DESeq2:results]{resultsNames()}}.
+\item \code{title}: Human readable, for plot titles and/or table captions.
+}}
+
+\item{value}{Value to assign.}
 }
 \value{
 \code{character(1)}.
@@ -51,7 +47,7 @@ Contrast name.
 Contrast name
 }
 \note{
-Updated 2021-03-12.
+Updated 2021-03-15.
 }
 \examples{
 data(deseq)
@@ -61,7 +57,6 @@ contrastName(deseq, i = 1L)
 }
 \seealso{
 \itemize{
-\item \code{\link[=contrastNames]{contrastNames()}}.
-\item \code{\link[DESeq2:results]{resultsNames()}}.
+\item \code{\link[=resultsNames]{resultsNames()}}.
 }
 }
