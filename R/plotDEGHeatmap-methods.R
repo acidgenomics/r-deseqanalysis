@@ -1,6 +1,6 @@
 #' @name plotDEGHeatmap
 #' @inherit AcidGenerics::plotDEGHeatmap
-#' @note Updated 2021-03-03.
+#' @note Updated 2021-03-15.
 #'
 #' @inheritParams AcidPlots::plotHeatmap
 #' @inheritParams AcidRoxygen::params
@@ -24,7 +24,7 @@ NULL
 ## This method is used in F1000 paper and needs to be included. Note that in
 ## newer versions of bcbioRNASeq, this step won't work because we've slotted the
 ## rlog/vst counts in as a matrix instead of DESeqTransform.
-## Updated 2021-03-03.
+## Updated 2021-03-15.
 `plotDEGHeatmap,DESeqResults` <-  # nolint
     function(
         object,
@@ -80,7 +80,7 @@ NULL
         dt <- dt[deg, , drop = FALSE]
         ## Title.
         if (isTRUE(title)) {
-            title <- contrastName(res, .format = "title")
+            title <- contrastName(res, format = "title")
         } else if (identical(title, FALSE)) {
             title <- NULL
         }
