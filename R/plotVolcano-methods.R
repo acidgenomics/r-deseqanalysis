@@ -222,11 +222,7 @@ NULL
                 max(ceiling(data[[lfcCol]]))
             )
         }
-        assert(
-            hasLength(limits[["x"]], n = 2L),
-            isNegative(limits[["x"]][[1L]]),
-            isPositive(limits[["x"]][[2L]])
-        )
+        assert(hasLength(limits[["x"]], n = 2L))
         ok <- list(
             data[[lfcCol]] >= limits[["x"]][[1L]],
             data[[lfcCol]] <= limits[["x"]][[2L]]

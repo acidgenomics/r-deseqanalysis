@@ -57,14 +57,4 @@ test_that("Label specific genes", {
         )
     )
     expect_is(x, "ggplot")
-
-    ## Return DataFrame.
-    x <- do.call(
-        what = plotVolcano,
-        args = c(
-            args,
-            list(return = "DataFrame")
-        )
-    )
-    expect_s4_class(x, "DataFrame")
 })
