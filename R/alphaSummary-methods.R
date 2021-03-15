@@ -1,7 +1,7 @@
 #' @name alphaSummary
 #' @author Michael Steinbaugh, Lorena Patano
 #' @inherit AcidGenerics::alphaSummary
-#' @note Updated 2019-08-20.
+#' @note Updated 2021-03-15.
 #'
 #' @inheritParams params
 #' @inheritParams AcidRoxygen::params
@@ -23,6 +23,15 @@
 #' alphaSummary(deseq, contrast = c("condition", "B", "A"))
 #' alphaSummary(deseq, name = "condition_B_vs_A")
 NULL
+
+
+
+## Updated 2020-08-04.
+`alphaSummary,DESeqAnalysis` <-  # nolint
+    function(object, ...) {
+        object <- as(object, "DESeqDataSet")
+        alphaSummary(object, ...)
+    }
 
 
 
@@ -107,18 +116,9 @@ NULL
 #' @export
 setMethod(
     f = "alphaSummary",
-    signature = signature("DESeqDataSet"),
-    definition = `alphaSummary,DESeqDataSet`
+    signature = signature("DESeqAnalysis"),
+    definition = `alphaSummary,DESeqAnalysis`
 )
-
-
-
-## Updated 2020-08-04.
-`alphaSummary,DESeqAnalysis` <-  # nolint
-    function(object, ...) {
-        object <- as(object, "DESeqDataSet")
-        alphaSummary(object, ...)
-    }
 
 
 
@@ -126,6 +126,6 @@ setMethod(
 #' @export
 setMethod(
     f = "alphaSummary",
-    signature = signature("DESeqAnalysis"),
-    definition = `alphaSummary,DESeqAnalysis`
+    signature = signature("DESeqDataSet"),
+    definition = `alphaSummary,DESeqDataSet`
 )

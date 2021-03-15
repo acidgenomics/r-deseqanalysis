@@ -89,46 +89,6 @@ NULL
 
 
 
-## Inheriting the SummarizedExperiment method internally here.
-## Only export the raw and normalized counts.
-## Skip exporting other assays, including mu, H, cooks.
-## Updated 2019-09-11.
-`export,DESeqDataSet` <-  # nolint
-    function(
-        object,
-        name = NULL,
-        dir = ".",
-        compress = FALSE
-    ) {
-        validObject(object)
-        call <- standardizeCall()
-        assert(isString(name, nullOK = TRUE))
-        if (is.null(name)) {
-            name <- as.character(call[["object"]])
-        }
-        ## Generate additional matrices on the fly.
-        rse <- as(object, "RangedSummarizedExperiment")
-        assays <- SimpleList(
-            counts = counts(object, normalized = FALSE),
-            normalized = counts(object, normalized = TRUE),
-            fpkm = fpkm(object)
-        )
-        assays(rse) <- assays
-        export(object = rse, name = name, dir = dir, compress = compress)
-    }
-
-
-
-#' @rdname export
-#' @export
-setMethod(
-    f = "export",
-    signature = signature("DESeqDataSet"),
-    definition = `export,DESeqDataSet`
-)
-
-
-
 ## Updated 2020-08-04.
 `export,DESeqAnalysis` <-  # nolint
     function(
@@ -196,10 +156,50 @@ setMethod(
 
 
 
+## Inheriting the SummarizedExperiment method internally here.
+## Only export the raw and normalized counts.
+## Skip exporting other assays, including mu, H, cooks.
+## Updated 2019-09-11.
+`export,DESeqDataSet` <-  # nolint
+    function(
+        object,
+        name = NULL,
+        dir = ".",
+        compress = FALSE
+    ) {
+        validObject(object)
+        call <- standardizeCall()
+        assert(isString(name, nullOK = TRUE))
+        if (is.null(name)) {
+            name <- as.character(call[["object"]])
+        }
+        ## Generate additional matrices on the fly.
+        rse <- as(object, "RangedSummarizedExperiment")
+        assays <- SimpleList(
+            counts = counts(object, normalized = FALSE),
+            normalized = counts(object, normalized = TRUE),
+            fpkm = fpkm(object)
+        )
+        assays(rse) <- assays
+        export(object = rse, name = name, dir = dir, compress = compress)
+    }
+
+
+
 #' @rdname export
 #' @export
 setMethod(
     f = "export",
     signature = signature("DESeqAnalysis"),
     definition = `export,DESeqAnalysis`
+)
+
+
+
+#' @rdname export
+#' @export
+setMethod(
+    f = "export",
+    signature = signature("DESeqDataSet"),
+    definition = `export,DESeqDataSet`
 )

@@ -2,7 +2,7 @@
 #'
 #' @name correlation
 #' @inherit AcidExperiment::correlation
-#' @note Updated 2021-02-09.
+#' @note Updated 2021-03-15.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @param col `character(1)`.
@@ -18,7 +18,7 @@ NULL
 
 
 
-method <- formals(basejump::cor)[["method"]]
+.method <- formals(basejump::cor)[["method"]]
 
 
 
@@ -46,20 +46,7 @@ method <- formals(basejump::cor)[["method"]]
         correlation(x = data[["x"]], y = data[["y"]], method = method)
     }
 
-formals(`correlation,DESeqResults,DESeqResults`)[["method"]] <- method
-
-
-
-#' @rdname correlation
-#' @export
-setMethod(
-    f = "correlation",
-    signature = signature(
-        x = "DESeqResults",
-        y = "DESeqResults"
-    ),
-    definition = `correlation,DESeqResults,DESeqResults`
-)
+formals(`correlation,DESeqResults,DESeqResults`)[["method"]] <- .method
 
 
 
@@ -82,7 +69,24 @@ setMethod(
         )
     }
 
-formals(`correlation,DESeqAnalysis,missing`)[["method"]] <- method
+formals(`correlation,DESeqAnalysis,missing`)[["method"]] <- .method
+
+
+
+rm(.method)
+
+
+
+#' @rdname correlation
+#' @export
+setMethod(
+    f = "correlation",
+    signature = signature(
+        x = "DESeqResults",
+        y = "DESeqResults"
+    ),
+    definition = `correlation,DESeqResults,DESeqResults`
+)
 
 
 
@@ -96,7 +100,3 @@ setMethod(
     ),
     definition = `correlation,DESeqAnalysis,missing`
 )
-
-
-
-rm(method)

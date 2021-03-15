@@ -2,15 +2,15 @@
 % Please edit documentation in R/AllGenerics.R, R/export-methods.R
 \name{export}
 \alias{export}
-\alias{export,DESeqDataSet-method}
 \alias{export,DESeqAnalysis-method}
+\alias{export,DESeqDataSet-method}
 \title{Export}
 \usage{
 export(object, ...)
 
-\S4method{export}{DESeqDataSet}(object, name = NULL, dir = ".", compress = FALSE)
-
 \S4method{export}{DESeqAnalysis}(object, name = NULL, dir = ".", compress = FALSE)
+
+\S4method{export}{DESeqDataSet}(object, name = NULL, dir = ".", compress = FALSE)
 }
 \arguments{
 \item{object}{Object.
