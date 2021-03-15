@@ -16,6 +16,20 @@ NULL
 
 
 
+## Updated 2020-08-05.
+`deg,DESeqAnalysis` <-  # nolint
+    function(object, i, ...) {
+        deg(
+            object = results(object, i = i),
+            alphaThreshold = alphaThreshold(object),
+            lfcThreshold = lfcThreshold(object),
+            baseMeanThreshold = baseMeanThreshold(object),
+            ...
+        )
+    }
+
+
+
 ## Get differential expressed genes (DEGs) from DESeqResults table.
 ##
 ## Note that we're not sorting the identifiers here by LFC or P value.
@@ -124,23 +138,9 @@ NULL
 #' @export
 setMethod(
     f = "deg",
-    signature = signature("DESeqResults"),
-    definition = `deg,DESeqResults`
+    signature = signature("DESeqAnalysis"),
+    definition = `deg,DESeqAnalysis`
 )
-
-
-
-## Updated 2020-08-05.
-`deg,DESeqAnalysis` <-  # nolint
-    function(object, i, ...) {
-        deg(
-            object = results(object, i = i),
-            alphaThreshold = alphaThreshold(object),
-            lfcThreshold = lfcThreshold(object),
-            baseMeanThreshold = baseMeanThreshold(object),
-            ...
-        )
-    }
 
 
 
@@ -148,6 +148,6 @@ setMethod(
 #' @export
 setMethod(
     f = "deg",
-    signature = signature("DESeqAnalysis"),
-    definition = `deg,DESeqAnalysis`
+    signature = signature("DESeqResults"),
+    definition = `deg,DESeqResults`
 )

@@ -2,11 +2,13 @@
 % Please edit documentation in R/AllGenerics.R, R/deg-methods.R
 \name{deg}
 \alias{deg}
-\alias{deg,DESeqResults-method}
 \alias{deg,DESeqAnalysis-method}
+\alias{deg,DESeqResults-method}
 \title{Differentially expressed genes}
 \usage{
 deg(object, ...)
+
+\S4method{deg}{DESeqAnalysis}(object, i, ...)
 
 \S4method{deg}{DESeqResults}(
   object,
@@ -16,11 +18,17 @@ deg(object, ...)
   direction = c("both", "up", "down"),
   quiet = FALSE
 )
-
-\S4method{deg}{DESeqAnalysis}(object, i, ...)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
+
+\item{...}{Additional arguments.}
 
 \item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
@@ -40,14 +48,6 @@ Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
 \item{quiet}{\code{logical(1)}.
 Perform command quietly, suppressing messages.}
-
-\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
-\code{character} vectors, empty (\code{missing}), or \code{NULL}.
-
-For more information:\preformatted{help(topic = "Extract", package = "base")
-}}
-
-\item{...}{Additional arguments.}
 }
 \value{
 \code{character}.

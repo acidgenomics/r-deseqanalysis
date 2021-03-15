@@ -2,11 +2,13 @@
 % Please edit documentation in R/AllGenerics.R, R/alphaSummary-methods.R
 \name{alphaSummary}
 \alias{alphaSummary}
-\alias{alphaSummary,DESeqDataSet-method}
 \alias{alphaSummary,DESeqAnalysis-method}
+\alias{alphaSummary,DESeqDataSet-method}
 \title{Alpha level cutoff summary statistics}
 \usage{
 alphaSummary(object, ...)
+
+\S4method{alphaSummary}{DESeqAnalysis}(object, ...)
 
 \S4method{alphaSummary}{DESeqDataSet}(
   object,
@@ -14,11 +16,11 @@ alphaSummary(object, ...)
   contrast = NULL,
   name = NULL
 )
-
-\S4method{alphaSummary}{DESeqAnalysis}(object, ...)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{...}{Additional arguments.}
 
 \item{alpha}{\code{numeric}. Multiple alpha cutoffs.}
 
@@ -35,8 +37,6 @@ See \code{\link[DESeq2:results]{DESeq2::results()}} for details.}
 \item{name}{\code{character(1)}.
 Name of the individual effect (coefficient) for building a results table.
 Use this argument rather than \code{contrast} for continuous variables.}
-
-\item{...}{Additional arguments.}
 }
 \value{
 \verb{integer matrix}.
@@ -48,7 +48,7 @@ Quickly generate a summary table of various alpha level cutoffs.
 Use either \code{contrast} or \code{name} to specify the desired contrast.
 }
 \note{
-Updated 2019-08-20.
+Updated 2021-03-15.
 }
 \examples{
 data(deseq)
