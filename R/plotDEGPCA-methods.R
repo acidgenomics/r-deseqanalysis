@@ -17,6 +17,50 @@ NULL
 
 
 
+## Updated 2021-03-15.
+`plotDEGPCA,DESeqAnalysis` <-  # nolint
+    function(
+        object,
+        i,
+        contrastSamples = FALSE,
+        alphaThreshold = NULL,
+        lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
+        ...
+    ) {
+        assert(isFlag(contrastSamples))
+        res <- results(object, i = i, quiet = TRUE)
+        dt <- as(object, "DESeqTransform")
+        if (isTRUE(contrastSamples)) {
+            samples <- contrastSamples(object, i = i)
+            assert(isSubset(samples, colnames(dt)))
+            dt <- dt[, samples, drop = FALSE]
+            dt <- droplevels(dt)
+        }
+        plotDEGPCA(
+            object = res,
+            DESeqTransform = dt,
+            alphaThreshold = ifelse(
+                test = is.null(alphaThreshold),
+                yes = alphaThreshold(object),
+                no = alphaThreshold
+            ),
+            lfcThreshold = ifelse(
+                test = is.null(lfcThreshold),
+                yes = lfcThreshold(object),
+                no = lfcThreshold
+            ),
+            baseMeanThreshold = ifelse(
+                test = is.null(baseMeanThreshold),
+                yes = baseMeanThreshold(object),
+                no = baseMeanThreshold
+            ),
+            ...
+        )
+    }
+
+
+
 ## Updated 2021-03-03.
 `plotDEGPCA,DESeqResults` <-  # nolint
     function(
@@ -89,46 +133,20 @@ NULL
 
 
 
-#' @rdname plotDEGPCA
-#' @export
-setMethod(
-    f = "plotDEGPCA",
-    signature = signature("DESeqResults"),
-    definition = `plotDEGPCA,DESeqResults`
-)
-
-
-
-## Updated 2020-08-25.
-`plotDEGPCA,DESeqAnalysis` <-  # nolint
-    function(object, i, contrastSamples = FALSE, ...) {
-        assert(isFlag(contrastSamples))
-        suppressMessages({
-            res <- results(object, i = i)
-        })
-        dt <- as(object, "DESeqTransform")
-        if (isTRUE(contrastSamples)) {
-            samples <- contrastSamples(object, i = i)
-            assert(isSubset(samples, colnames(dt)))
-            dt <- dt[, samples, drop = FALSE]
-            dt <- droplevels(dt)
-        }
-        plotDEGPCA(
-            object = res,
-            DESeqTransform = dt,
-            alphaThreshold = alphaThreshold(object),
-            lfcThreshold = lfcThreshold(object),
-            baseMeanThreshold = baseMeanThreshold(object),
-            ...
-        )
-    }
-
-
-
 #' @describeIn plotDEGPCA Passes to `DESeqResults` method.
 #' @export
 setMethod(
     f = "plotDEGPCA",
     signature = signature("DESeqAnalysis"),
     definition = `plotDEGPCA,DESeqAnalysis`
+)
+
+
+
+#' @rdname plotDEGPCA
+#' @export
+setMethod(
+    f = "plotDEGPCA",
+    signature = signature("DESeqResults"),
+    definition = `plotDEGPCA,DESeqResults`
 )
