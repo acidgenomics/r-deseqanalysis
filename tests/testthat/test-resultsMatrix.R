@@ -31,14 +31,16 @@ test_that("value argument", {
 })
 
 test_that("DESeqAnalysisList", {
-    object <- DESeqAnalysisList(deseq)
+    object <- DESeqAnalysisList(list("object1" = deseq, "object2" = deseq))
     x <- resultsMatrix(object)
     expect_is(x, "matrix")
     expect_identical(
         object = colnames(x),
         expected = c(
-            "deseq_condition_B_vs_A",
-            "deseq_treatment_D_vs_C"
+            "object1.condition_B_vs_A",
+            "object1.treatment_D_vs_C",
+            "object2.condition_B_vs_A",
+            "object2.treatment_D_vs_C"
         )
     )
 })

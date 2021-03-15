@@ -3,7 +3,7 @@
 #' Generate an aggregate matrix of `DESeqResults` column values per contrast.
 #'
 #' @name resultsMatrix
-#' @note Updated 2020-08-19.
+#' @note Updated 2021-03-15.
 #'
 #' @param object `DESeqAnalysis`.
 #' @param value `character(1)`.
@@ -31,7 +31,7 @@ NULL
 
 
 
-## Updated 2020-08-19.
+## Updated 2021-03-15.
 `resultsMatrix,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -76,12 +76,13 @@ NULL
         } else {
             out <- mat
         }
-        metadata2(out, which = "DESeqAnalysis") <- list(
-            version = packageVersion(packageName()),
-            date = Sys.Date(),
-            slotName = slotName,
-            value = value
-        )
+        metadata2(out, which = "DESeqAnalysis") <-
+            list(
+                "date" = Sys.Date(),
+                "packageVersion" = .pkgVersion,
+                "slotName" = slotName,
+                "value" = value
+            )
         out
     }
 

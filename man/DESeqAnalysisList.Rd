@@ -25,10 +25,10 @@ DESeqAnalysisList(object, ...)
 List containing related DESeq2 analyses
 }
 \note{
-Updated 2021-03-12.
+Updated 2021-03-15.
 }
 \examples{
 data(deseq)
-x <- DESeqAnalysisList(deseq)
+x <- DESeqAnalysisList(list("object1" = deseq, "object2" = deseq))
 x
 }
