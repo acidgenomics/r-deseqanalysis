@@ -40,6 +40,11 @@ Perform command quietly, suppressing messages.}
 \description{
 Results
 }
+\section{Functions}{
+\itemize{
+\item \code{results,DESeqDataSet-method}: Arguments pass through to \code{\link[DESeq2:results]{DESeq2::results()}}.
+}}
+
 \note{
 Updated 2021-03-12.
 }
