@@ -48,7 +48,6 @@ NULL
         } else {
             subset <- TRUE
         }
-
         ## data (DESeqDataSet) -------------------------------------------------
         ## Extract internal DESeqDataSet.
         data1 <- slot(x, name = "data")
@@ -57,11 +56,9 @@ NULL
         if (identical(data1, data2)) {
             return(x)
         }
-
         ## transform (DESeqTransform) ------------------------------------------
         transform1 <- slot(x, name = "transform")
         transform2 <- transform1[i, j, drop = FALSE]
-
         ## results (DESeqResults list) -----------------------------------------
         results1 <- slot(x, name = "results")
         results2 <- lapply(
@@ -70,7 +67,6 @@ NULL
                 x[i, , drop = FALSE]
             }
         )
-
         ## lfcShrink (DESeqResults list) ---------------------------------------
         lfcShrink1 <- slot(x, name = "lfcShrink")
         if (is.null(lfcShrink1)) {
@@ -83,7 +79,6 @@ NULL
                 }
             )
         }
-
         ## Return --------------------------------------------------------------
         out <- DESeqAnalysis(
             data = data2,
