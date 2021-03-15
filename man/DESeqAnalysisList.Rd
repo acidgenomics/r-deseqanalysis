@@ -16,7 +16,9 @@ DESeqAnalysisList(object, ...)
 \S4method{DESeqAnalysisList}{missing}(object)
 }
 \arguments{
-\item{...}{\code{DESeqAnalysis} objects or named \code{list}.}
+\item{object}{Object.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{DESeqAnalysisList}.
