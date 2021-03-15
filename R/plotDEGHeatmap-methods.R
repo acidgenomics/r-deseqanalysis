@@ -21,6 +21,51 @@ NULL
 
 
 
+## Updated 2021-03-15.
+`plotDEGHeatmap,DESeqAnalysis` <-  # nolint
+    function(
+        object,
+        i,
+        contrastSamples = FALSE,
+        alphaThreshold = NULL,
+        lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
+        ...
+    ) {
+        validObject(object)
+        assert(isFlag(contrastSamples))
+        res <- results(object, i = i, quiet = TRUE)
+        dt <- as(object, "DESeqTransform")
+        if (isTRUE(contrastSamples)) {
+            samples <- contrastSamples(object, i = i)
+            assert(isSubset(samples, colnames(dt)))
+            dt <- dt[, samples, drop = FALSE]
+            dt <- droplevels(dt)
+        }
+        plotDEGHeatmap(
+            object = res,
+            DESeqTransform = dt,
+            alphaThreshold = ifelse(
+                test = is.null(alphaThreshold),
+                yes = alphaThreshold(object),
+                no = alphaThreshold
+            ),
+            lfcThreshold = ifelse(
+                test = is.null(lfcThreshold),
+                yes = lfcThreshold(object),
+                no = lfcThreshold
+            ),
+            baseMeanThreshold = ifelse(
+                test = is.null(baseMeanThreshold),
+                yes = baseMeanThreshold(object),
+                no = baseMeanThreshold
+            ),
+            ...
+        )
+    }
+
+
+
 ## This method is used in F1000 paper and needs to be included. Note that in
 ## newer versions of bcbioRNASeq, this step won't work because we've slotted the
 ## rlog/vst counts in as a matrix instead of DESeqTransform.
@@ -106,6 +151,16 @@ NULL
 
 
 
+#' @describeIn plotDEGHeatmap Passes to `DESeqResults` method.
+#' @export
+setMethod(
+    f = "plotDEGHeatmap",
+    signature = signature("DESeqAnalysis"),
+    definition = `plotDEGHeatmap,DESeqAnalysis`
+)
+
+
+
 #' @describeIn plotDEGHeatmap Passes to `plotHeatmap()` `SummarizedExperiment`
 #'   method defined in AcidPlots.
 #' @export
@@ -113,41 +168,4 @@ setMethod(
     f = "plotDEGHeatmap",
     signature = signature("DESeqResults"),
     definition = `plotDEGHeatmap,DESeqResults`
-)
-
-
-
-## Updated 2020-08-25.
-`plotDEGHeatmap,DESeqAnalysis` <-  # nolint
-    function(object, i, contrastSamples = FALSE, ...) {
-        validObject(object)
-        assert(isFlag(contrastSamples))
-        suppressMessages({
-            res <- results(object, i = i)
-        })
-        dt <- as(object, "DESeqTransform")
-        if (isTRUE(contrastSamples)) {
-            samples <- contrastSamples(object, i = i)
-            assert(isSubset(samples, colnames(dt)))
-            dt <- dt[, samples, drop = FALSE]
-            dt <- droplevels(dt)
-        }
-        plotDEGHeatmap(
-            object = res,
-            DESeqTransform = dt,
-            alphaThreshold = alphaThreshold(object),
-            lfcThreshold = lfcThreshold(object),
-            baseMeanThreshold = baseMeanThreshold(object),
-            ...
-        )
-    }
-
-
-
-#' @describeIn plotDEGHeatmap Passes to `DESeqResults` method.
-#' @export
-setMethod(
-    f = "plotDEGHeatmap",
-    signature = signature("DESeqAnalysis"),
-    definition = `plotDEGHeatmap,DESeqAnalysis`
 )
