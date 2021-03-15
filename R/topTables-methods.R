@@ -1,3 +1,8 @@
+## FIXME DESeqResultsList support?
+## FIXME DESeqAnalysisList support?
+
+
+
 #' @name topTables
 #' @inherit AcidGenerics::topTables
 #' @note Updated 2021-02-10.
@@ -129,6 +134,21 @@ NULL
 
 
 
+## Updated 2020-08-05.
+`topTables,DESeqAnalysis` <-  # nolint
+    function(object, i, n = 10L) {
+        list <- resultsTables(
+            object = object,
+            i = i,
+            extra = TRUE,
+            return = "DataFrameList"
+        )
+        contrast <- contrastName(object, i = i)
+        .topKables(object = list, contrast = contrast, n = n)
+    }
+
+
+
 ## This is used in bcbioRNASeq F1000 paper.
 ## Updated 2019-11-12.
 `topTables,DESeqResults` <-  # nolint
@@ -153,41 +173,6 @@ NULL
             n = n
         )
     }
-
-
-
-#' @rdname topTables
-#' @export
-setMethod(
-    f = "topTables",
-    signature = signature("DESeqResults"),
-    definition = `topTables,DESeqResults`
-)
-
-
-
-## Updated 2020-08-05.
-`topTables,DESeqAnalysis` <-  # nolint
-    function(object, i, n = 10L) {
-        list <- resultsTables(
-            object = object,
-            i = i,
-            extra = TRUE,
-            return = "DataFrameList"
-        )
-        contrast <- contrastName(object, i = i)
-        .topKables(object = list, contrast = contrast, n = n)
-    }
-
-
-
-#' @rdname topTables
-#' @export
-setMethod(
-    f = "topTables",
-    signature = signature("DESeqAnalysis"),
-    definition = `topTables,DESeqAnalysis`
-)
 
 
 
@@ -218,6 +203,26 @@ setMethod(
             n = n
         )
     }
+
+
+
+#' @rdname topTables
+#' @export
+setMethod(
+    f = "topTables",
+    signature = signature("DESeqAnalysis"),
+    definition = `topTables,DESeqAnalysis`
+)
+
+
+
+#' @rdname topTables
+#' @export
+setMethod(
+    f = "topTables",
+    signature = signature("DESeqResults"),
+    definition = `topTables,DESeqResults`
+)
 
 
 

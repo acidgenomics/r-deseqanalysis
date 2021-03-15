@@ -1,6 +1,6 @@
 #' @name resultsTables
 #' @inherit AcidGenerics::resultsTables
-#' @note Updated 2021-03-05.
+#' @note Updated 2021-03-15.
 #'
 #' @inheritParams params
 #' @inheritParams results
@@ -47,17 +47,62 @@ NULL
 
 
 
-## Updated 2020-09-21.
+.args <- list(
+    "return" = c("tbl_df", "DataFrameList")
+)
+
+
+
+## Updated 2021-03-15.
+`resultsTables,DESeqAnalysis` <-  # nolint
+    function(
+        object,
+        i,
+        alphaThreshold = NULL,
+        lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
+        extra = TRUE,
+        return
+    ) {
+        validObject(object)
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- baseMeanThreshold(object)
+        }
+        resultsTables(
+            object = results(object = object, i = i, extra = extra),
+            alphaThreshold = ifelse(
+                test = is.null(alphaThreshold),
+                yes = alphaThreshold(object),
+                no = alphaThreshold
+            ),
+            lfcThreshold = ifelse(
+                test = is.null(lfcThreshold),
+                yes = lfcThreshold(object),
+                no = lfcThreshold
+            ),
+            baseMeanThreshold = ifelse(
+                test = is.null(baseMeanThreshold),
+                yes = baseMeanThreshold(object),
+                no = baseMeanThreshold
+            ),
+            return = match.arg(return)
+        )
+    }
+
+formals(`resultsTables,DESeqAnalysis`)[names(.args)] <- .args
+
+
+
+## Updated 2021-03-15.
 `resultsTables,DESeqResults` <-  # nolint
     function(
         object,
         alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
-        return = c("tbl_df", "DataFrameList")
+        return
     ) {
         validObject(object)
-        return <- match.arg(return)
         both <- deg(
             object = object,
             alphaThreshold = alphaThreshold,
@@ -89,53 +134,17 @@ NULL
             out <- Filter(f = hasRows, x = out)
         }
         switch(
-            EXPR = return,
+            EXPR = match.arg(return),
             "DataFrameList" = DataFrameList(out),
             "tbl_df" = lapply(out, as_tibble)
         )
     }
 
-
-
-#' @rdname resultsTables
-#' @export
-setMethod(
-    f = "resultsTables",
-    signature = signature("DESeqResults"),
-    definition = `resultsTables,DESeqResults`
-)
+formals(`resultsTables,DESeqResults`)[names(.args)] <- .args
 
 
 
-## Updated 2021-03-05.
-`resultsTables,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        alphaThreshold = NULL,
-        lfcThreshold = NULL,
-        baseMeanThreshold = NULL,
-        extra = TRUE,
-        ...
-    ) {
-        validObject(object)
-        if (is.null(alphaThreshold)) {
-            alphaThreshold <- alphaThreshold(object)
-        }
-        if (is.null(lfcThreshold)) {
-            lfcThreshold <- lfcThreshold(object)
-        }
-        if (is.null(baseMeanThreshold)) {
-            baseMeanThreshold <- baseMeanThreshold(object)
-        }
-        resultsTables(
-            object = results(object = object, i = i, extra = extra),
-            alphaThreshold = alphaThreshold,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold,
-            ...
-        )
-    }
+rm(.args)
 
 
 
@@ -145,4 +154,14 @@ setMethod(
     f = "resultsTables",
     signature = signature("DESeqAnalysis"),
     definition = `resultsTables,DESeqAnalysis`
+)
+
+
+
+#' @rdname resultsTables
+#' @export
+setMethod(
+    f = "resultsTables",
+    signature = signature("DESeqResults"),
+    definition = `resultsTables,DESeqResults`
 )

@@ -31,24 +31,6 @@ NULL
 
 
 
-## Updated 2019-07-23.
-`results,DESeqDataSet` <-  # nolint
-    function(object, ...) {
-        DESeq2::results(object, ...)
-    }
-
-
-
-#' @rdname results
-#' @export
-setMethod(
-    f = "results",
-    signature = signature("DESeqDataSet"),
-    definition = `results,DESeqDataSet`
-)
-
-
-
 ## Updated 2021-03-09.
 `results,DESeqAnalysis` <-  # nolint
     function(
@@ -104,10 +86,28 @@ setMethod(
 
 
 
+## Updated 2019-07-23.
+`results,DESeqDataSet` <-  # nolint
+    function(object, ...) {
+        DESeq2::results(object, ...)
+    }
+
+
+
 #' @rdname results
 #' @export
 setMethod(
     f = "results",
     signature = signature("DESeqAnalysis"),
     definition = `results,DESeqAnalysis`
+)
+
+
+
+#' @rdname results
+#' @export
+setMethod(
+    f = "results",
+    signature = signature("DESeqDataSet"),
+    definition = `results,DESeqDataSet`
 )

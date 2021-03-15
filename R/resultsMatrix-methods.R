@@ -88,16 +88,6 @@ NULL
 
 
 
-#' @rdname resultsMatrix
-#' @export
-setMethod(
-    f = "resultsMatrix",
-    signature = signature("DESeqAnalysis"),
-    definition = `resultsMatrix,DESeqAnalysis`
-)
-
-
-
 ## Updated 2021-03-15.
 `resultsMatrix,DESeqAnalysisList` <-  # nolint
     function(object, value, rowData) {
@@ -139,9 +129,20 @@ setMethod(
         out
     }
 
-args <- c("value", "rowData")
-formals(`resultsMatrix,DESeqAnalysisList`)[args] <-
-    formals(`resultsMatrix,DESeqAnalysis`)[args]
+.args <- c("value", "rowData")
+formals(`resultsMatrix,DESeqAnalysisList`)[.args] <-
+    formals(`resultsMatrix,DESeqAnalysis`)[.args]
+rm(.args)
+
+
+
+#' @rdname resultsMatrix
+#' @export
+setMethod(
+    f = "resultsMatrix",
+    signature = signature("DESeqAnalysis"),
+    definition = `resultsMatrix,DESeqAnalysis`
+)
 
 
 

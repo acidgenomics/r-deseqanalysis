@@ -1,6 +1,6 @@
 #' @name sampleData
 #' @inherit AcidGenerics::sampleData
-#' @note Updated 2019-08-20.
+#' @note Updated 2021-03-15.
 #'
 #' @param ... Additional arguments.
 #'
@@ -14,11 +14,11 @@ NULL
 
 
 
-## Updated 2019-08-20.
+## Updated 2021-03-15.
 `sampleData,DESeqAnalysis` <-  # nolint
     function(object) {
-        object <- as(object, "DESeqDataSet")
-        sampleData(object)
+        dds <- as(object, "DESeqDataSet")
+        sampleData(dds)
     }
 
 

@@ -140,15 +140,15 @@ NULL
             isInRange(ylim, lower = 1e-100, upper = 1e-3),
             isFlag(histograms)
         )
-        if (isTRUE(histograms)) {
-            assert(identical(return, "ggplot"))
-        }
         direction <- match.arg(direction)
         labels <- matchLabels(
             labels = labels,
             choices = eval(formals()[["labels"]])
         )
         return <- match.arg(return)
+        if (isTRUE(histograms)) {
+            assert(identical(return, "ggplot"))
+        }
         data <- as(object, "DataFrame")
         data <- camelCase(data, strict = TRUE)
         assert(isSubset(c(baseMeanCol, lfcCol, alphaCol), colnames(data)))
@@ -361,6 +361,10 @@ setMethod(
 
 
 
+## FIXME THIS DOESNT HANDLE THE ALPHATHRESHOLD, BASEMEAN, ETC. CORRECTLY.
+## NEED TO RETHINK THIS APPROACH.
+## FIXME DONT USE ... PASSTHROUGH HERE??
+
 ## Updated 2020-08-05.
 `plotVolcano,DESeqAnalysis` <-  # nolint
     function(object, i, ...) {
@@ -372,6 +376,7 @@ setMethod(
                 }),
                 error = function(e) NULL
             ),
+            ## FICME REWORK THESE...
             alphaThreshold = alphaThreshold(object),
             lfcThreshold = lfcThreshold(object),
             baseMeanThreshold = baseMeanThreshold(object),

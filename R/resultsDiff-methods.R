@@ -22,6 +22,18 @@ NULL
 
 
 
+## Updated 2020-08-05.
+`resultsDiff,DESeqAnalysis,missing` <-  # nolint
+    function(x, y = NULL, i, j, ...) {
+        resultsDiff(
+            x = results(x, i = i),
+            y = results(x, i = j),
+            ...
+        )
+    }
+
+
+
 ## Updated 2020-08-04.
 `resultsDiff,DESeqResults,DESeqResults` <-  # nolint
     function(
@@ -80,31 +92,6 @@ NULL
 
 
 
-#' @rdname resultsDiff
-#' @export
-setMethod(
-    f = "resultsDiff",
-    signature = signature(
-        x = "DESeqResults",
-        y = "DESeqResults"
-    ),
-    definition = `resultsDiff,DESeqResults,DESeqResults`
-)
-
-
-
-## Updated 2020-08-05.
-`resultsDiff,DESeqAnalysis,missing` <-  # nolint
-    function(x, y = NULL, i, j, ...) {
-        resultsDiff(
-            x = results(x, i = i),
-            y = results(x, i = j),
-            ...
-        )
-    }
-
-
-
 #' @describeIn resultsDiff Passes arguments to `DESeqResults` method.
 #' @export
 setMethod(
@@ -114,4 +101,17 @@ setMethod(
         y = "missingOrNULL"
     ),
     definition = `resultsDiff,DESeqAnalysis,missing`
+)
+
+
+
+#' @rdname resultsDiff
+#' @export
+setMethod(
+    f = "resultsDiff",
+    signature = signature(
+        x = "DESeqResults",
+        y = "DESeqResults"
+    ),
+    definition = `resultsDiff,DESeqResults,DESeqResults`
 )

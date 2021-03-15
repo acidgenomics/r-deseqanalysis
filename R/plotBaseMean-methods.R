@@ -1,6 +1,6 @@
 #' @name plotBaseMean
 #' @inherit AcidGenerics::plotBaseMean
-#' @note Updated 2020-08-04.
+#' @note Updated 2021-03-15.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -11,7 +11,7 @@
 #'
 #' @seealso
 #' - https://support.bioconductor.org/p/75244/
-#' - [`summary()`][base::summary]
+#' - [`summary()`][base::summary].
 #'
 #' @return `ggplot`.
 #'
@@ -24,10 +24,30 @@ NULL
 
 
 
-## If outliers have been replaced:
-## nolint start
-## > all(rowMeans(counts(dds, normalized=TRUE, replaced=TRUE)) == res$baseMean)
-## nolint end
+## Updated 2020-08-04.
+`plotBaseMean,DESeqAnalysis` <-  # nolint
+    function(object, ...) {
+        object <- as(object, "DESeqDataSet")
+        plotBaseMean(object, ...)
+    }
+
+
+
+## Updated 2020-08-04.
+`plotBaseMean,DESeqDataSet` <-  # nolint
+    function(object, ...) {
+        object <- rowMeans(counts(object, normalized = TRUE))
+        plotBaseMean(object, ...)
+    }
+
+
+
+## Updated 2020-08-04.
+`plotBaseMean,DESeqResults` <-  # nolint
+    function(object, ...) {
+        object <- object[["baseMean"]]
+        plotBaseMean(object, ...)
+    }
 
 
 
@@ -179,22 +199,13 @@ formals(`plotBaseMean,numeric`)[["color"]] <- formalsList[["color.discrete"]]
 
 
 
-#' @rdname plotBaseMean
+#' @describeIn plotBaseMean Passes to `DESeqDataSet` method.
 #' @export
 setMethod(
     f = "plotBaseMean",
-    signature = signature("numeric"),
-    definition = `plotBaseMean,numeric`
+    signature = signature("DESeqAnalysis"),
+    definition = `plotBaseMean,DESeqAnalysis`
 )
-
-
-
-## Updated 2020-08-04.
-`plotBaseMean,DESeqDataSet` <-  # nolint
-    function(object, ...) {
-        object <- rowMeans(counts(object, normalized = TRUE))
-        plotBaseMean(object, ...)
-    }
 
 
 
@@ -210,15 +221,6 @@ setMethod(
 
 
 
-## Updated 2020-08-04.
-`plotBaseMean,DESeqResults` <-  # nolint
-    function(object, ...) {
-        object <- object[["baseMean"]]
-        plotBaseMean(object, ...)
-    }
-
-
-
 #' @describeIn plotBaseMean Uses `baseMean` column of results.
 #'   Passes to `numeric` method.
 #' @export
@@ -230,19 +232,10 @@ setMethod(
 
 
 
-## Updated 2020-08-04.
-`plotBaseMean,DESeqAnalysis` <-  # nolint
-    function(object, ...) {
-        object <- as(object, "DESeqDataSet")
-        plotBaseMean(object, ...)
-    }
-
-
-
-#' @describeIn plotBaseMean Passes to `DESeqDataSet` method.
+#' @rdname plotBaseMean
 #' @export
 setMethod(
     f = "plotBaseMean",
-    signature = signature("DESeqAnalysis"),
-    definition = `plotBaseMean,DESeqAnalysis`
+    signature = signature("numeric"),
+    definition = `plotBaseMean,numeric`
 )
