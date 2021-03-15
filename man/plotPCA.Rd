@@ -2,63 +2,23 @@
 % Please edit documentation in R/AllGenerics.R, R/plotPCA-methods.R
 \name{plotPCA}
 \alias{plotPCA}
+\alias{plotPCA,DESeqAnalysis-method}
 \alias{plotPCA,DESeqDataSet-method}
 \alias{plotPCA,DESeqTransform-method}
-\alias{plotPCA,DESeqAnalysis-method}
 \title{Principal component analysis plot}
 \usage{
 plotPCA(object, ...)
 
+\S4method{plotPCA}{DESeqAnalysis}(object, ...)
+
 \S4method{plotPCA}{DESeqDataSet}(object, ...)
 
-\S4method{plotPCA}{DESeqTransform}(
-  object,
-  assay = 1L,
-  interestingGroups = NULL,
-  ntop = 500L,
-  label = getOption(x = "acid.label", default = FALSE),
-  color = getOption(x = "acid.color.discrete", default = getOption(x =
-    "ggplot2.discrete.colour", default = AcidPlots::scale_color_synesthesia_d())),
-  pointSize = getOption(x = "acid.point.size", default = 3L),
-  labels = list(title = "PCA", subtitle = NULL)
-)
-
-\S4method{plotPCA}{DESeqAnalysis}(object, ...)
+\S4method{plotPCA}{DESeqTransform}(object, ...)
 }
 \arguments{
 \item{object}{Object.}
 
 \item{...}{Additional arguments.}
-
-\item{assay}{\code{vector(1)}.
-Assay name or index position.}
-
-\item{interestingGroups}{\code{character}.
-Groups of interest to use for visualization.
-Corresponds to factors describing the columns of the object.}
-
-\item{ntop}{\code{integer(1)} or \code{Inf}.
-Number of most variable genes to plot.
-Use \code{Inf} to include all genes (\emph{not recommended}).}
-
-\item{label}{\code{logical(1)}.
-Superimpose sample text labels on the plot.}
-
-\item{color}{\code{ScaleDiscrete}.
-Desired ggplot2 color scale. Must supply discrete values. When set \code{NULL},
-the default ggplot2 color palette will be used. If manual color definitions
-are desired, we recommend using \code{ggplot2::scale_color_manual()}.
-
-To set the discrete color palette globally, use:\preformatted{options(acid.color.discrete = ggplot2::scale_color_viridis_d())
-}}
-
-\item{pointSize}{\code{numeric(1)}.
-Point size for dots in the plot.
-In the range of 1-3 is generally recommended.}
-
-\item{labels}{\code{list}.
-ggplot2 labels.
-See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
 }
 \value{
 \code{ggplot}.
@@ -71,12 +31,15 @@ Passes to \code{SummarizedExperiment} defined in AcidPlots package.
 }
 \section{Functions}{
 \itemize{
+\item \code{plotPCA,DESeqAnalysis-method}: Extracts \code{DESeqTransform} and passes to corresponding
+method.
+
+\item \code{plotPCA,DESeqDataSet-method}: Method intentionally errors. Use \code{DESeqAnalysis} or
+\code{DESeqTransform} methods instead.
+
 \item \code{plotPCA,DESeqTransform-method}: Passes to \code{SummarizedExperiment} method defined in
 AcidPlots package. Uses values defined in
 \code{\link[SummarizedExperiment:SummarizedExperiment-class]{assay()}}.
-
-\item \code{plotPCA,DESeqAnalysis-method}: Extracts \code{DESeqTransform} and passes to corresponding
-method.
 }}
 
 \note{
