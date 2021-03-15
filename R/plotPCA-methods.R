@@ -13,52 +13,30 @@ NULL
 
 
 
-## Updated 2020-07-28.
-`plotPCA,DESeqDataSet` <-  # nolint
-    function(object, ...) {
-        stop("Use DESeqTransform object instead of DESeqDataSet.")
-    }
-
-
-
-#' @rdname plotPCA
-#' @export
-setMethod(
-    f = "plotPCA",
-    signature = signature("DESeqDataSet"),
-    definition = `plotPCA,DESeqDataSet`
-)
-
-
-
-## Updated 2019-07-23.
-`plotPCA,DESeqTransform` <-  # nolint
-    getMethod(
-        f = "plotPCA",
-        signature = "SummarizedExperiment",
-        where = "AcidPlots"
-    )
-
-
-
-#' @describeIn plotPCA Passes to `SummarizedExperiment` method defined in
-#'   AcidPlots package. Uses values defined in
-#'   [`assay()`][SummarizedExperiment::assay].
-#' @export
-setMethod(
-    f = "plotPCA",
-    signature = signature("DESeqTransform"),
-    definition = `plotPCA,DESeqTransform`
-)
-
-
-
 ## Updated 2019-09-10.
 `plotPCA,DESeqAnalysis` <-  # nolint
     function(object, ...) {
         validObject(object)
         dt <- as(object, "DESeqTransform")
         plotPCA(object = dt, ...)
+    }
+
+
+
+## Keep this here so we don't allow inheritance of SE method.
+## Updated 2021-03-15.
+`plotPCA,DESeqDataSet` <-  # nolint
+    function(object, ...) {
+        stop("Use 'DESeqTransform' object instead of 'DESeqDataSet'.")
+    }
+
+
+
+## Updated 2019-07-23.
+`plotPCA,DESeqTransform` <-  # nolint
+    function(object, ...) {
+        rse <- as(object, "RangedSummarizedExperiment")
+        plotPCA(rse, ...)
     }
 
 
@@ -70,4 +48,27 @@ setMethod(
     f = "plotPCA",
     signature = signature("DESeqAnalysis"),
     definition = `plotPCA,DESeqAnalysis`
+)
+
+
+
+#' @describeIn plotPCA Method intentionally errors. Use `DESeqAnalysis` or
+#'   `DESeqTransform` methods instead.
+#' @export
+setMethod(
+    f = "plotPCA",
+    signature = signature("DESeqDataSet"),
+    definition = `plotPCA,DESeqDataSet`
+)
+
+
+
+#' @describeIn plotPCA Passes to `SummarizedExperiment` method defined in
+#'   AcidPlots package. Uses values defined in
+#'   [`assay()`][SummarizedExperiment::assay].
+#' @export
+setMethod(
+    f = "plotPCA",
+    signature = signature("DESeqTransform"),
+    definition = `plotPCA,DESeqTransform`
 )
