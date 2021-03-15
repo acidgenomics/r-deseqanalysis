@@ -104,7 +104,7 @@ setMethod(
 
 
 
-#' @rdname results
+#' @describeIn results Arguments pass through to [DESeq2::results()].
 #' @export
 setMethod(
     f = "results",
