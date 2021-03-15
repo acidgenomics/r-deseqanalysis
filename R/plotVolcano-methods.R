@@ -1,3 +1,4 @@
+## FIXME Improve the support for gating axes.
 ## NOTE Consider gating LFC at +/- 10 here by default.
 
 
@@ -5,7 +6,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit AcidGenerics::plotVolcano
-#' @note Updated 2021-03-03.
+#' @note Updated 2021-03-15.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -58,6 +59,45 @@
 #' ## Note that either gene IDs or names (symbols) are supported.
 #' plotVolcano(deseq, i = 1L, genes = genes)
 NULL
+
+
+
+## Updated 2021-03-15.
+`plotVolcano,DESeqAnalysis` <-  # nolint
+    function(
+        object,
+        i,
+        alphaThreshold = NULL,
+        lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
+        ...
+    ) {
+        plotVolcano(
+            object = results(object, i = i),
+            gene2symbol = tryCatch(
+                expr = suppressMessages({
+                    Gene2Symbol(as(object, "DESeqDataSet"))
+                }),
+                error = function(e) NULL
+            ),
+            alphaThreshold = ifelse(
+                test = is.null(alphaThreshold),
+                yes = alphaThreshold(object),
+                no = alphaThreshold
+            ),
+            lfcThreshold = ifelse(
+                test = is.null(lfcThreshold),
+                yes = lfcThreshold(object),
+                no = lfcThreshold
+            ),
+            baseMeanThreshold = ifelse(
+                test = is.null(baseMeanThreshold),
+                yes = baseMeanThreshold(object),
+                no = baseMeanThreshold
+            ),
+            ...
+        )
+    }
 
 
 
@@ -351,41 +391,6 @@ NULL
 
 
 
-#' @rdname plotVolcano
-#' @export
-setMethod(
-    f = "plotVolcano",
-    signature = signature("DESeqResults"),
-    definition = `plotVolcano,DESeqResults`
-)
-
-
-
-## FIXME THIS DOESNT HANDLE THE ALPHATHRESHOLD, BASEMEAN, ETC. CORRECTLY.
-## NEED TO RETHINK THIS APPROACH.
-## FIXME DONT USE ... PASSTHROUGH HERE??
-
-## Updated 2020-08-05.
-`plotVolcano,DESeqAnalysis` <-  # nolint
-    function(object, i, ...) {
-        plotVolcano(
-            object = results(object, i = i),
-            gene2symbol = tryCatch(
-                expr = suppressMessages({
-                    Gene2Symbol(as(object, "DESeqDataSet"))
-                }),
-                error = function(e) NULL
-            ),
-            ## FICME REWORK THESE...
-            alphaThreshold = alphaThreshold(object),
-            lfcThreshold = lfcThreshold(object),
-            baseMeanThreshold = baseMeanThreshold(object),
-            ...
-        )
-    }
-
-
-
 #' @describeIn plotVolcano Passes to `DESeqResults` method, with `gene2symbol`
 #'   argument automatically defined.
 #' @export
@@ -393,4 +398,14 @@ setMethod(
     f = "plotVolcano",
     signature = signature("DESeqAnalysis"),
     definition = `plotVolcano,DESeqAnalysis`
+)
+
+
+
+#' @rdname plotVolcano
+#' @export
+setMethod(
+    f = "plotVolcano",
+    signature = signature("DESeqResults"),
+    definition = `plotVolcano,DESeqResults`
 )

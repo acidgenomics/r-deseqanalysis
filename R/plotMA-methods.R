@@ -1,3 +1,4 @@
+## FIXME Improve the support for gating axes.
 ## NOTE Consider gating LFC at +/- 10 here by default.
 
 
@@ -5,19 +6,13 @@
 #' @name plotMA
 #' @inherit AcidGenerics::plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
-#' @note Updated 2021-03-03.
+#' @note Updated 2021-03-15.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual
 #' representation of genomic data. The plot visualizes the differences between
 #' measurements taken in two samples, by transforming the data onto
 #' M (log ratio) and A (mean average) scales, then plotting these values.
-#'
-#' @section plotMA2 aliases:
-#'
-#' Aliased methods for original [DESeq2::plotMA()] S4 methods, which us
-#' geneplotter instead of ggplot2. I prefer using ggplot2 instead, so the
-#' primary methods defined here in the package mask DESeq2.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -57,6 +52,45 @@
 #' ## Note that either gene IDs or names (symbols) are supported.
 #' plotMA(deseq, i = 1L, genes = genes)
 NULL
+
+
+
+## Updated 2021-03-15.
+`plotMA,DESeqAnalysis` <-  # nolint
+    function(
+        object,
+        i,
+        alphaThreshold = NULL,
+        lfcThreshold = NULL,
+        baseMeanThreshold = NULL,
+        ...
+    ) {
+        plotMA(
+            object = results(object, i = i),
+            gene2symbol = tryCatch(
+                expr = suppressMessages({
+                    Gene2Symbol(as(object, "DESeqDataSet"))
+                }),
+                error = function(e) NULL
+            ),
+            alphaThreshold = ifelse(
+                test = is.null(alphaThreshold),
+                yes = alphaThreshold(object),
+                no = alphaThreshold
+            ),
+            lfcThreshold = ifelse(
+                test = is.null(lfcThreshold),
+                yes = lfcThreshold(object),
+                no = lfcThreshold
+            ),
+            baseMeanThreshold = ifelse(
+                test = is.null(baseMeanThreshold),
+                yes = baseMeanThreshold(object),
+                no = baseMeanThreshold
+            ),
+            ...
+        )
+    }
 
 
 
@@ -290,36 +324,6 @@ NULL
 
 
 
-#' @rdname plotMA
-#' @export
-setMethod(
-    f = "plotMA",
-    signature = signature("DESeqResults"),
-    definition = `plotMA,DESeqResults`
-)
-
-
-
-## Updated 2020-08-05.
-`plotMA,DESeqAnalysis` <-  # nolint
-    function(object, i, ...) {
-        plotMA(
-            object = results(object, i = i),
-            gene2symbol = tryCatch(
-                expr = suppressMessages({
-                    Gene2Symbol(as(object, "DESeqDataSet"))
-                }),
-                error = function(e) NULL
-            ),
-            alphaThreshold = alphaThreshold(object),
-            lfcThreshold = lfcThreshold(object),
-            baseMeanThreshold = baseMeanThreshold(object),
-            ...
-        )
-    }
-
-
-
 #' @describeIn plotMA Passes to `DESeqResults` method, with `gene2symbol`
 #'   argument automatically defined.
 #' @export
@@ -331,12 +335,10 @@ setMethod(
 
 
 
-## Aliases =====================================================================
-## Soft deprecated, since this is used in bcbioRNASeq F1000 paper.
 #' @rdname plotMA
-#' @usage NULL
 #' @export
-plotMeanAverage <- function(...) {
-    ## > .Deprecated("plotMA")
-    plotMA(...)
-}
+setMethod(
+    f = "plotMA",
+    signature = signature("DESeqResults"),
+    definition = `plotMA,DESeqResults`
+)

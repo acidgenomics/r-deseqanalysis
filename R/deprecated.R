@@ -22,5 +22,17 @@ apeglmContrast <- function(dds, ...) {
 
 
 
+## v0.4.0 ======================================================================
+## Soft deprecated, since this is used in bcbioRNASeq F1000 paper.
+#' @rdname plotMA
+#' @usage NULL
+#' @export
+plotMeanAverage <- function(...) {
+    ## > .Deprecated("plotMA")
+    plotMA(...)
+}
+
+
+
 ## nolint end
 ## nocov end
