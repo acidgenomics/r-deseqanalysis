@@ -86,7 +86,7 @@ method defined in AcidPlots.
 }}
 
 \note{
-Updated 2021-03-03.
+Updated 2021-03-15.
 }
 \examples{
 data(deseq)
