@@ -1,6 +1,6 @@
 #' @name plotPCA
 #' @inherit AcidPlots::plotPCA
-#' @note Updated 2020-08-04.
+#' @note Updated 2021-03-15.
 #'
 #' @details Passes to `SummarizedExperiment` defined in AcidPlots package.
 #'

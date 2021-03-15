@@ -2,11 +2,21 @@
 % Please edit documentation in R/AllGenerics.R, R/plotDEGPCA-methods.R
 \name{plotDEGPCA}
 \alias{plotDEGPCA}
-\alias{plotDEGPCA,DESeqResults-method}
 \alias{plotDEGPCA,DESeqAnalysis-method}
+\alias{plotDEGPCA,DESeqResults-method}
 \title{Plot differentially expressed gene principal component analysis}
 \usage{
 plotDEGPCA(object, ...)
+
+\S4method{plotDEGPCA}{DESeqAnalysis}(
+  object,
+  i,
+  contrastSamples = FALSE,
+  alphaThreshold = NULL,
+  lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
+  ...
+)
 
 \S4method{plotDEGPCA}{DESeqResults}(
   object,
@@ -17,13 +27,20 @@ plotDEGPCA(object, ...)
   direction = c("both", "up", "down"),
   ...
 )
-
-\S4method{plotDEGPCA}{DESeqAnalysis}(object, i, contrastSamples = FALSE, ...)
 }
 \arguments{
 \item{object}{Object.}
 
-\item{DESeqTransform}{\code{DESeqTransform}.}
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
+
+\item{contrastSamples}{\code{logical(1)}.
+\strong{Experimental}. Only include the samples used to define the contrast
+passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
+contrasts (e.g. interaction effect).}
 
 \item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
@@ -38,21 +55,12 @@ Base mean (i.e. average expression across all samples) threshold.
 If left \code{NULL}, will use the cutoff defined in the object.
 Applies in general to DESeq2 RNA-seq differential expression output.}
 
-\item{direction}{\code{character(1)}.
-Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
-
 \item{...}{Additional arguments.}
 
-\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
-\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+\item{DESeqTransform}{\code{DESeqTransform}.}
 
-For more information:\preformatted{help(topic = "Extract", package = "base")
-}}
-
-\item{contrastSamples}{\code{logical(1)}.
-\strong{Experimental}. Only include the samples used to define the contrast
-passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
-contrasts (e.g. interaction effect).}
+\item{direction}{\code{character(1)}.
+Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 }
 \value{
 Plot.

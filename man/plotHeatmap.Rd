@@ -33,7 +33,7 @@ Plot.
 Heatmap
 }
 \note{
-Updated 2020-08-04.
+Updated 2021-03-15.
 }
 \section{Scaling}{
 
