@@ -42,7 +42,7 @@ Import pairwise contrasts from a file
 Updated 2019-09-09.
 }
 \examples{
-file <- system.file("extdata/contrasts.csv", package = "DESeqAnalysis")
+file <- system.file("extdata", "contrasts.csv", package = "DESeqAnalysis")
 x <- importPairwiseContrasts(file)
 print(x)
 }

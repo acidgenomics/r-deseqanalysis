@@ -2,13 +2,19 @@
 % Please edit documentation in R/AllGenerics.R, R/plotBaseMean-methods.R
 \name{plotBaseMean}
 \alias{plotBaseMean}
-\alias{plotBaseMean,numeric-method}
+\alias{plotBaseMean,DESeqAnalysis-method}
 \alias{plotBaseMean,DESeqDataSet-method}
 \alias{plotBaseMean,DESeqResults-method}
-\alias{plotBaseMean,DESeqAnalysis-method}
+\alias{plotBaseMean,numeric-method}
 \title{Plot base mean distribution}
 \usage{
 plotBaseMean(object, ...)
+
+\S4method{plotBaseMean}{DESeqAnalysis}(object, ...)
+
+\S4method{plotBaseMean}{DESeqDataSet}(object, ...)
+
+\S4method{plotBaseMean}{DESeqResults}(object, ...)
 
 \S4method{plotBaseMean}{numeric}(
   object,
@@ -20,15 +26,11 @@ plotBaseMean(object, ...)
   labels = list(title = "Base mean distribution", subtitle = NULL, x =
     "average expression across all samples", y = "density", color = "summary")
 )
-
-\S4method{plotBaseMean}{DESeqDataSet}(object, ...)
-
-\S4method{plotBaseMean}{DESeqResults}(object, ...)
-
-\S4method{plotBaseMean}{DESeqAnalysis}(object, ...)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{...}{Additional arguments.}
 
 \item{nonzero}{\code{logical(1)}.
 Remove zero-count features (genes).}
@@ -53,8 +55,6 @@ To set the discrete color palette globally, use:\preformatted{options(acid.color
 \item{labels}{\code{list}.
 ggplot2 labels.
 See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
-
-\item{...}{Additional arguments.}
 }
 \value{
 \code{ggplot}.
@@ -65,18 +65,18 @@ for sequencing depth.
 }
 \section{Functions}{
 \itemize{
+\item \code{plotBaseMean,DESeqAnalysis-method}: Passes to \code{DESeqDataSet} method.
+
 \item \code{plotBaseMean,DESeqDataSet-method}: Generates row means of normalized counts.
 This value corresponds to the \code{baseMean} column of \code{DESeqResults}.
 Passes to \code{numeric} method.
 
 \item \code{plotBaseMean,DESeqResults-method}: Uses \code{baseMean} column of results.
 Passes to \code{numeric} method.
-
-\item \code{plotBaseMean,DESeqAnalysis-method}: Passes to \code{DESeqDataSet} method.
 }}
 
 \note{
-Updated 2020-08-04.
+Updated 2021-03-15.
 }
 \examples{
 data(deseq)
@@ -87,6 +87,6 @@ plotBaseMean(deseq)
 \seealso{
 \itemize{
 \item https://support.bioconductor.org/p/75244/
-\item \code{\link[base:summary]{summary()}}
+\item \code{\link[base:summary]{summary()}}.
 }
 }

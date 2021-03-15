@@ -2,32 +2,32 @@
 % Please edit documentation in R/AllGenerics.R, R/topTables-methods.R
 \name{topTables}
 \alias{topTables}
-\alias{topTables,DESeqResults-method}
 \alias{topTables,DESeqAnalysis-method}
+\alias{topTables,DESeqResults-method}
 \alias{topTables,list-method}
 \title{Top tables}
 \usage{
 topTables(object, ...)
 
-\S4method{topTables}{DESeqResults}(object, DESeqDataSet = NULL, n = 10L)
-
 \S4method{topTables}{DESeqAnalysis}(object, i, n = 10L)
+
+\S4method{topTables}{DESeqResults}(object, DESeqDataSet = NULL, n = 10L)
 
 \S4method{topTables}{list}(object, n = 10L, contrast = NULL)
 }
 \arguments{
 \item{object}{Object.}
 
-\item{DESeqDataSet}{\code{DESeqDataSet} or \code{NULL}.}
-
-\item{n}{\code{integer(1)}.
-Number of genes (per direction) to report.}
-
 \item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
 \code{character} vectors, empty (\code{missing}), or \code{NULL}.
 
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
+
+\item{n}{\code{integer(1)}.
+Number of genes (per direction) to report.}
+
+\item{DESeqDataSet}{\code{DESeqDataSet} or \code{NULL}.}
 
 \item{contrast}{\code{character(1)} or \code{NULL}.
 Contrast name.}
