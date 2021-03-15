@@ -2,18 +2,18 @@
 % Please edit documentation in R/AllGenerics.R, R/plotCounts-methods.R
 \name{plotCounts}
 \alias{plotCounts}
+\alias{plotCounts,DESeqAnalysis-method}
 \alias{plotCounts,DESeqDataSet-method}
 \alias{plotCounts,DESeqTransform-method}
-\alias{plotCounts,DESeqAnalysis-method}
 \title{Plot counts}
 \usage{
 plotCounts(object, ...)
 
+\S4method{plotCounts}{DESeqAnalysis}(object, ..., samples = NULL, transform = FALSE)
+
 \S4method{plotCounts}{DESeqDataSet}(object, ...)
 
 \S4method{plotCounts}{DESeqTransform}(object, ...)
-
-\S4method{plotCounts}{DESeqAnalysis}(object, ..., samples = NULL, transform = FALSE)
 }
 \arguments{
 \item{object}{Object.}
@@ -40,18 +40,18 @@ Plot counts
 }
 \section{Functions}{
 \itemize{
+\item \code{plotCounts,DESeqAnalysis-method}: Plot either \code{DESeqDataSet} normalized counts or
+\code{DESeqTransform} log2 variance-stabilized counts.
+
 \item \code{plotCounts,DESeqDataSet-method}: Plot size factor (i.e. library size) adjusted
 normalized counts. Arguments pass through to \code{SummarizedExperiment} method
 defined in AcidPlots package.
 
 \item \code{plotCounts,DESeqTransform-method}: Plot log2 variance-stabilized transformed counts.
-
-\item \code{plotCounts,DESeqAnalysis-method}: Plot either \code{DESeqDataSet} normalized counts or
-\code{DESeqTransform} log2 variance-stabilized counts.
 }}
 
 \note{
-Updated 2019-12-18.
+Updated 2021-03-15.
 }
 \examples{
 data(deseq)

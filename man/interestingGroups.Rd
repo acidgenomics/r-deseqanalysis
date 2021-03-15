@@ -32,7 +32,7 @@ interestingGroups(object, ...)  <- value
 Interesting groups
 }
 \note{
-Updated 2020-08-04.
+Updated 2021-03-15.
 }
 \examples{
 data(deseq)

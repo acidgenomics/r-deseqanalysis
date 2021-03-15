@@ -2,19 +2,11 @@
 % Please edit documentation in R/AllGenerics.R, R/resultsTables-methods.R
 \name{resultsTables}
 \alias{resultsTables}
-\alias{resultsTables,DESeqResults-method}
 \alias{resultsTables,DESeqAnalysis-method}
+\alias{resultsTables,DESeqResults-method}
 \title{Results tables}
 \usage{
 resultsTables(object, ...)
-
-\S4method{resultsTables}{DESeqResults}(
-  object,
-  alphaThreshold = NULL,
-  lfcThreshold = NULL,
-  baseMeanThreshold = NULL,
-  return = c("tbl_df", "DataFrameList")
-)
 
 \S4method{resultsTables}{DESeqAnalysis}(
   object,
@@ -23,11 +15,22 @@ resultsTables(object, ...)
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
   extra = TRUE,
-  ...
+  return = c("tbl_df", "DataFrameList")
+)
+
+\S4method{resultsTables}{DESeqResults}(
+  object,
+  alphaThreshold = NULL,
+  lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
+  return = c("tbl_df", "DataFrameList")
 )
 }
 \arguments{
 \item{object}{Object.}
+
+\item{i}{\code{character(1)} or \code{integer(1)}.
+\code{DESeqResults} contrast name or position in \code{results} slot.}
 
 \item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
@@ -42,6 +45,10 @@ Base mean (i.e. average expression across all samples) threshold.
 If left \code{NULL}, will use the cutoff defined in the object.
 Applies in general to DESeq2 RNA-seq differential expression output.}
 
+\item{extra}{\code{logical(1)}.
+Include row data (i.e. gene metadata) and normalized counts from the
+internal \code{DESeqDataSet}.}
+
 \item{return}{\code{character(1)}.
 Type of data frame to return as a list.
 Uses \link[base:match.arg]{match.arg()}.
@@ -49,13 +56,6 @@ Uses \link[base:match.arg]{match.arg()}.
 \item \code{DataFrameList}: Returns \code{DataFrameList} with row names.
 \item \code{tbl_df}: Returns \code{list} of \code{tbl_df} containing \code{"rowname"} column.
 }}
-
-\item{i}{\code{character(1)} or \code{integer(1)}.
-\code{DESeqResults} contrast name or position in \code{results} slot.}
-
-\item{extra}{\code{logical(1)}.
-Include row data (i.e. gene metadata) and normalized counts from the
-internal \code{DESeqDataSet}.}
 
 \item{...}{Additional arguments.}
 }
@@ -72,7 +72,7 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 \code{all} table), are arranged by adjusted \emph{P} value.
 }
 \note{
-Updated 2021-03-05.
+Updated 2021-03-15.
 
 It is generally recommended to not apply post hoc log fold change
 cutoffs. If a specific effect size is desired, instead run

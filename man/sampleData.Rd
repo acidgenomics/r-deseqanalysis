@@ -28,7 +28,7 @@ columns map to a single sample (e.g. cells for a single-cell RNA-seq
 experiment).
 }
 \note{
-Updated 2019-08-20.
+Updated 2021-03-15.
 }
 \examples{
 data(deseq)
