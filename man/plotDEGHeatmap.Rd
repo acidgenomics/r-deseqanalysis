@@ -2,11 +2,21 @@
 % Please edit documentation in R/AllGenerics.R, R/plotDEGHeatmap-methods.R
 \name{plotDEGHeatmap}
 \alias{plotDEGHeatmap}
-\alias{plotDEGHeatmap,DESeqResults-method}
 \alias{plotDEGHeatmap,DESeqAnalysis-method}
+\alias{plotDEGHeatmap,DESeqResults-method}
 \title{Differentially expressed gene heatmap}
 \usage{
 plotDEGHeatmap(object, ...)
+
+\S4method{plotDEGHeatmap}{DESeqAnalysis}(
+  object,
+  i,
+  contrastSamples = FALSE,
+  alphaThreshold = NULL,
+  lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
+  ...
+)
 
 \S4method{plotDEGHeatmap}{DESeqResults}(
   object,
@@ -19,13 +29,20 @@ plotDEGHeatmap(object, ...)
   subtitle = TRUE,
   ...
 )
-
-\S4method{plotDEGHeatmap}{DESeqAnalysis}(object, i, contrastSamples = FALSE, ...)
 }
 \arguments{
 \item{object}{Object.}
 
-\item{DESeqTransform}{\code{DESeqTransform}.}
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
+
+\item{contrastSamples}{\code{logical(1)}.
+\strong{Experimental}. Only include the samples used to define the contrast
+passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
+contrasts (e.g. interaction effect).}
 
 \item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
@@ -40,6 +57,10 @@ Base mean (i.e. average expression across all samples) threshold.
 If left \code{NULL}, will use the cutoff defined in the object.
 Applies in general to DESeq2 RNA-seq differential expression output.}
 
+\item{...}{Additional arguments.}
+
+\item{DESeqTransform}{\code{DESeqTransform}.}
+
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
@@ -49,19 +70,6 @@ Can manually define as \code{character}.}
 
 \item{subtitle}{\code{logical(1)}.
 Include subtitle containing DEG information?}
-
-\item{...}{Additional arguments.}
-
-\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
-\code{character} vectors, empty (\code{missing}), or \code{NULL}.
-
-For more information:\preformatted{help(topic = "Extract", package = "base")
-}}
-
-\item{contrastSamples}{\code{logical(1)}.
-\strong{Experimental}. Only include the samples used to define the contrast
-passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
-contrasts (e.g. interaction effect).}
 }
 \value{
 Plot.
@@ -79,10 +87,10 @@ must contain a \code{SummarizedExperiment}.
 }
 \section{Functions}{
 \itemize{
+\item \code{plotDEGHeatmap,DESeqAnalysis-method}: Passes to \code{DESeqResults} method.
+
 \item \code{plotDEGHeatmap,DESeqResults-method}: Passes to \code{plotHeatmap()} \code{SummarizedExperiment}
 method defined in AcidPlots.
-
-\item \code{plotDEGHeatmap,DESeqAnalysis-method}: Passes to \code{DESeqResults} method.
 }}
 
 \note{
