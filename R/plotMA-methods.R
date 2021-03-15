@@ -216,61 +216,59 @@ NULL
             alertWarning("No genes passed cutoffs.")
             return(invisible(NULL))
         }
-        ## MA plot.
+        ## Define the limits and correct outliers, if necessary.
         if (is.null(limits[["x"]])) {
             limits[["x"]] <- c(
                 min(floor(data[[baseMeanCol]])),
                 max(ceiling(data[[baseMeanCol]]))
             )
-        } else {
-            assert(
-                hasLength(limits[["x"]], n = 2L),
-                allArePositive(limits[["x"]])
-            )
-            ok <- list(
-                data[[baseMeanCol]] >= limits[["x"]][[1L]],
-                data[[baseMeanCol]] <= limits[["x"]][[2L]]
-            )
-            if (!all(unlist(ok))) {
-                n <- sum(!unlist(ok))
-                alertWarning(sprintf(
-                    "%d %s outside x-axis limits of {.var c(%s, %s)}.",
-                    n,
-                    ngettext(n = n, msg1 = "point", msg2 = "points"),
-                    limits[["x"]][[1L]],
-                    limits[["x"]][[2L]]
-                ))
-                data[[baseMeanCol]][!ok[[1L]]] <- limits[["x"]][[1L]]
-                data[[baseMeanCol]][!ok[[2L]]] <- limits[["x"]][[2L]]
-            }
+        }
+        assert(
+            hasLength(limits[["x"]], n = 2L),
+            allArePositive(limits[["x"]])
+        )
+        ok <- list(
+            data[[baseMeanCol]] >= limits[["x"]][[1L]],
+            data[[baseMeanCol]] <= limits[["x"]][[2L]]
+        )
+        if (!all(unlist(ok))) {
+            n <- sum(!unlist(ok))
+            alertWarning(sprintf(
+                "%d %s outside x-axis limits of {.var c(%s, %s)}.",
+                n,
+                ngettext(n = n, msg1 = "point", msg2 = "points"),
+                limits[["x"]][[1L]],
+                limits[["x"]][[2L]]
+            ))
+            data[[baseMeanCol]][!ok[[1L]]] <- limits[["x"]][[1L]]
+            data[[baseMeanCol]][!ok[[2L]]] <- limits[["x"]][[2L]]
         }
         if (is.null(limits[["y"]])) {
             limits[["y"]] <- c(
                 min(floor(data[[lfcCol]])),
                 max(ceiling(data[[lfcCol]]))
             )
-        } else {
-            assert(
-                hasLength(limits[["y"]], n = 2L),
-                isNegative(limits[["y"]][[1L]]),
-                isPositive(limits[["y"]][[2L]])
-            )
-            ok <- list(
-                data[[lfcCol]] >= limits[["y"]][[1L]],
-                data[[lfcCol]] <= limits[["y"]][[2L]]
-            )
-            if (!all(unlist(ok))) {
-                n <- sum(!unlist(ok))
-                alertWarning(sprintf(
-                    "%d %s outside y-axis limits of {.var c(%s, %s)}.",
-                    n,
-                    ngettext(n = n, msg1 = "point", msg2 = "points"),
-                    limits[["y"]][[1L]],
-                    limits[["y"]][[2L]]
-                ))
-                data[[lfcCol]][!ok[[1L]]] <- limits[["y"]][[1L]]
-                data[[lfcCol]][!ok[[2L]]] <- limits[["y"]][[2L]]
-            }
+        }
+        assert(
+            hasLength(limits[["y"]], n = 2L),
+            isNegative(limits[["y"]][[1L]]),
+            isPositive(limits[["y"]][[2L]])
+        )
+        ok <- list(
+            data[[lfcCol]] >= limits[["y"]][[1L]],
+            data[[lfcCol]] <= limits[["y"]][[2L]]
+        )
+        if (!all(unlist(ok))) {
+            n <- sum(!unlist(ok))
+            alertWarning(sprintf(
+                "%d %s outside y-axis limits of {.var c(%s, %s)}.",
+                n,
+                ngettext(n = n, msg1 = "point", msg2 = "points"),
+                limits[["y"]][[1L]],
+                limits[["y"]][[2L]]
+            ))
+            data[[lfcCol]][!ok[[1L]]] <- limits[["y"]][[1L]]
+            data[[lfcCol]][!ok[[2L]]] <- limits[["y"]][[2L]]
         }
         breaks <- list(
             "x" = 10 ^ seq(
