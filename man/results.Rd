@@ -2,20 +2,18 @@
 % Please edit documentation in R/AllGenerics.R, R/results-methods.R
 \name{results}
 \alias{results}
-\alias{results,DESeqDataSet-method}
 \alias{results,DESeqAnalysis-method}
+\alias{results,DESeqDataSet-method}
 \title{Results}
 \usage{
 results(object, ...)
 
-\S4method{results}{DESeqDataSet}(object, ...)
-
 \S4method{results}{DESeqAnalysis}(object, i, lfcShrink = NULL, extra = FALSE, quiet = FALSE)
+
+\S4method{results}{DESeqDataSet}(object, ...)
 }
 \arguments{
 \item{object}{Object.}
-
-\item{...}{Additional arguments.}
 
 \item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
 \code{character} vectors, empty (\code{missing}), or \code{NULL}.
@@ -33,6 +31,8 @@ internal \code{DESeqDataSet}.}
 
 \item{quiet}{\code{logical(1)}.
 Perform command quietly, suppressing messages.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{DESeqResults}.

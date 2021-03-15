@@ -2,11 +2,13 @@
 % Please edit documentation in R/AllGenerics.R, R/resultsDiff-methods.R
 \name{resultsDiff}
 \alias{resultsDiff}
-\alias{resultsDiff,DESeqResults,DESeqResults-method}
 \alias{resultsDiff,DESeqAnalysis,missingOrNULL-method}
+\alias{resultsDiff,DESeqResults,DESeqResults-method}
 \title{Relative difference of results}
 \usage{
 resultsDiff(x, y, ...)
+
+\S4method{resultsDiff}{DESeqAnalysis,missingOrNULL}(x, y = NULL, i, j, ...)
 
 \S4method{resultsDiff}{DESeqResults,DESeqResults}(
   x,
@@ -18,13 +20,25 @@ resultsDiff(x, y, ...)
   baseMeanThreshold = NULL,
   direction = c("both", "up", "down")
 )
-
-\S4method{resultsDiff}{DESeqAnalysis,missingOrNULL}(x, y = NULL, i, j, ...)
 }
 \arguments{
 \item{x}{Object.}
 
 \item{y}{Object.}
+
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
+
+\item{j}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
+
+\item{...}{Additional arguments.}
 
 \item{col}{\code{character(1)}.
 Column to use for difference calculation (subtraction).
@@ -52,20 +66,6 @@ Applies in general to DESeq2 RNA-seq differential expression output.}
 
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
-
-\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
-\code{character} vectors, empty (\code{missing}), or \code{NULL}.
-
-For more information:\preformatted{help(topic = "Extract", package = "base")
-}}
-
-\item{j}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
-\code{character} vectors, empty (\code{missing}), or \code{NULL}.
-
-For more information:\preformatted{help(topic = "Extract", package = "base")
-}}
-
-\item{...}{Additional arguments.}
 }
 \value{
 Named \code{numeric}.
