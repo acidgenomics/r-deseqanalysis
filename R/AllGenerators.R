@@ -6,7 +6,7 @@ NULL
 ## DESeqAnalysis ===============================================================
 #' @inherit DESeqAnalysis-class title description return
 #' @export
-#' @note Updated 2021-03-09.
+#' @note Updated 2021-03-15.
 #'
 #' @param data `DESeqDataSet`.
 #' @param transform `DESeqTransform`.
@@ -57,7 +57,6 @@ DESeqAnalysis <-  # nolint
         results,
         lfcShrink = NULL
     ) {
-        metadata <- list(version = .version)
         ## Allow input of single `DESeqResults`.
         if (is(results, "DESeqResults")) {
             results <- .coerceResultsToList(results)
@@ -75,7 +74,7 @@ DESeqAnalysis <-  # nolint
             transform = transform,
             results = results,
             lfcShrink = lfcShrink,
-            metadata = metadata
+            metadata = list("packageVersion" = .pkgVersion)
         )
     }
 
@@ -84,13 +83,13 @@ DESeqAnalysis <-  # nolint
 ## DESeqAnalysisList ===========================================================
 #' @name DESeqAnalysisList
 #' @inherit DESeqAnalysisList-class title description return
-#' @note Updated 2021-03-12.
+#' @note Updated 2021-03-15.
 #'
 #' @param ... `DESeqAnalysis` objects or named `list`.
 #'
 #' @examples
 #' data(deseq)
-#' x <- DESeqAnalysisList(deseq)
+#' x <- DESeqAnalysisList(list("object1" = deseq, "object2" = deseq))
 #' x
 NULL
 

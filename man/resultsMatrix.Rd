@@ -54,7 +54,7 @@ are automatically prefixed to the column names.
 }}
 
 \note{
-Updated 2020-08-19.
+Updated 2021-03-15.
 }
 \examples{
 data(deseq)

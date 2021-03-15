@@ -30,7 +30,7 @@ to ensure \code{DESeqTransform} and \code{DESeqResults} correspond to the
 \code{DESeqDataSet}.
 }
 \note{
-Updated 2021-03-09.
+Updated 2021-03-15.
 }
 \examples{
 data <- DESeq2::makeExampleDESeqDataSet()

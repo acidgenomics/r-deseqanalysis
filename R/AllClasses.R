@@ -27,7 +27,7 @@
 #'
 #' @author Michael Steinbaugh
 #' @export
-#' @note Updated 2021-02-17.
+#' @note Updated 2021-03-15.
 #'
 #' @slot data `DESeqDataSet`.
 #' @slot transform `DESeqTransform`.
@@ -88,11 +88,12 @@ setValidity(
             msg = "DESeqResults list must be named."
         )
         if (!isTRUE(ok)) return(ok)
-        ok <- validate(
-            is(metadata(object)[["version"]], "package_version"),
-            msg = "Require package version in metadata."
-        )
-        if (!isTRUE(ok)) return(ok)
+        ## Renamed "version" to "packageVersion" in v0.4.0.
+        ## > ok <- validate(
+        ## >     is(metadata(object)[["packageVersion"]], "package_version"),
+        ## >     msg = "Require package version in metadata."
+        ## > )
+        ## > if (!isTRUE(ok)) return(ok)
         ## Alpha levels in the slotted results must be identical.
         alphas <- vapply(
             X = results,
