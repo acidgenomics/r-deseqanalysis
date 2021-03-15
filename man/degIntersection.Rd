@@ -19,7 +19,15 @@ degIntersection(object, ...)
   return = c("matrix", "count", "ratio", "names")
 )
 
-\S4method{degIntersection}{DESeqAnalysisList}(object, i = NULL)
+\S4method{degIntersection}{DESeqAnalysisList}(
+  object,
+  i = NULL,
+  alphaThreshold = NULL,
+  lfcThreshold = NULL,
+  baseMeanThreshold = NULL,
+  direction = c("up", "down"),
+  return = c("matrix", "count", "ratio", "names")
+)
 
 \S4method{degIntersection}{DESeqResultsList}(
   object,
@@ -81,7 +89,7 @@ lowest. Gene identifiers are defined as the names.
 Intersection of differentially expressed genes
 }
 \note{
-Updated 2021-03-12.
+Updated 2021-03-15.
 }
 \examples{
 data(deseq)
