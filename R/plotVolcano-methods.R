@@ -299,7 +299,7 @@ NULL
                 limits = limits[["y"]],
                 trans = "identity"
             ) +
-            guides(color = FALSE)
+            guides(color = "none")
         ## Labels.
         if (is.null(labels[["title"]])) {
             labels[["title"]] <- tryCatch(
@@ -385,7 +385,7 @@ NULL
                 ) +
                 scale_y_continuous(expand = c(0L, 0L)) +
                 labs(x = labels[["x"]], y = NULL) +
-                guides(fill = FALSE) +
+                guides(fill = "none") +
                 theme(
                     axis.line.y = element_blank(),
                     axis.text.y = element_blank(),
@@ -407,7 +407,7 @@ NULL
                 ) +
                 scale_y_continuous(expand = c(0L, 0L)) +
                 labs(x = labels[["y"]], y = NULL) +
-                guides(fill = FALSE) +
+                guides(fill = "none") +
                 theme(
                     axis.line.y = element_blank(),
                     axis.text.y = element_blank(),

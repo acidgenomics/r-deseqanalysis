@@ -303,7 +303,7 @@ NULL
                 trans = "identity"
             ) +
             annotation_logticks(sides = "b") +
-            guides(color = FALSE)
+            guides(color = "none")
         ## Labels.
         if (is.null(labels[["title"]])) {
             labels[["title"]] <- tryCatch(
