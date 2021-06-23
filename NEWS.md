@@ -1,3 +1,10 @@
+## DESeqAnalysis 0.4.1 (UNRELEASED)
+
+### Minor changes
+
+- Needed to update internal calls to `guide` function defined in ggplot2,
+  which has deprecated use of logical `FALSE` in favor of `"none"`.
+
 ## DESeqAnalysis 0.4.0 (2021-03-15)
 
 ### New classes
