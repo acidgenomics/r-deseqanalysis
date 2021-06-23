@@ -35,7 +35,7 @@ NULL
 ## Note that we're not sorting the identifiers here by LFC or P value.
 ## It's just performing a simple subset to get the identifiers as a character.
 ##
-## Updated 2020-08-04.
+## Updated 2021-06-22.
 `deg,DESeqResults` <-  # nolint
     function(
         object,
@@ -56,6 +56,7 @@ NULL
             baseMeanThreshold <- baseMeanThreshold(object)
         }
         assert(
+            hasRownames(object),
             isAlpha(alphaThreshold),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
