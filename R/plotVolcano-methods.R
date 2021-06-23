@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit AcidGenerics::plotVolcano
-#' @note Updated 2021-03-15.
+#' @note Updated 2021-06-22.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
