@@ -6,13 +6,13 @@
 #' @param i `character`, `numeric`, or `NULL`.
 #'   Names or range of results.
 #'   If set `NULL`, include all results.
-#' @param ... Passthrough arguments to [deg()].
+#' @param ... Passthrough arguments to `deg()`.
 #'
 #' @return
 #' - `matrix`: Matrix containing numbers of DEGs per contrast.
-#'   Intended primarily for use with [plotDEGStackedBar()].
+#'   Intended primarily for use with `plotDEGStackedBar()`.
 #' - `list`: Named vector containing the DEG identifiers.
-#'   Intended primarily for use with [plotDEGUpset()].
+#'   Intended primarily for use with `plotDEGUpset()`.
 #'
 #' @examples
 #' data(deseq)

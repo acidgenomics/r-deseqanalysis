@@ -55,16 +55,16 @@
 #'   2. Name of numerator level for the fold change.
 #'   3. Name of denominator level for the fold change.
 #'
-#'   See [DESeq2::results()] for details.
+#'   See `DESeq2::results()` for details.
 #' @param contrastSamples `logical(1)`.
-#'   **Experimental**. Only include the samples used to define the contrast
-#'   passed to [DESeq2::results()]. This setting will break for complex DESeq2
-#'   contrasts (e.g. interaction effect).
+#'   Only include the samples used to define the contrast passed to
+#'   `DESeq2::results()`. This setting will break for complex DESeq2 contrasts
+#'   (e.g. interaction effect).
 #' @param i `character(1)` or `integer(1)`.
 #'   `DESeqResults` contrast name or position in `results` slot.
 #' @param lfcShrink `logical(1)` or `NULL`.
 #'   Use shrunken log2 fold change (LFC) values.
-#'   If `NULL`, inherits value defined in [lfcShrink()].
+#'   If `NULL`, inherits value defined in `lfcShrink()`.
 #' @param limits `list(2)`.
 #'   Named list containing `"x"` and `"y"` that define the lower and upper
 #'   limits for each axis. Set automatically by default when left `NULL`.

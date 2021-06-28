@@ -1,8 +1,8 @@
 #' @name lfcShrink
 #' @inherit AcidGenerics::lfcShrink
-#' @note Updated 2021-03-12.
+#' @note Updated 2021-06-28.
 #'
-#' @seealso [DESeq2::lfcShrink()].
+#' @seealso `DESeq2::lfcShrink()`.
 #'
 #' @examples
 #' data(deseq)

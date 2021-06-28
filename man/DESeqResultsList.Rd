@@ -28,7 +28,7 @@ DESeqResultsList(object, ...)
 
 \item{lfcShrink}{\code{logical(1)} or \code{NULL}.
 Use shrunken log2 fold change (LFC) values.
-If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
+If \code{NULL}, inherits value defined in \code{lfcShrink()}.}
 
 \item{quiet}{\code{logical(1)}.
 Perform command quietly, suppressing messages.}

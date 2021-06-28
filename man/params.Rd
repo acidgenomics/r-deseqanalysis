@@ -16,19 +16,19 @@ A character vector with exactly 3 elements:
 \item Name of denominator level for the fold change.
 }
 
-See \code{\link[DESeq2:results]{DESeq2::results()}} for details.}
+See \code{DESeq2::results()} for details.}
 
 \item{contrastSamples}{\code{logical(1)}.
-\strong{Experimental}. Only include the samples used to define the contrast
-passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
-contrasts (e.g. interaction effect).}
+Only include the samples used to define the contrast passed to
+\code{DESeq2::results()}. This setting will break for complex DESeq2 contrasts
+(e.g. interaction effect).}
 
 \item{i}{\code{character(1)} or \code{integer(1)}.
 \code{DESeqResults} contrast name or position in \code{results} slot.}
 
 \item{lfcShrink}{\code{logical(1)} or \code{NULL}.
 Use shrunken log2 fold change (LFC) values.
-If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
+If \code{NULL}, inherits value defined in \code{lfcShrink()}.}
 
 \item{limits}{\code{list(2)}.
 Named list containing \code{"x"} and \code{"y"} that define the lower and upper

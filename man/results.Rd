@@ -23,7 +23,7 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 
 \item{lfcShrink}{\code{logical(1)} or \code{NULL}.
 Use shrunken log2 fold change (LFC) values.
-If \code{NULL}, inherits value defined in \code{\link[=lfcShrink]{lfcShrink()}}.}
+If \code{NULL}, inherits value defined in \code{lfcShrink()}.}
 
 \item{extra}{\code{logical(1)}.
 Include row data (i.e. gene metadata) and normalized counts from the
@@ -42,7 +42,7 @@ Results
 }
 \section{Functions}{
 \itemize{
-\item \code{results,DESeqDataSet-method}: Arguments pass through to \code{\link[DESeq2:results]{DESeq2::results()}}.
+\item \code{results,DESeqDataSet-method}: Arguments pass through to \code{DESeq2::results()}.
 }}
 
 \note{

@@ -40,5 +40,5 @@ data(deseq)
 lfcShrinkType(deseq)
 }
 \seealso{
-\code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}}.
+\code{DESeq2::lfcShrink()}.
 }

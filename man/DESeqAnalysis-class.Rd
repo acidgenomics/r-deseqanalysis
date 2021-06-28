@@ -35,8 +35,8 @@ Updated 2021-03-15.
 
 
 We recommend generating the \code{DESeqDataSet} by coercion from \code{bcbioRNASeq}
-object using \code{as(dds, "bcbioRNASeq")}. Don't use the \code{\link[DESeq2:DESeqDataSet]{DESeq2::DESeqDataSet()}}
-or \code{\link[DESeq2:DESeqDataSet]{DESeq2::DESeqDataSetFromMatrix()}} constructors to generate the
+object using \code{as(dds, "bcbioRNASeq")}. Don't use the \code{DESeq2::DESeqDataSet()}
+or \code{DESeq2::DESeqDataSetFromMatrix()} constructors to generate the
 \code{DESeqDataSet} object.
 }
 
@@ -44,8 +44,8 @@ or \code{\link[DESeq2:DESeqDataSet]{DESeq2::DESeqDataSetFromMatrix()}} construct
 
 
 Object containing variance-stabilized counts. We recommend slotting the
-return from either \code{\link[DESeq2:varianceStabilizingTransformation]{DESeq2::varianceStabilizingTransformation()}} or
-\code{\link[DESeq2:rlog]{DESeq2::rlog()}}.
+return from either \code{DESeq2::varianceStabilizingTransformation()} or
+\code{DESeq2::rlog()}.
 }
 
 \section{DESeqResults}{

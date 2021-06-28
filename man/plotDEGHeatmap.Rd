@@ -40,9 +40,9 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
 
 \item{contrastSamples}{\code{logical(1)}.
-\strong{Experimental}. Only include the samples used to define the contrast
-passed to \code{\link[DESeq2:results]{DESeq2::results()}}. This setting will break for complex DESeq2
-contrasts (e.g. interaction effect).}
+Only include the samples used to define the contrast passed to
+\code{DESeq2::results()}. This setting will break for complex DESeq2 contrasts
+(e.g. interaction effect).}
 
 \item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff

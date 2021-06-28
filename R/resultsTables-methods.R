@@ -1,6 +1,6 @@
 #' @name resultsTables
 #' @inherit AcidGenerics::resultsTables
-#' @note Updated 2021-03-15.
+#' @note Updated 2021-06-28.
 #'
 #' @inheritParams params
 #' @inheritParams results
@@ -29,7 +29,7 @@
 #'
 #' @param return `character(1)`.
 #'   Type of data frame to return as a list.
-#'   Uses [match.arg()][base::match.arg].
+#'   Uses `match.arg()`.
 #'
 #'   - `DataFrameList`: Returns `DataFrameList` with row names.
 #'   - `tbl_df`: Returns `list` of `tbl_df` containing `"rowname"` column.

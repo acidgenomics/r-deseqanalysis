@@ -38,7 +38,7 @@ Varies, depending on object class.
 Shrink log2 fold changes
 }
 \note{
-Updated 2021-03-12.
+Updated 2021-06-28.
 }
 \examples{
 data(deseq)
@@ -47,5 +47,5 @@ data(deseq)
 lfcShrink(deseq)
 }
 \seealso{
-\code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}}.
+\code{DESeq2::lfcShrink()}.
 }
