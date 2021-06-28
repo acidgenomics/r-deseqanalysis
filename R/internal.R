@@ -1,6 +1,10 @@
+## FIXME Should we just rank by adjusted p value here? simpler....
+##       Or allow the user to set which parameter they want to use for the
+##       ranking here...
 ## FIXME Rework this, standardizing for plotMA and plotVolcano...
 ## FIXME Ensure this is sorted by rank.
 ## FIXME How to handle sort if padj is not significant or NA?
+
 
 
 #' Prepare `DESeqResults` data for plot
@@ -23,78 +27,35 @@
 #' @return `DataFrame`.
 .prepareResultsForPlot <- function(
     object,
+    direction,
     alphaThreshold,
-    baseMeanCol,  # baseMean
     baseMeanThreshold,
-    lfcCol,  # log2FoldChange
     lfcThreshold
 ) {
     assert(is(object, "DESeqResults"))
-
     data <- as(object, "DataFrame")
     colnames(data) <- camelCase(colnames(data), strict = TRUE)
-
     baseMeanCol <- "baseMean"
     lfcCol <- "log2FoldChange"
-    isDegCol <- "isDeg"
-
-
-
     alphaCol <- ifelse(
         test = isTRUE(isSubset("svalue", names(object))),
         yes = "svalue",
         no = "padj"
     )
+    isDegCol <- "isDeg"
     ## NOTE `lfcShrink()` doesn't return `stat` column.
     rankCol <- ifelse(
         test = isTRUE(isSubset("stat", names(object))),
         yes = "stat",
         no = lfcCol
     )
-
-
-
     assert(isSubset(
-        x = c(baseMeanCol, lfcCol, rankCol, alphaCol),
+        x = c(alphaCol, baseMeanCol, lfcCol, rankCol),
         y = colnames(data)
     ))
     ## Remove genes with very low expression.
     keep <- which(data[[baseMeanCol]] >= baseMeanThreshold)
     data <- data[keep, , drop = FALSE]
-
-
-
-
-    data <- .addIsDegCol(
-        data = data,
-        alphaCol = alphaCol,
-        alphaThreshold = alphaThreshold,
-        lfcCol = lfcCol,
-        lfcThreshold = lfcThreshold,
-        baseMeanCol = baseMeanCol,
-        baseMeanThreshold = baseMeanThreshold
-    )
-
-
-
-
-
-
-
-    data[["rankScore"]] <- abs(data[[rankCol]])
-    data <- data[
-        order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE
-    ]
-    data[["rank"]] <- seq_len(nrow(data))
-
-
-
-
-
-    assert(isSubset(
-        x = c("isDeg", "rank", "rankScore"),
-        y = colnames(data)
-    ))
     ## Apply directional filtering, if desired.
     switch(
         EXPR = direction,
@@ -110,18 +71,9 @@
     ## Check for no genes passing cutoffs and early return.
     if (!hasRows(data)) {
         alertWarning("No genes passed cutoffs.")
-        return(invisible(NULL))
+        return(NULL)
     }
-
-
-
-
-
-
-
-    cols <- c(alphaCol, lfcCol, baseMeanCol)
-    assert(isSubset(cols, colnames(data)))
-    isDeg <- mapply(
+    data[[isDegCol]] <- as.factor(mapply(
         test = data[[alphaCol]],
         lfc = data[[lfcCol]],
         baseMean = data[[baseMeanCol]],
@@ -155,8 +107,32 @@
         },
         SIMPLIFY = TRUE,
         USE.NAMES = FALSE
-    )
-    data[[isDegCol]] <- as.factor(isDeg)
+    ))
+    data[["rankScore"]] <- abs(data[[rankCol]])
+    data <- data[order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE]
+
+    ## FIXME This needs to only rank significant genes.
+    data[["rank"]] <- seq_len(nrow(data))
+    assert(isSubset(
+        x = c("isDeg", "rank", "rankScore"),
+        y = colnames(data)
+    ))
+
+
+
+    ## FIXME Need to re-sort again here...
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     ## FIXME Need to support these better...
@@ -342,6 +318,7 @@
     lfcThreshold,
     baseMeanThreshold
 ) {
+    ## FIXME Should we no longer allow DESeqAnalysis here?
     assert(isAny(object, c("DESeqAnalysis", "DESeqResults")))
     x <- character()
     sep <- "; "

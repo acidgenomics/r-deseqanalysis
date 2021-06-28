@@ -196,6 +196,13 @@ NULL
             baseMeanThreshold = baseMeanThreshold,
             lfcThreshold = lfcThreshold
         )
+        if (!hasRows(data)) {
+            return(invisible(NULL))
+        }
+        assert(isSubset(
+            x = c("baseMeanCol", "isDegCol", "lfcCol"),
+            y = names(metadata(data))
+        ))
         baseMeanCol <- metadata(data)[["baseMeanCol"]]
         lfcCol <- metadata(data)[["lfcCol"]]
         isDegCol <- metadata(data)[["isDegCol"]]
@@ -204,8 +211,10 @@ NULL
             isString(lfcCol),
             isString(isDegCol)
         )
+
+
+
         ## Define the limits and correct outliers, if necessary.
-        ## FIXME Rework the limits here, using a shared function...
         if (is.null(limits[["x"]])) {
             limits[["x"]] <- c(
                 min(floor(data[[baseMeanCol]])),
