@@ -21,7 +21,7 @@
 #'   camelCase capture.output cbind colData colData<- complete.cases
 #'   convertSampleIDsToNames cor decode dl do.call droplevels formalsList
 #'   getS3method head import initDir interestingGroups<- intersectionMatrix
-#'   leftJoin makeNames mapGenesToRownames markdownHeader markdownList
+#'   leftJoin makeNames mapGenesToSymbols markdownHeader markdownList
 #'   matchesGene2Symbol mcols mcols<- melt metadata metadata<- metadata2
 #'   metadata2<- model.matrix na.omit packageName packageVersion printString
 #'   realpath relevel removeNA requireNamespaces rowData showSlotInfo snakeCase
