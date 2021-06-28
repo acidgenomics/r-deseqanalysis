@@ -344,6 +344,7 @@ NULL
                 isSubset("rank", colnames(data)),
                 identical(data[["rank"]], sort(data[["rank"]]))
             )
+            ## FIXME Need to harden this against no DEGs...
             genes <- head(rownames(data), n = ntop)
         }
         ## Visualize specific genes on the plot, if desired.
