@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit AcidGenerics::plotVolcano
-#' @note Updated 2021-06-22.
+#' @note Updated 2021-06-28.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -64,6 +64,7 @@ NULL
         baseMeanThreshold = NULL,
         ...
     ) {
+        ## FIXME Need to rework gene2symbol handling here...
         plotVolcano(
             object = results(object, i = i),
             gene2symbol = tryCatch(
@@ -93,7 +94,7 @@ NULL
 
 
 
-## Updated 2021-03-15.
+## Updated 2021-06-28.
 `plotVolcano,DESeqResults` <-  # nolint
     function(
         object,
@@ -101,8 +102,6 @@ NULL
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         genes = NULL,
-        ## FIXME Take this out....
-        gene2symbol = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
         pointColor = c(
@@ -128,17 +127,6 @@ NULL
         validObject(object)
         baseMeanCol <- "baseMean"
         lfcCol <- "log2FoldChange"
-        alphaCol <- ifelse(
-            test = isTRUE(isSubset("svalue", names(object))),
-            yes = "svalue",
-            no = "padj"
-        )
-        ## Note that `lfcShrink()` doesn't return `stat` column.
-        rankCol <- ifelse(
-            test = isTRUE(isSubset("stat", names(object))),
-            yes = "stat",
-            no = lfcCol
-        )
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
@@ -174,6 +162,10 @@ NULL
         labels <- matchLabels(
             labels = labels,
             choices = eval(formals()[["labels"]])
+        )
+        assert(
+            !(isCharacter(genes) && isTRUE(isPositive(ntop))),
+            msg = "Specify either 'genes' or 'ntop'."
         )
 
 
@@ -221,9 +213,6 @@ NULL
         }
 
         ## FIXME ===============================================================
-
-
-
 
 
 
@@ -325,6 +314,9 @@ NULL
             )
         }
         if (is.null(labels[["subtitle"]])) {
+            ## FIXME Can we set metadata on the object here instead, so we
+            ## don't need to pass argument flags???
+            ## FIXME Pass our modified DataFrame in here instead...
             labels[["subtitle"]] <- .thresholdLabel(
                 object = object,
                 direction = direction,
@@ -352,7 +344,6 @@ NULL
                 isSubset("rank", colnames(data)),
                 identical(data[["rank"]], sort(data[["rank"]]))
             )
-            ## Since we know the data is arranged by rank, simply take the head.
             genes <- head(rownames(data), n = ntop)
         }
         ## Visualize specific genes on the plot, if desired.

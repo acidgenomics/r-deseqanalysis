@@ -117,6 +117,7 @@ NULL
             ntop = Inf,
             labels = list(
                 title = contrastName(res),
+                ## FIXME Rework this using metadata stash approach?
                 subtitle = .thresholdLabel(
                     object = object,
                     direction = direction,
