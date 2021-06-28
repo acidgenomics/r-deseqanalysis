@@ -32,10 +32,9 @@ correlation(x, y, ...)
 \item{col}{\code{character(1)}.
 Column name.}
 
-\item{method}{a character string indicating which correlation
-    coefficient (or covariance) is to be computed.  One of
-    \code{"pearson"} (default), \code{"kendall"}, or \code{"spearman"}:
-    can be abbreviated.}
+\item{method}{\code{character(1)}.
+Which correlation coefficient (or covariance) is to be computed.
+See \code{stats::cor} documentation for details.}
 
 \item{i}{\code{integer(1)} or \code{character(1)}.
 For \code{SummarizedExperiment}, primary assay.}

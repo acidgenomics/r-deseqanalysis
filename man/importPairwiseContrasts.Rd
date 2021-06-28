@@ -17,8 +17,8 @@ importPairwiseContrasts(
 File path.}
 
 \item{groupCol}{\code{character(1)}.
-Group column name in \code{\link[SummarizedExperiment:SummarizedExperiment-class]{colData()}} of
-\code{DESeqDataSet}. Corresponds to value in \code{\link[DESeq2:design]{design()}}.}
+Group column name in \code{colData()} of
+\code{DESeqDataSet}. Corresponds to value in \code{design()}.}
 
 \item{numeratorCol}{\code{character(1)}.
 Numerator column name in contrasts file.}
@@ -28,7 +28,7 @@ Denominator column name in contrasts file.}
 
 \item{namesCol}{\code{character(1)}.
 Column in contrasts file to used to define the names of the contrast list.
-Values will be sanitized into \code{\link[basejump:reexports]{snakeCase()}}.}
+Values will be sanitized using \code{snakeCase()}.}
 }
 \value{
 \code{list}.
