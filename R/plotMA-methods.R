@@ -193,6 +193,12 @@ NULL
             !(is.character(genes) && isTRUE(ntop > 0L)),
             msg = "Specify either 'genes' or 'ntop'."
         )
+
+
+
+        ## FIXME ===============================================================
+        ## FIXME rank should only apply if DEG...
+        ## FIXME Can we move this into the addIsDegCol function?
         data <- as(object, "DataFrame")
         colnames(data) <- camelCase(colnames(data), strict = TRUE)
         assert(isSubset(
@@ -202,11 +208,6 @@ NULL
         ## Remove genes with very low expression.
         keep <- which(data[[baseMeanCol]] >= baseMeanThreshold)
         data <- data[keep, , drop = FALSE]
-        data[["rankScore"]] <- abs(data[[rankCol]])
-        data <- data[
-            order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE
-        ]
-        data[["rank"]] <- seq_len(nrow(data))
         data <- .addIsDegCol(
             data = data,
             alphaCol = alphaCol,
@@ -216,6 +217,16 @@ NULL
             baseMeanCol = baseMeanCol,
             baseMeanThreshold = baseMeanThreshold
         )
+        data[["rankScore"]] <- abs(data[[rankCol]])
+        data <- data[
+            order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE
+        ]
+        data[["rank"]] <- seq_len(nrow(data))
+
+
+
+
+
         assert(isSubset(
             x = c("isDeg", "rank", "rankScore"),
             y = colnames(data)
@@ -237,6 +248,15 @@ NULL
             alertWarning("No genes passed cutoffs.")
             return(invisible(NULL))
         }
+
+
+
+        ## FIXME ===============================================================
+
+
+
+
+
         ## Define the limits and correct outliers, if necessary.
         if (is.null(limits[["x"]])) {
             limits[["x"]] <- c(
@@ -358,6 +378,9 @@ NULL
         ## Gene text labels.
         ## Get the genes to visualize when `ntop` is declared.
         if (isTRUE(ntop > 0L)) {
+
+            ## FIXME This should only match DEGs....
+
             assert(
                 hasRownames(data),
                 isSubset("rank", colnames(data)),
