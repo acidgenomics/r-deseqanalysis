@@ -109,14 +109,17 @@
         USE.NAMES = FALSE
     ))
     data[["rankScore"]] <- abs(data[[rankCol]])
+    data[["rankScore"]][data[["isDeg"]] == 0L] <- NA
     data <- data[order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE]
 
     ## FIXME This needs to only rank significant genes.
+    ## Otherwise we want to censors
     data[["rank"]] <- seq_len(nrow(data))
     assert(isSubset(
         x = c("isDeg", "rank", "rankScore"),
         y = colnames(data)
     ))
+
 
 
 
