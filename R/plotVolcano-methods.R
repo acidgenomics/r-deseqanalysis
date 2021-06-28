@@ -175,6 +175,12 @@ NULL
             labels = labels,
             choices = eval(formals()[["labels"]])
         )
+
+
+
+
+        ## FIXME ===============================================================
+
         data <- as(object, "DataFrame")
         colnames(data) <- camelCase(colnames(data), strict = TRUE)
         assert(isSubset(c(baseMeanCol, lfcCol, alphaCol), colnames(data)))
@@ -213,6 +219,16 @@ NULL
             alertWarning("No genes passed cutoffs.")
             return(invisible(NULL))
         }
+
+        ## FIXME ===============================================================
+
+
+
+
+
+
+
+
         ## Define the limits and correct outliers, if necessary.
         if (is.null(limits[["x"]])) {
             limits[["x"]] <- c(

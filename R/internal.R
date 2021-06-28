@@ -1,3 +1,7 @@
+## FIXME Rework this, standardizing for plotMA and plotVolcano...
+
+
+
 #' Calculate a numeric vector to define the colors
 #'
 #' @note Updated 2020-08-04.
