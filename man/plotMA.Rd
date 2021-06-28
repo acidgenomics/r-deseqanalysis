@@ -16,6 +16,8 @@ plotMA(object, ...)
   alphaThreshold = NULL,
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
+  genes = NULL,
+  ntop = 0L,
   ...
 )
 
@@ -25,7 +27,6 @@ plotMA(object, ...)
   lfcThreshold = NULL,
   baseMeanThreshold = NULL,
   genes = NULL,
-  gene2symbol = NULL,
   ntop = 0L,
   direction = c("both", "up", "down"),
   pointColor = c(downregulated = AcidPlots::lightPalette[["purple"]], upregulated =
@@ -64,10 +65,6 @@ Applies in general to DESeq2 RNA-seq differential expression output.}
 
 \item{genes}{\code{character}.
 Gene identifiers.}
-
-\item{gene2symbol}{\code{Gene2Symbol}.
-Gene-to-symbol mappings. Must contain \code{geneId} and \code{geneName} columns. See
-\code{Gene2Symbol} for more information.}
 
 \item{ntop}{\code{integer(1)}.
 Number of top features to label.}
