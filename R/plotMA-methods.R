@@ -1,7 +1,7 @@
 #' @name plotMA
 #' @inherit AcidGenerics::plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
-#' @note Updated 2021-03-15.
+#' @note Updated 2021-06-28.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual
@@ -50,7 +50,7 @@ NULL
 
 
 
-## Updated 2021-03-15.
+## Updated 2021-06-28.
 `plotMA,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -60,8 +60,22 @@ NULL
         baseMeanThreshold = NULL,
         ...
     ) {
+        validObject(object)
+        dds <- as(object, "DESeqDataSet")
+        res <- results(object, i = i)
+        assert(identical(rownames(dds), rownames(res)))
+        dds <- convertGenesToSymbols(dds)
+        rownames(res) <- rownames(dds)
+        genes <- mapGenesToSymbols(
+            object = dds,
+            genes = genes,
+            strict = TRUE
+        )
+
+
+
         plotMA(
-            object = results(object, i = i),
+            object = res,
             gene2symbol = tryCatch(
                 expr = suppressMessages({
                     Gene2Symbol(as(object, "DESeqDataSet"))
@@ -89,7 +103,9 @@ NULL
 
 
 
-## Updated 2021-03-15.
+## FIXME genes need to map to the rownames here...
+
+## Updated 2021-06-28.
 `plotMA,DESeqResults` <-  # nolint
     function(
         object,
@@ -97,6 +113,7 @@ NULL
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         genes = NULL,
+        ## FIXME Take this out, clunky....
         gene2symbol = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
@@ -347,22 +364,50 @@ NULL
         }
         ## Visualize specific genes on the plot, if desired.
         if (!is.null(genes)) {
+            assert(is(gene2symbol, "Gene2Symbol"))
             validObject(gene2symbol)
-            assert(matchesGene2Symbol(
-                x = object,
+            rownames <- mapGenesToRownames(
+                object = gene2symbol,
                 genes = genes,
-                gene2symbol = gene2symbol
-            ))
+                strict = TRUE
+            )
+
+
+            ## FIXME Need to rethink this m
+            ## FIXME Should we take out matchesGene2Symbol code?
+
+
+
+
+
+            ## FIXME This isn't what we want here...
             ## Map the user-defined `genes` to `gene2symbol` rownames.
             ## We're using this to match back to the `DESeqResults` object.
-            rownames <- mapGenesToRownames(object = gene2symbol, genes = genes)
+
+
+
+
+
+
+
+
+
             gene2symbol <- as(gene2symbol, "DataFrame")
             gene2symbol[["rowname"]] <- rownames(gene2symbol)
+
+            ## FIXME Tighten this up...don't allow any mismatches to pass.
+
+
             ## Prepare the label data tibble.
             keep <- na.omit(match(x = rownames, table = rownames(data)))
             assert(hasLength(keep))
             labelData <- data[keep, , drop = FALSE]
             labelData[["rowname"]] <- rownames(labelData)
+
+
+
+
+
             labelData <- leftJoin(labelData, gene2symbol, by = "rowname")
             p <- p +
                 acid_geom_label_repel(

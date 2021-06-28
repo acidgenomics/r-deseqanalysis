@@ -101,6 +101,7 @@ NULL
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         genes = NULL,
+        ## FIXME Take this out....
         gene2symbol = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
@@ -340,6 +341,11 @@ NULL
         }
         ## Visualize specific genes on the plot, if desired.
         if (!is.null(genes)) {
+
+
+            ## FIXME Need to rethink this step...a different approach?
+            assert(is(gene2symbol, "Gene2Symbol"))
+
             validObject(gene2symbol)
             assert(matchesGene2Symbol(
                 x = object,
@@ -348,7 +354,11 @@ NULL
             ))
             ## Map the user-defined `genes` to `gene2symbol` rownames.
             ## We're using this to match back to the `DESeqResults` object.
-            rownames <- mapGenesToRownames(object = gene2symbol, genes = genes)
+            rownames <- mapGenesToRownames(
+                object = gene2symbol,
+                genes = genes,
+                strict = TRUE
+            )
             gene2symbol <- as(gene2symbol, "DataFrame")
             gene2symbol[["rowname"]] <- rownames(gene2symbol)
             ## Prepare the label data tibble.
@@ -357,6 +367,15 @@ NULL
             labelData <- data[keep, , drop = FALSE]
             labelData[["rowname"]] <- rownames(labelData)
             labelData <- leftJoin(labelData, gene2symbol, by = "rowname")
+
+
+
+
+
+
+
+
+
             p <- p +
                 acid_geom_label_repel(
                     data = as_tibble(labelData, rownames = NULL),
