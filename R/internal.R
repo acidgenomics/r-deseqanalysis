@@ -1,29 +1,124 @@
 ## FIXME Rework this, standardizing for plotMA and plotVolcano...
+## FIXME Ensure this is sorted by rank.
+## FIXME How to handle sort if padj is not significant or NA?
 
 
-
-#' Calculate a numeric vector to define the colors
-#'
-#' @note Updated 2020-08-04.
-#' @noRd
+#' Prepare `DESeqResults` data for plot
 #'
 #' @details
-#' - test: P value or S value.
-#' - lfc: log2 fold change cutoff.
+#' - `test`: P value or S value.
+#' - `lfc`: log2 fold change cutoff.
 #'
-#' @return `integer`.
+#' @section `isDeg`:
+#'
+#' Calculate an `integer factor`, used to define the color mappings:
+#'
 #' - `-1`: downregulated
 #' -  `0`: not significant
 #' -  `1`: upregulated
-.addIsDegCol <- function(
-    data,
-    alphaCol = "padj",
+#'
+#' @note Updated 2021-06-28.
+#' @noRd
+#'
+#' @return `DataFrame`.
+.prepareResultsForPlot <- function(
+    object,
     alphaThreshold,
-    lfcCol = "log2FoldChange",
-    lfcThreshold,
-    baseMeanCol = "baseMean",
-    baseMeanThreshold
+    baseMeanCol,  # baseMean
+    baseMeanThreshold,
+    lfcCol,  # log2FoldChange
+    lfcThreshold
 ) {
+    assert(is(object, "DESeqResults"))
+
+    data <- as(object, "DataFrame")
+    colnames(data) <- camelCase(colnames(data), strict = TRUE)
+
+    baseMeanCol <- "baseMean"
+    lfcCol <- "log2FoldChange"
+    isDegCol <- "isDeg"
+
+
+
+    alphaCol <- ifelse(
+        test = isTRUE(isSubset("svalue", names(object))),
+        yes = "svalue",
+        no = "padj"
+    )
+    ## NOTE `lfcShrink()` doesn't return `stat` column.
+    rankCol <- ifelse(
+        test = isTRUE(isSubset("stat", names(object))),
+        yes = "stat",
+        no = lfcCol
+    )
+
+
+
+    assert(isSubset(
+        x = c(baseMeanCol, lfcCol, rankCol, alphaCol),
+        y = colnames(data)
+    ))
+    ## Remove genes with very low expression.
+    keep <- which(data[[baseMeanCol]] >= baseMeanThreshold)
+    data <- data[keep, , drop = FALSE]
+
+
+
+
+    data <- .addIsDegCol(
+        data = data,
+        alphaCol = alphaCol,
+        alphaThreshold = alphaThreshold,
+        lfcCol = lfcCol,
+        lfcThreshold = lfcThreshold,
+        baseMeanCol = baseMeanCol,
+        baseMeanThreshold = baseMeanThreshold
+    )
+
+
+
+
+
+
+
+    data[["rankScore"]] <- abs(data[[rankCol]])
+    data <- data[
+        order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE
+    ]
+    data[["rank"]] <- seq_len(nrow(data))
+
+
+
+
+
+    assert(isSubset(
+        x = c("isDeg", "rank", "rankScore"),
+        y = colnames(data)
+    ))
+    ## Apply directional filtering, if desired.
+    switch(
+        EXPR = direction,
+        "up" = {
+            keep <- which(data[[lfcCol]] > 0L)
+            data <- data[keep, , drop = FALSE]
+        },
+        "down" = {
+            keep <- which(data[[lfcCol]] < 0L)
+            data <- data[keep, , drop = FALSE]
+        }
+    )
+    ## Check for no genes passing cutoffs and early return.
+    if (!hasRows(data)) {
+        alertWarning("No genes passed cutoffs.")
+        return(invisible(NULL))
+    }
+
+
+
+
+
+
+
     cols <- c(alphaCol, lfcCol, baseMeanCol)
     assert(isSubset(cols, colnames(data)))
     isDeg <- mapply(
@@ -61,7 +156,12 @@
         SIMPLIFY = TRUE,
         USE.NAMES = FALSE
     )
-    data[["isDeg"]] <- as.factor(isDeg)
+    data[[isDegCol]] <- as.factor(isDeg)
+
+
+    ## FIXME Need to support these better...
+    metadata(data)[["isDegCol"]] <- isDegCol
+
     data
 }
 
@@ -227,9 +327,12 @@
 
 
 
+## FIXME Rework this, using metadata stash approach instead...
+## FIXME We don't need to pass lfcShrinkType here correct??
+
 #' Threshold label that goes in subtitle for plot on DESeqResults
 #'
-#' @note Updated 2021-03-03.
+#' @note Updated 2021-06-28.
 #' @noRd
 .thresholdLabel <- function(
     object,

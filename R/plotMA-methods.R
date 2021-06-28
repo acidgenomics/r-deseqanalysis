@@ -134,19 +134,6 @@ NULL
         )
     ) {
         validObject(object)
-        baseMeanCol <- "baseMean"
-        lfcCol <- "log2FoldChange"
-        alphaCol <- ifelse(
-            test = isTRUE(isSubset("svalue", names(object))),
-            yes = "svalue",
-            no = "padj"
-        )
-        ## Note that `lfcShrink()` doesn't return `stat` column.
-        rankCol <- ifelse(
-            test = isTRUE(isSubset("stat", names(object))),
-            yes = "stat",
-            no = lfcCol
-        )
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
@@ -156,7 +143,7 @@ NULL
         if (is.null(baseMeanThreshold)) {
             baseMeanThreshold <- baseMeanThreshold(object)
         }
-        ## We're applying log10 transformation on axis, so gate the minimum.
+        ## We're applying log10 transformation on plot, so gate the minimum.
         if (isTRUE(baseMeanThreshold < 1L)) {
             baseMeanThreshold <- 1L
         }
@@ -169,8 +156,6 @@ NULL
             isNumber(baseMeanThreshold),
             isPositive(baseMeanThreshold),
             isAny(genes, classes = c("character", "NULL")),
-            ## FIXME Take this out.
-            isAny(gene2symbol, classes = c("Gene2Symbol", "NULL")),
             isCharacter(pointColor),
             areSetEqual(
                 x = names(pointColor),
@@ -190,74 +175,37 @@ NULL
             choices = eval(formals()[["labels"]])
         )
         assert(
-            !(is.character(genes) && isTRUE(ntop > 0L)),
+            !(isCharacter(genes) && isTRUE(isPositive(ntop))),
             msg = "Specify either 'genes' or 'ntop'."
         )
 
 
 
-        ## FIXME ===============================================================
-        ## FIXME rank should only apply if DEG...
-        ## FIXME Can we move this into the addIsDegCol function?
-        data <- as(object, "DataFrame")
-        colnames(data) <- camelCase(colnames(data), strict = TRUE)
-        assert(isSubset(
-            x = c(baseMeanCol, lfcCol, rankCol, alphaCol),
-            y = colnames(data)
-        ))
-        ## Remove genes with very low expression.
-        keep <- which(data[[baseMeanCol]] >= baseMeanThreshold)
-        data <- data[keep, , drop = FALSE]
-        data <- .addIsDegCol(
-            data = data,
-            alphaCol = alphaCol,
+
+
+
+
+        ## FIXME Can we move this up?
+        ## FIXME Ensure this works, consolidating preparation code....
+        ## FIXME Set baseMeanCol in metadata.
+        ## FIXME Set lfcCol in metadata...
+        data <- .prepareResultsForPlot(
+            object = object,
+            direction = direction,
             alphaThreshold = alphaThreshold,
-            lfcCol = lfcCol,
-            lfcThreshold = lfcThreshold,
-            baseMeanCol = baseMeanCol,
-            baseMeanThreshold = baseMeanThreshold
+            baseMeanThreshold = baseMeanThreshold,
+            lfcThreshold = lfcThreshold
         )
-        data[["rankScore"]] <- abs(data[[rankCol]])
-        data <- data[
-            order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE
-        ]
-        data[["rank"]] <- seq_len(nrow(data))
-
-
-
-
-
-        assert(isSubset(
-            x = c("isDeg", "rank", "rankScore"),
-            y = colnames(data)
-        ))
-        ## Apply directional filtering, if desired.
-        switch(
-            EXPR = direction,
-            "up" = {
-                keep <- which(data[[lfcCol]] > 0L)
-                data <- data[keep, , drop = FALSE]
-            },
-            "down" = {
-                keep <- which(data[[lfcCol]] < 0L)
-                data <- data[keep, , drop = FALSE]
-            }
+        baseMeanCol <- metadata(data)[["baseMeanCol"]]
+        lfcCol <- metadata(data)[["lfcCol"]]
+        isDegCol <- metadata(data)[["isDegCol"]]
+        assert(
+            isString(baseMeanCol),
+            isString(lfcCol),
+            isString(isDegCol)
         )
-        ## Check for no genes passing cutoffs and early return.
-        if (!hasRows(data)) {
-            alertWarning("No genes passed cutoffs.")
-            return(invisible(NULL))
-        }
-
-
-
-        ## FIXME ===============================================================
-
-
-
-
-
         ## Define the limits and correct outliers, if necessary.
+        ## FIXME Rework the limits here, using a shared function...
         if (is.null(limits[["x"]])) {
             limits[["x"]] <- c(
                 min(floor(data[[baseMeanCol]])),
@@ -307,6 +255,12 @@ NULL
             data[[lfcCol]][!ok[[1L]]] <- limits[["y"]][[1L]]
             data[[lfcCol]][!ok[[2L]]] <- limits[["y"]][[2L]]
         }
+        ## FIXME Rework the limits here ====
+
+
+
+
+
         breaks <- list(
             "x" = 10L ^ seq(
                 from = min(floor(log10(limits[["x"]][[1L]]))),
@@ -353,6 +307,9 @@ NULL
             )
         }
         if (is.null(labels[["subtitle"]])) {
+            ## FIXME Can we set metadata on the object here instead, so we
+            ## don't need to pass argument flags???
+            ## FIXME Pass our modified DataFrame in here instead...
             labels[["subtitle"]] <- .thresholdLabel(
                 object = object,
                 direction = direction,
@@ -378,15 +335,12 @@ NULL
         ## Gene text labels.
         ## Get the genes to visualize when `ntop` is declared.
         if (isTRUE(ntop > 0L)) {
-
-            ## FIXME This should only match DEGs....
-
+            ## FIXME This needs to only match DEGs (in progress).
             assert(
                 hasRownames(data),
                 isSubset("rank", colnames(data)),
                 identical(data[["rank"]], sort(data[["rank"]]))
             )
-            ## Since we know the data is arranged by rank, simply take the head.
             genes <- head(rownames(data), n = ntop)
         }
         ## Visualize specific genes on the plot, if desired.

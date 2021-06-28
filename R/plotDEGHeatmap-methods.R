@@ -130,6 +130,7 @@ NULL
             title <- NULL
         }
         if (isString(title) && isTRUE(subtitle)) {
+            ## FIXME Rework this using metadata stash approach?
             subtitle <- .thresholdLabel(
                 object = object,
                 direction = direction,
