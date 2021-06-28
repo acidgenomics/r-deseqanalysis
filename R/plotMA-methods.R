@@ -13,7 +13,7 @@
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'
-#' @seealso [DESeq2::plotMA()].
+#' @seealso `DESeq2::plotMA()`.
 #'
 #' @return `ggplot`.
 #'

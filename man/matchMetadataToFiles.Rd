@@ -12,8 +12,8 @@ User-defined metadata. The function assumes that sample identifiers are
 defined in the first metadata column.}
 
 \item{files}{\code{character}.
-Quant file paths passed to \code{\link[tximport:tximport]{tximport()}}.
-Sanitize return from \code{\link[=prepareTximportFiles]{prepareTximportFiles()}} is recommended.}
+Quant file paths passed to \code{tximport::tximport()}.
+Sanitize return from \code{prepareTximportFiles()} is recommended.}
 }
 \value{
 \code{data.frame}.
@@ -24,7 +24,7 @@ first column. Original values are stashed in "originalSampleId".
 Match user metadata to file names used for tximport
 }
 \note{
-Updated 2020-08-04.
+Updated 2021-06-28.
 }
 \examples{
 metadata <- data.frame(

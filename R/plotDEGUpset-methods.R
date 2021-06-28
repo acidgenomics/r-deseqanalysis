@@ -5,7 +5,7 @@
 #' @inheritParams degPerContrast
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
-#' @param ... Passthrough arguments to [AcidPlots::plotUpset()].
+#' @param ... Passthrough arguments to `AcidPlots::plotUpset()`.
 #'
 #' @examples
 #' data(deseq)

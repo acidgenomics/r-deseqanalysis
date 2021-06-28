@@ -32,7 +32,7 @@ A character vector with exactly 3 elements:
 \item Name of denominator level for the fold change.
 }
 
-See \code{\link[DESeq2:results]{DESeq2::results()}} for details.}
+See \code{DESeq2::results()} for details.}
 
 \item{name}{\code{character(1)}.
 Name of the individual effect (coefficient) for building a results table.

@@ -1,10 +1,10 @@
 #' @name transformType
 #' @inherit AcidGenerics::transformType
-#' @note Updated 2021-03-12.
+#' @note Updated 2021-06-28.
 #'
 #' @param ... Additional arguments.
 #'
-#' @seealso [DESeq2::DESeqTransform()].
+#' @seealso `DESeq2::DESeqTransform()`.
 #'
 #' @examples
 #' data(deseq)

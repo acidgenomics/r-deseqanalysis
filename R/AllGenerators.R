@@ -10,13 +10,13 @@ NULL
 #'
 #' @param data `DESeqDataSet`.
 #' @param transform `DESeqTransform`.
-#'   [DESeq2::varianceStabilizingTransformation()] recommended by default.
+#'   `DESeq2::varianceStabilizingTransformation()` recommended by default.
 #' @param results `list` or single `DESeqResults`.
 #'   One or more unshrunken `DESeqResults`.
-#'   Assign the [DESeq2::results()] return here.
+#'   Assign the `DESeq2::results()` return here.
 #' @param lfcShrink `list`, single `DESeqResults`, or `NULL`.
 #'   *Optional*. One or more shrunken `DESeqResults`.
-#'   Assign the [DESeq2::lfcShrink()] return here.
+#'   Assign the `DESeq2::lfcShrink()` return here.
 #'
 #' @examples
 #' data <- DESeq2::makeExampleDESeqDataSet()

@@ -35,9 +35,9 @@ Results containing unshrunken LFC values, generated with \code{results()}.}
 change values.
 }
 \description{
-Wrapper function that helps set up \code{\link[DESeq2:lfcShrink]{lfcShrink()}} to
-shrink LFC values for a pairwise contrast via apeglm, without having to
-manually relevel factor reference levels to use the required \code{coef} argument.
+Wrapper function that helps set up \code{DESeq2::lfcShrink()} to shrink LFC values
+for a pairwise contrast via apeglm, without having to manually relevel factor
+reference levels to use the required \code{coef} argument.
 }
 \details{
 Dynamically sets reference factor levels, as recommended by DESeq2 vignette.
@@ -80,11 +80,11 @@ if (requireNamespace("apeglm", quietly = TRUE)) {
 \itemize{
 \item "Extended section on shrinkage estimators" section of DESeq2 vignette,
 which explains how to manually define \code{coef} argument which can
-be used with apeglm \code{\link[DESeq2:lfcShrink]{lfcShrink()}}.
-\item \code{\link[apeglm:apeglm]{apeglm::apeglm()}}.
-\item \code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}}.
-\item \code{\link[DESeq2:results]{DESeq2::resultsNames()}}.
-\item \code{\link[DESeq2:DESeq]{DESeq2::DESeq()}}.
+be used with apeglm \code{DESeq2::lfcShrink()}.
+\item \code{apeglm::apeglm()}.
+\item \code{DESeq2::lfcShrink()}.
+\item \code{DESeq2::resultsNames()}.
+\item \code{DESeq2::DESeq()}.
 \item \code{stats::model.matrix()}.
 }
 }

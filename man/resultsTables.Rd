@@ -51,7 +51,7 @@ internal \code{DESeqDataSet}.}
 
 \item{return}{\code{character(1)}.
 Type of data frame to return as a list.
-Uses \link[base:match.arg]{match.arg()}.
+Uses \code{match.arg()}.
 \itemize{
 \item \code{DataFrameList}: Returns \code{DataFrameList} with row names.
 \item \code{tbl_df}: Returns \code{list} of \code{tbl_df} containing \code{"rowname"} column.
@@ -72,7 +72,7 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 \code{all} table), are arranged by adjusted \emph{P} value.
 }
 \note{
-Updated 2021-03-15.
+Updated 2021-06-28.
 
 It is generally recommended to not apply post hoc log fold change
 cutoffs. If a specific effect size is desired, instead run

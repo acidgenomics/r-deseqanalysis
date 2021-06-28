@@ -10,15 +10,15 @@ DESeqAnalysis(data, transform, results, lfcShrink = NULL)
 \item{data}{\code{DESeqDataSet}.}
 
 \item{transform}{\code{DESeqTransform}.
-\code{\link[DESeq2:varianceStabilizingTransformation]{DESeq2::varianceStabilizingTransformation()}} recommended by default.}
+\code{DESeq2::varianceStabilizingTransformation()} recommended by default.}
 
 \item{results}{\code{list} or single \code{DESeqResults}.
 One or more unshrunken \code{DESeqResults}.
-Assign the \code{\link[DESeq2:results]{DESeq2::results()}} return here.}
+Assign the \code{DESeq2::results()} return here.}
 
 \item{lfcShrink}{\code{list}, single \code{DESeqResults}, or \code{NULL}.
 \emph{Optional}. One or more shrunken \code{DESeqResults}.
-Assign the \code{\link[DESeq2:lfcShrink]{DESeq2::lfcShrink()}} return here.}
+Assign the \code{DESeq2::lfcShrink()} return here.}
 }
 \value{
 \code{DESeqAnalysis}.

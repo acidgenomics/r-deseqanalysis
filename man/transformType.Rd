@@ -28,7 +28,7 @@ Transformation method name.
 Variance-stabilizing transformation type
 }
 \note{
-Updated 2021-03-12.
+Updated 2021-06-28.
 }
 \examples{
 data(deseq)
@@ -37,5 +37,5 @@ data(deseq)
 transformType(deseq)
 }
 \seealso{
-\code{\link[DESeq2:DESeqTransform]{DESeq2::DESeqTransform()}}.
+\code{DESeq2::DESeqTransform()}.
 }

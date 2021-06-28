@@ -29,14 +29,14 @@ Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
 to the first argument in the \code{character} vector.}
 
-\item{...}{Passthrough arguments to \code{\link[=deg]{deg()}}.}
+\item{...}{Passthrough arguments to \code{deg()}.}
 }
 \value{
 \itemize{
 \item \code{matrix}: Matrix containing numbers of DEGs per contrast.
-Intended primarily for use with \code{\link[=plotDEGStackedBar]{plotDEGStackedBar()}}.
+Intended primarily for use with \code{plotDEGStackedBar()}.
 \item \code{list}: Named vector containing the DEG identifiers.
-Intended primarily for use with \code{\link[=plotDEGUpset]{plotDEGUpset()}}.
+Intended primarily for use with \code{plotDEGUpset()}.
 }
 }
 \description{

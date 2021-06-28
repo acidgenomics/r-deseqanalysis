@@ -1,8 +1,8 @@
 #' Run a quick pairwise contrast using lfcShrink with apeglm
 #'
-#' Wrapper function that helps set up [`lfcShrink()`][DESeq2::lfcShrink] to
-#' shrink LFC values for a pairwise contrast via apeglm, without having to
-#' manually relevel factor reference levels to use the required `coef` argument.
+#' Wrapper function that helps set up `DESeq2::lfcShrink()` to shrink LFC values
+#' for a pairwise contrast via apeglm, without having to manually relevel factor
+#' reference levels to use the required `coef` argument.
 #'
 #' Dynamically sets reference factor levels, as recommended by DESeq2 vignette.
 #' Matches `contrast` input internally to corresponding `coef` corresponding
@@ -32,11 +32,11 @@
 #' @seealso
 #' - "Extended section on shrinkage estimators" section of DESeq2 vignette,
 #'   which explains how to manually define `coef` argument which can
-#'   be used with apeglm [`lfcShrink()`][DESeq2::lfcShrink].
-#' - [apeglm::apeglm()].
-#' - [DESeq2::lfcShrink()].
-#' - [DESeq2::resultsNames()].
-#' - [DESeq2::DESeq()].
+#'   be used with apeglm `DESeq2::lfcShrink()`.
+#' - `apeglm::apeglm()`.
+#' - `DESeq2::lfcShrink()`.
+#' - `DESeq2::resultsNames()`.
+#' - `DESeq2::DESeq()`.
 #' - `stats::model.matrix()`.
 #'
 #' @return `DESeqResults`, with apeglm adaptive shrinkage applied to fold

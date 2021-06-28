@@ -9,15 +9,15 @@
 #' @section DESeqDataSet:
 #'
 #' We recommend generating the `DESeqDataSet` by coercion from `bcbioRNASeq`
-#' object using `as(dds, "bcbioRNASeq")`. Don't use the [DESeq2::DESeqDataSet()]
-#' or [DESeq2::DESeqDataSetFromMatrix()] constructors to generate the
+#' object using `as(dds, "bcbioRNASeq")`. Don't use the `DESeq2::DESeqDataSet()`
+#' or `DESeq2::DESeqDataSetFromMatrix()` constructors to generate the
 #' `DESeqDataSet` object.
 #'
 #' @section DESeqTransform:
 #'
 #' Object containing variance-stabilized counts. We recommend slotting the
-#' return from either [DESeq2::varianceStabilizingTransformation()] or
-#' [DESeq2::rlog()].
+#' return from either `DESeq2::varianceStabilizingTransformation()` or
+#' `DESeq2::rlog()`.
 #'
 #' @section DESeqResults:
 #'

@@ -4,7 +4,7 @@
 #'
 #' @param ... Additional arguments.
 #'
-#' @seealso [DESeq2::lfcShrink()].
+#' @seealso `DESeq2::lfcShrink()`.
 #'
 #' @examples
 #' data(deseq)

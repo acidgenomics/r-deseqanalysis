@@ -19,7 +19,7 @@ If set \code{NULL}, include all results.}
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 
-\item{...}{Passthrough arguments to \code{\link[AcidPlots:plotUpset]{AcidPlots::plotUpset()}}.}
+\item{...}{Passthrough arguments to \code{AcidPlots::plotUpset()}.}
 }
 \value{
 Plot.
