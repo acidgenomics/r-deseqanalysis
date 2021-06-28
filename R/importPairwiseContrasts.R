@@ -5,15 +5,15 @@
 #'
 #' @inheritParams AcidRoxygen::params
 #' @param groupCol `character(1)`.
-#'   Group column name in [`colData()`][SummarizedExperiment::colData] of
-#'   `DESeqDataSet`. Corresponds to value in [`design()`][DESeq2::design].
+#'   Group column name in `colData()` of
+#'   `DESeqDataSet`. Corresponds to value in `design()`.
 #' @param numeratorCol `character(1)`.
 #'   Numerator column name in contrasts file.
 #' @param denominatorCol `character(1)`.
 #'   Denominator column name in contrasts file.
 #' @param namesCol `character(1)`.
 #'   Column in contrasts file to used to define the names of the contrast list.
-#'   Values will be sanitized into [`snakeCase()`][basejump::snakeCase].
+#'   Values will be sanitized using `snakeCase()`.
 #'
 #' @seealso `DESeq2::results()`.
 #'
