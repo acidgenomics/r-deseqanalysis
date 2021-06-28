@@ -58,30 +58,32 @@ NULL
         alphaThreshold = NULL,
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
+        genes = NULL,
+        ntop = 0L,
         ...
     ) {
         validObject(object)
+        assert(
+            isAny(genes, classes = c("character", "NULL")),
+            isInt(ntop),
+            isNonNegative(ntop)
+        )
         dds <- as(object, "DESeqDataSet")
         res <- results(object, i = i)
         assert(identical(rownames(dds), rownames(res)))
-        dds <- convertGenesToSymbols(dds)
-        rownames(res) <- rownames(dds)
-        genes <- mapGenesToSymbols(
-            object = dds,
-            genes = genes,
-            strict = TRUE
-        )
-
-
-
+        if (is.character(genes)) {
+            genes <- mapGenesToSymbols(
+                object = dds,
+                genes = genes,
+                strict = TRUE
+            )
+        }
+        if (is.character(genes) || isTRUE(ntop > 0L)) {
+            dds <- convertGenesToSymbols(dds)
+            rownames(res) <- rownames(dds)
+        }
         plotMA(
             object = res,
-            gene2symbol = tryCatch(
-                expr = suppressMessages({
-                    Gene2Symbol(as(object, "DESeqDataSet"))
-                }),
-                error = function(e) NULL
-            ),
             alphaThreshold = ifelse(
                 test = is.null(alphaThreshold),
                 yes = alphaThreshold(object),
@@ -97,13 +99,13 @@ NULL
                 yes = baseMeanThreshold(object),
                 no = baseMeanThreshold
             ),
+            genes = genes,
+            ntop = ntop,
             ...
         )
     }
 
 
-
-## FIXME genes need to map to the rownames here...
 
 ## Updated 2021-06-28.
 `plotMA,DESeqResults` <-  # nolint
@@ -113,8 +115,6 @@ NULL
         lfcThreshold = NULL,
         baseMeanThreshold = NULL,
         genes = NULL,
-        ## FIXME Take this out, clunky....
-        gene2symbol = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
         pointColor = c(
@@ -169,6 +169,7 @@ NULL
             isNumber(baseMeanThreshold),
             isPositive(baseMeanThreshold),
             isAny(genes, classes = c("character", "NULL")),
+            ## FIXME Take this out.
             isAny(gene2symbol, classes = c("Gene2Symbol", "NULL")),
             isCharacter(pointColor),
             areSetEqual(
@@ -188,10 +189,10 @@ NULL
             labels = labels,
             choices = eval(formals()[["labels"]])
         )
-        ## Genes or ntop, but not both.
-        if (!is.null(genes) && ntop > 0L) {
-            stop("Specify either 'genes' or 'ntop'.")
-        }
+        assert(
+            !(is.character(genes) && isTRUE(ntop > 0L)),
+            msg = "Specify either 'genes' or 'ntop'."
+        )
         data <- as(object, "DataFrame")
         colnames(data) <- camelCase(colnames(data), strict = TRUE)
         assert(isSubset(
@@ -215,7 +216,10 @@ NULL
             baseMeanCol = baseMeanCol,
             baseMeanThreshold = baseMeanThreshold
         )
-        assert(isSubset(c("isDeg", "rank", "rankScore"), colnames(data)))
+        assert(isSubset(
+            x = c("isDeg", "rank", "rankScore"),
+            y = colnames(data)
+        ))
         ## Apply directional filtering, if desired.
         switch(
             EXPR = direction,
@@ -363,52 +367,10 @@ NULL
             genes <- head(rownames(data), n = ntop)
         }
         ## Visualize specific genes on the plot, if desired.
-        if (!is.null(genes)) {
-            assert(is(gene2symbol, "Gene2Symbol"))
-            validObject(gene2symbol)
-            rownames <- mapGenesToRownames(
-                object = gene2symbol,
-                genes = genes,
-                strict = TRUE
-            )
-
-
-            ## FIXME Need to rethink this m
-            ## FIXME Should we take out matchesGene2Symbol code?
-
-
-
-
-
-            ## FIXME This isn't what we want here...
-            ## Map the user-defined `genes` to `gene2symbol` rownames.
-            ## We're using this to match back to the `DESeqResults` object.
-
-
-
-
-
-
-
-
-
-            gene2symbol <- as(gene2symbol, "DataFrame")
-            gene2symbol[["rowname"]] <- rownames(gene2symbol)
-
-            ## FIXME Tighten this up...don't allow any mismatches to pass.
-
-
-            ## Prepare the label data tibble.
-            keep <- na.omit(match(x = rownames, table = rownames(data)))
-            assert(hasLength(keep))
-            labelData <- data[keep, , drop = FALSE]
-            labelData[["rowname"]] <- rownames(labelData)
-
-
-
-
-
-            labelData <- leftJoin(labelData, gene2symbol, by = "rowname")
+        if (is.character(genes)) {
+            assert(isSubset(genes, rownames(object)))
+            labelData <- data[genes, , drop = FALSE]
+            labelData[["geneName"]] <- rownames(labelData)
             p <- p +
                 acid_geom_label_repel(
                     data = as_tibble(labelData, rownames = NULL),
