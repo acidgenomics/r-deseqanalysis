@@ -2,7 +2,7 @@
 #'
 #' @name show
 #' @inherit methods::show params return title
-#' @note Updated 2020-08-04.
+#' @note Updated 2021-06-29.
 #'
 #' @examples
 #' data(deseq)
@@ -26,13 +26,13 @@ NULL
         ddsInfo <- paste0("  ", capture.output(show(dds))[-1L])
         cat("data:", ddsInfo, sep = "\n")
         list <- list(
-            transformType = transformType(object),
-            resultsNames = resultsNames(object),
-            alphaThreshold = alphaThreshold(object)
+            "transformType" = transformType(object),
+            "resultsNames" = resultsNames(object),
+            "alphaThreshold" = alphaThreshold(object)
         )
-        lfcShrink <- lfcShrink(object)
-        if (isTRUE(lfcShrink)) {
-            list[["lfcShrinkType"]] <- lfcShrinkType(object)
+        baseMeanThreshold <- baseMeanThreshold(object)
+        if (baseMeanThreshold > 0L) {
+            list[["baseMeanThreshold"]] <- baseMeanThreshold
         }
         lfcThreshold <- lfcThreshold(object)
         if (lfcThreshold > 0L) {
@@ -41,9 +41,9 @@ NULL
             }
             list[["lfcThreshold"]] <- lfcThreshold
         }
-        baseMeanThreshold <- baseMeanThreshold(object)
-        if (baseMeanThreshold > 0L) {
-            list[["baseMeanThreshold"]] <- baseMeanThreshold
+        lfcShrink <- lfcShrink(object)
+        if (isTRUE(lfcShrink)) {
+            list[["lfcShrinkType"]] <- lfcShrinkType(object)
         }
         showSlotInfo(list)
     }
