@@ -12,18 +12,17 @@ plotVolcano(object, ...)
   object,
   i,
   alphaThreshold = NULL,
-  lfcThreshold = NULL,
   baseMeanThreshold = NULL,
+  lfcThreshold = NULL,
   ...
 )
 
 \S4method{plotVolcano}{DESeqResults}(
   object,
   alphaThreshold = NULL,
-  lfcThreshold = NULL,
   baseMeanThreshold = NULL,
+  lfcThreshold = NULL,
   genes = NULL,
-  gene2symbol = NULL,
   ntop = 0L,
   direction = c("both", "up", "down"),
   pointColor = c(downregulated = AcidPlots::lightPalette[["purple"]], upregulated =
@@ -50,23 +49,19 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 
-\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
-Log (base 2) fold change ratio cutoff threshold.
-If left \code{NULL}, will use the cutoff defined in the object.}
-
 \item{baseMeanThreshold}{\code{numeric(1)} or \code{NULL}.
 Base mean (i.e. average expression across all samples) threshold.
 If left \code{NULL}, will use the cutoff defined in the object.
 Applies in general to DESeq2 RNA-seq differential expression output.}
 
+\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
+Log (base 2) fold change ratio cutoff threshold.
+If left \code{NULL}, will use the cutoff defined in the object.}
+
 \item{...}{Additional arguments.}
 
 \item{genes}{\code{character}.
 Gene identifiers.}
-
-\item{gene2symbol}{\code{Gene2Symbol}.
-Gene-to-symbol mappings. Must contain \code{geneId} and \code{geneName} columns. See
-\code{Gene2Symbol} for more information.}
 
 \item{ntop}{\code{integer(1)}.
 Number of top features to label.}
@@ -108,7 +103,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2021-06-22.
+Updated 2021-06-29.
 }
 \examples{
 data(deseq)

@@ -43,7 +43,7 @@ Intended primarily for use with \code{plotDEGUpset()}.
 Base mean threshold
 }
 \note{
-Updated 2020-09-21.
+Updated 2021-06-29.
 }
 \examples{
 data(deseq)
