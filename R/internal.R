@@ -24,8 +24,8 @@
     lfcThreshold
 ) {
     assert(is(object, "DESeqResults"))
-    data <- as(object, "DataFrame")
-    colnames(data) <- camelCase(colnames(data), strict = TRUE)
+    df <- as(object, "DataFrame")
+    colnames(df) <- camelCase(colnames(df), strict = TRUE)
     alphaCol <- ifelse(
         test = isTRUE(isSubset("svalue", names(object))),
         yes = "svalue",
@@ -34,32 +34,32 @@
     rankCol <- alphaCol
     assert(isSubset(
         x = c("baseMean", "log2FoldChange", alphaCol, rankCol),
-        y = colnames(data)
+        y = colnames(df)
     ))
     ## Remove genes with very low expression.
-    keep <- which(data[["baseMean"]] >= baseMeanThreshold)
-    data <- data[keep, , drop = FALSE]
+    keep <- which(df[["baseMean"]] >= baseMeanThreshold)
+    df <- df[keep, , drop = FALSE]
     ## Apply directional filtering, if desired.
     switch(
         EXPR = direction,
         "up" = {
-            keep <- which(data[["log2FoldChange"]] > 0L)
-            data <- data[keep, , drop = FALSE]
+            keep <- which(df[["log2FoldChange"]] > 0L)
+            df <- df[keep, , drop = FALSE]
         },
         "down" = {
-            keep <- which(data[["log2FoldChange"]] < 0L)
-            data <- data[keep, , drop = FALSE]
+            keep <- which(df[["log2FoldChange"]] < 0L)
+            df <- df[keep, , drop = FALSE]
         }
     )
     ## Check for no genes passing cutoffs and early return.
-    if (!hasRows(data)) {
+    if (!hasRows(df)) {
         alertWarning("No genes passed cutoffs.")
         return(NULL)
     }
-    data[["isDeg"]] <- as.factor(mapply(
-        alpha = data[[alphaCol]],
-        lfc = data[["log2FoldChange"]],
-        baseMean = data[["baseMean"]],
+    df[["isDeg"]] <- as.factor(mapply(
+        alpha = df[[alphaCol]],
+        lfc = df[["log2FoldChange"]],
+        baseMean = df[["baseMean"]],
         MoreArgs = list(
             alphaThreshold = alphaThreshold,
             lfcThreshold = lfcThreshold,
@@ -91,17 +91,17 @@
         SIMPLIFY = TRUE,
         USE.NAMES = FALSE
     ))
-    data[["rankScore"]] <- data[[rankCol]]
-    data[["rankScore"]][data[["isDeg"]] == 0L] <- NA
-    data <- data[order(data[["rankScore"]]), , drop = FALSE]
-    data[["rank"]] <- seq_len(nrow(data))
-    data[["rank"]][data[["isDeg"]] == 0L] <- NA
-    metadata(data) <- list(
+    df[["rankScore"]] <- df[[rankCol]]
+    df[["rankScore"]][df[["isDeg"]] == 0L] <- NA
+    df <- df[order(df[["rankScore"]]), , drop = FALSE]
+    df[["rank"]] <- seq_len(nrow(df))
+    df[["rank"]][df[["isDeg"]] == 0L] <- NA
+    metadata(df) <- list(
         "baseMeanCol" = "baseMean",
         "isDegCol" = "isDeg",
         "lfcCol" = "log2FoldChange"
     )
-    data
+    df
 }
 
 
