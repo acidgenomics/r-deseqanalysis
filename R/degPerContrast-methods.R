@@ -42,6 +42,7 @@ NULL
             i <- resultsNames[i]
         }
         assert(isSubset(i, resultsNames))
+        ## FIXME We should pass "quiet = TRUE" here instead of suppressMessages...
         suppressMessages({
             list <- mapply(
                 i = i,

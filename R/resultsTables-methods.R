@@ -93,43 +93,45 @@ formals(`resultsTables,DESeqAnalysis`)[names(.args)] <- .args
 
 
 
-## Updated 2021-03-15.
+## Updated 2021-06-29.
 `resultsTables,DESeqResults` <-  # nolint
     function(
         object,
         alphaThreshold = NULL,
-        lfcThreshold = NULL,
         baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
         return
     ) {
         validObject(object)
         both <- deg(
             object = object,
+            direction = "both",
             alphaThreshold = alphaThreshold,
-            lfcThreshold = lfcThreshold,
             baseMeanThreshold = baseMeanThreshold,
-            direction = "both"
+            lfcThreshold = lfcThreshold
         )
         if (!hasLength(both)) {
-            out <- list(all = object)
+            out <- list("all" = object)
         } else {
             up <- deg(
                 object = object,
+                direction = "up",
                 alphaThreshold = alphaThreshold,
-                lfcThreshold = lfcThreshold,
-                direction = "up"
+                baseMeanThreshold = baseMeanThreshold,
+                lfcThreshold = lfcThreshold
             )
             down <- deg(
                 object = object,
+                direction = "down",
                 alphaThreshold = alphaThreshold,
-                lfcThreshold = lfcThreshold,
-                direction = "down"
+                baseMeanThreshold = baseMeanThreshold,
+                lfcThreshold = lfcThreshold
             )
             out <- list(
-                all = object,
-                up = object[up, , drop = FALSE],
-                down = object[down, , drop = FALSE],
-                both = object[both, , drop = FALSE]
+                "all" = object,
+                "up" = object[up, , drop = FALSE],
+                "down" = object[down, , drop = FALSE],
+                "both" = object[both, , drop = FALSE]
             )
             out <- Filter(f = hasRows, x = out)
         }

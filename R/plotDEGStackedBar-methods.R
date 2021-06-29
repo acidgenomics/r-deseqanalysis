@@ -87,9 +87,9 @@ NULL
                 object = object,
                 direction = direction,
                 alphaThreshold = alphaThreshold(object),
+                baseMeanThreshold = baseMeanThreshold(object),
                 lfcShrinkType = lfcShrinkType(object),
-                lfcThreshold = lfcThreshold(object),
-                baseMeanThreshold = baseMeanThreshold(object)
+                lfcThreshold = lfcThreshold(object)
             )
         )
         if (isTRUE(flip)) {

@@ -54,7 +54,7 @@ NULL
 
 
 
-## Updated 2021-03-15.
+## Updated 2021-06-29.
 `plotVolcano,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -307,23 +307,22 @@ NULL
             ) +
             guides(color = "none")
         ## Labels.
+        ## NOTE Consider using 'TRUE' here instead of 'NULL'.
         if (is.null(labels[["title"]])) {
             labels[["title"]] <- tryCatch(
                 expr = contrastName(object),
                 error = function(e) NULL
             )
         }
+        ## NOTE Consider using 'TRUE' here instead of 'NULL'.
         if (is.null(labels[["subtitle"]])) {
-            ## FIXME Can we set metadata on the object here instead, so we
-            ## don't need to pass argument flags???
-            ## FIXME Pass our modified DataFrame in here instead...
             labels[["subtitle"]] <- .thresholdLabel(
                 object = object,
                 direction = direction,
                 alphaThreshold = alphaThreshold,
+                baseMeanThreshold = baseMeanThreshold,
                 lfcShrinkType = lfcShrinkType,
-                lfcThreshold = lfcThreshold,
-                baseMeanThreshold = baseMeanThreshold
+                lfcThreshold = lfcThreshold
             )
         }
         p <- p + do.call(what = labs, args = labels)

@@ -1,7 +1,7 @@
 #' @name plotMA
 #' @inherit AcidGenerics::plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
-#' @note Updated 2021-06-28.
+#' @note Updated 2021-06-29.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual
@@ -50,7 +50,7 @@ NULL
 
 
 
-## Updated 2021-06-28.
+## Updated 2021-06-29.
 `plotMA,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -71,14 +71,14 @@ NULL
         dds <- as(object, "DESeqDataSet")
         res <- results(object, i = i)
         assert(identical(rownames(dds), rownames(res)))
-        if (is.character(genes)) {
+        if (isCharacter(genes)) {
             genes <- mapGenesToSymbols(
                 object = dds,
                 genes = genes,
                 strict = TRUE
             )
         }
-        if (is.character(genes) || isTRUE(ntop > 0L)) {
+        if (isCharacter(genes) || isTRUE(isPositive(ntop))) {
             dds <- convertGenesToSymbols(dds)
             rownames(res) <- rownames(dds)
         }
@@ -107,7 +107,7 @@ NULL
 
 
 
-## Updated 2021-06-28.
+## Updated 2021-06-29.
 `plotMA,DESeqResults` <-  # nolint
     function(
         object,
@@ -178,17 +178,6 @@ NULL
             !(isCharacter(genes) && isTRUE(isPositive(ntop))),
             msg = "Specify either 'genes' or 'ntop'."
         )
-
-
-
-
-
-
-
-        ## FIXME Can we move this up?
-        ## FIXME Ensure this works, consolidating preparation code....
-        ## FIXME Set baseMeanCol in metadata.
-        ## FIXME Set lfcCol in metadata...
         data <- .prepareResultsForPlot(
             object = object,
             direction = direction,
@@ -204,16 +193,13 @@ NULL
             y = names(metadata(data))
         ))
         baseMeanCol <- metadata(data)[["baseMeanCol"]]
-        lfcCol <- metadata(data)[["lfcCol"]]
         isDegCol <- metadata(data)[["isDegCol"]]
+        lfcCol <- metadata(data)[["lfcCol"]]
         assert(
             isString(baseMeanCol),
-            isString(lfcCol),
-            isString(isDegCol)
+            isString(isDegCol),
+            isString(lfcCol)
         )
-
-
-
         ## Define the limits and correct outliers, if necessary.
         if (is.null(limits[["x"]])) {
             limits[["x"]] <- c(
@@ -264,12 +250,6 @@ NULL
             data[[lfcCol]][!ok[[1L]]] <- limits[["y"]][[1L]]
             data[[lfcCol]][!ok[[2L]]] <- limits[["y"]][[2L]]
         }
-        ## FIXME Rework the limits here ====
-
-
-
-
-
         breaks <- list(
             "x" = 10L ^ seq(
                 from = min(floor(log10(limits[["x"]][[1L]]))),
@@ -283,7 +263,7 @@ NULL
             mapping = aes(
                 x = !!sym(baseMeanCol),
                 y = !!sym(lfcCol),
-                color = !!sym("isDeg")
+                color = !!sym(isDegCol)
             )
         ) +
             geom_hline(
@@ -309,23 +289,22 @@ NULL
             annotation_logticks(sides = "b") +
             guides(color = "none")
         ## Labels.
+        ## NOTE Consider setting this to TRUE by default instead of NULL.
         if (is.null(labels[["title"]])) {
             labels[["title"]] <- tryCatch(
                 expr = contrastName(object),
                 error = function(e) NULL
             )
         }
+        ## NOTE Consider setting this to TRUE by default instead of NULL.
         if (is.null(labels[["subtitle"]])) {
-            ## FIXME Can we set metadata on the object here instead, so we
-            ## don't need to pass argument flags???
-            ## FIXME Pass our modified DataFrame in here instead...
             labels[["subtitle"]] <- .thresholdLabel(
                 object = object,
                 direction = direction,
                 alphaThreshold = alphaThreshold,
+                baseMeanThreshold = baseMeanThreshold,
                 lfcShrinkType = lfcShrinkType,
-                lfcThreshold = lfcThreshold,
-                baseMeanThreshold = baseMeanThreshold
+                lfcThreshold = lfcThreshold
             )
         }
         p <- p + do.call(what = labs, args = labels)
@@ -343,7 +322,7 @@ NULL
         }
         ## Gene text labels.
         ## Get the genes to visualize when `ntop` is declared.
-        if (isTRUE(ntop > 0L)) {
+        if (isTRUE(isPositive(ntop))) {
             ## FIXME This needs to only match DEGs (in progress).
             assert(
                 hasRownames(data),
