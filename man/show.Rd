@@ -19,7 +19,7 @@ show(object)
 Show an object
 }
 \note{
-Updated 2020-08-04.
+Updated 2021-06-29.
 }
 \examples{
 data(deseq)
