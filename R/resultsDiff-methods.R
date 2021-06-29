@@ -34,7 +34,7 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2021-06-29.
 `resultsDiff,DESeqResults,DESeqResults` <-  # nolint
     function(
         x,
@@ -61,17 +61,17 @@ NULL
         if (!identical(deg, "no")) {
             degX <- deg(
                 object = x,
+                direction = direction,
                 alphaThreshold = alphaThreshold,
-                lfcThreshold = lfcThreshold,
                 baseMeanThreshold = baseMeanThreshold,
-                direction = direction
+                lfcThreshold = lfcThreshold
             )
             degY <- deg(
                 object = y,
+                direction = direction,
                 alphaThreshold = alphaThreshold,
-                lfcThreshold = lfcThreshold,
                 baseMeanThreshold = baseMeanThreshold,
-                direction = direction
+                lfcThreshold = lfcThreshold
             )
             genes <- switch(
                 EXPR = deg,

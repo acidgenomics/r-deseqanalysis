@@ -97,9 +97,16 @@
     df[["rank"]] <- seq_len(nrow(df))
     df[["rank"]][df[["isDeg"]] == 0L] <- NA
     metadata(df) <- list(
+        "alphaCol" = alphaCol,
+        "alphaThreshold" = alphaThreshold,
         "baseMeanCol" = "baseMean",
+        "baseMeanThreshold" = baseMeanThreshold,
+        "direction" = direction,
         "isDegCol" = "isDeg",
-        "lfcCol" = "log2FoldChange"
+        "lfcCol" = "log2FoldChange",
+        "lfcShrinkType" = lfcShrinkType(object),
+        "lfcThreshold" = lfcThreshold,
+        "rankCol" = rankCol
     )
     df
 }
@@ -266,20 +273,17 @@
 
 
 
-## FIXME Rework this, using metadata stash approach instead...
-## FIXME We don't need to pass lfcShrinkType here correct??
-
 #' Threshold label that goes in subtitle for plot on DESeqResults
 #'
-#' @note Updated 2021-06-28.
+#' @note Updated 2021-06-29.
 #' @noRd
 .thresholdLabel <- function(
     object,
     direction,
     alphaThreshold,
+    baseMeanThreshold,
     lfcShrinkType,
-    lfcThreshold,
-    baseMeanThreshold
+    lfcThreshold
 ) {
     ## FIXME Should we no longer allow DESeqAnalysis here?
     assert(isAny(object, c("DESeqAnalysis", "DESeqResults")))
@@ -297,8 +301,8 @@
                     object = object,
                     direction = direction,
                     alphaThreshold = alphaThreshold,
-                    lfcThreshold = lfcThreshold,
                     baseMeanThreshold = baseMeanThreshold,
+                    lfcThreshold = lfcThreshold,
                     quiet = TRUE
                 ))
             },

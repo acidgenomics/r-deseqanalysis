@@ -93,15 +93,14 @@ NULL
             identical(rownames(res), rownames(dt))
         )
         direction <- match.arg(direction)
-        suppressMessages({
-            deg <- deg(
-                object = res,
-                alphaThreshold = alphaThreshold,
-                lfcThreshold = lfcThreshold,
-                baseMeanThreshold = baseMeanThreshold,
-                direction = direction
-            )
-        })
+        deg <- deg(
+            object = res,
+            direction = direction,
+            alphaThreshold = alphaThreshold,
+            baseMeanThreshold = baseMeanThreshold,
+            lfcThreshold = lfcThreshold,
+            quiet = TRUE
+        )
         if (length(deg) < .minDEGThreshold) {
             alertWarning(sprintf(
                 fmt = "Fewer than %s DEG to plot. Skipping.",
@@ -117,14 +116,13 @@ NULL
             ntop = Inf,
             labels = list(
                 title = contrastName(res),
-                ## FIXME Rework this using metadata stash approach?
                 subtitle = .thresholdLabel(
                     object = object,
                     direction = direction,
                     alphaThreshold = alphaThreshold,
+                    baseMeanThreshold = baseMeanThreshold,
                     lfcShrinkType = lfcShrinkType,
-                    lfcThreshold = lfcThreshold,
-                    baseMeanThreshold = baseMeanThreshold
+                    lfcThreshold = lfcThreshold
                 )
             )
         )

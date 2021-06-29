@@ -16,33 +16,35 @@ NULL
 
 
 
-## Updated 2020-08-05.
+## Updated 2021-06-29.
 `deg,DESeqAnalysis` <-  # nolint
     function(object, i, ...) {
         deg(
             object = results(object, i = i),
             alphaThreshold = alphaThreshold(object),
-            lfcThreshold = lfcThreshold(object),
             baseMeanThreshold = baseMeanThreshold(object),
+            lfcThreshold = lfcThreshold(object),
             ...
         )
     }
 
 
 
+## FIXME Ensure internal calls match the order here...
+
 ## Get differential expressed genes (DEGs) from DESeqResults table.
 ##
 ## Note that we're not sorting the identifiers here by LFC or P value.
 ## It's just performing a simple subset to get the identifiers as a character.
 ##
-## Updated 2021-06-22.
+## Updated 2021-06-29.
 `deg,DESeqResults` <-  # nolint
     function(
         object,
-        alphaThreshold = NULL,
-        lfcThreshold = NULL,
-        baseMeanThreshold = NULL,
         direction = c("both", "up", "down"),
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
         quiet = FALSE
     ) {
         validObject(object)
