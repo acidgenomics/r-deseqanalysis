@@ -19,13 +19,13 @@
 #' @importFrom basejump DataFrame DataFrameList Gene2Symbol SimpleList alert
 #'   alertInfo alertWarning as.data.frame as_tibble assays assays<- autopadZeros
 #'   camelCase capture.output cbind colData colData<- complete.cases
-#'   convertSampleIDsToNames cor decode dl do.call droplevels formalsList
-#'   getS3method head import initDir interestingGroups<- intersectionMatrix
-#'   leftJoin makeNames mapGenesToSymbols markdownHeader markdownList
-#'   matchesGene2Symbol mcols mcols<- melt metadata metadata<- metadata2
-#'   metadata2<- model.matrix na.omit packageName packageVersion printString
-#'   realpath relevel removeNA requireNamespaces rowData showSlotInfo snakeCase
-#'   standardizeCall str_locate_all str_match str_trunc
+#'   convertGenesToSymbols convertSampleIDsToNames cor decode dl do.call
+#'   droplevels formalsList getS3method head import initDir interestingGroups<-
+#'   intersectionMatrix leftJoin makeNames mapGenesToSymbols markdownHeader
+#'   markdownList matchesGene2Symbol mcols mcols<- melt metadata metadata<-
+#'   metadata2 metadata2<- model.matrix na.omit packageName packageVersion
+#'   printString realpath relevel removeNA requireNamespaces rowData
+#'   showSlotInfo snakeCase standardizeCall str_locate_all str_match str_trunc
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_bar
 #'   geom_density geom_hline geom_point geom_text geom_vline ggplot guides labs
 #'   position_stack scale_color_manual scale_x_continuous scale_y_continuous

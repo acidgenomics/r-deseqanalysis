@@ -8,7 +8,7 @@
 An object of class \code{DESeqAnalysis} with 500 rows and 12 columns.
 }
 \usage{
-deseq
+data(deseq)
 }
 \description{
 Minimal DESeq2 differential expression analysis.
