@@ -24,8 +24,8 @@ plotMA(object, ...)
 \S4method{plotMA}{DESeqResults}(
   object,
   alphaThreshold = NULL,
-  lfcThreshold = NULL,
   baseMeanThreshold = NULL,
+  lfcThreshold = NULL,
   genes = NULL,
   ntop = 0L,
   direction = c("both", "up", "down"),
@@ -111,7 +111,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2021-06-28.
+Updated 2021-06-29.
 }
 \examples{
 data(deseq)

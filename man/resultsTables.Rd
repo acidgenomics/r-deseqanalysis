@@ -21,8 +21,8 @@ resultsTables(object, ...)
 \S4method{resultsTables}{DESeqResults}(
   object,
   alphaThreshold = NULL,
-  lfcThreshold = NULL,
   baseMeanThreshold = NULL,
+  lfcThreshold = NULL,
   return = c("tbl_df", "DataFrameList")
 )
 }
