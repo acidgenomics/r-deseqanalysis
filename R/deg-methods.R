@@ -30,8 +30,6 @@ NULL
 
 
 
-## FIXME Ensure internal calls match the order here...
-
 ## Get differential expressed genes (DEGs) from DESeqResults table.
 ##
 ## Note that we're not sorting the identifiers here by LFC or P value.
