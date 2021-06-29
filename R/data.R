@@ -1,7 +1,7 @@
 #' List of DESeqDataSet example objects
 #'
 #' @author Michael Steinbaugh
-#' @note Updated 2021-03-08.
+#' @note Updated 2021-06-29.
 #'
 #' @usage data(dds_list)
 #'
@@ -17,7 +17,7 @@
 #' Minimal DESeq2 differential expression analysis.
 #'
 #' @author Michael Steinbaugh
-#' @note Updated 2019-07-30.
+#' @note Updated 2021-06-29.
 #'
 #' @usage data(deseq)
 #'

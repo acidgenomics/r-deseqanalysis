@@ -14,7 +14,7 @@ data(dds_list)
 List of DESeqDataSet example objects
 }
 \note{
-Updated 2021-03-08.
+Updated 2021-06-29.
 }
 \examples{
 data(dds_list)
