@@ -5,12 +5,14 @@
 ## FIXME Ensure this is sorted by rank.
 ## FIXME How to handle sort if padj is not significant or NA?
 
+## FIXME Rework the rank here, to just use adjusted p value...
+
 
 
 #' Prepare `DESeqResults` data for plot
 #'
 #' @details
-#' - `test`: P value or S value.
+#' - `alpha`: P value or S value.
 #' - `lfc`: log2 fold change cutoff.
 #'
 #' @section `isDeg`:
@@ -21,7 +23,7 @@
 #' -  `0`: not significant
 #' -  `1`: upregulated
 #'
-#' @note Updated 2021-06-28.
+#' @note Updated 2021-06-29.
 #' @noRd
 #'
 #' @return `DataFrame`.
@@ -35,36 +37,28 @@
     assert(is(object, "DESeqResults"))
     data <- as(object, "DataFrame")
     colnames(data) <- camelCase(colnames(data), strict = TRUE)
-    baseMeanCol <- "baseMean"
-    lfcCol <- "log2FoldChange"
     alphaCol <- ifelse(
         test = isTRUE(isSubset("svalue", names(object))),
         yes = "svalue",
         no = "padj"
     )
-    isDegCol <- "isDeg"
-    ## NOTE `lfcShrink()` doesn't return `stat` column.
-    rankCol <- ifelse(
-        test = isTRUE(isSubset("stat", names(object))),
-        yes = "stat",
-        no = lfcCol
-    )
+    rankCol <- alphaCol
     assert(isSubset(
-        x = c(alphaCol, baseMeanCol, lfcCol, rankCol),
+        x = c("baseMean", "log2FoldChange", alphaCol, rankCol),
         y = colnames(data)
     ))
     ## Remove genes with very low expression.
-    keep <- which(data[[baseMeanCol]] >= baseMeanThreshold)
+    keep <- which(data[["baseMean"]] >= baseMeanThreshold)
     data <- data[keep, , drop = FALSE]
     ## Apply directional filtering, if desired.
     switch(
         EXPR = direction,
         "up" = {
-            keep <- which(data[[lfcCol]] > 0L)
+            keep <- which(data[["log2FoldChange"]] > 0L)
             data <- data[keep, , drop = FALSE]
         },
         "down" = {
-            keep <- which(data[[lfcCol]] < 0L)
+            keep <- which(data[["log2FoldChange"]] < 0L)
             data <- data[keep, , drop = FALSE]
         }
     )
@@ -73,17 +67,17 @@
         alertWarning("No genes passed cutoffs.")
         return(NULL)
     }
-    data[[isDegCol]] <- as.factor(mapply(
-        test = data[[alphaCol]],
-        lfc = data[[lfcCol]],
-        baseMean = data[[baseMeanCol]],
+    data[["isDeg"]] <- as.factor(mapply(
+        alpha = data[[alphaCol]],
+        lfc = data[["log2FoldChange"]],
+        baseMean = data[["baseMean"]],
         MoreArgs = list(
             alphaThreshold = alphaThreshold,
             lfcThreshold = lfcThreshold,
             baseMeanThreshold = baseMeanThreshold
         ),
         FUN = function(
-            test,
+            alpha,
             alphaThreshold,
             lfc,
             lfcThreshold,
@@ -91,8 +85,8 @@
             baseMeanThreshold
         ) {
             if (
-                any(is.na(c(test, lfc, baseMean))) ||
-                test >= alphaThreshold ||
+                any(is.na(c(alpha, lfc, baseMean))) ||
+                alpha >= alphaThreshold ||
                 baseMean < baseMeanThreshold
             ) {
                 return(0L)
@@ -108,39 +102,16 @@
         SIMPLIFY = TRUE,
         USE.NAMES = FALSE
     ))
-    data[["rankScore"]] <- abs(data[[rankCol]])
+    data[["rankScore"]] <- data[[rankCol]]
     data[["rankScore"]][data[["isDeg"]] == 0L] <- NA
-    data <- data[order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE]
-
-    ## FIXME This needs to only rank significant genes.
-    ## Otherwise we want to censors
+    data <- data[order(data[["rankScore"]]), , drop = FALSE]
     data[["rank"]] <- seq_len(nrow(data))
-    assert(isSubset(
-        x = c("isDeg", "rank", "rankScore"),
-        y = colnames(data)
-    ))
-
-
-
-
-    ## FIXME Need to re-sort again here...
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ## FIXME Need to support these better...
-    metadata(data)[["isDegCol"]] <- isDegCol
-
+    data[["rank"]][data[["isDeg"]] == 0L] <- NA
+    metadata(data) <- list(
+        "baseMeanCol" = "baseMean",
+        "isDegCol" = "isDeg",
+        "lfcCol" = "log2FoldChange"
+    )
     data
 }
 
