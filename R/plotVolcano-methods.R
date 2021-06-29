@@ -196,14 +196,18 @@ NULL
             x = c("baseMeanCol", "isDegCol", "lfcCol"),
             y = names(metadata(data))
         ))
+        alphaCol <- metadata(data)[["alphaCol"]]
         baseMeanCol <- metadata(data)[["baseMeanCol"]]
         isDegCol <- metadata(data)[["isDegCol"]]
         lfcCol <- metadata(data)[["lfcCol"]]
         assert(
+            isString(alphaCol),
             isString(baseMeanCol),
             isString(isDegCol),
             isString(lfcCol)
         )
+        keep <- complete.cases(data[, c(alphaCol, lfcCol)])
+        data <- data[keep, , drop = FALSE]
         ## Define the limits and correct outliers, if necessary.
         if (is.null(limits[["x"]])) {
             limits[["x"]] <- c(
