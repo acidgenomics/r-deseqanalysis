@@ -13,8 +13,8 @@ degIntersection(object, ...)
   object,
   i = NULL,
   alphaThreshold = NULL,
-  lfcThreshold = NULL,
   baseMeanThreshold = NULL,
+  lfcThreshold = NULL,
   direction = c("up", "down"),
   return = c("matrix", "count", "ratio", "names")
 )
@@ -23,18 +23,18 @@ degIntersection(object, ...)
   object,
   i = NULL,
   alphaThreshold = NULL,
-  lfcThreshold = NULL,
   baseMeanThreshold = NULL,
+  lfcThreshold = NULL,
   direction = c("up", "down"),
   return = c("matrix", "count", "ratio", "names")
 )
 
 \S4method{degIntersection}{DESeqResultsList}(
   object,
-  alphaThreshold = NULL,
-  lfcThreshold = NULL,
-  baseMeanThreshold = NULL,
   direction = c("up", "down"),
+  alphaThreshold = NULL,
+  baseMeanThreshold = NULL,
+  lfcThreshold = NULL,
   return = c("matrix", "count", "ratio", "names")
 )
 }
@@ -52,14 +52,14 @@ with length matching the number of input objects, containing either
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 
-\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
-Log (base 2) fold change ratio cutoff threshold.
-If left \code{NULL}, will use the cutoff defined in the object.}
-
 \item{baseMeanThreshold}{\code{numeric(1)} or \code{NULL}.
 Base mean (i.e. average expression across all samples) threshold.
 If left \code{NULL}, will use the cutoff defined in the object.
 Applies in general to DESeq2 RNA-seq differential expression output.}
+
+\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
+Log (base 2) fold change ratio cutoff threshold.
+If left \code{NULL}, will use the cutoff defined in the object.}
 
 \item{direction}{\code{character(1)}.
 Include "up" or "down" directions.

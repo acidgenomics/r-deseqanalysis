@@ -14,8 +14,8 @@ plotMA(object, ...)
   object,
   i,
   alphaThreshold = NULL,
-  lfcThreshold = NULL,
   baseMeanThreshold = NULL,
+  lfcThreshold = NULL,
   genes = NULL,
   ntop = 0L,
   ...
@@ -23,12 +23,12 @@ plotMA(object, ...)
 
 \S4method{plotMA}{DESeqResults}(
   object,
+  direction = c("both", "up", "down"),
   alphaThreshold = NULL,
   baseMeanThreshold = NULL,
   lfcThreshold = NULL,
   genes = NULL,
   ntop = 0L,
-  direction = c("both", "up", "down"),
   pointColor = c(downregulated = AcidPlots::lightPalette[["purple"]], upregulated =
     AcidPlots::lightPalette[["orange"]], nonsignificant =
     AcidPlots::lightPalette[["gray"]]),
@@ -54,14 +54,14 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 
-\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
-Log (base 2) fold change ratio cutoff threshold.
-If left \code{NULL}, will use the cutoff defined in the object.}
-
 \item{baseMeanThreshold}{\code{numeric(1)} or \code{NULL}.
 Base mean (i.e. average expression across all samples) threshold.
 If left \code{NULL}, will use the cutoff defined in the object.
 Applies in general to DESeq2 RNA-seq differential expression output.}
+
+\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
+Log (base 2) fold change ratio cutoff threshold.
+If left \code{NULL}, will use the cutoff defined in the object.}
 
 \item{genes}{\code{character}.
 Gene identifiers.}

@@ -28,8 +28,8 @@ NULL
         i,
         contrastSamples = FALSE,
         alphaThreshold = NULL,
-        lfcThreshold = NULL,
         baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
         ...
     ) {
         validObject(object)
@@ -50,15 +50,15 @@ NULL
                 yes = alphaThreshold(object),
                 no = alphaThreshold
             ),
-            lfcThreshold = ifelse(
-                test = is.null(lfcThreshold),
-                yes = lfcThreshold(object),
-                no = lfcThreshold
-            ),
             baseMeanThreshold = ifelse(
                 test = is.null(baseMeanThreshold),
                 yes = baseMeanThreshold(object),
                 no = baseMeanThreshold
+            ),
+            lfcThreshold = ifelse(
+                test = is.null(lfcThreshold),
+                yes = lfcThreshold(object),
+                no = lfcThreshold
             ),
             ...
         )
@@ -74,10 +74,10 @@ NULL
     function(
         object,
         DESeqTransform,  # nolint
-        alphaThreshold = NULL,
-        lfcThreshold = NULL,
-        baseMeanThreshold = NULL,
         direction = c("both", "up", "down"),
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
         title = TRUE,
         subtitle = TRUE,
         ...
@@ -90,11 +90,11 @@ NULL
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(res)
         }
-        if (is.null(lfcThreshold)) {
-            lfcThreshold <- lfcThreshold(res)
-        }
         if (is.null(baseMeanThreshold)) {
             baseMeanThreshold <- baseMeanThreshold(res)
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- lfcThreshold(res)
         }
         lfcShrinkType <- lfcShrinkType(res)
         assert(

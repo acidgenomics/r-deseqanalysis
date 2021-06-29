@@ -49,19 +49,19 @@ NULL
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
-        if (is.null(lfcThreshold)) {
-            lfcThreshold <- lfcThreshold(object)
-        }
         if (is.null(baseMeanThreshold)) {
             baseMeanThreshold <- baseMeanThreshold(object)
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- lfcThreshold(object)
         }
         assert(
             hasRownames(object),
             isAlpha(alphaThreshold),
-            isNumber(lfcThreshold),
-            isNonNegative(lfcThreshold),
             isNumber(baseMeanThreshold),
             isNonNegative(baseMeanThreshold),
+            isNumber(lfcThreshold),
+            isNonNegative(lfcThreshold),
             isFlag(quiet)
         )
         direction <- match.arg(direction)

@@ -53,21 +53,18 @@ NULL
 
 
 
-## Updated 2021-03-15.
+## Updated 2021-06-29.
 `resultsTables,DESeqAnalysis` <-  # nolint
     function(
         object,
         i,
         alphaThreshold = NULL,
-        lfcThreshold = NULL,
         baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
         extra = TRUE,
         return
     ) {
         validObject(object)
-        if (is.null(baseMeanThreshold)) {
-            baseMeanThreshold <- baseMeanThreshold(object)
-        }
         resultsTables(
             object = results(object = object, i = i, extra = extra),
             alphaThreshold = ifelse(
@@ -75,15 +72,15 @@ NULL
                 yes = alphaThreshold(object),
                 no = alphaThreshold
             ),
-            lfcThreshold = ifelse(
-                test = is.null(lfcThreshold),
-                yes = lfcThreshold(object),
-                no = lfcThreshold
-            ),
             baseMeanThreshold = ifelse(
                 test = is.null(baseMeanThreshold),
                 yes = baseMeanThreshold(object),
                 no = baseMeanThreshold
+            ),
+            lfcThreshold = ifelse(
+                test = is.null(lfcThreshold),
+                yes = lfcThreshold(object),
+                no = lfcThreshold
             ),
             return = match.arg(return)
         )

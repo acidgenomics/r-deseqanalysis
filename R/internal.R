@@ -61,17 +61,17 @@
         lfc = df[["log2FoldChange"]],
         baseMean = df[["baseMean"]],
         MoreArgs = list(
-            alphaThreshold = alphaThreshold,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold
+            "alphaThreshold" = alphaThreshold,
+            "baseMeanThreshold" = baseMeanThreshold,
+            "lfcThreshold" = lfcThreshold
         ),
         FUN = function(
             alpha,
             alphaThreshold,
-            lfc,
-            lfcThreshold,
             baseMean,
-            baseMeanThreshold
+            baseMeanThreshold,
+            lfc,
+            lfcThreshold
         ) {
             if (
                 any(is.na(c(alpha, lfc, baseMean))) ||
