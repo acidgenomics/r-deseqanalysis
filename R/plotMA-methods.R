@@ -89,15 +89,15 @@ NULL
                 yes = alphaThreshold(object),
                 no = alphaThreshold
             ),
-            lfcThreshold = ifelse(
-                test = is.null(lfcThreshold),
-                yes = lfcThreshold(object),
-                no = lfcThreshold
-            ),
             baseMeanThreshold = ifelse(
                 test = is.null(baseMeanThreshold),
                 yes = baseMeanThreshold(object),
                 no = baseMeanThreshold
+            ),
+            lfcThreshold = ifelse(
+                test = is.null(lfcThreshold),
+                yes = lfcThreshold(object),
+                no = lfcThreshold
             ),
             genes = genes,
             ntop = ntop,
@@ -112,8 +112,8 @@ NULL
     function(
         object,
         alphaThreshold = NULL,
-        lfcThreshold = NULL,
         baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
         genes = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
@@ -151,11 +151,13 @@ NULL
         assert(
             isAlpha(alphaThreshold),
             isNumber(lfcThreshold),
-            isNonNegative(lfcThreshold),
-            isString(lfcShrinkType),
             isNumber(baseMeanThreshold),
             isPositive(baseMeanThreshold),
+            isNonNegative(lfcThreshold),
+            isString(lfcShrinkType),
             isAny(genes, classes = c("character", "NULL")),
+            isInt(ntop),
+            isNonNegative(ntop),
             isCharacter(pointColor),
             areSetEqual(
                 x = names(pointColor),
@@ -165,9 +167,7 @@ NULL
             isNonNegative(pointSize),
             isPercentage(pointAlpha),
             is.list(limits),
-            areSetEqual(names(limits), c("x", "y")),
-            isInt(ntop),
-            isNonNegative(ntop)
+            areSetEqual(names(limits), c("x", "y"))
         )
         direction <- match.arg(direction)
         labels <- matchLabels(
@@ -345,7 +345,7 @@ NULL
                 acid_geom_label_repel(
                     data = as_tibble(labelData, rownames = NULL),
                     mapping = aes(
-                        x = !!sym("baseMean"),
+                        x = !!sym(baseMeanCol),
                         y = !!sym(lfcCol),
                         label = !!sym("geneName")
                     )

@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit AcidGenerics::plotVolcano
-#' @note Updated 2021-06-28.
+#' @note Updated 2021-06-29.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -60,47 +60,62 @@ NULL
         object,
         i,
         alphaThreshold = NULL,
-        lfcThreshold = NULL,
         baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
         ...
     ) {
-        ## FIXME Need to rework gene2symbol handling here...
+        validObject(object)
+        assert(
+            isAny(genes, classes = c("character", "NULL")),
+            isInt(ntop),
+            isNonNegative(ntop)
+        )
+        dds <- as(object, "DESeqDataSet")
+        res <- results(object, i = i)
+        assert(identical(rownames(dds), rownames(res)))
+        if (isCharacter(genes)) {
+            genes <- mapGenesToSymbols(
+                object = dds,
+                genes = genes,
+                strict = TRUE
+            )
+        }
+        if (isCharacter(genes) || isTRUE(isPositive(ntop))) {
+            dds <- convertGenesToSymbols(dds)
+            rownames(res) <- rownames(dds)
+        }
         plotVolcano(
-            object = results(object, i = i),
-            gene2symbol = tryCatch(
-                expr = suppressMessages({
-                    Gene2Symbol(as(object, "DESeqDataSet"))
-                }),
-                error = function(e) NULL
-            ),
+            object = res,
             alphaThreshold = ifelse(
                 test = is.null(alphaThreshold),
                 yes = alphaThreshold(object),
                 no = alphaThreshold
-            ),
-            lfcThreshold = ifelse(
-                test = is.null(lfcThreshold),
-                yes = lfcThreshold(object),
-                no = lfcThreshold
             ),
             baseMeanThreshold = ifelse(
                 test = is.null(baseMeanThreshold),
                 yes = baseMeanThreshold(object),
                 no = baseMeanThreshold
             ),
+            lfcThreshold = ifelse(
+                test = is.null(lfcThreshold),
+                yes = lfcThreshold(object),
+                no = lfcThreshold
+            ),
+            genes = genes,
+            ntop = ntop,
             ...
         )
     }
 
 
 
-## Updated 2021-06-28.
+## Updated 2021-06-29.
 `plotVolcano,DESeqResults` <-  # nolint
     function(
         object,
         alphaThreshold = NULL,
-        lfcThreshold = NULL,
         baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
         genes = NULL,
         ntop = 0L,
         direction = c("both", "up", "down"),
@@ -125,8 +140,6 @@ NULL
         histograms = FALSE
     ) {
         validObject(object)
-        baseMeanCol <- "baseMean"
-        lfcCol <- "log2FoldChange"
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
@@ -139,11 +152,11 @@ NULL
         lfcShrinkType <- lfcShrinkType(object)
         assert(
             isAlpha(alphaThreshold),
+            isNumber(baseMeanThreshold),
+            isNonNegative(baseMeanThreshold),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
             isString(lfcShrinkType),
-            isNumber(baseMeanThreshold),
-            isNonNegative(baseMeanThreshold),
             isInt(ntop),
             isNonNegative(ntop),
             isCharacter(pointColor),
@@ -167,57 +180,28 @@ NULL
             !(isCharacter(genes) && isTRUE(isPositive(ntop))),
             msg = "Specify either 'genes' or 'ntop'."
         )
-
-
-
-
-        ## FIXME ===============================================================
-
-        data <- as(object, "DataFrame")
-        colnames(data) <- camelCase(colnames(data), strict = TRUE)
-        assert(isSubset(c(baseMeanCol, lfcCol, alphaCol), colnames(data)))
-        ## Remove genes with NA adjusted P values.
-        keep <- which(!is.na(data[[alphaCol]]))
-        data <- data[keep, , drop = FALSE]
-        keep <- which(data[[baseMeanCol]] >= baseMeanThreshold)
-        data <- data[keep, , drop = FALSE]
-        data[["rankScore"]] <- abs(data[[rankCol]])
-        data <- data[
-            order(data[["rankScore"]], decreasing = TRUE), , drop = FALSE
-        ]
-        data[["rank"]] <- seq_len(nrow(data))
-        data <- .addIsDegCol(
-            data = data,
-            alphaCol = alphaCol,
+        data <- .prepareResultsForPlot(
+            object = object,
+            direction = direction,
             alphaThreshold = alphaThreshold,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold
+            baseMeanThreshold = baseMeanThreshold,
+            lfcThreshold = lfcThreshold
         )
-        assert(isSubset(c("isDeg", "rank", "rankScore"), colnames(data)))
-        ## Apply directional filtering, if desired.
-        switch(
-            EXPR = direction,
-            "up" = {
-                keep <- which(data[[lfcCol]] > 0L)
-                data <- data[keep, , drop = FALSE]
-            },
-            "down" = {
-                keep <- which(data[[lfcCol]] < 0L)
-                data <- data[keep, , drop = FALSE]
-            }
-        )
-        ## Check for no genes passing cutoffs and early return.
         if (!hasRows(data)) {
-            alertWarning("No genes passed cutoffs.")
             return(invisible(NULL))
         }
-
-        ## FIXME ===============================================================
-
-
-
-
-
+        assert(isSubset(
+            x = c("baseMeanCol", "isDegCol", "lfcCol"),
+            y = names(metadata(data))
+        ))
+        baseMeanCol <- metadata(data)[["baseMeanCol"]]
+        isDegCol <- metadata(data)[["isDegCol"]]
+        lfcCol <- metadata(data)[["lfcCol"]]
+        assert(
+            isString(baseMeanCol),
+            isString(isDegCol),
+            isString(lfcCol)
+        )
         ## Define the limits and correct outliers, if necessary.
         if (is.null(limits[["x"]])) {
             limits[["x"]] <- c(
@@ -282,7 +266,7 @@ NULL
             mapping = aes(
                 x = !!sym(lfcCol),
                 y = !!sym(negLogAlphaCol),
-                color = !!sym("isDeg")
+                color = !!sym(isDegCol)
             )
         ) +
             geom_vline(
@@ -337,57 +321,30 @@ NULL
                 )
         }
         ## Gene text labels.
-        if (isTRUE(ntop > 0L)) {
-            assert(
-                hasRownames(data),
-                isSubset("rank", colnames(data)),
-                identical(data[["rank"]], sort(data[["rank"]]))
-            )
-            ## FIXME Need to harden this against no DEGs...
-            genes <- head(rownames(data), n = ntop)
+        if (isTRUE(isPositive(ntop))) {
+            assert(hasRownames(data))
+            idx <- head(which(!is.na(data[["rank"]])), n = ntop)
+            genes <- rownames(data)[idx]
         }
         ## Visualize specific genes on the plot, if desired.
-        if (!is.null(genes)) {
-
-
-            ## FIXME Need to rethink this step...a different approach?
-            assert(is(gene2symbol, "Gene2Symbol"))
-
-            validObject(gene2symbol)
-            assert(matchesGene2Symbol(
-                x = object,
-                genes = genes,
-                gene2symbol = gene2symbol
+        if (isCharacter(genes)) {
+            assert(isSubset(genes, rownames(object)))
+            alertInfo(sprintf(
+                "Labeling %d %s in plot.",
+                length(genes),
+                ngettext(
+                    n = length(genes),
+                    msg1 = "gene",
+                    msg2 = "genes"
+                )
             ))
-            ## Map the user-defined `genes` to `gene2symbol` rownames.
-            ## We're using this to match back to the `DESeqResults` object.
-            rownames <- mapGenesToRownames(
-                object = gene2symbol,
-                genes = genes,
-                strict = TRUE
-            )
-            gene2symbol <- as(gene2symbol, "DataFrame")
-            gene2symbol[["rowname"]] <- rownames(gene2symbol)
-            ## Prepare the label data tibble.
-            keep <- na.omit(match(x = rownames, table = rownames(data)))
-            assert(hasLength(keep))
-            labelData <- data[keep, , drop = FALSE]
-            labelData[["rowname"]] <- rownames(labelData)
-            labelData <- leftJoin(labelData, gene2symbol, by = "rowname")
-
-
-
-
-
-
-
-
-
+            labelData <- data[genes, , drop = FALSE]
+            labelData[["geneName"]] <- rownames(labelData)
             p <- p +
                 acid_geom_label_repel(
                     data = as_tibble(labelData, rownames = NULL),
                     mapping = aes(
-                        x = !!sym("baseMean"),
+                        x = !!sym(baseMeanCol),
                         y = !!sym(lfcCol),
                         label = !!sym("geneName")
                     )

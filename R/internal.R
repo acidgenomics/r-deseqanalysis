@@ -285,7 +285,6 @@
     lfcShrinkType,
     lfcThreshold
 ) {
-    ## FIXME Should we no longer allow DESeqAnalysis here?
     assert(isAny(object, c("DESeqAnalysis", "DESeqResults")))
     x <- character()
     sep <- "; "
