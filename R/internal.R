@@ -1,14 +1,3 @@
-## FIXME Should we just rank by adjusted p value here? simpler....
-##       Or allow the user to set which parameter they want to use for the
-##       ranking here...
-## FIXME Rework this, standardizing for plotMA and plotVolcano...
-## FIXME Ensure this is sorted by rank.
-## FIXME How to handle sort if padj is not significant or NA?
-
-## FIXME Rework the rank here, to just use adjusted p value...
-
-
-
 #' Prepare `DESeqResults` data for plot
 #'
 #' @details
