@@ -1,6 +1,6 @@
 #' @name degPerContrast
 #' @inherit AcidGenerics::baseMeanThreshold
-#' @note Updated 2020-09-21.
+#' @note Updated 2021-06-29.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @param i `character`, `numeric`, or `NULL`.
@@ -23,7 +23,7 @@ NULL
 
 
 
-## Updated 2020-09-21.
+## Updated 2021-06-29.
 `degPerContrast,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -42,54 +42,53 @@ NULL
             i <- resultsNames[i]
         }
         assert(isSubset(i, resultsNames))
-        ## FIXME We should pass "quiet = TRUE" here instead of suppressMessages...
-        suppressMessages({
-            list <- mapply(
-                i = i,
-                MoreArgs = list(object = object),
-                FUN = function(i, object) {
-                    if (isSubset(direction, c("both", "down"))) {
-                        down <- deg(
-                            object = object,
-                            i = i,
-                            direction = "down",
-                            ...
-                        )
-                        if (isTRUE(n)) {
-                            down <- length(down)
-                        }
-                    }
-                    if (isSubset(direction, c("both", "up"))) {
-                        up <- deg(
-                            object = object,
-                            i = i,
-                            direction = "up",
-                            ...
-                        )
-                        if (isTRUE(n)) {
-                            up <- length(up)
-                        }
-                    }
+        list <- mapply(
+            i = i,
+            MoreArgs = list("object" = object),
+            FUN = function(i, object) {
+                if (isSubset(direction, c("both", "down"))) {
+                    down <- deg(
+                        object = object,
+                        i = i,
+                        direction = "down",
+                        quiet = TRUE,
+                        ...
+                    )
                     if (isTRUE(n)) {
-                        switch(
-                            EXPR = direction,
-                            "both" = c(down = down, up = up),
-                            "down" = c(down = down),
-                            "up" = c(up = up)
-                        )
-                    } else {
-                        switch(
-                            EXPR = direction,
-                            "both" = list(down = down, up = up),
-                            "down" = list(down = down),
-                            "up" = list(up = up)
-                        )
+                        down <- length(down)
                     }
-                },
-                SIMPLIFY = FALSE,
-                USE.NAMES = TRUE
-            )
-        })
+                }
+                if (isSubset(direction, c("both", "up"))) {
+                    up <- deg(
+                        object = object,
+                        i = i,
+                        direction = "up",
+                        quiet = TRUE,
+                        ...
+                    )
+                    if (isTRUE(n)) {
+                        up <- length(up)
+                    }
+                }
+                if (isTRUE(n)) {
+                    switch(
+                        EXPR = direction,
+                        "both" = c("down" = down, "up" = up),
+                        "down" = c("down" = down),
+                        "up" = c("up" = up)
+                    )
+                } else {
+                    switch(
+                        EXPR = direction,
+                        "both" = list("down" = down, "up" = up),
+                        "down" = list("down" = down),
+                        "up" = list("up" = up)
+                    )
+                }
+            },
+            SIMPLIFY = FALSE,
+            USE.NAMES = TRUE
+        )
         switch(
             EXPR = return,
             "matrix" = as.matrix(as.data.frame(list)),

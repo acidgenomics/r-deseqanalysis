@@ -323,18 +323,22 @@ NULL
         ## Gene text labels.
         ## Get the genes to visualize when `ntop` is declared.
         if (isTRUE(isPositive(ntop))) {
-            ## FIXME This needs to only match DEGs (in progress).
-            assert(
-                hasRownames(data),
-                isSubset("rank", colnames(data)),
-                identical(data[["rank"]], sort(data[["rank"]]))
-            )
-            ## FIXME Need to harden this against no DEGs...
-            genes <- head(rownames(data), n = ntop)
+            assert(hasRownames(data))
+            idx <- head(which(!is.na(data[["rank"]])), n = ntop)
+            genes <- rownames(data)[idx]
         }
         ## Visualize specific genes on the plot, if desired.
-        if (is.character(genes)) {
+        if (isCharacter(genes)) {
             assert(isSubset(genes, rownames(object)))
+            alertInfo(sprintf(
+                "Labeling %d %s in plot.",
+                length(genes),
+                ngettext(
+                    n = length(genes),
+                    msg1 = "gene",
+                    msg2 = "genes"
+                )
+            ))
             labelData <- data[genes, , drop = FALSE]
             labelData[["geneName"]] <- rownames(labelData)
             p <- p +
