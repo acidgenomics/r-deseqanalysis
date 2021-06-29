@@ -67,8 +67,8 @@ NULL
         object,
         i = NULL,
         alphaThreshold = NULL,
-        lfcThreshold = NULL,
         baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
         direction,
         return
     ) {
@@ -80,22 +80,22 @@ NULL
         }
         degIntersection(
             object = resList,
+            direction = match.arg(direction),
             alphaThreshold = ifelse(
                 test = is.null(alphaThreshold),
                 yes = alphaThreshold(object),
                 no = alphaThreshold
-            ),
-            lfcThreshold = ifelse(
-                test = is.null(lfcThreshold),
-                yes = lfcThreshold(object),
-                no = lfcThreshold
             ),
             baseMeanThreshold = ifelse(
                 test = is.null(baseMeanThreshold),
                 yes = baseMeanThreshold(object),
                 no = baseMeanThreshold
             ),
-            direction = match.arg(direction),
+            lfcThreshold = ifelse(
+                test = is.null(lfcThreshold),
+                yes = lfcThreshold(object),
+                no = lfcThreshold
+            ),
             return = match.arg(return)
         )
     }
@@ -114,31 +114,31 @@ formals(`degIntersection,DESeqAnalysis`)[names(.args)] <- .args
 `degIntersection,DESeqResultsList` <-  # nolint
     function(
         object,
-        alphaThreshold = NULL,
-        lfcThreshold = NULL,
-        baseMeanThreshold = NULL,
         direction,
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
         return
     ) {
         validObject(object)
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
-        if (is.null(lfcThreshold)) {
-            lfcThreshold <- lfcThreshold(object)
-        }
         if (is.null(baseMeanThreshold)) {
             baseMeanThreshold <- baseMeanThreshold(object)
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- lfcThreshold(object)
         }
         direction <- match.arg(direction)
         return <- match.arg(return)
         x <- lapply(
             X = object,
             FUN = deg,
-            alphaThreshold = alphaThreshold,
-            lfcThreshold = lfcThreshold,
-            baseMeanThreshold = baseMeanThreshold,
             direction = direction,
+            alphaThreshold = alphaThreshold,
+            baseMeanThreshold = baseMeanThreshold,
+            lfcThreshold = lfcThreshold,
             quiet = TRUE
         )
         assert(hasNames(x))

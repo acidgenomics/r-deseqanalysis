@@ -13,18 +13,18 @@ plotDEGPCA(object, ...)
   i,
   contrastSamples = FALSE,
   alphaThreshold = NULL,
-  lfcThreshold = NULL,
   baseMeanThreshold = NULL,
+  lfcThreshold = NULL,
   ...
 )
 
 \S4method{plotDEGPCA}{DESeqResults}(
   object,
   DESeqTransform,
-  alphaThreshold = NULL,
-  lfcThreshold = NULL,
-  baseMeanThreshold = NULL,
   direction = c("both", "up", "down"),
+  alphaThreshold = NULL,
+  baseMeanThreshold = NULL,
+  lfcThreshold = NULL,
   ...
 )
 }
@@ -46,14 +46,14 @@ Only include the samples used to define the contrast passed to
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
 defined in the object.}
 
-\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
-Log (base 2) fold change ratio cutoff threshold.
-If left \code{NULL}, will use the cutoff defined in the object.}
-
 \item{baseMeanThreshold}{\code{numeric(1)} or \code{NULL}.
 Base mean (i.e. average expression across all samples) threshold.
 If left \code{NULL}, will use the cutoff defined in the object.
 Applies in general to DESeq2 RNA-seq differential expression output.}
+
+\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
+Log (base 2) fold change ratio cutoff threshold.
+If left \code{NULL}, will use the cutoff defined in the object.}
 
 \item{...}{Additional arguments.}
 

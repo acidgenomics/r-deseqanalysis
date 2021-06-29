@@ -41,10 +41,10 @@ NULL
         y,
         col = c("log2FoldChange", "stat"),
         deg = c("no", "intersect", "union"),
+        direction = c("both", "up", "down"),
         alphaThreshold = NULL,
-        lfcThreshold = NULL,
         baseMeanThreshold = NULL,
-        direction = c("both", "up", "down")
+        lfcThreshold = NULL
     ) {
         validObject(x)
         validObject(y)

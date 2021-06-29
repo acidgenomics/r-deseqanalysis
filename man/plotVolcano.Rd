@@ -14,17 +14,19 @@ plotVolcano(object, ...)
   alphaThreshold = NULL,
   baseMeanThreshold = NULL,
   lfcThreshold = NULL,
+  genes = NULL,
+  ntop = 0L,
   ...
 )
 
 \S4method{plotVolcano}{DESeqResults}(
   object,
+  direction = c("both", "up", "down"),
   alphaThreshold = NULL,
   baseMeanThreshold = NULL,
   lfcThreshold = NULL,
   genes = NULL,
   ntop = 0L,
-  direction = c("both", "up", "down"),
   pointColor = c(downregulated = AcidPlots::lightPalette[["purple"]], upregulated =
     AcidPlots::lightPalette[["orange"]], nonsignificant =
     AcidPlots::lightPalette[["gray"]]),
@@ -58,13 +60,13 @@ Applies in general to DESeq2 RNA-seq differential expression output.}
 Log (base 2) fold change ratio cutoff threshold.
 If left \code{NULL}, will use the cutoff defined in the object.}
 
-\item{...}{Additional arguments.}
-
 \item{genes}{\code{character}.
 Gene identifiers.}
 
 \item{ntop}{\code{integer(1)}.
 Number of top features to label.}
+
+\item{...}{Additional arguments.}
 
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}

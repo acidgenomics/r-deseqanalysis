@@ -56,8 +56,8 @@ NULL
         object,
         i,
         alphaThreshold = NULL,
-        lfcThreshold = NULL,
         baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
         genes = NULL,
         ntop = 0L,
         ...
@@ -111,12 +111,12 @@ NULL
 `plotMA,DESeqResults` <-  # nolint
     function(
         object,
+        direction = c("both", "up", "down"),
         alphaThreshold = NULL,
         baseMeanThreshold = NULL,
         lfcThreshold = NULL,
         genes = NULL,
         ntop = 0L,
-        direction = c("both", "up", "down"),
         pointColor = c(
             downregulated = AcidPlots::lightPalette[["purple"]],
             upregulated = AcidPlots::lightPalette[["orange"]],
@@ -137,15 +137,15 @@ NULL
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
-        if (is.null(lfcThreshold)) {
-            lfcThreshold <- lfcThreshold(object)
-        }
         if (is.null(baseMeanThreshold)) {
             baseMeanThreshold <- baseMeanThreshold(object)
         }
         ## We're applying log10 transformation on plot, so gate the minimum.
         if (isTRUE(baseMeanThreshold < 1L)) {
             baseMeanThreshold <- 1L
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- lfcThreshold(object)
         }
         lfcShrinkType <- lfcShrinkType(object)
         assert(

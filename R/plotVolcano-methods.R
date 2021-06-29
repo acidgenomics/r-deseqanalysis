@@ -62,6 +62,8 @@ NULL
         alphaThreshold = NULL,
         baseMeanThreshold = NULL,
         lfcThreshold = NULL,
+        genes = NULL,
+        ntop = 0L,
         ...
     ) {
         validObject(object)
@@ -113,12 +115,12 @@ NULL
 `plotVolcano,DESeqResults` <-  # nolint
     function(
         object,
+        direction = c("both", "up", "down"),
         alphaThreshold = NULL,
         baseMeanThreshold = NULL,
         lfcThreshold = NULL,
         genes = NULL,
         ntop = 0L,
-        direction = c("both", "up", "down"),
         pointColor = c(
             downregulated = AcidPlots::lightPalette[["purple"]],
             upregulated = AcidPlots::lightPalette[["orange"]],
@@ -143,11 +145,11 @@ NULL
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
-        if (is.null(lfcThreshold)) {
-            lfcThreshold <- lfcThreshold(object)
-        }
         if (is.null(baseMeanThreshold)) {
             baseMeanThreshold <- baseMeanThreshold(object)
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- lfcThreshold(object)
         }
         lfcShrinkType <- lfcShrinkType(object)
         assert(
