@@ -14,7 +14,7 @@ data(deseq)
 Minimal DESeq2 differential expression analysis.
 }
 \note{
-Updated 2019-07-30.
+Updated 2021-06-29.
 }
 \examples{
 data(deseq)
