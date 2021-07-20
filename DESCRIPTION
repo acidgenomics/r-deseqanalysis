@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: Acid Genomics DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.4.1
-Date: 2021-06-29
+Version: 0.4.2
+Date: 2021-07-20
 Authors@R: c(
     person(
         given = "Michael",
@@ -28,9 +28,9 @@ Depends:
     DESeq2 (>= 1.30)
 Imports:
     AcidGenerics (>= 0.5.18),
-    AcidPlots (>= 0.3.6),
-    ggplot2 (>= 3.3.4),
-    goalie (>= 0.5.1),
+    AcidPlots (>= 0.3.7),
+    ggplot2 (>= 3.3.5),
+    goalie (>= 0.5.2),
     methods
 Suggests:
     apeglm (>= 1.12),
