@@ -36,11 +36,14 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, cache=FALSE, message=FALSE}
-library(DESeqAnalysis)
+suppressPackageStartupMessages({
+    library(DESeqAnalysis)
+})
 prepareTemplate()
 source("_setup.R")
 ## This is required for tabset R Markdown headers to work in `lapply()` call.
 knitr::opts_chunk[["set"]](message = FALSE)
+initDir(params$output_dir)
 ```
 
 ```{r header, child="_header.Rmd"}
