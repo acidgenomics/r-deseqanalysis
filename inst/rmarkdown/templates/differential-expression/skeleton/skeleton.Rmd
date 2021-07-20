@@ -1,5 +1,5 @@
 ---
-## Updated 2021-03-08.
+## Updated 2021-07-20.
 params:
   title: "Differential expression with DESeq2"
   
@@ -24,6 +24,7 @@ params:
   lfc_threshold: NULL
   base_mean_threshold: NULL
   
+  ## Only include samples contained in current contast for DEG plots.
   contrast_samples: TRUE
   
   output_dir: !r file.path("results", Sys.Date(), "differential-expression")
@@ -112,14 +113,14 @@ An MA plot compares transformed counts on `M` (log ratio) and `A` (mean average)
 
 ```{r plot-ma, results="asis"}
 invisible(mapply(
-    i = resultsNames,
-    MoreArgs = list(object = object),
     FUN = function(object, i) {
         markdownHeader(i, level = 2L, asis = TRUE)
         print(plotMA(object = object, i = i))
     },
+    i = resultsNames,
+    MoreArgs = list("object" = object),
     SIMPLIFY = FALSE,
-    USE.NAMES = TRUE
+    USE.NAMES = FALSE
 ))
 ```
 
@@ -129,60 +130,52 @@ A volcano plot compares significance (BH-adjusted *P* value) against fold change
 
 ```{r plot-volcano, results="asis"}
 invisible(mapply(
-    i = resultsNames,
-    MoreArgs = list(object = object),
     FUN = function(object, i) {
         markdownHeader(i, level = 2L, asis = TRUE)
         print(plotVolcano(object = object, i = i))
     },
+    i = resultsNames,
+    MoreArgs = list("object" = object),
     SIMPLIFY = FALSE,
-    USE.NAMES = TRUE
+    USE.NAMES = FALSE
 ))
 ```
 
-# PCA {.tabset}
+# DEG PCA {.tabset}
 
 ```{r plot-deg-pca, results="asis"}
 invisible(mapply(
+    FUN = function(object, i, ...) {
+        markdownHeader(i, level = 2L, asis = TRUE)
+        print(plotDEGPCA(object = object, i = i, ...))
+    },
     i = resultsNames,
     MoreArgs = list(
-        object = object,
-        contrastSamples = params$contrast_samples
+        "object" = object,
+        "contrastSamples" = params$contrast_samples
     ),
-    FUN = function(object, i, contrastSamples) {
-        markdownHeader(i, level = 2L, asis = TRUE)
-        print(plotDEGPCA(
-            object = object,
-            i = i,
-            contrastSamples = contrastSamples
-        ))
-    },
     SIMPLIFY = FALSE,
-    USE.NAMES = TRUE
+    USE.NAMES = FALSE
 ))
 ```
 
-# Heatmap {.tabset}
+# DEG Heatmap {.tabset}
 
 This plot shows only differentially expressed genes on a per-sample basis. We have scaled the data by row (z-score) and used the `ward.D2` method for clustering [@Ward1963-xf].
 
 ```{r plot-deg-heatmap, results="asis"}
 invisible(mapply(
+    FUN = function(object, i, ...) {
+        markdownHeader(i, level = 2L, asis = TRUE)
+        plotDEGHeatmap(object = object, i = i, ...)
+    },
     i = resultsNames,
     MoreArgs = list(
-        object = object,
-        contrastSamples = params$contrast_samples
+        "object" = object,
+        "contrastSamples" = params$contrast_samples
     ),
-    FUN = function(object, i, contrastSamples) {
-        markdownHeader(i, level = 2L, asis = TRUE)
-        plotDEGHeatmap(
-            object = object,
-            i = i,
-            contrastSamples = contrastSamples
-        )
-    },
     SIMPLIFY = FALSE,
-    USE.NAMES = TRUE
+    USE.NAMES = FALSE
 ))
 ```
 
@@ -192,21 +185,17 @@ Only the top up- and down-regulated genes (arranged by adjusted *P* value) are s
 
 ```{r top-tables, results="asis"}
 invisible(mapply(
+    FUN = function(object, i, ...) {
+        markdownHeader(i, level = 2L, asis = TRUE)
+        topTables(object = object, i = i, ...)
+    },
     i = resultsNames,
     MoreArgs = list(
-        object = object,
-        n = 25L
+        "object" = object,
+        "n" = 25L
     ),
-    FUN = function(object, i, n) {
-        markdownHeader(i, level = 2L, asis = TRUE)
-        topTables(
-            object = object,
-            i = i,
-            n = n
-        )
-    },
     SIMPLIFY = FALSE,
-    USE.NAMES = TRUE
+    USE.NAMES = FALSE
 ))
 ```
 
