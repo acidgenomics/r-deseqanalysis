@@ -1,3 +1,10 @@
+## DESeqAnalysis 0.4.2 (2021-07-20)
+
+### Minor changes
+
+- Improved R Markdown template for differential expression report, and added
+  code coverage for `rmarkdown::render` call in unit tests.
+
 ## DESeqAnalysis 0.4.1 (2021-06-29)
 
 ### Minor changes
