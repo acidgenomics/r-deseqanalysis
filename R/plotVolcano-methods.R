@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit AcidGenerics::plotVolcano
-#' @note Updated 2021-06-29.
+#' @note Updated 2021-07-27.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -350,8 +350,8 @@ NULL
                 acid_geom_label_repel(
                     data = as_tibble(labelData, rownames = NULL),
                     mapping = aes(
-                        x = !!sym(baseMeanCol),
-                        y = !!sym(lfcCol),
+                        x = !!sym(lfcCol),
+                        y = !!sym(negLogAlphaCol),
                         label = !!sym("geneName")
                     )
                 )
