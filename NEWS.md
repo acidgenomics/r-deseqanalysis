@@ -1,3 +1,12 @@
+## DESeqAnalysis 0.4.3 (2021-07-27)
+
+### Minor changes
+
+- `plotVolcano`: Bug fix for plot labels not mapping correctly. Expecting
+  "lfcCol", "negLogAlphaCol" internally, but these were incorrectly mapped
+  to the values expected for `plotMA` instead. Thanks to @kokyriakidis for
+  noticing this.
+
 ## DESeqAnalysis 0.4.2 (2021-07-20)
 
 ### Minor changes
