@@ -105,7 +105,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2021-06-29.
+Updated 2021-07-27.
 }
 \examples{
 data(deseq)
