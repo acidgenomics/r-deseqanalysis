@@ -54,7 +54,7 @@ NULL
 
 
 
-## Updated 2021-06-29.
+## Updated 2021-07-27.
 `plotVolcano,DESeqAnalysis` <-  # nolint
     function(
         object,
