@@ -217,6 +217,18 @@ NULL
 
 
 
+## TODO Export this in next AcidGenerics update.
+#' @rdname plotContrast
+#' @export
+setGeneric(
+    name = "plotContrast",
+    def = function(object, ...) {
+        standardGeneric("plotContrast")
+    }
+)
+
+
+
 #' @rdname plotCounts
 #' @name plotCounts
 #' @importFrom AcidGenerics plotCounts

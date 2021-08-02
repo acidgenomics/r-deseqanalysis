@@ -1,7 +1,7 @@
 Package: DESeqAnalysis
 Title: Acid Genomics DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.4.4
+Version: 0.4.4.9000
 Date: 2021-08-02
 Authors@R: c(
     person(
@@ -72,6 +72,7 @@ Collate:
     'matchMetadataToFiles.R'
     'package.R'
     'plotBaseMean-methods.R'
+    'plotContrast-methods.R'
     'plotCounts-methods.R'
     'plotDEGHeatmap-methods.R'
     'plotDEGPCA-methods.R'
