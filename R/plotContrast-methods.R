@@ -19,6 +19,30 @@ NULL
 ## Updated 2021-08-02.
 `plotContrast,DESeqAnalysis` <-
     function(object, i) {
+        validObject(object)
+        res <- results(object, i = i)
+        samples <- contrastSamples(
+            object = object,
+            i = i,
+            quiet = TRUE
+        )
+        dds <- as(object, "DESeqDataSet")
+        dds <- dds[, samples, drop = FALSE]
+        counts <- counts(dds, normalized = TRUE)
+        ## Only include non-zero counts on the plot.
+        keep <- rowSums(counts) > 0L
+        counts <- counts[keep, , drop = FALSE]
+
+        ## FIXME Need to use updated `contrastSamples` function here
+        ## to get "numerator" and "denominator" samples.
+        ##
+        ## FIXME Then we can use these mappings to calculate mean values
+        ## per grouping.
+
+        ## Take the mean of the non-zero counts, per contrast.
+        logcounts <- log2(counts + 1L)
+
+        stop("FIXME Incomplete")
     }
 
 
