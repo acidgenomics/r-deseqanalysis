@@ -7,7 +7,7 @@
 \usage{
 contrastSamples(object, ...)
 
-\S4method{contrastSamples}{DESeqAnalysis}(object, i, quiet = FALSE, return = c("list", "character"))
+\S4method{contrastSamples}{DESeqAnalysis}(object, i, quiet = FALSE, return = c("character", "list"))
 }
 \arguments{
 \item{object}{Object.}
@@ -29,10 +29,10 @@ to the first argument in the \code{character} vector.}
 }
 \value{
 \itemize{
-\item \code{list}: Named list containing \code{"numerator"} and \code{"denominator"} of sample
-identifiers corresponding to column names of \code{DESeqDataSet}.
 \item \code{character}: Sample identifiers, corresponding to the column names
 of \code{DESeqDataSet}.
+\item \code{list}: Named list containing \code{"numerator"} and \code{"denominator"} of sample
+identifiers corresponding to column names of \code{DESeqDataSet}.
 }
 }
 \description{
