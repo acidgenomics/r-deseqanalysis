@@ -1,3 +1,10 @@
+## DESeqAnalysis 0.4.4 (2021-08-02)
+
+### Minor changes
+
+- `apeglmResults`: Relaxed assert check on P values when applying adaptive
+  shrinkage via apeglm model.
+
 ## DESeqAnalysis 0.4.3 (2021-07-27)
 
 ### Minor changes
