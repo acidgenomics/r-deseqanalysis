@@ -9,6 +9,10 @@ plotContrast(object, ...)
 
 \S4method{plotContrast}{DESeqAnalysis}(object, i)
 }
+\arguments{
+\item{i}{\code{character(1)} or \code{integer(1)}.
+\code{DESeqResults} contrast name or position in \code{results} slot.}
+}
 \description{
 Plot differential expression contrast
 }
