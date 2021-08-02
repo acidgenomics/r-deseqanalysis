@@ -1,6 +1,6 @@
 #' @name plotDEGHeatmap
 #' @inherit AcidGenerics::plotDEGHeatmap
-#' @note Updated 2021-03-15.
+#' @note Updated 2021-08-02.
 #'
 #' @inheritParams AcidPlots::plotHeatmap
 #' @inheritParams AcidRoxygen::params
@@ -21,7 +21,7 @@ NULL
 
 
 
-## Updated 2021-03-15.
+## Updated 2021-08-02.
 `plotDEGHeatmap,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -37,7 +37,7 @@ NULL
         res <- results(object, i = i, quiet = TRUE)
         dt <- as(object, "DESeqTransform")
         if (isTRUE(contrastSamples)) {
-            samples <- contrastSamples(object, i = i)
+            samples <- contrastSamples(object, i = i, return = "character")
             assert(isSubset(samples, colnames(dt)))
             dt <- dt[, samples, drop = FALSE]
             dt <- droplevels(dt)

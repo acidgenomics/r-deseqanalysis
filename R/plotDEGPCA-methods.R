@@ -1,6 +1,6 @@
 #' @name plotDEGPCA
 #' @inherit AcidGenerics::plotDEGPCA
-#' @note Updated 2021-03-03.
+#' @note Updated 2021-08-02.
 #'
 #' @inheritParams plotDEGHeatmap
 #' @inheritParams AcidPlots::plotPCA
@@ -32,7 +32,7 @@ NULL
         res <- results(object, i = i, quiet = TRUE)
         dt <- as(object, "DESeqTransform")
         if (isTRUE(contrastSamples)) {
-            samples <- contrastSamples(object, i = i)
+            samples <- contrastSamples(object, i = i, return = "character")
             assert(isSubset(samples, colnames(dt)))
             dt <- dt[, samples, drop = FALSE]
             dt <- droplevels(dt)
@@ -61,7 +61,7 @@ NULL
 
 
 
-## Updated 2021-03-03.
+## Updated 2021-08-02.
 `plotDEGPCA,DESeqResults` <-  # nolint
     function(
         object,
