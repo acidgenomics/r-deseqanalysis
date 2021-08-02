@@ -73,7 +73,7 @@ NULL
 
 ## Useful for avoiding this issue:
 ## type='apeglm' shrinkage only for use with 'coef'
-## Updated 2020-08-17.
+## Updated 2021-08-02.
 `apeglmResults,DESeqDataSet` <-  # nolint
     function(
             object,
@@ -123,8 +123,8 @@ NULL
             identical(res[["baseMean"]], shrink[["baseMean"]]),
             !identical(res[["log2FoldChange"]], shrink[["log2FoldChange"]]),
             !identical(res[["stat"]], shrink[["stat"]]),
-            identical(res[["pvalue"]], shrink[["pvalue"]]),
-            identical(res[["padj"]], shrink[["padj"]]),
+            ## > identical(res[["pvalue"]], shrink[["pvalue"]]),
+            ## > identical(res[["padj"]], shrink[["padj"]]),
             identical(
                 x = metadata(res)[["alpha"]],
                 y = metadata(shrink)[["alpha"]]
