@@ -31,11 +31,11 @@
 #'   position_stack scale_color_manual scale_x_continuous scale_y_continuous
 #'   theme
 #' @importFrom goalie allArePositive areDisjointSets areIntersectingSets
-#'   areSameLength areSetEqual assert bapply hasLength hasNames hasLength
-#'   hasRows hasRownames hasValidDimnames hasValidNames isAFile isAlpha isAny
-#'   isCharacter isFlag isGGScale isHeaderLevel isInRange isInt isNegative
-#'   isNonNegative isNumber isPercentage isPositive isScalar isString isSubset
-#'   validate
+#'   areSameLength areSetEqual assert bapply hasColnames hasLength hasNames
+#'   hasLength hasRows hasRownames hasValidDimnames hasValidNames isAFile
+#'   isAlpha isAny isCharacter isFlag isGGScale isHeaderLevel isInRange isInt
+#'   isMatchingFixed isNegative isNonNegative isNumber isPercentage isPositive
+#'   isScalar isString isSubset validate
 #' @importFrom methods as is new prototype setClass setGeneric setValidity show
 #'   slot slot<- validObject .hasSlot
 "_PACKAGE"
