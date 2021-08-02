@@ -13,10 +13,10 @@
 #' @param ... Additional arguments.
 #'
 #' @return
-#' - `list`: Named list containing `"numerator"` and `"denominator"` of sample
-#'   identifiers corresponding to column names of `DESeqDataSet`.
 #' - `character`: Sample identifiers, corresponding to the column names
 #'   of `DESeqDataSet`.
+#' - `list`: Named list containing `"numerator"` and `"denominator"` of sample
+#'   identifiers corresponding to column names of `DESeqDataSet`.
 #'
 #' @examples
 #' data(deseq)
@@ -37,7 +37,7 @@ NULL
         object,
         i,
         quiet = FALSE,
-        return = c("list", "character")
+        return = c("character", "list")
     ) {
         validObject(object)
         assert(isFlag(quiet))
