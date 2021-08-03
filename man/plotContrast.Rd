@@ -7,17 +7,38 @@
 \usage{
 plotContrast(object, ...)
 
-\S4method{plotContrast}{DESeqAnalysis}(object, i)
+\S4method{plotContrast}{DESeqAnalysis}(
+  object,
+  i,
+  direction = c("both", "up", "down"),
+  alphaThreshold = NULL,
+  baseMeanThreshold = NULL,
+  lfcThreshold = NULL,
+  genes = NULL,
+  ntop = 0L,
+  pointColor = c(downregulated = AcidPlots::lightPalette[["purple"]], upregulated =
+    AcidPlots::lightPalette[["orange"]], nonsignificant =
+    AcidPlots::lightPalette[["gray"]]),
+  pointSize = 2L,
+  pointAlpha = 0.8,
+  trans = c("log2", "log10", "identity"),
+  limits = list(x = NULL, y = NULL),
+  labels = list(title = NULL, subtitle = NULL, x = NULL, y = NULL)
+)
 }
 \arguments{
 \item{i}{\code{character(1)} or \code{integer(1)}.
 \code{DESeqResults} contrast name or position in \code{results} slot.}
+
+\item{limits}{\code{list(2)}.
+Named list containing \code{"x"} and \code{"y"} that define the lower and upper
+limits for each axis. Set automatically by default when left \code{NULL}.}
 }
 \description{
 Plot differential expression contrast
 }
 \note{
-Updated 2021-08-02.
+Updated 2021-08-03.
 }
 \examples{
 data(deseq)

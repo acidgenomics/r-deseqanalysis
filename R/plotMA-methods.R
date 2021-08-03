@@ -79,6 +79,7 @@ NULL
             )
         }
         if (isCharacter(genes) || isTRUE(isPositive(ntop))) {
+            ## FIXME Need to handle NA gene symbols here.
             dds <- convertGenesToSymbols(dds)
             rownames(res) <- rownames(dds)
         }
@@ -118,19 +119,19 @@ NULL
         genes = NULL,
         ntop = 0L,
         pointColor = c(
-            downregulated = AcidPlots::lightPalette[["purple"]],
-            upregulated = AcidPlots::lightPalette[["orange"]],
-            nonsignificant = AcidPlots::lightPalette[["gray"]]
+            "downregulated" = AcidPlots::lightPalette[["purple"]],
+            "upregulated" = AcidPlots::lightPalette[["orange"]],
+            "nonsignificant" = AcidPlots::lightPalette[["gray"]]
         ),
         pointSize = 2L,
         pointAlpha = 0.8,
         limits = list("x" = NULL, "y" = NULL),
         ## NOTE Consider reworking the NULL as TRUE here?
         labels = list(
-            title = NULL,
-            subtitle = NULL,
-            x = "mean expression across all samples",
-            y = "log2 fold change"
+            "title" = NULL,
+            "subtitle" = NULL,
+            "x" = "mean expression across all samples",
+            "y" = "log2 fold change"
         )
     ) {
         validObject(object)
@@ -150,9 +151,9 @@ NULL
         lfcShrinkType <- lfcShrinkType(object)
         assert(
             isAlpha(alphaThreshold),
-            isNumber(lfcThreshold),
             isNumber(baseMeanThreshold),
             isPositive(baseMeanThreshold),
+            isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
             isString(lfcShrinkType),
             isAny(genes, classes = c("character", "NULL")),
@@ -309,7 +310,6 @@ NULL
         }
         p <- p + do.call(what = labs, args = labels)
         ## Color the significant points.
-        ## Note that we're using direction-specific coloring by default.
         if (isCharacter(pointColor)) {
             p <- p +
                 scale_color_manual(

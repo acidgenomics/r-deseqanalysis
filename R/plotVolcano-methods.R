@@ -83,6 +83,7 @@ NULL
             )
         }
         if (isCharacter(genes) || isTRUE(isPositive(ntop))) {
+            ## FIXME Need to handle NA gene symbols here.
             dds <- convertGenesToSymbols(dds)
             rownames(res) <- rownames(dds)
         }
@@ -122,9 +123,9 @@ NULL
         genes = NULL,
         ntop = 0L,
         pointColor = c(
-            downregulated = AcidPlots::lightPalette[["purple"]],
-            upregulated = AcidPlots::lightPalette[["orange"]],
-            nonsignificant = AcidPlots::lightPalette[["gray"]]
+            "downregulated" = AcidPlots::lightPalette[["purple"]],
+            "upregulated" = AcidPlots::lightPalette[["orange"]],
+            "nonsignificant" = AcidPlots::lightPalette[["gray"]]
         ),
         pointSize = 2L,
         pointAlpha = 0.8,
@@ -134,10 +135,10 @@ NULL
         ),
         ## NOTE Consider reworking the NULL as TRUE here?
         labels = list(
-            title = NULL,
-            subtitle = NULL,
-            x = "log2 fold change",
-            y = "-log10 adj p value"
+            "title" = NULL,
+            "subtitle" = NULL,
+            "x" = "log2 fold change",  # FIXME Set to TRUE?
+            "y" = "-log10 adj p value"  # FIXME Set to TRUE?
         ),
         histograms = FALSE
     ) {

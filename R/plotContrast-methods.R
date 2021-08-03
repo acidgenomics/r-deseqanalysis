@@ -6,7 +6,7 @@
 #' Plot differential expression contrast
 #'
 #' @name plotContrast
-#' @note Updated 2021-08-02.
+#' @note Updated 2021-08-03.
 #'
 #' @inheritParams params
 #'
@@ -20,40 +20,174 @@ NULL
 
 
 
-## FIXME Consider adding a "geom" argument here, for different types of plots.
-## FIXME How to return the contrast groups here...Need a function.
-
-## Updated 2021-08-02.
+## Updated 2021-08-03.
 `plotContrast,DESeqAnalysis` <-
-    function(object, i) {
+    function(
+        object,
+        i,
+        direction = c("both", "up", "down"),
+        ## FIXME Need to support.
+        alphaThreshold = NULL,
+        ## FIXME Need to support.
+        ## FIXME Need to filter against the DESeqResults to drop the number
+        ## of genes first.
+        baseMeanThreshold = NULL,
+        ## FIXME Need to support.
+        lfcThreshold = NULL,
+        ## FIXME Need to support.
+        genes = NULL,
+        ## FIXME Need to support.
+        ntop = 0L,
+        ## FIXME Need to support.
+        pointColor = c(
+            "downregulated" = AcidPlots::lightPalette[["purple"]],
+            "upregulated" = AcidPlots::lightPalette[["orange"]],
+            "nonsignificant" = AcidPlots::lightPalette[["gray"]]
+        ),
+        ## FIXME Need to support.
+        pointSize = 2L,
+        ## FIXME Need to support.
+        pointAlpha = 0.8,
+        ## FIXME Need to support this.
+        trans = c("log2", "log10", "identity"),
+        ## FIXME Need to support.
+        limits = list("x" = NULL, "y" = NULL),
+        ## FIXME Need to support.
+        ## NOTE Consider reworking the NULL as TRUE here?
+        labels = list(
+            "title" = NULL,
+            "subtitle" = NULL,
+            "x" = NULL,  # FIXME Set `TRUE` or `"auto"` here?
+            "y" = NULL  # FIXME Set `TRUE` or `"auto"` here?
+        )
+    ) {
         validObject(object)
-        res <- results(object, i = i)
-        ## FIXME This needs to stash more metadata...
-        ## FIXME Needs to return "group", "numerator" name, "denominator" name.
-        samplesList <- contrastSamples(
+        direction <- match.arg(direction)
+        trans <- match.arg(trans)
+        if (is.null(alphaThreshold)) {
+            alphaThreshold <- alphaThreshold(object)
+        }
+        if (is.null(baseMeanThreshold)) {
+            baseMeanThreshold <- baseMeanThreshold(object)
+        }
+        ## FIXME Only do this step when trans is not identity.
+        ## We're applying log10 transformation on plot, so gate the minimum.
+        if (!identical(trans, "identity") && isTRUE(baseMeanThreshold < 1L)) {
+            baseMeanThreshold <- 1L
+        }
+        if (is.null(lfcThreshold)) {
+            lfcThreshold <- lfcThreshold(object)
+        }
+        assert(
+            isAlpha(alphaThreshold),
+            isNumber(baseMeanThreshold),
+            isPositive(baseMeanThreshold),
+            isNumber(lfcThreshold),
+            isNonNegative(lfcThreshold),
+            isAny(genes, classes = c("character", "NULL")),
+            isInt(ntop),
+            isNonNegative(ntop),
+            isCharacter(pointColor),
+            areSetEqual(
+                x = names(pointColor),
+                y = c("downregulated", "nonsignificant", "upregulated")
+            ),
+            isNumber(pointSize),
+            isNonNegative(pointSize),
+            isPercentage(pointAlpha),
+            is.list(limits),
+            areSetEqual(names(limits), c("x", "y"))
+        )
+        labels <- matchLabels(
+            labels = labels,
+            choices = eval(formals()[["labels"]])
+        )
+        assert(
+            !(isCharacter(genes) && isTRUE(isPositive(ntop))),
+            msg = "Specify either 'genes' or 'ntop'."
+        )
+        contrastMeta <- contrastSamples(
             object = object,
             i = i,
-            quiet = TRUE,
+            quiet = FALSE,
             return = "list"
         )
         assert(
-            is.list(samplesList),
-            identical(names(samplesList), c("numerator", "denominator"))
+            is.list(contrastMeta),
+            identical(
+                x = names(contrastMeta),
+                y = c("contrast", "samples")
+            ),
+            identical(
+                x = names(contrastMeta[["samples"]]),
+                y = c("numerator", "denominator")
+            )
         )
-        samples <- c(samplesList[["numerator"]], samplesList[["denominator"]])
         dds <- as(object, "DESeqDataSet")
-        dds <- dds[, samples, drop = FALSE]
+        res <- results(object, i = i, extra = FALSE)
+        assert(identical(rownames(dds), rownames(res)))
+        if (isCharacter(genes) || isTRUE(isPositive(ntop))) {
+            ## FIXME Need to handle NA gene symbols here.
+            ## FIXME Need to update AcidExperiment to handle this better.
+            dds <- convertGenesToSymbols(dds)
+            rownames(res) <- rownames(dds)
+        }
+        res <- .prepareResultsForPlot(
+            object = res,
+            direction = direction,
+            alphaThreshold = alphaThreshold,
+            baseMeanThreshold = baseMeanThreshold,
+            lfcThreshold = lfcThreshold
+        )
+        if (!hasRows(res)) {
+            return(invisible(NULL))
+        }
+        dds <- as(object, "DESeqDataSet")
+        dds <- dds[
+            rownames(res),
+            c(
+                contrastMeta[["samples"]][["numerator"]],
+                contrastMeta[["samples"]][["denominator"]]
+            ),
+            drop = FALSE
+        ]
         counts <- counts(dds, normalized = TRUE)
         ## Only include non-zero counts on the plot.
         keep <- rowSums(counts) > 0L
         counts <- counts[keep, , drop = FALSE]
-        ## Take the mean of the non-zero counts, per contrast.
-        logcounts <- log2(counts + 1L)
+        if (!hasRows(counts)) {
+            return(invisible(NULL))
+        }
+        ## Apply log2 or log10 transformation, when applicable.
+        if (!identical(trans, "identity")) {
+            fun <- get(trans, inherits = TRUE)
+            assert(is.function(fun))
+            counts <- fun(counts + 1L)
+        }
+        res <- res[rownames(counts), , drop = FALSE]
+
+
+
+
+
+
+
+
+
+
+        ## FIXME How to apply gene labeling here?
+
         ## FIXME Need to label DEGs here....
         ## FIXME Use "isDEG" column here (see plotMA code).
         data <- data.frame(
-            "x" = rowMeans(logcounts[, samplesList[["denominator"]]]),
-            "y" = rowMeans(logcounts[, samplesList[["numerator"]]]),
+            ## FIXME Need to rework this...
+            "x" = rowMeans(
+                counts[, contrastMeta[["samples"]][["denominator"]]]
+                ),
+            "y" = rowMeans(
+                counts[, contrastMeta[["samples"]][["numerator"]]]
+            ),
+            "isDeg" = res[["isDeg"]],
             row.names = rownames(counts)
         )
         p <- ggplot(
@@ -65,10 +199,6 @@ NULL
             )
         ) +
             geom_point(size = 1L)
-
-
-
-        stop("FIXME Incomplete")
     }
 
 
