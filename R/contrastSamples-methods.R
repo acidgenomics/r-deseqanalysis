@@ -1,6 +1,10 @@
+## FIXME This needs to stash more of the contrast metadata here...
+
+
+
 #' @name contrastSamples
 #' @inherit AcidGenerics::contrastSamples
-#' @note Updated 2021-08-02.
+#' @note Updated 2021-08-03.
 #'
 #' @details
 #' Match the samples in a `DESeqDataSet` used to define contrast in a
@@ -15,8 +19,12 @@
 #' @return
 #' - `character`: Sample identifiers, corresponding to the column names
 #'   of `DESeqDataSet`.
-#' - `list`: Named list containing `"numerator"` and `"denominator"` of sample
-#'   identifiers corresponding to column names of `DESeqDataSet`.
+#' - `list`: Named list containing `"contrast"` and `"samples"` elements:
+#'
+#'   - `"contrast"`: `character` vector containing metadata on `"factor"`,
+#'     `"numerator"`, and `"denominator"` contrast elements.
+#'   - `"samples"`: ``list` containing `"numerator"` and `"denominator"` of
+#'     sample identifiers corresponding to column names of `DESeqDataSet`.
 #'
 #' @examples
 #' data(deseq)
@@ -31,7 +39,7 @@ NULL
 
 
 
-## Updated 2021-08-02.
+## Updated 2021-08-03.
 `contrastSamples,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -96,31 +104,40 @@ NULL
             msg = "Contrast name match failure."
         )
         numeratorCol <- match[1L, 2L]
-        numerator <- samples[factor %in% numeratorCol]
+        numeratorSamples <- samples[factor %in% numeratorCol]
         denominatorCol <- match[1L, 3L]
-        denominator <- samples[factor %in% denominatorCol]
+        denominatorSamples <- samples[factor %in% denominatorCol]
         assert(
             isSubset(numeratorCol, factor),
-            hasLength(numerator),
+            hasLength(numeratorSamples),
             isSubset(denominatorCol, factor),
-            hasLength(denominator),
+            hasLength(denominatorSamples),
             msg = "Failed to extract numerator/denominator samples."
         )
         if (isFALSE(quiet)) {
             dl(c(
-                "Numerator samples" = toString(numerator, width = 200L),
-                "Denominator samples" = toString(denominator, width = 200L)
+                "Numerator samples" =
+                    toString(numeratorSamples, width = 200L),
+                "Denominator samples" =
+                    toString(denominatorSamples, width = 200L)
             ))
         }
         switch(
             EXPR = return,
             "character" = {
-                c(numerator, denominator)
+                c(numeratorSamples, denominatorSamples)
             },
             "list" = {
                 list(
-                    "numerator" = numerator,
-                    "denominator" = denominator
+                    "contrast" = c(
+                        "factor" = factorCol,
+                        "numerator" = numeratorCol,
+                        "denominator" = denominatorCol
+                    ),
+                    "samples" = list(
+                        "numerator" = numeratorSamples,
+                        "denominator" = denominatorSamples
+                    )
                 )
             }
         )

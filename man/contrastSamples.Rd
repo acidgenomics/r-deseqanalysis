@@ -31,8 +31,13 @@ to the first argument in the \code{character} vector.}
 \itemize{
 \item \code{character}: Sample identifiers, corresponding to the column names
 of \code{DESeqDataSet}.
-\item \code{list}: Named list containing \code{"numerator"} and \code{"denominator"} of sample
-identifiers corresponding to column names of \code{DESeqDataSet}.
+\item \code{list}: Named list containing \code{"contrast"} and \code{"samples"} elements:
+\itemize{
+\item \code{"contrast"}: \code{character} vector containing metadata on \code{"factor"},
+\code{"numerator"}, and \code{"denominator"} contrast elements.
+\item \code{"samples"}: ``list\code{containing}"numerator"` and `"denominator"` of
+sample identifiers corresponding to column names of `DESeqDataSet`.
+}
 }
 }
 \description{
@@ -45,7 +50,7 @@ corresponding \code{DESeqResults} object. Note that this only works for simple
 comparisons.
 }
 \note{
-Updated 2021-08-02.
+Updated 2021-08-03.
 }
 \examples{
 data(deseq)
