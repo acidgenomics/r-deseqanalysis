@@ -79,6 +79,7 @@ Collate:
     'plotDEGStackedBar-methods.R'
     'plotDEGUpset-methods.R'
     'plotHeatmap-methods.R'
+    'plotLFC-methods.R'
     'plotMA-methods.R'
     'plotPCA-methods.R'
     'plotVolcano-methods.R'
