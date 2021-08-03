@@ -1,7 +1,3 @@
-## FIXME This needs to stash more of the contrast metadata here...
-
-
-
 #' @name contrastSamples
 #' @inherit AcidGenerics::contrastSamples
 #' @note Updated 2021-08-03.
