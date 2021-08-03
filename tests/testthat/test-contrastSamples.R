@@ -53,26 +53,31 @@ test_that("DESeqAnalysis : list", {
             quiet = FALSE
         ),
         expected = list(
-            "numerator" = c(
-                "sample07",
-                "sample08",
-                "sample09",
-                "sample10",
-                "sample11",
-                "sample12"
+            "contrast" = c(
+                "factor" = "condition",
+                "numerator" = "B",
+                "denominator" = "A"
             ),
-            "denominator" = c(
-                "sample01",
-                "sample02",
-                "sample03",
-                "sample04",
-                "sample05",
-                "sample06"
+            "samples" = list(
+                "numerator" = c(
+                    "sample07",
+                    "sample08",
+                    "sample09",
+                    "sample10",
+                    "sample11",
+                    "sample12"
+                ),
+                "denominator" = c(
+                    "sample01",
+                    "sample02",
+                    "sample03",
+                    "sample04",
+                    "sample05",
+                    "sample06"
+                )
             )
         )
     )
-
-
     expect_identical(
         object = contrastSamples(
             deseq, i = 2L,
@@ -80,21 +85,28 @@ test_that("DESeqAnalysis : list", {
             quiet = FALSE
         ),
         expected = list(
-            "numerator" = c(
-                "sample04",
-                "sample05",
-                "sample06",
-                "sample10",
-                "sample11",
-                "sample12"
+            "contrast" = c(
+                "factor" = "treatment",
+                "numerator" = "D",
+                "denominator" = "C"
             ),
-            "denominator" = c(
-                "sample01",
-                "sample02",
-                "sample03",
-                "sample07",
-                "sample08",
-                "sample09"
+            "samples" = list(
+                "numerator" = c(
+                    "sample04",
+                    "sample05",
+                    "sample06",
+                    "sample10",
+                    "sample11",
+                    "sample12"
+                ),
+                "denominator" = c(
+                    "sample01",
+                    "sample02",
+                    "sample03",
+                    "sample07",
+                    "sample08",
+                    "sample09"
+                )
             )
         )
     )
