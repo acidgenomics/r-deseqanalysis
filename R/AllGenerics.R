@@ -217,14 +217,12 @@ NULL
 
 
 
-## TODO Export this in next AcidGenerics update.
-## FIXME Use a different name here?
-#' @rdname plotContrast
+#' @rdname plotContrastScatter
 #' @export
 setGeneric(
-    name = "plotContrast",
+    name = "plotContrastScatter",
     def = function(object, ...) {
-        standardGeneric("plotContrast")
+        standardGeneric("plotContrastScatter")
     }
 )
 
