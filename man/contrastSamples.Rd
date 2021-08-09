@@ -7,7 +7,7 @@
 \usage{
 contrastSamples(object, ...)
 
-\S4method{contrastSamples}{DESeqAnalysis}(object, i, quiet = FALSE)
+\S4method{contrastSamples}{DESeqAnalysis}(object, i, quiet = FALSE, return = c("character", "list"))
 }
 \arguments{
 \item{object}{Object.}
@@ -21,11 +21,24 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 \item{quiet}{\code{logical(1)}.
 Perform command quietly, suppressing messages.}
 
+\item{return}{\code{character(1)}.
+Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
+to the first argument in the \code{character} vector.}
+
 \item{...}{Additional arguments.}
 }
 \value{
-\code{character}.
-Sample identifiers.
+\itemize{
+\item \code{character}: Sample identifiers, corresponding to the column names
+of \code{DESeqDataSet}.
+\item \code{list}: Named list containing \code{"contrast"} and \code{"samples"} elements:
+\itemize{
+\item \code{"contrast"}: \code{character} vector containing metadata on \code{"factor"},
+\code{"numerator"}, and \code{"denominator"} contrast elements.
+\item \code{"samples"}: ``list\code{containing}"numerator"` and `"denominator"` of
+sample identifiers corresponding to column names of `DESeqDataSet`.
+}
+}
 }
 \description{
 Samples corresponding to a differential expression contrast
@@ -37,16 +50,15 @@ corresponding \code{DESeqResults} object. Note that this only works for simple
 comparisons.
 }
 \note{
-Updated 2021-03-15.
-
-\strong{EXPERIMENTAL}. This approach will error intentionally for
-\code{DESeqResults} objects generated with complex contrasts (e.g. interaction
-effect or LRT). It may be removed in a future release if this approach is
-too error-prone.
+Updated 2021-08-03.
 }
 \examples{
 data(deseq)
 
 ## DESeqAnalysis ====
-contrastSamples(deseq, i = 1L)
+x <- contrastSamples(deseq, i = 1L, return = "list")
+print(x)
+
+x <- contrastSamples(deseq, i = 1L, return = "character")
+print(x)
 }
