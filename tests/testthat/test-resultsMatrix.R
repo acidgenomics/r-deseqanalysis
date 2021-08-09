@@ -24,7 +24,8 @@ test_that("Unshrunken values", {
 })
 
 test_that("value argument", {
-    for (value in eval(formals(`resultsMatrix,DESeqAnalysis`)[["value"]])) {
+    values <- setdiff(eval(formals(`resultsMatrix,DESeqAnalysis`)[["value"]])
+    for (value in values) {
         x <- resultsMatrix(deseq, value = value)
         expect_is(x, "matrix")
     }
