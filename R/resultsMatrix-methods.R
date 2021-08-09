@@ -12,8 +12,8 @@
 #'   - `log2FoldChange`: log2 fold change.\cr
 #'     This will return *shrunken* LFC values if they are defined.
 #'   - `stat`: Wald test statistic.
-#'   - `padj`: BH adjusted *P* value.
-#'   - `svalue`: s-value, when using apeglm (or ashr).
+#'   - `alpha`: Either (1) `padj`, the BH adjusted *P* value; or
+#'     (2) `svalue`, the s-value, when using apeglm (or ashr).
 #' @param rowData `logical(1)`.
 #'   Include row (gene) annotations, bound to the left side of the data frame.
 #' @param ... Additional arguments.
@@ -32,11 +32,13 @@ NULL
 
 
 
+## FIXME Need to dynamically switch for "svalue" here with lfcShrink...
+
 ## Updated 2021-08-09.
 `resultsMatrix,DESeqAnalysis` <-  # nolint
     function(
         object,
-        value = c("log2FoldChange", "stat", "padj", "svalue"),
+        value = c("log2FoldChange", "stat", "alpha"),
         rowData = FALSE
     ) {
         validObject(object)
@@ -49,10 +51,19 @@ NULL
             hasLength(results),
             hasValidNames(results)
         )
+        ## Ensure we dynamically handle "padj" or "svalue", when applicable.
+        value <- switch(
+            EXPR = value,
+            "alpha" = .alphaCol(results),
+            value
+        )
         list <- lapply(
             X = results,
             col = value,
-            FUN = function(data, col) data[[col]]
+            FUN = function(data, col) {
+                assert(isSubset(col, colnames(data)))
+                data[[col]]
+            }
         )
         mat <- matrix(
             data = unlist(list, recursive = FALSE, use.names = FALSE),
