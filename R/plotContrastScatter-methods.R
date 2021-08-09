@@ -5,8 +5,8 @@
 
 #' Plot differential expression contrast
 #'
-#' @name plotContrast
-#' @note Updated 2021-08-03.
+#' @name plotContrastScatter
+#' @note Updated 2021-08-09.
 #'
 #' @inheritParams params
 #'
@@ -20,8 +20,8 @@ NULL
 
 
 
-## Updated 2021-08-03.
-`plotContrast,DESeqAnalysis` <-
+## Updated 2021-08-09.
+`plotContrastScatter,DESeqAnalysis` <-
     function(
         object,
         i,
@@ -53,12 +53,12 @@ NULL
         ## FIXME Need to support.
         limits = list("x" = NULL, "y" = NULL),
         ## FIXME Need to support.
-        ## NOTE Consider reworking the NULL as TRUE here?
+        ## FIXME Ensure that these work here...need to update.
         labels = list(
-            "title" = NULL,
+            "title" = TRUE,
             "subtitle" = NULL,
-            "x" = NULL,  # FIXME Set `TRUE` or `"auto"` here?
-            "y" = NULL  # FIXME Set `TRUE` or `"auto"` here?
+            "x" = TRUE,
+            "y" = TRUE
         )
     ) {
         validObject(object)
@@ -203,10 +203,10 @@ NULL
 
 
 
-#' @rdname plotContrast
+#' @rdname plotContrastScatter
 #' @export
 setMethod(
-    f = "plotContrast",
+    f = "plotContrastScatter",
     signature = signature("DESeqAnalysis"),
-    definition = `plotContrast,DESeqAnalysis`
+    definition = `plotContrastScatter,DESeqAnalysis`
 )

@@ -33,7 +33,7 @@ plotVolcano(object, ...)
   pointSize = 2L,
   pointAlpha = 0.8,
   limits = list(x = NULL, y = c(1e-10, 1L)),
-  labels = list(title = NULL, subtitle = NULL),
+  labels = list(title = TRUE, subtitle = NULL),
   histograms = FALSE
 )
 }

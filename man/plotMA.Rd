@@ -35,7 +35,7 @@ plotMA(object, ...)
   pointSize = 2L,
   pointAlpha = 0.8,
   limits = list(x = NULL, y = NULL),
-  labels = list(title = NULL, subtitle = NULL)
+  labels = list(title = TRUE, subtitle = NULL)
 )
 }
 \arguments{
