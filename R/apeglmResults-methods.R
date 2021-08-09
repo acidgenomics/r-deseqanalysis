@@ -128,8 +128,6 @@ NULL
             identical(res[["baseMean"]], shrink[["baseMean"]]),
             !identical(res[["log2FoldChange"]], shrink[["log2FoldChange"]]),
             !identical(res[["stat"]], shrink[["stat"]]),
-            ## > identical(res[["pvalue"]], shrink[["pvalue"]]),
-            ## > identical(res[["padj"]], shrink[["padj"]]),
             identical(
                 x = metadata(res)[["alpha"]],
                 y = metadata(shrink)[["alpha"]]

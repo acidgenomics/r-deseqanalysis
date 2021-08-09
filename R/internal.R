@@ -7,7 +7,7 @@
 #'
 #' @return `character(1)`.
 .alphaCol <- function(object) {
-    assert(is(object, "DESeqResults"))
+    assert(is(object, "DataFrame"))
     idx <- na.omit(match(
         x = c("svalue", "padj"),
         table = colnames(object)
