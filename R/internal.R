@@ -1,3 +1,27 @@
+#' Alpha column
+#'
+#' e.g. P-value or s-value.
+#'
+#' @note Updated 2021-08-09.
+#' @noRd
+#'
+#' @return `character(1)`.
+.alphaCol <- function(object) {
+    assert(is(object, "DESeqResults"))
+    idx <- na.omit(match(
+        x = c("svalue", "padj"),
+        table = colnames(object)
+    ))
+    assert(
+        hasLength(idx),
+        msg = "Failed to match alpha column (e.g. 'padj')."
+    )
+    col <- colnames(object)[idx[[1L]]]
+    col
+}
+
+
+
 #' Prepare `DESeqResults` data for plot
 #'
 #' @details
