@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit AcidGenerics::plotVolcano
-#' @note Updated 2021-07-27.
+#' @note Updated 2021-08-09.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -111,7 +111,7 @@ NULL
 
 
 
-## Updated 2021-06-29.
+## Updated 2021-08-09.
 `plotVolcano,DESeqResults` <-  # nolint
     function(
         object,
@@ -132,12 +132,9 @@ NULL
             "x" = NULL,
             "y" = c(1e-10, 1L)
         ),
-        ## NOTE Consider reworking the NULL as TRUE here?
         labels = list(
             title = NULL,
-            subtitle = NULL,
-            x = "log2 fold change",
-            y = "-log10 adj p value"
+            subtitle = NULL
         ),
         histograms = FALSE
     ) {
@@ -297,6 +294,16 @@ NULL
             ) +
             guides(color = "none")
         ## Labels.
+        labels[["x"]] <- "log2 fold change"
+        labels[["y"]] <- paste(
+            "-log10",
+            switch(
+                EXPR = alphaCol,
+                "padj" = "adjusted p",
+                "svalue" = "s"
+            ),
+            "value"
+        )
         ## NOTE Consider using 'TRUE' here instead of 'NULL'.
         if (is.null(labels[["title"]])) {
             labels[["title"]] <- tryCatch(
@@ -315,6 +322,11 @@ NULL
                 lfcThreshold = lfcThreshold
             )
         }
+
+
+
+
+
         p <- p + do.call(what = labs, args = labels)
         if (isCharacter(pointColor)) {
             p <- p +
