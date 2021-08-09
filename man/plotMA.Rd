@@ -35,8 +35,7 @@ plotMA(object, ...)
   pointSize = 2L,
   pointAlpha = 0.8,
   limits = list(x = NULL, y = NULL),
-  labels = list(title = NULL, subtitle = NULL, x =
-    "mean expression across all samples", y = "log2 fold change")
+  labels = list(title = NULL, subtitle = NULL)
 )
 }
 \arguments{

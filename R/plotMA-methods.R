@@ -128,9 +128,7 @@ NULL
         ## NOTE Consider reworking the NULL as TRUE here?
         labels = list(
             title = NULL,
-            subtitle = NULL,
-            x = "mean expression across all samples",
-            y = "log2 fold change"
+            subtitle = NULL
         )
     ) {
         validObject(object)
@@ -289,6 +287,8 @@ NULL
             annotation_logticks(sides = "b") +
             guides(color = "none")
         ## Labels.
+        labels[["x"]] <- "mean expression across all samples"
+        labels[["y"]] <- "log2 fold change"
         ## NOTE Consider setting this to TRUE by default instead of NULL.
         if (is.null(labels[["title"]])) {
             labels[["title"]] <- tryCatch(

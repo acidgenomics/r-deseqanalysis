@@ -33,8 +33,7 @@ plotVolcano(object, ...)
   pointSize = 2L,
   pointAlpha = 0.8,
   limits = list(x = NULL, y = c(1e-10, 1L)),
-  labels = list(title = NULL, subtitle = NULL, x = "log2 fold change", y =
-    "-log10 adj p value"),
+  labels = list(title = NULL, subtitle = NULL),
   histograms = FALSE
 )
 }
@@ -105,7 +104,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2021-07-27.
+Updated 2021-08-09.
 }
 \examples{
 data(deseq)
