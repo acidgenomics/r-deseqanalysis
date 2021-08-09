@@ -217,6 +217,19 @@ NULL
 
 
 
+## TODO Export this in next AcidGenerics update.
+## FIXME Use a different name here?
+#' @rdname plotContrast
+#' @export
+setGeneric(
+    name = "plotContrast",
+    def = function(object, ...) {
+        standardGeneric("plotContrast")
+    }
+)
+
+
+
 #' @rdname plotCounts
 #' @name plotCounts
 #' @importFrom AcidGenerics plotCounts
@@ -282,6 +295,17 @@ NULL
 #' @usage plotQuantileHeatmap(object, ...)
 #' @export
 NULL
+
+
+
+#' @rdname plotLFC
+#' @export
+setGeneric(
+    name = "plotLFC",
+    def = function(object, ...) {
+        standardGeneric("plotLFC")
+    }
+)
 
 
 

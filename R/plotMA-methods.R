@@ -79,6 +79,7 @@ NULL
             )
         }
         if (isCharacter(genes) || isTRUE(isPositive(ntop))) {
+            ## FIXME Need to handle NA gene symbols here.
             dds <- convertGenesToSymbols(dds)
             rownames(res) <- rownames(dds)
         }
@@ -107,7 +108,7 @@ NULL
 
 
 
-## Updated 2021-06-29.
+## Updated 2021-08-09.
 `plotMA,DESeqResults` <-  # nolint
     function(
         object,
@@ -118,17 +119,16 @@ NULL
         genes = NULL,
         ntop = 0L,
         pointColor = c(
-            downregulated = AcidPlots::lightPalette[["purple"]],
-            upregulated = AcidPlots::lightPalette[["orange"]],
-            nonsignificant = AcidPlots::lightPalette[["gray"]]
+            "downregulated" = AcidPlots::lightPalette[["purple"]],
+            "upregulated" = AcidPlots::lightPalette[["orange"]],
+            "nonsignificant" = AcidPlots::lightPalette[["gray"]]
         ),
         pointSize = 2L,
         pointAlpha = 0.8,
         limits = list("x" = NULL, "y" = NULL),
-        ## NOTE Consider reworking the NULL as TRUE here?
         labels = list(
-            title = NULL,
-            subtitle = NULL
+            "title" = TRUE,
+            "subtitle" = NULL
         )
     ) {
         validObject(object)
@@ -148,9 +148,9 @@ NULL
         lfcShrinkType <- lfcShrinkType(object)
         assert(
             isAlpha(alphaThreshold),
-            isNumber(lfcThreshold),
             isNumber(baseMeanThreshold),
             isPositive(baseMeanThreshold),
+            isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
             isString(lfcShrinkType),
             isAny(genes, classes = c("character", "NULL")),
@@ -289,14 +289,12 @@ NULL
         ## Labels.
         labels[["x"]] <- "mean expression across all samples"
         labels[["y"]] <- "log2 fold change"
-        ## NOTE Consider setting this to TRUE by default instead of NULL.
-        if (is.null(labels[["title"]])) {
+        if (isTRUE(labels[["title"]])) {
             labels[["title"]] <- tryCatch(
                 expr = contrastName(object),
                 error = function(e) NULL
             )
         }
-        ## NOTE Consider setting this to TRUE by default instead of NULL.
         if (is.null(labels[["subtitle"]])) {
             labels[["subtitle"]] <- .thresholdLabel(
                 object = object,
@@ -309,7 +307,6 @@ NULL
         }
         p <- p + do.call(what = labs, args = labels)
         ## Color the significant points.
-        ## Note that we're using direction-specific coloring by default.
         if (isCharacter(pointColor)) {
             p <- p +
                 scale_color_manual(

@@ -83,6 +83,7 @@ NULL
             )
         }
         if (isCharacter(genes) || isTRUE(isPositive(ntop))) {
+            ## FIXME Need to handle NA gene symbols here.
             dds <- convertGenesToSymbols(dds)
             rownames(res) <- rownames(dds)
         }
@@ -122,9 +123,9 @@ NULL
         genes = NULL,
         ntop = 0L,
         pointColor = c(
-            downregulated = AcidPlots::lightPalette[["purple"]],
-            upregulated = AcidPlots::lightPalette[["orange"]],
-            nonsignificant = AcidPlots::lightPalette[["gray"]]
+            "downregulated" = AcidPlots::lightPalette[["purple"]],
+            "upregulated" = AcidPlots::lightPalette[["orange"]],
+            "nonsignificant" = AcidPlots::lightPalette[["gray"]]
         ),
         pointSize = 2L,
         pointAlpha = 0.8,
@@ -133,8 +134,8 @@ NULL
             "y" = c(1e-10, 1L)
         ),
         labels = list(
-            title = NULL,
-            subtitle = NULL
+            "title" = TRUE,
+            "subtitle" = NULL
         ),
         histograms = FALSE
     ) {
@@ -304,14 +305,12 @@ NULL
             ),
             "value"
         )
-        ## NOTE Consider using 'TRUE' here instead of 'NULL'.
-        if (is.null(labels[["title"]])) {
+        if (isTRUE(labels[["title"]])) {
             labels[["title"]] <- tryCatch(
                 expr = contrastName(object),
                 error = function(e) NULL
             )
         }
-        ## NOTE Consider using 'TRUE' here instead of 'NULL'.
         if (is.null(labels[["subtitle"]])) {
             labels[["subtitle"]] <- .thresholdLabel(
                 object = object,
@@ -322,11 +321,6 @@ NULL
                 lfcThreshold = lfcThreshold
             )
         }
-
-
-
-
-
         p <- p + do.call(what = labs, args = labels)
         if (isCharacter(pointColor)) {
             p <- p +
