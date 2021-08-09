@@ -97,8 +97,6 @@ setMethod(
     definition = `contrastName,DESeqAnalysis`
 )
 
-
-
 #' @rdname contrastName
 #' @export
 setMethod(

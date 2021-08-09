@@ -155,8 +155,6 @@ setMethod(
     definition = `resultsTables,DESeqAnalysis`
 )
 
-
-
 #' @rdname resultsTables
 #' @export
 setMethod(

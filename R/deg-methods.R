@@ -143,8 +143,6 @@ setMethod(
     definition = `deg,DESeqAnalysis`
 )
 
-
-
 #' @rdname deg
 #' @export
 setMethod(

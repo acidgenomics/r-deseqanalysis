@@ -72,8 +72,6 @@ setMethod(
     definition = `lfcShrink,DESeqDataSet`
 )
 
-
-
 #' @rdname lfcShrink
 #' @export
 setMethod(
@@ -81,8 +79,6 @@ setMethod(
     signature = signature("DESeqAnalysis"),
     definition = `lfcShrink,DESeqAnalysis`
 )
-
-
 
 #' @rdname lfcShrink
 #' @export
@@ -104,8 +100,6 @@ setReplaceMethod(
     ),
     definition = `lfcShrink<-,DESeqAnalysis,logical`
 )
-
-
 
 #' @rdname lfcShrink
 #' @export

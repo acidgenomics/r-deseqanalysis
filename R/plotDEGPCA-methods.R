@@ -140,8 +140,6 @@ setMethod(
     definition = `plotDEGPCA,DESeqAnalysis`
 )
 
-
-
 #' @rdname plotDEGPCA
 #' @export
 setMethod(

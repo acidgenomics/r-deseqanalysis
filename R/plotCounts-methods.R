@@ -100,8 +100,6 @@ setMethod(
     definition = `plotCounts,DESeqAnalysis`
 )
 
-
-
 #' @describeIn plotCounts Plot size factor (i.e. library size) adjusted
 #'   normalized counts. Arguments pass through to `SummarizedExperiment` method
 #'   defined in AcidPlots package.
@@ -111,8 +109,6 @@ setMethod(
     signature = signature("DESeqDataSet"),
     definition = `plotCounts,DESeqDataSet`
 )
-
-
 
 #' @describeIn plotCounts Plot log2 variance-stabilized transformed counts.
 #' @export

@@ -88,8 +88,6 @@ setMethod(
     definition = `correlation,DESeqResults,DESeqResults`
 )
 
-
-
 #' @rdname correlation
 #' @export
 setMethod(

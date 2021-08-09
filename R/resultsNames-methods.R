@@ -77,8 +77,6 @@ setMethod(
     definition = `resultsNames,DESeqAnalysis`
 )
 
-
-
 #' @rdname resultsNames
 #' @export
 setMethod(
@@ -87,8 +85,6 @@ setMethod(
     definition = `resultsNames,DESeqAnalysisList`
 )
 
-
-
 #' @rdname resultsNames
 #' @export
 setMethod(
@@ -96,8 +92,6 @@ setMethod(
     signature = signature("DESeqDataSet"),
     definition = `resultsNames,DESeqDataSet`
 )
-
-
 
 #' @rdname resultsNames
 #' @export
@@ -119,8 +113,6 @@ setReplaceMethod(
     ),
     definition = `resultsNames<-,DESeqAnalysis,character`
 )
-
-
 
 #' @rdname resultsNames
 #' @export

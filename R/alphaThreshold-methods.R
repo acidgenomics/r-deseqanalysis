@@ -135,8 +135,6 @@ setMethod(
     definition = `alphaThreshold,DESeqAnalysis`
 )
 
-
-
 #' @rdname alphaThreshold
 #' @export
 setMethod(
@@ -145,8 +143,6 @@ setMethod(
     definition = `alphaThreshold,DESeqAnalysisList`
 )
 
-
-
 #' @rdname alphaThreshold
 #' @export
 setMethod(
@@ -154,8 +150,6 @@ setMethod(
     signature = signature("DESeqResults"),
     definition = `alphaThreshold,DESeqResults`
 )
-
-
 
 #' @rdname alphaThreshold
 #' @export
@@ -178,8 +172,6 @@ setReplaceMethod(
     definition = `alphaThreshold<-,DESeqAnalysis,numeric`
 )
 
-
-
 #' @rdname alphaThreshold
 #' @export
 setReplaceMethod(
@@ -190,8 +182,6 @@ setReplaceMethod(
     ),
     definition = `alphaThreshold<-,DESeqAnalysis,NULL`
 )
-
-
 
 #' @rdname alphaThreshold
 #' @export
@@ -204,8 +194,6 @@ setReplaceMethod(
     definition = `alphaThreshold<-,DESeqAnalysisList,numeric`
 )
 
-
-
 #' @rdname alphaThreshold
 #' @export
 setReplaceMethod(
@@ -216,8 +204,6 @@ setReplaceMethod(
     ),
     definition = `alphaThreshold<-,DESeqAnalysisList,NULL`
 )
-
-
 
 #' @rdname alphaThreshold
 #' @export
@@ -230,11 +216,7 @@ setReplaceMethod(
     definition = `alphaThreshold<-,DESeqResults,numeric`
 )
 
-
-
 ## Intentionally not allowing NULL method for DESeqResults here.
-
-
 
 #' @rdname alphaThreshold
 #' @export
@@ -246,8 +228,6 @@ setReplaceMethod(
     ),
     definition = `alphaThreshold<-,DESeqResultsList,numeric`
 )
-
-
 
 #' @rdname alphaThreshold
 #' @export

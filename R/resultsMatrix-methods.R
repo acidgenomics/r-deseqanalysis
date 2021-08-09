@@ -145,8 +145,6 @@ setMethod(
     definition = `resultsMatrix,DESeqAnalysis`
 )
 
-
-
 #' @describeIn resultsMatrix Loop across the nested `DESeqAnalysis` objects and
 #'   aggregate the corresponding result matrices. Note that the analysis names
 #'   are automatically prefixed to the column names.

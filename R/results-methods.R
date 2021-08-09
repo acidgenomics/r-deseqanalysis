@@ -102,8 +102,6 @@ setMethod(
     definition = `results,DESeqAnalysis`
 )
 
-
-
 #' @describeIn results Arguments pass through to `DESeq2::results()`.
 #' @export
 setMethod(

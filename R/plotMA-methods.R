@@ -365,8 +365,6 @@ setMethod(
     definition = `plotMA,DESeqAnalysis`
 )
 
-
-
 #' @rdname plotMA
 #' @export
 setMethod(

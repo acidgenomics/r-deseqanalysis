@@ -67,8 +67,6 @@ setReplaceMethod(
     definition = `interestingGroups<-,DESeqAnalysis,character`
 )
 
-
-
 #' @rdname interestingGroups
 #' @export
 setReplaceMethod(

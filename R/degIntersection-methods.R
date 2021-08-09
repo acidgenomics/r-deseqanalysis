@@ -193,8 +193,6 @@ setMethod(
     definition = `degIntersection,DESeqAnalysis`
 )
 
-
-
 #' @rdname degIntersection
 #' @export
 setMethod(
@@ -202,8 +200,6 @@ setMethod(
     signature = signature("DESeqAnalysisList"),
     definition = `degIntersection,DESeqAnalysisList`
 )
-
-
 
 #' @rdname degIntersection
 #' @export
