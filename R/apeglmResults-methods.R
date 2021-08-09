@@ -73,7 +73,7 @@ NULL
 
 ## Useful for avoiding this issue:
 ## type='apeglm' shrinkage only for use with 'coef'
-## Updated 2021-08-02.
+## Updated 2021-08-09.
 `apeglmResults,DESeqDataSet` <-  # nolint
     function(
             object,
@@ -113,6 +113,11 @@ NULL
                 res = res,
                 type = "apeglm",
                 lfcThreshold = lfcThreshold,
+                svalue = FALSE,
+                returnList = FALSE,
+                format = "DataFrame",
+                apeAdapt = TRUE,
+                apeMethod = "nbinomCR",
                 parallel = parallel
             )
         })
