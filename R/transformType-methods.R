@@ -58,8 +58,6 @@ setMethod(
     definition = `transformType,DESeqAnalysis`
 )
 
-
-
 #' @rdname transformType
 #' @export
 setMethod(
@@ -67,8 +65,6 @@ setMethod(
     signature = signature("DESeqAnalysisList"),
     definition = `transformType,DESeqAnalysisList`
 )
-
-
 
 #' @rdname transformType
 #' @export

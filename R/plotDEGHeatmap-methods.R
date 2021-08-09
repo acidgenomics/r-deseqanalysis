@@ -158,8 +158,6 @@ setMethod(
     definition = `plotDEGHeatmap,DESeqAnalysis`
 )
 
-
-
 #' @describeIn plotDEGHeatmap Passes to `plotHeatmap()` `SummarizedExperiment`
 #'   method defined in AcidPlots.
 #' @export

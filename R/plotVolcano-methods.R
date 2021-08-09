@@ -447,8 +447,6 @@ setMethod(
     definition = `plotVolcano,DESeqAnalysis`
 )
 
-
-
 #' @rdname plotVolcano
 #' @export
 setMethod(

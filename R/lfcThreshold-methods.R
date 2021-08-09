@@ -123,8 +123,6 @@ setMethod(
     definition = `lfcThreshold,DESeqAnalysis`
 )
 
-
-
 #' @rdname lfcThreshold
 #' @export
 setMethod(
@@ -133,8 +131,6 @@ setMethod(
     definition = `lfcThreshold,DESeqAnalysisList`
 )
 
-
-
 #' @rdname lfcThreshold
 #' @export
 setMethod(
@@ -142,8 +138,6 @@ setMethod(
     signature = signature("DESeqResults"),
     definition = `lfcThreshold,DESeqResults`
 )
-
-
 
 #' @rdname lfcThreshold
 #' @export
@@ -166,8 +160,6 @@ setReplaceMethod(
     definition = `lfcThreshold<-,DESeqAnalysis,numeric`
 )
 
-
-
 #' @rdname lfcThreshold
 #' @export
 setReplaceMethod(
@@ -178,8 +170,6 @@ setReplaceMethod(
     ),
     definition = `lfcThreshold<-,DESeqAnalysis,NULL`
 )
-
-
 
 #' @rdname lfcThreshold
 #' @export
@@ -192,8 +182,6 @@ setReplaceMethod(
     definition = `lfcThreshold<-,DESeqAnalysisList,numeric`
 )
 
-
-
 #' @rdname lfcThreshold
 #' @export
 setReplaceMethod(
@@ -205,8 +193,6 @@ setReplaceMethod(
     definition = `lfcThreshold<-,DESeqAnalysisList,NULL`
 )
 
-
-
 #' @rdname lfcThreshold
 #' @export
 setReplaceMethod(
@@ -217,8 +203,6 @@ setReplaceMethod(
     ),
     definition = `lfcThreshold<-,DESeqResults,numeric`
 )
-
-
 
 #' @rdname lfcThreshold
 #' @export

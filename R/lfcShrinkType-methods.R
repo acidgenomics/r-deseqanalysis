@@ -68,8 +68,6 @@ setMethod(
     definition = `lfcShrinkType,DESeqAnalysis`
 )
 
-
-
 #' @rdname lfcShrinkType
 #' @export
 setMethod(
@@ -78,8 +76,6 @@ setMethod(
     definition = `lfcShrinkType,DESeqAnalysisList`
 )
 
-
-
 #' @rdname lfcShrinkType
 #' @export
 setMethod(
@@ -87,8 +83,6 @@ setMethod(
     signature = signature("DESeqResults"),
     definition = `lfcShrinkType,DESeqResults`
 )
-
-
 
 #' @rdname lfcShrinkType
 #' @export

@@ -120,8 +120,6 @@ setMethod(
     definition = `alphaSummary,DESeqAnalysis`
 )
 
-
-
 #' @rdname alphaSummary
 #' @export
 setMethod(

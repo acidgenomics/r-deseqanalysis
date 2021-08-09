@@ -50,8 +50,6 @@ setMethod(
     definition = `plotPCA,DESeqAnalysis`
 )
 
-
-
 #' @describeIn plotPCA Method intentionally errors. Use `DESeqAnalysis` or
 #'   `DESeqTransform` methods instead.
 #' @export
@@ -60,8 +58,6 @@ setMethod(
     signature = signature("DESeqDataSet"),
     definition = `plotPCA,DESeqDataSet`
 )
-
-
 
 #' @describeIn plotPCA Passes to `SummarizedExperiment` method defined in
 #'   AcidPlots package. Uses values defined in

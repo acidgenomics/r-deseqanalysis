@@ -194,8 +194,6 @@ setMethod(
     definition = `export,DESeqAnalysis`
 )
 
-
-
 #' @rdname export
 #' @export
 setMethod(

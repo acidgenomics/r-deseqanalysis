@@ -207,8 +207,6 @@ setMethod(
     definition = `plotBaseMean,DESeqAnalysis`
 )
 
-
-
 #' @describeIn plotBaseMean Generates row means of normalized counts.
 #'   This value corresponds to the `baseMean` column of `DESeqResults`.
 #'   Passes to `numeric` method.
@@ -219,8 +217,6 @@ setMethod(
     definition = `plotBaseMean,DESeqDataSet`
 )
 
-
-
 #' @describeIn plotBaseMean Uses `baseMean` column of results.
 #'   Passes to `numeric` method.
 #' @export
@@ -229,8 +225,6 @@ setMethod(
     signature = signature("DESeqResults"),
     definition = `plotBaseMean,DESeqResults`
 )
-
-
 
 #' @rdname plotBaseMean
 #' @export

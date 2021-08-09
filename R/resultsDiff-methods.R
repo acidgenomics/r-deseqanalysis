@@ -103,8 +103,6 @@ setMethod(
     definition = `resultsDiff,DESeqAnalysis,missing`
 )
 
-
-
 #' @rdname resultsDiff
 #' @export
 setMethod(

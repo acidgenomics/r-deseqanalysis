@@ -121,8 +121,6 @@ setMethod(
     definition = `baseMeanThreshold,DESeqAnalysis`
 )
 
-
-
 #' @rdname baseMeanThreshold
 #' @export
 setMethod(
@@ -131,8 +129,6 @@ setMethod(
     definition = `baseMeanThreshold,DESeqAnalysisList`
 )
 
-
-
 #' @rdname baseMeanThreshold
 #' @export
 setMethod(
@@ -140,8 +136,6 @@ setMethod(
     signature = signature("DESeqResults"),
     definition = `baseMeanThreshold,DESeqResults`
 )
-
-
 
 #' @rdname baseMeanThreshold
 #' @export
@@ -164,8 +158,6 @@ setReplaceMethod(
     definition = `baseMeanThreshold<-,DESeqAnalysis,numeric`
 )
 
-
-
 #' @rdname baseMeanThreshold
 #' @export
 setReplaceMethod(
@@ -176,8 +168,6 @@ setReplaceMethod(
     ),
     definition = `baseMeanThreshold<-,DESeqAnalysis,NULL`
 )
-
-
 
 #' @rdname baseMeanThreshold
 #' @export
@@ -190,8 +180,6 @@ setReplaceMethod(
     definition = `baseMeanThreshold<-,DESeqAnalysisList,numeric`
 )
 
-
-
 #' @rdname baseMeanThreshold
 #' @export
 setReplaceMethod(
@@ -202,8 +190,6 @@ setReplaceMethod(
     ),
     definition = `baseMeanThreshold<-,DESeqAnalysisList,NULL`
 )
-
-
 
 #' @rdname baseMeanThreshold
 #' @export
@@ -216,8 +202,6 @@ setReplaceMethod(
     definition = `baseMeanThreshold<-,DESeqResults,numeric`
 )
 
-
-
 #' @rdname baseMeanThreshold
 #' @export
 setReplaceMethod(
@@ -229,8 +213,6 @@ setReplaceMethod(
     definition = `baseMeanThreshold<-,DESeqResults,NULL`
 )
 
-
-
 #' @rdname baseMeanThreshold
 #' @export
 setReplaceMethod(
@@ -241,8 +223,6 @@ setReplaceMethod(
     ),
     definition = `baseMeanThreshold<-,DESeqResultsList,numeric`
 )
-
-
 
 #' @rdname baseMeanThreshold
 #' @export

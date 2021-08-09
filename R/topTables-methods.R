@@ -195,8 +195,6 @@ setMethod(
     definition = `topTables,DESeqAnalysis`
 )
 
-
-
 #' @rdname topTables
 #' @export
 setMethod(
@@ -204,8 +202,6 @@ setMethod(
     signature = signature("DESeqResults"),
     definition = `topTables,DESeqResults`
 )
-
-
 
 #' @describeIn topTables Legacy support for `tbl_df` list returned from
 #'   `resultsTables()`. This method is still supported because it is used in the
