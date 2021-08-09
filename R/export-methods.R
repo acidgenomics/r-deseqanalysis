@@ -20,7 +20,7 @@ NULL
 
 
 
-## Updated 2019-11-12.
+## Updated 2021-08-09.
 .exportResultsMatrices <- function(object, dir, compress) {
     assert(
         is(object, "DESeqAnalysis"),
@@ -32,6 +32,15 @@ NULL
         FUN = function(value) {
             resultsMatrix(object, value = value, rowData = TRUE)
         }
+    )
+    ## Ensure we dynamically remap "alpha" back to "padj" or "svalue".
+    values <- vapply(
+        X = list,
+        FUN = function(x) {
+            metadata(x)[["DESeqAnalysis"]][["value"]]
+        },
+        FUN.VALUE = character(1L),
+        USE.NAMES = FALSE
     )
     names(list) <- values
     files <- file.path(dir, paste0(values, ".csv"))

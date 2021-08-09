@@ -32,8 +32,6 @@ NULL
 
 
 
-## FIXME Need to dynamically switch for "svalue" here with lfcShrink...
-
 ## Updated 2021-08-09.
 `resultsMatrix,DESeqAnalysis` <-  # nolint
     function(
@@ -54,7 +52,7 @@ NULL
         ## Ensure we dynamically handle "padj" or "svalue", when applicable.
         value <- switch(
             EXPR = value,
-            "alpha" = .alphaCol(results),
+            "alpha" = .alphaCol(results[[1L]]),
             value
         )
         list <- lapply(

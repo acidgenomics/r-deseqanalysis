@@ -14,70 +14,70 @@ test_that("DESeqAnalysis", {
         object = x,
         expected = list(
             data = list(
-                assays = list(
-                    counts = file.path(
+                "assays" = list(
+                    "counts" = file.path(
                         prefix,
                         "data",
                         "assays",
                         "counts.csv.gz"
                     ),
-                    normalized = file.path(
+                    "normalized" = file.path(
                         prefix,
                         "data",
                         "assays",
                         "normalized.csv.gz"
                     ),
-                    fpkm = file.path(
+                    "fpkm" = file.path(
                         prefix,
                         "data",
                         "assays",
                         "fpkm.csv.gz"
                     )
                 ),
-                colData = file.path(prefix, "data", "colData.csv.gz"),
-                rowData = file.path(prefix, "data", "rowData.csv.gz")
+                "colData" = file.path(prefix, "data", "colData.csv.gz"),
+                "rowData" = file.path(prefix, "data", "rowData.csv.gz")
             ),
-            transform = list(
-                assays = list(
-                    assay = file.path(
+            "transform" = list(
+                "assays" = list(
+                    "assay" = file.path(
                         prefix,
                         "transform",
                         "assays",
                         "assay.csv.gz"
                     )
                 ),
-                colData = file.path(prefix, "transform", "colData.csv.gz"),
-                rowData = file.path(prefix, "transform", "rowData.csv.gz")
+                "colData" = file.path(prefix, "transform", "colData.csv.gz"),
+                "rowData" = file.path(prefix, "transform", "rowData.csv.gz")
             ),
-            resultsTables = list(
-                condition_B_vs_A = c(
-                    all = file.path(
+            "resultsTables" = list(
+                "condition_B_vs_A" = c(
+                    "all" = file.path(
                         resTblPrefix, "condition_B_vs_A", "all.csv.gz"
                     ),
-                    up = file.path(
+                    "up" = file.path(
                         resTblPrefix, "condition_B_vs_A", "up.csv.gz"
                     ),
-                    down = file.path(
+                    "down" = file.path(
                         resTblPrefix, "condition_B_vs_A", "down.csv.gz"
                     ),
-                    both = file.path(
+                    "both" = file.path(
                         resTblPrefix, "condition_B_vs_A", "both.csv.gz"
                     )
                 ),
-                treatment_D_vs_C = c(
-                    all = file.path(
+                "treatment_D_vs_C" = c(
+                    "all" = file.path(
                         resTblPrefix, "treatment_D_vs_C", "all.csv.gz"
                     )
                 )
             ),
-            resultsMatrices = c(
-                log2FoldChange = file.path(
+            "resultsMatrices" = c(
+                "log2FoldChange" = file.path(
                     resMatPrefix, "log2FoldChange.csv.gz"
                 ),
-                stat = file.path(
+                "stat" = file.path(
                     resMatPrefix, "stat.csv.gz"
                 ),
-                padj = file.path(
+                "padj" = file.path(
                     resMatPrefix, "padj.csv.gz"
                 )
             )
