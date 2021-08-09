@@ -1,6 +1,6 @@
 #' @name deg
 #' @inherit AcidGenerics::deg
-#' @note Updated 2020-08-05.
+#' @note Updated 2020-08-09.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -35,7 +35,7 @@ NULL
 ## Note that we're not sorting the identifiers here by LFC or P value.
 ## It's just performing a simple subset to get the identifiers as a character.
 ##
-## Updated 2021-06-29.
+## Updated 2021-08-09.
 `deg,DESeqResults` <-  # nolint
     function(
         object,
@@ -67,7 +67,7 @@ NULL
         direction <- match.arg(direction)
         data <- as(object, "DataFrame")
         ## Define symbols to use in filtering steps below.
-        alphaCol <- "padj"
+        alphaCol <- .alphaCol(object)
         lfcCol <- "log2FoldChange"
         baseMeanCol <- "baseMean"
         cols <- c(alphaCol, baseMeanCol, lfcCol)

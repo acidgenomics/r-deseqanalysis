@@ -10,13 +10,13 @@ resultsMatrix(object, ...)
 
 \S4method{resultsMatrix}{DESeqAnalysis}(
   object,
-  value = c("log2FoldChange", "stat", "padj"),
+  value = c("log2FoldChange", "stat", "padj", "svalue"),
   rowData = FALSE
 )
 
 \S4method{resultsMatrix}{DESeqAnalysisList}(
   object,
-  value = c("log2FoldChange", "stat", "padj"),
+  value = c("log2FoldChange", "stat", "padj", "svalue"),
   rowData = FALSE
 )
 }
@@ -30,6 +30,7 @@ Value type to return. Corresponds to supported \code{DESeqResults} column:
 This will return \emph{shrunken} LFC values if they are defined.
 \item \code{stat}: Wald test statistic.
 \item \code{padj}: BH adjusted \emph{P} value.
+\item \code{svalue}: s-value, when using apeglm (or ashr).
 }}
 
 \item{rowData}{\code{logical(1)}.

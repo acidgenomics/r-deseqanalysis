@@ -1,6 +1,6 @@
 #' @name topTables
 #' @inherit AcidGenerics::topTables
-#' @note Updated 2021-02-10.
+#' @note Updated 2021-08-09.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -64,7 +64,7 @@ NULL
 
 
 
-## Updated 2019-08-20.
+## Updated 2021-08-09.
 .topTable <-  # nolint
     function(object, n = 10L) {
         assert(
@@ -75,23 +75,13 @@ NULL
         ## Ensure columns are in camel case.
         object <- camelCase(object, strict = TRUE)
         ## Select minimal columns of interest.
-        required <- c(
-            "baseMean",
-            "log2FoldChange",
-            "padj"
-        )
+        alphaCol <- .alphaCol(object)
+        required <- c("baseMean", "log2FoldChange", alphaCol)
         assert(isSubset(required, colnames(object)))
         ## Also include optional informative columns.
         ## Use of `broadClass` is cleaner than `biotype` here.
-        optional <- c(
-            "broadClass",
-            "geneName",
-            "description"
-        )
-        keep <- intersect(
-            x = c(required, optional),
-            y = colnames(object)
-        )
+        optional <- c("broadClass", "geneName", "description")
+        keep <- intersect(x = c(required, optional), y = colnames(object))
         object <- object[, keep, drop = FALSE]
         ## Get the top rows.
         object <- head(object, n = n)
@@ -117,8 +107,8 @@ NULL
             digits = 3L,
             scientific = FALSE
         )
-        object[["padj"]] <- format(
-            x = object[["padj"]],
+        object[[alphaCol]] <- format(
+            x = object[[alphaCol]],
             digits = 3L,
             scientific = TRUE
         )
@@ -172,16 +162,12 @@ NULL
 
 
 ## This is used in bcbioRNASeq F1000 paper.
-## Updated 2019-09-17.
+## Updated 2021-08-09.
 `topTables,list` <-  # nolint
     function(object, n = 10L, contrast = NULL) {
         assert(
             isSubset(c("down", "up"), names(object)),
-            is(object[[1L]], "tbl_df"),
-            isSubset(
-                x = c("rowname", "baseMean", "log2FoldChange", "padj"),
-                y = colnames(object[[1L]])
-            )
+            is(object[[1L]], "tbl_df")
         )
         ## Coerce tbl_df list to DataFrameList.
         list <- DataFrameList(lapply(

@@ -13,6 +13,7 @@
 #'     This will return *shrunken* LFC values if they are defined.
 #'   - `stat`: Wald test statistic.
 #'   - `padj`: BH adjusted *P* value.
+#'   - `svalue`: s-value, when using apeglm (or ashr).
 #' @param rowData `logical(1)`.
 #'   Include row (gene) annotations, bound to the left side of the data frame.
 #' @param ... Additional arguments.
@@ -31,11 +32,11 @@ NULL
 
 
 
-## Updated 2021-03-15.
+## Updated 2021-08-09.
 `resultsMatrix,DESeqAnalysis` <-  # nolint
     function(
         object,
-        value = c("log2FoldChange", "stat", "padj"),
+        value = c("log2FoldChange", "stat", "padj", "svalue"),
         rowData = FALSE
     ) {
         validObject(object)
