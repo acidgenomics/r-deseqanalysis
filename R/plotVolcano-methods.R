@@ -408,24 +408,12 @@ NULL
                     axis.text.y = element_blank(),
                     axis.ticks.y = element_blank()
                 )
-            ## Coordinates are relative to lower left corner.
-            ## FIXME Need to rework this using patchwork approach.
-            ggdraw() +
-                draw_plot(
-                    plot = p,
-                    x = 0L, y = 0.2,
-                    width = 1L, height = 0.8
-                ) +
-                draw_plot(
-                    plot = lfcHist,
-                    x = 0L, y = 0L,
-                    width = 0.5, height = 0.2
-                ) +
-                draw_plot(
-                    plot = pvalueHist,
-                    x = 0.5, y = 0L,
-                    width = 0.5, height = 0.2
-                )
+            wrap_plots(
+                list(p, lfcHist, pvalueHist),
+                ## Alternatively can use `area()` here.
+                design = paste("AA", "BC", sep = "\n"),
+                heights = c(0.75, 0.25)
+            )
         } else {
             p
         }
