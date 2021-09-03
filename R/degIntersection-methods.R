@@ -144,7 +144,7 @@ formals(`degIntersection,DESeqAnalysis`)[names(.args)] <- .args
         assert(hasNames(x))
         if (any(duplicated(names(x)))) {
             dupes <- names(x)[duplicated(names(x))]
-            stop(sprintf(
+            abort(sprintf(
                 "%d duplicate %s: %s.",
                 length(dupes),
                 ngettext(
@@ -152,7 +152,7 @@ formals(`degIntersection,DESeqAnalysis`)[names(.args)] <- .args
                     msg1 = "contrast",
                     msg2 = "contrasts"
                 ),
-                toString(dupes, width = 200L)
+                toInlineString(dupes, n = 5L)
             ))
         }
         mat <- intersectionMatrix(x)

@@ -113,9 +113,9 @@ NULL
         if (isFALSE(quiet)) {
             dl(c(
                 "Numerator samples" =
-                    toString(numeratorSamples, width = 200L),
+                    toInlineString(numeratorSamples, n = 5L),
                 "Denominator samples" =
-                    toString(denominatorSamples, width = 200L)
+                    toInlineString(denominatorSamples, n = 5L)
             ))
         }
         switch(
