@@ -213,7 +213,7 @@ setValidity(
         if (!all(ok)) {
             return(sprintf(
                 "Row names mismatch in: %s.",
-                toString(names(ok)[!ok], width = 200L)
+                toInlineString(names(ok)[!ok], n = 5L)
             ))
         }
         TRUE
@@ -275,7 +275,7 @@ setValidity(
         if (!all(ok)) {
             return(sprintf(
                 "Row names mismatch in: %s.",
-                toString(names(ok)[!ok], width = 200L)
+                toInlineString(names(ok)[!ok], n = 5L)
             ))
         }
         TRUE
