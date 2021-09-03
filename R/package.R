@@ -1,3 +1,9 @@
+## FIXME Need to rework grid approach:
+##       draw_plot, ggraw
+##       Not using these any more, in favor of patchwork.
+
+
+
 #' DESeqAnalysis
 #'
 #' Toolkit for performing differential expression with
@@ -16,16 +22,17 @@
 #' @importFrom AcidPlots !! acid_coord_flip acid_geom_label_repel draw_plot
 #'   ggdraw matchLabels plotHeatmap pretty_breaks scale_color_synesthesia_d
 #'   plotCounts plotPCA plotUpset sym
-#' @importFrom basejump DataFrame DataFrameList Gene2Symbol SimpleList alert
-#'   alertInfo alertWarning as.data.frame as_tibble assays assays<- autopadZeros
-#'   camelCase capture.output cbind colData colData<- complete.cases
-#'   convertGenesToSymbols convertSampleIDsToNames cor decode dl do.call
-#'   droplevels formalsList getS3method head import initDir interestingGroups<-
-#'   intersectionMatrix leftJoin makeNames mapGenesToSymbols markdownHeader
-#'   markdownList mcols mcols<- melt metadata metadata<- metadata2 metadata2<-
-#'   model.matrix na.omit packageName packageVersion printString realpath
-#'   relevel removeNA requireNamespaces rowData showSlotInfo snakeCase
-#'   standardizeCall str_locate_all str_match str_trunc
+#' @importFrom basejump DataFrame DataFrameList Gene2Symbol SimpleList abort
+#'   alert alertInfo alertWarning as.data.frame as_tibble assays assays<-
+#'   autopadZeros camelCase capture.output cbind colData colData<-
+#'   complete.cases convertGenesToSymbols convertSampleIDsToNames cor decode dl
+#'   do.call droplevels formalsList getS3method head import initDir
+#'   interestingGroups<- intersectionMatrix leftJoin makeNames mapGenesToSymbols
+#'   markdownHeader markdownList mcols mcols<- melt metadata metadata<-
+#'   metadata2 metadata2<- model.matrix na.omit packageName packageVersion
+#'   printString realpath relevel removeNA requireNamespaces rowData
+#'   showSlotInfo snakeCase standardizeCall str_locate_all str_match str_trunc
+#'   toInlineString
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_bar
 #'   geom_density geom_hline geom_point geom_text geom_vline ggplot guides labs
 #'   position_stack scale_color_manual scale_x_continuous scale_y_continuous
