@@ -184,7 +184,7 @@
 .ddsMsg <- function() {
     alertInfo(sprintf(
         "Generating DESeqDataSet with DESeq2 %s.",
-        packageVersion("DESeq2")
+        as.character(packageVersion("DESeq2"))
     ))
 }
 
@@ -263,12 +263,16 @@
         },
         FUN.VALUE = logical(1L)
     )
-    if (!any(keep)) {
-        stop(
-            "No suitable row annotations detected.\n",
-            "Check 'rowData()' of DESeqDataSet."
+    asset(
+        any(keep),
+        msg = sprintf(
+            fmt = paste0(
+                "No suitable row annotations detected.\n",
+                "Check '%s' of %s."
+            ),
+            "rowData()", "DESeqDataSet"
         )
-    }
+    )
     rowData <- rowData[, keep, drop = FALSE]
     ## Drop any remaining blacklisted columns. These columsn aren't useful in
     ## the downstream export to CSV format.

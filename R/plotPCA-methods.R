@@ -27,7 +27,10 @@ NULL
 ## Updated 2021-03-15.
 `plotPCA,DESeqDataSet` <-  # nolint
     function(object, ...) {
-        stop("Use 'DESeqTransform' object instead of 'DESeqDataSet'.")
+        abort(sprintf(
+            "Use {.cls %s} object instead of {.cls %s}.",
+            "DESeqTransform", "DESeqDataSet"
+        ))
     }
 
 

@@ -43,10 +43,13 @@ matchMetadataToFiles <- function(metadata, files) {
     assert(areSameLength(metaSampleNames, fileSampleNames))
     # Currently requiring that the user pass in tximport-style quant files.
     if (!areDisjointSets(fileSampleNames, ".")) {
-        stop(
-            "Failed to detect sample name from quant file.\n",
-            "Example: 'salmon/sample-1/quant.sf'"
-        )
+        abort(sprintf(
+            fmt = paste0(
+                "Failed to detect sample name from quant file.\n",
+                "Example: {.code %s}."
+            ),
+            "salmon/sample-1/quant.sf"
+        ))
     }
     idx <- match(
         x = snakeCase(metaSampleNames),
@@ -66,7 +69,7 @@ matchMetadataToFiles <- function(metadata, files) {
     if (!identical(anyNA(map, recursive = TRUE), FALSE)) {
         fail <- !complete.cases(map)
         fail <- map[fail, , drop = FALSE]
-        stop("Match failure:\n", printString(fail))
+        abort(sprintf("Match failure:\n%s", printString(fail)))
     }
     assert(identical(
         x = as.character(metadata[[1L]]),

@@ -39,12 +39,16 @@ NULL
             isTRUE(lfcShrink) &&
             !hasLength(slot(object, name = "lfcShrink"))
         ) {
-            stop(
-                "Shrunken LFC values were requested, ",
-                "but object does not contain DESeqResults ",
-                "defined in 'lfcShrink' slot.\n",
-                "Set 'lfcShrink(object) <- NULL'."
-            )
+            abort(sprintf(
+                fmt = paste0(
+                    "Shrunken LFC values were requested, ",
+                    "but object does not contain {.cls %s} object ",
+                    "defined in {.var %s} slot.\n",
+                    "Set {.code %s}."
+                ),
+                "DESeqResults", "lfcShrink",
+                "lfcShrink(object) <- NULL"
+            ))
         }
         out <- slot(object, name = slotName)
         assert(
