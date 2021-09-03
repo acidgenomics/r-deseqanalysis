@@ -409,6 +409,7 @@ NULL
                     axis.ticks.y = element_blank()
                 )
             ## Coordinates are relative to lower left corner.
+            ## FIXME Need to rework this using patchwork approach.
             ggdraw() +
                 draw_plot(
                     plot = p,
