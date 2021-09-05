@@ -26,7 +26,7 @@ NULL
 ## Updated 2021-08-03.
 `plotLFC,DESeqResults` <-  # nolint
     function(object) {
-        stop("FIXME Need to add method support.")
+        abort("FIXME Need to add method support.")
 }
 
 
@@ -34,5 +34,5 @@ NULL
 ## Updated 2021-08-03.
 `plotLFC,DESeqAnalysis` <-  # nolint
     function(object) {
-        stop("FIXME Need to add method support.")
+        abort("FIXME Need to add method support.")
     }
