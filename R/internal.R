@@ -263,7 +263,7 @@
         },
         FUN.VALUE = logical(1L)
     )
-    asset(
+    assert(
         any(keep),
         msg = sprintf(
             fmt = paste0(
