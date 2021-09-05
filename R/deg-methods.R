@@ -127,7 +127,7 @@ NULL
                     "baseMean >= ", baseMeanThreshold
                 )
             }
-            status <- paste0(status, ")")
+            status <- paste0(status, ").")
             alertInfo(status)
         }
         deg
