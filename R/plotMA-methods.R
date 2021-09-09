@@ -168,10 +168,7 @@ NULL
             areSetEqual(names(limits), c("x", "y"))
         )
         direction <- match.arg(direction)
-        labels <- matchLabels(
-            labels = labels,
-            choices = eval(formals()[["labels"]])
-        )
+        labels <- matchLabels(labels)
         assert(
             !(isCharacter(genes) && isTRUE(isPositive(ntop))),
             msg = "Specify either 'genes' or 'ntop'."

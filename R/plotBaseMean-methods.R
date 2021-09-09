@@ -74,10 +74,7 @@ NULL
             isGGScale(color, scale = "discrete", aes = "color", nullOK = TRUE)
         )
         trans <- match.arg(trans)
-        labels <- matchLabels(
-            labels = labels,
-            choices = eval(formals()[["labels"]])
-        )
+        labels <- matchLabels(labels)
         ## Drop zero values prior to plot.
         if (isTRUE(nonzero)) {
             keep <- object > 0L
