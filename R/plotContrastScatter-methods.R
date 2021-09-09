@@ -98,10 +98,7 @@ NULL
             is.list(limits),
             areSetEqual(names(limits), c("x", "y"))
         )
-        labels <- matchLabels(
-            labels = labels,
-            choices = eval(formals()[["labels"]])
-        )
+        labels <- matchLabels(labels)
         assert(
             !(isCharacter(genes) && isTRUE(isPositive(ntop))),
             msg = "Specify either 'genes' or 'ntop'."
