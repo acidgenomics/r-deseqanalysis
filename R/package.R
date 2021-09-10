@@ -19,9 +19,9 @@
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom DESeq2 DESeq counts design fpkm nbinomWaldTest priorInfo
-#' @importFrom AcidPlots !! acid_coord_flip acid_geom_label_repel matchLabels
-#'   plotHeatmap pretty_breaks scale_color_synesthesia_d plotCounts plotPCA
-#'   plotUpset sym wrap_plots
+#' @importFrom AcidPlots !! acid_coord_flip acid_geom_label_repel
+#'   autoDiscreteColorScale autoDiscreteFillScale matchLabels plotHeatmap
+#'   pretty_breaks plotCounts plotPCA plotUpset sym wrap_plots
 #' @importFrom basejump DataFrame DataFrameList Gene2Symbol SimpleList abort
 #'   alert alertInfo alertWarning as.data.frame as_tibble assays assays<-
 #'   autopadZeros camelCase capture.output cbind colData colData<-
@@ -40,7 +40,7 @@
 #' @importFrom goalie allArePositive areDisjointSets areIntersectingSets
 #'   areSameLength areSetEqual assert bapply hasColnames hasLength hasNames
 #'   hasLength hasRows hasRownames hasValidDimnames hasValidNames isAFile
-#'   isAlpha isAny isCharacter isFlag isGGScale isHeaderLevel isInRange isInt
+#'   isAlpha isAny isCharacter isFlag isHeaderLevel isInRange isInt
 #'   isMatchingFixed isNegative isNonNegative isNumber isPercentage isPositive
 #'   isScalar isString isSubset validate
 #' @importFrom methods as is new prototype setClass setGeneric setValidity show
