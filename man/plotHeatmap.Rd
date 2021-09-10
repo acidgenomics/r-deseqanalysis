@@ -61,8 +61,8 @@ See also:
 
 
 Row- and column-wise hierarchical clustering is performed when \code{clusterRows}
-and/or \code{clusterCols} are set to \code{TRUE}. Internally, this calls
-\code{\link[stats:hclust]{hclust()}}, and defaults to the Ward method.
+and/or \code{clusterCols} are set to \code{TRUE}. Internally, this calls \code{hclust()},
+and defaults to the Ward method.
 
 Automatic hierarchical clustering of rows and/or columns can error for some
 datasets. When this occurs, you'll likely see this error:\preformatted{Error in hclust(d, method = method) :
@@ -71,9 +71,8 @@ NA/NaN/Inf in foreign function call
 
 In this case, either set \code{clusterRows} and/or \code{clusterCols} to \code{FALSE}, or
 you can attempt to pass an \code{hclust} object to these arguments. This is
-recommended as an alternate approach to be used with
-\code{\link[pheatmap:pheatmap]{pheatmap()}}, which is called internally by our
-plotting code. Here's how this can be accomplished:\if{html}{\out{<div class="r">}}\preformatted{mat <- assay(mat)
+recommended as an alternate approach to be used with \code{pheatmap()}, which is
+called internally by our plotting code. Here's how this can be accomplished:\if{html}{\out{<div class="sourceCode r">}}\preformatted{mat <- assay(mat)
 dist <- dist(mat)
 hclust <- hclust(dist, method = "ward.D2")
 }\if{html}{\out{</div>}}

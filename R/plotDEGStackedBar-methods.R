@@ -2,7 +2,7 @@
 #'
 #' @name plotDEGStackedBar
 #' @inherit AcidGenerics::plotDEGStackedBar
-#' @note Updated 2021-03-03.
+#' @note Updated 2021-09-10.
 #'
 #' @inheritParams degPerContrast
 #' @inheritParams AcidRoxygen::params
@@ -22,7 +22,7 @@ NULL
 
 
 
-## Updated 2021-03-03.
+## Updated 2021-09-10.
 `plotDEGStackedBar,DESeqAnalysis` <-  # nolint
     function(
         object,
@@ -30,7 +30,6 @@ NULL
         direction = c("both", "up", "down"),
         orderBySize = FALSE,
         label = TRUE,
-        fill,
         flip = TRUE
     ) {
         validObject(object)
@@ -92,18 +91,13 @@ NULL
                 lfcThreshold = lfcThreshold(object)
             )
         )
+        ## Color palette.
+        p <- p + autoDiscreteFillScale()
         if (isTRUE(flip)) {
             p <- acid_coord_flip(p)
         }
-        ## Fill.
-        if (is(fill, "ScaleDiscrete")) {
-            p <- p + fill
-        }
         p
     }
-
-formals(`plotDEGStackedBar,DESeqAnalysis`)[["fill"]] <-
-    formalsList[["fill.discrete"]]
 
 
 

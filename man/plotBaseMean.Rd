@@ -21,10 +21,7 @@ plotBaseMean(object, ...)
   nonzero = TRUE,
   trans = c("log10", "log2", "identity"),
   summary = TRUE,
-  color = getOption(x = "acid.color.discrete", default = getOption(x =
-    "ggplot2.discrete.colour", default = AcidPlots::scale_color_synesthesia_d())),
-  labels = list(title = "Base mean distribution", subtitle = NULL, x =
-    "average expression across all samples", y = "density", color = "summary")
+  labels = list(title = "Base mean distribution", subtitle = NULL)
 )
 }
 \arguments{
@@ -43,14 +40,6 @@ For more information:\preformatted{help(topic = "scale_x_continuous", package = 
 
 \item{summary}{\code{logical(1)}.
 Include distribution summary statistics as lines on the plot.}
-
-\item{color}{\code{ScaleDiscrete}.
-Desired ggplot2 color scale. Must supply discrete values. When set \code{NULL},
-the default ggplot2 color palette will be used. If manual color definitions
-are desired, we recommend using \code{ggplot2::scale_color_manual()}.
-
-To set the discrete color palette globally, use:\preformatted{options(acid.color.discrete = ggplot2::scale_color_viridis_d())
-}}
 
 \item{labels}{\code{list}.
 ggplot2 labels.
@@ -76,7 +65,7 @@ Passes to \code{numeric} method.
 }}
 
 \note{
-Updated 2021-03-15.
+Updated 2021-09-10.
 }
 \examples{
 data(deseq)
@@ -87,6 +76,6 @@ plotBaseMean(deseq)
 \seealso{
 \itemize{
 \item https://support.bioconductor.org/p/75244/
-\item \code{\link[base:summary]{summary()}}.
+\item \code{summary()}.
 }
 }

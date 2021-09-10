@@ -1,6 +1,6 @@
 #' @name plotBaseMean
 #' @inherit AcidGenerics::plotBaseMean
-#' @note Updated 2021-03-15.
+#' @note Updated 2021-09-10.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -11,7 +11,7 @@
 #'
 #' @seealso
 #' - https://support.bioconductor.org/p/75244/
-#' - [`summary()`][base::summary].
+#' - `summary()`.
 #'
 #' @return `ggplot`.
 #'
@@ -58,20 +58,15 @@ NULL
         nonzero = TRUE,
         trans = c("log10", "log2", "identity"),
         summary = TRUE,
-        color,
         labels = list(
-            title = "Base mean distribution",
-            subtitle = NULL,
-            x = "average expression across all samples",
-            y = "density",
-            color = "summary"
+            "title" = "Base mean distribution",
+            "subtitle" = NULL
         )
     ) {
         assert(
             is.numeric(object),
             isFlag(nonzero),
-            isFlag(summary),
-            isGGScale(color, scale = "discrete", aes = "color", nullOK = TRUE)
+            isFlag(summary)
         )
         trans <- match.arg(trans)
         labels <- matchLabels(labels)
@@ -179,20 +174,17 @@ NULL
                     linetype = linetype,
                     size = size
                 )
-            ## Color.
-            if (is(color, "ScaleDiscrete")) {
-                p <- p + color
-            }
+            ## Color palette.
+            p <- p + autoDiscreteColorScale()
         }
         ## Labels.
-        if (is.list(labels)) {
-            p <- p + do.call(what = labs, args = labels)
-        }
+        labels[["color"]] <- "summary"
+        labels[["x"]] <- "average expression across all samples"
+        labels[["y"]] <- "density"
+        p <- p + do.call(what = labs, args = labels)
         ## Return.
         p
     }
-
-formals(`plotBaseMean,numeric`)[["color"]] <- formalsList[["color.discrete"]]
 
 
 
