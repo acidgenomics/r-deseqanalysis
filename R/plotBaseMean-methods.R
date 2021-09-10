@@ -70,6 +70,8 @@ NULL
         )
         trans <- match.arg(trans)
         labels <- matchLabels(labels)
+        labels[["x"]] <- "average expression across all samples"
+        labels[["y"]] <- "density"
         ## Drop zero values prior to plot.
         if (isTRUE(nonzero)) {
             keep <- object > 0L
@@ -179,8 +181,6 @@ NULL
         }
         ## Labels.
         labels[["color"]] <- "summary"
-        labels[["x"]] <- "average expression across all samples"
-        labels[["y"]] <- "density"
         p <- p + do.call(what = labs, args = labels)
         ## Return.
         p
