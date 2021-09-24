@@ -1,6 +1,10 @@
+## FIXME Need to rework using BiocIO approach.
+
+
+
 #' @name export
 #' @inherit AcidExperiment::export
-#' @note Updated 2021-02-10.
+#' @note Updated 2021-09-24.
 #'
 #' @details
 #' Size-factor normalized coutns and FPKM values are calculated on the fly and
@@ -47,6 +51,7 @@ NULL
     if (isTRUE(compress)) {
         files <- paste0(files, ".gz")
     }
+    ## FIXME Need to rework call here, supporting "con" and "format".
     mapply(
         object = list,
         file = files,
@@ -83,6 +88,7 @@ NULL
             if (isTRUE(compress)) {
                 files <- paste0(files, ".gz")
             }
+            ## FIXME Need to rework call here, supporting "con" and "format".
             mapply(
                 object = data,
                 file = files,
@@ -98,10 +104,12 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2021-09-24.
 `export,DESeqAnalysis` <-  # nolint
     function(
         object,
+        con,  # FIXME
+        format,  # FIXME
         name = NULL,
         dir = ".",
         compress = FALSE
@@ -122,8 +130,9 @@ NULL
         rm(name)
         files <- list()
         ## DESeqDataSet.
-        alert("Exporting {.var DESeqDataSet} to {.path data}.")
+        alert("Exporting {.cls DESeqDataSet} to {.path data}.")
         files[["data"]] <-
+            ## FIXME Need to rework call here, supporting "con" and "format".
             export(
                 object = as(object, "DESeqDataSet"),
                 name = "data",
@@ -133,6 +142,7 @@ NULL
         ## DESeqTransform.
         alert("Exporting {.var DESeqTransform} to {.path transform}.")
         files[["transform"]] <-
+            ## FIXME Need to rework call here, supporting "con" and "format".
             export(
                 object = as(object, "DESeqTransform"),
                 name = "transform",
@@ -172,6 +182,8 @@ NULL
 `export,DESeqDataSet` <-  # nolint
     function(
         object,
+        con,  # FIXME
+        format,  # FIXME
         name = NULL,
         dir = ".",
         compress = FALSE
@@ -190,6 +202,7 @@ NULL
             fpkm = fpkm(object)
         )
         assays(rse) <- assays
+        ## FIXME Need to rework call here, supporting "con" and "format".
         export(object = rse, name = name, dir = dir, compress = compress)
     }
 
@@ -199,7 +212,11 @@ NULL
 #' @export
 setMethod(
     f = "export",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(
+        object = "DESeqAnalysis",
+        con = "ANY",  # FIXME
+        format = "ANY"  # FIXME
+    ),
     definition = `export,DESeqAnalysis`
 )
 
@@ -207,6 +224,10 @@ setMethod(
 #' @export
 setMethod(
     f = "export",
-    signature = signature("DESeqDataSet"),
+    signature = signature(
+        object = "DESeqDataSet",
+        con = "ANY",  # FIXME
+        format = "ANY"  # FIXME
+    ),
     definition = `export,DESeqDataSet`
 )
