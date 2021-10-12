@@ -66,13 +66,17 @@ setValidity(
             identical(dimnames(data), dimnames(transform)),
             msg = "DESeqDataSet and DESeqTransform must correspond."
         )
-        if (!isTRUE(ok)) return(ok)
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
         ok <- validate(
             is.list(results),
             is.list(lfcShrink),
             msg = "results and lfcShrink must be list."
         )
-        if (!isTRUE(ok)) return(ok)
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
         ok <- validate(
             all(bapply(
                 X = results,
@@ -82,18 +86,16 @@ setValidity(
             )),
             msg = "DESeqDataSet and DESeqResults must correspond."
         )
-        if (!isTRUE(ok)) return(ok)
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
         ok <- validate(
             hasValidNames(results),
             msg = "DESeqResults list must be named."
         )
-        if (!isTRUE(ok)) return(ok)
-        ## Renamed "version" to "packageVersion" in v0.4.0.
-        ## > ok <- validate(
-        ## >     is(metadata(object)[["packageVersion"]], "package_version"),
-        ## >     msg = "Require package version in metadata."
-        ## > )
-        ## > if (!isTRUE(ok)) return(ok)
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
         ## Alpha levels in the slotted results must be identical.
         alphas <- vapply(
             X = results,
@@ -103,7 +105,9 @@ setValidity(
             FUN.VALUE = numeric(1L)
         )
         ok <- validate(length(unique(alphas)) == 1L)
-        if (!isTRUE(ok)) return(ok)
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
         ## Note that `lfcShrink` slot is currently optional.
         if (hasLength(lfcShrink)) {
             ok <- validate(
@@ -118,7 +122,9 @@ setValidity(
                 )),
                 msg = "Unshrunken and shrunken DESeqResults must correspond."
             )
-            if (!isTRUE(ok)) return(ok)
+            if (!isTRUE(ok)) {
+                return(ok)
+            }
             ## Ensure that DESeqResults slotted into `lfcShrink` is actually
             ## shrunken using the `lfcShrink()` function. This also checks to
             ## ensure that the same method was used for all contrasts.
@@ -131,7 +137,9 @@ setValidity(
                 length(unique(shrinkTypes)) == 1L,
                 msg = "Invalid shrink type."
             )
-            if (!isTRUE(ok)) return(ok)
+            if (!isTRUE(ok)) {
+                return(ok)
+            }
             ok <- validate(
                 identical(
                     vapply(
@@ -151,7 +159,9 @@ setValidity(
                 ),
                 msg = "lfcShrink alpha must match the results alpha."
             )
-            if (!isTRUE(ok)) return(ok)
+            if (!isTRUE(ok)) {
+                return(ok)
+            }
         }
         TRUE
     }
@@ -174,10 +184,14 @@ setValidity(
     Class = "DESeqAnalysisList",
     method = function(object) {
         ## Currently allowing an empty list.
-        if (!hasLength(object)) return(TRUE)
+        if (!hasLength(object)) {
+            return(TRUE)
+        }
         ## Require that all objects in list are named, without duplicates.
         ok <- validate(hasValidNames(object))
-        if (!isTRUE(ok)) return(ok)
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
         ## Check that all of the elements in the list are DESeqAnalysis.
         ok <- validate(
             all(bapply(
@@ -188,21 +202,27 @@ setValidity(
             )),
             msg = "Not a list of DESeqAnalysis objects."
         )
-        if (!isTRUE(ok)) return(ok)
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
         ## Ensure that all slotted DESeqAnalysis objects are valid.
         ## This step can be slow for large objects.
         ok <- validate(
             all(bapply(object, validObject)),
             msg = "Not all DESeqAnalysis objects are valid."
         )
-        if (!isTRUE(ok)) return(ok)
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
         ## Check that all rownames in slotted DESeqResults are identical.
         rn <- rownames(object[[1L]])
         ok <- validate(
             isCharacter(rn),
             msg = "Row names in first DESeqAnalysis are invalid."
         )
-        if (!isTRUE(ok)) return(ok)
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
         ok <- bapply(
             X = object,
             rn = rn,
@@ -237,10 +257,14 @@ setValidity(
     Class = "DESeqResultsList",
     method = function(object) {
         ## Currently allowing an empty list.
-        if (!hasLength(object)) return(TRUE)
+        if (!hasLength(object)) {
+            return(TRUE)
+        }
         ## Require that all objects in list are named.
         ok <- validate(hasValidNames(object))
-        if (!isTRUE(ok)) return(ok)
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
         ## Check that all of the elements in the list are DESeqAnalysis.
         ok <- validate(
             all(bapply(
@@ -251,20 +275,26 @@ setValidity(
             )),
             msg = "Not a list of DESeqResults objects."
         )
-        if (!isTRUE(ok)) return(ok)
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
         ## Ensure that all slotted DESeqResults objects are valid.
         ok <- validate(
             all(bapply(object, validObject)),
             msg = "Not all DESeqResults in list are valid."
         )
-        if (!isTRUE(ok)) return(ok)
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
         ## Check that all rownames in slotted DESeqResults are identical.
         rn <- rownames(object[[1L]])
         ok <- validate(
             isCharacter(rn),
             msg = "Row names in first DESeqResults are invalid."
         )
-        if (!isTRUE(ok)) return(ok)
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
         ok <- bapply(
             X = object,
             rn = rn,

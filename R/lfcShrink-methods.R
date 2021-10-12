@@ -25,7 +25,9 @@ NULL
 `lfcShrink,DESeqAnalysis` <-  # nolint
     function(object) {
         ok <- metadata(object)[["lfcShrink"]]
-        if (is.logical(ok)) return(ok)
+        if (is.logical(ok)) {
+            return(ok)
+        }
         ok <- as.logical(hasLength(slot(object, "lfcShrink")))
         ok
     }
