@@ -13,13 +13,14 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2021-10-15.
 `show,DESeqAnalysis` <-  # nolint
     function(object) {
         validObject(object)
         dds <- as(object, "DESeqDataSet")
         cat(paste0(
-            class(object), " ", metadata(object)[["version"]], "; ",
+            class(object), " ",
+            metadata(object)[["packageVersion"]], "; ",
             "DESeq2 ", metadata(dds)[["version"]]
         ), sep = "\n")
         ## Show information about the DESeqDataSet.
