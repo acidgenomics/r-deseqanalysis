@@ -29,8 +29,8 @@
 #'   do.call droplevels getS3method head import initDir interestingGroups<-
 #'   intersectionMatrix leftJoin makeNames mapGenesToSymbols markdownHeader
 #'   markdownList mcols mcols<- melt metadata metadata<- metadata2 metadata2<-
-#'   model.matrix na.omit packageName packageVersion printString realpath
-#'   relevel removeNA requireNamespaces rowData showSlotInfo snakeCase
+#'   methodFunction model.matrix na.omit packageName packageVersion printString
+#'   realpath relevel removeNA requireNamespaces rowData showSlotInfo snakeCase
 #'   standardizeCall str_locate_all str_match str_trunc toInlineString
 #' @importFrom ggplot2 aes annotation_logticks element_blank geom_bar
 #'   geom_density geom_hline geom_point geom_text geom_vline ggplot guides labs
