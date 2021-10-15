@@ -193,7 +193,7 @@ NULL
         files[["resultsTables"]] <-
             .exportResultsTables(
                 object = object,
-                con = file.path(dir, "resultsTables"),
+                dir = file.path(dir, "resultsTables"),
                 compress = compress,
                 overwrite = overwrite,
                 quiet = quiet
@@ -206,7 +206,7 @@ NULL
         files[["resultsMatrices"]] <-
             .exportResultsMatrices(
                 object = object,
-                con = file.path(dir, "resultsMatrices"),
+                dir = file.path(dir, "resultsMatrices"),
                 compress = compress,
                 overwrite = overwrite,
                 quiet = quiet
