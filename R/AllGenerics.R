@@ -145,7 +145,7 @@ NULL
 #' @rdname export
 #' @name export
 #' @importFrom AcidGenerics export
-#' @usage export(object, ...)
+#' @usage export(object, con, format, ...)
 #' @export
 NULL
 
