@@ -1,10 +1,13 @@
 ## FIXME Need to rework using BiocIO approach.
+## FIXME This isn't exporting the DESeqDataSet assays we want here currently.
+## FIXME Expecting these assays to be exported: counts, normalized, fpkm
+## FIXME We don't want H, cooks, mu assays from DESeqDataSet...
 
 
 
 #' @name export
 #' @inherit AcidExperiment::export
-#' @note Updated 2021-09-24.
+#' @note Updated 2021-10-15.
 #'
 #' @details
 #' Size-factor normalized coutns and FPKM values are calculated on the fly and
@@ -16,25 +19,35 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' export(deseq, dir = "example")
-#'
-#' ## Clean up.
-#' unlink("example", recursive = TRUE)
+#' con <- file.path(testdir(), "example")
+#' export(deseq, con = con)
+#' unlink(con, recursive = TRUE)
 NULL
 
 
 
-## Updated 2021-08-09.
-.exportResultsMatrices <- function(object, dir, compress) {
+## Updated 2021-10-15.
+.exportResultsMatrices <- function(
+    object,
+    dir,
+    compress,
+    overwrite,
+    quiet
+) {
     assert(
         is(object, "DESeqAnalysis"),
-        isFlag(compress)
+        isString(dir),
+        isFlag(compress),
+        isFlag(overwrite),
+        isFlag(quiet)
     )
+    ## Loop across all possible values to export.
+    ## e.g. `"log2FoldChange"`, `"stat"`, `"alpha"`.
     values <- eval(formals(`resultsMatrix,DESeqAnalysis`)[["value"]])
     list <- lapply(
         X = values,
         FUN = function(value) {
-            resultsMatrix(object, value = value, rowData = TRUE)
+            resultsMatrix(object = object, value = value, rowData = TRUE)
         }
     )
     ## Ensure we dynamically remap "alpha" back to "padj" or "svalue".
@@ -51,10 +64,11 @@ NULL
     if (isTRUE(compress)) {
         files <- paste0(files, ".gz")
     }
-    ## FIXME Need to rework call here, supporting "con" and "format".
     mapply(
         object = list,
-        file = files,
+        con = files,
+        overwrite = overwrite,
+        quiet = quiet,
         FUN = export,
         SIMPLIFY = TRUE,
         USE.NAMES = TRUE
@@ -65,11 +79,19 @@ NULL
 
 ## Here we are looping across each contrast and writing out DEG tables.
 ## Note: We don't need to support humanize mode because `geneName` is required.
-## Updated 2020-08-04.
-.exportResultsTables <- function(object, dir, compress) {
+## Updated 2021-10-15.
+.exportResultsTables <- function(
+    object,
+    dir,
+    compress,
+    overwrite,
+    quiet
+) {
     assert(
         is(object, "DESeqAnalysis"),
-        isFlag(compress)
+        isFlag(compress),
+        isFlag(overwrite),
+        isFlag(quiet)
     )
     resultsNames <- resultsNames(object)
     out <- lapply(
@@ -88,10 +110,11 @@ NULL
             if (isTRUE(compress)) {
                 files <- paste0(files, ".gz")
             }
-            ## FIXME Need to rework call here, supporting "con" and "format".
             mapply(
                 object = data,
-                file = files,
+                con = files,
+                overwrite = overwrite,
+                quiet = quiet,
                 FUN = export,
                 SIMPLIFY = TRUE,
                 USE.NAMES = TRUE
@@ -104,70 +127,89 @@ NULL
 
 
 
-## Updated 2021-09-24.
+## Updated 2021-10-15.
 `export,DESeqAnalysis` <-  # nolint
     function(
         object,
-        con,  # FIXME
-        format,  # FIXME
-        name = NULL,
-        dir = ".",
-        compress = FALSE
+        con,
+        format,  # NULL
+        compress = getOption(
+            x = "acid.export.compress",
+            default = FALSE
+        ),
+        overwrite = getOption(
+            x = "acid.overwrite",
+            default = TRUE
+        ),
+        quiet = getOption(
+            x = "acid.quiet",
+            default = FALSE
+        )
     ) {
         validObject(object)
-        assert(
-            isString(name, nullOK = TRUE),
-            isFlag(compress)
-        )
-        call <- standardizeCall()
-        assert(isString(name, nullOK = TRUE))
-        if (is.null(name)) {
-            name <- as.character(call[["object"]])
+        if (missing(format)) {
+            format <- NULL
         }
-        ## Note that we're combining the dir with name, so we can set
-        ## subdirectories for each slotted data type (e.g. DESeqDataSet).
-        dir <- initDir(file.path(dir, name))
-        rm(name)
+        assert(
+            isString(con),
+            is.null(format),
+            isFlag(compress),
+            isFlag(overwrite),
+            isFlag(quiet)
+        )
+        dir <- initDir(con)
         files <- list()
         ## DESeqDataSet.
-        alert("Exporting {.cls DESeqDataSet} to {.path data}.")
+        alert(sprintf(
+            "Exporting {.cls %s} to {.path %s}.",
+            "DESeqDataSet", "data"
+        ))
         files[["data"]] <-
-            ## FIXME Need to rework call here, supporting "con" and "format".
             export(
                 object = as(object, "DESeqDataSet"),
-                name = "data",
-                dir = dir,
-                compress = compress
+                con = file.path(dir, "data"),
+                compress = compress,
+                overwrite = overwrite,
+                quiet = quiet
             )
         ## DESeqTransform.
-        alert("Exporting {.var DESeqTransform} to {.path transform}.")
+        alert(sprintf(
+            "Exporting {.cls %s} to {.path %s}.",
+            "DESeqTransform", "transform"
+        ))
         files[["transform"]] <-
-            ## FIXME Need to rework call here, supporting "con" and "format".
             export(
                 object = as(object, "DESeqTransform"),
-                name = "transform",
-                dir = dir,
-                compress = compress
+                con = file.path(dir, "transform"),
+                compress = compress,
+                overwrite = overwrite,
+                quiet = quiet
             )
-        ## DEG results tables.
-        alert(
-            "Exporting {.var DESeqResults} tables to {.path resultsTables}."
-        )
+        ## DESeqResults tables.
+        alert(sprintf(
+            "Exporting {.var %s} tables to {.path %s}.",
+            "DESeqResults", "resultsTables"
+        ))
         files[["resultsTables"]] <-
             .exportResultsTables(
                 object = object,
-                dir = file.path(dir, "resultsTables"),
-                compress = compress
+                con = file.path(dir, "resultsTables"),
+                compress = compress,
+                overwrite = overwrite,
+                quiet = quiet
             )
-        ## Combined results matrices.
-        alert(
-            "Exporting {.var DESeqResults} matrices to {.path resultsMatrices}."
-        )
+        ## Combined DESeqResults matrices.
+        alert(sprintf(
+            "Exporting {.cls %s} matrices to {.path %s}.",
+            "DESeqResults", "resultsMatrices"
+        ))
         files[["resultsMatrices"]] <-
             .exportResultsMatrices(
                 object = object,
-                dir = file.path(dir, "resultsMatrices"),
-                compress = compress
+                con = file.path(dir, "resultsMatrices"),
+                compress = compress,
+                overwrite = overwrite,
+                quiet = quiet
             )
         ## Return file list.
         invisible(files)
@@ -178,33 +220,79 @@ NULL
 ## Inheriting the SummarizedExperiment method internally here.
 ## Only export the raw and normalized counts.
 ## Skip exporting other assays, including mu, H, cooks.
-## Updated 2019-09-11.
+## Updated 2021-10-15.
 `export,DESeqDataSet` <-  # nolint
     function(
         object,
-        con,  # FIXME
-        format,  # FIXME
-        name = NULL,
-        dir = ".",
-        compress = FALSE
+        con,
+        format,  # NULL
+        compress = getOption(
+            x = "acid.export.compress",
+            default = FALSE
+        ),
+        overwrite = getOption(
+            x = "acid.overwrite",
+            default = TRUE
+        ),
+        quiet = getOption(
+            x = "acid.quiet",
+            default = FALSE
+        )
     ) {
         validObject(object)
-        call <- standardizeCall()
-        assert(isString(name, nullOK = TRUE))
-        if (is.null(name)) {
-            name <- as.character(call[["object"]])
+        if (missing(format)) {
+            format <- NULL
         }
+        assert(
+            isString(con),
+            is.null(format),
+            isFlag(compress),
+            isFlag(overwrite),
+            isFlag(quiet)
+        )
+        files <- list()
         ## Generate additional matrices on the fly.
         rse <- as(object, "RangedSummarizedExperiment")
         assays <- SimpleList(
-            counts = counts(object, normalized = FALSE),
-            normalized = counts(object, normalized = TRUE),
-            fpkm = fpkm(object)
+            "counts" = counts(object, normalized = FALSE),
+            "normalized" = counts(object, normalized = TRUE),
+            "fpkm" = fpkm(object)
         )
         assays(rse) <- assays
-        ## FIXME Need to rework call here, supporting "con" and "format".
-        export(object = rse, name = name, dir = dir, compress = compress)
+        export(
+            object = rse,
+            con = con,
+            compress = compress,
+            overwrite = overwrite,
+            quiet = quiet
+        )
     }
+
+
+
+## Updated 2021-10-15.
+`export,DESeqAnalysis,deprecated` <-  # nolint
+    methodFunction(
+        f = "export",
+        signature = signature(
+            object = "SummarizedExperiment",
+            con = "missingOrNULL",
+            format = "missingOrNULL"
+        ),
+        package = "basejump"
+    )
+
+## Updated 2021-10-15.
+`export,DESeqDataSet,deprecated` <-  # nolint
+    methodFunction(
+        f = "export",
+        signature = signature(
+            object = "SummarizedExperiment",
+            con = "missingOrNULL",
+            format = "missingOrNULL"
+        ),
+        package = "basejump"
+    )
 
 
 
@@ -214,8 +302,8 @@ setMethod(
     f = "export",
     signature = signature(
         object = "DESeqAnalysis",
-        con = "ANY",  # FIXME
-        format = "ANY"  # FIXME
+        con = "character",
+        format = "missingOrNULL"
     ),
     definition = `export,DESeqAnalysis`
 )
@@ -225,9 +313,33 @@ setMethod(
 setMethod(
     f = "export",
     signature = signature(
+        object = "DESeqAnalysis",
+        con = "missingOrNULL",
+        format = "missingOrNULL"
+    ),
+    definition = `export,DESeqAnalysis,deprecated`
+)
+
+#' @rdname export
+#' @export
+setMethod(
+    f = "export",
+    signature = signature(
         object = "DESeqDataSet",
-        con = "ANY",  # FIXME
-        format = "ANY"  # FIXME
+        con = "character",
+        format = "missingOrNULL"
     ),
     definition = `export,DESeqDataSet`
+)
+
+#' @rdname export
+#' @export
+setMethod(
+    f = "export",
+    signature = signature(
+        object = "DESeqDataSet",
+        con = "missingOrNULL",
+        format = "missingOrNULL"
+    ),
+    definition = `export,DESeqDataSet,deprecated`
 )
