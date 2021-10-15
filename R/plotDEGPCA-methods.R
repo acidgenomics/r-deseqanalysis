@@ -136,7 +136,7 @@ NULL
 #' @export
 setMethod(
     f = "plotDEGPCA",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `plotDEGPCA,DESeqAnalysis`
 )
 
@@ -144,6 +144,6 @@ setMethod(
 #' @export
 setMethod(
     f = "plotDEGPCA",
-    signature = signature("DESeqResults"),
+    signature = signature(object = "DESeqResults"),
     definition = `plotDEGPCA,DESeqResults`
 )

@@ -204,6 +204,6 @@ NULL
 #' @export
 setMethod(
     f = "plotContrastScatter",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `plotContrastScatter,DESeqAnalysis`
 )

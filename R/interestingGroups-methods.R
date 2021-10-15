@@ -50,7 +50,7 @@ NULL
 #' @export
 setMethod(
     f = "interestingGroups",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `interestingGroups,DESeqAnalysis`
 )
 

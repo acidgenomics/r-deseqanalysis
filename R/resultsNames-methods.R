@@ -73,7 +73,7 @@ NULL
 #' @export
 setMethod(
     f = "resultsNames",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `resultsNames,DESeqAnalysis`
 )
 
@@ -81,7 +81,7 @@ setMethod(
 #' @export
 setMethod(
     f = "resultsNames",
-    signature = signature("DESeqAnalysisList"),
+    signature = signature(object = "DESeqAnalysisList"),
     definition = `resultsNames,DESeqAnalysisList`
 )
 
@@ -89,7 +89,7 @@ setMethod(
 #' @export
 setMethod(
     f = "resultsNames",
-    signature = signature("DESeqDataSet"),
+    signature = signature(object = "DESeqDataSet"),
     definition = `resultsNames,DESeqDataSet`
 )
 
@@ -97,7 +97,7 @@ setMethod(
 #' @export
 setMethod(
     f = "resultsNames",
-    signature = signature("DESeqResultsList"),
+    signature = signature(object = "DESeqResultsList"),
     definition = `resultsNames,DESeqResultsList`
 )
 

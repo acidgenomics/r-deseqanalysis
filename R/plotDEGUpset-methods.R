@@ -42,6 +42,6 @@ NULL
 #' @export
 setMethod(
     f = "plotDEGUpset",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `plotDEGUpset,DESeqAnalysis`
 )

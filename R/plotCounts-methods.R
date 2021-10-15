@@ -96,7 +96,7 @@ NULL
 #' @export
 setMethod(
     f = "plotCounts",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `plotCounts,DESeqAnalysis`
 )
 
@@ -106,7 +106,7 @@ setMethod(
 #' @export
 setMethod(
     f = "plotCounts",
-    signature = signature("DESeqDataSet"),
+    signature = signature(object = "DESeqDataSet"),
     definition = `plotCounts,DESeqDataSet`
 )
 
@@ -114,6 +114,6 @@ setMethod(
 #' @export
 setMethod(
     f = "plotCounts",
-    signature = signature("DESeqTransform"),
+    signature = signature(object = "DESeqTransform"),
     definition = `plotCounts,DESeqTransform`
 )

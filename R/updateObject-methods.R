@@ -54,6 +54,6 @@ NULL
 #' @export
 setMethod(
     f = "updateObject",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `updateObject,DESeqAnalysis`
 )

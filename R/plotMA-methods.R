@@ -355,7 +355,7 @@ NULL
 #' @export
 setMethod(
     f = "plotMA",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `plotMA,DESeqAnalysis`
 )
 
@@ -363,6 +363,6 @@ setMethod(
 #' @export
 setMethod(
     f = "plotMA",
-    signature = signature("DESeqResults"),
+    signature = signature(object = "DESeqResults"),
     definition = `plotMA,DESeqResults`
 )

@@ -102,6 +102,6 @@ NULL
 #' @export
 setMethod(
     f = "degPerContrast",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `degPerContrast,DESeqAnalysis`
 )

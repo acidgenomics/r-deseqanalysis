@@ -119,7 +119,7 @@ NULL
 #' @export
 setMethod(
     f = "lfcThreshold",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `lfcThreshold,DESeqAnalysis`
 )
 
@@ -127,7 +127,7 @@ setMethod(
 #' @export
 setMethod(
     f = "lfcThreshold",
-    signature = signature("DESeqAnalysisList"),
+    signature = signature(object = "DESeqAnalysisList"),
     definition = `lfcThreshold,DESeqAnalysisList`
 )
 
@@ -135,7 +135,7 @@ setMethod(
 #' @export
 setMethod(
     f = "lfcThreshold",
-    signature = signature("DESeqResults"),
+    signature = signature(object = "DESeqResults"),
     definition = `lfcThreshold,DESeqResults`
 )
 
@@ -143,7 +143,7 @@ setMethod(
 #' @export
 setMethod(
     f = "lfcThreshold",
-    signature = signature("DESeqResultsList"),
+    signature = signature(object = "DESeqResultsList"),
     definition = `lfcThreshold,DESeqResultsList`
 )
 

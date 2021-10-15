@@ -47,12 +47,6 @@ NULL
 
 
 
-.args <- list(
-    "return" = c("tbl_df", "DataFrameList")
-)
-
-
-
 ## Updated 2021-06-29.
 `resultsTables,DESeqAnalysis` <-  # nolint
     function(
@@ -62,7 +56,7 @@ NULL
         baseMeanThreshold = NULL,
         lfcThreshold = NULL,
         extra = TRUE,
-        return
+        return = c("tbl_df", "DataFrameList")
     ) {
         validObject(object)
         resultsTables(
@@ -85,8 +79,6 @@ NULL
             return = match.arg(return)
         )
     }
-
-formals(`resultsTables,DESeqAnalysis`)[names(.args)] <- .args
 
 
 
@@ -139,11 +131,8 @@ formals(`resultsTables,DESeqAnalysis`)[names(.args)] <- .args
         )
     }
 
-formals(`resultsTables,DESeqResults`)[names(.args)] <- .args
-
-
-
-rm(.args)
+formals(`resultsTables,DESeqResults`)[["return"]] <-
+    formals(`resultsTables,DESeqAnalysis`)[["return"]]
 
 
 
@@ -151,7 +140,7 @@ rm(.args)
 #' @export
 setMethod(
     f = "resultsTables",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `resultsTables,DESeqAnalysis`
 )
 
@@ -159,6 +148,6 @@ setMethod(
 #' @export
 setMethod(
     f = "resultsTables",
-    signature = signature("DESeqResults"),
+    signature = signature(object = "DESeqResults"),
     definition = `resultsTables,DESeqResults`
 )

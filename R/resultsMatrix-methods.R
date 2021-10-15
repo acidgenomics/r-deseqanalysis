@@ -150,7 +150,7 @@ rm(.args)
 #' @export
 setMethod(
     f = "resultsMatrix",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `resultsMatrix,DESeqAnalysis`
 )
 
@@ -160,6 +160,6 @@ setMethod(
 #' @export
 setMethod(
     f = "resultsMatrix",
-    signature = signature("DESeqAnalysisList"),
+    signature = signature(object = "DESeqAnalysisList"),
     definition = `resultsMatrix,DESeqAnalysisList`
 )

@@ -63,7 +63,7 @@ NULL
 #' @export
 setMethod(
     f = "plotHeatmap",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `plotHeatmap,DESeqAnalysis`
 )
 
@@ -73,7 +73,7 @@ setMethod(
 #' @export
 setMethod(
     f = "plotCorrelationHeatmap",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `plotCorrelationHeatmap,DESeqAnalysis`
 )
 
@@ -83,6 +83,6 @@ setMethod(
 #' @export
 setMethod(
     f = "plotQuantileHeatmap",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `plotQuantileHeatmap,DESeqAnalysis`
 )

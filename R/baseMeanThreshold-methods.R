@@ -117,7 +117,7 @@ NULL
 #' @export
 setMethod(
     f = "baseMeanThreshold",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `baseMeanThreshold,DESeqAnalysis`
 )
 
@@ -125,7 +125,7 @@ setMethod(
 #' @export
 setMethod(
     f = "baseMeanThreshold",
-    signature = signature("DESeqAnalysisList"),
+    signature = signature(object = "DESeqAnalysisList"),
     definition = `baseMeanThreshold,DESeqAnalysisList`
 )
 
@@ -133,7 +133,7 @@ setMethod(
 #' @export
 setMethod(
     f = "baseMeanThreshold",
-    signature = signature("DESeqResults"),
+    signature = signature(object = "DESeqResults"),
     definition = `baseMeanThreshold,DESeqResults`
 )
 
@@ -141,7 +141,7 @@ setMethod(
 #' @export
 setMethod(
     f = "baseMeanThreshold",
-    signature = signature("DESeqResultsList"),
+    signature = signature(object = "DESeqResultsList"),
     definition = `baseMeanThreshold,DESeqResultsList`
 )
 

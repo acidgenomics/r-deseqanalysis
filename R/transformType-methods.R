@@ -54,7 +54,7 @@ NULL
 #' @export
 setMethod(
     f = "transformType",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `transformType,DESeqAnalysis`
 )
 
@@ -62,7 +62,7 @@ setMethod(
 #' @export
 setMethod(
     f = "transformType",
-    signature = signature("DESeqAnalysisList"),
+    signature = signature(object = "DESeqAnalysisList"),
     definition = `transformType,DESeqAnalysisList`
 )
 
@@ -70,6 +70,6 @@ setMethod(
 #' @export
 setMethod(
     f = "transformType",
-    signature = signature("DESeqTransform"),
+    signature = signature(object = "DESeqTransform"),
     definition = `transformType,DESeqTransform`
 )

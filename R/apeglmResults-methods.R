@@ -146,6 +146,6 @@ NULL
 #' @export
 setMethod(
     f = "apeglmResults",
-    signature = signature("DESeqDataSet"),
+    signature = signature(object = "DESeqDataSet"),
     definition = `apeglmResults,DESeqDataSet`
 )
