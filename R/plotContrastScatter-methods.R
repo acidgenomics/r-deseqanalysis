@@ -1,3 +1,4 @@
+## FIXME This function is still a work in progress.
 ## FIXME Need to support plotVolcano colors here...
 ## FIXME Consider supporting directionality labeling.
 
@@ -6,13 +7,13 @@
 #' Plot differential expression contrast
 #'
 #' @name plotContrastScatter
-#' @note Updated 2021-08-09.
+#' @note Updated 2021-10-15.
 #'
 #' @inheritParams params
 #'
 #' @examples
 #' data(deseq)
-#' plotContrast(deseq, i = 1L)
+#' plotContrastScatter(deseq, i = 1L)
 #'
 #' @seealso
 # - https://doi.org/10.1084/jem.20200829
@@ -20,7 +21,7 @@ NULL
 
 
 
-## Updated 2021-08-09.
+## Updated 2021-10-15.
 `plotContrastScatter,DESeqAnalysis` <-
     function(
         object,
@@ -162,15 +163,6 @@ NULL
             counts <- fun(counts + 1L)
         }
         res <- res[rownames(counts), , drop = FALSE]
-
-
-
-
-
-
-
-
-
 
         ## FIXME How to apply gene labeling here?
 

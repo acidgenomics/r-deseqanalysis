@@ -38,11 +38,11 @@ limits for each axis. Set automatically by default when left \code{NULL}.}
 Plot differential expression contrast
 }
 \note{
-Updated 2021-08-09.
+Updated 2021-10-15.
 }
 \examples{
 data(deseq)
-plotContrast(deseq, i = 1L)
+plotContrastScatter(deseq, i = 1L)
 
 }
 \seealso{
