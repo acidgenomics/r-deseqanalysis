@@ -8,7 +8,7 @@
 \alias{export,DESeqDataSet,missingOrNULL,missingOrNULL-method}
 \title{Export}
 \usage{
-export(object, ...)
+export(object, con, format, ...)
 
 \S4method{export}{DESeqAnalysis,character,missingOrNULL}(
   object,
