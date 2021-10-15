@@ -1,7 +1,3 @@
-## FIXME Put the setMethod calls at the end here
-
-
-
 #' Base methods
 #'
 #' @name base
@@ -34,8 +30,6 @@ NULL
 
 formals(`colnames,DESeqAnalysis`) <- formals(colnames)
 
-
-
 #' @rdname base
 #' @export
 setMethod(
@@ -51,8 +45,6 @@ setMethod(
     function(x) {
         dim(as(x, "DESeqDataSet"))
     }
-
-
 
 #' @rdname base
 #' @export
@@ -70,8 +62,6 @@ setMethod(
         dimnames(as(x, "DESeqDataSet"))
     }
 
-
-
 #' @rdname base
 #' @export
 setMethod(
@@ -87,8 +77,6 @@ setMethod(
     function(x) {
         names(as(x, "DESeqDataSet"))
     }
-
-
 
 #' @rdname base
 #' @export
@@ -107,8 +95,6 @@ setMethod(
     }
 
 formals(`rownames,DESeqAnalysis`) <- formals(rownames)
-
-
 
 #' @rdname base
 #' @export

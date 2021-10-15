@@ -1,10 +1,3 @@
-## FIXME Need to rework using BiocIO approach.
-## FIXME This isn't exporting the DESeqDataSet assays we want here currently.
-## FIXME Expecting these assays to be exported: counts, normalized, fpkm
-## FIXME We don't want H, cooks, mu assays from DESeqDataSet...
-
-
-
 #' @name export
 #' @inherit AcidExperiment::export
 #' @note Updated 2021-10-15.
