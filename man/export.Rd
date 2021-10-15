@@ -2,33 +2,62 @@
 % Please edit documentation in R/AllGenerics.R, R/export-methods.R
 \name{export}
 \alias{export}
-\alias{export,DESeqAnalysis,ANY,ANY-method}
-\alias{export,DESeqDataSet,ANY,ANY-method}
-\title{Objects exported from other packages}
+\alias{export,DESeqAnalysis,character,missingOrNULL-method}
+\alias{export,DESeqAnalysis,missingOrNULL,missingOrNULL-method}
+\alias{export,DESeqDataSet,character,missingOrNULL-method}
+\alias{export,DESeqDataSet,missingOrNULL,missingOrNULL-method}
+\title{Export}
 \usage{
 export(object, ...)
 
-\S4method{export}{DESeqAnalysis,ANY,ANY}(object, con, format, name = NULL, dir = ".", compress = FALSE)
+\S4method{export}{DESeqAnalysis,character,missingOrNULL}(
+  object,
+  con,
+  format,
+  compress = getOption(x = "acid.export.compress", default = FALSE),
+  overwrite = getOption(x = "acid.overwrite", default = TRUE),
+  quiet = getOption(x = "acid.quiet", default = FALSE)
+)
 
-\S4method{export}{DESeqDataSet,ANY,ANY}(object, con, format, name = NULL, dir = ".", compress = FALSE)
+\S4method{export}{DESeqAnalysis,missingOrNULL,missingOrNULL}(object, con, format, name = NULL, dir, ...)
+
+\S4method{export}{DESeqDataSet,character,missingOrNULL}(
+  object,
+  con,
+  format,
+  compress = getOption(x = "acid.export.compress", default = FALSE),
+  overwrite = getOption(x = "acid.overwrite", default = TRUE),
+  quiet = getOption(x = "acid.quiet", default = FALSE)
+)
+
+\S4method{export}{DESeqDataSet,missingOrNULL,missingOrNULL}(object, con, format, name = NULL, dir, ...)
 }
 \arguments{
 \item{object}{Object.
 An object supporting \code{dim()}, or a supported class capable of being coerced
 to \code{data.frame}, to be written to disk.}
 
-\item{con}{FIXME}
+\item{con}{\code{character(1)}, \code{missing}, or \code{NULL}.
+File path.
+Alternatively, can leave unset and use \code{ext} and \code{dir} arguments instead.}
 
-\item{format}{FIXME}
+\item{format}{\code{character(1)}, \code{missing}, or \code{NULL}.
+Output file format extension.}
+
+\item{compress}{\code{logical(1)}.
+Apply gzip compression to all files.}
+
+\item{overwrite}{\code{logical(1)}.
+Overwrite existing file on disk.}
+
+\item{quiet}{\code{logical(1)}.
+Perform command quietly, suppressing messages.}
 
 \item{name}{\code{character(1)}.
 Name to use on disk. If \code{NULL}, will use the name of the object instead.}
 
 \item{dir}{\code{character(1)}.
 Directory path.}
-
-\item{compress}{\code{logical(1)}.
-Apply gzip compression to all files.}
 
 \item{...}{Additional arguments.}
 }
@@ -37,22 +66,37 @@ Invisible \code{character}.
 File path(s).
 }
 \description{
-These objects are imported from other packages. Follow the links
-below to see their documentation.
-
-\describe{
-  \item{IRanges}{\code{\link[IRanges:AtomicList-class]{CharacterList}}, \code{\link[IRanges:DataFrameList-class]{DataFrameList}}, \code{\link[IRanges:AtomicList-class]{FactorList}}, \code{\link[IRanges:IRanges-constructor]{IRanges}}, \code{\link[IRanges:AtomicList-class]{IntegerList}}, \code{\link[IRanges:AtomicList-class]{LogicalList}}, \code{\link[IRanges:AtomicList-class]{NumericList}}, \code{\link[IRanges:AtomicList-class]{RleList}}, \code{\link[IRanges:DataFrameList-class]{SplitDataFrameList}}}
-
-  \item{S4Vectors}{\code{\link[S4Vectors:DataFrame-class]{DataFrame}}, \code{\link[S4Vectors:Factor-class]{Factor}}, \code{\link[S4Vectors:LLint-class]{LLint}}, \code{\link[S4Vectors:List-class]{List}}, \code{\link[S4Vectors:Rle-class]{Rle}}, \code{\link[S4Vectors:SimpleList-class]{SimpleList}}}
-}
+Export
 }
 \details{
 Size-factor normalized coutns and FPKM values are calculated on the fly and
 exported automatically.
 }
 \note{
-Updated 2021-09-24.
+Updated 2021-10-15.
 }
+\section{Output file format extension}{
+
+
+
+
+\code{matrix} supported arguments:
+\itemize{
+\item Comma separated values (CSV):
+\code{"csv"}, \code{"csv.bz2"}, \code{"csv.gz"}, \code{"csv.xz"}, \code{"csv.zip"}.
+\item Tab separated values (TSV):
+\code{"tsv"}, \code{"tsv.bz2"}, \code{"tsv.gz"}, \code{"tsv.xz"}, \code{"tsv.zip"}.
+}
+
+\code{Matrix} (\code{sparseMatrix}) supported arguments:
+\itemize{
+\item MatrixMarket exchange (MTX):
+\code{"mtx"}, \code{"mtx.bz2"}, \code{"mtx.gz"}, \code{"mtx.xz"}, \code{"mtx.zip"}.
+}
+
+
+}
+
 \section{Row names}{
 
 
@@ -83,10 +127,9 @@ for exporting \code{data.frame} and \code{matrix} class objects.
 data(deseq)
 
 ## DESeqAnalysis ====
-export(deseq, dir = "example")
-
-## Clean up.
-unlink("example", recursive = TRUE)
+con <- file.path(testdir(), "example")
+export(deseq, con = con)
+unlink(con, recursive = TRUE)
 }
 \seealso{
 Packages:
@@ -100,6 +143,7 @@ Packages:
 
 Export functions:
 \itemize{
+\item \code{BiocIO::export()}.
 \item \code{data.table::fwrite()}.
 \item \code{readr::write_csv()}.
 \item \code{rio::export()}.

@@ -1,19 +1,25 @@
-context("export")
+context("export : DESeqAnalysis")
 
-test_that("DESeqAnalysis", {
-    x <- export(
-        object = deseq,
-        name = "AAA",
-        dir = "XXX",
+testdir <- file.path(tempdir(), "example")
+
+test_that("Deprecated : 'dir' instead of 'con'", {
+    unlink(testdir, recursive = TRUE)
+    object <- deseq
+    out <- export(
+        object = object,
+        dir = testdir,
         compress = TRUE
     )
-    prefix <- realpath(file.path("XXX", "AAA"))
+    prefix <- realpath(file.path(testdir, "object"))
     resTblPrefix <- file.path(prefix, "resultsTables")
     resMatPrefix <- file.path(prefix, "resultsMatrices")
+
+    ## FIXME This is outputting "counts", "mu", "H", and "cooks" in assays.
+
     expect_identical(
-        object = x,
+        object = out,
         expected = list(
-            data = list(
+            "data" = list(
                 "assays" = list(
                     "counts" = file.path(
                         prefix,
@@ -83,5 +89,5 @@ test_that("DESeqAnalysis", {
             )
         )
     )
-    unlink("XXX", recursive = TRUE)
+    unlink(testdir, recursive = TRUE)
 })

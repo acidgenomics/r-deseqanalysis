@@ -1,3 +1,7 @@
+## FIXME Put the setMethod calls at the end here
+
+
+
 #' Base methods
 #'
 #' @name base
@@ -36,7 +40,7 @@ formals(`colnames,DESeqAnalysis`) <- formals(colnames)
 #' @export
 setMethod(
     f = "colnames",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(x = "DESeqAnalysis"),
     definition = `colnames,DESeqAnalysis`
 )
 
@@ -54,7 +58,7 @@ setMethod(
 #' @export
 setMethod(
     f = "dim",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(x = "DESeqAnalysis"),
     definition = `dim,DESeqAnalysis`
 )
 
@@ -72,7 +76,7 @@ setMethod(
 #' @export
 setMethod(
     f = "dimnames",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(x = "DESeqAnalysis"),
     definition = `dimnames,DESeqAnalysis`
 )
 
@@ -90,7 +94,7 @@ setMethod(
 #' @export
 setMethod(
     f = "names",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(x = "DESeqAnalysis"),
     definition = `names,DESeqAnalysis`
 )
 
@@ -110,6 +114,6 @@ formals(`rownames,DESeqAnalysis`) <- formals(rownames)
 #' @export
 setMethod(
     f = "rownames",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(x = "DESeqAnalysis"),
     definition = `rownames,DESeqAnalysis`
 )
