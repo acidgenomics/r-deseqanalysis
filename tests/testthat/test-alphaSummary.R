@@ -46,7 +46,7 @@ test_that("Contrast vector or name", {
         )
     )
     expect_error(
-        alphaSummary(deseq, contrast = "aaa", name = "bbb"),
-        "Specify either 'contrast' or 'name'."
+        object = alphaSummary(deseq, contrast = "aaa", name = "bbb"),
+        regexp = "either"
     )
 })

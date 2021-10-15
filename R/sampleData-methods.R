@@ -27,6 +27,6 @@ NULL
 #' @export
 setMethod(
     f = "sampleData",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `sampleData,DESeqAnalysis`
 )

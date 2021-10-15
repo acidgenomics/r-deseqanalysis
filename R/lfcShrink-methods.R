@@ -70,15 +70,7 @@ NULL
 #' @export
 setMethod(
     f = "lfcShrink",
-    signature = signature("DESeqDataSet"),
-    definition = `lfcShrink,DESeqDataSet`
-)
-
-#' @rdname lfcShrink
-#' @export
-setMethod(
-    f = "lfcShrink",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `lfcShrink,DESeqAnalysis`
 )
 
@@ -86,8 +78,16 @@ setMethod(
 #' @export
 setMethod(
     f = "lfcShrink",
-    signature = signature("DESeqAnalysisList"),
+    signature = signature(object = "DESeqAnalysisList"),
     definition = `lfcShrink,DESeqAnalysisList`
+)
+
+#' @rdname lfcShrink
+#' @export
+setMethod(
+    f = "lfcShrink",
+    signature = signature(object = "DESeqDataSet"),
+    definition = `lfcShrink,DESeqDataSet`
 )
 
 

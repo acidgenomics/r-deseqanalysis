@@ -154,7 +154,7 @@ NULL
 #' @export
 setMethod(
     f = "plotDEGHeatmap",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `plotDEGHeatmap,DESeqAnalysis`
 )
 
@@ -163,6 +163,6 @@ setMethod(
 #' @export
 setMethod(
     f = "plotDEGHeatmap",
-    signature = signature("DESeqResults"),
+    signature = signature(object = "DESeqResults"),
     definition = `plotDEGHeatmap,DESeqResults`
 )

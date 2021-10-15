@@ -119,7 +119,7 @@ NULL
 #' @export
 setMethod(
     f = "alphaSummary",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `alphaSummary,DESeqAnalysis`
 )
 
@@ -127,6 +127,6 @@ setMethod(
 #' @export
 setMethod(
     f = "alphaSummary",
-    signature = signature("DESeqDataSet"),
+    signature = signature(object = "DESeqDataSet"),
     definition = `alphaSummary,DESeqDataSet`
 )

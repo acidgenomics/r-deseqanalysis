@@ -191,7 +191,7 @@ NULL
 #' @export
 setMethod(
     f = "topTables",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `topTables,DESeqAnalysis`
 )
 
@@ -199,7 +199,7 @@ setMethod(
 #' @export
 setMethod(
     f = "topTables",
-    signature = signature("DESeqResults"),
+    signature = signature(object = "DESeqResults"),
     definition = `topTables,DESeqResults`
 )
 
@@ -210,6 +210,6 @@ setMethod(
 #' @export
 setMethod(
     f = "topTables",
-    signature = signature("list"),
+    signature = signature(object = "list"),
     definition = `topTables,list`
 )

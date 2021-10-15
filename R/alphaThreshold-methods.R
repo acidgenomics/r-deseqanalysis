@@ -131,7 +131,7 @@ NULL
 #' @export
 setMethod(
     f = "alphaThreshold",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `alphaThreshold,DESeqAnalysis`
 )
 
@@ -139,7 +139,7 @@ setMethod(
 #' @export
 setMethod(
     f = "alphaThreshold",
-    signature = signature("DESeqAnalysisList"),
+    signature = signature(object = "DESeqAnalysisList"),
     definition = `alphaThreshold,DESeqAnalysisList`
 )
 
@@ -147,7 +147,7 @@ setMethod(
 #' @export
 setMethod(
     f = "alphaThreshold",
-    signature = signature("DESeqResults"),
+    signature = signature(object = "DESeqResults"),
     definition = `alphaThreshold,DESeqResults`
 )
 
@@ -155,7 +155,7 @@ setMethod(
 #' @export
 setMethod(
     f = "alphaThreshold",
-    signature = signature("DESeqResultsList"),
+    signature = signature(object = "DESeqResultsList"),
     definition = `alphaThreshold,DESeqResultsList`
 )
 

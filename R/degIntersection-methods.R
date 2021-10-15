@@ -189,7 +189,7 @@ rm(.args)
 #' @export
 setMethod(
     f = "degIntersection",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `degIntersection,DESeqAnalysis`
 )
 
@@ -197,7 +197,7 @@ setMethod(
 #' @export
 setMethod(
     f = "degIntersection",
-    signature = signature("DESeqAnalysisList"),
+    signature = signature(object = "DESeqAnalysisList"),
     definition = `degIntersection,DESeqAnalysisList`
 )
 
@@ -205,6 +205,6 @@ setMethod(
 #' @export
 setMethod(
     f = "degIntersection",
-    signature = signature("DESeqResultsList"),
+    signature = signature(object = "DESeqResultsList"),
     definition = `degIntersection,DESeqResultsList`
 )

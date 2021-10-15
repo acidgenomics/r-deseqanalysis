@@ -423,7 +423,7 @@ NULL
 #' @export
 setMethod(
     f = "plotVolcano",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `plotVolcano,DESeqAnalysis`
 )
 
@@ -431,6 +431,6 @@ setMethod(
 #' @export
 setMethod(
     f = "plotVolcano",
-    signature = signature("DESeqResults"),
+    signature = signature(object = "DESeqResults"),
     definition = `plotVolcano,DESeqResults`
 )

@@ -3,9 +3,9 @@
 \name{lfcShrink}
 \alias{lfcShrink}
 \alias{lfcShrink<-}
-\alias{lfcShrink,DESeqDataSet-method}
 \alias{lfcShrink,DESeqAnalysis-method}
 \alias{lfcShrink,DESeqAnalysisList-method}
+\alias{lfcShrink,DESeqDataSet-method}
 \alias{lfcShrink<-,DESeqAnalysis,logical-method}
 \alias{lfcShrink<-,DESeqAnalysisList,logical-method}
 \title{Shrink log2 fold changes}
@@ -14,11 +14,11 @@ lfcShrink(object, ...)
 
 lfcShrink(object, ...) <- value
 
-\S4method{lfcShrink}{DESeqDataSet}(object, ...)
-
 \S4method{lfcShrink}{DESeqAnalysis}(object)
 
 \S4method{lfcShrink}{DESeqAnalysisList}(object)
+
+\S4method{lfcShrink}{DESeqDataSet}(object, ...)
 
 \S4method{lfcShrink}{DESeqAnalysis,logical}(object) <- value
 

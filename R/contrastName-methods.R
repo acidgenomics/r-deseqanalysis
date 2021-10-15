@@ -93,7 +93,7 @@ NULL
 #' @export
 setMethod(
     f = "contrastName",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `contrastName,DESeqAnalysis`
 )
 
@@ -101,7 +101,7 @@ setMethod(
 #' @export
 setMethod(
     f = "contrastName",
-    signature = signature("DESeqResults"),
+    signature = signature(object = "DESeqResults"),
     definition = `contrastName,DESeqResults`
 )
 

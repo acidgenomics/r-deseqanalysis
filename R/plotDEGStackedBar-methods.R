@@ -105,6 +105,6 @@ NULL
 #' @export
 setMethod(
     f = "plotDEGStackedBar",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `plotDEGStackedBar,DESeqAnalysis`
 )

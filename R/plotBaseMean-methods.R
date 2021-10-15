@@ -192,7 +192,7 @@ NULL
 #' @export
 setMethod(
     f = "plotBaseMean",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `plotBaseMean,DESeqAnalysis`
 )
 
@@ -202,7 +202,7 @@ setMethod(
 #' @export
 setMethod(
     f = "plotBaseMean",
-    signature = signature("DESeqDataSet"),
+    signature = signature(object = "DESeqDataSet"),
     definition = `plotBaseMean,DESeqDataSet`
 )
 
@@ -211,7 +211,7 @@ setMethod(
 #' @export
 setMethod(
     f = "plotBaseMean",
-    signature = signature("DESeqResults"),
+    signature = signature(object = "DESeqResults"),
     definition = `plotBaseMean,DESeqResults`
 )
 
@@ -219,6 +219,6 @@ setMethod(
 #' @export
 setMethod(
     f = "plotBaseMean",
-    signature = signature("numeric"),
+    signature = signature(object = "numeric"),
     definition = `plotBaseMean,numeric`
 )

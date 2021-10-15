@@ -64,7 +64,7 @@ NULL
 #' @export
 setMethod(
     f = "lfcShrinkType",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `lfcShrinkType,DESeqAnalysis`
 )
 
@@ -72,7 +72,7 @@ setMethod(
 #' @export
 setMethod(
     f = "lfcShrinkType",
-    signature = signature("DESeqAnalysisList"),
+    signature = signature(object = "DESeqAnalysisList"),
     definition = `lfcShrinkType,DESeqAnalysisList`
 )
 
@@ -80,7 +80,7 @@ setMethod(
 #' @export
 setMethod(
     f = "lfcShrinkType",
-    signature = signature("DESeqResults"),
+    signature = signature(object = "DESeqResults"),
     definition = `lfcShrinkType,DESeqResults`
 )
 
@@ -88,6 +88,6 @@ setMethod(
 #' @export
 setMethod(
     f = "lfcShrinkType",
-    signature = signature("DESeqResultsList"),
+    signature = signature(object = "DESeqResultsList"),
     definition = `lfcShrinkType,DESeqResultsList`
 )

@@ -39,7 +39,7 @@ NULL
 #' @export
 setMethod(
     f = "DESeqAnalysisList",
-    signature = signature("SimpleList"),
+    signature = signature(object = "SimpleList"),
     definition = `DESeqAnalysisList,SimpleList`
 )
 
@@ -47,7 +47,7 @@ setMethod(
 #' @export
 setMethod(
     f = "DESeqAnalysisList",
-    signature = signature("list"),
+    signature = signature(object = "list"),
     definition = `DESeqAnalysisList,list`
 )
 
@@ -55,6 +55,6 @@ setMethod(
 #' @export
 setMethod(
     f = "DESeqAnalysisList",
-    signature = signature("missing"),
+    signature = signature(object = "missing"),
     definition = `DESeqAnalysisList,missing`
 )

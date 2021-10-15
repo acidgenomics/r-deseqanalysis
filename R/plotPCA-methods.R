@@ -49,7 +49,7 @@ NULL
 #' @export
 setMethod(
     f = "plotPCA",
-    signature = signature("DESeqAnalysis"),
+    signature = signature(object = "DESeqAnalysis"),
     definition = `plotPCA,DESeqAnalysis`
 )
 
@@ -58,7 +58,7 @@ setMethod(
 #' @export
 setMethod(
     f = "plotPCA",
-    signature = signature("DESeqDataSet"),
+    signature = signature(object = "DESeqDataSet"),
     definition = `plotPCA,DESeqDataSet`
 )
 
@@ -68,6 +68,6 @@ setMethod(
 #' @export
 setMethod(
     f = "plotPCA",
-    signature = signature("DESeqTransform"),
+    signature = signature(object = "DESeqTransform"),
     definition = `plotPCA,DESeqTransform`
 )
