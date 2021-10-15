@@ -27,12 +27,57 @@ plotContrastScatter(object, ...)
 )
 }
 \arguments{
-\item{i}{\code{character(1)} or \code{integer(1)}.
-\code{DESeqResults} contrast name or position in \code{results} slot.}
+\item{object}{Object.}
 
-\item{limits}{\code{list(2)}.
-Named list containing \code{"x"} and \code{"y"} that define the lower and upper
-limits for each axis. Set automatically by default when left \code{NULL}.}
+\item{...}{Additional arguments.}
+
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
+
+\item{direction}{\code{character(1)}.
+Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
+
+\item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
+Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
+defined in the object.}
+
+\item{baseMeanThreshold}{\code{numeric(1)} or \code{NULL}.
+Base mean (i.e. average expression across all samples) threshold.
+If left \code{NULL}, will use the cutoff defined in the object.
+Applies in general to DESeq2 RNA-seq differential expression output.}
+
+\item{lfcThreshold}{\code{numeric(1)} or \code{NULL}.
+Log (base 2) fold change ratio cutoff threshold.
+If left \code{NULL}, will use the cutoff defined in the object.}
+
+\item{genes}{\code{character}.
+Gene identifiers.}
+
+\item{ntop}{\code{integer(1)}.
+Number of top features to label.}
+
+\item{pointColor}{\code{character(1)}.
+Default point color for the plot.}
+
+\item{pointSize}{\code{numeric(1)}.
+Point size for dots in the plot.
+In the range of 1-3 is generally recommended.}
+
+\item{pointAlpha}{\code{numeric(1)} (\code{0}-\code{1}).
+Alpha transparency level.}
+
+\item{trans}{\code{character(1)}.
+Name of the axis scale transformation to apply.
+
+For more information:\preformatted{help(topic = "scale_x_continuous", package = "ggplot2")
+}}
+
+\item{labels}{\code{list}.
+ggplot2 labels.
+See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
 }
 \description{
 Plot differential expression contrast
@@ -46,5 +91,7 @@ plotContrastScatter(deseq, i = 1L)
 
 }
 \seealso{
-
+\itemize{
+\item https://doi.org/10.1084/jem.20200829
+}
 }

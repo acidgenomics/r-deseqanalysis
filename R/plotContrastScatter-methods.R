@@ -9,14 +9,15 @@
 #' @name plotContrastScatter
 #' @note Updated 2021-10-15.
 #'
-#' @inheritParams params
+#' @inheritParams AcidRoxygen::params
+#' @param ... Additional arguments.
 #'
 #' @examples
 #' data(deseq)
 #' plotContrastScatter(deseq, i = 1L)
 #'
 #' @seealso
-# - https://doi.org/10.1084/jem.20200829
+#' - https://doi.org/10.1084/jem.20200829
 NULL
 
 

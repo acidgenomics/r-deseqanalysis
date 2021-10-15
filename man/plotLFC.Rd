@@ -6,6 +6,11 @@
 \usage{
 plotLFC(object, ...)
 }
+\arguments{
+\item{object}{Object.}
+
+\item{...}{Additional arguments.}
+}
 \description{
 Plot log fold change
 }

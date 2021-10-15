@@ -7,7 +7,8 @@
 #' @name plotLFC
 #' @note Updated 2021-08-03.
 #'
-#' @inheritParams params
+#' @inheritParams AcidRoxygen::params
+#' @param ... Additional arguments.
 #'
 #' @examples
 #' data(deseq)
