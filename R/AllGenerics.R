@@ -7,8 +7,6 @@ setGeneric(
     }
 )
 
-
-
 #' @rdname DESeqResultsList
 #' @export
 setGeneric(
@@ -17,8 +15,6 @@ setGeneric(
         standardGeneric("DESeqResultsList")
     }
 )
-
-
 
 #' @rdname apeglmResults
 #' @export
@@ -29,16 +25,12 @@ setGeneric(
     }
 )
 
-
-
 #' @rdname alphaSummary
 #' @name alphaSummary
 #' @importFrom AcidGenerics alphaSummary
 #' @usage alphaSummary(object, ...)
 #' @export
 NULL
-
-
 
 #' @rdname alphaThreshold
 #' @name alphaThreshold
@@ -54,8 +46,6 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname baseMeanThreshold
 #' @name baseMeanThreshold
 #' @importFrom AcidGenerics baseMeanThreshold
@@ -70,16 +60,12 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname combine
 #' @name combine
 #' @importFrom AcidGenerics combine
 #' @usage combine(x, y, ...)
 #' @export
 NULL
-
-
 
 #' @rdname contrastName
 #' @name contrastName
@@ -95,16 +81,12 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname contrastSamples
 #' @name contrastSamples
 #' @importFrom AcidGenerics contrastSamples
 #' @usage contrastSamples(object, ...)
 #' @export
 NULL
-
-
 
 #' @rdname correlation
 #' @name correlation
@@ -113,16 +95,12 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname deg
 #' @name deg
 #' @importFrom AcidGenerics deg
 #' @usage deg(object, ...)
 #' @export
 NULL
-
-
 
 #' @rdname degIntersection
 #' @name degIntersection
@@ -131,8 +109,6 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname degPerContrast
 #' @name degPerContrast
 #' @importFrom AcidGenerics degPerContrast
@@ -140,16 +116,12 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname export
 #' @name export
 #' @importFrom AcidGenerics export
 #' @usage export(object, con, format, ...)
 #' @export
 NULL
-
-
 
 #' @rdname interestingGroups
 #' @name interestingGroups
@@ -165,8 +137,6 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname lfcShrink
 #' @name lfcShrink
 #' @importFrom AcidGenerics lfcShrink
@@ -181,16 +151,12 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname lfcShrinkType
 #' @name lfcShrinkType
 #' @importFrom AcidGenerics lfcShrinkType
 #' @usage lfcShrinkType(object, ...)
 #' @export
 NULL
-
-
 
 #' @rdname lfcThreshold
 #' @name lfcThreshold
@@ -206,8 +172,6 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname plotBaseMean
 #' @name plotBaseMean
 #' @importFrom AcidGenerics plotBaseMean
@@ -215,7 +179,7 @@ NULL
 #' @export
 NULL
 
-
+## FIXME Move this to AcidGenerics.
 
 #' @rdname plotContrastScatter
 #' @export
@@ -226,16 +190,12 @@ setGeneric(
     }
 )
 
-
-
 #' @rdname plotCounts
 #' @name plotCounts
 #' @importFrom AcidGenerics plotCounts
 #' @usage plotCounts(object, ...)
 #' @export
 NULL
-
-
 
 #' @rdname plotDEGHeatmap
 #' @name plotDEGHeatmap
@@ -244,16 +204,12 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname plotDEGPCA
 #' @name plotDEGPCA
 #' @importFrom AcidGenerics plotDEGPCA
 #' @usage plotDEGPCA(object, ...)
 #' @export
 NULL
-
-
 
 #' @rdname plotDEGStackedBar
 #' @name plotDEGStackedBar
@@ -262,16 +218,12 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname plotDEGUpset
 #' @name plotDEGUpset
 #' @importFrom AcidGenerics plotDEGUpset
 #' @usage plotDEGUpset(object, ...)
 #' @export
 NULL
-
-
 
 #' @rdname plotHeatmap
 #' @name plotHeatmap
@@ -294,7 +246,7 @@ NULL
 #' @export
 NULL
 
-
+## FIXME Move this to AcidGenerics.
 
 #' @rdname plotLFC
 #' @export
@@ -305,16 +257,12 @@ setGeneric(
     }
 )
 
-
-
 #' @rdname plotMA
 #' @name plotMA
 #' @importFrom AcidGenerics plotMA
 #' @usage plotMA(object, ...)
 #' @export
 NULL
-
-
 
 #' @rdname plotPCA
 #' @name plotPCA
@@ -323,16 +271,12 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname plotVolcano
 #' @name plotVolcano
 #' @importFrom AcidGenerics plotVolcano
 #' @usage plotVolcano(object, ...)
 #' @export
 NULL
-
-
 
 #' @rdname results
 #' @name results
@@ -341,8 +285,6 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname resultsDiff
 #' @name resultsDiff
 #' @importFrom AcidGenerics resultsDiff
@@ -350,16 +292,12 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname resultsMatrix
 #' @name resultsMatrix
 #' @importFrom AcidGenerics resultsMatrix
 #' @usage resultsMatrix(object, ...)
 #' @export
 NULL
-
-
 
 #' @rdname resultsNames
 #' @name resultsNames
@@ -375,16 +313,12 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname resultsTables
 #' @name resultsTables
 #' @importFrom AcidGenerics resultsTables
 #' @usage resultsTables(object, ...)
 #' @export
 NULL
-
-
 
 #' @rdname sampleData
 #' @name sampleData
@@ -393,16 +327,12 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname show
 #' @name show
 #' @importFrom methods show
 #' @usage show(object)
 #' @export
 NULL
-
-
 
 #' @rdname topTables
 #' @name topTables
@@ -411,16 +341,12 @@ NULL
 #' @export
 NULL
 
-
-
 #' @rdname transformType
 #' @name transformType
 #' @importFrom AcidGenerics transformType
 #' @usage transformType(object, ...)
 #' @export
 NULL
-
-
 
 #' @rdname updateObject
 #' @name updateObject
