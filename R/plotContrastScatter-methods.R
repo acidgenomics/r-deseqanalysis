@@ -4,12 +4,12 @@
 
 
 
-#' Plot differential expression contrast
-#'
 #' @name plotContrastScatter
-#' @note Updated 2021-10-15.
+#' @inherit AcidGenerics::plotContrastScatter
+#' @note Updated 2021-10-18.
 #'
 #' @inheritParams AcidRoxygen::params
+#' @inheritParams params
 #' @param ... Additional arguments.
 #'
 #' @examples

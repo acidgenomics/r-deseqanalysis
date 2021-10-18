@@ -3,7 +3,7 @@
 \name{plotContrastScatter}
 \alias{plotContrastScatter}
 \alias{plotContrastScatter,DESeqAnalysis-method}
-\title{Plot differential expression contrast}
+\title{Plot scatterplot of differential expression contrast}
 \usage{
 plotContrastScatter(object, ...)
 
@@ -28,8 +28,6 @@ plotContrastScatter(object, ...)
 }
 \arguments{
 \item{object}{Object.}
-
-\item{...}{Additional arguments.}
 
 \item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
 \code{character} vectors, empty (\code{missing}), or \code{NULL}.
@@ -75,15 +73,24 @@ Name of the axis scale transformation to apply.
 For more information:\preformatted{help(topic = "scale_x_continuous", package = "ggplot2")
 }}
 
+\item{limits}{\code{list(2)}.
+Named list containing \code{"x"} and \code{"y"} that define the lower and upper
+limits for each axis. Set automatically by default when left \code{NULL}.}
+
 \item{labels}{\code{list}.
 ggplot2 labels.
 See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
+
+\item{...}{Additional arguments.}
+}
+\value{
+\code{ggplot}.
 }
 \description{
-Plot differential expression contrast
+Plot scatterplot of differential expression contrast
 }
 \note{
-Updated 2021-10-15.
+Updated 2021-10-18.
 }
 \examples{
 data(deseq)

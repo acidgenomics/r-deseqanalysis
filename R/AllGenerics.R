@@ -179,16 +179,12 @@ NULL
 #' @export
 NULL
 
-## FIXME Move this to AcidGenerics.
-
 #' @rdname plotContrastScatter
+#' @name plotContrastScatter
+#' @importFrom AcidGenerics plotContrastScatter
+#' @usage plotContrastScatter(object, ...)
 #' @export
-setGeneric(
-    name = "plotContrastScatter",
-    def = function(object, ...) {
-        standardGeneric("plotContrastScatter")
-    }
-)
+NULL
 
 #' @rdname plotCounts
 #' @name plotCounts
@@ -246,16 +242,12 @@ NULL
 #' @export
 NULL
 
-## FIXME Move this to AcidGenerics.
-
 #' @rdname plotLFC
+#' @name plotLFC
+#' @importFrom AcidGenerics plotLFC
+#' @usage plotLFC(object, ...)
 #' @export
-setGeneric(
-    name = "plotLFC",
-    def = function(object, ...) {
-        standardGeneric("plotLFC")
-    }
-)
+NULL
 
 #' @rdname plotMA
 #' @name plotMA

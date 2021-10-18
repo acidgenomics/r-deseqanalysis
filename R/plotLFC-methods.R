@@ -2,12 +2,12 @@
 
 
 
-#' Plot log fold change
-#'
 #' @name plotLFC
-#' @note Updated 2021-08-03.
+#' @inherit AcidGenerics::plotLFC
+#' @note Updated 2021-10-18.
 #'
 #' @inheritParams AcidRoxygen::params
+#' @inheritParams params
 #' @param ... Additional arguments.
 #'
 #' @examples
@@ -26,7 +26,9 @@ NULL
 
 ## Updated 2021-08-03.
 `plotLFC,DESeqResults` <-  # nolint
-    function(object) {
+    function(
+        object
+    ) {
         abort("FIXME Need to add method support.")
 }
 
@@ -34,6 +36,27 @@ NULL
 
 ## Updated 2021-08-03.
 `plotLFC,DESeqAnalysis` <-  # nolint
-    function(object) {
+    function(
+        object,
+        i  # FIXME
+    ) {
         abort("FIXME Need to add method support.")
     }
+
+
+
+#' @rdname plotLFC
+#' @export
+setMethod(
+    f = "plotLFC",
+    signature = signature(object = "DESeqAnalysis"),
+    definition = `plotLFC,DESeqAnalysis`
+)
+
+#' @rdname plotLFC
+#' @export
+setMethod(
+    f = "plotLFC",
+    signature = signature(object = "DESeqResults"),
+    definition = `plotLFC,DESeqResults`
+)
