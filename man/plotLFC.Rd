@@ -2,20 +2,35 @@
 % Please edit documentation in R/AllGenerics.R, R/plotLFC-methods.R
 \name{plotLFC}
 \alias{plotLFC}
-\title{Plot log fold change}
+\alias{plotLFC,DESeqAnalysis-method}
+\alias{plotLFC,DESeqResults-method}
+\title{Plot log2 fold change distributions}
 \usage{
 plotLFC(object, ...)
+
+\S4method{plotLFC}{DESeqAnalysis}(object, i)
+
+\S4method{plotLFC}{DESeqResults}(object)
 }
 \arguments{
 \item{object}{Object.}
 
+\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
+\code{character} vectors, empty (\code{missing}), or \code{NULL}.
+
+For more information:\preformatted{help(topic = "Extract", package = "base")
+}}
+
 \item{...}{Additional arguments.}
 }
+\value{
+\code{ggplot}.
+}
 \description{
-Plot log fold change
+Plot log2 fold change distributions
 }
 \note{
-Updated 2021-08-03.
+Updated 2021-10-18.
 }
 \examples{
 data(deseq)
