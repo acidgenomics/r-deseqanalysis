@@ -25,6 +25,8 @@ setGeneric(
     }
 )
 
+
+
 #' @rdname alphaSummary
 #' @name alphaSummary
 #' @importFrom AcidGenerics alphaSummary
