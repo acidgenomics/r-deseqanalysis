@@ -1,6 +1,8 @@
 ## FIXME This function is still a work in progress.
 ## FIXME Need to support plotVolcano colors here...
 ## FIXME Consider supporting directionality labeling.
+## FIXME Need to think about NA gene symbol handling in call
+##       to convertGenesToSymbols.
 
 
 

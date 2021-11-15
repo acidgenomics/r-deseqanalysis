@@ -1,3 +1,7 @@
+## FIXME Need to improve full path messages for "data", "transform", etc...
+
+
+
 #' @name export
 #' @inherit AcidExperiment::export
 #' @note Updated 2021-10-15.
