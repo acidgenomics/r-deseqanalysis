@@ -6,7 +6,7 @@ params:
   ## Use DESeqAnalysis object as input.
   ## - Standard: Load from file on disk, either RDS or RDA.
   ## - Advanced: Loop across multiple objects using `rmarkdown::render()`.
-  object: !r file.path("rds", "YYYY-MM-DD", "object.rds")
+  object: !r file.path("rds", Sys.Date(), "object.rds")
   
   ## The `name` param is only required when passing in object directly, during
   ## an `rmarkdown::render()` call. See `object` param.
