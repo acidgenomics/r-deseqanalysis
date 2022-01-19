@@ -1,5 +1,11 @@
 ## DESeqAnalysis 0.4.5 (UNRELEASED)
 
+### Minor changes
+
+- Updated dependencies to R 4.1 / Bioconductor 3.14.
+- `export`: Updated method to inherit BiocIO conventions now used in basejump,
+  which now rely on `con` argument.
+
 ## DESeqAnalysis 0.4.4 (2021-08-02)
 
 ### Minor changes
