@@ -4,7 +4,7 @@
 
 #' @name export
 #' @inherit AcidExperiment::export
-#' @note Updated 2021-10-15.
+#' @note Updated 2022-01-19.
 #'
 #' @details
 #' Size-factor normalized coutns and FPKM values are calculated on the fly and
@@ -16,7 +16,7 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' con <- file.path(testdir(), "example")
+#' con <- file.path(tempdir(), "example")
 #' export(deseq, con = con)
 #' unlink(con, recursive = TRUE)
 NULL

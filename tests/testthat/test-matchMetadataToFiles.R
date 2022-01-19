@@ -66,6 +66,6 @@ test_that("Error on non-tximport quant file input", {
     files <- "sample-1.fastq.gz"
     expect_error(
         object = matchMetadataToFiles(metadata = metadata, files = files),
-        regexp = "Failed to detect sample name from quant file."
+        regexp = "quant"
     )
 })
