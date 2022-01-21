@@ -5,6 +5,8 @@
 - Updated dependencies to R 4.1 / Bioconductor 3.14.
 - `export`: Updated method to inherit BiocIO conventions now used in basejump,
   which now rely on `con` argument.
+- `plotPCA`: Tightned up method export to only work on `DESeqAnalysis` object,
+  so we don't conflict with `DESeqTransform` method defined in DESeq2.
 
 ## DESeqAnalysis 0.4.4 (2021-08-02)
 
