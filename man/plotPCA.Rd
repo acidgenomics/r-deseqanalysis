@@ -3,17 +3,11 @@
 \name{plotPCA}
 \alias{plotPCA}
 \alias{plotPCA,DESeqAnalysis-method}
-\alias{plotPCA,DESeqDataSet-method}
-\alias{plotPCA,DESeqTransform-method}
 \title{Principal component analysis plot}
 \usage{
 plotPCA(object, ...)
 
 \S4method{plotPCA}{DESeqAnalysis}(object, ...)
-
-\S4method{plotPCA}{DESeqDataSet}(object, ...)
-
-\S4method{plotPCA}{DESeqTransform}(object, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -31,19 +25,12 @@ Passes to \code{SummarizedExperiment} defined in AcidPlots package.
 }
 \section{Functions}{
 \itemize{
-\item \code{plotPCA,DESeqAnalysis-method}: Extracts \code{DESeqTransform} and passes to corresponding
-method.
-
-\item \code{plotPCA,DESeqDataSet-method}: Method intentionally errors. Use \code{DESeqAnalysis} or
-\code{DESeqTransform} methods instead.
-
-\item \code{plotPCA,DESeqTransform-method}: Passes to \code{SummarizedExperiment} method defined in
-AcidPlots package. Uses values defined in
-\code{\link[SummarizedExperiment:SummarizedExperiment-class]{assay()}}.
+\item \code{plotPCA,DESeqAnalysis-method}: Extracts \code{DESeqTransform}, converts to
+\code{RangedSummarizedExperiment}, and passes to method defined in AcidPlots.
 }}
 
 \note{
-Updated 2021-03-15.
+Updated 2022-01-21.
 }
 \section{Principal component analysis}{
 
