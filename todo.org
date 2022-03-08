@@ -1,4 +1,7 @@
 #+TITLE: DESeqAnalysis
 #+STARTUP: content
 * Development
+** TODO Consider adding method support for: colData, rowData, rowRanges.
+** TODO Ensure coercion methods for `as.DESeqDataSet` and `asDESeqTransform` work here.
 ** TODO Need to think about NA gene symbol handling in call to convertGenesToSymbols.
+** TODO `export()`: Need to improve full path messages for "data", "transform", etc...
