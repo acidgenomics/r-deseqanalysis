@@ -1,13 +1,12 @@
-## FIXME Need to think about NA gene symbol handling in call
-##       to convertGenesToSymbols.
-
-
-
 #' MA plot
 #'
 #' @name plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @note Updated 2022-03-08.
+#'
+#' @description The plot visualizes the differences between measurements taken
+#'   in two samples, by transforming the data onto **M** (log ratio) and **A**
+#'   (mean average) scales.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual

@@ -15,16 +15,16 @@ updateObject(object, ..., verbose = FALSE)
 \item{...}{Additional arguments.}
 
 \item{verbose}{\code{logical(1)}.
-Verbose output.}
+Run the function with verbose output.}
 }
 \value{
-\code{DESeqAnalysis}.
+Modified object.
 }
 \description{
 Update object
 }
 \note{
-Updated 2021-02-10.
+Updated 2022-03-09.
 }
 \section{\code{DESeqAnalysis}}{
 

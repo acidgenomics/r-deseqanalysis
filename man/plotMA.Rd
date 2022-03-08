@@ -93,7 +93,9 @@ See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
 \code{ggplot}.
 }
 \description{
-MA plot
+The plot visualizes the differences between measurements taken
+in two samples, by transforming the data onto \strong{M} (log ratio) and \strong{A}
+(mean average) scales.
 }
 \details{
 An MA plot is an application of a Bland–Altman plot for visual
