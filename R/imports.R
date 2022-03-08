@@ -1,9 +1,3 @@
-## FIXME Need to rework grid approach:
-##       draw_plot, ggraw
-##       Not using these any more, in favor of patchwork.
-
-
-
 ## S4 classes ==================================================================
 
 #' @importClassesFrom AcidBase missingOrNULL

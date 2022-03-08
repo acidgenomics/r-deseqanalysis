@@ -1,10 +1,3 @@
-## FIXME Need to add support for:
-## rowData
-## rowRanges
-## colData
-
-
-
 #' Base methods
 #'
 #' @name base
