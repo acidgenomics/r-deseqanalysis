@@ -3,10 +3,11 @@
 
 
 
+#' MA plot
+#'
 #' @name plotMA
-#' @inherit AcidGenerics::plotMA
 #' @author Michael Steinbaugh, Rory Kirchner
-#' @note Updated 2021-06-29.
+#' @note Updated 2022-03-08.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual
