@@ -93,9 +93,7 @@ See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
 \code{ggplot}.
 }
 \description{
-The plot visualizes the differences between measurements taken in two
-samples, by transforming the data onto \strong{M} (log ratio) and \strong{A}
-(mean average) scales.
+MA plot
 }
 \details{
 An MA plot is an application of a Bland–Altman plot for visual
@@ -110,7 +108,7 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2021-06-29.
+Updated 2022-03-08.
 }
 \examples{
 data(deseq)
