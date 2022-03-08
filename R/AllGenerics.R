@@ -1,5 +1,5 @@
-#' @rdname DESeqAnalysisList
 #' @export
+#' @rdname DESeqAnalysisList
 setGeneric(
     name = "DESeqAnalysisList",
     def = function(object, ...) {
@@ -7,8 +7,8 @@ setGeneric(
     }
 )
 
-#' @rdname DESeqResultsList
 #' @export
+#' @rdname DESeqResultsList
 setGeneric(
     name = "DESeqResultsList",
     def = function(object, ...) {
@@ -16,8 +16,23 @@ setGeneric(
     }
 )
 
-#' @rdname apeglmResults
 #' @export
+#' @name alphaSummary
+#' @rdname alphaSummary
+#' @usage alphaSummary(object, ...)
+NULL
+
+#' @aliases alphaThreshold<-
+#' @export alphaThreshold alphaThreshold<-
+#' @name alphaThreshold
+#' @rdname alphaThreshold
+#' @usage
+#' alphaThreshold(object, ...)
+#' alphaThreshold(object, ...) <- value
+NULL
+
+#' @export
+#' @rdname apeglmResults
 setGeneric(
     name = "apeglmResults",
     def = function(object, ...) {
@@ -25,326 +40,242 @@ setGeneric(
     }
 )
 
-
-
-#' @rdname alphaSummary
-#' @name alphaSummary
-#' @importFrom AcidGenerics alphaSummary
-#' @usage alphaSummary(object, ...)
-#' @export
-NULL
-
-#' @rdname alphaThreshold
-#' @name alphaThreshold
-#' @importFrom AcidGenerics alphaThreshold
-#' @usage alphaThreshold(object, ...)
-#' @export
-NULL
-
-#' @rdname alphaThreshold
-#' @name alphaThreshold<-
-#' @importFrom AcidGenerics alphaThreshold<-
-#' @usage alphaThreshold(object, ...) <- value
-#' @export
-NULL
-
-#' @rdname baseMeanThreshold
+#' @aliases baseMeanThreshold<-
+#' @export baseMeanThreshold baseMeanThreshold<-
 #' @name baseMeanThreshold
-#' @importFrom AcidGenerics baseMeanThreshold
-#' @usage baseMeanThreshold(object, ...)
-#' @export
-NULL
-
 #' @rdname baseMeanThreshold
-#' @name baseMeanThreshold<-
-#' @importFrom AcidGenerics baseMeanThreshold<-
-#' @usage baseMeanThreshold(object, ...) <- value
-#' @export
+#' @usage
+#' baseMeanThreshold(object, ...)
+#' baseMeanThreshold(object, ...) <- value
 NULL
 
-#' @rdname combine
+#' @export
 #' @name combine
-#' @importFrom AcidGenerics combine
+#' @rdname combine
 #' @usage combine(x, y, ...)
-#' @export
 NULL
 
-#' @rdname contrastName
+#' @aliases contrastName<-
+#' @export contrastName contrastName<-
 #' @name contrastName
-#' @importFrom AcidGenerics contrastName
-#' @usage contrastName(object, ...)
-#' @export
-NULL
-
 #' @rdname contrastName
-#' @name contrastName<-
-#' @importFrom AcidGenerics contrastName<-
-#' @usage contrastName(object, ...) <- value
-#' @export
+#' @usage
+#' contrastName(object, ...)
+#' contrastName(object, ...) <- value
 NULL
 
-#' @rdname contrastSamples
+#' @export
 #' @name contrastSamples
-#' @importFrom AcidGenerics contrastSamples
+#' @rdname contrastSamples
 #' @usage contrastSamples(object, ...)
-#' @export
 NULL
 
-#' @rdname correlation
+#' @export
 #' @name correlation
-#' @importFrom basejump correlation
+#' @rdname correlation
 #' @usage correlation(x, y, ...)
-#' @export
 NULL
 
-#' @rdname deg
+#' @export
 #' @name deg
-#' @importFrom AcidGenerics deg
+#' @rdname deg
 #' @usage deg(object, ...)
-#' @export
 NULL
 
-#' @rdname degIntersection
+#' @export
 #' @name degIntersection
-#' @importFrom AcidGenerics degIntersection
+#' @rdname degIntersection
 #' @usage degIntersection(object, ...)
-#' @export
 NULL
 
-#' @rdname degPerContrast
+#' @export
 #' @name degPerContrast
-#' @importFrom AcidGenerics degPerContrast
+#' @rdname degPerContrast
 #' @usage degPerContrast(object, ...)
-#' @export
 NULL
 
-#' @rdname export
+#' @export
 #' @name export
-#' @importFrom AcidGenerics export
+#' @rdname export
 #' @usage export(object, con, format, ...)
-#' @export
 NULL
 
-#' @rdname interestingGroups
+#' @aliases interestingGroups<-
+#' @export interestingGroups interestingGroups<-
 #' @name interestingGroups
-#' @importFrom basejump interestingGroups
-#' @usage interestingGroups(object, ...)
-#' @export
-NULL
-
 #' @rdname interestingGroups
-#' @name interestingGroups<-
-#' @importFrom basejump interestingGroups<-
-#' @usage interestingGroups(object, ...)  <- value
-#' @export
+#' @usage
+#' interestingGroups(object, ...)
+#' interestingGroups(object, ...)  <- value
 NULL
 
-#' @rdname lfcShrink
+#' @aliases lfcShrink<-
+#' @export lfcShrink lfcShrink<-
 #' @name lfcShrink
-#' @importFrom AcidGenerics lfcShrink
-#' @usage lfcShrink(object, ...)
-#' @export
-NULL
-
 #' @rdname lfcShrink
-#' @name lfcShrink<-
-#' @importFrom AcidGenerics lfcShrink<-
-#' @usage lfcShrink(object, ...) <- value
-#' @export
+#' @usage
+#' lfcShrink(object, ...)
+#' lfcShrink(object, ...) <- value
 NULL
 
-#' @rdname lfcShrinkType
+#' @export
 #' @name lfcShrinkType
-#' @importFrom AcidGenerics lfcShrinkType
+#' @rdname lfcShrinkType
 #' @usage lfcShrinkType(object, ...)
-#' @export
 NULL
 
-#' @rdname lfcThreshold
+#' @aliases lfcThreshold<-
+#' @export lfcThreshold lfcThreshold<-
 #' @name lfcThreshold
-#' @importFrom AcidGenerics lfcThreshold
-#' @usage lfcThreshold(object, ...)
-#' @export
-NULL
-
 #' @rdname lfcThreshold
-#' @name lfcThreshold<-
-#' @importFrom AcidGenerics lfcThreshold<-
-#' @usage lfcThreshold(object, ...) <- value
-#' @export
+#' @usage
+#' lfcThreshold(object, ...)
+#' lfcThreshold(object, ...) <- value
 NULL
 
-#' @rdname plotBaseMean
+#' @export
 #' @name plotBaseMean
-#' @importFrom AcidGenerics plotBaseMean
+#' @rdname plotBaseMean
 #' @usage plotBaseMean(object, ...)
-#' @export
 NULL
 
-#' @rdname plotContrastScatter
+#' @export
 #' @name plotContrastScatter
-#' @importFrom AcidGenerics plotContrastScatter
+#' @rdname plotContrastScatter
 #' @usage plotContrastScatter(object, ...)
-#' @export
 NULL
 
-#' @rdname plotCounts
-#' @name plotCounts
-#' @importFrom AcidGenerics plotCounts
-#' @usage plotCounts(object, ...)
 #' @export
-NULL
-
-#' @rdname plotDEGHeatmap
-#' @name plotDEGHeatmap
-#' @importFrom AcidGenerics plotDEGHeatmap
-#' @usage plotDEGHeatmap(object, ...)
-#' @export
-NULL
-
-#' @rdname plotDEGPCA
-#' @name plotDEGPCA
-#' @importFrom AcidGenerics plotDEGPCA
-#' @usage plotDEGPCA(object, ...)
-#' @export
-NULL
-
-#' @rdname plotDEGStackedBar
-#' @name plotDEGStackedBar
-#' @importFrom AcidGenerics plotDEGStackedBar
-#' @usage plotDEGStackedBar(object, ...)
-#' @export
-NULL
-
-#' @rdname plotDEGUpset
-#' @name plotDEGUpset
-#' @importFrom AcidGenerics plotDEGUpset
-#' @usage plotDEGUpset(object, ...)
-#' @export
-NULL
-
-#' @rdname plotHeatmap
-#' @name plotHeatmap
-#' @importFrom AcidGenerics plotHeatmap
-#' @usage plotHeatmap(object, ...)
-#' @export
-NULL
-
-#' @rdname plotHeatmap
 #' @name plotCorrelationHeatmap
-#' @importFrom AcidGenerics plotCorrelationHeatmap
-#' @usage plotCorrelationHeatmap(object, ...)
-#' @export
-NULL
-
 #' @rdname plotHeatmap
-#' @name plotQuantileHeatmap
-#' @importFrom AcidGenerics plotQuantileHeatmap
-#' @usage plotQuantileHeatmap(object, ...)
-#' @export
+#' @usage plotCorrelationHeatmap(object, ...)
 NULL
 
-#' @rdname plotLFC
+#' @export
+#' @name plotCounts
+#' @rdname plotCounts
+#' @usage plotCounts(object, ...)
+NULL
+
+#' @export
+#' @name plotDEGHeatmap
+#' @rdname plotDEGHeatmap
+#' @usage plotDEGHeatmap(object, ...)
+NULL
+
+#' @export
+#' @name plotDEGPCA
+#' @rdname plotDEGPCA
+#' @usage plotDEGPCA(object, ...)
+NULL
+
+#' @export
+#' @name plotDEGStackedBar
+#' @rdname plotDEGStackedBar
+#' @usage plotDEGStackedBar(object, ...)
+NULL
+
+#' @export
+#' @name plotDEGUpset
+#' @rdname plotDEGUpset
+#' @usage plotDEGUpset(object, ...)
+NULL
+
+#' @export
+#' @name plotHeatmap
+#' @rdname plotHeatmap
+#' @usage plotHeatmap(object, ...)
+NULL
+
+#' @export
 #' @name plotLFC
-#' @importFrom AcidGenerics plotLFC
+#' @rdname plotLFC
 #' @usage plotLFC(object, ...)
-#' @export
 NULL
 
-#' @rdname plotMA
+#' @export
 #' @name plotMA
-#' @importFrom AcidGenerics plotMA
+#' @rdname plotMA
 #' @usage plotMA(object, ...)
-#' @export
 NULL
 
-#' @rdname plotPCA
+#' @export
 #' @name plotPCA
-#' @importFrom AcidGenerics plotPCA
+#' @rdname plotPCA
 #' @usage plotPCA(object, ...)
-#' @export
 NULL
 
-#' @rdname plotVolcano
+#' @export
+#' @name plotQuantileHeatmap
+#' @rdname plotHeatmap
+#' @usage plotQuantileHeatmap(object, ...)
+NULL
+
+#' @export
 #' @name plotVolcano
-#' @importFrom AcidGenerics plotVolcano
+#' @rdname plotVolcano
 #' @usage plotVolcano(object, ...)
-#' @export
 NULL
 
-#' @rdname results
+#' @export
 #' @name results
-#' @importFrom AcidGenerics results
+#' @rdname results
 #' @usage results(object, ...)
-#' @export
 NULL
 
-#' @rdname resultsDiff
+#' @export
 #' @name resultsDiff
-#' @importFrom AcidGenerics resultsDiff
+#' @rdname resultsDiff
 #' @usage resultsDiff(x, y, ...)
-#' @export
 NULL
 
-#' @rdname resultsMatrix
+#' @export
 #' @name resultsMatrix
-#' @importFrom AcidGenerics resultsMatrix
+#' @rdname resultsMatrix
 #' @usage resultsMatrix(object, ...)
-#' @export
 NULL
 
-#' @rdname resultsNames
+#' @aliases resultsNames<-
+#' @export resultsNames resultsNames<-
 #' @name resultsNames
-#' @importFrom AcidGenerics resultsNames
-#' @usage resultsNames(object, ...)
-#' @export
-NULL
-
 #' @rdname resultsNames
-#' @name resultsNames<-
-#' @importFrom AcidGenerics resultsNames<-
-#' @usage resultsNames(object, ...) <- value
-#' @export
+#' @usage
+#' resultsNames(object, ...)
+#' resultsNames(object, ...) <- value
 NULL
 
-#' @rdname resultsTables
+#' @export
 #' @name resultsTables
-#' @importFrom AcidGenerics resultsTables
+#' @rdname resultsTables
 #' @usage resultsTables(object, ...)
-#' @export
 NULL
 
-#' @rdname sampleData
+#' @export
 #' @name sampleData
-#' @importFrom AcidGenerics sampleData
+#' @rdname sampleData
 #' @usage sampleData(object, ...)
-#' @export
 NULL
 
-#' @rdname show
+#' @export
 #' @name show
-#' @importFrom methods show
+#' @rdname show
 #' @usage show(object)
-#' @export
 NULL
 
-#' @rdname topTables
+#' @export
 #' @name topTables
-#' @importFrom AcidGenerics topTables
+#' @rdname topTables
 #' @usage topTables(object, ...)
-#' @export
 NULL
 
-#' @rdname transformType
+#' @export
 #' @name transformType
-#' @importFrom AcidGenerics transformType
+#' @rdname transformType
 #' @usage transformType(object, ...)
-#' @export
 NULL
 
-#' @rdname updateObject
-#' @name updateObject
-#' @importFrom AcidGenerics updateObject
-#' @usage updateObject(object, ..., verbose = FALSE)
 #' @export
+#' @name updateObject
+#' @rdname updateObject
+#' @usage updateObject(object, ..., verbose = FALSE)
 NULL

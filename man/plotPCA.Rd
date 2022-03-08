@@ -3,7 +3,7 @@
 \name{plotPCA}
 \alias{plotPCA}
 \alias{plotPCA,DESeqAnalysis-method}
-\title{Principal component analysis plot}
+\title{Plot reduced dimensions}
 \usage{
 plotPCA(object, ...)
 
@@ -18,7 +18,7 @@ plotPCA(object, ...)
 \code{ggplot}.
 }
 \description{
-Principal component analysis plot
+Plot cell-level dimensionality reduction.
 }
 \details{
 Passes to \code{SummarizedExperiment} defined in AcidPlots package.
@@ -32,7 +32,18 @@ Passes to \code{SummarizedExperiment} defined in AcidPlots package.
 \note{
 Updated 2022-01-21.
 }
-\section{Principal component analysis}{
+\section{Reduction types}{
+
+
+\itemize{
+\item PCA: \strong{P}rincipal \strong{C}omponent \strong{A}nalysis.
+\item t-SNE: \strong{t}-distributed \strong{S}tochastic \strong{N}eighbor \strong{E}mbedding.
+\item UMAP: \strong{U}niform \strong{M}anifold \strong{A}pproximation and \strong{P}rojection.
+}
+
+}
+
+\section{Principal component analysis (\code{plotPCA})}{
 
 
 
@@ -43,14 +54,21 @@ reducing each sample into one point. Thereby, we can separate samples by
 expression variation, and identify potential sample outliers. The PCA plot is
 a way to look at how samples are clustering.
 
+We're using a modified version of the \code{DESeqTransform} method here.\if{html}{\out{<div class="sourceCode r">}}\preformatted{methodFunction(
+    f = "plotPCA",
+    signature = "DESeqTransform",
+    package = "DESeq2"
+)
+}\if{html}{\out{</div>}}
+
 }
 
-\section{\code{SingleCellExperiment}}{
+\section{UMAP calculation}{
 
 
 
-The \code{SingleCellExperiment} method that visualizes dimension reduction data
-slotted in \code{reducedDims()} is defined in pointillism package.
+\href{https://github.com/lmcinnes/umap}{UMAP} calculation in R requires the \href{https://www.python.org}{Python} module \code{umap-learn}.
+The UMAP module can be loaded in R using \href{https://rstudio.github.io/reticulate/}{reticulate}.
 
 }
 
@@ -66,5 +84,11 @@ Jolliffe, et al., 2002.
 \seealso{
 \itemize{
 \item \code{DESeq2::plotPCA()}.
+\item \code{Seurat::DimPlot()}.
+\item \code{monocle3::plot_cells()}.
+\item \href{https://satijalab.org/seurat/mca.html}{Seurat Mouse Cell Atlas vignette}.
 }
+}
+\author{
+Michael Steinbaugh, Rory Kirchner
 }

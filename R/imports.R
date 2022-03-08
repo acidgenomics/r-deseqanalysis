@@ -18,27 +18,37 @@ NULL
 
 ## S4 generics and methods =====================================================
 
-#' @importFrom AcidGenerics Gene2Symbol autopadZeros camelCase
-#'   convertGenesToSymbols convertSampleIDsToNames interestingGroups<-
-#'   intersectionMatrix leftJoin makeNames mapGenesToSymbols melt metadata2
-#'   metadata2<- plotCounts plotHeatmap plotUpset removeNA snakeCase
-#' @importFrom BiocGenerics as.data.frame cbind counts design do.call plotPCA
+#' @importFrom AcidGenerics Gene2Symbol alphaSummary alphaThreshold
+#'   alphaThreshold<- autopadZeros baseMeanThreshold baseMeanThreshold<-
+#'   camelCase contrastName contrastName<- contrastSamples convertGenesToSymbols
+#'   convertSampleIDsToNames correlation deg degIntersection degPerContrast
+#'   interestingGroups interestingGroups<- intersectionMatrix leftJoin lfcShrink
+#'   lfcShrink<- lfcShrinkType lfcThreshold lfcThreshold<- makeNames
+#'   mapGenesToSymbols melt metadata2 metadata2<- plotBaseMean
+#'   plotContrastScatter plotCorrelationHeatmap plotCounts plotDEGHeatmap
+#'   plotDEGPCA plotDEGStackedBar plotDEGUpset plotHeatmap plotLFC
+#'   plotQuantileHeatmap plotUpset plotVolcano removeNA results resultsDiff
+#'   resultsMatrix resultsNames resultsNames<- resultsTables sampleData
+#'   snakeCase topTables transformType
+#' @importFrom BiocGenerics as.data.frame cbind combine counts design do.call
+#'   plotPCA plotMA updateObject
 #' @importFrom DESeq2 priorInfo
 #' @importFrom S4Vectors complete.cases cor decode droplevels head mcols mcols<-
-#'   metadata metadata<- na.omit relevel
+#'   metadata metadata<- na.omit
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom methods coerce show
-#' @importFrom pipette import
+#' @importFrom pipette export import
 #'
 #' @importMethodsFrom AcidBase intersectionMatrix
 #' @importMethodsFrom AcidExperiment Gene2Symbol autopadZeros
-#'   convertGenesToSymbols convertSampleIDsToNames interestingGroups<-
-#'   mapGenesToSymbols melt
+#'   convertGenesToSymbols convertSampleIDsToNames export interestingGroups
+#'   interestingGroups<- mapGenesToSymbols melt
 #' @importMethodsFrom AcidGenomes Gene2Symbol
 #' @importMethodsFrom AcidPlots plotCounts plotHeatmap plotPCA plotUpset
 #' @importMethodsFrom AcidPlyr leftJoin melt
 #' @importMethodsFrom DESeq2 counts design
-#' @importMethodsFrom pipette coerce import metadata2 metadata2<- removeNA
+#' @importMethodsFrom pipette coerce export import metadata2 metadata2<-
+#'   removeNA
 #' @importMethodsFrom syntactic autopadZeros camelCase makeNames snakeCase
 NULL
 
@@ -47,7 +57,7 @@ NULL
 ## S3 generics =================================================================
 
 #' @importFrom pipette as_tibble
-#' @importFrom stats model.matrix
+#' @importFrom stats model.matrix relevel
 NULL
 
 

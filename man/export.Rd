@@ -144,8 +144,8 @@ Packages:
 Export functions:
 \itemize{
 \item \code{BiocIO::export()}.
-\item \code{readr::write_delim()}.
 \item \code{data.table::fwrite()}.
+\item \code{readr::write_delim()}.
 \item \code{rio::export()}.
 \item \code{rtracklayer::export()}.
 \item \code{vroom::vroom_write()}.
