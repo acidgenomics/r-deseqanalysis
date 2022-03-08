@@ -1,6 +1,7 @@
+#' Update object
+#'
 #' @name updateObject
-#' @inherit AcidGenerics::updateObject
-#' @note Updated 2021-02-10.
+#' @note Updated 2022-03-09.
 #'
 #' @section `DESeqAnalysis`:
 #'
@@ -8,7 +9,9 @@
 #' class, which adds support for the `metadata()` slot. Objects saved by older
 #' package versions must be updated to account for this change.
 #'
-#' @return `DESeqAnalysis`.
+#' @inheritParams AcidRoxygen::params
+#'
+#' @return Modified object.
 #'
 #' @examples
 #' data(deseq)
