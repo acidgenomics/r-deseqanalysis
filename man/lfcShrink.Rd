@@ -11,7 +11,6 @@
 \title{Shrink log2 fold changes}
 \usage{
 lfcShrink(object, ...)
-
 lfcShrink(object, ...) <- value
 
 \S4method{lfcShrink}{DESeqAnalysis}(object)

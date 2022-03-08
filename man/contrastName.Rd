@@ -9,7 +9,6 @@
 \title{Contrast name}
 \usage{
 contrastName(object, ...)
-
 contrastName(object, ...) <- value
 
 \S4method{contrastName}{DESeqAnalysis}(object, i, ...)

@@ -12,7 +12,6 @@
 \title{Results names}
 \usage{
 resultsNames(object, ...)
-
 resultsNames(object, ...) <- value
 
 \S4method{resultsNames}{DESeqAnalysis}(object)
