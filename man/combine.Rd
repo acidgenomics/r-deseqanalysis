@@ -10,9 +10,9 @@ combine(x, y, ...)
 \S4method{combine}{DESeqAnalysis,DESeqAnalysis}(x, y)
 }
 \arguments{
-\item{x}{Primary object.}
+\item{x}{Object.}
 
-\item{y}{Secondary object.}
+\item{y}{Object.}
 
 \item{...}{Additional arguments.}
 }
@@ -30,7 +30,7 @@ names. The \code{lfcShrink} slot is optional but must be either defined in both
 objects or \code{NULL} in both objects.
 }
 \note{
-Updated 2020-08-04.
+Updated 2022-03-08.
 }
 \examples{
 data(deseq)

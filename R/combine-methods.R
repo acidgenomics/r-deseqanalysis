@@ -1,6 +1,7 @@
+#' Combine multiple objects
+
 #' @name combine
-#' @inherit AcidGenerics::combine
-#' @note Updated 2020-08-04.
+#' @note Updated 2022-03-08.
 #'
 #' @details
 #' Combines the results from 2 separate `DESeqAnalysis` objects. Note that the
@@ -11,6 +12,8 @@
 #'
 #' @inheritParams AcidRoxygen::params
 #' @param ... Additional arguments.
+#'
+#' @return Modified object.
 #'
 #' @examples
 #' data(deseq)
