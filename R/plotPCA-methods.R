@@ -1,8 +1,13 @@
+#' Principal component analysis plot
+#'
 #' @name plotPCA
-#' @inherit AcidPlots::plotPCA
-#' @note Updated 2022-01-21.
+#' @note Updated 2022-03-08.
 #'
 #' @details Passes to `SummarizedExperiment` defined in AcidPlots package.
+#'
+#' @inheritParams AcidRoxygen::params
+#'
+#' @return `ggplot`.
 #'
 #' @examples
 #' data(deseq)
