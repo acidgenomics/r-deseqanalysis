@@ -1,5 +1,5 @@
 ---
-## Updated 2021-07-20.
+## Updated 2022-03-08.
 params:
   title: "Differential expression with DESeq2"
   
@@ -37,6 +37,7 @@ bibliography: bibliography.bib
 
 ```{r setup, cache=FALSE, message=FALSE}
 suppressPackageStartupMessages({
+    library(basejump)
     library(DESeqAnalysis)
 })
 prepareTemplate()
