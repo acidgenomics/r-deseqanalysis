@@ -9,7 +9,6 @@
 \title{Interesting groups}
 \usage{
 interestingGroups(object, ...)
-
 interestingGroups(object, ...)  <- value
 
 \S4method{interestingGroups}{DESeqAnalysis}(object)

@@ -16,7 +16,6 @@
 \title{Log2 fold change threshold}
 \usage{
 lfcThreshold(object, ...)
-
 lfcThreshold(object, ...) <- value
 
 \S4method{lfcThreshold}{DESeqAnalysis}(object)

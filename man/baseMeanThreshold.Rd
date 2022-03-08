@@ -18,7 +18,6 @@
 \title{Base mean threshold}
 \usage{
 baseMeanThreshold(object, ...)
-
 baseMeanThreshold(object, ...) <- value
 
 \S4method{baseMeanThreshold}{DESeqAnalysis}(object)

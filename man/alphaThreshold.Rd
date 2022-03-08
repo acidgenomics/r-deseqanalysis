@@ -17,7 +17,6 @@
 \title{Alpha threshold}
 \usage{
 alphaThreshold(object, ...)
-
 alphaThreshold(object, ...) <- value
 
 \S4method{alphaThreshold}{DESeqAnalysis}(object)
