@@ -1,25 +1,26 @@
 ## FIXME This function is still a work in progress.
 ## FIXME Need to support plotVolcano colors here...
 ## FIXME Consider supporting directionality labeling.
-## FIXME Need to think about NA gene symbol handling in call
-##       to convertGenesToSymbols.
+## FIXME Consider plotting a regression line here?
 
 
 
 #' @name plotContrastScatter
 #' @inherit AcidGenerics::plotContrastScatter
-#' @note Updated 2021-10-18.
+#' @note Updated 2022-03-08.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
 #'
-#' @examples
-#' data(deseq)
-#' plotContrastScatter(deseq, i = 1L)
-#'
 #' @seealso
 #' - https://doi.org/10.1084/jem.20200829
+#'
+#' @examples
+#' data(deseq)
+#'
+#' ## DESeqAnalysis ====
+#' plotContrastScatter(deseq, i = 1L)
 NULL
 
 
@@ -191,6 +192,7 @@ NULL
             )
         ) +
             geom_point(size = 1L)
+        return(p)
     }
 
 
