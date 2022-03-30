@@ -1,8 +1,3 @@
-## FIXME Need to think about NA gene symbol handling in call
-##       to convertGenesToSymbols.
-
-
-
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit AcidGenerics::plotVolcano
@@ -88,8 +83,6 @@ NULL
             )
         }
         if (isCharacter(genes) || isTRUE(isPositive(ntop))) {
-            ## FIXME Need to handle NA gene symbols here.
-            ## FIXME Need to get this against a better example dataset.
             dds <- convertGenesToSymbols(dds)
             rownames(res) <- rownames(dds)
         }
