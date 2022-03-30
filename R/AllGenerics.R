@@ -40,6 +40,18 @@ setGeneric(
     }
 )
 
+#' @export
+#' @name as.DESeqDataSet
+#' @rdname coerce
+#' @usage as.DESeqDataSet(x, ...)
+NULL
+
+#' @export
+#' @name as.DESeqTransform
+#' @rdname coerce
+#' @usage as.DESeqTransform(x, ...)
+NULL
+
 #' @aliases baseMeanThreshold<-
 #' @export baseMeanThreshold baseMeanThreshold<-
 #' @name baseMeanThreshold
