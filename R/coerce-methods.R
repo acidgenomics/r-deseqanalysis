@@ -21,12 +21,10 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' dds <- as(deseq, "DESeqDataSet")
-#' print(dds)
-#' dt <- as(deseq, "DESeqTransform")
-#' print(dt)
-#' resList <- as(deseq, "DESeqResultsList")
-#' print(names(resList))
+#' dds <- as.DESeqDataSet(deseq)
+#' class(dds)
+#' dt <- as.DESeqTransform(deseq)
+#' class(dt)
 NULL
 
 
