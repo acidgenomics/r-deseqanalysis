@@ -79,7 +79,7 @@ limits for each axis. Set automatically by default when left \code{NULL}.}
 
 \item{labels}{\code{list}.
 ggplot2 labels.
-See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
+See \code{ggplot2::labs()} for details.}
 
 \item{...}{Additional arguments.}
 }
@@ -90,12 +90,13 @@ See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
 Plot scatterplot of differential expression contrast
 }
 \note{
-Updated 2021-10-18.
+Updated 2022-03-08.
 }
 \examples{
 data(deseq)
-plotContrastScatter(deseq, i = 1L)
 
+## DESeqAnalysis ====
+plotContrastScatter(deseq, i = 1L)
 }
 \seealso{
 \itemize{

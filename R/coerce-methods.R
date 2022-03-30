@@ -1,3 +1,8 @@
+## FIXME Need to support `as.DESeqDataSet` and `as.DESeqTransform` coercion.
+
+
+
+
 #' Force an object to belong to a class
 #'
 #' @name as

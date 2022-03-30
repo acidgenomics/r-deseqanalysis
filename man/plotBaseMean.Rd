@@ -43,7 +43,7 @@ Include distribution summary statistics as lines on the plot.}
 
 \item{labels}{\code{list}.
 ggplot2 labels.
-See \code{\link[ggplot2:labs]{ggplot2::labs()}} for details.}
+See \code{ggplot2::labs()} for details.}
 }
 \value{
 \code{ggplot}.
