@@ -1,37 +1,51 @@
+## This approach is inspired by bcbioRNASeq F1000 manuscript full test.
+
 context("R Markdown")
 
-## FIXME Need to improve the tempdir handling here, and clean up on success.
-## FIXME Rework using similar approach to bcbioRNASeq tests-extra f1000.R
+templatesDir <- system.file(
+    "rmarkdown",
+    "templates",
+    package = .pkgName,
+    mustWork = TRUE
+)
+
+renderDir <- file.path(
+    tempdir(),
+    paste("render", Sys.Date(), sep = "-")
+)
+unlink(renderDir, recursive = TRUE)
+renderDir <- initDir(renderDir)
 
 test_that("Differential expression", {
-    skeleton <- system.file(
-        "rmarkdown",
-        "templates",
-        "differential-expression",
-        "skeleton",
-        "skeleton.Rmd",
-        package = .pkgName,
-        mustWork = TRUE
-    )
-    input <- tempfile(
-        pattern = "render",
-        tmpdir = tempdir(),
-        fileext = ".Rmd"
-    )
-    file.copy(from = skeleton, to = input, overwrite = TRUE)
-    out <- rmarkdown::render(
-        input = input,
-        output_format = "html_document",
-        clean = TRUE,
-        params = list(
-            "object" = system.file(
-                "data",
-                "deseq.rda",
-                package = .pkgName,
-                mustWork = TRUE
-            )
+    stem <- "differential-expression"
+    input <- file.path(renderDir, paste0(stem, ".Rmd"))
+    file.copy(
+        from = file.path(
+            templatesDir,
+            stem,
+            "skeleton",
+            "skeleton.Rmd"
         ),
-        quiet = TRUE
+        to = input,
+        overwrite = TRUE
     )
-    expect_true(file.exists(out))
+    objectFile <-
+        system.file(
+            "data",
+            "deseq.rda",
+            package = .pkgName,
+            mustWork = TRUE
+        )
+    x <- render(
+        input = input,
+        params = list(
+            "object" = objectFile
+        ),
+        clean = TRUE
+    )
+    outfile <- file.path(renderDir, paste0(stem, ".html"))
+    expect_identical(x, outfile)
+    expect_true(file.exists(outfile))
 })
+
+unlink(renderDir, recursive = TRUE)

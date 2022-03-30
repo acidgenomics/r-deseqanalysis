@@ -7,4 +7,5 @@ geneNames <- head(g2s[["geneName"]])
 
 ## nolint start
 realpath <- basejump::realpath
+render <- rmarkdown::render
 ## nolint end
