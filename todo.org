@@ -2,6 +2,7 @@
 #+STARTUP: content
 * Development
 ** TODO Need to support `as.DESeqDataSet` and `as.DESeqTransform` coercion methods.
+** TODO plotMA and plotVolcano may need to handle NA gene to symbol mapping better.
 ** TODO Consider adding method support for: colData, rowData, rowRanges.
 ** TODO Ensure coercion methods for `as.DESeqDataSet` and `asDESeqTransform` work here.
 ** TODO Need to think about NA gene symbol handling in call to convertGenesToSymbols.
