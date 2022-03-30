@@ -13,17 +13,17 @@ NULL
 ## S4 generics and methods =====================================================
 
 #' @importFrom AcidGenerics Gene2Symbol alphaSummary alphaThreshold
-#'   alphaThreshold<- autopadZeros baseMeanThreshold baseMeanThreshold<-
-#'   camelCase contrastName contrastName<- contrastSamples convertGenesToSymbols
-#'   convertSampleIDsToNames correlation deg degIntersection degPerContrast
-#'   interestingGroups interestingGroups<- intersectionMatrix leftJoin lfcShrink
-#'   lfcShrink<- lfcShrinkType lfcThreshold lfcThreshold<- makeNames
-#'   mapGenesToSymbols melt metadata2 metadata2<- plotBaseMean
-#'   plotContrastScatter plotCorrelationHeatmap plotCounts plotDEGHeatmap
-#'   plotDEGPCA plotDEGStackedBar plotDEGUpset plotHeatmap plotLFC
-#'   plotQuantileHeatmap plotUpset plotVolcano removeNA results resultsDiff
-#'   resultsMatrix resultsNames resultsNames<- resultsTables sampleData
-#'   snakeCase topTables transformType
+#'   alphaThreshold<- as.DESeqDataSet as.DESeqTransform autopadZeros
+#'   baseMeanThreshold baseMeanThreshold<- camelCase contrastName contrastName<-
+#'   contrastSamples convertGenesToSymbols convertSampleIDsToNames correlation
+#'   deg degIntersection degPerContrast interestingGroups interestingGroups<-
+#'   intersectionMatrix leftJoin lfcShrink lfcShrink<- lfcShrinkType
+#'   lfcThreshold lfcThreshold<- makeNames mapGenesToSymbols melt metadata2
+#'   metadata2<- plotBaseMean plotContrastScatter plotCorrelationHeatmap
+#'   plotCounts plotDEGHeatmap plotDEGPCA plotDEGStackedBar plotDEGUpset
+#'   plotHeatmap plotLFC plotQuantileHeatmap plotUpset plotVolcano removeNA
+#'   results resultsDiff resultsMatrix resultsNames resultsNames<- resultsTables
+#'   sampleData snakeCase topTables transformType
 #' @importFrom BiocGenerics as.data.frame cbind combine counts design do.call
 #'   plotPCA plotMA updateObject
 #' @importFrom DESeq2 priorInfo
