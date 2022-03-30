@@ -43,7 +43,7 @@ Runs the following internal comments:
 }
 }
 \note{
-Updated 2022-03-23.
+Updated 2019-10-09.
 }
 \examples{
 files <- c(
