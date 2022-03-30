@@ -1,17 +1,11 @@
-## FIXME Need to support `as.DESeqDataSet` and `as.DESeqTransform` coercion.
-
-
-
-
-#' Force an object to belong to a class
+#' Coercion methods
 #'
-#' @name as
-#' @aliases coerce
-#' @author Michael Steinbaugh
+#' @name coerce
 #' @exportMethod coerce
-#' @importFrom methods coerce
-#' @inherit methods::as return title
-#' @note Updated 2021-03-09.
+#' @note Updated 2022-03-30.
+#'
+#' @inheritParams AcidRoxygen::params
+#' @param ... Additional arguments.
 #'
 #' @section DESeqAnalysis:
 #'
@@ -20,6 +14,8 @@
 #' - `DESeqDataSet`.
 #' - `DESeqTransform`.
 #' - `DESeqResultsList`.
+#'
+#' @return Modified object, of desired conversion class.
 #'
 #' @examples
 #' data(deseq)
@@ -35,47 +31,86 @@ NULL
 
 
 
-#' @rdname as
-#' @name coerce,DESeqAnalysis,DESeqDataSet-method
-## Updated 2019-07-23.
-setAs(
-    from = "DESeqAnalysis",
-    to = "DESeqDataSet",
+## Updated 2022-03-30.
+`as.DESeqDataSet,DESeqAnalysis` <-
+    function(x) {
+        as(object = x, Class = "DESeqDataSet")
+    }
+
+## Updated 2022-03-30.
+`as.DESeqTransform,DESeqAnalysis` <-
+    function(x) {
+        as(object = x, Class = "DESeqTransform")
+    }
+
+
+
+## Updated 2022-03-30.
+`coerce,DESeqAnalysis,DESeqDataSet` <-
     function(from) {
         validObject(from)
         to <- slot(from, "data")
         validObject(to)
         to
     }
-)
 
-
-
-#' @rdname as
-#' @name coerce,DESeqAnalysis,DESeqTransform-method
-## Updated 2019-07-23.
-setAs(
-    from = "DESeqAnalysis",
-    to = "DESeqTransform",
+## Updated 2022-03-30.
+`coerce,DESeqAnalysis,DESeqTransform` <-
     function(from) {
         validObject(from)
         to <- slot(from, "transform")
         validObject(to)
         to
     }
-)
 
-
-
-#' @rdname as
-#' @name coerce,DESeqAnalysis,DESeqResultsList-method
-## Updated 2021-03-09.
-setAs(
-    from = "DESeqAnalysis",
-    to = "DESeqResultsList",
+## Updated 2022-03-30.
+`coerce,DESeqAnalysis,DESeqResultsList` <-
     function(from) {
         validObject(from)
         to <- DESeqResultsList(from, quiet = TRUE)
         to
     }
+
+
+
+#' @rdname coerce
+#' @export
+setMethod(
+    f = "as.DESeqDataSet",
+    signature = signature(x = "DESeqAnalysis"),
+    definition = `as.DESeqDataSet,DESeqAnalysis`
+)
+
+#' @rdname coerce
+#' @export
+setMethod(
+    f = "as.DESeqTransform",
+    signature = signature(x = "DESeqAnalysis"),
+    definition = `as.DESeqTransform,DESeqAnalysis`
+)
+
+
+
+#' @rdname coerce
+#' @name coerce,DESeqAnalysis,DESeqDataSet-method
+setAs(
+    from = "DESeqAnalysis",
+    to = "DESeqDataSet",
+    def = `coerce,DESeqAnalysis,DESeqDataSet`
+)
+
+#' @rdname coerce
+#' @name coerce,DESeqAnalysis,DESeqTransform-method
+setAs(
+    from = "DESeqAnalysis",
+    to = "DESeqTransform",
+    def = `coerce,DESeqAnalysis,DESeqTransform`
+)
+
+#' @rdname coerce
+#' @name coerce,DESeqAnalysis,DESeqResultsList-method
+setAs(
+    from = "DESeqAnalysis",
+    to = "DESeqResultsList",
+    def = `coerce,DESeqAnalysis,DESeqResultsList`
 )
