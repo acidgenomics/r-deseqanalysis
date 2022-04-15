@@ -1,5 +1,12 @@
 ## DESeqAnalysis 0.5.0 (2022-04-15)
 
+### New functions
+
+- `plotContrastScatter`: Visualize expression between numerator and denominator
+  for a contrast of interest.
+- `plotLFC`: Plot log2 fold change distributions for all contrasts in the
+  DESeq2 analysis.
+
 ### Major changes
 
 - Updated dependencies to R 4.1 / Bioconductor 3.14.
