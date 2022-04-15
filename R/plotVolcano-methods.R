@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit AcidGenerics::plotVolcano
-#' @note Updated 2021-08-09.
+#' @note Updated 2022-04-15.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -16,16 +16,17 @@
 #' data(deseq)
 #'
 #' ## Get genes from DESeqDataSet.
-#' dds <- as(deseq, "DESeqDataSet")
+#' dds <- as.DESeqDataSet(deseq)
 #' genes <- head(rownames(dds))
 #' print(genes)
 #'
 #' ## DESeqAnalysis ====
-#' plotVolcano(deseq, i = 1L)
+#' object <- deseq
+#' plotVolcano(object, i = 1L)
 #'
 #' ## Customize the colors.
 #' plotVolcano(
-#'     object = deseq,
+#'     object = object,
 #'     i = 1L,
 #'     pointColor = c(
 #'         downregulated = "red",
@@ -36,13 +37,13 @@
 #'
 #' ## Directional support (up or down).
 #' plotVolcano(
-#'     object = deseq,
+#'     object = object,
 #'     i = 1L,
 #'     direction = "up",
 #'     ntop = 5L
 #' )
 #' plotVolcano(
-#'     object = deseq,
+#'     object = object,
 #'     i = 1L,
 #'     direction = "down",
 #'     ntop = 5L
@@ -50,7 +51,7 @@
 #'
 #' ## Label genes manually.
 #' ## Note that either gene IDs or names (symbols) are supported.
-#' plotVolcano(deseq, i = 1L, genes = genes)
+#' plotVolcano(object, i = 1L, genes = genes)
 NULL
 
 
@@ -83,6 +84,9 @@ NULL
         }
         if (isCharacter(genes) || isTRUE(isPositive(ntop))) {
             dds <- convertGenesToSymbols(dds)
+            if (isCharacter(genes)) {
+                assert(isSubset(genes, rownames(dds)))
+            }
             rownames(res) <- rownames(dds)
         }
         plotVolcano(
@@ -334,6 +338,9 @@ NULL
         ## Visualize specific genes on the plot, if desired.
         if (isCharacter(genes)) {
             assert(isSubset(genes, rownames(object)))
+            diff <- setdiff(genes, rownames(data))
+            genes <- intersect(genes, rownames(data))
+            assert(hasLength(genes))
             alertInfo(sprintf(
                 "Labeling %d %s in plot.",
                 length(genes),
@@ -343,7 +350,22 @@ NULL
                     msg2 = "genes"
                 )
             ))
-            labelData <- data[genes, , drop = FALSE]
+            if (hasLength(diff)) {
+                alertWarning(sprintf(
+                    paste(
+                        "%d %s not labeled on plot,",
+                        "due to censored adjusted P value: %s."
+                    ),
+                    length(diff),
+                    ngettext(
+                        n = length(diff),
+                        msg1 = "gene",
+                        msg2 = "genes"
+                    ),
+                    toInlineString(diff)
+                ))
+            }
+            labelData <- data[unname(genes), , drop = FALSE]
             labelData[["geneName"]] <- rownames(labelData)
             p <- p +
                 acid_geom_label_repel(
