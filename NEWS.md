@@ -18,6 +18,8 @@
 
 - `plotPCA`: Tightned up method export to only work on `DESeqAnalysis` object,
   so we don't conflict with `DESeqTransform` method defined in DESeq2.
+- `plotVolcano`: Hardened against edge case where visualization of a specific
+  gene is requested, but contains a censored adjusted P value.
 - Updated example `deseq` object.
 - Added basejump as a library load in DE template.
 - `contrastSamples`: Improved documentation.

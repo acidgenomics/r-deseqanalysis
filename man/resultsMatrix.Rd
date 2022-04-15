@@ -29,8 +29,8 @@ Value type to return. Corresponds to supported \code{DESeqResults} column:
 \item \code{log2FoldChange}: log2 fold change.\cr
 This will return \emph{shrunken} LFC values if they are defined.
 \item \code{stat}: Wald test statistic.
-\item \code{alpha}: Either (1) \code{padj}, the BH adjusted \emph{P} value; or
-(2) \code{svalue}, the s-value, when using apeglm (or ashr).
+\item \code{alpha}: Either (1) \code{padj}, the BH adjusted \emph{P} value; or (2) \code{svalue},
+the s-value, when using apeglm (or ashr).
 }}
 
 \item{rowData}{\code{logical(1)}.
