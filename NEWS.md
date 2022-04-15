@@ -1,4 +1,4 @@
-## DESeqAnalysis 0.4.5 (UNRELEASED)
+## DESeqAnalysis 0.5.0 (2022-04-15)
 
 ### Minor changes
 
