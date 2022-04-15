@@ -104,22 +104,23 @@ argument automatically defined.
 }}
 
 \note{
-Updated 2021-08-09.
+Updated 2022-04-15.
 }
 \examples{
 data(deseq)
 
 ## Get genes from DESeqDataSet.
-dds <- as(deseq, "DESeqDataSet")
+dds <- as.DESeqDataSet(deseq)
 genes <- head(rownames(dds))
 print(genes)
 
 ## DESeqAnalysis ====
-plotVolcano(deseq, i = 1L)
+object <- deseq
+plotVolcano(object, i = 1L)
 
 ## Customize the colors.
 plotVolcano(
-    object = deseq,
+    object = object,
     i = 1L,
     pointColor = c(
         downregulated = "red",
@@ -130,13 +131,13 @@ plotVolcano(
 
 ## Directional support (up or down).
 plotVolcano(
-    object = deseq,
+    object = object,
     i = 1L,
     direction = "up",
     ntop = 5L
 )
 plotVolcano(
-    object = deseq,
+    object = object,
     i = 1L,
     direction = "down",
     ntop = 5L
@@ -144,7 +145,7 @@ plotVolcano(
 
 ## Label genes manually.
 ## Note that either gene IDs or names (symbols) are supported.
-plotVolcano(deseq, i = 1L, genes = genes)
+plotVolcano(object, i = 1L, genes = genes)
 }
 \seealso{
 \code{CHBUtils::volcano_density_plot()}.

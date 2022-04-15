@@ -65,10 +65,5 @@ plotCounts(deseq, genes = genes, style = "facet")
 plotCounts(deseq, genes = genes, style = "wide")
 }
 \seealso{
-\itemize{
-\item \code{Seurat::DotPlot()}.
-\item \code{Seurat::VlnPlot()}.
-\item \code{Seurat::RidgePlot()}.
-\item \code{monocle3::plot_genes_violin()}.
-}
+\code{DESeq2::plotCounts}.
 }
