@@ -1,12 +1,12 @@
-## FIXME Add deprecated fallback support for passing of `results` as primary
-## argument instead of `object`, which is still in use in bcbioRNASeq F1000 v2
-## paper.
+## NOTE Consider adding deprecated fallback support for passing of `results` as
+## primary argument instead of `object`, which is still in use in bcbioRNASeq
+## F1000 v2 paper.
 
 
 
 #' @name plotDEGHeatmap
 #' @inherit AcidGenerics::plotDEGHeatmap
-#' @note Updated 2021-08-02.
+#' @note Updated 2022-04-15.
 #'
 #' @inheritParams AcidPlots::plotHeatmap
 #' @inheritParams AcidRoxygen::params
