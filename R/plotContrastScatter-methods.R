@@ -7,7 +7,7 @@
 
 #' @name plotContrastScatter
 #' @inherit AcidGenerics::plotContrastScatter
-#' @note Updated 2022-03-08.
+#' @note Updated 2022-04-15.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -25,40 +25,26 @@ NULL
 
 
 
-## Updated 2021-10-15.
+## Updated 2022-04-15.
 `plotContrastScatter,DESeqAnalysis` <-
     function(
         object,
         i,
         direction = c("both", "up", "down"),
-        ## FIXME Need to support.
         alphaThreshold = NULL,
-        ## FIXME Need to support.
-        ## FIXME Need to filter against the DESeqResults to drop the number
-        ## of genes first.
         baseMeanThreshold = NULL,
-        ## FIXME Need to support.
         lfcThreshold = NULL,
-        ## FIXME Need to support.
         genes = NULL,
-        ## FIXME Need to support.
         ntop = 0L,
-        ## FIXME Need to support.
         pointColor = c(
             "downregulated" = AcidPlots::lightPalette[["purple"]],
             "upregulated" = AcidPlots::lightPalette[["orange"]],
             "nonsignificant" = AcidPlots::lightPalette[["gray"]]
         ),
-        ## FIXME Need to support.
         pointSize = 2L,
-        ## FIXME Need to support.
         pointAlpha = 0.8,
-        ## FIXME Need to support this.
         trans = c("log2", "log10", "identity"),
-        ## FIXME Need to support.
         limits = list("x" = NULL, "y" = NULL),
-        ## FIXME Need to support.
-        ## FIXME Ensure that these work here...need to update.
         labels = list(
             "title" = TRUE,
             "subtitle" = NULL,
@@ -75,8 +61,6 @@ NULL
         if (is.null(baseMeanThreshold)) {
             baseMeanThreshold <- baseMeanThreshold(object)
         }
-        ## FIXME Only do this step when trans is not identity.
-        ## We're applying log10 transformation on plot, so gate the minimum.
         if (!identical(trans, "identity") && isTRUE(baseMeanThreshold < 1L)) {
             baseMeanThreshold <- 1L
         }
@@ -129,8 +113,6 @@ NULL
         res <- results(object, i = i, extra = FALSE)
         assert(identical(rownames(dds), rownames(res)))
         if (isCharacter(genes) || isTRUE(isPositive(ntop))) {
-            ## FIXME Need to handle NA gene symbols here.
-            ## FIXME Need to update AcidExperiment to handle this better.
             dds <- convertGenesToSymbols(dds)
             rownames(res) <- rownames(dds)
         }
@@ -144,7 +126,6 @@ NULL
         if (!hasRows(res)) {
             return(invisible(NULL))
         }
-        dds <- as(object, "DESeqDataSet")
         dds <- dds[
             rownames(res),
             c(
@@ -168,8 +149,9 @@ NULL
         }
         res <- res[rownames(counts), , drop = FALSE]
 
-        ## FIXME How to apply gene labeling here?
 
+
+        ## FIXME How to apply gene labeling here?
         ## FIXME Need to label DEGs here....
         ## FIXME Use "isDEG" column here (see plotMA code).
         data <- data.frame(
@@ -192,7 +174,7 @@ NULL
             )
         ) +
             geom_point(size = 1L)
-        return(p)
+        p
     }
 
 
