@@ -19,7 +19,7 @@ NULL
 
 
 ## Updated 2022-04-15.
-`plotContrastScatter,DESeqAnalysis` <-
+`plotContrastScatter,DESeqAnalysis` <- # nolint
     function(object,
              i,
              direction = c("both", "up", "down"),

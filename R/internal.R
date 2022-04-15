@@ -271,8 +271,8 @@
             )
         )
         rowData <- rowData[, keep, drop = FALSE]
-        ## Drop any remaining blacklisted columns. These columsn aren't useful in
-        ## the downstream export to CSV format.
+        ## Drop any remaining blacklisted columns. These columsn aren't useful
+        ## in the downstream export to CSV format.
         blacklist <- "seqCoordSystem"
         keep <- !colnames(rowData) %in% blacklist
         rowData <- rowData[, keep, drop = FALSE]
@@ -334,7 +334,11 @@
             )
             x <- paste0(x, paste("n", "=", sum(n)))
             if (direction == "both" && sum(n) > 0L) {
-                x <- paste0(x, sep, paste(names(n), n, sep = ": ", collapse = sep))
+                x <- paste0(
+                    x,
+                    sep,
+                    paste(names(n), n, sep = ": ", collapse = sep)
+                )
             } else {
                 x <- paste0(x, " (", direction, ")")
             }
