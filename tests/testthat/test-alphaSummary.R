@@ -1,5 +1,6 @@
 context("alphaSummary")
 
+## NOTE The expected values can change when we resave the example object.
 test_that("Default, no contrast specified.", {
     object <- alphaSummary(
         object = deseq,
@@ -12,10 +13,10 @@ test_that("Default, no contrast specified.", {
         expected = matrix(
             ## nolint start
             data = c(
-                48, 36, 24, 15, 2,
-                39, 22, 14, 8, 1,
+                39, 34, 17, 3, 0,
+                31, 23, 13, 6, 1,
                 0, 0, 0, 0, 0,
-                116, 116, 58, 271, 0
+                97, 49, 87, 0, 0
             ),
             ## nolint end
             nrow = 4L,
