@@ -35,26 +35,27 @@
 #' print(files)
 #' files <- prepareTximportFiles(files, makeNames = "snakeCase", exists = FALSE)
 #' print(files)
-prepareTximportFiles <- function(files,
-                                 makeNames = c("makeNames", "snakeCase", "camelCase"),
-                                 exists = TRUE) {
-    makeNames <- get(
-        x = match.arg(makeNames),
-        envir = asNamespace("basejump"),
-        inherits = TRUE
-    )
-    assert(
-        isCharacter(files),
-        isFlag(exists),
-        is.function(makeNames)
-    )
-    if (isTRUE(exists)) {
-        files <- realpath(files) # nocov
+prepareTximportFiles <-
+    function(files,
+             makeNames = c("makeNames", "snakeCase", "camelCase"),
+             exists = TRUE) {
+        makeNames <- get(
+            x = match.arg(makeNames),
+            envir = asNamespace("basejump"),
+            inherits = TRUE
+        )
+        assert(
+            isCharacter(files),
+            isFlag(exists),
+            is.function(makeNames)
+        )
+        if (isTRUE(exists)) {
+            files <- realpath(files) # nocov
+        }
+        names <- basename(dirname(files))
+        names <- autopadZeros(names)
+        names <- makeNames(names)
+        names(files) <- names
+        files <- files[sort(names)]
+        files
     }
-    names <- basename(dirname(files))
-    names <- autopadZeros(names)
-    names <- makeNames(names)
-    names(files) <- names
-    files <- files[sort(names)]
-    files
-}

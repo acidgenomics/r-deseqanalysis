@@ -30,13 +30,13 @@ NULL
 
 
 ## Updated 2022-03-30.
-`as.DESeqDataSet,DESeqAnalysis` <-
+`as.DESeqDataSet,DESeqAnalysis` <- # nolint
     function(x) {
         as(object = x, Class = "DESeqDataSet")
     }
 
 ## Updated 2022-03-30.
-`as.DESeqTransform,DESeqAnalysis` <-
+`as.DESeqTransform,DESeqAnalysis` <- # nolint
     function(x) {
         as(object = x, Class = "DESeqTransform")
     }
@@ -44,7 +44,7 @@ NULL
 
 
 ## Updated 2022-03-30.
-`coerce,DESeqAnalysis,DESeqDataSet` <-
+`coerce,DESeqAnalysis,DESeqDataSet` <- # nolint
     function(from) {
         validObject(from)
         to <- slot(from, "data")
@@ -53,7 +53,7 @@ NULL
     }
 
 ## Updated 2022-03-30.
-`coerce,DESeqAnalysis,DESeqTransform` <-
+`coerce,DESeqAnalysis,DESeqTransform` <- # nolint
     function(from) {
         validObject(from)
         to <- slot(from, "transform")
@@ -62,7 +62,7 @@ NULL
     }
 
 ## Updated 2022-03-30.
-`coerce,DESeqAnalysis,DESeqResultsList` <-
+`coerce,DESeqAnalysis,DESeqResultsList` <- # nolint
     function(from) {
         validObject(from)
         to <- DESeqResultsList(from, quiet = TRUE)
