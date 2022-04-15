@@ -4,9 +4,11 @@
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
+#'
 #' @param col `character(1)`.
 #' Column to use for difference calculation (subtraction).
 #' Note that `x`/`i` represents `A` and `y`/`j` `B` in `A - B` calculation.
+#'
 #' @param deg `character(1)`.
 #' - `"no"`: Return all genes, corresponding to original row names order.
 #' - `"intersect"`: Return only genes called as DE in both contrasts.

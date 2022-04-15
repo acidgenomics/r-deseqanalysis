@@ -13,10 +13,11 @@
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
+#' @param ... Additional arguments.
+#'
 #' @param extra `logical(1)`.
 #' Include row data (i.e. gene metadata) and normalized counts from the
 #' internal `DESeqDataSet`.
-#' @param ... Additional arguments.
 #'
 #' @return `DESeqResults`.
 #'
