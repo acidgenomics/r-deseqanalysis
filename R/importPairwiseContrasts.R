@@ -29,38 +29,39 @@
 #' file <- system.file("extdata", "contrasts.csv", package = "DESeqAnalysis")
 #' x <- importPairwiseContrasts(file)
 #' print(x)
-importPairwiseContrasts <- function(file,
-                                    groupCol = "group",
-                                    numeratorCol = "numerator",
-                                    denominatorCol = "denominator",
-                                    namesCol = "description") {
-    assert(
-        isAFile(file),
-        isString(groupCol),
-        isString(numeratorCol),
-        isString(denominatorCol)
-    )
-    data <- import(file)
-    assert(
-        isSubset(
-            x = c(numeratorCol, denominatorCol, namesCol),
-            y = colnames(data)
+importPairwiseContrasts <-
+    function(file,
+             groupCol = "group",
+             numeratorCol = "numerator",
+             denominatorCol = "denominator",
+             namesCol = "description") {
+        assert(
+            isAFile(file),
+            isString(groupCol),
+            isString(numeratorCol),
+            isString(denominatorCol)
         )
-    )
-    list <- mapply(
-        numerator = data[["numerator"]],
-        denominator = data[["denominator"]],
-        MoreArgs = list("group" = groupCol),
-        FUN = function(group, numerator, denominator) {
-            c(
-                "group" = group,
-                "numerator" = numerator,
-                "denominator" = denominator
+        data <- import(file)
+        assert(
+            isSubset(
+                x = c(numeratorCol, denominatorCol, namesCol),
+                y = colnames(data)
             )
-        },
-        SIMPLIFY = FALSE,
-        USE.NAMES = FALSE
-    )
-    names(list) <- snakeCase(data[[namesCol]])
-    list
-}
+        )
+        list <- mapply(
+            numerator = data[["numerator"]],
+            denominator = data[["denominator"]],
+            MoreArgs = list("group" = groupCol),
+            FUN = function(group, numerator, denominator) {
+                c(
+                    "group" = group,
+                    "numerator" = numerator,
+                    "denominator" = denominator
+                )
+            },
+            SIMPLIFY = FALSE,
+            USE.NAMES = FALSE
+        )
+        names(list) <- snakeCase(data[[namesCol]])
+        list
+    }
