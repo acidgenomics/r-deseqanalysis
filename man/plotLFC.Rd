@@ -3,23 +3,14 @@
 \name{plotLFC}
 \alias{plotLFC}
 \alias{plotLFC,DESeqAnalysis-method}
-\alias{plotLFC,DESeqResults-method}
 \title{Plot log2 fold change distributions}
 \usage{
 plotLFC(object, ...)
 
-\S4method{plotLFC}{DESeqAnalysis}(object, i)
-
-\S4method{plotLFC}{DESeqResults}(object)
+\S4method{plotLFC}{DESeqAnalysis}(object)
 }
 \arguments{
 \item{object}{Object.}
-
-\item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
-\code{character} vectors, empty (\code{missing}), or \code{NULL}.
-
-For more information:\preformatted{help(topic = "Extract", package = "base")
-}}
 
 \item{...}{Additional arguments.}
 }
@@ -30,16 +21,17 @@ For more information:\preformatted{help(topic = "Extract", package = "base")
 Plot log2 fold change distributions
 }
 \note{
-Updated 2021-10-18.
+Updated 2022-03-30.
+
+Plot the log2 fold change distribution per contrast.
 }
 \examples{
 data(deseq)
 
-## Plot the LFC distribution.
-plotLFC(deseq, i = 1L)
+## DESeqAnalysis ====
+plotLFC(deseq)
 
 ## Plot expression of specific genes.
-dds <- as(deseq, "DESeqDataSet")
-genes <- head(rownames(dds))
-plotLFC(deseq, i = 1L, genes = genes)
+genes <- head(rownames(as.DESeqDataSet(deseq)))
+plotLFC(deseq, genes = genes)
 }
