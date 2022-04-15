@@ -4,11 +4,13 @@
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
-#' @param contrast `character(1)` or `NULL`.
-#'   Contrast name.
-#' @param n `integer(1)`.
-#'   Number of genes (per direction) to report.
 #' @param ... Additional arguments.
+#'
+#' @param contrast `character(1)` or `NULL`.
+#' Contrast name.
+#'
+#' @param n `integer(1)`.
+#' Number of genes (per direction) to report.
 #'
 #' @examples
 #' data(deseq)
@@ -25,7 +27,7 @@ NULL
 
 
 ## Updated 2019-08-20.
-.topKables <-  # nolint
+.topKables <- # nolint
     function(object, contrast, n) {
         requireNamespaces("knitr")
         assert(
@@ -65,7 +67,7 @@ NULL
 
 
 ## Updated 2021-08-09.
-.topTable <-  # nolint
+.topTable <- # nolint
     function(object, n = 10L) {
         assert(
             is(object, "DataFrame"),
@@ -120,7 +122,7 @@ NULL
 
 
 ## Updated 2020-08-05.
-`topTables,DESeqAnalysis` <-  # nolint
+`topTables,DESeqAnalysis` <- # nolint
     function(object, i, n = 10L) {
         list <- resultsTables(
             object = object,
@@ -136,12 +138,10 @@ NULL
 
 ## This is used in bcbioRNASeq F1000 paper.
 ## Updated 2019-11-12.
-`topTables,DESeqResults` <-  # nolint
-    function(
-        object,
-        DESeqDataSet = NULL,  # nolint
-        n = 10L
-    ) {
+`topTables,DESeqResults` <- # nolint
+    function(object,
+             DESeqDataSet = NULL, # nolint
+             n = 10L) {
         validObject(object)
         assert(isAny(DESeqDataSet, c("DESeqDataSet", "NULL")))
         if (is(DESeqDataSet, "DESeqDataSet")) {
@@ -163,7 +163,7 @@ NULL
 
 ## This is used in bcbioRNASeq F1000 paper.
 ## Updated 2021-08-09.
-`topTables,list` <-  # nolint
+`topTables,list` <- # nolint
     function(object, n = 10L, contrast = NULL) {
         assert(
             isSubset(c("down", "up"), names(object)),
@@ -204,9 +204,9 @@ setMethod(
 )
 
 #' @describeIn topTables Legacy support for `tbl_df` list returned from
-#'   `resultsTables()`. This method is still supported because it is used in the
-#'   F1000 v2 workflow paper. Otherwise, we now recommend using the
-#'   `DESeqAnalysis` method directly.
+#' `resultsTables()`. This method is still supported because it is used in the
+#' F1000 v2 workflow paper. Otherwise, we now recommend using the
+#' `DESeqAnalysis` method directly.
 #' @export
 setMethod(
     f = "topTables",

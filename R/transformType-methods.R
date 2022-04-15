@@ -16,7 +16,7 @@ NULL
 
 
 ## Updated 2019-07-23.
-`transformType,DESeqAnalysis` <-  # nolint
+`transformType,DESeqAnalysis` <- # nolint
     function(object) {
         validObject(object)
         dt <- as(object, "DESeqTransform")
@@ -26,7 +26,7 @@ NULL
 
 
 ## Updated 2019-07-23.
-`transformType,DESeqAnalysisList` <-  # nolint
+`transformType,DESeqAnalysisList` <- # nolint
     function(object) {
         assert(hasLength(object))
         transformType(object[[1L]])
@@ -35,7 +35,7 @@ NULL
 
 
 ## Updated 2021-03-12.
-`transformType,DESeqTransform` <-  # nolint
+`transformType,DESeqTransform` <- # nolint
     function(object) {
         validObject(object)
         ifelse(

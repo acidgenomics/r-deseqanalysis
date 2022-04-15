@@ -40,100 +40,97 @@
 #' @noRd
 #'
 #' @return `DataFrame`.
-.prepareResultsForPlot <- function(
-    object,
-    direction,
-    alphaThreshold,
-    baseMeanThreshold,
-    lfcThreshold
-) {
-    assert(is(object, "DESeqResults"))
-    df <- as(object, "DataFrame")
-    colnames(df) <- camelCase(colnames(df), strict = TRUE)
-    alphaCol <- ifelse(
-        test = isTRUE(isSubset("svalue", names(object))),
-        yes = "svalue",
-        no = "padj"
-    )
-    rankCol <- alphaCol
-    assert(isSubset(
-        x = c("baseMean", "log2FoldChange", alphaCol, rankCol),
-        y = colnames(df)
-    ))
-    ## Remove genes with very low expression.
-    keep <- which(df[["baseMean"]] >= baseMeanThreshold)
-    df <- df[keep, , drop = FALSE]
-    ## Apply directional filtering, if desired.
-    switch(
-        EXPR = direction,
-        "up" = {
-            keep <- which(df[["log2FoldChange"]] > 0L)
-            df <- df[keep, , drop = FALSE]
-        },
-        "down" = {
-            keep <- which(df[["log2FoldChange"]] < 0L)
-            df <- df[keep, , drop = FALSE]
+.prepareResultsForPlot <-
+    function(object,
+             direction,
+             alphaThreshold,
+             baseMeanThreshold,
+             lfcThreshold) {
+        assert(is(object, "DESeqResults"))
+        df <- as(object, "DataFrame")
+        colnames(df) <- camelCase(colnames(df), strict = TRUE)
+        alphaCol <- ifelse(
+            test = isTRUE(isSubset("svalue", names(object))),
+            yes = "svalue",
+            no = "padj"
+        )
+        rankCol <- alphaCol
+        assert(isSubset(
+            x = c("baseMean", "log2FoldChange", alphaCol, rankCol),
+            y = colnames(df)
+        ))
+        ## Remove genes with very low expression.
+        keep <- which(df[["baseMean"]] >= baseMeanThreshold)
+        df <- df[keep, , drop = FALSE]
+        ## Apply directional filtering, if desired.
+        switch(
+            EXPR = direction,
+            "up" = {
+                keep <- which(df[["log2FoldChange"]] > 0L)
+                df <- df[keep, , drop = FALSE]
+            },
+            "down" = {
+                keep <- which(df[["log2FoldChange"]] < 0L)
+                df <- df[keep, , drop = FALSE]
+            }
+        )
+        ## Check for no genes passing cutoffs and early return.
+        if (!hasRows(df)) {
+            alertWarning("No genes passed cutoffs.")
+            return(NULL)
         }
-    )
-    ## Check for no genes passing cutoffs and early return.
-    if (!hasRows(df)) {
-        alertWarning("No genes passed cutoffs.")
-        return(NULL)
-    }
-    df[["isDeg"]] <- as.factor(mapply(
-        alpha = df[[alphaCol]],
-        lfc = df[["log2FoldChange"]],
-        baseMean = df[["baseMean"]],
-        MoreArgs = list(
+        df[["isDeg"]] <- as.factor(mapply(
+            alpha = df[[alphaCol]],
+            lfc = df[["log2FoldChange"]],
+            baseMean = df[["baseMean"]],
+            MoreArgs = list(
+                "alphaThreshold" = alphaThreshold,
+                "baseMeanThreshold" = baseMeanThreshold,
+                "lfcThreshold" = lfcThreshold
+            ),
+            FUN = function(alpha,
+                           alphaThreshold,
+                           baseMean,
+                           baseMeanThreshold,
+                           lfc,
+                           lfcThreshold) {
+                if (
+                    any(is.na(c(alpha, lfc, baseMean))) ||
+                        alpha >= alphaThreshold ||
+                        baseMean < baseMeanThreshold
+                ) {
+                    return(0L)
+                }
+                if (lfc >= lfcThreshold) {
+                    1L
+                } else if (lfc <= -lfcThreshold) {
+                    -1L
+                } else {
+                    0L
+                }
+            },
+            SIMPLIFY = TRUE,
+            USE.NAMES = FALSE
+        ))
+        df[["rankScore"]] <- df[[rankCol]]
+        df[["rankScore"]][df[["isDeg"]] == 0L] <- NA
+        df <- df[order(df[["rankScore"]]), , drop = FALSE]
+        df[["rank"]] <- seq_len(nrow(df))
+        df[["rank"]][df[["isDeg"]] == 0L] <- NA
+        metadata(df) <- list(
+            "alphaCol" = alphaCol,
             "alphaThreshold" = alphaThreshold,
+            "baseMeanCol" = "baseMean",
             "baseMeanThreshold" = baseMeanThreshold,
-            "lfcThreshold" = lfcThreshold
-        ),
-        FUN = function(
-            alpha,
-            alphaThreshold,
-            baseMean,
-            baseMeanThreshold,
-            lfc,
-            lfcThreshold
-        ) {
-            if (
-                any(is.na(c(alpha, lfc, baseMean))) ||
-                alpha >= alphaThreshold ||
-                baseMean < baseMeanThreshold
-            ) {
-                return(0L)
-            }
-            if (lfc >= lfcThreshold) {
-                1L
-            } else if (lfc <= -lfcThreshold) {
-                -1L
-            } else {
-                0L
-            }
-        },
-        SIMPLIFY = TRUE,
-        USE.NAMES = FALSE
-    ))
-    df[["rankScore"]] <- df[[rankCol]]
-    df[["rankScore"]][df[["isDeg"]] == 0L] <- NA
-    df <- df[order(df[["rankScore"]]), , drop = FALSE]
-    df[["rank"]] <- seq_len(nrow(df))
-    df[["rank"]][df[["isDeg"]] == 0L] <- NA
-    metadata(df) <- list(
-        "alphaCol" = alphaCol,
-        "alphaThreshold" = alphaThreshold,
-        "baseMeanCol" = "baseMean",
-        "baseMeanThreshold" = baseMeanThreshold,
-        "direction" = direction,
-        "isDegCol" = "isDeg",
-        "lfcCol" = "log2FoldChange",
-        "lfcShrinkType" = lfcShrinkType(object),
-        "lfcThreshold" = lfcThreshold,
-        "rankCol" = rankCol
-    )
-    df
-}
+            "direction" = direction,
+            "isDegCol" = "isDeg",
+            "lfcCol" = "log2FoldChange",
+            "lfcShrinkType" = lfcShrinkType(object),
+            "lfcThreshold" = lfcThreshold,
+            "rankCol" = rankCol
+        )
+        df
+    }
 
 
 
@@ -191,34 +188,34 @@
 
 
 ## Updated 2019-11-12.
-.joinCounts <- function(
-    object,  # nolint
-    DESeqDataSet   # nolint
-) {
-    assert(
-        is(object, "DataFrame"),
-        is(DESeqDataSet, "DESeqDataSet"),
-        identical(
-            x = rownames(object),
-            y = rownames(DESeqDataSet)
-        ),
-        areDisjointSets(
-            x = colnames(object),
-            y = colnames(DESeqDataSet)
+.joinCounts <-
+    function(object,
+             DESeqDataSet # nolint
+    ) {
+        assert(
+            is(object, "DataFrame"),
+            is(DESeqDataSet, "DESeqDataSet"),
+            identical(
+                x = rownames(object),
+                y = rownames(DESeqDataSet)
+            ),
+            areDisjointSets(
+                x = colnames(object),
+                y = colnames(DESeqDataSet)
+            )
         )
-    )
-    validObject(object)
-    validObject(DESeqDataSet)
-    counts <- counts(DESeqDataSet, normalized = TRUE)
-    out <- cbind(object, counts)
-    ## Ensure we're not changing the object class on return.
-    ## This can happen for DESeqResults, which will coerce to DataFrame.
-    if (!identical(x = class(object), y = class(out))) {
-        out <- as(out, Class = class(object)[[1L]])
+        validObject(object)
+        validObject(DESeqDataSet)
+        counts <- counts(DESeqDataSet, normalized = TRUE)
+        out <- cbind(object, counts)
+        ## Ensure we're not changing the object class on return.
+        ## This can happen for DESeqResults, which will coerce to DataFrame.
+        if (!identical(x = class(object), y = class(out))) {
+            out <- as(out, Class = class(object)[[1L]])
+        }
+        validObject(out)
+        out
     }
-    validObject(out)
-    out
-}
 
 
 
@@ -232,72 +229,72 @@
 ## handle S4 Rle columns from the Genomic Ranges.
 ##
 ## Updated 2019-11-12.
-.joinRowData <- function(
-    object,  # nolint
-    DESeqDataSet   # nolint
-) {
-    assert(
-        is(object, "DataFrame"),
-        is(DESeqDataSet, "DESeqDataSet"),
-        identical(
-            x = rownames(object),
-            y = rownames(DESeqDataSet)
-        ),
-        areDisjointSets(
-            x = colnames(object),
-            y = colnames(DESeqDataSet)
-        )
-    )
-    validObject(object)
-    validObject(DESeqDataSet)
-    ## SummarizedExperiment inconsistently handles rownames on rowData.
-    ## Ensure they are set here before continuing.
-    rownames <- rownames(DESeqDataSet)
-    rowData <- rowData(DESeqDataSet)
-    rownames(rowData) <- rownames
-    rowData <- decode(rowData)
-    keep <- vapply(
-        X = rowData,
-        FUN = function(x) {
-            is.character(x) || is.factor(x)
-        },
-        FUN.VALUE = logical(1L)
-    )
-    assert(
-        any(keep),
-        msg = sprintf(
-            fmt = paste0(
-                "No suitable row annotations detected.\n",
-                "Check '%s' of %s."
+.joinRowData <-
+    function(object,
+             DESeqDataSet # nolint
+    ) {
+        assert(
+            is(object, "DataFrame"),
+            is(DESeqDataSet, "DESeqDataSet"),
+            identical(
+                x = rownames(object),
+                y = rownames(DESeqDataSet)
             ),
-            "rowData()", "DESeqDataSet"
+            areDisjointSets(
+                x = colnames(object),
+                y = colnames(DESeqDataSet)
+            )
         )
-    )
-    rowData <- rowData[, keep, drop = FALSE]
-    ## Drop any remaining blacklisted columns. These columsn aren't useful in
-    ## the downstream export to CSV format.
-    blacklist <- "seqCoordSystem"
-    keep <- !colnames(rowData) %in% blacklist
-    rowData <- rowData[, keep, drop = FALSE]
-    assert(
-        all(vapply(
+        validObject(object)
+        validObject(DESeqDataSet)
+        ## SummarizedExperiment inconsistently handles rownames on rowData.
+        ## Ensure they are set here before continuing.
+        rownames <- rownames(DESeqDataSet)
+        rowData <- rowData(DESeqDataSet)
+        rownames(rowData) <- rownames
+        rowData <- decode(rowData)
+        keep <- vapply(
             X = rowData,
-            FUN = is.atomic,
+            FUN = function(x) {
+                is.character(x) || is.factor(x)
+            },
             FUN.VALUE = logical(1L)
-        )),
-        hasLength(rowData),
-        identical(rownames(object), rownames(rowData)),
-        areDisjointSets(colnames(object), colnames(rowData))
-    )
-    out <- cbind(object, rowData)
-    ## Ensure we're not changing the object class on return.
-    ## This can happen for DESeqResults, which will coerce to DataFrame.
-    if (!identical(x = class(object), y = class(out))) {
-        out <- as(out, Class = class(object)[[1L]])
+        )
+        assert(
+            any(keep),
+            msg = sprintf(
+                fmt = paste0(
+                    "No suitable row annotations detected.\n",
+                    "Check '%s' of %s."
+                ),
+                "rowData()", "DESeqDataSet"
+            )
+        )
+        rowData <- rowData[, keep, drop = FALSE]
+        ## Drop any remaining blacklisted columns. These columsn aren't useful in
+        ## the downstream export to CSV format.
+        blacklist <- "seqCoordSystem"
+        keep <- !colnames(rowData) %in% blacklist
+        rowData <- rowData[, keep, drop = FALSE]
+        assert(
+            all(vapply(
+                X = rowData,
+                FUN = is.atomic,
+                FUN.VALUE = logical(1L)
+            )),
+            hasLength(rowData),
+            identical(rownames(object), rownames(rowData)),
+            areDisjointSets(colnames(object), colnames(rowData))
+        )
+        out <- cbind(object, rowData)
+        ## Ensure we're not changing the object class on return.
+        ## This can happen for DESeqResults, which will coerce to DataFrame.
+        if (!identical(x = class(object), y = class(out))) {
+            out <- as(out, Class = class(object)[[1L]])
+        }
+        validObject(out)
+        out
     }
-    validObject(out)
-    out
-}
 
 
 
@@ -305,60 +302,59 @@
 #'
 #' @note Updated 2022-04-15.
 #' @noRd
-.thresholdLabel <- function(
-    object,
-    direction,
-    alphaThreshold,
-    baseMeanThreshold,
-    lfcShrinkType = NULL,
-    lfcThreshold
-) {
-    assert(isAny(object, c("DESeqAnalysis", "DESeqResults")))
-    x <- character()
-    sep <- "; "
-    if (is(object, "DESeqResults")) {
-        n <- vapply(
-            X = switch(
-                EXPR = direction,
-                "both" = c("up", "down"),
-                direction
-            ),
-            FUN = function(direction) {
-                length(deg(
-                    object = object,
-                    direction = direction,
-                    alphaThreshold = alphaThreshold,
-                    baseMeanThreshold = baseMeanThreshold,
-                    lfcThreshold = lfcThreshold,
-                    quiet = TRUE
-                ))
-            },
-            FUN.VALUE = integer(1L),
-            USE.NAMES = TRUE
-        )
-        x <- paste0(x, paste("n", "=", sum(n)))
-        if (direction == "both" && sum(n) > 0L) {
-            x <- paste0(x, sep, paste(names(n), n, sep = ": ", collapse = sep))
-        } else {
-            x <- paste0(x, " (", direction, ")")
+.thresholdLabel <-
+    function(object,
+             direction,
+             alphaThreshold,
+             baseMeanThreshold,
+             lfcShrinkType = NULL,
+             lfcThreshold) {
+        assert(isAny(object, c("DESeqAnalysis", "DESeqResults")))
+        x <- character()
+        sep <- "; "
+        if (is(object, "DESeqResults")) {
+            n <- vapply(
+                X = switch(
+                    EXPR = direction,
+                    "both" = c("up", "down"),
+                    direction
+                ),
+                FUN = function(direction) {
+                    length(deg(
+                        object = object,
+                        direction = direction,
+                        alphaThreshold = alphaThreshold,
+                        baseMeanThreshold = baseMeanThreshold,
+                        lfcThreshold = lfcThreshold,
+                        quiet = TRUE
+                    ))
+                },
+                FUN.VALUE = integer(1L),
+                USE.NAMES = TRUE
+            )
+            x <- paste0(x, paste("n", "=", sum(n)))
+            if (direction == "both" && sum(n) > 0L) {
+                x <- paste0(x, sep, paste(names(n), n, sep = ": ", collapse = sep))
+            } else {
+                x <- paste0(x, " (", direction, ")")
+            }
+            x <- paste0(x, sep)
         }
-        x <- paste0(x, sep)
+        x <- paste0(x, "alpha < ", alphaThreshold)
+        if (lfcThreshold > 0L) {
+            x <- paste0(x, sep, "lfc >= ", lfcThreshold)
+        }
+        if (
+            !is.null(lfcShrinkType) &&
+                lfcShrinkType != "unshrunken"
+        ) {
+            x <- paste0(x, sep, "lfcShrink: ", lfcShrinkType)
+        }
+        if (baseMeanThreshold > 1L) {
+            x <- paste0(x, sep, "baseMean >= ", baseMeanThreshold)
+        }
+        x
     }
-    x <- paste0(x, "alpha < ", alphaThreshold)
-    if (lfcThreshold > 0L) {
-        x <- paste0(x, sep, "lfc >= ", lfcThreshold)
-    }
-    if (
-        !is.null(lfcShrinkType) &&
-        lfcShrinkType != "unshrunken"
-    ) {
-        x <- paste0(x, sep, "lfcShrink: ", lfcShrinkType)
-    }
-    if (baseMeanThreshold > 1L) {
-        x <- paste0(x, sep, "baseMean >= ", baseMeanThreshold)
-    }
-    x
-}
 
 
 
@@ -376,10 +372,10 @@
 #'
 #' @param object `DESeqAnalysis` or `DESeqAnalysisList`.
 #' @param value `character(1)`.
-#'   `DESeqResults` column name.
+#' `DESeqResults` column name.
 #'
 #' @return `character(1)`.
-#'   `DESeqResults` slot name. Either "results" or "lfcShrink"
+#' `DESeqResults` slot name. Either "results" or "lfcShrink"
 #'
 #' @examples
 #' .whichResults(object, value = "log2FoldChange")
@@ -393,7 +389,7 @@
     )
     if (
         identical(value, "log2FoldChange") &&
-        hasLength(slot(object, "lfcShrink"))
+            hasLength(slot(object, "lfcShrink"))
     ) {
         slot <- "lfcShrink"
     } else {

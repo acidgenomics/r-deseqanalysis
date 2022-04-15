@@ -3,7 +3,8 @@ context("contrastSamples")
 test_that("DESeqAnalysis : character", {
     expect_identical(
         object = contrastSamples(
-            deseq, i = 1L,
+            deseq,
+            i = 1L,
             return = "character",
             quiet = FALSE
         ),
@@ -24,7 +25,8 @@ test_that("DESeqAnalysis : character", {
     )
     expect_identical(
         object = contrastSamples(
-            deseq, i = 2L,
+            deseq,
+            i = 2L,
             return = "character",
             quiet = FALSE
         ),
@@ -48,7 +50,8 @@ test_that("DESeqAnalysis : character", {
 test_that("DESeqAnalysis : list", {
     expect_identical(
         object = contrastSamples(
-            deseq, i = 1L,
+            deseq,
+            i = 1L,
             return = "list",
             quiet = FALSE
         ),
@@ -80,7 +83,8 @@ test_that("DESeqAnalysis : list", {
     )
     expect_identical(
         object = contrastSamples(
-            deseq, i = 2L,
+            deseq,
+            i = 2L,
             return = "list",
             quiet = FALSE
         ),

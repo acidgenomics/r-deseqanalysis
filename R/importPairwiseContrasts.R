@@ -4,16 +4,20 @@
 #' @note Updated 2019-09-09.
 #'
 #' @inheritParams AcidRoxygen::params
+#'
 #' @param groupCol `character(1)`.
-#'   Group column name in `colData()` of
-#'   `DESeqDataSet`. Corresponds to value in `design()`.
+#' Group column name in `colData()` of
+#' `DESeqDataSet`. Corresponds to value in `design()`.
+#'
 #' @param numeratorCol `character(1)`.
-#'   Numerator column name in contrasts file.
+#' Numerator column name in contrasts file.
+#'
 #' @param denominatorCol `character(1)`.
-#'   Denominator column name in contrasts file.
+#' Denominator column name in contrasts file.
+#'
 #' @param namesCol `character(1)`.
-#'   Column in contrasts file to used to define the names of the contrast list.
-#'   Values will be sanitized using `snakeCase()`.
+#' Column in contrasts file to used to define the names of the contrast list.
+#' Values will be sanitized using `snakeCase()`.
 #'
 #' @seealso `DESeq2::results()`.
 #'
@@ -25,13 +29,11 @@
 #' file <- system.file("extdata", "contrasts.csv", package = "DESeqAnalysis")
 #' x <- importPairwiseContrasts(file)
 #' print(x)
-importPairwiseContrasts <- function(
-    file,
-    groupCol = "group",
-    numeratorCol = "numerator",
-    denominatorCol = "denominator",
-    namesCol = "description"
-) {
+importPairwiseContrasts <- function(file,
+                                    groupCol = "group",
+                                    numeratorCol = "numerator",
+                                    denominatorCol = "denominator",
+                                    namesCol = "description") {
     assert(
         isAFile(file),
         isString(groupCol),

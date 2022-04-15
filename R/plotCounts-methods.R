@@ -4,11 +4,12 @@
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
-#' @param transform `logical(1)`.
-#'   Plot log2 variance-stabilized transform counts, defined internally in
-#'   `DESeqTransform` object (see `transform` slot). If `FALSE`, plot the
-#'   size factor adjusted counts from `DESeqDataSet`.
 #' @param ... Additional arguments.
+#'
+#' @param transform `logical(1)`.
+#' Plot log2 variance-stabilized transform counts, defined internally in
+#' `DESeqTransform` object (see `transform` slot). If `FALSE`, plot the
+#' size factor adjusted counts from `DESeqDataSet`.
 #'
 #' @examples
 #' data(deseq)
@@ -27,7 +28,7 @@ NULL
 ## Putting the args after `...` here so we can pass in genes easily as a
 ## positional argument, during interactive use.
 ## Updated 2019-12-18.
-`plotCounts,DESeqAnalysis` <-  # nolint
+`plotCounts,DESeqAnalysis` <- # nolint
     function(object, ..., samples = NULL, transform = FALSE) {
         validObject(object)
         assert(
@@ -51,7 +52,7 @@ NULL
 
 
 ## Updated 2019-11-18.
-`plotCounts,DESeqDataSet` <-  # nolint
+`plotCounts,DESeqDataSet` <- # nolint
     function(object, ...) {
         dots <- list(...)
         rse <- as(object, "RangedSummarizedExperiment")
@@ -70,7 +71,7 @@ NULL
 
 
 ## Updated 2019-11-18.
-`plotCounts,DESeqTransform` <-  # nolint
+`plotCounts,DESeqTransform` <- # nolint
     function(object, ...) {
         dots <- list(...)
         rse <- as(object, "RangedSummarizedExperiment")
@@ -92,7 +93,7 @@ NULL
 
 
 #' @describeIn plotCounts Plot either `DESeqDataSet` normalized counts or
-#'   `DESeqTransform` log2 variance-stabilized counts.
+#' `DESeqTransform` log2 variance-stabilized counts.
 #' @export
 setMethod(
     f = "plotCounts",
@@ -101,8 +102,8 @@ setMethod(
 )
 
 #' @describeIn plotCounts Plot size factor (i.e. library size) adjusted
-#'   normalized counts. Arguments pass through to `SummarizedExperiment` method
-#'   defined in AcidPlots package.
+#' normalized counts. Arguments pass through to `SummarizedExperiment` method
+#' defined in AcidPlots package.
 #' @export
 setMethod(
     f = "plotCounts",

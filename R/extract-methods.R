@@ -27,11 +27,9 @@ NULL
 
 
 ## Updated 2020-10-28.
-`extract,DESeqAnalysis` <-  # nolint
-    function(
-        x, i, j,
-        drop = FALSE
-    ) {
+`extract,DESeqAnalysis` <- # nolint
+    function(x, i, j,
+             drop = FALSE) {
         validObject(x)
         assert(isFALSE(drop))
         ## Genes (rows).
@@ -102,7 +100,7 @@ setMethod(
         x = "DESeqAnalysis",
         i = "ANY",
         j = "ANY",
-        drop = "ANY"  # Don't use logical here.
+        drop = "ANY" # Don't use logical here.
     ),
     definition = `extract,DESeqAnalysis`
 )

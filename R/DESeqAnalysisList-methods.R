@@ -13,7 +13,7 @@ NULL
 
 
 ## Updated 2021-03-12.
-`DESeqAnalysisList,SimpleList` <-  # nolint
+`DESeqAnalysisList,SimpleList` <- # nolint
     function(object) {
         assert(hasLength(object), hasNames(object))
         new(Class = "DESeqAnalysisList", object)
@@ -22,13 +22,13 @@ NULL
 
 
 ## Updated 2021-03-12.
-`DESeqAnalysisList,list` <-  # nolint
+`DESeqAnalysisList,list` <- # nolint
     `DESeqAnalysisList,SimpleList`
 
 
 
 ## Updated 2021-03-08.
-`DESeqAnalysisList,missing` <-  # nolint
+`DESeqAnalysisList,missing` <- # nolint
     function(object) {
         new(Class = "DESeqAnalysisList", list())
     }

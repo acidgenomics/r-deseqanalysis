@@ -20,125 +20,121 @@ NULL
 
 
 ## Updated 2021-10-15.
-.exportResultsMatrices <- function(
-    object,
-    dir,
-    compress,
-    overwrite,
-    quiet
-) {
-    assert(
-        is(object, "DESeqAnalysis"),
-        isString(dir),
-        isFlag(compress),
-        isFlag(overwrite),
-        isFlag(quiet)
-    )
-    ## Loop across all possible values to export.
-    ## e.g. `"log2FoldChange"`, `"stat"`, `"alpha"`.
-    values <- eval(formals(`resultsMatrix,DESeqAnalysis`)[["value"]])
-    list <- lapply(
-        X = values,
-        FUN = function(value) {
-            resultsMatrix(object = object, value = value, rowData = TRUE)
+.exportResultsMatrices <-
+    function(object,
+             dir,
+             compress,
+             overwrite,
+             quiet) {
+        assert(
+            is(object, "DESeqAnalysis"),
+            isString(dir),
+            isFlag(compress),
+            isFlag(overwrite),
+            isFlag(quiet)
+        )
+        ## Loop across all possible values to export.
+        ## e.g. `"log2FoldChange"`, `"stat"`, `"alpha"`.
+        values <- eval(formals(`resultsMatrix,DESeqAnalysis`)[["value"]])
+        list <- lapply(
+            X = values,
+            FUN = function(value) {
+                resultsMatrix(object = object, value = value, rowData = TRUE)
+            }
+        )
+        ## Ensure we dynamically remap "alpha" back to "padj" or "svalue".
+        values <- vapply(
+            X = list,
+            FUN = function(x) {
+                metadata(x)[["DESeqAnalysis"]][["value"]]
+            },
+            FUN.VALUE = character(1L),
+            USE.NAMES = FALSE
+        )
+        names(list) <- values
+        files <- file.path(dir, paste0(values, ".csv"))
+        if (isTRUE(compress)) {
+            files <- paste0(files, ".gz")
         }
-    )
-    ## Ensure we dynamically remap "alpha" back to "padj" or "svalue".
-    values <- vapply(
-        X = list,
-        FUN = function(x) {
-            metadata(x)[["DESeqAnalysis"]][["value"]]
-        },
-        FUN.VALUE = character(1L),
-        USE.NAMES = FALSE
-    )
-    names(list) <- values
-    files <- file.path(dir, paste0(values, ".csv"))
-    if (isTRUE(compress)) {
-        files <- paste0(files, ".gz")
+        mapply(
+            object = list,
+            con = files,
+            overwrite = overwrite,
+            quiet = quiet,
+            FUN = export,
+            SIMPLIFY = TRUE,
+            USE.NAMES = TRUE
+        )
     }
-    mapply(
-        object = list,
-        con = files,
-        overwrite = overwrite,
-        quiet = quiet,
-        FUN = export,
-        SIMPLIFY = TRUE,
-        USE.NAMES = TRUE
-    )
-}
 
 
 
 ## Here we are looping across each contrast and writing out DEG tables.
 ## Note: We don't need to support humanize mode because `geneName` is required.
 ## Updated 2021-10-15.
-.exportResultsTables <- function(
-    object,
-    dir,
-    compress,
-    overwrite,
-    quiet
-) {
-    assert(
-        is(object, "DESeqAnalysis"),
-        isFlag(compress),
-        isFlag(overwrite),
-        isFlag(quiet)
-    )
-    resultsNames <- resultsNames(object)
-    out <- lapply(
-        X = resultsNames,
-        FUN = function(i) {
-            data <- resultsTables(
-                object = object,
-                i = i,
-                extra = TRUE,
-                return = "tbl_df"
-            )
-            if (is.null(data)) {
-                return(invisible(NULL))
+.exportResultsTables <-
+    function(object,
+             dir,
+             compress,
+             overwrite,
+             quiet) {
+        assert(
+            is(object, "DESeqAnalysis"),
+            isFlag(compress),
+            isFlag(overwrite),
+            isFlag(quiet)
+        )
+        resultsNames <- resultsNames(object)
+        out <- lapply(
+            X = resultsNames,
+            FUN = function(i) {
+                data <- resultsTables(
+                    object = object,
+                    i = i,
+                    extra = TRUE,
+                    return = "tbl_df"
+                )
+                if (is.null(data)) {
+                    return(invisible(NULL))
+                }
+                files <- file.path(dir, i, paste0(names(data), ".csv"))
+                if (isTRUE(compress)) {
+                    files <- paste0(files, ".gz")
+                }
+                mapply(
+                    object = data,
+                    con = files,
+                    overwrite = overwrite,
+                    quiet = quiet,
+                    FUN = export,
+                    SIMPLIFY = TRUE,
+                    USE.NAMES = TRUE
+                )
             }
-            files <- file.path(dir, i, paste0(names(data), ".csv"))
-            if (isTRUE(compress)) {
-                files <- paste0(files, ".gz")
-            }
-            mapply(
-                object = data,
-                con = files,
-                overwrite = overwrite,
-                quiet = quiet,
-                FUN = export,
-                SIMPLIFY = TRUE,
-                USE.NAMES = TRUE
-            )
-        }
-    )
-    names(out) <- resultsNames
-    out
-}
+        )
+        names(out) <- resultsNames
+        out
+    }
 
 
 
 ## Updated 2021-10-15.
-`export,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        con,
-        format,  # NULL
-        compress = getOption(
-            x = "acid.export.compress",
-            default = FALSE
-        ),
-        overwrite = getOption(
-            x = "acid.overwrite",
-            default = TRUE
-        ),
-        quiet = getOption(
-            x = "acid.quiet",
-            default = FALSE
-        )
-    ) {
+`export,DESeqAnalysis` <- # nolint
+    function(object,
+             con,
+             format, # NULL
+             compress = getOption(
+                 x = "acid.export.compress",
+                 default = FALSE
+             ),
+             overwrite = getOption(
+                 x = "acid.overwrite",
+                 default = TRUE
+             ),
+             quiet = getOption(
+                 x = "acid.quiet",
+                 default = FALSE
+             )) {
         validObject(object)
         if (missing(format)) {
             format <- NULL
@@ -214,24 +210,22 @@ NULL
 ## Only export the raw and normalized counts.
 ## Skip exporting other assays, including mu, H, cooks.
 ## Updated 2021-10-15.
-`export,DESeqDataSet` <-  # nolint
-    function(
-        object,
-        con,
-        format,  # NULL
-        compress = getOption(
-            x = "acid.export.compress",
-            default = FALSE
-        ),
-        overwrite = getOption(
-            x = "acid.overwrite",
-            default = TRUE
-        ),
-        quiet = getOption(
-            x = "acid.quiet",
-            default = FALSE
-        )
-    ) {
+`export,DESeqDataSet` <- # nolint
+    function(object,
+             con,
+             format, # NULL
+             compress = getOption(
+                 x = "acid.export.compress",
+                 default = FALSE
+             ),
+             overwrite = getOption(
+                 x = "acid.overwrite",
+                 default = TRUE
+             ),
+             quiet = getOption(
+                 x = "acid.quiet",
+                 default = FALSE
+             )) {
         validObject(object)
         if (missing(format)) {
             format <- NULL
@@ -264,7 +258,7 @@ NULL
 
 
 ## Updated 2021-10-15.
-`export,DESeqAnalysis,deprecated` <-  # nolint
+`export,DESeqAnalysis,deprecated` <- # nolint
     methodFunction(
         f = "export",
         signature = signature(
@@ -276,7 +270,7 @@ NULL
     )
 
 ## Updated 2021-10-15.
-`export,DESeqDataSet,deprecated` <-  # nolint
+`export,DESeqDataSet,deprecated` <- # nolint
     methodFunction(
         f = "export",
         signature = signature(

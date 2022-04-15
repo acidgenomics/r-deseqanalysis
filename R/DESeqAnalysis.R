@@ -3,14 +3,17 @@
 #' @note Updated 2021-03-15.
 #'
 #' @param data `DESeqDataSet`.
+#'
 #' @param transform `DESeqTransform`.
-#'   `DESeq2::varianceStabilizingTransformation()` recommended by default.
+#' `DESeq2::varianceStabilizingTransformation()` recommended by default.
+#'
 #' @param results `list` or single `DESeqResults`.
-#'   One or more unshrunken `DESeqResults`.
-#'   Assign the `DESeq2::results()` return here.
+#' One or more unshrunken `DESeqResults`.
+#' Assign the `DESeq2::results()` return here.
+#'
 #' @param lfcShrink `list`, single `DESeqResults`, or `NULL`.
-#'   *Optional*. One or more shrunken `DESeqResults`.
-#'   Assign the `DESeq2::lfcShrink()` return here.
+#' *Optional*. One or more shrunken `DESeqResults`.
+#' Assign the `DESeq2::lfcShrink()` return here.
 #'
 #' @examples
 #' data <- DESeq2::makeExampleDESeqDataSet()
@@ -44,13 +47,11 @@
 #'     lfcShrink = lfcShrink
 #' )
 #' print(object)
-DESeqAnalysis <-  # nolint
-    function(
-        data,
-        transform,
-        results,
-        lfcShrink = NULL
-    ) {
+DESeqAnalysis <- # nolint
+    function(data,
+             transform,
+             results,
+             lfcShrink = NULL) {
         ## Allow input of single `DESeqResults`.
         if (is(results, "DESeqResults")) {
             results <- .coerceResultsToList(results)

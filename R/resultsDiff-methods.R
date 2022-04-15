@@ -5,12 +5,12 @@
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param col `character(1)`.
-#'   Column to use for difference calculation (subtraction).
-#'   Note that `x`/`i` represents `A` and `y`/`j` `B` in `A - B` calculation.
+#' Column to use for difference calculation (subtraction).
+#' Note that `x`/`i` represents `A` and `y`/`j` `B` in `A - B` calculation.
 #' @param deg `character(1)`.
-#'   - `"no"`: Return all genes, corresponding to original row names order.
-#'   - `"intersect"`: Return only genes called as DE in both contrasts.
-#'   - `"union"`: Return genes called as DE in either contrast.
+#' - `"no"`: Return all genes, corresponding to original row names order.
+#' - `"intersect"`: Return only genes called as DE in both contrasts.
+#' - `"union"`: Return genes called as DE in either contrast.
 #'
 #' @examples
 #' data(deseq)
@@ -23,7 +23,7 @@ NULL
 
 
 ## Updated 2020-08-05.
-`resultsDiff,DESeqAnalysis,missing` <-  # nolint
+`resultsDiff,DESeqAnalysis,missing` <- # nolint
     function(x, y = NULL, i, j, ...) {
         resultsDiff(
             x = results(x, i = i),
@@ -35,17 +35,15 @@ NULL
 
 
 ## Updated 2021-06-29.
-`resultsDiff,DESeqResults,DESeqResults` <-  # nolint
-    function(
-        x,
-        y,
-        col = c("log2FoldChange", "stat"),
-        deg = c("no", "intersect", "union"),
-        direction = c("both", "up", "down"),
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL
-    ) {
+`resultsDiff,DESeqResults,DESeqResults` <- # nolint
+    function(x,
+             y,
+             col = c("log2FoldChange", "stat"),
+             deg = c("no", "intersect", "union"),
+             direction = c("both", "up", "down"),
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL) {
         validObject(x)
         validObject(y)
         col <- match.arg(col)

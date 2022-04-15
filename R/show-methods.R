@@ -14,7 +14,7 @@ NULL
 
 
 ## Updated 2021-10-15.
-`show,DESeqAnalysis` <-  # nolint
+`show,DESeqAnalysis` <- # nolint
     function(object) {
         validObject(object)
         dds <- as(object, "DESeqDataSet")

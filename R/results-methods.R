@@ -14,8 +14,8 @@
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param extra `logical(1)`.
-#'   Include row data (i.e. gene metadata) and normalized counts from the
-#'   internal `DESeqDataSet`.
+#' Include row data (i.e. gene metadata) and normalized counts from the
+#' internal `DESeqDataSet`.
 #' @param ... Additional arguments.
 #'
 #' @return `DESeqResults`.
@@ -32,14 +32,12 @@ NULL
 
 
 ## Updated 2021-03-09.
-`results,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        lfcShrink = NULL,
-        extra = FALSE,
-        quiet = FALSE
-    ) {
+`results,DESeqAnalysis` <- # nolint
+    function(object,
+             i,
+             lfcShrink = NULL,
+             extra = FALSE,
+             quiet = FALSE) {
         validObject(object)
         assert(
             isScalar(i),
@@ -87,7 +85,7 @@ NULL
 
 
 ## Updated 2019-07-23.
-`results,DESeqDataSet` <-  # nolint
+`results,DESeqDataSet` <- # nolint
     function(object, ...) {
         DESeq2::results(object, ...)
     }

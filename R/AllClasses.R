@@ -30,12 +30,15 @@
 #' @note Updated 2021-03-15.
 #'
 #' @slot data `DESeqDataSet`.
+#'
 #' @slot transform `DESeqTransform`.
+#'
 #' @slot results `list`.
-#'   One or more unshrunken `DESeqResults`.
+#' One or more unshrunken `DESeqResults`.
+#'
 #' @slot lfcShrink `list`.
-#'   *Optional*. One or more shrunken `DESeqResults`. If set, must correspond to
-#'   those defined in `results`. Otherwise, can set as empty list (`list()`).
+#' *Optional*. One or more shrunken `DESeqResults`. If set, must correspond to
+#' those defined in `results`. Otherwise, can set as empty list (`list()`).
 #'
 #' @seealso
 #' - `help(topic = "Annotated-class", package = "S4Vectors")`.

@@ -17,7 +17,7 @@ NULL
 
 
 ## Updated 2021-06-29.
-`deg,DESeqAnalysis` <-  # nolint
+`deg,DESeqAnalysis` <- # nolint
     function(object, i, ...) {
         deg(
             object = results(object, i = i),
@@ -36,15 +36,13 @@ NULL
 ## It's just performing a simple subset to get the identifiers as a character.
 ##
 ## Updated 2021-08-09.
-`deg,DESeqResults` <-  # nolint
-    function(
-        object,
-        direction = c("both", "up", "down"),
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL,
-        quiet = FALSE
-    ) {
+`deg,DESeqResults` <- # nolint
+    function(object,
+             direction = c("both", "up", "down"),
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL,
+             quiet = FALSE) {
         validObject(object)
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)

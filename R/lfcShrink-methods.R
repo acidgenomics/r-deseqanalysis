@@ -14,7 +14,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`lfcShrink,DESeqDataSet` <-  # nolint
+`lfcShrink,DESeqDataSet` <- # nolint
     function(object, ...) {
         DESeq2::lfcShrink(object, ...)
     }
@@ -22,7 +22,7 @@ NULL
 
 
 ## Updated 2020-09-18.
-`lfcShrink,DESeqAnalysis` <-  # nolint
+`lfcShrink,DESeqAnalysis` <- # nolint
     function(object) {
         ok <- metadata(object)[["lfcShrink"]]
         if (is.logical(ok)) {
@@ -35,7 +35,7 @@ NULL
 
 
 ## Updated 2021-03-12.
-`lfcShrink,DESeqAnalysisList` <-  # nolint
+`lfcShrink,DESeqAnalysisList` <- # nolint
     function(object) {
         assert(hasLength(object))
         lfcShrink(object[[1L]])
@@ -44,7 +44,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`lfcShrink<-,DESeqAnalysis,logical` <-  # nolint
+`lfcShrink<-,DESeqAnalysis,logical` <- # nolint
     function(object, value) {
         assert(isFlag(value))
         metadata(object)[["lfcShrink"]] <- value
@@ -54,7 +54,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`lfcShrink<-,DESeqAnalysisList,logical` <-  # nolint
+`lfcShrink<-,DESeqAnalysisList,logical` <- # nolint
     function(object, value) {
         assert(
             hasLength(object),

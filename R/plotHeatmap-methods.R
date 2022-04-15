@@ -18,7 +18,7 @@ NULL
 
 
 ## Updated 2021-03-15.
-`plotHeatmap,DESeqAnalysis` <-  # nolint
+`plotHeatmap,DESeqAnalysis` <- # nolint
     function(object, ...) {
         validObject(object)
         alertInfo(sprintf(
@@ -32,7 +32,7 @@ NULL
 
 
 ## Updated 2021-03-15.
-`plotCorrelationHeatmap,DESeqAnalysis` <-  # nolint
+`plotCorrelationHeatmap,DESeqAnalysis` <- # nolint
     function(object, ...) {
         validObject(object)
         alertInfo(sprintf(
@@ -46,7 +46,7 @@ NULL
 
 
 ## Updated 2021-03-15.
-`plotQuantileHeatmap,DESeqAnalysis` <-  # nolint
+`plotQuantileHeatmap,DESeqAnalysis` <- # nolint
     function(object, ...) {
         validObject(object)
         alertInfo(sprintf(

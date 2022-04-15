@@ -4,12 +4,13 @@
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
-#' @param format `character(1)`.
-#'   Name format to return:
-#'   - `resultsNames`: Attempt to matching the conventions in
-#'     [`resultsNames()`][DESeq2::resultsNames].
-#'   - `title`: Human readable, for plot titles and/or table captions.
 #' @param ... Additional arguments.
+#'
+#' @param format `character(1)`.
+#' Name format to return:
+#' - `resultsNames`: Attempt to matching the conventions in
+#' [`resultsNames()`][DESeq2::resultsNames].
+#' - `title`: Human readable, for plot titles and/or table captions.
 #'
 #' @seealso
 #' - [`resultsNames()`].
@@ -26,7 +27,7 @@ NULL
 ## This method is to be used primarily to set the contrast name on DESeqResults
 ## inside plotting functions. See `plotMA()` method, for example.
 ## Updated 2021-03-15.
-`contrastName,DESeqAnalysis` <-  # nolint
+`contrastName,DESeqAnalysis` <- # nolint
     function(object, i, ...) {
         assert(isScalar(i))
         resList <- DESeqResultsList(object, quiet = TRUE)
@@ -38,11 +39,9 @@ NULL
 
 
 ## Updated 2021-03-15.
-`contrastName,DESeqResults` <-  # nolint
-    function(
-        object,
-        format = c("resultsNames", "title")
-    ) {
+`contrastName,DESeqResults` <- # nolint
+    function(object,
+             format = c("resultsNames", "title")) {
         validObject(object)
         format <- match.arg(format)
         ## Use metadata stash, if defined. This is the recommended approach
@@ -79,7 +78,7 @@ NULL
 
 
 ## Updated 2019-09-10.
-`contrastName<-,DESeqResults,character` <-  # nolint
+`contrastName<-,DESeqResults,character` <- # nolint
     function(object, value) {
         assert(isString(value))
         metadata(object)[["contrastName"]] <- value

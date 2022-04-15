@@ -3,27 +3,29 @@
 #' @note Updated 2021-03-15.
 #'
 #' @inheritParams AcidRoxygen::params
+#' @param ... Passthrough arguments to `DESeqResultsList` method.
 #'
 #' @param i `character`, `numeric`, or `NULL`.
-#'   Names or range of results.
-#'   If set `NULL`, include all results per object.
-#'   When passing in multiple objects, specify the desired results as a `list`
-#'   with length matching the number of input objects, containing either
-#'   `character` or `numeric` corresponding to each object.
+#' Names or range of results.
+#' If set `NULL`, include all results per object.
+#' When passing in multiple objects, specify the desired results as a `list`
+#' with length matching the number of input objects, containing either
+#' `character` or `numeric` corresponding to each object.
+#'
 #' @param direction `character(1)`.
-#'   Include "up" or "down" directions.
-#'   Must be directional, and intentionally does not support "both".
+#' Include "up" or "down" directions.
+#' Must be directional, and intentionally does not support "both".
+#'
 #' @param return `character(1)`.
-#'   - `"matrix"`: `logical matrix`;
-#'     Intersection matrix.
-#'   - `"count"`: `integer`;
-#'     Number of times the gene is significant across contrasts.
-#'   - `"ratio"`: `numeric`;
-#'     The ratio of how many times the gene is significant across contrasts.
-#'   - `"names"`: `character`;
-#'     Names of genes that intersect across all contrasts defined.
-#'     Input of specific contrasts with `i` argument is recommended here.
-#' @param ... Passthrough arguments to `DESeqResultsList` method.
+#' - `"matrix"`: `logical matrix`;
+#' Intersection matrix.
+#' - `"count"`: `integer`;
+#' Number of times the gene is significant across contrasts.
+#' - `"ratio"`: `numeric`;
+#' The ratio of how many times the gene is significant across contrasts.
+#' - `"names"`: `character`;
+#' Names of genes that intersect across all contrasts defined.
+#' Input of specific contrasts with `i` argument is recommended here.
 #'
 #' @examples
 #' data(deseq)
@@ -62,16 +64,14 @@ NULL
 
 
 ## Updated 2021-03-15.
-`degIntersection,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i = NULL,
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL,
-        direction,
-        return
-    ) {
+`degIntersection,DESeqAnalysis` <- # nolint
+    function(object,
+             i = NULL,
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL,
+             direction,
+             return) {
         validObject(object)
         resList <- DESeqResultsList(object = object, quiet = TRUE)
         if (!is.null(i)) {
@@ -105,21 +105,19 @@ formals(`degIntersection,DESeqAnalysis`)[names(.args)] <- .args
 
 
 ## Updated 2021-03-15.
-`degIntersection,DESeqAnalysisList` <-  # nolint
+`degIntersection,DESeqAnalysisList` <- # nolint
     `degIntersection,DESeqAnalysis`
 
 
 
 ## Updated 2021-03-12.
-`degIntersection,DESeqResultsList` <-  # nolint
-    function(
-        object,
-        direction,
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL,
-        return
-    ) {
+`degIntersection,DESeqResultsList` <- # nolint
+    function(object,
+             direction,
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL,
+             return) {
         validObject(object)
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)

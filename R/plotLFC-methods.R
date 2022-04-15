@@ -18,7 +18,7 @@ NULL
 
 
 ## Updated 2022-04-15.
-`plotLFC,DESeqAnalysis` <-  # nolint
+`plotLFC,DESeqAnalysis` <- # nolint
     function(object) {
         validObject(object)
         resList <- as.list(as(object, "DESeqResultsList"))

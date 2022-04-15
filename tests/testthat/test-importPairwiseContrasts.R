@@ -13,7 +13,6 @@ test_that("importPairwiseContrasts", {
             group = "group",
             numerator = "C",
             denominator = "B"
-
         )
     )
     expect_identical(object, expected)
