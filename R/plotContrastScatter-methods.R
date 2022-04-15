@@ -1,10 +1,3 @@
-## FIXME This function is still a work in progress.
-## FIXME Need to support plotVolcano colors here...
-## FIXME Consider supporting directionality labeling.
-## FIXME Consider plotting a regression line here?
-
-
-
 #' @name plotContrastScatter
 #' @inherit AcidGenerics::plotContrastScatter
 #' @note Updated 2022-04-15.
