@@ -21,17 +21,13 @@ plotLFC(object, ...)
 Plot log2 fold change distributions
 }
 \note{
-Updated 2022-03-30.
+Updated 2022-04-15.
 
-Plot the log2 fold change distribution per contrast.
+Plot the log2 fold change distributions for all contrasts in the analysis.
 }
 \examples{
 data(deseq)
 
 ## DESeqAnalysis ====
 plotLFC(deseq)
-
-## Plot expression of specific genes.
-genes <- head(rownames(as.DESeqDataSet(deseq)))
-plotLFC(deseq, genes = genes)
 }
