@@ -303,14 +303,14 @@
 
 #' Threshold label that goes in subtitle for plot on DESeqResults
 #'
-#' @note Updated 2021-06-29.
+#' @note Updated 2022-04-15.
 #' @noRd
 .thresholdLabel <- function(
     object,
     direction,
     alphaThreshold,
     baseMeanThreshold,
-    lfcShrinkType,
+    lfcShrinkType = NULL,
     lfcThreshold
 ) {
     assert(isAny(object, c("DESeqAnalysis", "DESeqResults")))
@@ -348,7 +348,10 @@
     if (lfcThreshold > 0L) {
         x <- paste0(x, sep, "lfc >= ", lfcThreshold)
     }
-    if (lfcShrinkType != "unshrunken") {
+    if (
+        !is.null(lfcShrinkType) &&
+        lfcShrinkType != "unshrunken"
+    ) {
         x <- paste0(x, sep, "lfcShrink: ", lfcShrinkType)
     }
     if (baseMeanThreshold > 1L) {

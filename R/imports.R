@@ -63,8 +63,8 @@ NULL
 #' @importFrom AcidCLI abort alert alertInfo alertWarning dl toInlineString
 #' @importFrom AcidMarkdown markdownHeader markdownList
 #' @importFrom AcidPlots !! acid_coord_flip acid_geom_label_repel
-#'   autoDiscreteColorScale autoDiscreteFillScale matchLabels
-#'   pretty_breaks sym wrap_plots
+#'   autoDiscreteColorScale autoDiscreteFillScale matchLabels pretty_breaks sym
+#'   wrap_plots
 #' @importFrom DESeq2 DESeq fpkm nbinomWaldTest
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors DataFrame SimpleList

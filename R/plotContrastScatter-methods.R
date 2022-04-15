@@ -65,14 +65,12 @@ NULL
         if (is.null(lfcThreshold)) {
             lfcThreshold <- lfcThreshold(object)
         }
-        lfcShrinkType <- lfcShrinkType(object)
         assert(
             isAlpha(alphaThreshold),
             isNumber(baseMeanThreshold),
             isPositive(baseMeanThreshold),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
-            isString(lfcShrinkType),
             isCharacter(pointColor),
             areSetEqual(
                 x = names(pointColor),
@@ -85,10 +83,6 @@ NULL
             areSetEqual(names(limits), c("x", "y"))
         )
         labels <- matchLabels(labels)
-        assert(
-            !(isCharacter(genes) && isTRUE(isPositive(ntop))),
-            msg = "Specify either 'genes' or 'ntop'."
-        )
         contrastMeta <- contrastSamples(
             object = object,
             i = i,
@@ -158,16 +152,16 @@ NULL
             data = data,
             mapping = aes(
                 x = !!sym("x"),
-                y = !!sym("y"),
-                color = !!sym(isDegCol)
+                y = !!sym("y")
             )
         ) +
             geom_point(
+                mapping = aes(color = !!sym(isDegCol)),
                 alpha = pointAlpha,
                 size = pointSize,
-                stroke = 0L
-            ) +
-            guides(color = "none")
+                stroke = 0L,
+                show.legend = FALSE
+            )
         ## Labels.
         if (isTRUE(labels[["x"]])) {
             labels[["x"]] <- toString(
@@ -193,7 +187,6 @@ NULL
                 direction = direction,
                 alphaThreshold = alphaThreshold,
                 baseMeanThreshold = baseMeanThreshold,
-                lfcShrinkType = lfcShrinkType,
                 lfcThreshold = lfcThreshold
             )
         }

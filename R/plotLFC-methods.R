@@ -1,13 +1,8 @@
-## FIXME Need to add support for this.
-## FIXME Consider plotting all fold changes on a single graph...
-
-
-
 #' @name plotLFC
 #' @inherit AcidGenerics::plotLFC
-#' @note Updated 2022-03-30.
+#' @note Updated 2022-04-15.
 #'
-#' Plot the log2 fold change distribution per contrast.
+#' Plot the log2 fold change distributions for all contrasts in the analysis.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -18,40 +13,42 @@
 #'
 #' ## DESeqAnalysis ====
 #' plotLFC(deseq)
-#'
-#' ## Plot expression of specific genes.
-#' genes <- head(rownames(as.DESeqDataSet(deseq)))
-#' plotLFC(deseq, genes = genes)
 NULL
 
 
 
-## Updated 2022-03-30.
+## Updated 2022-04-15.
 `plotLFC,DESeqAnalysis` <-  # nolint
     function(object) {
         validObject(object)
         resList <- as.list(as(object, "DESeqResultsList"))
-
-        tbl <- mapply(
-            contrast = names(resList),
-            df = resList,
-            FUN = function(contrast, df) {
-                tibble(
-                    "contrast" = contrast,
-                    "log2FoldChange" = df[["log2FoldChange"]]
-                )
-            },
-            SIMPLIFY = FALSE
+        data <- do.call(
+            what = rbind,
+            args = mapply(
+                contrast = names(resList),
+                df = resList,
+                FUN = function(contrast, df) {
+                    data.frame(
+                        "contrast" = contrast,
+                        "log2FoldChange" = df[["log2FoldChange"]]
+                    )
+                },
+                SIMPLIFY = FALSE,
+                USE.NAMES = FALSE
+            )
         )
-
-
-        df <- lapply(
-            X =
-        )
-        ## Unlist and create a data.frame of values.
-
-
-        abort("FIXME Need to add method support.")
+        p <- ggplot(
+            data = data,
+            mapping = aes(x = !!sym("log2FoldChange"))
+        ) +
+            geom_density(
+                mapping = aes(
+                    color = !!sym("contrast")
+                ),
+                fill = NA
+            ) +
+            autoDiscreteColorScale()
+        p
     }
 
 
