@@ -31,7 +31,7 @@ NULL
 #'   metadata metadata<- na.omit
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom methods coerce show
-#' @importFrom pipette export import
+#' @importFrom pipette export import tibble
 #'
 #' @importMethodsFrom AcidBase intersectionMatrix
 #' @importMethodsFrom AcidExperiment Gene2Symbol autopadZeros
