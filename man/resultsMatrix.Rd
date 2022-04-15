@@ -21,7 +21,7 @@ resultsMatrix(object, ...)
 )
 }
 \arguments{
-\item{object}{\code{DESeqAnalysis}.}
+\item{object}{Object.}
 
 \item{value}{\code{character(1)}.
 Value type to return. Corresponds to supported \code{DESeqResults} column:

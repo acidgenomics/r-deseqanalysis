@@ -11,6 +11,8 @@
 #' `DESeqTransform` object (see `transform` slot). If `FALSE`, plot the
 #' size factor adjusted counts from `DESeqDataSet`.
 #'
+#' @seealso `DESeq2::plotCounts`.
+#'
 #' @examples
 #' data(deseq)
 #'

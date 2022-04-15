@@ -32,12 +32,10 @@ to the first argument in the \code{character} vector.}
 \item \code{character}: Sample identifiers, corresponding to the column names
 of \code{DESeqDataSet}.
 \item \code{list}: Named list containing \code{"contrast"} and \code{"samples"} elements:
-\itemize{
-\item \code{"contrast"}: \code{character} vector containing metadata on \code{"factor"},
-\code{"numerator"}, and \code{"denominator"} contrast elements.
-\item \code{"samples"}: ``list\code{containing}"numerator"` and `"denominator"` of
+(1) \code{"contrast"}: \code{character} vector containing metadata on \code{"factor"},
+\code{"numerator"}, and \code{"denominator"} contrast elements;
+(2) \code{"samples"}: ``list\code{containing}"numerator"` and `"denominator"` of
 sample identifiers corresponding to column names of `DESeqDataSet`.
-}
 }
 }
 \description{

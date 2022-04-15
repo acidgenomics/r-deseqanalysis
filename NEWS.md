@@ -1,12 +1,20 @@
 ## DESeqAnalysis 0.5.0 (2022-04-15)
 
-### Minor changes
+### Major changes
 
 - Updated dependencies to R 4.1 / Bioconductor 3.14.
 - `export`: Updated method to inherit BiocIO conventions now used in basejump,
   which now rely on `con` argument.
+- Added `as.DESeqDataSet` and `as.DESeqTransform` coercion methods.
+
+### Minor changes
+
 - `plotPCA`: Tightned up method export to only work on `DESeqAnalysis` object,
   so we don't conflict with `DESeqTransform` method defined in DESeq2.
+- Updated example `deseq` object.
+- Added basejump as a library load in DE template.
+- `contrastSamples`: Improved documentation.
+- Package code is now formatted according to styler conventions.
 
 ## DESeqAnalysis 0.4.4 (2021-08-02)
 
