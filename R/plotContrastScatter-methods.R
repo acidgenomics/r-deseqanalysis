@@ -34,8 +34,6 @@ NULL
         alphaThreshold = NULL,
         baseMeanThreshold = NULL,
         lfcThreshold = NULL,
-        genes = NULL,
-        ntop = 0L,
         pointColor = c(
             "downregulated" = AcidPlots::lightPalette[["purple"]],
             "upregulated" = AcidPlots::lightPalette[["orange"]],
@@ -67,15 +65,14 @@ NULL
         if (is.null(lfcThreshold)) {
             lfcThreshold <- lfcThreshold(object)
         }
+        lfcShrinkType <- lfcShrinkType(object)
         assert(
             isAlpha(alphaThreshold),
             isNumber(baseMeanThreshold),
             isPositive(baseMeanThreshold),
             isNumber(lfcThreshold),
             isNonNegative(lfcThreshold),
-            isAny(genes, classes = c("character", "NULL")),
-            isInt(ntop),
-            isNonNegative(ntop),
+            isString(lfcShrinkType),
             isCharacter(pointColor),
             areSetEqual(
                 x = names(pointColor),
@@ -112,22 +109,21 @@ NULL
         dds <- as(object, "DESeqDataSet")
         res <- results(object, i = i, extra = FALSE)
         assert(identical(rownames(dds), rownames(res)))
-        if (isCharacter(genes) || isTRUE(isPositive(ntop))) {
-            dds <- convertGenesToSymbols(dds)
-            rownames(res) <- rownames(dds)
-        }
-        res <- .prepareResultsForPlot(
+        resDf <- .prepareResultsForPlot(
             object = res,
             direction = direction,
             alphaThreshold = alphaThreshold,
             baseMeanThreshold = baseMeanThreshold,
             lfcThreshold = lfcThreshold
         )
-        if (!hasRows(res)) {
+        if (!hasRows(resDf)) {
             return(invisible(NULL))
         }
+        assert(isSubset("isDegCol", names(metadata(resDf))))
+        isDegCol <- metadata(resDf)[["isDegCol"]]
+        assert(isString(isDegCol))
         dds <- dds[
-            rownames(res),
+            rownames(resDf),
             c(
                 contrastMeta[["samples"]][["numerator"]],
                 contrastMeta[["samples"]][["denominator"]]
@@ -147,33 +143,72 @@ NULL
             assert(is.function(fun))
             counts <- fun(counts + 1L)
         }
-        res <- res[rownames(counts), , drop = FALSE]
-
-
-
-        ## FIXME How to apply gene labeling here?
-        ## FIXME Need to label DEGs here....
-        ## FIXME Use "isDEG" column here (see plotMA code).
+        resDf <- resDf[rownames(counts), , drop = FALSE]
         data <- data.frame(
-            ## FIXME Need to rework this...
             "x" = rowMeans(
                 counts[, contrastMeta[["samples"]][["denominator"]]]
                 ),
             "y" = rowMeans(
                 counts[, contrastMeta[["samples"]][["numerator"]]]
             ),
-            "isDeg" = res[["isDeg"]],
+            "isDeg" = resDf[[isDegCol]],
             row.names = rownames(counts)
         )
         p <- ggplot(
             data = data,
             mapping = aes(
                 x = !!sym("x"),
-                y = !!sym("y")
-                ## fill = !!sym("isDEG")
+                y = !!sym("y"),
+                color = !!sym(isDegCol)
             )
         ) +
-            geom_point(size = 1L)
+            geom_point(
+                alpha = pointAlpha,
+                size = pointSize,
+                stroke = 0L
+            ) +
+            guides(color = "none")
+        ## Labels.
+        if (isTRUE(labels[["x"]])) {
+            labels[["x"]] <- toString(
+                x = contrastMeta[["samples"]][["denominator"]],
+                width = 100L
+            )
+        }
+        if (isTRUE(labels[["y"]])) {
+            labels[["y"]] <- toString(
+                x = contrastMeta[["samples"]][["numerator"]],
+                width = 100L
+            )
+        }
+        if (isTRUE(labels[["title"]])) {
+            labels[["title"]] <- tryCatch(
+                expr = contrastName(res),
+                error = function(e) NULL
+            )
+        }
+        if (is.null(labels[["subtitle"]])) {
+            labels[["subtitle"]] <- .thresholdLabel(
+                object = object,
+                direction = direction,
+                alphaThreshold = alphaThreshold,
+                baseMeanThreshold = baseMeanThreshold,
+                lfcShrinkType = lfcShrinkType,
+                lfcThreshold = lfcThreshold
+            )
+        }
+        p <- p + do.call(what = labs, args = labels)
+        ## Color the significant points.
+        if (isCharacter(pointColor)) {
+            p <- p +
+                scale_color_manual(
+                    values = c(
+                        "-1" = pointColor[["downregulated"]],
+                        "0" = pointColor[["nonsignificant"]],
+                        "1" = pointColor[["upregulated"]]
+                    )
+                )
+        }
         p
     }
 

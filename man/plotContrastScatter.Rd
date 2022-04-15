@@ -14,8 +14,6 @@ plotContrastScatter(object, ...)
   alphaThreshold = NULL,
   baseMeanThreshold = NULL,
   lfcThreshold = NULL,
-  genes = NULL,
-  ntop = 0L,
   pointColor = c(downregulated = AcidPlots::lightPalette[["purple"]], upregulated =
     AcidPlots::lightPalette[["orange"]], nonsignificant =
     AcidPlots::lightPalette[["gray"]]),
@@ -51,12 +49,6 @@ Applies in general to DESeq2 RNA-seq differential expression output.}
 Log (base 2) fold change ratio cutoff threshold.
 If left \code{NULL}, will use the cutoff defined in the object.}
 
-\item{genes}{\code{character}.
-Gene identifiers.}
-
-\item{ntop}{\code{integer(1)}.
-Number of top features to label.}
-
 \item{pointColor}{\code{character(1)}.
 Default point color for the plot.}
 
@@ -90,7 +82,7 @@ See \code{ggplot2::labs()} for details.}
 Plot scatterplot of differential expression contrast
 }
 \note{
-Updated 2022-03-08.
+Updated 2022-04-15.
 }
 \examples{
 data(deseq)
