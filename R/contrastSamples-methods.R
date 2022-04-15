@@ -14,13 +14,12 @@
 #'
 #' @return
 #' - `character`: Sample identifiers, corresponding to the column names
-#'   of `DESeqDataSet`.
+#' of `DESeqDataSet`.
 #' - `list`: Named list containing `"contrast"` and `"samples"` elements:
-#'
-#'   - `"contrast"`: `character` vector containing metadata on `"factor"`,
-#'     `"numerator"`, and `"denominator"` contrast elements.
-#'   - `"samples"`: ``list` containing `"numerator"` and `"denominator"` of
-#'     sample identifiers corresponding to column names of `DESeqDataSet`.
+#' (1) `"contrast"`: `character` vector containing metadata on `"factor"`,
+#' `"numerator"`, and `"denominator"` contrast elements;
+#' (2) `"samples"`: ``list` containing `"numerator"` and `"denominator"` of
+#' sample identifiers corresponding to column names of `DESeqDataSet`.
 #'
 #' @examples
 #' data(deseq)
@@ -36,13 +35,11 @@ NULL
 
 
 ## Updated 2021-08-03.
-`contrastSamples,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        quiet = FALSE,
-        return = c("character", "list")
-    ) {
+`contrastSamples,DESeqAnalysis` <- # nolint
+    function(object,
+             i,
+             quiet = FALSE,
+             return = c("character", "list")) {
         validObject(object)
         assert(isFlag(quiet))
         return <- match.arg(return)

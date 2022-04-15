@@ -18,16 +18,14 @@ NULL
 
 
 ## Updated 2021-03-15.
-`plotDEGPCA,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        contrastSamples = FALSE,
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL,
-        ...
-    ) {
+`plotDEGPCA,DESeqAnalysis` <- # nolint
+    function(object,
+             i,
+             contrastSamples = FALSE,
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL,
+             ...) {
         assert(isFlag(contrastSamples))
         res <- results(object, i = i, quiet = TRUE)
         dt <- as(object, "DESeqTransform")
@@ -62,16 +60,14 @@ NULL
 
 
 ## Updated 2021-08-02.
-`plotDEGPCA,DESeqResults` <-  # nolint
-    function(
-        object,
-        DESeqTransform,  # nolint
-        direction = c("both", "up", "down"),
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL,
-        ...
-    ) {
+`plotDEGPCA,DESeqResults` <- # nolint
+    function(object,
+             DESeqTransform, # nolint
+             direction = c("both", "up", "down"),
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL,
+             ...) {
         validObject(object)
         validObject(DESeqTransform)
         ## Rename objects internally to make the code more readable.

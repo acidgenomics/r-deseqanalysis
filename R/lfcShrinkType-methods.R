@@ -16,7 +16,7 @@ NULL
 
 
 ## Updated 2021-03-12.
-`lfcShrinkType,DESeqAnalysis` <-  # nolint
+`lfcShrinkType,DESeqAnalysis` <- # nolint
     function(object) {
         if (!isTRUE(lfcShrink(object))) {
             return(NULL)
@@ -28,7 +28,7 @@ NULL
 
 
 ## Updated 2021-03-12.
-`lfcShrinkType,DESeqAnalysisList` <-  # nolint
+`lfcShrinkType,DESeqAnalysisList` <- # nolint
     function(object) {
         assert(hasLength(object))
         lfcShrinkType(object[[1L]])
@@ -37,7 +37,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`lfcShrinkType,DESeqResults` <-  # nolint
+`lfcShrinkType,DESeqResults` <- # nolint
     function(object) {
         pi <- priorInfo(object)
         if (isSubset("type", names(pi))) {
@@ -52,7 +52,7 @@ NULL
 
 
 ## Updated 2021-03-12.
-`lfcShrinkType,DESeqResultsList` <-  # nolint
+`lfcShrinkType,DESeqResultsList` <- # nolint
     function(object) {
         assert(hasLength(object))
         lfcShrinkType(object[[1L]])

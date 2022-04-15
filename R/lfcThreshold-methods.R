@@ -18,7 +18,7 @@ NULL
 
 
 ## Updated 2021-03-12.
-`lfcThreshold,DESeqAnalysis` <-  # nolint
+`lfcThreshold,DESeqAnalysis` <- # nolint
     function(object) {
         x <- metadata(object)[["lfcThreshold"]]
         if (is.null(x)) {
@@ -32,7 +32,7 @@ NULL
 
 
 ## Updated 2021-03-12.
-`lfcThreshold,DESeqAnalysisList` <-  # nolint
+`lfcThreshold,DESeqAnalysisList` <- # nolint
     function(object) {
         assert(hasLength(object))
         x <- metadata(object)[["lfcThreshold"]]
@@ -46,7 +46,7 @@ NULL
 
 
 ## Updated 2021-03-03.
-`lfcThreshold,DESeqResults` <-  # nolint
+`lfcThreshold,DESeqResults` <- # nolint
     function(object) {
         x <- metadata(object)[["lfcThreshold"]]
         if (is.null(x)) {
@@ -59,7 +59,7 @@ NULL
 
 
 ## Updated 2021-03-12.
-`lfcThreshold,DESeqResultsList` <-  # nolint
+`lfcThreshold,DESeqResultsList` <- # nolint
     function(object) {
         assert(hasLength(object))
         x <- metadata(object)[["lfcThreshold"]]
@@ -73,7 +73,7 @@ NULL
 
 
 ## Updated 2021-03-03.
-`lfcThreshold<-,DESeqAnalysis,numeric` <-  # nolint
+`lfcThreshold<-,DESeqAnalysis,numeric` <- # nolint
     function(object, value) {
         assert(isScalar(value), isNonNegative(value))
         metadata(object)[["lfcThreshold"]] <- value
@@ -83,7 +83,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`lfcThreshold<-,DESeqAnalysis,NULL` <-  # nolint
+`lfcThreshold<-,DESeqAnalysis,NULL` <- # nolint
     function(object, value) {
         metadata(object)[["lfcThreshold"]] <- value
         object
@@ -92,25 +92,25 @@ NULL
 
 
 ## Updated 2021-03-13.
-`lfcThreshold<-,DESeqAnalysisList,numeric` <-  # nolint
+`lfcThreshold<-,DESeqAnalysisList,numeric` <- # nolint
     `lfcThreshold<-,DESeqAnalysis,numeric`
 
 
 
 ## Updated 2021-03-13.
-`lfcThreshold<-,DESeqAnalysisList,NULL` <-  # nolint
+`lfcThreshold<-,DESeqAnalysisList,NULL` <- # nolint
     `lfcThreshold<-,DESeqAnalysis,NULL`
 
 
 
 ## Updated 2021-03-12.
-`lfcThreshold<-,DESeqResults,numeric` <-  # nolint
+`lfcThreshold<-,DESeqResults,numeric` <- # nolint
     `lfcThreshold<-,DESeqAnalysis,numeric`
 
 
 
 ## Updated 2021-03-13.
-`lfcThreshold<-,DESeqResultsList,numeric` <-  # nolint
+`lfcThreshold<-,DESeqResultsList,numeric` <- # nolint
     `lfcThreshold<-,DESeqResults,numeric`
 
 

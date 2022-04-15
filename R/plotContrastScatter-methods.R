@@ -20,29 +20,27 @@ NULL
 
 ## Updated 2022-04-15.
 `plotContrastScatter,DESeqAnalysis` <-
-    function(
-        object,
-        i,
-        direction = c("both", "up", "down"),
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL,
-        pointColor = c(
-            "downregulated" = AcidPlots::lightPalette[["purple"]],
-            "upregulated" = AcidPlots::lightPalette[["orange"]],
-            "nonsignificant" = AcidPlots::lightPalette[["gray"]]
-        ),
-        pointSize = 2L,
-        pointAlpha = 0.8,
-        trans = c("log2", "log10", "identity"),
-        limits = list("x" = NULL, "y" = NULL),
-        labels = list(
-            "title" = TRUE,
-            "subtitle" = NULL,
-            "x" = TRUE,
-            "y" = TRUE
-        )
-    ) {
+    function(object,
+             i,
+             direction = c("both", "up", "down"),
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL,
+             pointColor = c(
+                 "downregulated" = AcidPlots::lightPalette[["purple"]],
+                 "upregulated" = AcidPlots::lightPalette[["orange"]],
+                 "nonsignificant" = AcidPlots::lightPalette[["gray"]]
+             ),
+             pointSize = 2L,
+             pointAlpha = 0.8,
+             trans = c("log2", "log10", "identity"),
+             limits = list("x" = NULL, "y" = NULL),
+             labels = list(
+                 "title" = TRUE,
+                 "subtitle" = NULL,
+                 "x" = TRUE,
+                 "y" = TRUE
+             )) {
         validObject(object)
         direction <- match.arg(direction)
         trans <- match.arg(trans)
@@ -134,7 +132,7 @@ NULL
         data <- data.frame(
             "x" = rowMeans(
                 counts[, contrastMeta[["samples"]][["denominator"]]]
-                ),
+            ),
             "y" = rowMeans(
                 counts[, contrastMeta[["samples"]][["numerator"]]]
             ),

@@ -23,7 +23,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`updateObject,DESeqAnalysis` <-  # nolint
+`updateObject,DESeqAnalysis` <- # nolint
     function(object, ..., verbose = FALSE) {
         assert(isFlag(verbose))
         if (!isTRUE(.hasSlot(object, "metadata"))) {

@@ -31,7 +31,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`combine,DESeqAnalysis` <-  # nolint
+`combine,DESeqAnalysis` <- # nolint
     function(x, y) {
         validObject(x)
         validObject(y)

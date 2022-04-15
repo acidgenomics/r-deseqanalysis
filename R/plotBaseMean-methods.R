@@ -4,10 +4,12 @@
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
+#'
 #' @param nonzero `logical(1)`.
-#'   Remove zero-count features (genes).
+#' Remove zero-count features (genes).
+#'
 #' @param summary `logical(1)`.
-#'   Include distribution summary statistics as lines on the plot.
+#' Include distribution summary statistics as lines on the plot.
 #'
 #' @seealso
 #' - https://support.bioconductor.org/p/75244/
@@ -25,7 +27,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`plotBaseMean,DESeqAnalysis` <-  # nolint
+`plotBaseMean,DESeqAnalysis` <- # nolint
     function(object, ...) {
         object <- as(object, "DESeqDataSet")
         plotBaseMean(object, ...)
@@ -34,7 +36,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`plotBaseMean,DESeqDataSet` <-  # nolint
+`plotBaseMean,DESeqDataSet` <- # nolint
     function(object, ...) {
         object <- rowMeans(counts(object, normalized = TRUE))
         plotBaseMean(object, ...)
@@ -43,7 +45,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`plotBaseMean,DESeqResults` <-  # nolint
+`plotBaseMean,DESeqResults` <- # nolint
     function(object, ...) {
         object <- object[["baseMean"]]
         plotBaseMean(object, ...)
@@ -52,17 +54,15 @@ NULL
 
 
 ## Updated 2019-10-15.
-`plotBaseMean,numeric` <-  # nolint
-    function(
-        object,
-        nonzero = TRUE,
-        trans = c("log10", "log2", "identity"),
-        summary = TRUE,
-        labels = list(
-            "title" = "Base mean distribution",
-            "subtitle" = NULL
-        )
-    ) {
+`plotBaseMean,numeric` <- # nolint
+    function(object,
+             nonzero = TRUE,
+             trans = c("log10", "log2", "identity"),
+             summary = TRUE,
+             labels = list(
+                 "title" = "Base mean distribution",
+                 "subtitle" = NULL
+             )) {
         assert(
             is.numeric(object),
             isFlag(nonzero),
@@ -197,8 +197,8 @@ setMethod(
 )
 
 #' @describeIn plotBaseMean Generates row means of normalized counts.
-#'   This value corresponds to the `baseMean` column of `DESeqResults`.
-#'   Passes to `numeric` method.
+#' This value corresponds to the `baseMean` column of `DESeqResults`.
+#' Passes to `numeric` method.
 #' @export
 setMethod(
     f = "plotBaseMean",
@@ -207,7 +207,7 @@ setMethod(
 )
 
 #' @describeIn plotBaseMean Uses `baseMean` column of results.
-#'   Passes to `numeric` method.
+#' Passes to `numeric` method.
 #' @export
 setMethod(
     f = "plotBaseMean",

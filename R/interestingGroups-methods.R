@@ -19,7 +19,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`interestingGroups,DESeqAnalysis` <-  # nolint
+`interestingGroups,DESeqAnalysis` <- # nolint
     function(object) {
         dds <- as(object, "DESeqDataSet")
         interestingGroups(dds)
@@ -28,7 +28,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`interestingGroups<-,DESeqAnalysis,character` <-  # nolint
+`interestingGroups<-,DESeqAnalysis,character` <- # nolint
     function(object, value) {
         data <- slot(object, "data")
         transform <- slot(object, "transform")
@@ -41,7 +41,7 @@ NULL
 
 
 
-`interestingGroups<-,DESeqAnalysis,NULL` <-  # nolint
+`interestingGroups<-,DESeqAnalysis,NULL` <- # nolint
     `interestingGroups<-,DESeqAnalysis,character`
 
 

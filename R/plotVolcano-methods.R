@@ -5,9 +5,10 @@
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
-#' @param histograms `logical(1)`.
-#'   Show LFC and P value histograms.
 #' @param ... Additional arguments.
+#'
+#' @param histograms `logical(1)`.
+#' Show LFC and P value histograms.
 #'
 #' @seealso `CHBUtils::volcano_density_plot()`.
 #'
@@ -55,17 +56,15 @@ NULL
 
 
 ## Updated 2021-07-27.
-`plotVolcano,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL,
-        genes = NULL,
-        ntop = 0L,
-        ...
-    ) {
+`plotVolcano,DESeqAnalysis` <- # nolint
+    function(object,
+             i,
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL,
+             genes = NULL,
+             ntop = 0L,
+             ...) {
         validObject(object)
         assert(
             isAny(genes, classes = c("character", "NULL")),
@@ -112,32 +111,30 @@ NULL
 
 
 ## Updated 2021-08-09.
-`plotVolcano,DESeqResults` <-  # nolint
-    function(
-        object,
-        direction = c("both", "up", "down"),
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL,
-        genes = NULL,
-        ntop = 0L,
-        pointColor = c(
-            "downregulated" = AcidPlots::lightPalette[["purple"]],
-            "upregulated" = AcidPlots::lightPalette[["orange"]],
-            "nonsignificant" = AcidPlots::lightPalette[["gray"]]
-        ),
-        pointSize = 2L,
-        pointAlpha = 0.8,
-        limits = list(
-            "x" = NULL,
-            "y" = c(1e-10, 1L)
-        ),
-        labels = list(
-            "title" = TRUE,
-            "subtitle" = NULL
-        ),
-        histograms = FALSE
-    ) {
+`plotVolcano,DESeqResults` <- # nolint
+    function(object,
+             direction = c("both", "up", "down"),
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL,
+             genes = NULL,
+             ntop = 0L,
+             pointColor = c(
+                 "downregulated" = AcidPlots::lightPalette[["purple"]],
+                 "upregulated" = AcidPlots::lightPalette[["orange"]],
+                 "nonsignificant" = AcidPlots::lightPalette[["gray"]]
+             ),
+             pointSize = 2L,
+             pointAlpha = 0.8,
+             limits = list(
+                 "x" = NULL,
+                 "y" = c(1e-10, 1L)
+             ),
+             labels = list(
+                 "title" = TRUE,
+                 "subtitle" = NULL
+             ),
+             histograms = FALSE) {
         validObject(object)
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
@@ -418,7 +415,7 @@ NULL
 
 
 #' @describeIn plotVolcano Passes to `DESeqResults` method, with `gene2symbol`
-#'   argument automatically defined.
+#' argument automatically defined.
 #' @export
 setMethod(
     f = "plotVolcano",

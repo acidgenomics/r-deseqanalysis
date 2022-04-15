@@ -19,7 +19,7 @@ NULL
 
 
 ## Updated 2021-01-21.
-`plotPCA,DESeqAnalysis` <-  # nolint
+`plotPCA,DESeqAnalysis` <- # nolint
     function(object, ...) {
         validObject(object)
         dt <- as(object, "DESeqTransform")
@@ -30,7 +30,7 @@ NULL
 
 
 #' @describeIn plotPCA Extracts `DESeqTransform`, converts to
-#'   `RangedSummarizedExperiment`, and passes to method defined in AcidPlots.
+#' `RangedSummarizedExperiment`, and passes to method defined in AcidPlots.
 #' @export
 setMethod(
     f = "plotPCA",

@@ -27,7 +27,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`alphaSummary,DESeqAnalysis` <-  # nolint
+`alphaSummary,DESeqAnalysis` <- # nolint
     function(object, ...) {
         object <- as(object, "DESeqDataSet")
         alphaSummary(object, ...)
@@ -36,13 +36,11 @@ NULL
 
 
 ## Updated 2020-08-04.
-`alphaSummary,DESeqDataSet` <-  # nolint
-    function(
-        object,
-        alpha = c(0.1, 0.05, 0.01, 1e-3, 1e-6),
-        contrast = NULL,
-        name = NULL
-    ) {
+`alphaSummary,DESeqDataSet` <- # nolint
+    function(object,
+             alpha = c(0.1, 0.05, 0.01, 1e-3, 1e-6),
+             contrast = NULL,
+             name = NULL) {
         validObject(object)
         assert(
             is.numeric(alpha),

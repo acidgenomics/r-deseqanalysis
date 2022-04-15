@@ -17,13 +17,11 @@ NULL
 
 
 ## Updated 2020-08-25.
-`plotDEGUpset,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i = NULL,
-        direction = c("both", "up", "down"),
-        ...
-    ) {
+`plotDEGUpset,DESeqAnalysis` <- # nolint
+    function(object,
+             i = NULL,
+             direction = c("both", "up", "down"),
+             ...) {
         direction <- match.arg(direction)
         degPerContrast <- degPerContrast(
             object = object,

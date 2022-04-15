@@ -13,26 +13,26 @@
 #' `all` table), are arranged by adjusted *P* value.
 #'
 #' @note It is generally recommended to not apply post hoc log fold change
-#'   cutoffs. If a specific effect size is desired, instead run
-#'   `DESeq2::results()` using the `lfcThreshold` parameter. Refer to the DESeq2
-#'   documentation and vignette for details.
+#' cutoffs. If a specific effect size is desired, instead run
+#' `DESeq2::results()` using the `lfcThreshold` parameter. Refer to the DESeq2
+#' documentation and vignette for details.
 #'
 #' @section Tables:
 #'
 #' - `all`: All genes, including genes without an adjusted *P* value. This table
-#'   is unmodified, and the rows have not been re-arranged or subset. It is
-#'   suitable for gene set enrichment analysis (GSEA).
+#' is unmodified, and the rows have not been re-arranged or subset. It is
+#' suitable for gene set enrichment analysis (GSEA).
 #' - `up`: Upregulated genes.
 #' - `down`: Downregulated genes.
 #' - `both`: Bidirectional DEGs (up- and down-regulated). This table can be
-#'   used for overrepresentation testing but should NOT be used for GSEA.
+#' used for overrepresentation testing but should NOT be used for GSEA.
 #'
 #' @param return `character(1)`.
-#'   Type of data frame to return as a list.
-#'   Uses `match.arg()`.
+#' Type of data frame to return as a list.
+#' Uses `match.arg()`.
 #'
-#'   - `DataFrameList`: Returns `DataFrameList` with row names.
-#'   - `tbl_df`: Returns `list` of `tbl_df` containing `"rowname"` column.
+#' - `DataFrameList`: Returns `DataFrameList` with row names.
+#' - `tbl_df`: Returns `list` of `tbl_df` containing `"rowname"` column.
 #'
 #' @return `list`.
 #' Named list containing subsets of `DESeqResults`.
@@ -48,16 +48,14 @@ NULL
 
 
 ## Updated 2021-06-29.
-`resultsTables,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL,
-        extra = TRUE,
-        return = c("tbl_df", "DataFrameList")
-    ) {
+`resultsTables,DESeqAnalysis` <- # nolint
+    function(object,
+             i,
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL,
+             extra = TRUE,
+             return = c("tbl_df", "DataFrameList")) {
         validObject(object)
         resultsTables(
             object = results(object = object, i = i, extra = extra),
@@ -83,14 +81,12 @@ NULL
 
 
 ## Updated 2021-06-29.
-`resultsTables,DESeqResults` <-  # nolint
-    function(
-        object,
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL,
-        return
-    ) {
+`resultsTables,DESeqResults` <- # nolint
+    function(object,
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL,
+             return) {
         validObject(object)
         both <- deg(
             object = object,

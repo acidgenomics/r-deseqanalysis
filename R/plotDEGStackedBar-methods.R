@@ -7,11 +7,13 @@
 #' @inheritParams degPerContrast
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
-#' @param orderBySize `logical(1)`.
-#'   Order contrasts by DEG set size.
-#' @param label `logical(1)`.
-#'   Label the number of DEGs per contrast on the plot.
 #' @param ... Additional arguments.
+#'
+#' @param label `logical(1)`.
+#' Label the number of DEGs per contrast on the plot.
+#'
+#' @param orderBySize `logical(1)`.
+#' Order contrasts by DEG set size.
 #'
 #' @examples
 #' data(deseq)
@@ -23,15 +25,13 @@ NULL
 
 
 ## Updated 2021-09-10.
-`plotDEGStackedBar,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i = NULL,
-        direction = c("both", "up", "down"),
-        orderBySize = FALSE,
-        label = TRUE,
-        flip = TRUE
-    ) {
+`plotDEGStackedBar,DESeqAnalysis` <- # nolint
+    function(object,
+             i = NULL,
+             direction = c("both", "up", "down"),
+             orderBySize = FALSE,
+             label = TRUE,
+             flip = TRUE) {
         validObject(object)
         assert(
             isFlag(orderBySize),

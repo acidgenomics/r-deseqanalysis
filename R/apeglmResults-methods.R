@@ -15,24 +15,26 @@
 #' @note Updated 2020-08-17.
 #'
 #' @inheritParams AcidRoxygen::params
+#'
 #' @param contrast `character(3)`.
-#'   Pairwise contrast vector:
+#' Pairwise contrast vector:
 #'
-#'   1. `factor`: Grouping factor. Corresponds to column name in
-#'      [`colData()`][SummarizedExperiment::colData].
-#'   2. `numerator`: Numerator samples.
-#'   3. `denominator`: Denominator samples.
+#' 1. `factor`: Grouping factor. Corresponds to column name in
+#' [`colData()`][SummarizedExperiment::colData].
+#' 2. `numerator`: Numerator samples.
+#' 3. `denominator`: Denominator samples.
 #'
-#'   Numerator and denominator values correspond to grouping factor column.
-#'   See [`results()`] for details. Note that we're intentionally being more
-#'   strict about the input format here.
+#' Numerator and denominator values correspond to grouping factor column.
+#' See [`results()`] for details. Note that we're intentionally being more
+#' strict about the input format here.
+#'
 #' @param res `DESeqResults`.
-#'   Results containing unshrunken LFC values, generated with `results()`.
+#' Results containing unshrunken LFC values, generated with `results()`.
 #'
 #' @seealso
 #' - "Extended section on shrinkage estimators" section of DESeq2 vignette,
-#'   which explains how to manually define `coef` argument which can
-#'   be used with apeglm `DESeq2::lfcShrink()`.
+#' which explains how to manually define `coef` argument which can
+#' be used with apeglm `DESeq2::lfcShrink()`.
 #' - `apeglm::apeglm()`.
 #' - `DESeq2::lfcShrink()`.
 #' - `DESeq2::resultsNames()`.
@@ -40,7 +42,7 @@
 #' - `stats::model.matrix()`.
 #'
 #' @return `DESeqResults`, with apeglm adaptive shrinkage applied to fold
-#'   change values.
+#' change values.
 #'
 #' @examples
 #' ## DESeqDataSet ====
@@ -74,13 +76,11 @@ NULL
 ## Useful for avoiding this issue:
 ## type='apeglm' shrinkage only for use with 'coef'
 ## Updated 2021-08-09.
-`apeglmResults,DESeqDataSet` <-  # nolint
-    function(
-            object,
-            contrast,
-            res,
-            ...
-        ) {
+`apeglmResults,DESeqDataSet` <- # nolint
+    function(object,
+             contrast,
+             res,
+             ...) {
         validObject(object)
         requireNamespaces("apeglm")
         assert(

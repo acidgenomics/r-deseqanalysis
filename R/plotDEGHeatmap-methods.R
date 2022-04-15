@@ -11,12 +11,14 @@
 #' @inheritParams AcidPlots::plotHeatmap
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
-#' @param title `logical(1)`, `character(1)`.
-#'   Include contrast name as title?
-#'   Can manually define as `character`.
-#' @param subtitle `logical(1)`.
-#'   Include subtitle containing DEG information?
 #' @param ... Additional arguments.
+#'
+#' @param title `logical(1)`, `character(1)`.
+#' Include contrast name as title?
+#' Can manually define as `character`.
+#'
+#' @param subtitle `logical(1)`.
+#' Include subtitle containing DEG information?
 #'
 #' @examples
 #' data(deseq)
@@ -28,16 +30,14 @@ NULL
 
 
 ## Updated 2021-08-02.
-`plotDEGHeatmap,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        contrastSamples = FALSE,
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL,
-        ...
-    ) {
+`plotDEGHeatmap,DESeqAnalysis` <- # nolint
+    function(object,
+             i,
+             contrastSamples = FALSE,
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL,
+             ...) {
         validObject(object)
         assert(isFlag(contrastSamples))
         res <- results(object, i = i, quiet = TRUE)
@@ -76,18 +76,16 @@ NULL
 ## newer versions of bcbioRNASeq, this step won't work because we've slotted the
 ## rlog/vst counts in as a matrix instead of DESeqTransform.
 ## Updated 2021-03-15.
-`plotDEGHeatmap,DESeqResults` <-  # nolint
-    function(
-        object,
-        DESeqTransform,  # nolint
-        direction = c("both", "up", "down"),
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL,
-        title = TRUE,
-        subtitle = TRUE,
-        ...
-    ) {
+`plotDEGHeatmap,DESeqResults` <- # nolint
+    function(object,
+             DESeqTransform, # nolint
+             direction = c("both", "up", "down"),
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL,
+             title = TRUE,
+             subtitle = TRUE,
+             ...) {
         validObject(object)
         validObject(DESeqTransform)
         ## Rename objects internally to make the code more readable.
@@ -165,7 +163,7 @@ setMethod(
 )
 
 #' @describeIn plotDEGHeatmap Passes to `plotHeatmap()` `SummarizedExperiment`
-#'   method defined in AcidPlots.
+#' method defined in AcidPlots.
 #' @export
 setMethod(
     f = "plotDEGHeatmap",

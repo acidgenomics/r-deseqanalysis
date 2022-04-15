@@ -14,7 +14,7 @@ NULL
 
 
 ## Updated 2021-03-10.
-`baseMeanThreshold,DESeqAnalysis` <-  # nolint
+`baseMeanThreshold,DESeqAnalysis` <- # nolint
     function(object) {
         x <- metadata(object)[["baseMeanThreshold"]]
         if (is.null(x)) {
@@ -27,7 +27,7 @@ NULL
 
 
 ## Updated 2021-03-10.
-`baseMeanThreshold,DESeqAnalysisList` <-  # nolint
+`baseMeanThreshold,DESeqAnalysisList` <- # nolint
     function(object) {
         x <- metadata(object)[["baseMeanThreshold"]]
         if (is.null(x)) {
@@ -40,13 +40,13 @@ NULL
 
 
 ## Updated 2021-03-03.
-`baseMeanThreshold,DESeqResults` <-  # nolint
+`baseMeanThreshold,DESeqResults` <- # nolint
     `baseMeanThreshold,DESeqAnalysis`
 
 
 
 ## Updated 2021-03-10.
-`baseMeanThreshold,DESeqResultsList` <-  # nolint
+`baseMeanThreshold,DESeqResultsList` <- # nolint
     function(object) {
         x <- metadata(object)[["baseMeanThreshold"]]
         if (is.null(x)) {
@@ -59,7 +59,7 @@ NULL
 
 
 ## Updated 2021-03-12.
-`baseMeanThreshold<-,DESeqAnalysis,numeric` <-  # nolint
+`baseMeanThreshold<-,DESeqAnalysis,numeric` <- # nolint
     function(object, value) {
         assert(isNumber(value), isNonNegative(value))
         metadata(object)[["baseMeanThreshold"]] <- value
@@ -69,7 +69,7 @@ NULL
 
 
 ## Updated 2021-03-12.
-`baseMeanThreshold<-,DESeqAnalysis,NULL` <-  # nolint
+`baseMeanThreshold<-,DESeqAnalysis,NULL` <- # nolint
     function(object, value) {
         metadata(object)[["baseMeanThreshold"]] <- value
         object
@@ -78,37 +78,37 @@ NULL
 
 
 ## Updated 2021-03-12.
-`baseMeanThreshold<-,DESeqAnalysisList,numeric` <-  # nolint
+`baseMeanThreshold<-,DESeqAnalysisList,numeric` <- # nolint
     `baseMeanThreshold<-,DESeqAnalysis,numeric`
 
 
 
 ## Updated 2021-03-12.
-`baseMeanThreshold<-,DESeqAnalysisList,NULL` <-  # nolint
+`baseMeanThreshold<-,DESeqAnalysisList,NULL` <- # nolint
     `baseMeanThreshold<-,DESeqAnalysis,NULL`
 
 
 
 ## Updated 2021-03-12.
-`baseMeanThreshold<-,DESeqResults,numeric` <-  # nolint
+`baseMeanThreshold<-,DESeqResults,numeric` <- # nolint
     `baseMeanThreshold<-,DESeqAnalysis,numeric`
 
 
 
 ## Updated 2021-03-12.
-`baseMeanThreshold<-,DESeqResults,NULL` <-  # nolint
+`baseMeanThreshold<-,DESeqResults,NULL` <- # nolint
     `baseMeanThreshold<-,DESeqAnalysis,NULL`
 
 
 
 ## Updated 2021-03-12.
-`baseMeanThreshold<-,DESeqResultsList,numeric` <-  # nolint
+`baseMeanThreshold<-,DESeqResultsList,numeric` <- # nolint
     `baseMeanThreshold<-,DESeqResults,numeric`
 
 
 
 ## Updated 2021-03-12.
-`baseMeanThreshold<-,DESeqResultsList,NULL` <-  # nolint
+`baseMeanThreshold<-,DESeqResultsList,NULL` <- # nolint
     `baseMeanThreshold<-,DESeqResults,NULL`
 
 

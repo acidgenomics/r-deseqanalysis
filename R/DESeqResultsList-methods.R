@@ -14,12 +14,10 @@ NULL
 
 
 ## Updated 2021-03-09.
-`DESeqResultsList,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        lfcShrink = NULL,
-        quiet = FALSE
-    ) {
+`DESeqResultsList,DESeqAnalysis` <- # nolint
+    function(object,
+             lfcShrink = NULL,
+             quiet = FALSE) {
         validObject(object)
         if (is.null(lfcShrink)) {
             lfcShrink <- lfcShrink(object)
@@ -32,12 +30,12 @@ NULL
             slotName <- "results"
         } else if (
             isTRUE(lfcShrink) &&
-            hasLength(slot(object, name = "lfcShrink"))
+                hasLength(slot(object, name = "lfcShrink"))
         ) {
             slotName <- "lfcShrink"
         } else if (
             isTRUE(lfcShrink) &&
-            !hasLength(slot(object, name = "lfcShrink"))
+                !hasLength(slot(object, name = "lfcShrink"))
         ) {
             abort(sprintf(
                 fmt = paste0(
@@ -75,7 +73,7 @@ NULL
 
 ## Coercion to `SimpleList` here doesn't unlist like we'd want here.
 ## Updated 2021-03-15.
-`DESeqResultsList,DESeqAnalysisList` <-  # nolint
+`DESeqResultsList,DESeqAnalysisList` <- # nolint
     function(object, ...) {
         x <- lapply(X = object, FUN = DESeqResultsList, ...)
         x <- lapply(X = x, FUN = as.list)
@@ -87,7 +85,7 @@ NULL
 
 
 ## Updated 2021-03-12.
-`DESeqResultsList,SimpleList` <-  # nolint
+`DESeqResultsList,SimpleList` <- # nolint
     function(object) {
         new(Class = "DESeqResultsList", object)
     }
@@ -95,13 +93,13 @@ NULL
 
 
 ## Updated 2021-03-12.
-`DESeqResultsList,list` <-  # nolint
+`DESeqResultsList,list` <- # nolint
     `DESeqResultsList,SimpleList`
 
 
 
 ## Updated 2021-03-08.
-`DESeqResultsList,missing` <-  # nolint
+`DESeqResultsList,missing` <- # nolint
     function(object) {
         new(Class = "DESeqResultsList", list())
     }

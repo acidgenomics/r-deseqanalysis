@@ -19,7 +19,7 @@ NULL
 
 
 ## Updated 2021-03-10.
-`alphaThreshold,DESeqAnalysis` <-  # nolint
+`alphaThreshold,DESeqAnalysis` <- # nolint
     function(object) {
         x <- metadata(object)[["alphaThreshold"]]
         if (is.null(x)) {
@@ -33,7 +33,7 @@ NULL
 
 
 ## Updated 2021-03-10.
-`alphaThreshold,DESeqAnalysisList` <-  # nolint
+`alphaThreshold,DESeqAnalysisList` <- # nolint
     function(object) {
         assert(hasLength(object))
         x <- metadata(object)[["alphaThreshold"]]
@@ -48,7 +48,7 @@ NULL
 
 ## Other methods slot "alphaThreshold" instead of "alpha".
 ## Updated 2021-03-10.
-`alphaThreshold,DESeqResults` <-  # nolint
+`alphaThreshold,DESeqResults` <- # nolint
     function(object) {
         x <- metadata(object)[["alpha"]]
         if (is.null(x)) {
@@ -61,7 +61,7 @@ NULL
 
 
 ## Updated 2021-03-12.
-`alphaThreshold,DESeqResultsList` <-  # nolint
+`alphaThreshold,DESeqResultsList` <- # nolint
     function(object) {
         assert(hasLength(object))
         x <- metadata(object)[["alphaThreshold"]]
@@ -75,7 +75,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`alphaThreshold<-,DESeqAnalysis,numeric` <-  # nolint
+`alphaThreshold<-,DESeqAnalysis,numeric` <- # nolint
     function(object, value) {
         assert(isAlpha(value))
         metadata(object)[["alphaThreshold"]] <- value
@@ -85,7 +85,7 @@ NULL
 
 
 ## Updated 2020-08-04.
-`alphaThreshold<-,DESeqAnalysis,NULL` <-  # nolint
+`alphaThreshold<-,DESeqAnalysis,NULL` <- # nolint
     function(object, value) {
         metadata(object)[["alphaThreshold"]] <- value
         object
@@ -94,19 +94,19 @@ NULL
 
 
 ## Updated 2021-03-10.
-`alphaThreshold<-,DESeqAnalysisList,numeric` <-  # nolint
+`alphaThreshold<-,DESeqAnalysisList,numeric` <- # nolint
     `alphaThreshold<-,DESeqAnalysis,numeric`
 
 
 
 ## Updated 2021-03-10.
-`alphaThreshold<-,DESeqAnalysisList,NULL` <-  # nolint
+`alphaThreshold<-,DESeqAnalysisList,NULL` <- # nolint
     `alphaThreshold<-,DESeqAnalysis,NULL`
 
 
 
 ## Updated 2021-03-03.
-`alphaThreshold<-,DESeqResults,numeric` <-  # nolint
+`alphaThreshold<-,DESeqResults,numeric` <- # nolint
     function(object, value) {
         assert(isAlpha(value))
         metadata(object)[["alpha"]] <- value
@@ -116,13 +116,13 @@ NULL
 
 
 ## Updated 2021-03-10.
-`alphaThreshold<-,DESeqResultsList,numeric` <-  # nolint
+`alphaThreshold<-,DESeqResultsList,numeric` <- # nolint
     `alphaThreshold<-,DESeqAnalysisList,numeric`
 
 
 
 ## Updated 2021-03-10.
-`alphaThreshold<-,DESeqResultsList,NULL` <-  # nolint
+`alphaThreshold<-,DESeqResultsList,NULL` <- # nolint
     `alphaThreshold<-,DESeqAnalysisList,NULL`
 
 

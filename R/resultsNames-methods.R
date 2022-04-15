@@ -16,7 +16,7 @@ NULL
 
 
 ## Updated 2021-03-15.
-`resultsNames,DESeqAnalysis` <-  # nolint
+`resultsNames,DESeqAnalysis` <- # nolint
     function(object) {
         resList <- DESeqResultsList(object, quiet = TRUE)
         names(resList)
@@ -25,13 +25,13 @@ NULL
 
 
 ## Updated 2021-03-15.
-`resultsNames,DESeqAnalysisList` <-  # nolint
+`resultsNames,DESeqAnalysisList` <- # nolint
     `resultsNames,DESeqAnalysis`
 
 
 
 ## Updated 2019-07-23.
-`resultsNames,DESeqDataSet` <-  # nolint
+`resultsNames,DESeqDataSet` <- # nolint
     function(object) {
         DESeq2::resultsNames(object)
     }
@@ -39,7 +39,7 @@ NULL
 
 
 ## Updated 2021-03-15.
-`resultsNames,DESeqResultsList` <-  # nolint
+`resultsNames,DESeqResultsList` <- # nolint
     function(object) {
         names(object)
     }
@@ -47,7 +47,7 @@ NULL
 
 
 ## Updated 2019-09-10.
-`resultsNames<-,DESeqAnalysis,character` <-  # nolint
+`resultsNames<-,DESeqAnalysis,character` <- # nolint
     function(object, value) {
         names(object@results) <- value
         if (!is.null(object@lfcShrink)) {
@@ -60,7 +60,7 @@ NULL
 
 
 ## Updated 2021-03-15.
-`resultsNames<-,DESeqResultsList,character` <-  # nolint
+`resultsNames<-,DESeqResultsList,character` <- # nolint
     function(object, value) {
         names(object) <- value
         validObject(object)

@@ -5,9 +5,10 @@
 #' @note Updated 2021-03-15.
 #'
 #' @inheritParams AcidRoxygen::params
-#' @param col `character(1)`.
-#'   Column name.
 #' @param ... Additional arguments.
+#'
+#' @param col `character(1)`.
+#' Column name.
 #'
 #' @examples
 #' data(deseq)
@@ -23,7 +24,7 @@ NULL
 
 
 ## Updated 2019-11-08.
-`correlation,DESeqResults,DESeqResults` <-  # nolint
+`correlation,DESeqResults,DESeqResults` <- # nolint
     function(x, y, col = "log2FoldChange", method) {
         assert(
             hasRownames(x),
@@ -51,15 +52,13 @@ formals(`correlation,DESeqResults,DESeqResults`)[["method"]] <- .method
 
 
 ## Updated 2020-08-05.
-`correlation,DESeqAnalysis,missing` <-  # nolint
-    function(
-        x,
-        y = NULL,
-        i,
-        j,
-        col = "log2FoldChange",
-        method
-    ) {
+`correlation,DESeqAnalysis,missing` <- # nolint
+    function(x,
+             y = NULL,
+             i,
+             j,
+             col = "log2FoldChange",
+             method) {
         assert(!identical(i, j))
         method <- match.arg(method)
         correlation(

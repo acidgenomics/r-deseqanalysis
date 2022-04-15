@@ -3,16 +3,17 @@
 #' @note Updated 2021-06-29.
 #'
 #' @inheritParams AcidRoxygen::params
-#' @param i `character`, `numeric`, or `NULL`.
-#'   Names or range of results.
-#'   If set `NULL`, include all results.
 #' @param ... Passthrough arguments to `deg()`.
+#'
+#' @param i `character`, `numeric`, or `NULL`.
+#' Names or range of results.
+#' If set `NULL`, include all results.
 #'
 #' @return
 #' - `matrix`: Matrix containing numbers of DEGs per contrast.
-#'   Intended primarily for use with `plotDEGStackedBar()`.
+#' Intended primarily for use with `plotDEGStackedBar()`.
 #' - `list`: Named vector containing the DEG identifiers.
-#'   Intended primarily for use with `plotDEGUpset()`.
+#' Intended primarily for use with `plotDEGUpset()`.
 #'
 #' @examples
 #' data(deseq)
@@ -24,17 +25,18 @@ NULL
 
 
 ## Updated 2021-06-29.
-`degPerContrast,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i = NULL,
-        direction = c("both", "up", "down"),
-        return = c("matrix", "list"),
-        ...
-    ) {
+`degPerContrast,DESeqAnalysis` <- # nolint
+    function(object,
+             i = NULL,
+             direction = c("both", "up", "down"),
+             return = c("matrix", "list"),
+             ...) {
         direction <- match.arg(direction)
         return <- match.arg(return)
-        n <- switch(EXPR = return, "matrix" = TRUE, "list" = FALSE)
+        n <- switch(EXPR = return,
+            "matrix" = TRUE,
+            "list" = FALSE
+        )
         resultsNames <- resultsNames(object)
         if (is.null(i)) {
             i <- resultsNames

@@ -5,8 +5,8 @@
 #' @note Updated 2022-03-08.
 #'
 #' @description The plot visualizes the differences between measurements taken
-#'   in two samples, by transforming the data onto **M** (log ratio) and **A**
-#'   (mean average) scales.
+#' in two samples, by transforming the data onto **M** (log ratio) and **A**
+#' (mean average) scales.
 #'
 #' @details
 #' An MA plot is an application of a Bland–Altman plot for visual
@@ -56,17 +56,15 @@ NULL
 
 
 ## Updated 2021-06-29.
-`plotMA,DESeqAnalysis` <-  # nolint
-    function(
-        object,
-        i,
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL,
-        genes = NULL,
-        ntop = 0L,
-        ...
-    ) {
+`plotMA,DESeqAnalysis` <- # nolint
+    function(object,
+             i,
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL,
+             genes = NULL,
+             ntop = 0L,
+             ...) {
         validObject(object)
         assert(
             isAny(genes, classes = c("character", "NULL")),
@@ -113,28 +111,26 @@ NULL
 
 
 ## Updated 2021-08-09.
-`plotMA,DESeqResults` <-  # nolint
-    function(
-        object,
-        direction = c("both", "up", "down"),
-        alphaThreshold = NULL,
-        baseMeanThreshold = NULL,
-        lfcThreshold = NULL,
-        genes = NULL,
-        ntop = 0L,
-        pointColor = c(
-            "downregulated" = AcidPlots::lightPalette[["purple"]],
-            "upregulated" = AcidPlots::lightPalette[["orange"]],
-            "nonsignificant" = AcidPlots::lightPalette[["gray"]]
-        ),
-        pointSize = 2L,
-        pointAlpha = 0.8,
-        limits = list("x" = NULL, "y" = NULL),
-        labels = list(
-            "title" = TRUE,
-            "subtitle" = NULL
-        )
-    ) {
+`plotMA,DESeqResults` <- # nolint
+    function(object,
+             direction = c("both", "up", "down"),
+             alphaThreshold = NULL,
+             baseMeanThreshold = NULL,
+             lfcThreshold = NULL,
+             genes = NULL,
+             ntop = 0L,
+             pointColor = c(
+                 "downregulated" = AcidPlots::lightPalette[["purple"]],
+                 "upregulated" = AcidPlots::lightPalette[["orange"]],
+                 "nonsignificant" = AcidPlots::lightPalette[["gray"]]
+             ),
+             pointSize = 2L,
+             pointAlpha = 0.8,
+             limits = list("x" = NULL, "y" = NULL),
+             labels = list(
+                 "title" = TRUE,
+                 "subtitle" = NULL
+             )) {
         validObject(object)
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
@@ -250,7 +246,7 @@ NULL
             data[[lfcCol]][!ok[[2L]]] <- limits[["y"]][[2L]]
         }
         breaks <- list(
-            "x" = 10L ^ seq(
+            "x" = 10L^seq(
                 from = min(floor(log10(limits[["x"]][[1L]]))),
                 to = min(floor(log10(limits[["x"]][[2L]]))),
                 by = 1L
@@ -355,7 +351,7 @@ NULL
 
 
 #' @describeIn plotMA Passes to `DESeqResults` method, with `gene2symbol`
-#'   argument automatically defined.
+#' argument automatically defined.
 #' @export
 setMethod(
     f = "plotMA",
