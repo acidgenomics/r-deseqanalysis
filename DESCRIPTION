@@ -51,6 +51,7 @@ Suggests:
     ashr,
     basejump (>= 0.15.0),
     knitr,
+    rmarkdown,
     testthat,
     tximport
 Roxygen: list(markdown = TRUE)
