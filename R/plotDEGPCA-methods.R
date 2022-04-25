@@ -33,7 +33,7 @@ NULL
             samples <- contrastSamples(object, i = i, return = "character")
             assert(isSubset(samples, colnames(dt)))
             dt <- dt[, samples, drop = FALSE]
-            dt <- droplevels(dt)
+            dt <- droplevels2(dt)
         }
         plotDEGPCA(
             object = res,
