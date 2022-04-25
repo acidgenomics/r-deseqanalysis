@@ -16,10 +16,10 @@ NULL
 #' alphaThreshold<- as.DESeqDataSet as.DESeqTransform autopadZeros
 #' baseMeanThreshold baseMeanThreshold<- camelCase contrastName contrastName<-
 #' contrastSamples convertGenesToSymbols convertSampleIDsToNames correlation
-#' deg degIntersection degPerContrast interestingGroups interestingGroups<-
-#' intersectionMatrix leftJoin lfcShrink lfcShrink<- lfcShrinkType
-#' lfcThreshold lfcThreshold<- makeNames mapGenesToSymbols melt metadata2
-#' metadata2<- plotBaseMean plotContrastScatter plotCorrelationHeatmap
+#' deg degIntersection degPerContrast droplevels2 interestingGroups
+#' interestingGroups<- intersectionMatrix leftJoin lfcShrink lfcShrink<-
+#' lfcShrinkType lfcThreshold lfcThreshold<- makeNames mapGenesToSymbols melt
+#' metadata2 metadata2<- plotBaseMean plotContrastScatter plotCorrelationHeatmap
 #' plotCounts plotDEGHeatmap plotDEGPCA plotDEGStackedBar plotDEGUpset
 #' plotHeatmap plotLFC plotQuantileHeatmap plotUpset plotVolcano removeNA
 #' results resultsDiff resultsMatrix resultsNames resultsNames<- resultsTables
@@ -35,14 +35,14 @@ NULL
 #'
 #' @importMethodsFrom AcidBase intersectionMatrix
 #' @importMethodsFrom AcidExperiment Gene2Symbol autopadZeros
-#' convertGenesToSymbols convertSampleIDsToNames export interestingGroups
-#' interestingGroups<- mapGenesToSymbols melt
+#' convertGenesToSymbols convertSampleIDsToNames droplevels2 export
+#' interestingGroups interestingGroups<- mapGenesToSymbols melt
 #' @importMethodsFrom AcidGenomes Gene2Symbol
 #' @importMethodsFrom AcidPlots plotCounts plotHeatmap plotPCA plotUpset
 #' @importMethodsFrom AcidPlyr leftJoin melt
 #' @importMethodsFrom DESeq2 counts design
-#' @importMethodsFrom pipette coerce export import metadata2 metadata2<-
-#' removeNA
+#' @importMethodsFrom pipette coerce droplevels2 export import metadata2
+#' metadata2<- removeNA
 #' @importMethodsFrom syntactic autopadZeros camelCase makeNames snakeCase
 NULL
 
