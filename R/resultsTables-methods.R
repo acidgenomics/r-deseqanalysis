@@ -1,6 +1,6 @@
 #' @name resultsTables
 #' @inherit AcidGenerics::resultsTables
-#' @note Updated 2021-06-28.
+#' @note Updated 2022-05-06.
 #'
 #' @inheritParams params
 #' @inheritParams results
@@ -47,7 +47,7 @@ NULL
 
 
 
-## Updated 2021-06-29.
+## Updated 2022-05-06.
 `resultsTables,DESeqAnalysis` <- # nolint
     function(object,
              i,
@@ -123,7 +123,17 @@ NULL
         switch(
             EXPR = match.arg(return),
             "DataFrameList" = DataFrameList(out),
-            "tbl_df" = lapply(out, as_tibble)
+            "tbl_df" = {
+                assert(requireNamespaces("tibble"))
+                lapply(
+                    X = out,
+                    FUN = function(x) {
+                        x <- as.data.frame(x)
+                        x <- tibble::as_tibble(x)
+                        x
+                    }
+                )
+            }
         )
     }
 

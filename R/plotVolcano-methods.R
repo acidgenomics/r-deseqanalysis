@@ -263,7 +263,7 @@ NULL
         )
         data[[negLogAlphaCol]] <- -log10(data[[alphaCol]])
         p <- ggplot(
-            data = as_tibble(data, rownames = NULL),
+            data = as.data.frame(data),
             mapping = aes(
                 x = !!sym(lfcCol),
                 y = !!sym(negLogAlphaCol),
@@ -369,7 +369,7 @@ NULL
             labelData[["geneName"]] <- rownames(labelData)
             p <- p +
                 acid_geom_label_repel(
-                    data = as_tibble(labelData, rownames = NULL),
+                    data = as.data.frame(labelData),
                     mapping = aes(
                         x = !!sym(lfcCol),
                         y = !!sym(negLogAlphaCol),
@@ -381,7 +381,7 @@ NULL
         if (isTRUE(histograms)) {
             ## LFC density plot.
             lfcHist <- ggplot(
-                data = as_tibble(data, rownames = NULL),
+                data = as.data.frame(data),
                 mapping = aes(x = !!sym(lfcCol))
             ) +
                 geom_density(
@@ -403,7 +403,7 @@ NULL
                 )
             ## P value density plot.
             pvalueHist <- ggplot(
-                data = as_tibble(data, rownames = NULL),
+                data = as.data.frame(data),
                 mapping = aes(x = !!sym(negLogAlphaCol))
             ) +
                 geom_density(
