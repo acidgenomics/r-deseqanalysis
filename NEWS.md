@@ -1,10 +1,16 @@
-# DESeqAnalysis 0.5.1 (UNRELEASED)
+# DESeqAnalysis 0.6.0 (2022-05-06)
+
+## Major changes
+
+- Package now requires R 4.2 / Bioconductor 3.15.
 
 ## Minor changes
 
 - Reworked internal droplevels calls against SummarizedExperiment using new
   `droplevels2` approach, which provides better compatibility with Bioconductor
   3.15 release.
+- Reworked internal handoff to `ggplot`, using `as.data.frame` coercion instead
+  of `as_tibble`.
 
 # DESeqAnalysis 0.5.0 (2022-04-15)
 

@@ -254,7 +254,7 @@ NULL
             "y" = pretty_breaks()
         )
         p <- ggplot(
-            data = as_tibble(data, rownames = NULL),
+            data = as.data.frame(data),
             mapping = aes(
                 x = !!sym(baseMeanCol),
                 y = !!sym(lfcCol),
@@ -337,7 +337,7 @@ NULL
             labelData[["geneName"]] <- rownames(labelData)
             p <- p +
                 acid_geom_label_repel(
-                    data = as_tibble(labelData, rownames = NULL),
+                    data = as.data.frame(labelData),
                     mapping = aes(
                         x = !!sym(baseMeanCol),
                         y = !!sym(lfcCol),

@@ -31,7 +31,7 @@ NULL
 #' metadata metadata<- na.omit
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom methods coerce show
-#' @importFrom pipette export import tibble
+#' @importFrom pipette export import
 #'
 #' @importMethodsFrom AcidBase intersectionMatrix
 #' @importMethodsFrom AcidExperiment Gene2Symbol autopadZeros
@@ -41,8 +41,8 @@ NULL
 #' @importMethodsFrom AcidPlots plotCounts plotHeatmap plotPCA plotUpset
 #' @importMethodsFrom AcidPlyr leftJoin melt
 #' @importMethodsFrom DESeq2 counts design
-#' @importMethodsFrom pipette coerce droplevels2 export import metadata2
-#' metadata2<- removeNA
+#' @importMethodsFrom pipette droplevels2 export import metadata2 metadata2<-
+#' removeNA
 #' @importMethodsFrom syntactic autopadZeros camelCase makeNames snakeCase
 NULL
 
@@ -50,7 +50,6 @@ NULL
 
 ## S3 generics =================================================================
 
-#' @importFrom pipette as_tibble
 #' @importFrom stats model.matrix relevel
 NULL
 

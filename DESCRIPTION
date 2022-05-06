@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: Acid Genomics DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.5.1.9000
-Date: 2022-04-25
+Version: 0.6.0
+Date: 2022-04-06
 Authors@R: c(
     person(
         given = "Michael",
@@ -26,33 +26,34 @@ Depends:
     R (>= 4.2),
     DESeq2
 Imports:
-    AcidBase (>= 0.5.0),
-    AcidCLI (>= 0.2.0),
-    AcidExperiment (>= 0.3.1),
-    AcidGenerics (>= 0.6.1),
-    AcidGenomes (>= 0.3.1),
-    AcidMarkdown (>= 0.1.6),
-    AcidPlots (>= 0.4.1),
-    AcidPlyr (>= 0.2.0),
+    AcidBase,
+    AcidCLI,
+    AcidExperiment,
+    AcidGenerics,
+    AcidGenomes,
+    AcidMarkdown,
+    AcidPlots,
+    AcidPlyr,
     BiocGenerics,
     IRanges,
     S4Vectors,
     SummarizedExperiment,
     ggplot2,
-    goalie (>= 0.6.0),
+    goalie,
     methods,
-    pipette (>= 0.8.1),
+    pipette,
     stats,
     stringr,
-    syntactic (>= 0.5.1),
+    syntactic,
     utils
 Suggests:
     apeglm,
     ashr,
-    basejump (>= 0.15.1),
+    basejump,
     knitr,
     rmarkdown,
     testthat,
+    tibble,
     tximport
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
