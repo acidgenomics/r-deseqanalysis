@@ -17,7 +17,8 @@ install.packages(
     repos = c(
         "https://r.acidgenomics.com",
         BiocManager::repositories()
-    )
+    ),
+    dependencies = TRUE
 )
 ```
 
