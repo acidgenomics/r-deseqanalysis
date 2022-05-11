@@ -1,5 +1,5 @@
 ---
-## Updated 2022-03-08.
+## Updated 2022-05-11.
 params:
   title: "Differential expression with DESeq2"
   
@@ -29,7 +29,7 @@ params:
   
   output_dir: !r file.path("results", Sys.Date(), "differential-expression")
 
-title: "`r params$title`"
+title: "`r params[["title"]]`"
 author: "`r getOption('author')`"
 date: "`r Sys.Date()`"
 bibliography: bibliography.bib
@@ -44,7 +44,7 @@ prepareTemplate()
 source("_setup.R")
 ## This is required for tabset R Markdown headers to work in `lapply()` call.
 knitr::opts_chunk[["set"]](message = FALSE)
-initDir(params$output_dir)
+initDir(params[["output_dir"]])
 ```
 
 ```{r header, child="_header.Rmd"}
@@ -53,33 +53,33 @@ initDir(params$output_dir)
 # Load DESeqAnalysis object
 
 ```{r load-object}
-if (is.character(params$object)) {
-    file <- params$object
+if (is.character(params[["object"]])) {
+    file <- params[["object"]]
     object <- import(file)
-    name <- params$name
+    name <- params[["name"]]
     if (!isTRUE(nzchar(name))) {
       name <- basenameSansExt(file)
     }
     rm(file)
 } else {
-    object <- params$object
-    name <- params$name
+    object <- params[["object"]]
+    name <- params[["name"]]
 }
 stopifnot(
     is(object, "DESeqAnalysis"),
     isTRUE(nzchar(name))
 )
-if (!is.null(params$alpha_threshold)) {
-    alphaThreshold(object) <- params$alpha_threshold
+if (!is.null(params[["alpha_threshold"]])) {
+    alphaThreshold(object) <- params[["alpha_threshold"]]
 }
-if (!is.null(params$lfc_shrink)) {
-    lfcShrink(object) <- params$lfc_shrink
+if (!is.null(params[["lfc_shrink"]])) {
+    lfcShrink(object) <- params[["lfc_shrink"]]
 }
-if (!is.null(params$lfc_threshold)) {
-    lfcThreshold(object) <- params$lfc_threshold
+if (!is.null(params[["lfc_threshold"]])) {
+    lfcThreshold(object) <- params[["lfc_threshold"]]
 }
-if (!is.null(params$base_mean_threshold)) {
-    baseMeanThreshold(object) <- base_mean_threshold
+if (!is.null(params[["base_mean_threshold"]])) {
+    baseMeanThreshold(object) <- params[["base_mean_threshold"]]
 }
 resultsNames <- resultsNames(object)
 invisible(validObject(object))
@@ -101,11 +101,11 @@ plotDEGStackedBar(object)
 ```{r plot-deg-upset, include=FALSE}
 pdf(
     file = file.path(
-        params$output_dir,
+        params[["output_dir"]],
         "plot-deg-upset.pdf"
     ),
-    width = 15,
-    height = 10
+    width = 15L,
+    height = 10L
 )
 plotDEGUpset(object)
 dev.off()
@@ -156,7 +156,7 @@ invisible(mapply(
     i = resultsNames,
     MoreArgs = list(
         "object" = object,
-        "contrastSamples" = params$contrast_samples
+        "contrastSamples" = params[["contrast_samples"]]
     ),
     SIMPLIFY = FALSE,
     USE.NAMES = FALSE
@@ -176,7 +176,7 @@ invisible(mapply(
     i = resultsNames,
     MoreArgs = list(
         "object" = object,
-        "contrastSamples" = params$contrast_samples
+        "contrastSamples" = params[["contrast_samples"]]
     ),
     SIMPLIFY = FALSE,
     USE.NAMES = FALSE
@@ -224,7 +224,7 @@ Note that `colData` files contain annotations corresponding to the columns (i.e.
 export(
     object = object,
     name = name,
-    dir = params$output_dir,
+    dir = params[["output_dir"]],
     compress = FALSE
 )
 ```
