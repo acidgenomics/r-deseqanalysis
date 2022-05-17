@@ -118,15 +118,13 @@ dev.off()
 An MA plot compares transformed counts on `M` (log ratio) and `A` (mean average) scales [@Yang2002-sx].
 
 ```{r plot-ma, results="asis"}
-invisible(mapply(
-    FUN = function(object, i) {
+invisible(Map(
+    f = function(object, i) {
         markdownHeader(i, level = 2L, asis = TRUE)
         print(plotMA(object = object, i = i))
     },
     i = resultsNames,
-    MoreArgs = list("object" = object),
-    SIMPLIFY = FALSE,
-    USE.NAMES = FALSE
+    MoreArgs = list("object" = object)
 ))
 ```
 
@@ -135,23 +133,21 @@ invisible(mapply(
 A volcano plot compares significance (BH-adjusted *P* value) against fold change (log2) [@Cui2003-rn; @Li2014-ll]. Genes in the green box with text labels have an adjusted *P* value are likely to be the top candidate genes of interest.
 
 ```{r plot-volcano, results="asis"}
-invisible(mapply(
-    FUN = function(object, i) {
+invisible(Map(
+    f = function(object, i) {
         markdownHeader(i, level = 2L, asis = TRUE)
         print(plotVolcano(object = object, i = i))
     },
     i = resultsNames,
-    MoreArgs = list("object" = object),
-    SIMPLIFY = FALSE,
-    USE.NAMES = FALSE
+    MoreArgs = list("object" = object)
 ))
 ```
 
 # DEG PCA {.tabset}
 
 ```{r plot-deg-pca, results="asis"}
-invisible(mapply(
-    FUN = function(object, i, ...) {
+invisible(Map(
+    f = function(object, i, ...) {
         markdownHeader(i, level = 2L, asis = TRUE)
         print(plotDEGPCA(object = object, i = i, ...))
     },
@@ -159,9 +155,7 @@ invisible(mapply(
     MoreArgs = list(
         "object" = object,
         "contrastSamples" = params[["contrast_samples"]]
-    ),
-    SIMPLIFY = FALSE,
-    USE.NAMES = FALSE
+    )
 ))
 ```
 
@@ -170,8 +164,8 @@ invisible(mapply(
 This plot shows only differentially expressed genes on a per-sample basis. We have scaled the data by row (z-score) and used the `ward.D2` method for clustering [@Ward1963-xf].
 
 ```{r plot-deg-heatmap, results="asis"}
-invisible(mapply(
-    FUN = function(object, i, ...) {
+invisible(Map(
+    f = function(object, i, ...) {
         markdownHeader(i, level = 2L, asis = TRUE)
         plotDEGHeatmap(object = object, i = i, ...)
     },
@@ -179,9 +173,7 @@ invisible(mapply(
     MoreArgs = list(
         "object" = object,
         "contrastSamples" = params[["contrast_samples"]]
-    ),
-    SIMPLIFY = FALSE,
-    USE.NAMES = FALSE
+    )
 ))
 ```
 
@@ -190,8 +182,8 @@ invisible(mapply(
 Only the top up- and down-regulated genes (arranged by adjusted *P* value) are shown.
 
 ```{r top-tables, results="asis"}
-invisible(mapply(
-    FUN = function(object, i, ...) {
+invisible(Map(
+    f = function(object, i, ...) {
         markdownHeader(i, level = 2L, asis = TRUE)
         topTables(object = object, i = i, ...)
     },
@@ -199,9 +191,7 @@ invisible(mapply(
     MoreArgs = list(
         "object" = object,
         "n" = 25L
-    ),
-    SIMPLIFY = FALSE,
-    USE.NAMES = FALSE
+    )
 ))
 ```
 
