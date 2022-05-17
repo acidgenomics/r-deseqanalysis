@@ -1,6 +1,6 @@
 #' @name degIntersection
 #' @inherit AcidGenerics::degIntersection return title
-#' @note Updated 2021-03-15.
+#' @note Updated 2022-05-17.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @param ... Passthrough arguments to `DESeqResultsList` method.
@@ -111,7 +111,7 @@ formals(`degIntersection,DESeqAnalysis`)[names(.args)] <- # nolint
 
 
 
-## Updated 2021-03-12.
+## Updated 2022-05-17.
 `degIntersection,DESeqResultsList` <- # nolint
     function(object,
              direction,
@@ -141,7 +141,7 @@ formals(`degIntersection,DESeqAnalysis`)[names(.args)] <- # nolint
             quiet = TRUE
         )
         assert(hasNames(x))
-        if (any(duplicated(names(x)))) {
+        if (anyDuplicated(names(x)) > 0L) {
             dupes <- names(x)[duplicated(names(x))]
             abort(sprintf(
                 "%d duplicate %s: %s.",
