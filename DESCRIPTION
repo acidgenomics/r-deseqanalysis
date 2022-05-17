@@ -1,7 +1,7 @@
 Package: DESeqAnalysis
 Title: Acid Genomics DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.6.1.9000
+Version: 0.6.1
 Date: 2022-05-17
 Authors@R: c(
     person(
@@ -52,9 +52,10 @@ Suggests:
     basejump,
     knitr,
     rmarkdown,
-    testthat,
+    testthat (>= 3.0.0),
     tibble,
     tximport
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
 Additional_repositories: https://r.acidgenomics.com
+Config/testthat/edition: 3
