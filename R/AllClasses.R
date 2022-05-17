@@ -122,7 +122,7 @@ setValidity(
                     f = function(unshrunken, shrunken) {
                         identical(rownames(unshrunken), rownames(shrunken))
                     }
-                )),
+                ))),
                 msg = "Unshrunken and shrunken DESeqResults must correspond."
             )
             if (!isTRUE(ok)) {
