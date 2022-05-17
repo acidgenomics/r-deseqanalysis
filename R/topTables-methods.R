@@ -1,6 +1,6 @@
 #' @name topTables
 #' @inherit AcidGenerics::topTables
-#' @note Updated 2021-08-09.
+#' @note Updated 2022-05-17.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -26,7 +26,7 @@ NULL
 
 
 
-## Updated 2019-08-20.
+## Updated 2022-05-17.
 .topKables <- # nolint
     function(object, contrast, n) {
         requireNamespaces("knitr")
@@ -61,12 +61,12 @@ NULL
             ))
         }
         ## Invisibly return list containing the subsets.
-        invisible(list(up = up, down = down))
+        invisible(list("up" = up, "down" = down))
     }
 
 
 
-## Updated 2021-08-09.
+## Updated 2022-05-17.
 .topTable <- # nolint
     function(object, n = 10L) {
         assert(
@@ -97,8 +97,16 @@ NULL
                 replacement = "",
                 x = desc
             )
+
+            ## FIXME Rework this using base R, to avoid stringr dependency.
+
             ## Truncate to max 50 characters.
             desc <- str_trunc(desc, width = 50L, side = "right")
+
+            ifelse(nchar(a) > 13, paste0(substring(a, 1, 10), "..."), a)
+
+
+
             object[["description"]] <- desc
         }
         ## Improve number appearance.
@@ -136,6 +144,9 @@ NULL
 
 
 
+## FIXME This is problematic if dataset doesn't contain geneName
+## FIXME Need to test with deseqMinimal object.
+
 ## This is used in bcbioRNASeq F1000 paper.
 ## Updated 2019-11-12.
 `topTables,DESeqResults` <- # nolint
@@ -162,9 +173,10 @@ NULL
 
 
 ## This is used in bcbioRNASeq F1000 paper.
-## Updated 2021-08-09.
+## Updated 2022-05-17.
 `topTables,list` <- # nolint
     function(object, n = 10L, contrast = NULL) {
+        .Deprecated()
         assert(
             isSubset(c("down", "up"), names(object)),
             is(object[[1L]], "tbl_df")
