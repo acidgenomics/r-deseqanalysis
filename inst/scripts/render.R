@@ -1,15 +1,18 @@
+## """
 ## Render multiple DESeqAnalysis reports.
-## Updated 2019-10-11.
+## Updated 2022-05-17.
+## """
 
+## nolint start
+suppressPackageStartupMessages({
 library(rmarkdown)
-
+})
+## nolint end
 templateFile <- "deseqanalysis.Rmd"
 stopifnot(file.exists(templateFile))
-
-## Load the DESeqAnalysis objects.
 datasets <- c(
-    name1 = "deseqanalysis1",
-    name2 = "deseqanalysis2"
+    "name1" = "deseqanalysis1",
+    "name2" = "deseqanalysis2"
 )
 objectFiles <- file.path(
     "rds",
@@ -18,23 +21,18 @@ objectFiles <- file.path(
 )
 names(objectFiles) <- names(datasets)
 stopifnot(all(file.exists(objectFiles)))
-
 outputDir <- file.path("results", Sys.Date(), "differential-expression")
-
-invisible(mapply(
+invisible(Map(
     name = names(objectFiles),
     file = objectFiles,
-    FUN = function(name, file) {
-        message(sprintf(
-            "Rendering '%s'\nFile: %s",
-            name, file
-        ))
+    f = function(name, file) {
+        message(sprintf("Rendering '%s'\nFile: %s", name, file))
         render(
             params = list(
-                title = paste("DESeq2 differential expression:", name),
-                object = file,
-                name = name,
-                output_dir = outputDir
+                "title" = paste("DESeq2 differential expression:", name),
+                "object" = file,
+                "name" = name,
+                "output_dir" = outputDir
             ),
             input = templateFile,
             output_format = "html_document",
@@ -43,7 +41,5 @@ invisible(mapply(
             clean = TRUE,
             envir = new.env()
         )
-    },
-    SIMPLIFY = FALSE,
-    USE.NAMES = FALSE
+    }
 ))
