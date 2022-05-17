@@ -3,7 +3,7 @@
 #' Generate an aggregate matrix of `DESeqResults` column values per contrast.
 #'
 #' @name resultsMatrix
-#' @note Updated 2021-03-15.
+#' @note Updated 2022-05-17.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @param ... Additional arguments.
@@ -86,7 +86,7 @@ NULL
         } else {
             out <- mat
         }
-        metadata2(out, which = "DESeqAnalysis") <-
+        metadata2(out, which = "DESeqAnalysis") <- # nolint
             list(
                 "date" = Sys.Date(),
                 "packageVersion" = .pkgVersion,
@@ -98,18 +98,18 @@ NULL
 
 
 
-## Updated 2021-03-15.
+## Updated 2022-05-17.
 `resultsMatrix,DESeqAnalysisList` <- # nolint
     function(object, value, rowData) {
         validObject(object)
         assert(isFlag(rowData))
         value <- match.arg(value)
         slotName <- .whichResults(object, value)
-        list <- mapply(
+        list <- Map(
             name = names(object),
             object = object,
-            MoreArgs = list(value = value),
-            FUN = function(object, name, value) {
+            MoreArgs = list("value" = value),
+            f = function(object, name, value) {
                 ## Note that we're handling rowData below.
                 m <- resultsMatrix(
                     object = object,
@@ -118,9 +118,7 @@ NULL
                 )
                 colnames(m) <- makeNames(paste(name, colnames(m)))
                 m
-            },
-            SIMPLIFY = FALSE,
-            USE.NAMES = TRUE
+            }
         )
         out <- do.call(what = cbind, args = list)
         if (isTRUE(rowData)) {
