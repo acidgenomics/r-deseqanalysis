@@ -2,9 +2,6 @@
 suppressPackageStartupMessages({
     library(devtools)
     library(usethis)
-    library(basejump)
-    library(DESeq2)
-    library(apeglm)
 })
 ## nolint end
 load_all()
@@ -72,9 +69,9 @@ deseq <- DESeqAnalysis(
     lfcShrink = shrink
 )
 ## Check the object size.
-lapply(coerceToList(deseq), object.size)
-stopifnot(object.size(deseq) < limit)
-## Check that object is valid.
-stopifnot(is(deseq, "DESeqAnalysis"))
-validObject(deseq)
+stopifnot(
+    is(deseq, "DESeqAnalysis"),
+    validObject(deseq),
+    object.size(deseq) < limit
+)
 use_data(deseq, overwrite = TRUE, compress = "xz")
