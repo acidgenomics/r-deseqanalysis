@@ -19,7 +19,7 @@ NULL
 
 
 
-.method <- formals(basejump::cor)[["method"]]
+.method <- formals(S4Vectors::cor)[["method"]]
 
 
 
@@ -47,7 +47,8 @@ NULL
         correlation(x = data[["x"]], y = data[["y"]], method = method)
     }
 
-formals(`correlation,DESeqResults,DESeqResults`)[["method"]] <- .method
+formals(`correlation,DESeqResults,DESeqResults`)[["method"]] <- # nolint
+    .method
 
 
 
@@ -68,7 +69,8 @@ formals(`correlation,DESeqResults,DESeqResults`)[["method"]] <- .method
         )
     }
 
-formals(`correlation,DESeqAnalysis,missing`)[["method"]] <- .method
+formals(`correlation,DESeqAnalysis,missing`)[["method"]] <- # nolint
+    .method
 
 
 

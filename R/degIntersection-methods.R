@@ -100,7 +100,8 @@ NULL
         )
     }
 
-formals(`degIntersection,DESeqAnalysis`)[names(.args)] <- .args
+formals(`degIntersection,DESeqAnalysis`)[names(.args)] <- # nolint
+    .args
 
 
 
@@ -175,7 +176,8 @@ formals(`degIntersection,DESeqAnalysis`)[names(.args)] <- .args
         )
     }
 
-formals(`degIntersection,DESeqResultsList`)[names(.args)] <- .args
+formals(`degIntersection,DESeqResultsList`)[names(.args)] <- # nolint
+    .args
 
 
 
