@@ -75,7 +75,7 @@ NULL
 
 ## Useful for avoiding this issue:
 ## type='apeglm' shrinkage only for use with 'coef'
-## Updated 2021-08-09.
+## Updated 2022-05-17.
 `apeglmResults,DESeqDataSet` <- # nolint
     function(object,
              contrast,
@@ -93,7 +93,6 @@ NULL
         lfcThreshold <- lfcThreshold(res)
         parallel <- TRUE
         factor <- contrast[[1L]]
-        numerator <- contrast[[2L]]
         denominator <- contrast[[3L]]
         ## Get the grouping factor defined by contrast vector.
         group <- colData(object)[[factor]]
