@@ -29,18 +29,17 @@ NULL
 ## Updated 2022-05-17.
 .topKables <- # nolint
     function(object, contrast, n) {
-        requireNamespaces("knitr")
         assert(
+            requireNamespaces("knitr"),
             is(object, "DataFrameList") || is.null(object),
             isString(contrast, nullOK = TRUE),
             isInt(n),
             isPositive(n)
         )
         ## Upregulated genes.
-        up <- object[["up"]]
-        if (hasLength(up)) {
+        if (hasLength(object[["up"]])) {
             show(knitr::kable(
-                x = as.data.frame(.topTable(up, n = n)),
+                x = as.data.frame(.topTable(object[["up"]], n = n)),
                 caption = ifelse(
                     test = is.null(contrast),
                     yes = "upregulated",
@@ -49,10 +48,9 @@ NULL
             ))
         }
         ## Downregulated genes.
-        down <- object[["down"]]
-        if (hasLength(down)) {
+        if (hasLength(object[["down"]])) {
             show(knitr::kable(
-                x = as.data.frame(.topTable(down, n = n)),
+                x = as.data.frame(.topTable(object[["down"]], n = n)),
                 caption = ifelse(
                     test = is.null(contrast),
                     yes = "downregulated",
@@ -61,7 +59,10 @@ NULL
             ))
         }
         ## Invisibly return list containing the subsets.
-        invisible(list("up" = up, "down" = down))
+        invisible(list(
+            "up" = object[["up"]],
+            "down" = object[["down"]]
+        ))
     }
 
 
@@ -88,7 +89,7 @@ NULL
         ## Get the top rows.
         object <- head(object, n = n)
         ## Sanitize optional columns first.
-        if ("description" %in% colnames(object)) {
+        if (isSubset("description", colnames(object))) {
             desc <- object[["description"]]
             desc <- as.character(desc)
             ## Remove symbol information in brackets.
@@ -97,16 +98,19 @@ NULL
                 replacement = "",
                 x = desc
             )
-
-            ## FIXME Rework this using base R, to avoid stringr dependency.
-
-            ## Truncate to max 50 characters.
-            desc <- str_trunc(desc, width = 50L, side = "right")
-
-            ifelse(nchar(a) > 13, paste0(substring(a, 1, 10), "..."), a)
-
-
-
+            maxWidth <- 50L
+            desc <- ifelse(
+                test = nchar(desc) > maxWidth,
+                yes = paste0(
+                    substring(
+                        text = desc,
+                        first = 1L,
+                        last = maxWidth - 3L
+                    ),
+                    "..."
+                ),
+                no = desc
+            )
             object[["description"]] <- desc
         }
         ## Improve number appearance.
@@ -176,7 +180,7 @@ NULL
 ## Updated 2022-05-17.
 `topTables,list` <- # nolint
     function(object, n = 10L, contrast = NULL) {
-        .Deprecated()
+        ## > .Deprecated("Use our newer 'DESeqAnalysis' method instead.")
         assert(
             isSubset(c("down", "up"), names(object)),
             is(object[[1L]], "tbl_df")
