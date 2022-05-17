@@ -1,3 +1,4 @@
+## nolint start
 suppressPackageStartupMessages({
     library(devtools)
     library(usethis)
@@ -5,6 +6,7 @@ suppressPackageStartupMessages({
     library(DESeq2)
     library(apeglm)
 })
+## nolint end
 load_all()
 data(RangedSummarizedExperiment, package = "AcidTest")
 rse <- RangedSummarizedExperiment
@@ -39,31 +41,29 @@ contrasts <- list(
         denominator = "C"
     )
 )
-res <- mapply(
-    FUN = DESeq2::results,
+res <- Map(
+    f = DESeq2::results,
     contrast = contrasts,
     MoreArgs = list(
-        object = dds,
-        lfcThreshold = lfcThreshold,
-        alpha = alpha
-    ),
-    SIMPLIFY = FALSE,
-    USE.NAMES = TRUE
+        "object" = dds,
+        "lfcThreshold" = lfcThreshold,
+        "alpha" = alpha
+    )
 )
+names(res) <- names(contrasts)
 ## Shrink log2 fold changes via `DESeq2::lfcShrink()`. apeglm is now recommended
 ## over normal. Also note that LFC shrinkage via type='normal' is not
 ## implemented for designs with interactions.
-shrink <- mapply(
-    FUN = apeglmResults,
+shrink <- Map(
+    f = apeglmResults,
     contrast = contrasts,
     res = res,
     MoreArgs = list(
-        object = dds,
-        lfcThreshold = lfcThreshold
-    ),
-    SIMPLIFY = FALSE,
-    USE.NAMES = TRUE
+        "object" = dds,
+        "lfcThreshold" = lfcThreshold
+    )
 )
+names(shrink) <- names(contrasts)
 ## Package up the analysis into a DESeqAnalysis object.
 deseq <- DESeqAnalysis(
     data = dds,
