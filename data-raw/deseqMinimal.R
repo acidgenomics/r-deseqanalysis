@@ -1,7 +1,3 @@
-## FIXME Rework this to be super small, with no DEGs.
-
-
-
 ## nolint start
 suppressPackageStartupMessages({
     library(devtools)
@@ -9,10 +5,9 @@ suppressPackageStartupMessages({
 })
 ## nolint end
 load_all()
-limit <- structure(2e6L, class = "object_size")
-dds <- makeExampleDESeqDataSet()
-dds <- DESeq(dds)
-dt <- varianceStabilizingTransformation(dds)
+dds <- makeExampleDESeqDataSet(n = 50L, m = 4L)
+dds <- DESeq(dds, fitType = "local")
+dt <- varianceStabilizingTransformation(dds, fitType = "local")
 res <- results(dds)
 object <- DESeqAnalysis(
     data = dds,
@@ -20,6 +15,7 @@ object <- DESeqAnalysis(
     results = res,
     lfcShrink = NULL
 )
+limit <- structure(1e6L, class = "object_size")
 stopifnot(
     is(object, "DESeqAnalysis"),
     validObject(object),
