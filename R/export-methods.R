@@ -1,6 +1,6 @@
 #' @name export
 #' @inherit AcidExperiment::export
-#' @note Updated 2022-01-19.
+#' @note Updated 2022-05-17.
 #'
 #' @details
 #' Size-factor normalized coutns and FPKM values are calculated on the fly and
@@ -19,7 +19,7 @@ NULL
 
 
 
-## Updated 2021-10-15.
+## Updated 2022-05-17.
 .exportResultsMatrices <-
     function(object,
              dir,
@@ -56,22 +56,23 @@ NULL
         if (isTRUE(compress)) {
             files <- paste0(files, ".gz")
         }
-        mapply(
+        Map(
+            f = export,
             object = list,
             con = files,
-            overwrite = overwrite,
-            quiet = quiet,
-            FUN = export,
-            SIMPLIFY = TRUE,
-            USE.NAMES = TRUE
+            MoreArgs = list(
+                "overwrite" = overwrite,
+                "quiet" = quiet
+            )
         )
     }
 
 
 
-## Here we are looping across each contrast and writing out DEG tables.
-## Note: We don't need to support humanize mode because `geneName` is required.
-## Updated 2021-10-15.
+## Here we are looping across each contrast and writing out DEG tables. We
+## don't need to support humanize mode because `geneName` is required.
+##
+## Updated 2022-05-17.
 .exportResultsTables <-
     function(object,
              dir,
@@ -101,14 +102,14 @@ NULL
                 if (isTRUE(compress)) {
                     files <- paste0(files, ".gz")
                 }
-                mapply(
+                Map(
+                    f = export,
                     object = data,
                     con = files,
-                    overwrite = overwrite,
-                    quiet = quiet,
-                    FUN = export,
-                    SIMPLIFY = TRUE,
-                    USE.NAMES = TRUE
+                    MoreArgs = list(
+                        "overwrite" = overwrite,
+                        "quiet" = quiet
+                    )
                 )
             }
         )
