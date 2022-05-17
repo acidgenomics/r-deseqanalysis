@@ -8,18 +8,18 @@ test_that("DESeqAnalysis : character", {
             quiet = FALSE
         ),
         expected = c(
-            "sample07",
-            "sample08",
-            "sample09",
+            "sample7",
+            "sample8",
+            "sample9",
             "sample10",
             "sample11",
             "sample12",
-            "sample01",
-            "sample02",
-            "sample03",
-            "sample04",
-            "sample05",
-            "sample06"
+            "sample1",
+            "sample2",
+            "sample3",
+            "sample4",
+            "sample5",
+            "sample6"
         )
     )
     expect_identical(
@@ -30,18 +30,18 @@ test_that("DESeqAnalysis : character", {
             quiet = FALSE
         ),
         expected = c(
-            "sample04",
-            "sample05",
-            "sample06",
+            "sample4",
+            "sample5",
+            "sample6",
             "sample10",
             "sample11",
             "sample12",
-            "sample01",
-            "sample02",
-            "sample03",
-            "sample07",
-            "sample08",
-            "sample09"
+            "sample1",
+            "sample2",
+            "sample3",
+            "sample7",
+            "sample8",
+            "sample9"
         )
     )
 })
@@ -63,20 +63,20 @@ test_that("DESeqAnalysis : list", {
             ),
             "samples" = list(
                 "numerator" = c(
-                    "sample07",
-                    "sample08",
-                    "sample09",
+                    "sample7",
+                    "sample8",
+                    "sample9",
                     "sample10",
                     "sample11",
                     "sample12"
                 ),
                 "denominator" = c(
-                    "sample01",
-                    "sample02",
-                    "sample03",
-                    "sample04",
-                    "sample05",
-                    "sample06"
+                    "sample1",
+                    "sample2",
+                    "sample3",
+                    "sample4",
+                    "sample5",
+                    "sample6"
                 )
             )
         )
@@ -96,20 +96,20 @@ test_that("DESeqAnalysis : list", {
             ),
             "samples" = list(
                 "numerator" = c(
-                    "sample04",
-                    "sample05",
-                    "sample06",
+                    "sample4",
+                    "sample5",
+                    "sample6",
                     "sample10",
                     "sample11",
                     "sample12"
                 ),
                 "denominator" = c(
-                    "sample01",
-                    "sample02",
-                    "sample03",
-                    "sample07",
-                    "sample08",
-                    "sample09"
+                    "sample1",
+                    "sample2",
+                    "sample3",
+                    "sample7",
+                    "sample8",
+                    "sample9"
                 )
             )
         )
