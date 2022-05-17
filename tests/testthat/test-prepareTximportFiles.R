@@ -19,7 +19,7 @@ test_that("makeNames", {
                 exists = FALSE
             )
             expect_identical(unname(object), files)
-            expect_identical(names(object), names)
+            expect_named(object, names)
         }
     )
 })

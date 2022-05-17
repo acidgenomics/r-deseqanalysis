@@ -17,7 +17,7 @@ test_that("DESeqAnalysis", {
     names(results) <- name
     lfcShrink <- list(lfcShrink)
     names(lfcShrink) <- name
-    expect_true(identical(names(results), names(lfcShrink)))
+    expect_identical(names(results), names(lfcShrink))
     x <- DESeqAnalysis(
         data = data,
         transform = transform,
