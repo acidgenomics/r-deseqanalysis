@@ -43,7 +43,7 @@ Imports:
     methods,
     pipette,
     stats,
-    stringr,
+    stringi,
     syntactic,
     utils
 Suggests:
