@@ -2,7 +2,7 @@
 #'
 #' @name base
 #' @keywords internal
-#' @note Updated 2020-10-28.
+#' @note Updated 2022-05-17.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams base::colnames
@@ -28,15 +28,8 @@ NULL
         colnames(as(x, "DESeqDataSet"))
     }
 
-formals(`colnames,DESeqAnalysis`) <- formals(colnames)
-
-#' @rdname base
-#' @export
-setMethod(
-    f = "colnames",
-    signature = signature(x = "DESeqAnalysis"),
-    definition = `colnames,DESeqAnalysis`
-)
+formals(`colnames,DESeqAnalysis`) <- # nolint
+    formals(colnames)
 
 
 
@@ -46,14 +39,6 @@ setMethod(
         dim(as(x, "DESeqDataSet"))
     }
 
-#' @rdname base
-#' @export
-setMethod(
-    f = "dim",
-    signature = signature(x = "DESeqAnalysis"),
-    definition = `dim,DESeqAnalysis`
-)
-
 
 
 ## Updated 2020-10-28.
@@ -61,14 +46,6 @@ setMethod(
     function(x) {
         dimnames(as(x, "DESeqDataSet"))
     }
-
-#' @rdname base
-#' @export
-setMethod(
-    f = "dimnames",
-    signature = signature(x = "DESeqAnalysis"),
-    definition = `dimnames,DESeqAnalysis`
-)
 
 
 
@@ -78,14 +55,6 @@ setMethod(
         names(as(x, "DESeqDataSet"))
     }
 
-#' @rdname base
-#' @export
-setMethod(
-    f = "names",
-    signature = signature(x = "DESeqAnalysis"),
-    definition = `names,DESeqAnalysis`
-)
-
 
 
 ## Updated 2020-10-28.
@@ -94,7 +63,42 @@ setMethod(
         rownames(as(x, "DESeqDataSet"))
     }
 
-formals(`rownames,DESeqAnalysis`) <- formals(rownames)
+formals(`rownames,DESeqAnalysis`) <- # nolint
+    formals(rownames)
+
+
+
+#' @rdname base
+#' @export
+setMethod(
+    f = "colnames",
+    signature = signature(x = "DESeqAnalysis"),
+    definition = `colnames,DESeqAnalysis`
+)
+
+#' @rdname base
+#' @export
+setMethod(
+    f = "dim",
+    signature = signature(x = "DESeqAnalysis"),
+    definition = `dim,DESeqAnalysis`
+)
+
+#' @rdname base
+#' @export
+setMethod(
+    f = "dimnames",
+    signature = signature(x = "DESeqAnalysis"),
+    definition = `dimnames,DESeqAnalysis`
+)
+
+#' @rdname base
+#' @export
+setMethod(
+    f = "names",
+    signature = signature(x = "DESeqAnalysis"),
+    definition = `names,DESeqAnalysis`
+)
 
 #' @rdname base
 #' @export
