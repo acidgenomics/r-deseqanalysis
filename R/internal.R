@@ -36,7 +36,7 @@
 #' -  `0`: not significant
 #' -  `1`: upregulated
 #'
-#' @note Updated 2021-06-29.
+#' @note Updated 2022-05-17.
 #' @noRd
 #'
 #' @return `DataFrame`.
@@ -79,7 +79,7 @@
             alertWarning("No genes passed cutoffs.")
             return(NULL)
         }
-        df[["isDeg"]] <- as.factor(mapply(
+        isDeg <- Map(
             alpha = df[[alphaCol]],
             lfc = df[["log2FoldChange"]],
             baseMean = df[["baseMean"]],
@@ -88,7 +88,7 @@
                 "baseMeanThreshold" = baseMeanThreshold,
                 "lfcThreshold" = lfcThreshold
             ),
-            FUN = function(alpha,
+            f = function(alpha,
                            alphaThreshold,
                            baseMean,
                            baseMeanThreshold,
@@ -108,10 +108,11 @@
                 } else {
                     0L
                 }
-            },
-            SIMPLIFY = TRUE,
-            USE.NAMES = FALSE
-        ))
+            }
+        )
+        ## See also `base::simplify2array` for coercion to vector.
+        isDeg <- as.factor(unlist(isDeg, recursive = FALSE))
+        df[["isDeg"]] <- isDeg
         df[["rankScore"]] <- df[[rankCol]]
         df[["rankScore"]][df[["isDeg"]] == 0L] <- NA
         df <- df[order(df[["rankScore"]]), , drop = FALSE]
