@@ -39,7 +39,7 @@ Named list of pairwise character vectors containing: "group", "numerator",
 Import pairwise contrasts from a file
 }
 \note{
-Updated 2019-09-09.
+Updated 2022-05-17.
 }
 \examples{
 file <- system.file("extdata", "contrasts.csv", package = "DESeqAnalysis")
