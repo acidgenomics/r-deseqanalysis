@@ -1,4 +1,5 @@
 ## DESeqAnalysis ===============================================================
+
 #' DESeq2 differential expression analysis
 #'
 #' Class containing all elements generated during differential expression
@@ -115,13 +116,12 @@ setValidity(
         if (hasLength(lfcShrink)) {
             ok <- validate(
                 identical(names(results), names(lfcShrink)),
-                all(mapply(
+                all(as.logical(Map(
                     unshrunken = results,
                     shrunken = lfcShrink,
-                    FUN = function(unshrunken, shrunken) {
+                    f = function(unshrunken, shrunken) {
                         identical(rownames(unshrunken), rownames(shrunken))
-                    },
-                    SIMPLIFY = TRUE
+                    }
                 )),
                 msg = "Unshrunken and shrunken DESeqResults must correspond."
             )
@@ -173,6 +173,7 @@ setValidity(
 
 
 ## DESeqAnalysisList ===========================================================
+
 #' List containing related DESeq2 analyses
 #'
 #' @author Michael Steinbaugh
@@ -246,6 +247,7 @@ setValidity(
 
 
 ## DESeqResultsList ============================================================
+
 #' List containing related DESeqResults objects
 #'
 #' @author Michael Steinbaugh
