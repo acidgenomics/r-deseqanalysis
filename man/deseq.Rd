@@ -11,14 +11,14 @@ An object of class \code{DESeqAnalysis} with 500 rows and 12 columns.
 data(deseq)
 }
 \description{
-Minimal DESeq2 differential expression analysis.
+DESeq2 example analysis
 }
 \note{
-Updated 2021-06-29.
+Updated 2022-05-17.
 }
 \examples{
 data(deseq)
-deseq
+print(deseq)
 }
 \author{
 Michael Steinbaugh
