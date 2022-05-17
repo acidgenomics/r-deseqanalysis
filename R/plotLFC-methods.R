@@ -1,6 +1,6 @@
 #' @name plotLFC
 #' @inherit AcidGenerics::plotLFC
-#' @note Updated 2022-04-15.
+#' @note Updated 2022-05-17.
 #'
 #' Plot the log2 fold change distributions for all contrasts in the analysis.
 #'
@@ -12,7 +12,9 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' plotLFC(deseq)
+#' object <- deseq
+#' lfcThreshold(object) <- 0.5
+#' plotLFC(object)
 NULL
 
 
@@ -20,7 +22,8 @@ NULL
 ## Updated 2022-05-17.
 `plotLFC,DESeqAnalysis` <- # nolint
     function(object) {
-        validObject(object)
+        assert(validObject(object))
+        lfcThreshold <- lfcThreshold(object)
         resList <- as.list(as(object, "DESeqResultsList"))
         data <- do.call(
             what = rbind,
@@ -35,16 +38,23 @@ NULL
                 }
             )
         )
-        data <- data[complete.cases(data), ]
+        keep <- complete.cases(data)
+        data <- data[keep, ]
+        keep <- abs(data[["log2FoldChange"]]) >= lfcThreshold
+        data <- data[keep, ]
         p <- ggplot(
             data = data,
-            mapping = aes(x = !!sym("log2FoldChange"))
+            mapping = aes(
+                x = !!sym("log2FoldChange"),
+                y = after_stat(!!sym("density"))
+            )
         ) +
-            geom_density(
+            geom_freqpoly(
+                stat = "bin",
+                binwidth = 0.25,
                 mapping = aes(
                     color = !!sym("contrast")
-                ),
-                fill = NA
+                )
             ) +
             autoDiscreteColorScale()
         p

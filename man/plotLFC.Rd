@@ -21,7 +21,7 @@ plotLFC(object, ...)
 Plot log2 fold change distributions
 }
 \note{
-Updated 2022-04-15.
+Updated 2022-05-17.
 
 Plot the log2 fold change distributions for all contrasts in the analysis.
 }
@@ -29,5 +29,7 @@ Plot the log2 fold change distributions for all contrasts in the analysis.
 data(deseq)
 
 ## DESeqAnalysis ====
-plotLFC(deseq)
+object <- deseq
+lfcThreshold(object) <- 0.5
+plotLFC(object)
 }

@@ -1,6 +1,4 @@
-context("plotMA")
-
-args <- list(object = deseq, i = 1L)
+args <- list("object" = objs[["deseq"]], "i" = 1L)
 
 test_that("DESeqAnalysis", {
     x <- do.call(plotMA, args)
@@ -31,17 +29,17 @@ test_that("DESeqAnalysis", {
 test_that("Directional support", {
     x <- do.call(
         what = plotMA,
-        args = c(
-            args,
-            list(direction = "up")
+        args = append(
+            x = args,
+            values = list("direction" = "up")
         )
     )
     expect_is(x, "ggplot")
     x <- do.call(
         what = plotMA,
-        args = c(
-            args,
-            list(direction = "down")
+        args = append(
+            x = args,
+            values = list("direction" = "down")
         )
     )
     expect_is(x, "ggplot")
@@ -50,7 +48,10 @@ test_that("Directional support", {
 test_that("Label the top genes", {
     x <- do.call(
         what = plotMA,
-        args = c(args, list(ntop = 10L))
+        args = append(
+            x = args,
+            values = list("ntop" = 10L)
+        )
     )
     expect_is(x, "ggplot")
 })
@@ -58,9 +59,9 @@ test_that("Label the top genes", {
 test_that("Label specific genes", {
     x <- do.call(
         what = plotMA,
-        args = c(
-            args,
-            list(genes = geneNames)
+        args = append(
+            x = args,
+            values = list("genes" = geneNames)
         )
     )
     expect_is(x, "ggplot")

@@ -1,4 +1,5 @@
 test_that("DESeqAnalysis", {
+    object <- objs[["deseq"]]
     Map(
         return = c(
             "matrix",
@@ -12,7 +13,7 @@ test_that("DESeqAnalysis", {
             "double",
             "character"
         ),
-        MoreArgs = list("object" = objs[["deseq"]]),
+        MoreArgs = list("object" = object),
         f = function(object, return, type) {
             expect_type(
                 object = degIntersection(object, return = return),

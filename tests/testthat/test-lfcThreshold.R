@@ -1,11 +1,10 @@
-context("lfcThreshold")
-
 test_that("DESeqAnalysis", {
-    value <- metadata(deseq@results[[1L]])[["lfcThreshold"]]
+    object <- objs[["deseq"]]
+    value <- metadata(object@results[[1L]])[["lfcThreshold"]]
     expect_is(value, "integer")
-    lfcThreshold(deseq) <- NULL
-    expect_identical(lfcThreshold(deseq), value)
+    lfcThreshold(object) <- NULL
+    expect_identical(lfcThreshold(object), value)
     value <- 1L
-    lfcThreshold(deseq) <- value
-    expect_identical(lfcThreshold(deseq), value)
+    lfcThreshold(object) <- value
+    expect_identical(lfcThreshold(object), value)
 })

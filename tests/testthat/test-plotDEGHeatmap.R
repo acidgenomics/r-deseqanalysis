@@ -1,8 +1,5 @@
-context("plotDEGHeatmap")
-
 test_that("DESeqAnalysis", {
-    expect_is(
-        object = plotDEGHeatmap(deseq, i = 1L),
-        class = "pheatmap"
-    )
+    object <- objs[["deseq"]]
+    p <- plotDEGHeatmap(object, i = 1L)
+    expect_s3_class(object, "pheatmap")
 })

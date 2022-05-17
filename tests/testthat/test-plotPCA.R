@@ -1,12 +1,11 @@
-context("plotPCA")
-
 test_that("DESeqAnalysis", {
-    p <- plotPCA(deseq)
+    object <- objs[["deseq"]]
+    p <- plotPCA(object)
     expect_s3_class(p, "ggplot")
 })
 
 test_that("DESeqTransform", {
-    dt <- as(deseq, "DESeqTransform")
-    p <- plotPCA(dt)
+    object <- as.DESeqTransform(objs[["deseq"]])
+    p <- plotPCA(object)
     expect_s3_class(p, "ggplot")
 })

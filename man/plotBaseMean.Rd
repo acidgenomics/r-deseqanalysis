@@ -5,7 +5,6 @@
 \alias{plotBaseMean,DESeqAnalysis-method}
 \alias{plotBaseMean,DESeqDataSet-method}
 \alias{plotBaseMean,DESeqResults-method}
-\alias{plotBaseMean,numeric-method}
 \title{Plot base mean distribution}
 \usage{
 plotBaseMean(object, ...)
@@ -15,14 +14,6 @@ plotBaseMean(object, ...)
 \S4method{plotBaseMean}{DESeqDataSet}(object, ...)
 
 \S4method{plotBaseMean}{DESeqResults}(object, ...)
-
-\S4method{plotBaseMean}{numeric}(
-  object,
-  nonzero = TRUE,
-  trans = c("log10", "log2", "identity"),
-  summary = TRUE,
-  labels = list(title = "Base mean distribution", subtitle = NULL)
-)
 }
 \arguments{
 \item{object}{Object.}
@@ -32,18 +23,8 @@ plotBaseMean(object, ...)
 \item{nonzero}{\code{logical(1)}.
 Remove zero-count features (genes).}
 
-\item{trans}{\code{character(1)}.
-Name of the axis scale transformation to apply.
-
-For more information:\preformatted{help(topic = "scale_x_continuous", package = "ggplot2")
-}}
-
 \item{summary}{\code{logical(1)}.
 Include distribution summary statistics as lines on the plot.}
-
-\item{labels}{\code{list}.
-ggplot2 labels.
-See \code{ggplot2::labs()} for details.}
 }
 \value{
 \code{ggplot}.

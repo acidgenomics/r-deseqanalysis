@@ -1,5 +1,3 @@
-context("prepareTximportFiles")
-
 test_that("makeNames", {
     Map(
         makeNames = eval(formals(prepareTximportFiles)[["makeNames"]]),

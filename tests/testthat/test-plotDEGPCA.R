@@ -1,8 +1,5 @@
-context("plotDEGPCA")
-
 test_that("DESeqAnalysis", {
-    expect_is(
-        object = plotDEGPCA(deseq, i = 1L),
-        class = "ggplot"
-    )
+    object <- objs[["deseq"]]
+    p <- plotDEGPCA(object, i = 1L)
+    expect_s3_class(p, "ggplot")
 })

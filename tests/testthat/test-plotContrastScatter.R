@@ -1,6 +1,5 @@
-context("plotContrastScatter")
-
 test_that("DESeqAnalysis", {
-    p <- plotContrastScatter(deseq, i = 1L)
-    expect_is(p, "ggplot")
+    object <- objs[["deseq"]]
+    p <- plotContrastScatter(object, i = 1L)
+    expect_s3_class(p, "ggplot")
 })

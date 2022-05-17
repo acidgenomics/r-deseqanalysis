@@ -1,6 +1,5 @@
-context("transformType")
-
 test_that("DESeqAnalysis", {
-    x <- transformType(deseq)
-    expect_identical(x, "varianceStabilizingTransformation")
+    object <- objs[["deseq"]]
+    object <- transformType(object)
+    expect_identical(object, "varianceStabilizingTransformation")
 })

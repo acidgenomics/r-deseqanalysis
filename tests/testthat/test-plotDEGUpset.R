@@ -1,6 +1,5 @@
-context("plotDEGUpset")
-
 test_that("DESeqAnalysis", {
-    p <- plotDEGUpset(deseq)
+    object <- objs[["deseq"]]
+    p <- plotDEGUpset(object)
     expect_s3_class(p, "patchwork")
 })

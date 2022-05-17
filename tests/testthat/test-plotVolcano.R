@@ -1,9 +1,9 @@
-context("plotVolcano")
+## FIXME Expand list using `append` not `c` here.
 
-args <- list(object = deseq, i = 1L)
+args <- list("object" = objs[["deseq"]], "i" = 1L)
 
 test_that("plotVolcano", {
-    x <- do.call(plotVolcano, args)
+    x <- do.call(what = plotVolcano, args = args)
     expect_is(x, "ggplot")
 })
 

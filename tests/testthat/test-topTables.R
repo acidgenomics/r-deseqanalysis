@@ -1,4 +1,4 @@
-context("topTables")
+## FIXME Need to test support for more minimal DESeqDataSet / DESeqResults
 
 test_that("DESeqAnalysis", {
     for (object in objs[c("deseq", "deseqMinimal")]) {

@@ -1,5 +1,3 @@
-context("matchMetadataToFiles")
-
 test_that("Kebab files, snake user metadata out of order", {
     metadata <- data.frame(
         "sampleId" = paste(
