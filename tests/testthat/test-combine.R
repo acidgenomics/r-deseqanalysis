@@ -1,8 +1,6 @@
-context("combine")
-
 test_that("DESeqAnalysis", {
-    x <- deseq
-    y <- deseq
+    x <- objs[["deseq"]]
+    y <- x
     namesX <- paste0("x_", resultsNames(x))
     namesY <- paste0("y_", resultsNames(y))
     resultsNames(x) <- namesX

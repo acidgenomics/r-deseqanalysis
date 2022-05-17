@@ -1,9 +1,8 @@
-context("contrastSamples")
-
 test_that("DESeqAnalysis : character", {
+    object <- objs[["deseq"]]
     expect_identical(
         object = contrastSamples(
-            deseq,
+            object = object,
             i = 1L,
             return = "character",
             quiet = FALSE
@@ -25,7 +24,7 @@ test_that("DESeqAnalysis : character", {
     )
     expect_identical(
         object = contrastSamples(
-            deseq,
+            object = object,
             i = 2L,
             return = "character",
             quiet = FALSE

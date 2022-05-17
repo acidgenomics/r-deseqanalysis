@@ -1,10 +1,9 @@
-context("baseMeanThreshold")
-
 test_that("DESeqAnalysis", {
+    object <- objs[["deseq"]]
     value <- 0L
-    baseMeanThreshold(deseq) <- NULL
-    expect_identical(baseMeanThreshold(deseq), value)
+    baseMeanThreshold(object) <- NULL
+    expect_identical(baseMeanThreshold(object), value)
     value <- 1L
-    baseMeanThreshold(deseq) <- value
-    expect_identical(baseMeanThreshold(deseq), value)
+    baseMeanThreshold(object) <- value
+    expect_identical(baseMeanThreshold(object), value)
 })
