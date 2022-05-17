@@ -1,6 +1,5 @@
-context("plotDEGStackedBar")
-
 test_that("DESeqAnalysis", {
-    p <- plotDEGStackedBar(deseq)
+    object <- objs[["deseq"]]
+    p <- plotDEGStackedBar(object)
     expect_s3_class(p, "ggplot")
 })

@@ -1,10 +1,8 @@
-context("export : DESeqAnalysis")
-
 testdir <- file.path(tempdir(), "example")
 
 test_that("New 'con' BiocIO approach, instead of deprecated 'dir'", {
     unlink(testdir, recursive = TRUE)
-    object <- deseq
+    object <- objs[["deseq"]]
     out <- export(
         object = object,
         con = testdir,
@@ -91,7 +89,7 @@ test_that("New 'con' BiocIO approach, instead of deprecated 'dir'", {
 
 test_that("Deprecated : 'dir' argument, no 'name'", {
     unlink(testdir, recursive = TRUE)
-    object <- deseq
+    object <- objs[["deseq"]]
     out <- export(
         object = object,
         dir = testdir,

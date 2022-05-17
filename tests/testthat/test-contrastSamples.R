@@ -47,9 +47,10 @@ test_that("DESeqAnalysis : character", {
 })
 
 test_that("DESeqAnalysis : list", {
+    object <- objs[["deseq"]]
     expect_identical(
         object = contrastSamples(
-            deseq,
+            object = object,
             i = 1L,
             return = "list",
             quiet = FALSE
@@ -82,7 +83,7 @@ test_that("DESeqAnalysis : list", {
     )
     expect_identical(
         object = contrastSamples(
-            deseq,
+            object = object,
             i = 2L,
             return = "list",
             quiet = FALSE

@@ -1,6 +1,5 @@
-context("plotLFC")
-
 test_that("DESeqAnalysis", {
-    p <- plotLFC(deseq)
+    object <- objs[["deseq"]]
+    p <- plotLFC(object)
     expect_is(p, "ggplot")
 })

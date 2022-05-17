@@ -1,13 +1,11 @@
-context("plotCounts")
+## FIXME Consider testing this with minimal dataset without geneName.
 
 test_that("DESeqAnalysis", {
-    ## Get genes from working example.
-    res <- results(deseq, i = 1L)
+    object <- objs[["deseq"]]
+    res <- results(object, i = 1L)
     genes <- head(rownames(res))
-
-    p <- plotCounts(deseq, genes = genes, style = "facet")
+    p <- plotCounts(object, genes = genes, style = "facet")
     expect_s3_class(p, "ggplot")
-
-    p <- plotCounts(deseq, genes = genes, style = "wide")
+    p <- plotCounts(object, genes = genes, style = "wide")
     expect_s3_class(p, "ggplot")
 })

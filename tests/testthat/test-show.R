@@ -1,6 +1,5 @@
-context("show")
-
 test_that("DESeqAnalysis", {
-    x <- capture.output(show(deseq))
+    object <- objs[["deseq"]]
+    x <- capture.output(show(object))
     expect_match(x[[1L]], "DESeqAnalysis")
 })

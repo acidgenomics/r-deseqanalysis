@@ -1,5 +1,3 @@
-context("DESeqAnalysis")
-
 test_that("DESeqAnalysis", {
     data <- DESeq2::makeExampleDESeqDataSet()
     rowRanges <- AcidGenomes::emptyRanges(names = rownames(data))
