@@ -220,16 +220,18 @@
 
 
 
-## Join the row annotations.
-##
-## DESeq2 includes additional columns in `rowData()` that aren't informative for
-## a user, and doesn't need to be included in the tables. Instead, only keep
-## informative columns that are character or factor. Be sure to drop complex,
-## non-atomic columns (e.g. list, S4) that are allowed in GRanges/DataFrame but
-## will fail to write to disk as CSV. Note that we're using `decode()` here to
-## handle S4 Rle columns from the Genomic Ranges.
-##
-## Updated 2019-11-12.
+#' Join the row annotations
+#'
+#' @note Updated 2022-05-17.
+#' @noRd
+#'
+#' @details
+#' DESeq2 includes additional columns in `rowData()` that aren't informative for
+#' a user, and doesn't need to be included in the tables. Instead, only keep
+#' informative columns that are character or factor. Be sure to drop complex,
+#' non-atomic columns (e.g. list, S4) that are allowed in GRanges/DataFrame but
+#' will fail to write to disk as CSV. Note that we're using `decode()` here to
+#' handle S4 Rle columns from the Genomic Ranges.
 .joinRowData <-
     function(object,
              DESeqDataSet # nolint
@@ -237,6 +239,8 @@
         assert(
             is(object, "DataFrame"),
             is(DESeqDataSet, "DESeqDataSet"),
+            validObject(object),
+            validObject(DESeqDataSet),
             identical(
                 x = rownames(object),
                 y = rownames(DESeqDataSet)
@@ -246,8 +250,6 @@
                 y = colnames(DESeqDataSet)
             )
         )
-        validObject(object)
-        validObject(DESeqDataSet)
         ## SummarizedExperiment inconsistently handles rownames on rowData.
         ## Ensure they are set here before continuing.
         rownames <- rownames(DESeqDataSet)
@@ -261,21 +263,14 @@
             },
             FUN.VALUE = logical(1L)
         )
-        assert(
-            any(keep),
-            msg = sprintf(
-                fmt = paste0(
-                    "No suitable row annotations detected.\n",
-                    "Check '%s' of %s."
-                ),
-                "rowData()", "DESeqDataSet"
-            )
-        )
+        if (!any(keep)) {
+            return(object)
+        }
         rowData <- rowData[, keep, drop = FALSE]
-        ## Drop any remaining blacklisted columns. These columsn aren't useful
+        ## Drop any remaining denylisted columns. These columsn aren't useful
         ## in the downstream export to CSV format.
-        blacklist <- "seqCoordSystem"
-        keep <- !colnames(rowData) %in% blacklist
+        denylist <- "seqCoordSystem"
+        keep <- !colnames(rowData) %in% denylist
         rowData <- rowData[, keep, drop = FALSE]
         assert(
             all(vapply(
