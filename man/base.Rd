@@ -33,7 +33,7 @@ Varies, dependending on function.
 Base methods
 }
 \note{
-Updated 2020-10-28.
+Updated 2022-05-17.
 }
 \examples{
 data(deseq)

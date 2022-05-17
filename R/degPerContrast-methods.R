@@ -1,6 +1,6 @@
 #' @name degPerContrast
 #' @inherit AcidGenerics::baseMeanThreshold
-#' @note Updated 2021-06-29.
+#' @note Updated 2022-05-17.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @param ... Passthrough arguments to `deg()`.
@@ -24,7 +24,7 @@ NULL
 
 
 
-## Updated 2021-06-29.
+## Updated 2022-05-17.
 `degPerContrast,DESeqAnalysis` <- # nolint
     function(object,
              i = NULL,
@@ -44,10 +44,10 @@ NULL
             i <- resultsNames[i]
         }
         assert(isSubset(i, resultsNames))
-        list <- mapply(
+        list <- Map(
             i = i,
             MoreArgs = list("object" = object),
-            FUN = function(i, object) {
+            f = function(i, object) {
                 if (isSubset(direction, c("both", "down"))) {
                     down <- deg(
                         object = object,
@@ -87,9 +87,7 @@ NULL
                         "up" = list("up" = up)
                     )
                 }
-            },
-            SIMPLIFY = FALSE,
-            USE.NAMES = TRUE
+            }
         )
         switch(
             EXPR = return,
