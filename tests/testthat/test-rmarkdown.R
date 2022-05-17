@@ -1,7 +1,5 @@
 ## This approach is inspired by bcbioRNASeq F1000 manuscript full test.
 
-context("R Markdown")
-
 templatesDir <- system.file(
     "rmarkdown",
     "templates",
@@ -38,9 +36,7 @@ test_that("Differential expression", {
         )
     x <- render(
         input = input,
-        params = list(
-            "object" = objectFile
-        ),
+        params = list("object" = objectFile),
         clean = TRUE
     )
     outfile <- file.path(renderDir, paste0(stem, ".html"))
