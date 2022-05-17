@@ -1,6 +1,7 @@
 context("sampleData")
 
 test_that("DESeqAnalysis", {
-    x <- sampleData(deseq)
+    object <- objs[["deseq"]]
+    x <- sampleData(object)
     expect_s4_class(x, "DataFrame")
 })
