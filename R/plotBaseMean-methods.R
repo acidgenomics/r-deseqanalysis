@@ -1,7 +1,3 @@
-## FIXME Should we split this out per sample?
-
-
-
 #' @name plotBaseMean
 #' @inherit AcidGenerics::plotBaseMean
 #' @note Updated 2022-05-17.
@@ -39,29 +35,23 @@ NULL
 
 
 
-## FIXME Rethink this...keep track of sample.
-
-## Updated 2020-08-04.
+## Updated 2022-05-17.
 `plotBaseMean,DESeqDataSet` <- # nolint
     function(object, ...) {
         object <- rowMeans(counts(object, normalized = TRUE))
-        plotBaseMean(object, ...)
+        `plotBaseMean,numeric`(object, ...)
     }
 
 
 
-## FIXME Rethink this...keep track of contrast.
-
-## Updated 2020-08-04.
+## Updated 2022-05-17.
 `plotBaseMean,DESeqResults` <- # nolint
     function(object, ...) {
         object <- object[["baseMean"]]
-        plotBaseMean(object, ...)
+        `plotBaseMean,numeric`(object, ...)
     }
 
 
-
-## FIXME Rework this, to plot per sample, rather than a flat numeric value.
 
 ## Updated 2019-10-15.
 `plotBaseMean,numeric` <- # nolint
@@ -223,12 +213,4 @@ setMethod(
     f = "plotBaseMean",
     signature = signature(object = "DESeqResults"),
     definition = `plotBaseMean,DESeqResults`
-)
-
-#' @rdname plotBaseMean
-#' @export
-setMethod(
-    f = "plotBaseMean",
-    signature = signature(object = "numeric"),
-    definition = `plotBaseMean,numeric`
 )
