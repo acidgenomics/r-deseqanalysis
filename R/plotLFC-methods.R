@@ -17,26 +17,25 @@ NULL
 
 
 
-## Updated 2022-04-15.
+## Updated 2022-05-17.
 `plotLFC,DESeqAnalysis` <- # nolint
     function(object) {
         validObject(object)
         resList <- as.list(as(object, "DESeqResultsList"))
         data <- do.call(
             what = rbind,
-            args = mapply(
+            args = Map(
                 contrast = names(resList),
                 df = resList,
-                FUN = function(contrast, df) {
+                f = function(contrast, df) {
                     data.frame(
                         "contrast" = contrast,
                         "log2FoldChange" = df[["log2FoldChange"]]
                     )
-                },
-                SIMPLIFY = FALSE,
-                USE.NAMES = FALSE
+                }
             )
         )
+        data <- data[complete.cases(data), ]
         p <- ggplot(
             data = data,
             mapping = aes(x = !!sym("log2FoldChange"))

@@ -95,7 +95,7 @@
                            lfc,
                            lfcThreshold) {
                 if (
-                    any(is.na(c(alpha, lfc, baseMean))) ||
+                    anyNA(c(alpha, lfc, baseMean)) ||
                         alpha >= alphaThreshold ||
                         baseMean < baseMeanThreshold
                 ) {
