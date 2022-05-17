@@ -1,10 +1,10 @@
-## FIXME Need to test support for more minimal DESeqDataSet / DESeqResults
-
 test_that("DESeqAnalysis", {
-    for (object in objs[c("deseq", "deseqMinimal")]) {
-        x <- capture.output(topTables(object, i = 1L))
-        expect_true(any(grepl("\\|padj", x)))
-    }
+    object <- objs[["deseq"]]
+    x <- capture.output(topTables(object, i = 1L))
+    expect_true(any(grepl("\\|padj", x)))
+    object <- objs[["deseqMinimal"]]
+    x <- capture.output(topTables(object, i = 1L))
+    expect_false(any(grepl("\\|padj", x)))
 })
 
 test_that("DESeqResults", {
