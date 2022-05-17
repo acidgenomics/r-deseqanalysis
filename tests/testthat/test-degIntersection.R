@@ -1,7 +1,7 @@
 context("degIntersection")
 
 test_that("DESeqAnalysis", {
-    mapply(
+    Map(
         return = c(
             "matrix",
             "count",
@@ -14,13 +14,12 @@ test_that("DESeqAnalysis", {
             "numeric",
             "character"
         ),
-        MoreArgs = list(object = deseq),
-        FUN = function(object, return, class) {
+        MoreArgs = list("object" = deseq),
+        f = function(object, return, class) {
             expect_is(
                 object = degIntersection(object, return = return),
                 class = class
             )
-        },
-        SIMPLIFY = FALSE
+        }
     )
 })
