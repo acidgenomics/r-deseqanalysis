@@ -1,7 +1,7 @@
 #' Import pairwise contrasts from a file
 #'
 #' @export
-#' @note Updated 2019-09-09.
+#' @note Updated 2022-05-17.
 #'
 #' @inheritParams AcidRoxygen::params
 #'
@@ -48,19 +48,17 @@ importPairwiseContrasts <-
                 y = colnames(data)
             )
         )
-        list <- mapply(
+        list <- Map(
             numerator = data[["numerator"]],
             denominator = data[["denominator"]],
             MoreArgs = list("group" = groupCol),
-            FUN = function(group, numerator, denominator) {
+            f = function(group, numerator, denominator) {
                 c(
                     "group" = group,
                     "numerator" = numerator,
                     "denominator" = denominator
                 )
-            },
-            SIMPLIFY = FALSE,
-            USE.NAMES = FALSE
+            }
         )
         names(list) <- snakeCase(data[[namesCol]])
         list

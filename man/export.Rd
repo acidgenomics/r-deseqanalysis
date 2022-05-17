@@ -73,7 +73,7 @@ Size-factor normalized coutns and FPKM values are calculated on the fly and
 exported automatically.
 }
 \note{
-Updated 2022-01-19.
+Updated 2022-05-17.
 }
 \section{Output file format extension}{
 
