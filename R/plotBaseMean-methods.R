@@ -1,3 +1,7 @@
+## FIXME Should we split this out per sample?
+
+
+
 #' @name plotBaseMean
 #' @inherit AcidGenerics::plotBaseMean
 #' @note Updated 2022-05-17.
@@ -29,11 +33,13 @@ NULL
 ## Updated 2020-08-04.
 `plotBaseMean,DESeqAnalysis` <- # nolint
     function(object, ...) {
-        object <- as(object, "DESeqDataSet")
+        object <- as.DESeqDataSet(object)
         plotBaseMean(object, ...)
     }
 
 
+
+## FIXME Rethink this...keep track of sample.
 
 ## Updated 2020-08-04.
 `plotBaseMean,DESeqDataSet` <- # nolint
@@ -44,6 +50,8 @@ NULL
 
 
 
+## FIXME Rethink this...keep track of contrast.
+
 ## Updated 2020-08-04.
 `plotBaseMean,DESeqResults` <- # nolint
     function(object, ...) {
@@ -52,6 +60,8 @@ NULL
     }
 
 
+
+## FIXME Rework this, to plot per sample, rather than a flat numeric value.
 
 ## Updated 2019-10-15.
 `plotBaseMean,numeric` <- # nolint
