@@ -1,6 +1,6 @@
 #' @name plotBaseMean
 #' @inherit AcidGenerics::plotBaseMean
-#' @note Updated 2021-09-10.
+#' @note Updated 2022-05-17.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -76,7 +76,7 @@ NULL
         if (isTRUE(nonzero)) {
             keep <- object > 0L
             ## Inform the user about how many zero count features were dropped.
-            if (any(!keep)) {
+            if (!all(keep)) {
                 n <- sum(!keep, na.rm = TRUE)
                 alertInfo(sprintf(
                     "Removing %d zero-count %s.",
