@@ -1,21 +1,23 @@
-## FIXME Work on `extra = TRUE` support for very minimal DESeqDataSet.
+## FIXME Add code coverage for `extra = TRUE` for very minimal DESeqDataSet.
 
 test_that("results argument", {
+    object <- objs[["deseq"]]
     ## Numeric scalar.
-    x <- results(deseq, i = 1L)
+    x <- results(object, i = 1L)
     expect_s4_class(x, "DESeqResults")
     ## Character string.
-    x <- results(deseq, i = resultsNames(deseq)[[1L]])
+    x <- results(object, i = resultsNames(object)[[1L]])
     expect_s4_class(x, "DESeqResults")
 })
 
 test_that("Match failure", {
+    object <- objs[["deseq"]]
     expect_error(
-        object = results(deseq),
+        object = results(object),
         regexp = "missing"
     )
     expect_error(
-        object = results(deseq, i = "XXX"),
+        object = results(object, i = "XXX"),
         regexp = "XXX"
     )
 })

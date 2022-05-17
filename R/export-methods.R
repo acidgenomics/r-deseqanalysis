@@ -56,7 +56,7 @@ NULL
         if (isTRUE(compress)) {
             files <- paste0(files, ".gz")
         }
-        Map(
+        out <- Map(
             f = export,
             object = list,
             con = files,
@@ -65,6 +65,8 @@ NULL
                 "quiet" = quiet
             )
         )
+        out <- unlist(out, recursive = FALSE)
+        out
     }
 
 
@@ -102,7 +104,7 @@ NULL
                 if (isTRUE(compress)) {
                     files <- paste0(files, ".gz")
                 }
-                Map(
+                out <- Map(
                     f = export,
                     object = data,
                     con = files,
@@ -111,6 +113,8 @@ NULL
                         "quiet" = quiet
                     )
                 )
+                out <- unlist(out, recursive = FALSE)
+                out
             }
         )
         names(out) <- resultsNames
@@ -258,7 +262,7 @@ NULL
 
 
 
-## Updated 2021-10-15.
+## Updated 2022-05-17.
 `export,DESeqAnalysis,deprecated` <- # nolint
     methodFunction(
         f = "export",
@@ -267,10 +271,10 @@ NULL
             con = "missingOrNULL",
             format = "missingOrNULL"
         ),
-        package = "basejump"
+        package = "AcidExperiment"
     )
 
-## Updated 2021-10-15.
+## Updated 2022-05-17.
 `export,DESeqDataSet,deprecated` <- # nolint
     methodFunction(
         f = "export",
@@ -279,7 +283,7 @@ NULL
             con = "missingOrNULL",
             format = "missingOrNULL"
         ),
-        package = "basejump"
+        package = "AcidExperiment"
     )
 
 

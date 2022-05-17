@@ -61,7 +61,7 @@ test_that("Label specific genes", {
         what = plotMA,
         args = append(
             x = args,
-            values = list("genes" = geneNames)
+            values = list("genes" = objs[["geneNames"]])
         )
     )
     expect_is(x, "ggplot")
