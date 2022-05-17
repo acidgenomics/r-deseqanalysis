@@ -1,13 +1,15 @@
 context("alphaSummary")
 
+object <- objs[["deseq"]]
+
 ## NOTE The expected values can change when we resave the example object.
 test_that("Default, no contrast specified.", {
     object <- alphaSummary(
-        object = deseq,
+        object = object,
         contrast = c("condition", "B", "A")
     )
-    expect_is(object, "matrix")
     expect_type(object, "integer")
+    expect_true(is.matrix(object))
     expect_equal(
         object = object,
         expected = matrix(
@@ -38,11 +40,11 @@ test_that("Default, no contrast specified.", {
 test_that("Contrast vector or name", {
     expect_identical(
         object = alphaSummary(
-            object = deseq,
+            object = object,
             name = "condition_B_vs_A"
         ),
         expected = alphaSummary(
-            object = deseq,
+            object = object,
             contrast = c("condition", "B", "A")
         )
     )
