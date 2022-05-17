@@ -127,7 +127,7 @@ NULL
                 DESeqDataSet = as(object, "DESeqDataSet")
             )
         }
-        metadata2(out, which = "DESeqAnalysis") <-
+        metadata2(out, which = "DESeqAnalysis") <- # nolint
             list(
                 "date" = Sys.Date(),
                 "packageVersion" = .pkgVersion,
@@ -138,7 +138,7 @@ NULL
     }
 
 .args <- c("value", "rowData")
-formals(`resultsMatrix,DESeqAnalysisList`)[.args] <-
+formals(`resultsMatrix,DESeqAnalysisList`)[.args] <- # nolint
     formals(`resultsMatrix,DESeqAnalysis`)[.args]
 rm(.args)
 

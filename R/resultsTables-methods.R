@@ -137,7 +137,7 @@ NULL
         )
     }
 
-formals(`resultsTables,DESeqResults`)[["return"]] <-
+formals(`resultsTables,DESeqResults`)[["return"]] <- # nolint
     formals(`resultsTables,DESeqAnalysis`)[["return"]]
 
 
