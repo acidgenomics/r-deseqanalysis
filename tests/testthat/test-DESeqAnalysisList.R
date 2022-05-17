@@ -1,6 +1,10 @@
-context("DESeqAnalysisList")
-
 test_that("list", {
-    x <- DESeqAnalysisList(list("object1" = deseq, "object2" = deseq))
+    object <- objs[["deseq"]]
+    x <- DESeqAnalysisList(
+        object = list(
+            "object1" = object,
+            "object2" = object
+        )
+    )
     expect_s4_class(x, "DESeqAnalysisList")
 })
