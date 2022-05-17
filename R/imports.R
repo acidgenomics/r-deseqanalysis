@@ -67,11 +67,10 @@ NULL
 #' @importFrom DESeq2 DESeq fpkm nbinomWaldTest
 #' @importFrom IRanges DataFrameList
 #' @importFrom S4Vectors DataFrame SimpleList
-#'
-#' @importFrom ggplot2 aes annotation_logticks element_blank geom_bar
-#' geom_density geom_hline geom_point geom_text geom_vline ggplot guides labs
-#' position_stack scale_color_manual scale_x_continuous scale_y_continuous
-#' theme
+#' @importFrom ggplot2 aes after_stat annotation_logticks element_blank geom_bar
+#' geom_density geom_freqpoly geom_hline geom_point geom_text geom_vline ggplot
+#' guides labs position_stack scale_color_manual scale_x_continuous
+#' scale_y_continuous theme
 #' @importFrom goalie allArePositive areDisjointSets areIntersectingSets
 #' areSameLength areSetEqual assert bapply hasColnames hasLength hasNames
 #' hasLength hasRows hasRownames hasValidDimnames hasValidNames isAFile
@@ -80,6 +79,11 @@ NULL
 #' isScalar isString isSubset validate
 #' @importFrom methods as is new prototype setClass setGeneric setValidity slot
 #' slot<- validObject .hasSlot
-#' @importFrom stringr str_locate_all str_match str_trunc
 #' @importFrom utils capture.output getS3method packageName packageVersion
+NULL
+
+
+
+## FIXME Sunset this in favor of stringi
+#' @importFrom stringr str_locate_all str_match str_trunc
 NULL
