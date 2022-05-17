@@ -1,7 +1,7 @@
 #' @name alphaSummary
 #' @author Michael Steinbaugh, Lorena Patano
 #' @inherit AcidGenerics::alphaSummary
-#' @note Updated 2021-03-15.
+#' @note Updated 2022-05-17.
 #'
 #' @inheritParams params
 #' @inheritParams AcidRoxygen::params
@@ -35,7 +35,7 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2022-05-17.
 `alphaSummary,DESeqDataSet` <- # nolint
     function(object,
              alpha = c(0.1, 0.05, 0.01, 1e-3, 1e-6),
@@ -96,8 +96,8 @@ NULL
                 ## Keep only the summary lines that contain a colon.
                 output <- output[grepl(" : ", output)]
                 ## Extract the values after the colon in summary.
-                match <- str_match(
-                    string = output,
+                match <- stri_match_first_regex(
+                    str = output,
                     pattern = "^(.+)\\s\\:\\s([[:digit:]]+).*$"
                 )
                 names <- gsub("\\s+$", "", match[, 2L])

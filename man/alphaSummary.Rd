@@ -48,7 +48,7 @@ Quickly generate a summary table of various alpha level cutoffs.
 Use either \code{contrast} or \code{name} to specify the desired contrast.
 }
 \note{
-Updated 2021-03-15.
+Updated 2022-05-17.
 }
 \examples{
 data(deseq)

@@ -1,6 +1,6 @@
 #' @name contrastSamples
 #' @inherit AcidGenerics::contrastSamples
-#' @note Updated 2021-08-03.
+#' @note Updated 2022-05-17.
 #'
 #' @details
 #' Match the samples in a `DESeqDataSet` used to define contrast in a
@@ -34,7 +34,7 @@ NULL
 
 
 
-## Updated 2021-08-03.
+## Updated 2022-05-17.
 `contrastSamples,DESeqAnalysis` <- # nolint
     function(object,
              i,
@@ -88,8 +88,8 @@ NULL
             replacement = "",
             x = contrast
         )
-        match <- str_match(
-            string = contrastSansFactor,
+        match <- stri_match_first_regex(
+            str = contrastSansFactor,
             pattern = "^(.+)_vs_(.+)$"
         )
         assert(

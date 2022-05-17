@@ -79,11 +79,6 @@ NULL
 #' isScalar isString isSubset validate
 #' @importFrom methods as is new prototype setClass setGeneric setValidity slot
 #' slot<- validObject .hasSlot
+#' @importFrom stringi stri_match_first_regex
 #' @importFrom utils capture.output getS3method packageName packageVersion
-NULL
-
-
-
-## FIXME Sunset this in favor of stringi
-#' @importFrom stringr str_locate_all str_match str_trunc
 NULL
