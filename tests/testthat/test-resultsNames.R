@@ -1,7 +1,7 @@
 context("resultsNames")
 
 test_that("DESeqAnalysis", {
-    object <- deseq
+    object <- objs[["deseq"]]
     expect_identical(
         object = resultsNames(object),
         expected = c(
