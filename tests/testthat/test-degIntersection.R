@@ -1,5 +1,3 @@
-context("degIntersection")
-
 test_that("DESeqAnalysis", {
     Map(
         return = c(
@@ -8,17 +6,17 @@ test_that("DESeqAnalysis", {
             "ratio",
             "names"
         ),
-        class = c(
-            "matrix",
+        type = c(
+            "logical",
             "integer",
-            "numeric",
+            "double",
             "character"
         ),
-        MoreArgs = list("object" = deseq),
-        f = function(object, return, class) {
-            expect_is(
+        MoreArgs = list("object" = objs[["deseq"]]),
+        f = function(object, return, type) {
+            expect_type(
                 object = degIntersection(object, return = return),
-                class = class
+                type = type
             )
         }
     )
