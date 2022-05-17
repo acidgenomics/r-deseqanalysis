@@ -65,7 +65,7 @@ Passes to \code{numeric} method.
 }}
 
 \note{
-Updated 2021-09-10.
+Updated 2022-05-17.
 }
 \examples{
 data(deseq)
