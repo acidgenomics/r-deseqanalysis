@@ -11,13 +11,13 @@ test_that("tbl_df return", {
         class2 = "tbl_df",
         FUN.VALUE = logical(1L)
     )))
-    expect_identical(names(x), names)
+    expect_named(x, names)
 })
 
 test_that("DataFrameList return", {
     x <- resultsTables(deseq, i = 1L, return = "DataFrameList")
     expect_s4_class(x, "SimpleDataFrameList")
-    expect_identical(names(x), names)
+    expect_named(x, names)
 })
 
 test_that("Extra mode handling", {

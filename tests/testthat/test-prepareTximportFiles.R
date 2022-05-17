@@ -1,7 +1,7 @@
 context("prepareTximportFiles")
 
 test_that("makeNames", {
-    mapply(
+    Map(
         makeNames = eval(formals(prepareTximportFiles)[["makeNames"]]),
         names = list(
             "makeNames" = c("X001_sample_A", "X100_sample_B"),
