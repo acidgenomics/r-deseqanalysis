@@ -29,7 +29,7 @@ params:
   
   output_dir: !r file.path("results", Sys.Date(), "differential-expression")
 
-title: "`r params[["title"]]`"
+title: "`r params[['title']]`"
 author: "`r getOption('author')`"
 date: "`r Sys.Date()`"
 bibliography: bibliography.bib
