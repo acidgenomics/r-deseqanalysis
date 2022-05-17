@@ -210,7 +210,8 @@ NULL
 ## Inheriting the SummarizedExperiment method internally here.
 ## Only export the raw and normalized counts.
 ## Skip exporting other assays, including mu, H, cooks.
-## Updated 2021-10-15.
+##
+## Updated 2022-05-17.
 `export,DESeqDataSet` <- # nolint
     function(object,
              con,
@@ -238,7 +239,6 @@ NULL
             isFlag(overwrite),
             isFlag(quiet)
         )
-        files <- list()
         ## Generate additional matrices on the fly.
         rse <- as(object, "RangedSummarizedExperiment")
         assays <- SimpleList(
