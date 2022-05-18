@@ -1,5 +1,3 @@
-context("resultsMatrix")
-
 test_that("DESeqAnalysis", {
     object <- objs[["deseq"]]
     mat <- resultsMatrix(object, value = "log2FoldChange")
@@ -20,15 +18,15 @@ test_that("Unshrunken values", {
     object <- objs[["deseq"]]
     object@lfcShrink <- list()
     x <- resultsMatrix(object, value = "log2FoldChange")
-    expect_is(x, "matrix")
+    expect_type(x, "double")
 })
 
-test_that("value argument", {
+test_that("Value argument", {
     object <- objs[["deseq"]]
     values <- eval(formals(`resultsMatrix,DESeqAnalysis`)[["value"]])
     for (value in values) {
         x <- resultsMatrix(object, value = value)
-        expect_is(x, "matrix")
+        expect_type(x, "double")
     }
 })
 
@@ -38,7 +36,7 @@ test_that("DESeqAnalysisList", {
         "object2" = objs[["deseq"]]
     ))
     x <- resultsMatrix(object)
-    expect_is(x, "matrix")
+    expect_type(x, "double")
     expect_identical(
         object = colnames(x),
         expected = c(

@@ -1,5 +1,3 @@
-context("resultsNames")
-
 test_that("DESeqAnalysis", {
     object <- objs[["deseq"]]
     expect_identical(

@@ -1,5 +1,3 @@
-context("resultsTables")
-
 names <- c("all", "up", "down", "both")
 
 test_that("tbl_df return", {
