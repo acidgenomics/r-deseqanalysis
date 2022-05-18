@@ -51,6 +51,8 @@ Include distribution summary statistics as lines on the plot.}
 \item{labels}{\code{list}.
 ggplot2 labels.
 See \code{ggplot2::labs()} for details.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{ggplot}.
