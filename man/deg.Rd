@@ -8,7 +8,7 @@
 \usage{
 deg(object, ...)
 
-\S4method{deg}{DESeqAnalysis}(object, i, ...)
+\S4method{deg}{DESeqAnalysis}(object, i, direction = c("both", "up", "down"), quiet = FALSE)
 
 \S4method{deg}{DESeqResults}(
   object,
@@ -28,10 +28,11 @@ deg(object, ...)
 For more information:\preformatted{help(topic = "Extract", package = "base")
 }}
 
-\item{...}{Additional arguments.}
-
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
+
+\item{quiet}{\code{logical(1)}.
+Perform command quietly, suppressing messages.}
 
 \item{alphaThreshold}{\code{numeric(1)} or \code{NULL}.
 Adjusted P value ("alpha") cutoff. If left \code{NULL}, will use the cutoff
@@ -46,8 +47,7 @@ Applies in general to DESeq2 RNA-seq differential expression output.}
 Log (base 2) fold change ratio cutoff threshold.
 If left \code{NULL}, will use the cutoff defined in the object.}
 
-\item{quiet}{\code{logical(1)}.
-Perform command quietly, suppressing messages.}
+\item{...}{Additional arguments.}
 }
 \value{
 \code{character}.

@@ -1,6 +1,6 @@
 #' @name deg
 #' @inherit AcidGenerics::deg
-#' @note Updated 2020-08-09.
+#' @note Updated 2022-05-18.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -16,15 +16,21 @@ NULL
 
 
 
-## Updated 2021-06-29.
+## Updated 2022-05-18.
 `deg,DESeqAnalysis` <- # nolint
-    function(object, i, ...) {
+    function(
+        object,
+        i,
+        direction = c("both", "up", "down"),
+        quiet = FALSE
+    ) {
         deg(
-            object = results(object, i = i),
+            object = results(object = object, i = i, quiet = quiet),
+            direction = match.arg(direction),
             alphaThreshold = alphaThreshold(object),
             baseMeanThreshold = baseMeanThreshold(object),
             lfcThreshold = lfcThreshold(object),
-            ...
+            quiet = quiet
         )
     }
 
@@ -95,7 +101,7 @@ NULL
         ## Arrange table by adjusted P value.
         data <- data[order(data[[alphaCol]]), , drop = FALSE]
         deg <- rownames(data)
-        if (!isTRUE(quiet)) {
+        if (isFALSE(quiet)) {
             sep <- "; "
             status <- sprintf(
                 fmt = "%d %s %s",

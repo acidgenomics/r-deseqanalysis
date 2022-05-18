@@ -1,9 +1,9 @@
 #' @name degPerContrast
 #' @inherit AcidGenerics::baseMeanThreshold
-#' @note Updated 2022-05-17.
+#' @note Updated 2022-05-18.
 #'
 #' @inheritParams AcidRoxygen::params
-#' @param ... Passthrough arguments to `deg()`.
+#' @param ... Additional arguments.
 #'
 #' @param i `character`, `numeric`, or `NULL`.
 #' Names or range of results.
@@ -29,14 +29,10 @@ NULL
     function(object,
              i = NULL,
              direction = c("both", "up", "down"),
-             return = c("matrix", "list"),
-             ...) {
+             return = c("matrix", "list")) {
         direction <- match.arg(direction)
         return <- match.arg(return)
-        n <- switch(EXPR = return,
-            "matrix" = TRUE,
-            "list" = FALSE
-        )
+        n <- switch(EXPR = return, "matrix" = TRUE, "list" = FALSE)
         resultsNames <- resultsNames(object)
         if (is.null(i)) {
             i <- resultsNames
@@ -53,8 +49,7 @@ NULL
                         object = object,
                         i = i,
                         direction = "down",
-                        quiet = TRUE,
-                        ...
+                        quiet = TRUE
                     )
                     if (isTRUE(n)) {
                         down <- length(down)
@@ -65,8 +60,7 @@ NULL
                         object = object,
                         i = i,
                         direction = "up",
-                        quiet = TRUE,
-                        ...
+                        quiet = TRUE
                     )
                     if (isTRUE(n)) {
                         up <- length(up)

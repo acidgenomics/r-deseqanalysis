@@ -5,7 +5,7 @@
 \alias{deseqMinimal}
 \title{Minimal DESeq2 example analysis}
 \format{
-An object of class \code{DESeqAnalysis} with 1000 rows and 12 columns.
+An object of class \code{DESeqAnalysis} with 50 rows and 4 columns.
 }
 \usage{
 data(deseqMinimal)

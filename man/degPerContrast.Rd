@@ -11,8 +11,7 @@ degPerContrast(object, ...)
   object,
   i = NULL,
   direction = c("both", "up", "down"),
-  return = c("matrix", "list"),
-  ...
+  return = c("matrix", "list")
 )
 }
 \arguments{
@@ -29,7 +28,7 @@ Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
 Return type. Uses \code{\link[base:match.arg]{match.arg()}} internally and defaults
 to the first argument in the \code{character} vector.}
 
-\item{...}{Passthrough arguments to \code{deg()}.}
+\item{...}{Additional arguments.}
 }
 \value{
 \itemize{
@@ -43,7 +42,7 @@ Intended primarily for use with \code{plotDEGUpset()}.
 Base mean threshold
 }
 \note{
-Updated 2022-05-17.
+Updated 2022-05-18.
 }
 \examples{
 data(deseq)
