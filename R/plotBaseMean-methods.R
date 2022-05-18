@@ -4,6 +4,7 @@
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
+#' @param ... Additional arguments.
 #'
 #' @param nonzero `logical(1)`.
 #' Remove zero-count features (genes).
