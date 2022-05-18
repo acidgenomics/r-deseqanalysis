@@ -1,3 +1,7 @@
+## FIXME Need to return with alert warning on no DEGs.
+
+
+
 #' Stacked bar plot of DEGs
 #'
 #' @name plotDEGStackedBar
