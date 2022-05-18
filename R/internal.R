@@ -89,11 +89,11 @@
                 "lfcThreshold" = lfcThreshold
             ),
             f = function(alpha,
-                           alphaThreshold,
-                           baseMean,
-                           baseMeanThreshold,
-                           lfc,
-                           lfcThreshold) {
+                         alphaThreshold,
+                         baseMean,
+                         baseMeanThreshold,
+                         lfc,
+                         lfcThreshold) {
                 if (
                     anyNA(c(alpha, lfc, baseMean)) ||
                         alpha >= alphaThreshold ||
