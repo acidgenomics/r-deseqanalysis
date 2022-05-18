@@ -1,3 +1,18 @@
+# DESeqAnalysis 0.6.1 (2022-05-18)
+
+## Minor changes
+
+- Hardened `resultsTables` and `topTables` to work with minimal `DESeqDataSet`
+  that doesn't contain gene names and additional metadata in `rowData`.
+- Improved `plotDEGStackedBar` and `plotDEGUpset` to early return with alert
+  warning for objects without DEGs.
+- Resaved example objects and added new `deseqMinimal` object, that contains
+  an unusually small `DESeqDataSet` without metadata, which is useful for
+  testing edge case handling in our plotting functions.
+- Updated lintr checks and migrated to testthat 3e for unit tests.
+- Now consistently using `Map` instead of `mapply`, as recommended by lintr.
+- `plotBaseMean` now longer exporting `integer` method -- using internally only.
+
 # DESeqAnalysis 0.6.0 (2022-05-06)
 
 ## Major changes
