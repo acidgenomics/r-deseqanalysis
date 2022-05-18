@@ -9,22 +9,44 @@
 \usage{
 plotBaseMean(object, ...)
 
-\S4method{plotBaseMean}{DESeqAnalysis}(object, ...)
+\S4method{plotBaseMean}{DESeqAnalysis}(
+  object,
+  nonzero = TRUE,
+  trans = c("log10", "log2", "identity"),
+  summary = TRUE,
+  labels = list(title = "Base mean distribution", subtitle = NULL)
+)
 
-\S4method{plotBaseMean}{DESeqDataSet}(object, ...)
+\S4method{plotBaseMean}{DESeqDataSet}(
+  object,
+  nonzero = TRUE,
+  trans = c("log10", "log2", "identity"),
+  summary = TRUE,
+  labels = list(title = "Base mean distribution", subtitle = NULL)
+)
 
 \S4method{plotBaseMean}{DESeqResults}(object, ...)
 }
 \arguments{
 \item{object}{Object.}
 
-\item{...}{Additional arguments.}
-
 \item{nonzero}{\code{logical(1)}.
 Remove zero-count features (genes).}
 
+\item{trans}{\code{character(1)}.
+Name of the axis scale transformation to apply.
+
+For more information:\preformatted{help(topic = "scale_x_continuous", package = "ggplot2")
+}}
+
 \item{summary}{\code{logical(1)}.
 Include distribution summary statistics as lines on the plot.}
+
+\item{labels}{\code{list}.
+ggplot2 labels.
+See \code{ggplot2::labs()} for details.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{ggplot}.

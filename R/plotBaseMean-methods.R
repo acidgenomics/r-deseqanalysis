@@ -26,29 +26,65 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2022-05-18.
 `plotBaseMean,DESeqAnalysis` <- # nolint
-    function(object, ...) {
-        object <- as.DESeqDataSet(object)
-        plotBaseMean(object, ...)
+    function(object,
+             nonzero = TRUE,
+             trans = c("log10", "log2", "identity"),
+             summary = TRUE,
+             labels = list(
+                 "title" = "Base mean distribution",
+                 "subtitle" = NULL
+             )) {
+        plotBaseMean(
+            object = as.DESeqDataSet(object),
+            nonzero = nonzero,
+            trans = match.arg(trans),
+            summary = summary,
+            labels = labels
+        )
     }
 
 
 
-## Updated 2022-05-17.
+## Updated 2022-05-18.
 `plotBaseMean,DESeqDataSet` <- # nolint
-    function(object, ...) {
-        object <- rowMeans(counts(object, normalized = TRUE))
-        `plotBaseMean,numeric`(object, ...)
+    function(object,
+             nonzero = TRUE,
+             trans = c("log10", "log2", "identity"),
+             summary = TRUE,
+             labels = list(
+                 "title" = "Base mean distribution",
+                 "subtitle" = NULL
+             )) {
+        `plotBaseMean,numeric`(
+            object = rowMeans(counts(object, normalized = TRUE)),
+            nonzero = nonzero,
+            trans = match.arg(trans),
+            summary = summary,
+            labels = labels
+        )
     }
 
 
 
-## Updated 2022-05-17.
+## Updated 2022-05-18.
 `plotBaseMean,DESeqResults` <- # nolint
-    function(object, ...) {
-        object <- object[["baseMean"]]
-        `plotBaseMean,numeric`(object, ...)
+    function(object,
+             nonzero = TRUE,
+             trans = c("log10", "log2", "identity"),
+             summary = TRUE,
+             labels = list(
+                 "title" = "Base mean distribution",
+                 "subtitle" = NULL
+             )) {
+        `plotBaseMean,numeric`(
+            object = object[["baseMean"]],
+            nonzero = nonzero,
+            trans = match.arg(trans),
+            summary = summary,
+            labels = labels
+        )
     }
 
 
@@ -198,7 +234,6 @@ setMethod(
 
 #' @describeIn plotBaseMean Generates row means of normalized counts.
 #' This value corresponds to the `baseMean` column of `DESeqResults`.
-#' Passes to `numeric` method.
 #' @export
 setMethod(
     f = "plotBaseMean",
@@ -207,7 +242,6 @@ setMethod(
 )
 
 #' @describeIn plotBaseMean Uses `baseMean` column of results.
-#' Passes to `numeric` method.
 #' @export
 setMethod(
     f = "plotBaseMean",
