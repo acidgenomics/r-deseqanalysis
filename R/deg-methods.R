@@ -18,12 +18,10 @@ NULL
 
 ## Updated 2022-05-18.
 `deg,DESeqAnalysis` <- # nolint
-    function(
-        object,
-        i,
-        direction = c("both", "up", "down"),
-        quiet = FALSE
-    ) {
+    function(object,
+             i,
+             direction = c("both", "up", "down"),
+             quiet = FALSE) {
         deg(
             object = results(object = object, i = i, quiet = quiet),
             direction = match.arg(direction),

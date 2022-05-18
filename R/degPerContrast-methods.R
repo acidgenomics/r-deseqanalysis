@@ -32,7 +32,10 @@ NULL
              return = c("matrix", "list")) {
         direction <- match.arg(direction)
         return <- match.arg(return)
-        n <- switch(EXPR = return, "matrix" = TRUE, "list" = FALSE)
+        n <- switch(EXPR = return,
+            "matrix" = TRUE,
+            "list" = FALSE
+        )
         resultsNames <- resultsNames(object)
         if (is.null(i)) {
             i <- resultsNames
