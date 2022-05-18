@@ -1,3 +1,7 @@
+## FIXME This is erroring on deseqMinimal dataset.
+
+
+
 #' @name plotDEGUpset
 #' @inherit AcidGenerics::plotDEGUpset
 #' @note Updated 2020-08-25.
