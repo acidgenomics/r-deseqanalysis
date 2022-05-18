@@ -25,7 +25,7 @@ NULL
 #' results resultsDiff resultsMatrix resultsNames resultsNames<- resultsTables
 #' sampleData snakeCase topTables transformType
 #' @importFrom BiocGenerics Map anyDuplicated as.data.frame cbind combine counts
-#'   design do.call plotPCA plotMA unlist updateObject
+#' design do.call plotPCA plotMA unlist updateObject
 #' @importFrom DESeq2 priorInfo
 #' @importFrom S4Vectors complete.cases cor decode droplevels head mcols mcols<-
 #' metadata metadata<- na.omit
