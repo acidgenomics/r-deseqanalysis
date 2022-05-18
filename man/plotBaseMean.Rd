@@ -25,7 +25,13 @@ plotBaseMean(object, ...)
   labels = list(title = "Base mean distribution", subtitle = NULL)
 )
 
-\S4method{plotBaseMean}{DESeqResults}(object, ...)
+\S4method{plotBaseMean}{DESeqResults}(
+  object,
+  nonzero = TRUE,
+  trans = c("log10", "log2", "identity"),
+  summary = TRUE,
+  labels = list(title = "Base mean distribution", subtitle = NULL)
+)
 }
 \arguments{
 \item{object}{Object.}
@@ -45,8 +51,6 @@ Include distribution summary statistics as lines on the plot.}
 \item{labels}{\code{list}.
 ggplot2 labels.
 See \code{ggplot2::labs()} for details.}
-
-\item{...}{Additional arguments.}
 }
 \value{
 \code{ggplot}.
@@ -61,10 +65,8 @@ for sequencing depth.
 
 \item \code{plotBaseMean,DESeqDataSet-method}: Generates row means of normalized counts.
 This value corresponds to the \code{baseMean} column of \code{DESeqResults}.
-Passes to \code{numeric} method.
 
 \item \code{plotBaseMean,DESeqResults-method}: Uses \code{baseMean} column of results.
-Passes to \code{numeric} method.
 }}
 
 \note{
