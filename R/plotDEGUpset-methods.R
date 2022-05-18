@@ -1,10 +1,6 @@
-## FIXME This is erroring on deseqMinimal dataset.
-
-
-
 #' @name plotDEGUpset
 #' @inherit AcidGenerics::plotDEGUpset
-#' @note Updated 2020-08-25.
+#' @note Updated 2022-05-18.
 #'
 #' @inheritParams degPerContrast
 #' @inheritParams AcidRoxygen::params
@@ -20,22 +16,26 @@ NULL
 
 
 
-## Updated 2020-08-25.
+## Updated 2022-05-18.
 `plotDEGUpset,DESeqAnalysis` <- # nolint
     function(object,
              i = NULL,
              direction = c("both", "up", "down"),
              ...) {
         direction <- match.arg(direction)
-        degPerContrast <- degPerContrast(
+        degs <- degPerContrast(
             object = object,
             i = i,
             direction = direction,
             return = "list"
         )
-        list <- do.call(what = c, args = degPerContrast)
+        list <- do.call(what = c, args = degs)
         names(list) <- makeNames(names(list), unique = TRUE)
-        plotUpset(list, ...)
+        if (!any(bapply(X = list, FUN = hasLength))) {
+            alertWarning("No DEGs to plot. Skipping.")
+            return(invisible(NULL))
+        }
+        plotUpset(object = list, ...)
     }
 
 

@@ -1,12 +1,8 @@
-## FIXME Need to return with alert warning on no DEGs.
-
-
-
 #' Stacked bar plot of DEGs
 #'
 #' @name plotDEGStackedBar
 #' @inherit AcidGenerics::plotDEGStackedBar
-#' @note Updated 2021-09-10.
+#' @note Updated 2022-05-18.
 #'
 #' @inheritParams degPerContrast
 #' @inheritParams AcidRoxygen::params
@@ -28,7 +24,7 @@ NULL
 
 
 
-## Updated 2021-09-10.
+## Updated 2022-05-18.
 `plotDEGStackedBar,DESeqAnalysis` <- # nolint
     function(object,
              i = NULL,
@@ -43,31 +39,30 @@ NULL
             isFlag(flip)
         )
         direction <- match.arg(direction)
-        mat <- degPerContrast(
+        data <- degPerContrast(
             object = object,
             i = i,
             direction = direction,
             return = "matrix"
         )
-        data <- as.data.frame(mat)
         ## Reorder the factor levels, so we can rank from most DEG to least.
         if (isTRUE(orderBySize)) {
             levels <- names(sort(colSums(data), decreasing = TRUE))
         }
-        data <- as.data.frame(melt(
-            object = t(data),
-            colnames = c("rowname", "colname", "value")
-        ))
-        assert(is.factor(data[["rowname"]]))
+        data <- melt(
+            object = data,
+            colnames = c("direction", "contrast", "value")
+        )
         if (isTRUE(orderBySize)) {
-            data[["rowname"]] <- factor(x = data[["rowname"]], levels = levels)
+            data[["contrast"]] <-
+                factor(x = data[["contrast"]], levels = levels)
         }
         p <- ggplot(
-            data = data,
+            data = as.data.frame(data),
             mapping = aes(
-                x = !!sym("rowname"),
+                x = !!sym("contrast"),
                 y = !!sym("value"),
-                fill = !!sym("colname"),
+                fill = !!sym("direction"),
                 label = !!sym("value")
             )
         ) +
