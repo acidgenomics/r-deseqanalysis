@@ -2,8 +2,7 @@ args <- list("object" = objs[["deseq"]], "i" = 1L)
 
 test_that("DESeqAnalysis", {
     x <- do.call(plotMA, args)
-    expect_is(x, "ggplot")
-    ## Check geom classes.
+    expect_s3_class(x, "ggplot")
     geomtype <- vapply(
         X = x[["layers"]],
         FUN = function(x) {
@@ -15,7 +14,6 @@ test_that("DESeqAnalysis", {
         object = geomtype,
         expected = c("GeomHline", "GeomPoint", "GeomLogticks")
     )
-    ## Check plot labels.
     expect_identical(
         object = x[["labels"]][["y"]],
         expected = "log2 fold change"
@@ -34,7 +32,7 @@ test_that("Directional support", {
             values = list("direction" = "up")
         )
     )
-    expect_is(x, "ggplot")
+    expect_s3_class(x, "ggplot")
     x <- do.call(
         what = plotMA,
         args = append(
@@ -42,7 +40,7 @@ test_that("Directional support", {
             values = list("direction" = "down")
         )
     )
-    expect_is(x, "ggplot")
+    expect_s3_class(x, "ggplot")
 })
 
 test_that("Label the top genes", {
@@ -53,7 +51,7 @@ test_that("Label the top genes", {
             values = list("ntop" = 10L)
         )
     )
-    expect_is(x, "ggplot")
+    expect_s3_class(x, "ggplot")
 })
 
 test_that("Label specific genes", {
@@ -64,5 +62,5 @@ test_that("Label specific genes", {
             values = list("genes" = objs[["geneNames"]])
         )
     )
-    expect_is(x, "ggplot")
+    expect_s3_class(x, "ggplot")
 })

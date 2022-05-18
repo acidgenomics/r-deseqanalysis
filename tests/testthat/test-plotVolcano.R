@@ -2,7 +2,7 @@ args <- list("object" = objs[["deseq"]], "i" = 1L)
 
 test_that("plotVolcano", {
     x <- do.call(what = plotVolcano, args = args)
-    expect_is(x, "ggplot")
+    expect_s3_class(x, "ggplot")
 })
 
 test_that("Enable histograms", {
@@ -13,7 +13,7 @@ test_that("Enable histograms", {
             values = list("histograms" = TRUE)
         )
     )
-    expect_is(x, "ggplot")
+    expect_s3_class(x, "ggplot")
 })
 
 test_that("Directional support", {
@@ -24,7 +24,7 @@ test_that("Directional support", {
             values = list("direction" = "up")
         )
     )
-    expect_is(x, "ggplot")
+    expect_s3_class(x, "ggplot")
     x <- do.call(
         what = plotVolcano,
         args = append(
@@ -32,7 +32,7 @@ test_that("Directional support", {
             values = list("direction" = "down")
         )
     )
-    expect_is(x, "ggplot")
+    expect_s3_class(x, "ggplot")
 })
 
 test_that("Label the top genes", {
@@ -43,7 +43,7 @@ test_that("Label the top genes", {
             values = list("ntop" = 5L)
         )
     )
-    expect_is(x, "ggplot")
+    expect_s3_class(x, "ggplot")
 })
 
 test_that("Label specific genes", {
@@ -54,5 +54,5 @@ test_that("Label specific genes", {
             values = list("genes" = objs[["geneNames"]])
         )
     )
-    expect_is(x, "ggplot")
+    expect_s3_class(x, "ggplot")
 })

@@ -1,5 +1,3 @@
-context("sampleData")
-
 test_that("DESeqAnalysis", {
     object <- objs[["deseq"]]
     x <- sampleData(object)
