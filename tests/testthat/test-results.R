@@ -11,7 +11,6 @@ test_that("DESeqAnalysis", {
             "baseMean",
             "log2FoldChange",
             "lfcSE",
-            "stat",
             "pvalue",
             "padj",
             "broadClass",
@@ -42,6 +41,17 @@ test_that("DESeqAnalysis", {
             "baseMean",
             "log2FoldChange",
             "lfcSE",
+            "pvalue",
+            "padj"
+        )
+    )
+    x <- results(object, i = 1L, lfcShrink = FALSE, extra = FALSE)
+    expect_identical(
+        object = colnames(x),
+        expected = c(
+            "baseMean",
+            "log2FoldChange",
+            "lfcSE",
             "stat",
             "pvalue",
             "padj"
@@ -66,6 +76,10 @@ test_that("DESeqAnalysis without rowData", {
             "sample3",
             "sample4"
         )
+    )
+    expect_error(
+        object = results(object, i = 1L, lfcShrink = TRUE),
+        regexp = "Shrunken LFC values were requested"
     )
 })
 
