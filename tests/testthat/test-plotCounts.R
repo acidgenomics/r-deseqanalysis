@@ -1,5 +1,3 @@
-## FIXME Consider testing this with minimal dataset without geneName.
-
 test_that("DESeqAnalysis", {
     object <- objs[["deseq"]]
     res <- results(object, i = 1L)

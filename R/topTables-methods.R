@@ -148,9 +148,6 @@ NULL
 
 
 
-## FIXME This is problematic if dataset doesn't contain geneName
-## FIXME Need to test with deseqMinimal object.
-
 ## This is used in bcbioRNASeq F1000 paper.
 ## Updated 2019-11-12.
 `topTables,DESeqResults` <- # nolint
