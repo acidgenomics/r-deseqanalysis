@@ -98,8 +98,7 @@ NULL
                 data <- resultsTables(
                     object = object,
                     i = i,
-                    extra = TRUE,
-                    return = "tbl_df"
+                    extra = TRUE
                 )
                 if (is.null(data)) {
                     return(invisible(NULL))

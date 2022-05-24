@@ -50,7 +50,7 @@ data(deseq)
 ## DESeqAnalysis ====
 markdownTables(deseq, i = 1L, n = 5L)
 
-## DESeqResults 'resultsTables()' list ====
+## DESeqResults 'resultsTables()' return ====
 res <- results(deseq, i = 1L)
 resTbl <- resultsTables(res)
 markdownTables(resTbl, n = 5L)

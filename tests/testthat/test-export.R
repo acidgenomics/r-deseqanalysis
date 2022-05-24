@@ -1,5 +1,3 @@
-## FIXME Need to test export without rowData metadata.
-
 testdir <- file.path(tempdir(), "example")
 
 test_that("New 'con' BiocIO approach, instead of deprecated 'dir'", {
@@ -95,7 +93,6 @@ test_that("New 'con' BiocIO approach, instead of deprecated 'dir'", {
         object = rownames(counts)[[1L]],
         expected = "gene1"
     )
-    ## FIXME This is dropping row names, we don't want that...
     res <- import(out[["resultsTables"]][[1L]][["all"]])
     expect_identical(
         object = rownames(res)[[1L]],
