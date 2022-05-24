@@ -42,8 +42,10 @@ Remove zero-count features (genes).}
 \item{trans}{\code{character(1)}.
 Name of the axis scale transformation to apply.
 
-For more information:\preformatted{help(topic = "scale_x_continuous", package = "ggplot2")
-}}
+For more information:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{help(topic = "scale_x_continuous", package = "ggplot2")
+}\if{html}{\out{</div>}}}
 
 \item{summary}{\code{logical(1)}.
 Include distribution summary statistics as lines on the plot.}

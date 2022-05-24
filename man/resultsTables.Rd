@@ -14,16 +14,14 @@ resultsTables(object, ...)
   alphaThreshold = NULL,
   baseMeanThreshold = NULL,
   lfcThreshold = NULL,
-  extra = TRUE,
-  return = c("tbl_df", "DataFrameList")
+  extra = TRUE
 )
 
 \S4method{resultsTables}{DESeqResults}(
   object,
   alphaThreshold = NULL,
   baseMeanThreshold = NULL,
-  lfcThreshold = NULL,
-  return = c("tbl_df", "DataFrameList")
+  lfcThreshold = NULL
 )
 }
 \arguments{
@@ -49,18 +47,10 @@ If left \code{NULL}, will use the cutoff defined in the object.}
 Include row data (i.e. gene metadata) and normalized counts from the
 internal \code{DESeqDataSet}.}
 
-\item{return}{\code{character(1)}.
-Type of data frame to return as a list.
-Uses \code{match.arg()}.
-\itemize{
-\item \code{DataFrameList}: Returns \code{DataFrameList} with row names.
-\item \code{tbl_df}: Returns \code{list} of \code{tbl_df} containing \code{"rowname"} column.
-}}
-
 \item{...}{Additional arguments.}
 }
 \value{
-\code{list}.
+\code{DataFrameList}.
 Named list containing subsets of \code{DESeqResults}.
 }
 \description{
@@ -72,7 +62,7 @@ differentially expressed genes (DEGs). DEG tables (i.e. everything except the
 \code{all} table), are arranged by adjusted \emph{P} value.
 }
 \note{
-Updated 2022-05-06.
+Updated 2022-05-24.
 
 It is generally recommended to not apply post hoc log fold change
 cutoffs. If a specific effect size is desired, instead run
@@ -97,5 +87,5 @@ data(deseq)
 
 ## DESeqAnalysis ====
 x <- resultsTables(deseq, i = 1L)
-names(x)
+print(x)
 }

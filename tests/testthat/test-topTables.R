@@ -1,3 +1,6 @@
+## FIXME Rework this as markdownTables instead...
+## FIXME Need to test handling without rowData metadata.
+
 test_that("DESeqAnalysis", {
     object <- objs[["deseq"]]
     x <- capture.output(topTables(object, i = 1L))

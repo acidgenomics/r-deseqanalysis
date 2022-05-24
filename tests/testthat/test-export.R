@@ -1,3 +1,5 @@
+## FIXME Need to test export without rowData metadata.
+
 testdir <- file.path(tempdir(), "example")
 
 test_that("New 'con' BiocIO approach, instead of deprecated 'dir'", {
@@ -82,6 +84,50 @@ test_that("New 'con' BiocIO approach, instead of deprecated 'dir'", {
                     resMatPrefix, "padj.csv.gz"
                 )
             )
+        )
+    )
+    counts <- import(out[["data"]][["assays"]][["counts"]])
+    expect_identical(
+        object = colnames(counts)[[1L]],
+        expected = "sample1"
+    )
+    expect_identical(
+        object = rownames(counts)[[1L]],
+        expected = "gene1"
+    )
+    ## FIXME This is dropping row names, we don't want that...
+    res <- import(out[["resultsTables"]][[1L]][["all"]])
+    expect_identical(
+        object = rownames(res)[[1L]],
+        expected = "gene1"
+    )
+    expect_identical(
+        object = colnames(res),
+        expected = c(
+            "baseMean",
+            "log2FoldChange",
+            "lfcSE",
+            "pvalue",
+            "padj",
+            "broadClass",
+            "description",
+            "geneBiotype",
+            "geneId",
+            "geneIdNoVersion",
+            "geneIdVersion",
+            "geneName",
+            "sample1",
+            "sample2",
+            "sample3",
+            "sample4",
+            "sample5",
+            "sample6",
+            "sample7",
+            "sample8",
+            "sample9",
+            "sample10",
+            "sample11",
+            "sample12"
         )
     )
     unlink(testdir, recursive = TRUE)

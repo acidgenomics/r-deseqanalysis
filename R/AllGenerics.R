@@ -146,6 +146,12 @@ NULL
 NULL
 
 #' @export
+#' @name markdownTables
+#' @rdname markdownTables
+#' @usage markdownTables(object, ...)
+NULL
+
+#' @export
 #' @name plotBaseMean
 #' @rdname plotBaseMean
 #' @usage plotBaseMean(object, ...)
@@ -272,12 +278,6 @@ NULL
 #' @name show
 #' @rdname show
 #' @usage show(object)
-NULL
-
-#' @export
-#' @name topTables
-#' @rdname topTables
-#' @usage topTables(object, ...)
 NULL
 
 #' @export

@@ -23,8 +23,10 @@ contrastName(object, ...) <- value
 \item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
 \code{character} vectors, empty (\code{missing}), or \code{NULL}.
 
-For more information:\preformatted{help(topic = "Extract", package = "base")
-}}
+For more information:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{help(topic = "Extract", package = "base")
+}\if{html}{\out{</div>}}}
 
 \item{...}{Additional arguments.}
 
