@@ -18,7 +18,7 @@
 #' ## DESeqAnalysis ====
 #' markdownTables(deseq, i = 1L, n = 5L)
 #'
-#' ## DESeqResults 'resultsTables()' list ====
+#' ## DESeqResults 'resultsTables()' return ====
 #' res <- results(deseq, i = 1L)
 #' resTbl <- resultsTables(res)
 #' markdownTables(resTbl, n = 5L)
@@ -26,8 +26,7 @@ NULL
 
 
 
-## FIXME Need to ensure we assign geneId from rownames, when necessary.
-## Updated 2022-05-17.
+## Updated 2022-05-24.
 .degKable <- # nolint
     function(object, caption, n = 10L) {
         assert(
@@ -37,9 +36,9 @@ NULL
             isInt(n),
             isPositive(n)
         )
+        alphaCol <- .alphaCol(object)
         object <- as(object, "DataFrame")
         object <- camelCase(object, strict = TRUE)
-        alphaCol <- .alphaCol(object)
         required <- c("baseMean", "log2FoldChange", alphaCol)
         assert(isSubset(required, colnames(object)))
         optional <- c("broadClass", "geneName", "description")
