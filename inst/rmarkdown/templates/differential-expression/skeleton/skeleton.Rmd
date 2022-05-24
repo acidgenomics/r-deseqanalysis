@@ -1,5 +1,5 @@
 ---
-## Updated 2022-05-17.
+## Updated 2022-05-24.
 params:
   title: "Differential expression with DESeq2"
   
@@ -183,9 +183,9 @@ Only the top up- and down-regulated genes (arranged by adjusted *P* value) are s
 
 ```{r top-tables, results="asis"}
 invisible(Map(
-    f = function(object, i, ...) {
-        markdownHeader(i, level = 2L, asis = TRUE)
-        topTables(object = object, i = i, ...)
+    f = function(object, i, n) {
+        markdownHeader(text = i, level = 2L, asis = TRUE)
+        markdownTables(object = object, i = i, n = n)
     },
     i = resultsNames,
     MoreArgs = list(
