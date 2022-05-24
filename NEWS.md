@@ -1,3 +1,14 @@
+# DESeqAnalysis 0.6.2 (2022-05-24)
+
+## Major changes
+
+- Reworked and simplified `topTables` as `markdownTables`.
+- Simplified `resultsTables` return to always return as `DataFrameList`
+  containing subset `DESeqResults`. Previously `tbl_df` option was available,
+  but this has been removed in favor of Bioconductor S4Vectors support instead.
+- Improved code coverage of `export`, `markdownTables`, and `resultsTables`,
+  to ensure that we never drop rownames.
+
 # DESeqAnalysis 0.6.1 (2022-05-18)
 
 ## Minor changes
