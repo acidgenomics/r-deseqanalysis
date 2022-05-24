@@ -1,9 +1,9 @@
 test_that("DESeqAnalysis with extra rowData", {
     object <- objs[["deseq"]]
-    x <- capture.output(markdownTables(object, i = 1L))
-    x <- x[[5L]]
-    x <- gsub(pattern = " ", replacement = "", x = x)
+    out <- capture.output(markdownTables(object, i = 1L))
+    x <- out[[5L]]
     x <- strsplit(x = x, split = "|", fixed = TRUE)[[1L]]
+    x <- gsub(pattern = " ", replacement = "", x = x)
     expect_identical(
         object = x,
         expected = c(
@@ -17,6 +17,23 @@ test_that("DESeqAnalysis with extra rowData", {
             "description"
         )
     )
+    x <- out[[7L]]
+    x <- strsplit(x = x, split = "|", fixed = TRUE)[[1L]]
+    x <- gsub(pattern = "^[[:space:]]+", replacement = "", x = x)
+    x <- gsub(pattern = "[[:space:]]+$", replacement = "", x = x)
+    expect_identical(
+        object = x,
+        expected = c(
+            "",
+            "gene65",
+            "61",
+            "2.40",
+            "2.35e-04",
+            "coding",
+            "ARX",
+            "aristaless related homeobox"
+        )
+    )
 })
 
 test_that("DESeqAnalysis with minimal rowData", {
@@ -24,8 +41,8 @@ test_that("DESeqAnalysis with minimal rowData", {
     rowData(object@data) <- NULL
     x <- capture.output(markdownTables(object, i = 1L))
     x <- x[[5L]]
-    x <- gsub(pattern = " ", replacement = "", x = x)
     x <- strsplit(x = x, split = "|", fixed = TRUE)[[1L]]
+    x <- gsub(pattern = " ", replacement = "", x = x)
     expect_identical(
         object = x,
         expected = c(
