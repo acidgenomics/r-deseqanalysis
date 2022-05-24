@@ -30,8 +30,10 @@ plotContrastScatter(object, ...)
 \item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
 \code{character} vectors, empty (\code{missing}), or \code{NULL}.
 
-For more information:\preformatted{help(topic = "Extract", package = "base")
-}}
+For more information:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{help(topic = "Extract", package = "base")
+}\if{html}{\out{</div>}}}
 
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}
@@ -62,8 +64,10 @@ Alpha transparency level.}
 \item{trans}{\code{character(1)}.
 Name of the axis scale transformation to apply.
 
-For more information:\preformatted{help(topic = "scale_x_continuous", package = "ggplot2")
-}}
+For more information:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{help(topic = "scale_x_continuous", package = "ggplot2")
+}\if{html}{\out{</div>}}}
 
 \item{limits}{\code{list(2)}.
 Named list containing \code{"x"} and \code{"y"} that define the lower and upper

@@ -18,12 +18,12 @@ NULL
 #' contrastSamples convertGenesToSymbols convertSampleIDsToNames correlation
 #' deg degIntersection degPerContrast droplevels2 interestingGroups
 #' interestingGroups<- intersectionMatrix leftJoin lfcShrink lfcShrink<-
-#' lfcShrinkType lfcThreshold lfcThreshold<- makeNames mapGenesToSymbols melt
-#' metadata2 metadata2<- plotBaseMean plotContrastScatter plotCorrelationHeatmap
-#' plotCounts plotDEGHeatmap plotDEGPCA plotDEGStackedBar plotDEGUpset
-#' plotHeatmap plotLFC plotQuantileHeatmap plotUpset plotVolcano removeNA
-#' results resultsDiff resultsMatrix resultsNames resultsNames<- resultsTables
-#' sampleData snakeCase topTables transformType
+#' lfcShrinkType lfcThreshold lfcThreshold<- makeNames mapGenesToSymbols
+#' markdownTables melt metadata2 metadata2<- plotBaseMean plotContrastScatter
+#' plotCorrelationHeatmap plotCounts plotDEGHeatmap plotDEGPCA plotDEGStackedBar
+#' plotDEGUpset plotHeatmap plotLFC plotQuantileHeatmap plotUpset plotVolcano
+#' removeNA results resultsDiff resultsMatrix resultsNames resultsNames<-
+#' resultsTables sampleData snakeCase transformType
 #' @importFrom BiocGenerics Map anyDuplicated as.data.frame cbind combine counts
 #' design do.call plotPCA plotMA unlist updateObject
 #' @importFrom DESeq2 priorInfo

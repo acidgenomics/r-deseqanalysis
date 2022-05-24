@@ -1,3 +1,5 @@
+## FIXME Need to test export without rowData metadata.
+
 names <- c("all", "up", "down", "both")
 
 test_that("tbl_df return", {

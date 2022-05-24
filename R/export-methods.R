@@ -1,3 +1,7 @@
+## FIXME Need to ensure we keep rownames for objects without rowData.
+
+
+
 #' @name export
 #' @inherit AcidExperiment::export
 #' @note Updated 2022-05-17.

@@ -25,8 +25,10 @@ deg(object, ...)
 \item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
 \code{character} vectors, empty (\code{missing}), or \code{NULL}.
 
-For more information:\preformatted{help(topic = "Extract", package = "base")
-}}
+For more information:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{help(topic = "Extract", package = "base")
+}\if{html}{\out{</div>}}}
 
 \item{direction}{\code{character(1)}.
 Include \code{"both"}, \code{"up"}, or \code{"down"} directions.}

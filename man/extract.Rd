@@ -13,14 +13,18 @@
 \item{i}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
 \code{character} vectors, empty (\code{missing}), or \code{NULL}.
 
-For more information:\preformatted{help(topic = "Extract", package = "base")
-}}
+For more information:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{help(topic = "Extract", package = "base")
+}\if{html}{\out{</div>}}}
 
 \item{j}{Indices specifying elements to extract or replace. Indices are \code{numeric} or
 \code{character} vectors, empty (\code{missing}), or \code{NULL}.
 
-For more information:\preformatted{help(topic = "Extract", package = "base")
-}}
+For more information:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{help(topic = "Extract", package = "base")
+}\if{html}{\out{</div>}}}
 
 \item{drop}{For matrices and arrays.  If \code{TRUE} the result is
     coerced to the lowest possible dimension (see the examples).  This
