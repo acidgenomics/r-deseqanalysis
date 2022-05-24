@@ -1,6 +1,6 @@
 #' @name resultsTables
 #' @inherit AcidGenerics::resultsTables
-#' @note Updated 2022-05-06.
+#' @note Updated 2022-05-24.
 #'
 #' @inheritParams params
 #' @inheritParams results
@@ -27,14 +27,7 @@
 #' - `both`: Bidirectional DEGs (up- and down-regulated). This table can be
 #' used for overrepresentation testing but should NOT be used for GSEA.
 #'
-#' @param return `character(1)`.
-#' Type of data frame to return as a list.
-#' Uses `match.arg()`.
-#'
-#' - `DataFrameList`: Returns `DataFrameList` with row names.
-#' - `tbl_df`: Returns `list` of `tbl_df` containing `"rowname"` column.
-#'
-#' @return `list`.
+#' @return `DataFrameList`.
 #' Named list containing subsets of `DESeqResults`.
 #'
 #' @examples
@@ -42,20 +35,19 @@
 #'
 #' ## DESeqAnalysis ====
 #' x <- resultsTables(deseq, i = 1L)
-#' names(x)
+#' print(x)
 NULL
 
 
 
-## Updated 2022-05-06.
+## Updated 2022-05-24.
 `resultsTables,DESeqAnalysis` <- # nolint
     function(object,
              i,
              alphaThreshold = NULL,
              baseMeanThreshold = NULL,
              lfcThreshold = NULL,
-             extra = TRUE,
-             return = c("tbl_df", "DataFrameList")) {
+             extra = TRUE) {
         validObject(object)
         resultsTables(
             object = results(object = object, i = i, extra = extra),
@@ -73,20 +65,18 @@ NULL
                 test = is.null(lfcThreshold),
                 yes = lfcThreshold(object),
                 no = lfcThreshold
-            ),
-            return = match.arg(return)
+            )
         )
     }
 
 
 
-## Updated 2021-06-29.
+## Updated 2022-05-24.
 `resultsTables,DESeqResults` <- # nolint
     function(object,
              alphaThreshold = NULL,
              baseMeanThreshold = NULL,
-             lfcThreshold = NULL,
-             return) {
+             lfcThreshold = NULL) {
         validObject(object)
         both <- deg(
             object = object,
@@ -120,25 +110,9 @@ NULL
             )
             out <- Filter(f = hasRows, x = out)
         }
-        switch(
-            EXPR = match.arg(return),
-            "DataFrameList" = DataFrameList(out),
-            "tbl_df" = {
-                assert(requireNamespaces("tibble"))
-                lapply(
-                    X = out,
-                    FUN = function(x) {
-                        x <- as.data.frame(x)
-                        x <- tibble::as_tibble(x)
-                        x
-                    }
-                )
-            }
-        )
+        out <- DataFrameList(out)
+        out
     }
-
-formals(`resultsTables,DESeqResults`)[["return"]] <- # nolint
-    formals(`resultsTables,DESeqAnalysis`)[["return"]]
 
 
 
