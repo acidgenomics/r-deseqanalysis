@@ -1,3 +1,8 @@
+# DESeqAnalysis 0.6.3 (2022-05-25)
+
+- Removed deprecated `plotMeanAverage` and `apeglmContrast` functions from
+  NAMESPACE, to avoid collisions with updates in bcbioRNASeq package.
+
 # DESeqAnalysis 0.6.2 (2022-05-24)
 
 ## Major changes
