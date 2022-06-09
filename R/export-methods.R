@@ -12,9 +12,10 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' con <- file.path(tempdir(), "example")
-#' export(deseq, con = con)
-#' unlink(con, recursive = TRUE)
+#' con <- AcidBase::tempdir2()
+#' x <- export(deseq, con = con)
+#' print(x)
+#' AcidBase::unlink2(con)
 NULL
 
 

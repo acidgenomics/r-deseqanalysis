@@ -1,7 +1,5 @@
-testdir <- file.path(tempdir(), "example")
-
 test_that("New 'con' BiocIO approach, instead of deprecated 'dir'", {
-    unlink(testdir, recursive = TRUE)
+    testdir <- tempdir2()
     object <- objs[["deseq"]]
     out <- export(
         object = object,
@@ -127,11 +125,11 @@ test_that("New 'con' BiocIO approach, instead of deprecated 'dir'", {
             "sample12"
         )
     )
-    unlink(testdir, recursive = TRUE)
+    unlink2(testdir)
 })
 
 test_that("Deprecated : 'dir' argument, no 'name'", {
-    unlink(testdir, recursive = TRUE)
+    testdir <- tempdir2()
     object <- objs[["deseq"]]
     out <- export(
         object = object,
@@ -214,5 +212,5 @@ test_that("Deprecated : 'dir' argument, no 'name'", {
             )
         )
     )
-    unlink(testdir, recursive = TRUE)
+    unlink2(testdir)
 })

@@ -1,4 +1,12 @@
+# DESeqAnalysis 0.6.4 (2022-06-09)
+
+## Minor changes
+
+- Improved Windows CI compatibility, using `tempdir2` and `unlink2`.
+
 # DESeqAnalysis 0.6.3 (2022-05-25)
+
+## Minor changes
 
 - Removed deprecated `plotMeanAverage` and `apeglmContrast` functions from
   NAMESPACE, to avoid collisions with updates in bcbioRNASeq package.

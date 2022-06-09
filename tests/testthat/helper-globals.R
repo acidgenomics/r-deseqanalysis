@@ -2,6 +2,8 @@
 Gene2Symbol <- AcidGenomes::Gene2Symbol
 realpath <- basejump::realpath
 render <- rmarkdown::render
+tempdir2 <- AcidBase::tempdir2
+unlink2 <- AcidBase::unlink2
 ## nolint end
 
 tmpenv <- new.env()
