@@ -38,4 +38,3 @@ test_that("Differential expression", {
     expect_true(file.exists(outfile))
     unlink2(renderDir)
 })
-
