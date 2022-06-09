@@ -7,14 +7,8 @@ templatesDir <- system.file(
     mustWork = TRUE
 )
 
-renderDir <- file.path(
-    tempdir(),
-    paste("render", Sys.Date(), sep = "-")
-)
-unlink(renderDir, recursive = TRUE)
-renderDir <- initDir(renderDir)
-
 test_that("Differential expression", {
+    renderDir <- tempdir2()
     stem <- "differential-expression"
     input <- file.path(renderDir, paste0(stem, ".Rmd"))
     file.copy(
@@ -42,6 +36,6 @@ test_that("Differential expression", {
     outfile <- file.path(renderDir, paste0(stem, ".html"))
     expect_identical(x, outfile)
     expect_true(file.exists(outfile))
+    unlink2(renderDir)
 })
 
-unlink(renderDir, recursive = TRUE)
