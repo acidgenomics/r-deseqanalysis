@@ -2,7 +2,7 @@
 
 ## Minor changes
 
-- Improved Windows CI compatibility, using `tempdir2` and `unlink2`.
+mproved Windows CI compatibility, using `tempdir2` and `unlink2`.
 
 # DESeqAnalysis 0.6.3 (2022-05-25)
 
@@ -687,7 +687,7 @@ valid when checked using `validObject`. They can be updated using
 ## Major changes
 
 - Importing `DataFrame` to `tbl_df` coercion methods directly from [basejump][]
-  instead of the [transformer][] package. Note that S4Transfomer package was
+  instead of the transformer package. Note that S4Transfomer package was
   renamed simply to transformer at this date.
 
 ## Minor changes
@@ -708,9 +708,9 @@ valid when checked using `validObject`. They can be updated using
 
 ## Minor changes
 
-- Switched to reexporting generics from [bioverbs][] instead of [basejump][],
+- Switched to reexporting generics from bioverbs instead of [basejump][],
   where applicable. For example, moved `contrastSamples` and `resultsTables`
-  generics (verbs) to [bioverbs][].
+  generics (verbs) to bioverbs.
 - Removed internal `validateS4` code, instead relying upon `goalie::validate`.
 - Simplified [Travis CI][] configuration to only test against `bioc-release`.
 - Simplified internal asserts using `nullOK = TRUE`, where applicable. This was
@@ -781,13 +781,11 @@ valid when checked using `validObject`. They can be updated using
 Initial release. Some of the functions defined in this package have been
 migrated from my [bcbioRNASeq][] R package.
 
-[AcidPlots]: https://AcidPlots.acidgenomics.com/
-[Acid Genomics]: https://acidgenomics.com/
-[AppVeyor CI]: https://www.appveyor.com/
-[basejump]: https://basejump.acidgenomics.com/
-[bcbioRNASeq]: https://bioinformatics.sph.harvard.edu/bcbioRNASeq/
-[bioverbs]: https://bioverbs.acidgenomics.com/
-[goalie]: https://goalie.steinbaugh.com/
-[testthat]: http://testthat.r-lib.org/
-[transformer]: https://transformer.acidgenomics.com/
-[Travis CI]: https://travis-ci.com/
+[acidplots]: https://r.acidgenomics.com/packages/acidplots/
+[acid genomics]: https://acidgenomics.com/
+[appveyor CI]: https://www.appveyor.com/
+[basejump]: https://r.acidgenomics.com/packages/basejump/
+[bcbiornaseq]: https://r.acidgenomics.com/packages/bcbiornaseq/
+[goalie]: https://r.acidgenomics.com/packages/goalie/
+[testthat]: https://testthat.r-lib.org/
+[travis ci]: https://www.travis-ci.com/
