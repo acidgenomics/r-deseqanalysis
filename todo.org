@@ -1,6 +1,7 @@
 #+TITLE: DESeqAnalysis
 #+STARTUP: content
 * Development
+** TODO Consider adding `organism` support.
 ** TODO Need to support `as.DESeqDataSet` and `as.DESeqTransform` coercion methods.
 ** TODO plotMA and plotVolcano may need to handle NA gene to symbol mapping better.
 ** TODO Consider adding method support for: colData, rowData, rowRanges.
