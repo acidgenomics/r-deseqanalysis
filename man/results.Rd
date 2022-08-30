@@ -8,7 +8,7 @@
 \usage{
 results(object, ...)
 
-\S4method{results}{DESeqAnalysis}(object, i, lfcShrink = NULL, extra = FALSE, quiet = FALSE)
+\S4method{results}{DESeqAnalysis}(object, i, lfcShrink = NULL, extra = FALSE, quiet = TRUE)
 
 \S4method{results}{DESeqDataSet}(object, ...)
 }
@@ -44,11 +44,11 @@ Results
 }
 \section{Functions}{
 \itemize{
-\item \code{results,DESeqDataSet-method}: Arguments pass through to \code{DESeq2::results()}.
-}}
+\item \code{results(DESeqDataSet)}: Arguments pass through to \code{DESeq2::results()}.
 
+}}
 \note{
-Updated 2021-03-12.
+Updated 2022-08-30.
 }
 \section{Extra mode}{
 

@@ -78,9 +78,9 @@ argument, which must contain/extend a \code{SummarizedExperiment}.
 }
 \section{Functions}{
 \itemize{
-\item \code{plotDEGPCA,DESeqAnalysis-method}: Passes to \code{DESeqResults} method.
-}}
+\item \code{plotDEGPCA(DESeqAnalysis)}: Passes to \code{DESeqResults} method.
 
+}}
 \note{
 Updated 2021-08-02.
 }

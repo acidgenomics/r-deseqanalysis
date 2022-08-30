@@ -105,10 +105,10 @@ M (log ratio) and A (mean average) scales, then plotting these values.
 }
 \section{Functions}{
 \itemize{
-\item \code{plotMA,DESeqAnalysis-method}: Passes to \code{DESeqResults} method, with \code{gene2symbol}
+\item \code{plotMA(DESeqAnalysis)}: Passes to \code{DESeqResults} method, with \code{gene2symbol}
 argument automatically defined.
-}}
 
+}}
 \note{
 Updated 2022-03-08.
 }

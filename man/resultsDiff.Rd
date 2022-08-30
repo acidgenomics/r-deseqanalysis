@@ -80,9 +80,9 @@ Relative difference of results
 }
 \section{Functions}{
 \itemize{
-\item \code{resultsDiff,DESeqAnalysis,missingOrNULL-method}: Passes arguments to \code{DESeqResults} method.
-}}
+\item \code{resultsDiff(x = DESeqAnalysis, y = missingOrNULL)}: Passes arguments to \code{DESeqResults} method.
 
+}}
 \note{
 Updated 2020-08-05.
 }
