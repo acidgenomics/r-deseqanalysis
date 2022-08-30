@@ -25,10 +25,10 @@ Passes to \code{SummarizedExperiment} defined in AcidPlots package.
 }
 \section{Functions}{
 \itemize{
-\item \code{plotPCA,DESeqAnalysis-method}: Extracts \code{DESeqTransform}, converts to
+\item \code{plotPCA(DESeqAnalysis)}: Extracts \code{DESeqTransform}, converts to
 \code{RangedSummarizedExperiment}, and passes to method defined in AcidPlots.
-}}
 
+}}
 \note{
 Updated 2022-03-08.
 }

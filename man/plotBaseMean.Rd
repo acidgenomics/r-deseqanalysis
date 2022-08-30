@@ -65,14 +65,14 @@ for sequencing depth.
 }
 \section{Functions}{
 \itemize{
-\item \code{plotBaseMean,DESeqAnalysis-method}: Passes to \code{DESeqDataSet} method.
+\item \code{plotBaseMean(DESeqAnalysis)}: Passes to \code{DESeqDataSet} method.
 
-\item \code{plotBaseMean,DESeqDataSet-method}: Generates row means of normalized counts.
+\item \code{plotBaseMean(DESeqDataSet)}: Generates row means of normalized counts.
 This value corresponds to the \code{baseMean} column of \code{DESeqResults}.
 
-\item \code{plotBaseMean,DESeqResults-method}: Uses \code{baseMean} column of results.
-}}
+\item \code{plotBaseMean(DESeqResults)}: Uses \code{baseMean} column of results.
 
+}}
 \note{
 Updated 2022-05-17.
 }

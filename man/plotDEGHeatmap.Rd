@@ -89,12 +89,12 @@ must contain a \code{SummarizedExperiment}.
 }
 \section{Functions}{
 \itemize{
-\item \code{plotDEGHeatmap,DESeqAnalysis-method}: Passes to \code{DESeqResults} method.
+\item \code{plotDEGHeatmap(DESeqAnalysis)}: Passes to \code{DESeqResults} method.
 
-\item \code{plotDEGHeatmap,DESeqResults-method}: Passes to \code{plotHeatmap()} \code{SummarizedExperiment}
+\item \code{plotDEGHeatmap(DESeqResults)}: Passes to \code{plotHeatmap()} \code{SummarizedExperiment}
 method defined in AcidPlots.
-}}
 
+}}
 \note{
 Updated 2022-04-15.
 }

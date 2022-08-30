@@ -135,10 +135,10 @@ AcidBase::unlink2(con)
 \seealso{
 Packages:
 \itemize{
-\item \href{https://readr.tidyverse.org}{readr}.
-\item \href{https://r-datatable.com/}{data.table}.
+\item \href{http://readr.tidyverse.org}{readr}.
+\item \href{http://r-datatable.com/}{data.table}.
 \item \href{https://cran.r-project.org/package=rio}{rio}.
-\item \href{https://bioconductor.org/packages/rtracklayer/}{rtracklayer}.
+\item \href{http://bioconductor.org/packages/rtracklayer/}{rtracklayer}.
 \item \href{https://vroom.r-lib.org}{vroom}.
 }
 

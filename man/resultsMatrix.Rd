@@ -49,11 +49,11 @@ Generate an aggregate matrix of \code{DESeqResults} column values per contrast.
 }
 \section{Functions}{
 \itemize{
-\item \code{resultsMatrix,DESeqAnalysisList-method}: Loop across the nested \code{DESeqAnalysis} objects and
+\item \code{resultsMatrix(DESeqAnalysisList)}: Loop across the nested \code{DESeqAnalysis} objects and
 aggregate the corresponding result matrices. Note that the analysis names
 are automatically prefixed to the column names.
-}}
 
+}}
 \note{
 Updated 2022-05-17.
 }

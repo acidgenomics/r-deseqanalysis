@@ -40,16 +40,16 @@ Plot counts
 }
 \section{Functions}{
 \itemize{
-\item \code{plotCounts,DESeqAnalysis-method}: Plot either \code{DESeqDataSet} normalized counts or
+\item \code{plotCounts(DESeqAnalysis)}: Plot either \code{DESeqDataSet} normalized counts or
 \code{DESeqTransform} log2 variance-stabilized counts.
 
-\item \code{plotCounts,DESeqDataSet-method}: Plot size factor (i.e. library size) adjusted
+\item \code{plotCounts(DESeqDataSet)}: Plot size factor (i.e. library size) adjusted
 normalized counts. Arguments pass through to \code{SummarizedExperiment} method
 defined in AcidPlots package.
 
-\item \code{plotCounts,DESeqTransform-method}: Plot log2 variance-stabilized transformed counts.
-}}
+\item \code{plotCounts(DESeqTransform)}: Plot log2 variance-stabilized transformed counts.
 
+}}
 \note{
 Updated 2021-03-15.
 }

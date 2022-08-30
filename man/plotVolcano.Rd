@@ -101,10 +101,10 @@ Volcano plot
 }
 \section{Functions}{
 \itemize{
-\item \code{plotVolcano,DESeqAnalysis-method}: Passes to \code{DESeqResults} method, with \code{gene2symbol}
+\item \code{plotVolcano(DESeqAnalysis)}: Passes to \code{DESeqResults} method, with \code{gene2symbol}
 argument automatically defined.
-}}
 
+}}
 \note{
 Updated 2022-04-15.
 }
