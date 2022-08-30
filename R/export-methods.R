@@ -1,10 +1,16 @@
 #' @name export
-#' @inherit AcidExperiment::export
+#' @inherit AcidExperiment::export description params return title
 #' @note Updated 2022-05-17.
 #'
 #' @details
 #' Size-factor normalized coutns and FPKM values are calculated on the fly and
 #' exported automatically.
+#'
+#' @param object
+#' Object.
+#'
+#' @param con `character(1)`.
+#' Directory path.
 #'
 #' @param ... Additional arguments.
 #'

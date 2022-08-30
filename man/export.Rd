@@ -33,13 +33,10 @@ export(object, con, format, ...)
 \S4method{export}{DESeqDataSet,missingOrNULL,missingOrNULL}(object, con, format, name = NULL, dir, ...)
 }
 \arguments{
-\item{object}{Object.
-An object supporting \code{dim()}, or a supported class capable of being coerced
-to \code{data.frame}, to be written to disk.}
+\item{object}{Object.}
 
-\item{con}{\code{character(1)}, \code{missing}, or \code{NULL}.
-File path.
-Alternatively, can leave unset and use \code{ext} and \code{dir} arguments instead.}
+\item{con}{\code{character(1)}.
+Directory path.}
 
 \item{format}{\code{character(1)}, \code{missing}, or \code{NULL}.
 Output file format extension.}
@@ -75,54 +72,6 @@ exported automatically.
 \note{
 Updated 2022-05-17.
 }
-\section{Output file format extension}{
-
-
-
-
-\code{matrix} supported arguments:
-\itemize{
-\item Comma separated values (CSV):
-\code{"csv"}, \code{"csv.bz2"}, \code{"csv.gz"}, \code{"csv.xz"}, \code{"csv.zip"}.
-\item Tab separated values (TSV):
-\code{"tsv"}, \code{"tsv.bz2"}, \code{"tsv.gz"}, \code{"tsv.xz"}, \code{"tsv.zip"}.
-}
-
-\code{Matrix} (\code{sparseMatrix}) supported arguments:
-\itemize{
-\item MatrixMarket exchange (MTX):
-\code{"mtx"}, \code{"mtx.bz2"}, \code{"mtx.gz"}, \code{"mtx.xz"}, \code{"mtx.zip"}.
-}
-
-
-}
-
-\section{Row names}{
-
-
-
-
-Some export utilities in R have a tendency to drop row names when writing to
-disk in CSV format. For example, the \href{https://readr.tidyverse.org/}{readr} family of functions never
-write row names by design. This is a \emph{really poor} default setting for
-handling genomic data, which often contain gene identifiers in the row names.
-Here we're performing any internal tibble coercion step to ensure row names
-are always moved to a \code{"rowname"} column in the CSV export.
-
-
-}
-
-\section{Debugging}{
-
-
-
-
-Note that this function currently wraps \code{readr::write_delim()} by default
-for exporting \code{DataFrame}, \code{data.frame}, and \code{matrix} class objects.
-
-
-}
-
 \examples{
 data(deseq)
 
@@ -131,24 +80,4 @@ con <- AcidBase::tempdir2()
 x <- export(deseq, con = con)
 print(x)
 AcidBase::unlink2(con)
-}
-\seealso{
-Packages:
-\itemize{
-\item \href{http://readr.tidyverse.org}{readr}.
-\item \href{http://r-datatable.com/}{data.table}.
-\item \href{https://cran.r-project.org/package=rio}{rio}.
-\item \href{http://bioconductor.org/packages/rtracklayer/}{rtracklayer}.
-\item \href{https://vroom.r-lib.org}{vroom}.
-}
-
-Export functions:
-\itemize{
-\item \code{BiocIO::export()}.
-\item \code{data.table::fwrite()}.
-\item \code{readr::write_delim()}.
-\item \code{rio::export()}.
-\item \code{rtracklayer::export()}.
-\item \code{vroom::vroom_write()}.
-}
 }
