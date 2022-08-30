@@ -28,7 +28,7 @@ Configure [Conda][] to use the [Bioconda][] channels.
 
 ```sh
 # Don't install recipe into base environment.
-name="r-deseqanalysis"
+name='r-deseqanalysis'
 conda create --name="$name" "$name"
 conda activate "$name"
 R
@@ -37,18 +37,16 @@ R
 ### [Docker][] method
 
 ```sh
-image="acidgenomics/r-deseqanalysis"
-workdir="/mnt/work"
+image='acidgenomics/r-packages:deseqanalysis'
+workdir='/mnt/work'
 docker pull "$image"
 docker run -it \
     --volume="${PWD}:${workdir}" \
     --workdir="$workdir" \
-    "$image" \
-    R
+    "$image"
 ```
 
 [bioconda]: https://bioconda.github.io/
-[bioconductor]: https://bioconductor.org/
 [conda]: https://conda.io/
 [deseq2]: https://bioconductor.org/packages/DESeq2/
 [docker]: https://www.docker.com/
