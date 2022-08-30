@@ -1,7 +1,7 @@
 #' Results
 #'
 #' @name results
-#' @note Updated 2021-03-12.
+#' @note Updated 2022-08-30.
 #'
 #' @section Extra mode:
 #'
@@ -32,13 +32,13 @@ NULL
 
 
 
-## Updated 2021-03-09.
+## Updated 2022-08-30.
 `results,DESeqAnalysis` <- # nolint
     function(object,
              i,
              lfcShrink = NULL,
              extra = FALSE,
-             quiet = FALSE) {
+             quiet = TRUE) {
         validObject(object)
         assert(
             isScalar(i),
