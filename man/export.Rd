@@ -2,15 +2,13 @@
 % Please edit documentation in R/AllGenerics.R, R/export-methods.R
 \name{export}
 \alias{export}
-\alias{export,DESeqAnalysis,character,missingOrNULL-method}
-\alias{export,DESeqAnalysis,missingOrNULL,missingOrNULL-method}
-\alias{export,DESeqDataSet,character,missingOrNULL-method}
-\alias{export,DESeqDataSet,missingOrNULL,missingOrNULL-method}
+\alias{export,DESeqAnalysis,character,missing-method}
+\alias{export,DESeqDataSet,character,missing-method}
 \title{Export}
 \usage{
 export(object, con, format, ...)
 
-\S4method{export}{DESeqAnalysis,character,missingOrNULL}(
+\S4method{export}{DESeqAnalysis,character,missing}(
   object,
   con,
   format,
@@ -19,9 +17,7 @@ export(object, con, format, ...)
   quiet = getOption(x = "acid.quiet", default = FALSE)
 )
 
-\S4method{export}{DESeqAnalysis,missingOrNULL,missingOrNULL}(object, con, format, name = NULL, dir, ...)
-
-\S4method{export}{DESeqDataSet,character,missingOrNULL}(
+\S4method{export}{DESeqDataSet,character,missing}(
   object,
   con,
   format,
@@ -29,8 +25,6 @@ export(object, con, format, ...)
   overwrite = getOption(x = "acid.overwrite", default = TRUE),
   quiet = getOption(x = "acid.quiet", default = FALSE)
 )
-
-\S4method{export}{DESeqDataSet,missingOrNULL,missingOrNULL}(object, con, format, name = NULL, dir, ...)
 }
 \arguments{
 \item{object}{Object.}
@@ -39,7 +33,7 @@ export(object, con, format, ...)
 Directory path.}
 
 \item{format}{\code{character(1)}, \code{missing}, or \code{NULL}.
-Output file format extension.}
+\emph{Currently not supported.}}
 
 \item{compress}{\code{logical(1)}.
 Apply gzip compression to all files.}
@@ -49,12 +43,6 @@ Overwrite existing file on disk.}
 
 \item{quiet}{\code{logical(1)}.
 Perform command quietly, suppressing messages.}
-
-\item{name}{\code{character(1)}.
-Name to use on disk. If \code{NULL}, will use the name of the object instead.}
-
-\item{dir}{\code{character(1)}.
-Directory path.}
 
 \item{...}{Additional arguments.}
 }
@@ -70,7 +58,7 @@ Size-factor normalized coutns and FPKM values are calculated on the fly and
 exported automatically.
 }
 \note{
-Updated 2022-05-17.
+Updated 2022-09-13.
 }
 \examples{
 data(deseq)

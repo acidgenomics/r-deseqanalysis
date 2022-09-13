@@ -1,6 +1,6 @@
 #' @name export
 #' @inherit AcidExperiment::export description params return title
-#' @note Updated 2022-05-17.
+#' @note Updated 2022-09-13.
 #'
 #' @details
 #' Size-factor normalized coutns and FPKM values are calculated on the fly and
@@ -133,7 +133,7 @@ NULL
 `export,DESeqAnalysis` <- # nolint
     function(object,
              con,
-             format, # NULL
+             format, # missing
              compress = getOption(
                  x = "acid.export.compress",
                  default = FALSE
@@ -146,11 +146,11 @@ NULL
                  x = "acid.quiet",
                  default = FALSE
              )) {
-        validObject(object)
         if (missing(format)) {
             format <- NULL
         }
         assert(
+            validObject(object),
             isString(con),
             is.null(format),
             isFlag(compress),
@@ -221,11 +221,11 @@ NULL
 ## Only export the raw and normalized counts.
 ## Skip exporting other assays, including mu, H, cooks.
 ##
-## Updated 2022-05-17.
+## Updated 2022-09-13.
 `export,DESeqDataSet` <- # nolint
     function(object,
              con,
-             format, # NULL
+             format, # missing
              compress = getOption(
                  x = "acid.export.compress",
                  default = FALSE
@@ -238,11 +238,11 @@ NULL
                  x = "acid.quiet",
                  default = FALSE
              )) {
-        validObject(object)
         if (missing(format)) {
             format <- NULL
         }
         assert(
+            validObject(object),
             isString(con),
             is.null(format),
             isFlag(compress),
@@ -268,32 +268,6 @@ NULL
 
 
 
-## Updated 2022-05-17.
-`export,DESeqAnalysis,deprecated` <- # nolint
-    methodFunction(
-        f = "export",
-        signature = signature(
-            object = "SummarizedExperiment",
-            con = "missingOrNULL",
-            format = "missingOrNULL"
-        ),
-        package = "AcidExperiment"
-    )
-
-## Updated 2022-05-17.
-`export,DESeqDataSet,deprecated` <- # nolint
-    methodFunction(
-        f = "export",
-        signature = signature(
-            object = "SummarizedExperiment",
-            con = "missingOrNULL",
-            format = "missingOrNULL"
-        ),
-        package = "AcidExperiment"
-    )
-
-
-
 #' @rdname export
 #' @export
 setMethod(
@@ -301,7 +275,7 @@ setMethod(
     signature = signature(
         object = "DESeqAnalysis",
         con = "character",
-        format = "missingOrNULL"
+        format = "missing"
     ),
     definition = `export,DESeqAnalysis`
 )
@@ -311,33 +285,9 @@ setMethod(
 setMethod(
     f = "export",
     signature = signature(
-        object = "DESeqAnalysis",
-        con = "missingOrNULL",
-        format = "missingOrNULL"
-    ),
-    definition = `export,DESeqAnalysis,deprecated`
-)
-
-#' @rdname export
-#' @export
-setMethod(
-    f = "export",
-    signature = signature(
         object = "DESeqDataSet",
         con = "character",
-        format = "missingOrNULL"
+        format = "missing"
     ),
     definition = `export,DESeqDataSet`
-)
-
-#' @rdname export
-#' @export
-setMethod(
-    f = "export",
-    signature = signature(
-        object = "DESeqDataSet",
-        con = "missingOrNULL",
-        format = "missingOrNULL"
-    ),
-    definition = `export,DESeqDataSet,deprecated`
 )
