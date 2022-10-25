@@ -50,7 +50,7 @@
         df <- as(object, "DataFrame")
         colnames(df) <- camelCase(colnames(df), strict = TRUE)
         alphaCol <- ifelse(
-            test = isTRUE(isSubset("svalue", names(object))),
+            test = isSubset("svalue", names(object)),
             yes = "svalue",
             no = "padj"
         )
