@@ -36,7 +36,7 @@
 #' -  `0`: not significant
 #' -  `1`: upregulated
 #'
-#' @note Updated 2022-05-17.
+#' @note Updated 2022-10-25.
 #' @noRd
 #'
 #' @return `DataFrame`.
@@ -50,7 +50,7 @@
         df <- as(object, "DataFrame")
         colnames(df) <- camelCase(colnames(df), strict = TRUE)
         alphaCol <- ifelse(
-            test = isSubset("svalue", names(object)),
+            test = isTRUE(isSubset("svalue", names(object))),
             yes = "svalue",
             no = "padj"
         )

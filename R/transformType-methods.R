@@ -39,10 +39,10 @@ NULL
     function(object) {
         validObject(object)
         ifelse(
-            test = isSubset(
+            test = isTRUE(isSubset(
                 x = "rlogIntercept",
                 y = colnames(mcols(object))
-            ),
+            )),
             yes = "rlog",
             no = "varianceStabilizingTransformation"
         )
