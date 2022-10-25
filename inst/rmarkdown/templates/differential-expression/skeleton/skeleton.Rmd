@@ -1,5 +1,5 @@
 ---
-## Updated 2022-05-24.
+## Updated 2022-10-25.
 params:
   title: "Differential expression with DESeq2"
   
@@ -215,8 +215,7 @@ Note that `colData` files contain annotations corresponding to the columns (i.e.
 ```{r export}
 export(
     object = object,
-    name = name,
-    dir = params[["output_dir"]],
+    con = params[["output_dir"]],
     compress = FALSE
 )
 ```
