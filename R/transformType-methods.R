@@ -34,15 +34,15 @@ NULL
 
 
 
-## Updated 2021-03-12.
+## Updated 2022-09-22.
 `transformType,DESeqTransform` <- # nolint
     function(object) {
         validObject(object)
         ifelse(
-            test = isTRUE(isSubset(
+            test = isSubset(
                 x = "rlogIntercept",
                 y = colnames(mcols(object))
-            )),
+            ),
             yes = "rlog",
             no = "varianceStabilizingTransformation"
         )

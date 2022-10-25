@@ -141,7 +141,7 @@ formals(`degIntersection,DESeqAnalysis`)[names(.args)] <- # nolint
             quiet = TRUE
         )
         assert(hasNames(x))
-        if (anyDuplicated(names(x)) > 0L) {
+        if (hasDuplicates(names(x))) {
             dupes <- names(x)[duplicated(names(x))]
             abort(sprintf(
                 "%d duplicate %s: %s.",

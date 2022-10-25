@@ -32,7 +32,8 @@ NULL
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom methods coerce show
 #' @importFrom pipette export import
-#'
+NULL
+
 #' @importMethodsFrom AcidBase intersectionMatrix
 #' @importMethodsFrom AcidExperiment Gene2Symbol autopadZeros
 #' convertGenesToSymbols convertSampleIDsToNames droplevels2 export
@@ -72,8 +73,8 @@ NULL
 #' guides labs position_stack scale_color_manual scale_x_continuous
 #' scale_y_continuous theme
 #' @importFrom goalie allArePositive areDisjointSets areIntersectingSets
-#' areSameLength areSetEqual assert bapply hasColnames hasLength hasNames
-#' hasLength hasRows hasRownames hasValidDimnames hasValidNames isAFile
+#' areSameLength areSetEqual assert bapply hasColnames hasDuplicates hasLength
+#' hasNames hasLength hasRows hasRownames hasValidDimnames hasValidNames isAFile
 #' isAlpha isAny isCharacter isFlag isHeaderLevel isInRange isInt
 #' isMatchingFixed isNegative isNonNegative isNumber isPercentage isPositive
 #' isScalar isString isSubset validate
