@@ -1,4 +1,4 @@
-test_that("New 'con' BiocIO approach, instead of deprecated 'dir'", {
+test_that("New 'con' BiocIO approach", {
     testdir <- tempdir2()
     object <- objs[["deseq"]]
     out <- export(
@@ -33,8 +33,8 @@ test_that("New 'con' BiocIO approach, instead of deprecated 'dir'", {
                         "fpkm.csv.gz"
                     )
                 ),
-                "colData" = file.path(prefix, "data", "colData.csv.gz"),
-                "rowData" = file.path(prefix, "data", "rowData.csv.gz")
+                "rowData" = file.path(prefix, "data", "rowData.csv.gz"),
+                "colData" = file.path(prefix, "data", "colData.csv.gz")
             ),
             "transform" = list(
                 "assays" = list(
@@ -45,8 +45,8 @@ test_that("New 'con' BiocIO approach, instead of deprecated 'dir'", {
                         "assay.csv.gz"
                     )
                 ),
-                "colData" = file.path(prefix, "transform", "colData.csv.gz"),
-                "rowData" = file.path(prefix, "transform", "rowData.csv.gz")
+                "rowData" = file.path(prefix, "transform", "rowData.csv.gz"),
+                "colData" = file.path(prefix, "transform", "colData.csv.gz")
             ),
             "resultsTables" = list(
                 "condition_B_vs_A" = c(
@@ -123,93 +123,6 @@ test_that("New 'con' BiocIO approach, instead of deprecated 'dir'", {
             "sample10",
             "sample11",
             "sample12"
-        )
-    )
-    unlink2(testdir)
-})
-
-test_that("Deprecated : 'dir' argument, no 'name'", {
-    testdir <- tempdir2()
-    object <- objs[["deseq"]]
-    out <- export(
-        object = object,
-        dir = testdir,
-        compress = TRUE
-    )
-    prefix <- realpath(file.path(testdir, "object"))
-    resTblPrefix <- file.path(prefix, "resultsTables")
-    resMatPrefix <- file.path(prefix, "resultsMatrices")
-    expect_identical(
-        object = out,
-        expected = list(
-            "data" = list(
-                "assays" = list(
-                    "counts" = file.path(
-                        prefix,
-                        "data",
-                        "assays",
-                        "counts.csv.gz"
-                    ),
-                    "normalized" = file.path(
-                        prefix,
-                        "data",
-                        "assays",
-                        "normalized.csv.gz"
-                    ),
-                    "fpkm" = file.path(
-                        prefix,
-                        "data",
-                        "assays",
-                        "fpkm.csv.gz"
-                    )
-                ),
-                "colData" = file.path(prefix, "data", "colData.csv.gz"),
-                "rowData" = file.path(prefix, "data", "rowData.csv.gz")
-            ),
-            "transform" = list(
-                "assays" = list(
-                    "assay" = file.path(
-                        prefix,
-                        "transform",
-                        "assays",
-                        "assay.csv.gz"
-                    )
-                ),
-                "colData" = file.path(prefix, "transform", "colData.csv.gz"),
-                "rowData" = file.path(prefix, "transform", "rowData.csv.gz")
-            ),
-            "resultsTables" = list(
-                "condition_B_vs_A" = c(
-                    "all" = file.path(
-                        resTblPrefix, "condition_B_vs_A", "all.csv.gz"
-                    ),
-                    "up" = file.path(
-                        resTblPrefix, "condition_B_vs_A", "up.csv.gz"
-                    ),
-                    "down" = file.path(
-                        resTblPrefix, "condition_B_vs_A", "down.csv.gz"
-                    ),
-                    "both" = file.path(
-                        resTblPrefix, "condition_B_vs_A", "both.csv.gz"
-                    )
-                ),
-                "treatment_D_vs_C" = c(
-                    "all" = file.path(
-                        resTblPrefix, "treatment_D_vs_C", "all.csv.gz"
-                    )
-                )
-            ),
-            "resultsMatrices" = c(
-                "log2FoldChange" = file.path(
-                    resMatPrefix, "log2FoldChange.csv.gz"
-                ),
-                "stat" = file.path(
-                    resMatPrefix, "stat.csv.gz"
-                ),
-                "padj" = file.path(
-                    resMatPrefix, "padj.csv.gz"
-                )
-            )
         )
     )
     unlink2(testdir)
