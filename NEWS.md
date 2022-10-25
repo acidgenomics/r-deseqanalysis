@@ -1,16 +1,35 @@
 # Release notes
 
+## DESeqAnalysis 0.6.6 (2022-10-25)
+
+Major changes:
+
+- `export`: Reduced the number of exported methods, to match the new conventions
+  defined by pipette. Note that `con` is now required instead of `dir` for the
+  target directory.
+
+Minor changes:
+
+- Tightened up dependency requirements.
+- Improved consistency of internal goalie boolean functions.
+
 ## DESeqAnalysis 0.6.5 (2022-08-30)
 
-- Updated package to roxygen2 7.2.1. 
+Minor changes:
+
+- Updated package to roxygen2 7.2.1.
 - `results`: Now defaults to `quiet = TRUE` by default, to reduce the amount
   of message spam in bcbioRNASeq R Markdown templates.
 
 ## DESeqAnalysis 0.6.4 (2022-06-09)
 
+Minor changes:
+
 - Improved Windows CI compatibility, using `tempdir2` and `unlink2`.
 
 ## DESeqAnalysis 0.6.3 (2022-05-25)
+
+Minor changes:
 
 - Removed deprecated `plotMeanAverage` and `apeglmContrast` functions from
   NAMESPACE, to avoid collisions with updates in bcbioRNASeq package.
