@@ -1,6 +1,8 @@
 #+TITLE: DESeqAnalysis
 #+STARTUP: content
 * Development
+** TODO Consider hardening named results check in `DESeqAnalysis` generator.
+    https://github.com/hbc/bcbioRNASeq/issues/191
 ** TODO Consider adding `organism` support.
 ** TODO Need to support `as.DESeqDataSet` and `as.DESeqTransform` coercion methods.
 ** TODO plotMA and plotVolcano may need to handle NA gene to symbol mapping better.
