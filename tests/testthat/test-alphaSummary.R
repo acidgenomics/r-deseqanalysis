@@ -1,5 +1,3 @@
-
-
 ## NOTE The expected values can change when we resave the example object.
 test_that("Default, no contrast specified.", {
     object <- alphaSummary(
