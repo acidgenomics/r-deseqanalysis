@@ -59,7 +59,7 @@ NULL
 ## Standard functions ==========================================================
 
 #' @importFrom AcidBase initDir methodFunction printString realpath
-#' requireNamespaces showSlotInfo standardizeCall
+#' showSlotInfo standardizeCall
 #' @importFrom AcidCLI abort alert alertInfo alertWarning dl toInlineString
 #' @importFrom AcidMarkdown markdownHeader markdownList
 #' @importFrom AcidPlots !! acid_coord_flip acid_geom_label_repel
@@ -77,7 +77,7 @@ NULL
 #' hasNames hasLength hasRows hasRownames hasValidDimnames hasValidNames isAFile
 #' isAlpha isAny isCharacter isFlag isHeaderLevel isInRange isInt
 #' isMatchingFixed isNegative isNonNegative isNumber isPercentage isPositive
-#' isScalar isString isSubset validate
+#' isScalar isString isSubset requireNamespaces validate
 #' @importFrom methods as is new prototype setClass setGeneric setValidity slot
 #' slot<- validObject .hasSlot
 #' @importFrom stringi stri_match_first_regex
