@@ -1,5 +1,12 @@
 # Release notes
 
+## DESeqAnalysis 0.6.7 (2023-02-09)
+
+Minor changes:
+
+- Updated dependencies to Bioconductor 3.16.
+- Migrated `requireNamespaces` import from AcidBase to goalie.
+
 ## DESeqAnalysis 0.6.6 (2022-10-25)
 
 Major changes:
