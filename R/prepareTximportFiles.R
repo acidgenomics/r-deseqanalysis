@@ -1,3 +1,8 @@
+## FIXME Rework this to use a directory as the primary argument instead...
+## more intuitive.
+
+
+
 #' Prepare quant files for tximport
 #'
 #' @export
