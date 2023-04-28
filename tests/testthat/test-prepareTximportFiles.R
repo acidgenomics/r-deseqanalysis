@@ -1,23 +1,27 @@
-test_that("makeNames", {
-    Map(
-        makeNames = eval(formals(prepareTximportFiles)[["makeNames"]]),
-        names = list(
-            "makeNames" = c("X001_sample_A", "X100_sample_B"),
-            "snakeCase" = c("x001_sample_a", "x100_sample_b"),
-            "camelCase" = c("x001SampleA", "x100SampleB")
-        ),
-        f = function(makeNames, names) {
-            files <- c(
-                file.path("salmon", "1-sample-A", "quant.sf"),
-                file.path("salmon", "100-sample-B", "quant.sf")
-            )
-            object <- prepareTximportFiles(
-                files = files,
-                makeNames = makeNames,
-                exists = FALSE
-            )
-            expect_identical(unname(object), files)
-            expect_named(object, names)
-        }
+test_that("salmon", {
+    dir <- tempdir2()
+    samples <- c("1-sample-A", "2-sample-B")
+    lapply(X = file.path(dir, samples), FUN = initDir)
+    file.create(file.path(dir, samples, "quant.sf"))
+    files <- prepareTximportFiles(dir = dir, type = "salmon")
+    expect_identical(unique(basename(files)), "quant.sf")
+    expect_identical(
+        object = names(files),
+        expected = c("X1_sample_A", "X2_sample_B")
     )
+    unlink2(dir)
+})
+
+test_that("kallisto", {
+    dir <- tempdir2()
+    samples <- c("1-sample-A", "2-sample-B")
+    lapply(X = file.path(dir, samples), FUN = initDir)
+    file.create(file.path(dir, samples, "abundance.h5"))
+    files <- prepareTximportFiles(dir = dir, type = "kallisto")
+    expect_identical(unique(basename(files)), "abundance.h5")
+    expect_identical(
+        object = names(files),
+        expected = c("X1_sample_A", "X2_sample_B")
+    )
+    unlink2(dir)
 })
