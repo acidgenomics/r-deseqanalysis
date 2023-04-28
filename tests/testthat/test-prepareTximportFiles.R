@@ -5,8 +5,8 @@ test_that("salmon", {
     file.create(file.path(dir, samples, "quant.sf"))
     files <- prepareTximportFiles(dir = dir, type = "salmon")
     expect_identical(unique(basename(files)), "quant.sf")
-    expect_identical(
-        object = names(files),
+    expect_named(
+        object = files,
         expected = c("X1_sample_A", "X2_sample_B")
     )
     unlink2(dir)
@@ -19,8 +19,8 @@ test_that("kallisto", {
     file.create(file.path(dir, samples, "abundance.h5"))
     files <- prepareTximportFiles(dir = dir, type = "kallisto")
     expect_identical(unique(basename(files)), "abundance.h5")
-    expect_identical(
-        object = names(files),
+    expect_named(
+        object = files,
         expected = c("X1_sample_A", "X2_sample_B")
     )
     unlink2(dir)
