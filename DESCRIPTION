@@ -1,7 +1,7 @@
 Package: DESeqAnalysis
 Title: Acid Genomics DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.6.8.9000
+Version: 0.6.8
 Date: 2023-04-28
 Authors@R: c(
     person(
@@ -26,33 +26,33 @@ Depends:
     R (>= 4.2),
     DESeq2 (>= 1.38.0)
 Imports:
-    AcidBase (>= 0.6.11),
+    AcidBase (>= 0.6.15),
     AcidCLI (>= 0.2.7),
-    AcidExperiment (>= 0.4.4),
-    AcidGenerics (>= 0.6.5),
-    AcidGenomes (>= 0.4.5),
+    AcidExperiment (>= 0.4.7),
+    AcidGenerics (>= 0.6.7),
+    AcidGenomes (>= 0.5.0),
     AcidMarkdown (>= 0.2.5),
-    AcidPlots (>= 0.5.3),
-    AcidPlyr (>= 0.3.4),
+    AcidPlots (>= 0.5.5),
+    AcidPlyr (>= 0.3.10),
     BiocGenerics (>= 0.44.0),
     IRanges (>= 2.32.0),
     S4Vectors (>= 0.36.0),
     SummarizedExperiment (>= 1.28.0),
-    ggplot2 (>= 3.4.0),
-    goalie (>= 0.6.8),
-    pipette (>= 0.10.2),
+    ggplot2 (>= 3.4.2),
+    goalie (>= 0.6.9),
+    pipette (>= 0.10.9),
     stringi (>= 1.7.12),
-    syntactic (>= 0.6.4),
+    syntactic (>= 0.6.5),
     methods,
     stats,
     utils
 Suggests:
     apeglm (>= 1.20.0),
     ashr (>= 2.2.54),
-    basejump (>= 0.16.3),
+    basejump (>= 0.16.5),
     knitr (>= 1.42),
-    rmarkdown (>= 2.20),
-    testthat (>= 3.1.6),
+    rmarkdown (>= 2.21),
+    testthat (>= 3.1.7),
     tximport (>= 1.26.0)
 Additional_repositories: https://r.acidgenomics.com
 Config/testthat/edition: 3
