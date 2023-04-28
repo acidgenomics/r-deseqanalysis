@@ -45,13 +45,22 @@ Runs the following internal comments:
 Updated 2023-04-28.
 }
 \examples{
-files <- c(
-    file.path("salmon", "1-sample-A", "quant.sf"),
-    file.path("salmon", "2-sample-B", "quant.sf")
-)
-print(files)
-files <- prepareTximportFiles(dir = "salmon", type = "salmon")
-print(files)
+library(AcidBase)
+tempdir <- tempdir2()
+samples <- c("1-sample-A", "2-sample-B")
+salmonDir <- initDir(file.path(tempdir, "salmon"))
+kallistoDir <- initDir(file.path(tempdir, "kallisto"))
+invisible({
+    lapply(X = file.path(salmonDir, samples), FUN = initDir)
+    file.create(file.path(salmonDir, samples, "quant.sf"))
+    lapply(X = file.path(kallistoDir, samples), FUN = initDir)
+    file.create(file.path(kallistoDir, samples, "abundance.h5"))
+})
+salmonFiles <- prepareTximportFiles(dir = salmonDir, type = "salmon")
+print(salmonFiles)
+kallistoFiles <- prepareTximportFiles(dir = kallistoDir, type = "kallisto")
+print(kallistoFiles)
+unlink2(tempdir)
 }
 \seealso{
 \itemize{
