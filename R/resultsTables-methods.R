@@ -27,7 +27,7 @@
 #' - `both`: Bidirectional DEGs (up- and down-regulated). This table can be
 #' used for overrepresentation testing but should NOT be used for GSEA.
 #'
-#' @return `DataFrameList`.
+#' @return `DFrameList`.
 #' Named list containing subsets of `DESeqResults`.
 #'
 #' @examples

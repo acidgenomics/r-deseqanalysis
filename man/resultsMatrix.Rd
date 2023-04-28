@@ -41,7 +41,7 @@ Include row (gene) annotations, bound to the left side of the data frame.}
 \value{
 \itemize{
 \item \code{rowData = FALSE}: \code{matrix}.
-\item \code{rowData = TRUE}: \code{DataFrame}.
+\item \code{rowData = TRUE}: \code{DFrame}.
 }
 }
 \description{

@@ -67,7 +67,7 @@ NULL
             isFlag(quiet)
         )
         direction <- match.arg(direction)
-        data <- as(object, "DataFrame")
+        data <- as(object, "DFrame")
         ## Define symbols to use in filtering steps below.
         alphaCol <- .alphaCol(object)
         lfcCol <- "log2FoldChange"

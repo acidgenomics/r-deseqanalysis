@@ -7,7 +7,7 @@
 #'
 #' @return `character(1)`.
 .alphaCol <- function(object) {
-    assert(is(object, "DataFrame"))
+    assert(is(object, "DFrame"))
     idx <- na.omit(match(
         x = c("svalue", "padj"),
         table = colnames(object)
@@ -39,7 +39,7 @@
 #' @note Updated 2022-10-25.
 #' @noRd
 #'
-#' @return `DataFrame`.
+#' @return `DFrame`.
 .prepareResultsForPlot <-
     function(object,
              direction,
@@ -47,7 +47,7 @@
              baseMeanThreshold,
              lfcThreshold) {
         assert(is(object, "DESeqResults"))
-        df <- as(object, "DataFrame")
+        df <- as(object, "DFrame")
         colnames(df) <- camelCase(colnames(df), strict = TRUE)
         alphaCol <- ifelse(
             test = isTRUE(isSubset("svalue", names(object))),
@@ -194,7 +194,7 @@
              DESeqDataSet # nolint
     ) {
         assert(
-            is(object, "DataFrame"),
+            is(object, "DFrame"),
             is(DESeqDataSet, "DESeqDataSet"),
             identical(
                 x = rownames(object),
@@ -210,7 +210,7 @@
         counts <- counts(DESeqDataSet, normalized = TRUE)
         out <- cbind(object, counts)
         ## Ensure we're not changing the object class on return.
-        ## This can happen for DESeqResults, which will coerce to DataFrame.
+        ## This can happen for DESeqResults, which will coerce to DFrame.
         if (!identical(x = class(object), y = class(out))) {
             out <- as(out, Class = class(object)[[1L]])
         }
@@ -229,7 +229,7 @@
 #' DESeq2 includes additional columns in `rowData()` that aren't informative for
 #' a user, and doesn't need to be included in the tables. Instead, only keep
 #' informative columns that are character or factor. Be sure to drop complex,
-#' non-atomic columns (e.g. list, S4) that are allowed in GRanges/DataFrame but
+#' non-atomic columns (e.g. list, S4) that are allowed in GRanges/DFrame but
 #' will fail to write to disk as CSV. Note that we're using `decode()` here to
 #' handle S4 Rle columns from the Genomic Ranges.
 .joinRowData <-
@@ -237,7 +237,7 @@
              DESeqDataSet # nolint
     ) {
         assert(
-            is(object, "DataFrame"),
+            is(object, "DFrame"),
             is(DESeqDataSet, "DESeqDataSet"),
             validObject(object),
             validObject(DESeqDataSet),

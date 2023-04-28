@@ -50,7 +50,7 @@ internal \code{DESeqDataSet}.}
 \item{...}{Additional arguments.}
 }
 \value{
-\code{DataFrameList}.
+\code{DFrameList}.
 Named list containing subsets of \code{DESeqResults}.
 }
 \description{
