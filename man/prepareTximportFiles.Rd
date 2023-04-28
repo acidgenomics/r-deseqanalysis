@@ -5,24 +5,23 @@
 \title{Prepare quant files for tximport}
 \usage{
 prepareTximportFiles(
-  files,
-  makeNames = c("makeNames", "snakeCase", "camelCase"),
-  exists = TRUE
+  dir,
+  type = c("salmon", "kallisto"),
+  makeNames = c("makeNames", "snakeCase", "camelCase")
 )
 }
 \arguments{
-\item{files}{\code{character}.
-Quant file paths (e.g. "quant.sf" for salmon, "abundance.h5" for kallisto).
+\item{dir}{\code{character(1)}.
+Directory path containing quant files.
 See \code{\link[tximport:tximport]{tximport()}} for details.}
+
+\item{type}{\code{character(1)}.
+Type of quant/abundance file to find.
+Expecting \code{"quant.sf"} for salmon, \code{"abundance.h5"} for kallisto.}
 
 \item{makeNames}{\code{character(1)}.
 Syntactic name function to apply on sample names.
-Uses \code{\link[base:match.arg]{match.arg()}} internally.
-See basejump toolkit for details.}
-
-\item{exists}{\code{logical(1)}.
-Check if requested input exists on disk.
-Runs \code{\link[basejump:reexports]{realpath()}} internally.}
+Uses \code{\link[base:match.arg]{match.arg()}} internally.}
 }
 \value{
 \code{character}.
@@ -43,7 +42,7 @@ Runs the following internal comments:
 }
 }
 \note{
-Updated 2019-10-09.
+Updated 2023-04-28.
 }
 \examples{
 files <- c(
@@ -51,6 +50,11 @@ files <- c(
     file.path("salmon", "2-sample-B", "quant.sf")
 )
 print(files)
-files <- prepareTximportFiles(files, makeNames = "snakeCase", exists = FALSE)
+files <- prepareTximportFiles(dir = "salmon", type = "salmon")
 print(files)
+}
+\seealso{
+\itemize{
+\item tximport vignette
+}
 }
