@@ -1,5 +1,17 @@
 # Release notes
 
+## DESeqAnalysis 0.6.8 (2023-04-28)
+
+Major changes:
+
+- Reworked `prepareTximportFiles` to work on a directory instead of files.
+
+Minor changes:
+
+- Now classing on `DFrame` instead of `DataFrame` virtual class consitently.
+- Resaved example `deseq` and `deseqMinimal` objects.
+- Removed unused `matchMetadataToFiles` function.
+
 ## DESeqAnalysis 0.6.7 (2023-02-09)
 
 Minor changes:
@@ -273,8 +285,8 @@ Major changes:
   - `lfcShrink`: whether to use (adaptie) shrunken LFC values or not.
   - `lfcThreshold` (for post-hoc cutoffs).
   - `baseMeanThreshold`.
-  These are defined in the `metadata` slot of the object and can be accessed/
-  modified with corresponding S4 generics.
+    These are defined in the `metadata` slot of the object and can be accessed/
+    modified with corresponding S4 generics.
 - Updated default differential expression R Markdown template to support
   additional parameters:
   - `alpha_threshold`
