@@ -37,7 +37,7 @@ NULL
             isPositive(n)
         )
         alphaCol <- .alphaCol(object)
-        object <- as(object, "DataFrame")
+        object <- as(object, "DFrame")
         object <- camelCase(object, strict = TRUE)
         required <- c("baseMean", "log2FoldChange", alphaCol)
         assert(isSubset(required, colnames(object)))
@@ -124,8 +124,8 @@ NULL
 
 
 
-## Updated 2022-05-24.
-`markdownTables,DataFrameList` <- # nolint
+## Updated 2023-04-28.
+`markdownTables,DFrameList` <- # nolint
     function(object,
              contrastName = NULL,
              n = 10L) {
@@ -161,8 +161,8 @@ NULL
 #' @export
 setMethod(
     f = "markdownTables",
-    signature = signature(object = "DataFrameList"),
-    definition = `markdownTables,DataFrameList`
+    signature = signature(object = "DFrameList"),
+    definition = `markdownTables,DFrameList`
 )
 
 #' @rdname markdownTables

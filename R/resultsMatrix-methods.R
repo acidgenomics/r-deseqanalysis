@@ -22,7 +22,7 @@
 #'
 #' @return
 #' - `rowData = FALSE`: `matrix`.
-#' - `rowData = TRUE`: `DataFrame`.
+#' - `rowData = TRUE`: `DFrame`.
 #'
 #' @examples
 #' data(deseq)
@@ -80,7 +80,7 @@ NULL
         )
         if (isTRUE(rowData)) {
             out <- .joinRowData(
-                object = as(mat, "DataFrame"),
+                object = as(mat, "DFrame"),
                 DESeqDataSet = as(object, "DESeqDataSet")
             )
         } else {

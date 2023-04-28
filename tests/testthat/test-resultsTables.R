@@ -1,9 +1,9 @@
 names <- c("all", "up", "down", "both")
 
-test_that("DataFrameList return", {
+test_that("DFrameList return", {
     object <- objs[["deseq"]]
     x <- resultsTables(object, i = 1L)
-    expect_s4_class(x, "SimpleDataFrameList")
+    expect_s4_class(x, "SimpleDFrameList")
     expect_s4_class(x[[1L]], "DESeqResults")
     expect_named(x, names)
 })

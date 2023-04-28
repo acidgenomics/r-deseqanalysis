@@ -2,14 +2,14 @@
 % Please edit documentation in R/AllGenerics.R, R/markdownTables-methods.R
 \name{markdownTables}
 \alias{markdownTables}
-\alias{markdownTables,DataFrameList-method}
+\alias{markdownTables,DFrameList-method}
 \alias{markdownTables,DESeqAnalysis-method}
 \alias{markdownTables,DESeqResults-method}
 \title{Markdown tables}
 \usage{
 markdownTables(object, ...)
 
-\S4method{markdownTables}{DataFrameList}(object, contrastName = NULL, n = 10L)
+\S4method{markdownTables}{DFrameList}(object, contrastName = NULL, n = 10L)
 
 \S4method{markdownTables}{DESeqAnalysis}(object, i, n = 10L)
 
