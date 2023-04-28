@@ -74,8 +74,8 @@ NULL
 #' scale_y_continuous theme
 #' @importFrom goalie allArePositive areDisjointSets areIntersectingSets
 #' areSameLength areSetEqual assert bapply hasColnames hasDuplicates hasLength
-#' hasNames hasLength hasRows hasRownames hasValidDimnames hasValidNames isAFile
-#' isAlpha isAny isCharacter isFlag isHeaderLevel isInRange isInt
+#' hasNames hasLength hasRows hasRownames hasValidDimnames hasValidNames isADir
+#' isAFile isAlpha isAny isCharacter isFlag isHeaderLevel isInRange isInt
 #' isMatchingFixed isNegative isNonNegative isNumber isPercentage isPositive
 #' isScalar isString isSubset requireNamespaces validate
 #' @importFrom methods as is new prototype setClass setGeneric setValidity slot

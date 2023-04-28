@@ -1,23 +1,19 @@
-## FIXME Rework this to use a directory as the primary argument instead...
-## more intuitive.
-
-
-
 #' Prepare quant files for tximport
 #'
 #' @export
-#' @note Updated 2019-10-09.
+#' @note Updated 2023-04-28.
 #'
-#' @param files `character`.
-#' Quant file paths (e.g. "quant.sf" for salmon, "abundance.h5" for kallisto).
+#' @param dir `character(1)`.
+#' Directory path containing quant files.
 #' See [`tximport()`][tximport::tximport] for details.
-#' @param exists `logical(1)`.
-#' Check if requested input exists on disk.
-#' Runs [`realpath()`][basejump::realpath] internally.
+#'
+#' @param type `character(1)`.
+#' Type of quant/abundance file to find.
+#' Expecting `"quant.sf"` for salmon, `"abundance.h5"` for kallisto.
+#'
 #' @param makeNames `character(1)`.
 #' Syntactic name function to apply on sample names.
 #' Uses [`match.arg()`][base::match.arg] internally.
-#' See basejump toolkit for details.
 #'
 #' @details
 #' Runs the following internal comments:
@@ -32,31 +28,51 @@
 #' @return `character`.
 #' Return quant file paths, with valid sample names automatically applied.
 #'
+#' @seealso
+#' - tximport vignette
+#'
 #' @examples
 #' files <- c(
 #'     file.path("salmon", "1-sample-A", "quant.sf"),
 #'     file.path("salmon", "2-sample-B", "quant.sf")
 #' )
 #' print(files)
-#' files <- prepareTximportFiles(files, makeNames = "snakeCase", exists = FALSE)
+#' files <- prepareTximportFiles(dir = "salmon", type = "salmon")
 #' print(files)
 prepareTximportFiles <-
-    function(files,
-             makeNames = c("makeNames", "snakeCase", "camelCase"),
-             exists = TRUE) {
+    function(dir,
+             type = c("salmon", "kallisto"),
+             makeNames = c("makeNames", "snakeCase", "camelCase")) {
         makeNames <- get(
             x = match.arg(makeNames),
             envir = asNamespace("basejump"),
             inherits = TRUE
         )
         assert(
-            isCharacter(files),
-            isFlag(exists),
+            isADir(dir),
             is.function(makeNames)
         )
-        if (isTRUE(exists)) {
-            files <- realpath(files) # nocov
-        }
+        type <- match.arg(type)
+        pattern <- switch(
+            EXPR = type,
+            "salmon" = "quant.sf",
+            "kallisto" = "abundance.h5"
+        )
+        files <- sort(list.files(
+            path = dir,
+            pattern = pattern,
+            full.names = TRUE,
+            recursive = TRUE,
+            ignore.case = TRUE
+        ))
+        assert(
+            hasLength(files),
+            msg = sprintf(
+                "Failed to detect {.file %s} in {.dir %s}.",
+                pattern, dir
+            )
+        )
+        files <- realpath(files)
         names <- basename(dirname(files))
         names <- autopadZeros(names)
         names <- makeNames(names)
