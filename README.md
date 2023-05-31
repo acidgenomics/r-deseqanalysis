@@ -34,20 +34,7 @@ conda activate "$name"
 R
 ```
 
-### [Docker][] method
-
-```sh
-image='acidgenomics/r-packages:deseqanalysis'
-workdir='/mnt/work'
-docker pull "$image"
-docker run -it \
-    --volume="${PWD}:${workdir}" \
-    --workdir="$workdir" \
-    "$image"
-```
-
 [bioconda]: https://bioconda.github.io/
 [conda]: https://conda.io/
 [deseq2]: https://bioconductor.org/packages/DESeq2/
-[docker]: https://www.docker.com/
 [r]: https://www.r-project.org/
