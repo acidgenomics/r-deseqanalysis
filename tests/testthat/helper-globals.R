@@ -1,6 +1,6 @@
 ## nolint start
 Gene2Symbol <- AcidGenomes::Gene2Symbol
-realpath <- basejump::realpath
+realpath <- AcidBase::realpath
 render <- rmarkdown::render
 tempdir2 <- AcidBase::tempdir2
 unlink2 <- AcidBase::unlink2

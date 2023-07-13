@@ -49,7 +49,7 @@ Imports:
 Suggests:
     apeglm (>= 1.20.0),
     ashr (>= 2.2.54),
-    basejump (>= 0.16.5),
+    basejump (>= 0.17.0),
     knitr (>= 1.42),
     rmarkdown (>= 2.21),
     testthat (>= 3.1.7),

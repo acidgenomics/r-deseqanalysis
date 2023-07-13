@@ -36,16 +36,18 @@ Runs the following internal comments:
 \item Extract sample directory name from quant file using
 \code{\link[base:basename]{dirname()}} and \code{\link[base:basename]{basename()}}.
 \item Autopad zeros, if necessary, via
-\code{\link[basejump:reexports]{autopadZeros()}}.
+\code{\link[syntactic:autopadZeros]{autopadZeros()}}.
 \item Sanitizes names with \code{\link[syntactic:snakeCase]{snakeCase()}}.
 \item Sorts files alphabetically.
 }
 }
 \note{
-Updated 2023-04-28.
+Updated 2023-07-13.
 }
 \examples{
-library(AcidBase)
+suppressPackageStartupMessages({
+    library(AcidBase)
+})
 tempdir <- tempdir2()
 samples <- c("1-sample-A", "2-sample-B")
 salmonDir <- initDir(file.path(tempdir, "salmon"))
