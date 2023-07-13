@@ -1,5 +1,18 @@
 # Release notes
 
+## DESeqAnalysis 0.6.9 (2023-07-13)
+
+Major changes:
+
+- Updated dependencies to R 4.3 / Bioconductor 3.17.
+
+Minor changes:
+
+- Removed internal calls to basejump package, which has been changed to a
+  meta-package of Acid Genomics packages, without any exports in `NAMESPACE`.
+  This has been corrected inside of `prepareTximportFiles` to correctly
+  reference the methods exported in syntactic package.
+
 ## DESeqAnalysis 0.6.8 (2023-04-28)
 
 Major changes:
