@@ -23,10 +23,10 @@ License: AGPL-3
 Encoding: UTF-8
 LazyData: false
 Depends:
-    R (>= 4.2),
-    DESeq2 (>= 1.38.0)
+    R (>= 4.3),
+    DESeq2 (>= 1.40.0)
 Imports:
-    AcidBase (>= 0.6.15),
+    AcidBase (>= 0.6.16),
     AcidCLI (>= 0.2.7),
     AcidExperiment (>= 0.4.7),
     AcidGenerics (>= 0.6.7),
@@ -34,26 +34,26 @@ Imports:
     AcidMarkdown (>= 0.2.5),
     AcidPlots (>= 0.5.5),
     AcidPlyr (>= 0.3.10),
-    BiocGenerics (>= 0.44.0),
-    IRanges (>= 2.32.0),
-    S4Vectors (>= 0.36.0),
-    SummarizedExperiment (>= 1.28.0),
+    BiocGenerics (>= 0.46.0),
+    IRanges (>= 2.34.0),
+    S4Vectors (>= 0.38.0),
+    SummarizedExperiment (>= 1.30.0),
     ggplot2 (>= 3.4.2),
-    goalie (>= 0.6.9),
-    pipette (>= 0.10.9),
+    goalie (>= 0.6.11),
+    pipette (>= 0.11.0),
     stringi (>= 1.7.12),
-    syntactic (>= 0.6.5),
+    syntactic (>= 0.6.6),
     methods,
     stats,
     utils
 Suggests:
-    ComplexUpset,
-    apeglm (>= 1.20.0),
+    ComplexUpset (>= 1.3.3),
+    apeglm (>= 1.22.0),
     ashr (>= 2.2.54),
     basejump (>= 0.17.0),
-    ggrepel,
+    ggrepel (>= 0.9.3),
     knitr (>= 1.42),
-    pheatmap,
+    pheatmap (>= 1.0.12),
     rmarkdown (>= 2.21),
     testthat (>= 3.1.7),
     tximport (>= 1.26.0)
