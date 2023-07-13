@@ -1,7 +1,7 @@
 #' Prepare quant files for tximport
 #'
 #' @export
-#' @note Updated 2023-04-28.
+#' @note Updated 2023-07-13.
 #'
 #' @param dir `character(1)`.
 #' Directory path containing quant files.
@@ -21,7 +21,7 @@
 #' 1. Extract sample directory name from quant file using
 #' [`dirname()`][base::dirname] and [`basename()`][base::basename].
 #' 2. Autopad zeros, if necessary, via
-#' [`autopadZeros()`][basejump::autopadZeros].
+#' [`autopadZeros()`][syntactic::autopadZeros].
 #' 3. Sanitizes names with [`snakeCase()`][syntactic::snakeCase].
 #' 4. Sorts files alphabetically.
 #'
@@ -32,7 +32,9 @@
 #' - tximport vignette
 #'
 #' @examples
-#' library(AcidBase)
+#' suppressPackageStartupMessages({
+#'     library(AcidBase)
+#' })
 #' tempdir <- tempdir2()
 #' samples <- c("1-sample-A", "2-sample-B")
 #' salmonDir <- initDir(file.path(tempdir, "salmon"))
@@ -54,7 +56,7 @@ prepareTximportFiles <-
              makeNames = c("makeNames", "snakeCase", "camelCase")) {
         makeNames <- get(
             x = match.arg(makeNames),
-            envir = asNamespace("basejump"),
+            envir = asNamespace("syntactic"),
             inherits = TRUE
         )
         assert(

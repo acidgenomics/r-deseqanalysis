@@ -2,31 +2,31 @@
 ## Updated 2022-10-25.
 params:
   title: "Differential expression with DESeq2"
-  
+
   ## Use DESeqAnalysis object as input.
   ## - Standard: Load from file on disk, either RDS or RDA.
   ## - Advanced: Loop across multiple objects using `rmarkdown::render()`.
   object: !r file.path("rds", Sys.Date(), "object.rds")
-  
+
   ## The `name` param is only required when passing in object directly, during
   ## an `rmarkdown::render()` call. See `object` param.
   name: ""
-  
+
   ## Use log2 fold change values with adaptive shrinkage applied.
   ## Refer to `DESeq2::lfcShrink()` for details.
   ## Enabled by default, if defined in object.
   ## Can override default setting with TRUE/FALSE boolean flag.
   lfc_shrink: NULL
-  
+
   ## Post-hoc filters for differential expression results.
   ## These will inherit values defined in object when left NULL.
   alpha_threshold: NULL
   lfc_threshold: NULL
   base_mean_threshold: NULL
-  
+
   ## Only include samples contained in current contast for DEG plots.
   contrast_samples: TRUE
-  
+
   output_dir: !r file.path("results", Sys.Date(), "differential-expression")
 
 title: "`r params[['title']]`"
