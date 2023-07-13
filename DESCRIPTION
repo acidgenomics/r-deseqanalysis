@@ -51,6 +51,7 @@ Suggests:
     apeglm (>= 1.20.0),
     ashr (>= 2.2.54),
     basejump (>= 0.17.0),
+    ggrepel,
     knitr (>= 1.42),
     pheatmap,
     rmarkdown (>= 2.21),
