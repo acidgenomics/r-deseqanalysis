@@ -1,7 +1,7 @@
 Package: DESeqAnalysis
 Title: Acid Genomics DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.6.9.9000
+Version: 0.6.9
 Date: 2023-07-13
 Authors@R: c(
     person(
