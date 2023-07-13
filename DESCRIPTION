@@ -2,7 +2,7 @@ Package: DESeqAnalysis
 Title: Acid Genomics DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
 Version: 0.6.9.9000
-Date: 2023-04-28
+Date: 2023-07-13
 Authors@R: c(
     person(
         given = "Michael",
@@ -47,10 +47,12 @@ Imports:
     stats,
     utils
 Suggests:
+    ComplexUpset,
     apeglm (>= 1.20.0),
     ashr (>= 2.2.54),
     basejump (>= 0.17.0),
     knitr (>= 1.42),
+    pheatmap,
     rmarkdown (>= 2.21),
     testthat (>= 3.1.7),
     tximport (>= 1.26.0)
