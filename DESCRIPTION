@@ -56,7 +56,7 @@ Suggests:
     pheatmap (>= 1.0.12),
     rmarkdown (>= 2.21),
     testthat (>= 3.1.7),
-    tximport (>= 1.26.0)
+    tximport (>= 1.28.0)
 Additional_repositories: https://r.acidgenomics.com
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
