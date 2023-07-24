@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: Acid Genomics DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.6.9
-Date: 2023-07-13
+Version: 0.6.10.9000
+Date: 2023-07-24
 Authors@R: c(
     person(
         given = "Michael",
@@ -39,7 +39,7 @@ Imports:
     S4Vectors (>= 0.38.0),
     SummarizedExperiment (>= 1.30.0),
     ggplot2 (>= 3.4.2),
-    goalie (>= 0.6.11),
+    goalie (>= 0.6.12),
     pipette (>= 0.11.0),
     stringi (>= 1.7.12),
     syntactic (>= 0.6.6),
@@ -56,7 +56,8 @@ Suggests:
     pheatmap (>= 1.0.12),
     rmarkdown (>= 2.21),
     testthat (>= 3.1.7),
-    tximport (>= 1.28.0)
+    tximport (>= 1.28.0),
+    tximportData (>= 1.28.0)
 Additional_repositories: https://r.acidgenomics.com
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
