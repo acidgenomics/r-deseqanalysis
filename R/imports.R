@@ -77,7 +77,7 @@ NULL
 #' hasNames hasLength hasRows hasRownames hasValidDimnames hasValidNames isADir
 #' isAFile isAlpha isAny isCharacter isFlag isHeaderLevel isInRange isInt
 #' isMatchingFixed isNegative isNonNegative isNumber isPercentage isPositive
-#' isScalar isString isSubset requireNamespaces validate
+#' isScalar isString isSubset isTximport requireNamespaces validate
 #' @importFrom methods as is new prototype setClass setGeneric setValidity slot
 #' slot<- validObject .hasSlot
 #' @importFrom stringi stri_match_first_regex
