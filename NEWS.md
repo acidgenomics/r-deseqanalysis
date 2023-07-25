@@ -1,5 +1,11 @@
 # Release notes
 
+## DESeqAnalysis 0.6.11 (2023-07-25)
+
+Minor changes:
+
+- `sanitizeTximportIdentifiers`: Fixed typo in identifier check pattern.
+
 ## DESeqAnalysis 0.6.10 (2023-07-25)
 
 New functions:
