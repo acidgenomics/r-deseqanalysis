@@ -31,7 +31,7 @@ sanitizeTximportIdentifiers <- function(txi) {
     assert(isTximport(txi))
     if (!all(grepl(
         pattern = "|",
-        x = txi[["abundance"]],
+        x = rownames(txi[["abundance"]]),
         fixed = TRUE
     ))) {
         return(txi)
