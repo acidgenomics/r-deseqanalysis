@@ -1,5 +1,5 @@
 ---
-## Updated 2022-10-25.
+## Updated 2023-07-25.
 params:
   title: "Differential expression with DESeq2"
 
@@ -60,7 +60,7 @@ if (is.character(params[["object"]])) {
     object <- import(file)
     name <- params[["name"]]
     if (!isTRUE(nzchar(name))) {
-      name <- basenameSansExt(file)
+        name <- basenameSansExt(file)
     }
     rm(file)
 } else {
