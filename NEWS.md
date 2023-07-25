@@ -1,5 +1,16 @@
 # Release notes
 
+## DESeqAnalysis 0.6.10 (2023-07-25)
+
+New functions:
+
+- `sanitizeTximportIdentifiers`: New utility function for sanitizing malformed
+  transcript identifiers returned when importing salmon data generated against
+  GENCODE-aligned BAM files. We hit this edge case when processing Nanopore
+  samples using guppy to minimap2 to BAM with samtools. This edge case has also
+  be observed when importing kallisto data aligned against GENCODE, which also
+  doesn't currently handle transcript identifier sanitization correctly.
+
 ## DESeqAnalysis 0.6.9 (2023-07-13)
 
 Major changes:
