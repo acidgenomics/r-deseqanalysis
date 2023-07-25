@@ -1,0 +1,11 @@
+test_that("sanitizeTximportIdentifiers", {
+    skip_if_not_installed("tximport")
+    skip_if_not_installed("tximportData")
+    dir <- system.file("extdata", package = "tximportData")
+    samples <- read.table(file.path(dir, "samples.txt"), header = TRUE)
+    files <- file.path(dir, "salmon", samples[["run"]], "quant.sf.gz")
+    names(files) <- paste0("sample", seq(from = 1L, to = length(files)))
+    txi <- tximport::tximport(files, type = "salmon", txIn = TRUE, txOut = TRUE)
+    txi <- sanitizeTximportIdentifiers(txi)
+    expect_type(txi, "list")
+})
