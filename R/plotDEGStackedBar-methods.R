@@ -60,10 +60,10 @@ NULL
         p <- ggplot(
             data = as.data.frame(data),
             mapping = aes(
-                x = !!sym("contrast"),
-                y = !!sym("value"),
-                fill = !!sym("direction"),
-                label = !!sym("value")
+                x = .data[["contrast"]],
+                y = .data[["value"]],
+                fill = .data[["direction"]],
+                label = .data[["value"]]
             )
         ) +
             geom_bar(

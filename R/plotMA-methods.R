@@ -256,9 +256,9 @@ NULL
         p <- ggplot(
             data = as.data.frame(data),
             mapping = aes(
-                x = !!sym(baseMeanCol),
-                y = !!sym(lfcCol),
-                color = !!sym(isDegCol)
+                x = .data[[baseMeanCol]],
+                y = .data[[lfcCol]],
+                color = .data[[isDegCol]]
             )
         ) +
             geom_hline(
@@ -339,9 +339,9 @@ NULL
                 acid_geom_label_repel(
                     data = as.data.frame(labelData),
                     mapping = aes(
-                        x = !!sym(baseMeanCol),
-                        y = !!sym(lfcCol),
-                        label = !!sym("geneName")
+                        x = .data[[baseMeanCol]],
+                        y = .data[[lfcCol]],
+                        label = .data[["geneName"]]
                     )
                 )
         }

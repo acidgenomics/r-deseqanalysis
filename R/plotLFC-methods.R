@@ -45,15 +45,15 @@ NULL
         p <- ggplot(
             data = data,
             mapping = aes(
-                x = !!sym("log2FoldChange"),
-                y = after_stat(!!sym("density"))
+                x = .data[["log2FoldChange"]],
+                y = after_stat(.data[["density")]]
             )
         ) +
             geom_freqpoly(
                 stat = "bin",
                 binwidth = 0.25,
                 mapping = aes(
-                    color = !!sym("contrast")
+                    color = .data[["contrast"]]
                 )
             ) +
             acid_scale_color_discrete()

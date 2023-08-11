@@ -158,7 +158,7 @@ NULL
         linetype <- "solid"
         p <- ggplot(
             data = data.frame(baseMean = object),
-            mapping = aes(x = !!sym("baseMean"))
+            mapping = aes(x = .data[["baseMean")]]
         ) +
             geom_density(
                 color = "black",

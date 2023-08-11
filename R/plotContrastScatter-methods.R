@@ -142,12 +142,12 @@ NULL
         p <- ggplot(
             data = data,
             mapping = aes(
-                x = !!sym("x"),
-                y = !!sym("y")
+                x = .data[["x"]],
+                y = .data[["y"]]
             )
         ) +
             geom_point(
-                mapping = aes(color = !!sym(isDegCol)),
+                mapping = aes(color = .data[[isDegCol)]],
                 alpha = pointAlpha,
                 size = pointSize,
                 stroke = 0L,
