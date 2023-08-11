@@ -91,9 +91,9 @@ NULL
             )
         )
         ## Color palette.
-        p <- p + autoDiscreteFillScale()
+        p <- p + acid_scale_fill_discrete()
         if (isTRUE(flip)) {
-            p <- acid_coord_flip(p)
+            p <- p + acid_discrete_coord_flip()
         }
         p
     }
