@@ -19,7 +19,7 @@ NULL
 
 
 
-## Updated 2022-05-17.
+## Updated 2023-08-11.
 `plotLFC,DESeqAnalysis` <- # nolint
     function(object) {
         assert(validObject(object))
@@ -39,9 +39,9 @@ NULL
             )
         )
         keep <- complete.cases(data)
-        data <- data[keep, ]
+        data <- data[keep, , drop = FALSE]
         keep <- abs(data[["log2FoldChange"]]) >= lfcThreshold
-        data <- data[keep, ]
+        data <- data[keep, , drop = FALSE]
         p <- ggplot(
             data = data,
             mapping = aes(
@@ -56,7 +56,7 @@ NULL
                     color = !!sym("contrast")
                 )
             ) +
-            autoDiscreteColorScale()
+            acid_scale_color_discrete()
         p
     }
 

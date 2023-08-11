@@ -214,7 +214,7 @@ NULL
                     size = size
                 )
             ## Color palette.
-            p <- p + autoDiscreteColorScale()
+            p <- p + acid_scale_color_discrete()
         }
         ## Labels.
         labels[["color"]] <- "summary"
