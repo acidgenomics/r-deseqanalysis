@@ -271,9 +271,9 @@ NULL
             )
         ) +
             geom_vline(
-                xintercept = 0L,
-                size = 0.5,
-                color = pointColor[["nonsignificant"]]
+                color = pointColor[["nonsignificant"]],
+                linewidth = 0.5,
+                xintercept = 0L
             ) +
             geom_point(
                 alpha = pointAlpha,

@@ -262,9 +262,9 @@ NULL
             )
         ) +
             geom_hline(
-                yintercept = 0L,
-                size = 0.5,
-                color = pointColor[["nonsignificant"]]
+                color = pointColor[["nonsignificant"]],
+                linewidth = 0.5,
+                yintercept = 0L
             ) +
             geom_point(
                 alpha = pointAlpha,
