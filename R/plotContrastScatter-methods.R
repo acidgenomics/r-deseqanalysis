@@ -147,7 +147,7 @@ NULL
             )
         ) +
             geom_point(
-                mapping = aes(color = .data[[isDegCol)]],
+                mapping = aes(color = .data[[isDegCol]]),
                 alpha = pointAlpha,
                 size = pointSize,
                 stroke = 0L,

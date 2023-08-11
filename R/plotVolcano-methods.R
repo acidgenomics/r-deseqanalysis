@@ -382,7 +382,7 @@ NULL
             ## LFC density plot.
             lfcHist <- ggplot(
                 data = as.data.frame(data),
-                mapping = aes(x = .data[[lfcCol)]]
+                mapping = aes(x = .data[[lfcCol]])
             ) +
                 geom_density(
                     color = NA,
@@ -404,7 +404,7 @@ NULL
             ## P value density plot.
             pvalueHist <- ggplot(
                 data = as.data.frame(data),
-                mapping = aes(x = .data[[negLogAlphaCol)]]
+                mapping = aes(x = .data[[negLogAlphaCol]])
             ) +
                 geom_density(
                     color = NA,

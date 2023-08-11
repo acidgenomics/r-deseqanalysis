@@ -46,7 +46,7 @@ NULL
             data = data,
             mapping = aes(
                 x = .data[["log2FoldChange"]],
-                y = after_stat(.data[["density")]]
+                y = after_stat(.data[["density"]])
             )
         ) +
             geom_freqpoly(
