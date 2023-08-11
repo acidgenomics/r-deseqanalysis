@@ -265,9 +265,9 @@ NULL
         p <- ggplot(
             data = as.data.frame(data),
             mapping = aes(
-                x = !!sym(lfcCol),
-                y = !!sym(negLogAlphaCol),
-                color = !!sym(isDegCol)
+                x = .data[[lfcCol]],
+                y = .data[[negLogAlphaCol]],
+                color = .data[[isDegCol]]
             )
         ) +
             geom_vline(
@@ -371,9 +371,9 @@ NULL
                 acid_geom_label_repel(
                     data = as.data.frame(labelData),
                     mapping = aes(
-                        x = !!sym(lfcCol),
-                        y = !!sym(negLogAlphaCol),
-                        label = !!sym("geneName")
+                        x = .data[[lfcCol]],
+                        y = .data[[negLogAlphaCol]],
+                        label = .data[["geneName"]]
                     )
                 )
         }
@@ -382,7 +382,7 @@ NULL
             ## LFC density plot.
             lfcHist <- ggplot(
                 data = as.data.frame(data),
-                mapping = aes(x = !!sym(lfcCol))
+                mapping = aes(x = .data[[lfcCol)]]
             ) +
                 geom_density(
                     color = NA,
@@ -404,7 +404,7 @@ NULL
             ## P value density plot.
             pvalueHist <- ggplot(
                 data = as.data.frame(data),
-                mapping = aes(x = !!sym(negLogAlphaCol))
+                mapping = aes(x = .data[[negLogAlphaCol)]]
             ) +
                 geom_density(
                     color = NA,
