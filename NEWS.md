@@ -1,5 +1,15 @@
 # Release notes
 
+## DESeqAnalysis 0.6.12 (2023-08-15)
+
+Minor changes:
+
+- Reworked internal ggplot2 code to use data pronouns (`.data`) instead of
+  rlang syntactic sugar (`!!`/`sym`).
+- Using updated AcidPlots functions: `acid_scale_color_discrete` instead of
+  `autoDiscreteColorScale` and `acid_discrete_coord_flip` instead of
+  `acid_coord_flip`.
+
 ## DESeqAnalysis 0.6.11 (2023-07-25)
 
 Minor changes:
