@@ -58,7 +58,8 @@ tempusToTximport <- function(file) {
         f = function(object, name, dir ) {
             export(
                 object = object,
-                con = file.path(dir, paste0(name, ".tsv"))
+                con = file.path(dir, paste0(name, ".tsv")),
+                quiet = TRUE
             )
         }
     )
