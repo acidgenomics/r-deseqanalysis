@@ -28,7 +28,7 @@ NULL
 #' design do.call plotPCA plotMA unlist updateObject
 #' @importFrom DESeq2 priorInfo
 #' @importFrom S4Vectors complete.cases cor decode droplevels head mcols mcols<-
-#' metadata metadata<- na.omit
+#' metadata metadata<- na.omit split
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom methods coerce show
 #' @importFrom pipette export import
@@ -59,14 +59,14 @@ NULL
 ## Standard functions ==========================================================
 
 #' @importFrom AcidBase initDir methodFunction printString realpath
-#' showSlotInfo standardizeCall
+#' showSlotInfo standardizeCall tempdir2 unlink2
 #' @importFrom AcidCLI abort alert alertInfo alertWarning dl toInlineString
 #' @importFrom AcidMarkdown markdownHeader markdownList
 #' @importFrom AcidPlots .data acid_discrete_coord_flip acid_geom_label_repel
 #' acid_scale_color_discrete acid_scale_fill_discrete matchLabels pretty_breaks
 #' wrap_plots
 #' @importFrom DESeq2 DESeq fpkm nbinomWaldTest
-#' @importFrom IRanges DataFrameList
+#' @importFrom IRanges DataFrameList SplitDataFrameList
 #' @importFrom S4Vectors DataFrame SimpleList
 #' @importFrom ggplot2 aes after_stat annotation_logticks element_blank geom_bar
 #' geom_density geom_freqpoly geom_hline geom_point geom_text geom_vline ggplot
