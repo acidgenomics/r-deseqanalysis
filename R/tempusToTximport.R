@@ -1,7 +1,7 @@
-#' Import Tempus transcript-level data into tximport
+#' Import Tempus xR transcript-level counts into tximport
 #'
 #' @export
-#' @note Updated 2023-08-30.
+#' @note Updated 2023-08-31.
 #'
 #' @param file `character(1)`.
 #' Tempus transcript-level counts file.
