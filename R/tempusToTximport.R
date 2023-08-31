@@ -9,7 +9,7 @@
 #' @return tximport `list`.
 #'
 #' @examples
-#' ## > file <- "g_rna_abundance.csv"
+#' ## > file <- "g_rna_abundance.csv.gz"
 #' ## > txi <- tempusToTximport(file)
 tempusToTximport <- function(file) {
     assert(
