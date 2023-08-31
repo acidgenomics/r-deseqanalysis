@@ -24,8 +24,8 @@ NULL
 #' plotDEGUpset plotHeatmap plotLFC plotQuantileHeatmap plotUpset plotVolcano
 #' removeNA results resultsDiff resultsMatrix resultsNames resultsNames<-
 #' resultsTables sampleData snakeCase transformType
-#' @importFrom BiocGenerics Map anyDuplicated as.data.frame cbind combine counts
-#' design do.call plotPCA plotMA unlist updateObject
+#' @importFrom BiocGenerics Map Reduce anyDuplicated as.data.frame cbind combine
+#' counts design do.call match plotPCA plotMA sort unlist updateObject
 #' @importFrom DESeq2 priorInfo
 #' @importFrom S4Vectors complete.cases cor decode droplevels head mcols mcols<-
 #' metadata metadata<- na.omit split

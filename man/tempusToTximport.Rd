@@ -2,7 +2,7 @@
 % Please edit documentation in R/tempusToTximport.R
 \name{tempusToTximport}
 \alias{tempusToTximport}
-\title{Import Tempus transcript-level data into tximport}
+\title{Import Tempus xR transcript-level counts into tximport}
 \usage{
 tempusToTximport(file)
 }
@@ -14,10 +14,10 @@ Tempus transcript-level counts file.}
 tximport \code{list}.
 }
 \description{
-Import Tempus transcript-level data into tximport
+Import Tempus xR transcript-level counts into tximport
 }
 \note{
-Updated 2023-08-30.
+Updated 2023-08-31.
 }
 \examples{
 ## > file <- "g_rna_abundance.csv"
