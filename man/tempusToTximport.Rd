@@ -20,6 +20,6 @@ Import Tempus xR transcript-level counts into tximport
 Updated 2023-08-31.
 }
 \examples{
-## > file <- "g_rna_abundance.csv"
+## > file <- "g_rna_abundance.csv.gz"
 ## > txi <- tempusToTximport(file)
 }
