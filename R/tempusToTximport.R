@@ -1,3 +1,7 @@
+## FIXME Need to rework to handle expansion of zero-count transcripts.
+
+
+
 #' Import Tempus xR transcript-level counts into tximport
 #'
 #' @export
