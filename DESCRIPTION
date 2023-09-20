@@ -2,7 +2,7 @@ Package: DESeqAnalysis
 Title: Acid Genomics DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
 Version: 0.6.13.9000
-Date: 2023-08-30
+Date: 2023-09-20
 Authors@R: c(
     person(
         given = "Michael",
@@ -23,8 +23,7 @@ License: AGPL-3
 Encoding: UTF-8
 LazyData: false
 Depends:
-    R (>= 4.3),
-    DESeq2 (>= 1.40.0)
+    R (>= 4.3)
 Imports:
     AcidBase (>= 0.6.18),
     AcidCLI (>= 0.2.8),
@@ -35,6 +34,7 @@ Imports:
     AcidPlots (>= 0.6.1),
     AcidPlyr (>= 0.3.11),
     BiocGenerics (>= 0.46.0),
+    DESeq2 (>= 1.40.0),
     IRanges (>= 2.34.0),
     S4Vectors (>= 0.38.0),
     SummarizedExperiment (>= 1.30.0),

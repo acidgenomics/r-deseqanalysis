@@ -2,38 +2,21 @@
 % Please edit documentation in R/AllGenerics.R, R/export-methods.R
 \name{export}
 \alias{export}
-\alias{export,DESeqAnalysis,character,missing-method}
-\alias{export,DESeqDataSet,character,missing-method}
-\title{Export}
+\alias{export,DESeqAnalysis,character-method}
+\alias{export,DESeqDataSet,character-method}
+\title{Export data from R}
 \usage{
-export(object, con, format, ...)
+export(object, con, ...)
 
-\S4method{export}{DESeqAnalysis,character,missing}(
-  object,
-  con,
-  format,
-  compress = getOption(x = "acid.export.compress", default = FALSE),
-  overwrite = getOption(x = "acid.overwrite", default = TRUE),
-  quiet = getOption(x = "acid.quiet", default = FALSE)
-)
+\S4method{export}{DESeqAnalysis,character}(object, con, compress = FALSE, overwrite = TRUE, quiet = FALSE)
 
-\S4method{export}{DESeqDataSet,character,missing}(
-  object,
-  con,
-  format,
-  compress = getOption(x = "acid.export.compress", default = FALSE),
-  overwrite = getOption(x = "acid.overwrite", default = TRUE),
-  quiet = getOption(x = "acid.quiet", default = FALSE)
-)
+\S4method{export}{DESeqDataSet,character}(object, con, compress = FALSE, overwrite = TRUE, quiet = FALSE)
 }
 \arguments{
 \item{object}{Object.}
 
 \item{con}{\code{character(1)}.
 Directory path.}
-
-\item{format}{\code{character(1)}, \code{missing}, or \code{NULL}.
-\emph{Currently not supported.}}
 
 \item{compress}{\code{logical(1)}.
 Apply gzip compression to all files.}
@@ -47,11 +30,10 @@ Perform command quietly, suppressing messages.}
 \item{...}{Additional arguments.}
 }
 \value{
-Invisible \code{character}.
-File path(s).
+Invisible \code{character} or \code{list} of file paths.
 }
 \description{
-Export
+Export data from R
 }
 \details{
 Size-factor normalized coutns and FPKM values are calculated on the fly and
