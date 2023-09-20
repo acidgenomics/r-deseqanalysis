@@ -6,9 +6,6 @@
 #' Size-factor normalized coutns and FPKM values are calculated on the fly and
 #' exported automatically.
 #'
-#' @param object
-#' Object.
-#'
 #' @param con `character(1)`.
 #' Directory path.
 #'
@@ -133,26 +130,12 @@ NULL
 `export,DESeqAnalysis` <- # nolint
     function(object,
              con,
-             format, # missing
-             compress = getOption(
-                 x = "acid.export.compress",
-                 default = FALSE
-             ),
-             overwrite = getOption(
-                 x = "acid.overwrite",
-                 default = TRUE
-             ),
-             quiet = getOption(
-                 x = "acid.quiet",
-                 default = FALSE
-             )) {
-        if (missing(format)) {
-            format <- NULL
-        }
+             compress = FALSE,
+             overwrite = TRUE,
+             quiet = FALSE) {
         assert(
             validObject(object),
             isString(con),
-            is.null(format),
             isFlag(compress),
             isFlag(overwrite),
             isFlag(quiet)
@@ -220,31 +203,17 @@ NULL
 ## Inheriting the SummarizedExperiment method internally here.
 ## Only export the raw and normalized counts.
 ## Skip exporting other assays, including mu, H, cooks.
-##
+
 ## Updated 2022-09-13.
 `export,DESeqDataSet` <- # nolint
     function(object,
              con,
-             format, # missing
-             compress = getOption(
-                 x = "acid.export.compress",
-                 default = FALSE
-             ),
-             overwrite = getOption(
-                 x = "acid.overwrite",
-                 default = TRUE
-             ),
-             quiet = getOption(
-                 x = "acid.quiet",
-                 default = FALSE
-             )) {
-        if (missing(format)) {
-            format <- NULL
-        }
+             compress = FALSE,
+             overwrite = TRUE,
+             quiet = FALSE) {
         assert(
             validObject(object),
             isString(con),
-            is.null(format),
             isFlag(compress),
             isFlag(overwrite),
             isFlag(quiet)
@@ -274,8 +243,7 @@ setMethod(
     f = "export",
     signature = signature(
         object = "DESeqAnalysis",
-        con = "character",
-        format = "missing"
+        con = "character"
     ),
     definition = `export,DESeqAnalysis`
 )
@@ -286,8 +254,7 @@ setMethod(
     f = "export",
     signature = signature(
         object = "DESeqDataSet",
-        con = "character",
-        format = "missing"
+        con = "character"
     ),
     definition = `export,DESeqDataSet`
 )

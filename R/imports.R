@@ -16,22 +16,22 @@ NULL
 #' alphaThreshold<- as.DESeqDataSet as.DESeqTransform autopadZeros
 #' baseMeanThreshold baseMeanThreshold<- camelCase contrastName contrastName<-
 #' contrastSamples convertGenesToSymbols convertSampleIDsToNames correlation
-#' deg degIntersection degPerContrast droplevels2 interestingGroups
-#' interestingGroups<- intersectionMatrix leftJoin lfcShrink lfcShrink<-
+#' deg degIntersection degPerContrast droplevels2 export interestingGroups
+#' import interestingGroups<- intersectionMatrix leftJoin lfcShrink lfcShrink<-
 #' lfcShrinkType lfcThreshold lfcThreshold<- makeNames mapGenesToSymbols
 #' markdownTables melt metadata2 metadata2<- plotBaseMean plotContrastScatter
 #' plotCorrelationHeatmap plotCounts plotDEGHeatmap plotDEGPCA plotDEGStackedBar
 #' plotDEGUpset plotHeatmap plotLFC plotQuantileHeatmap plotUpset plotVolcano
 #' removeNA results resultsDiff resultsMatrix resultsNames resultsNames<-
 #' resultsTables sampleData snakeCase transformType
-#' @importFrom BiocGenerics Map Reduce anyDuplicated as.data.frame cbind combine
-#' counts design do.call match plotPCA plotMA sort unlist updateObject
+#' @importFrom BiocGenerics Map Reduce anyDuplicated as.data.frame cbind
+#' colnames combine counts design do.call match plotPCA plotMA rownames sort
+#' unlist updateObject
 #' @importFrom DESeq2 priorInfo
 #' @importFrom S4Vectors complete.cases cor decode droplevels head mcols mcols<-
 #' metadata metadata<- na.omit split
 #' @importFrom SummarizedExperiment assays assays<- colData colData<- rowData
 #' @importFrom methods coerce show
-#' @importFrom pipette export import
 NULL
 
 #' @importMethodsFrom AcidBase intersectionMatrix
