@@ -12,7 +12,7 @@
 ## S4 classes ==================================================================
 
 #' @importClassesFrom AcidBase missingOrNULL
-#' @importClassesFrom AcidGenomes Tx2Gene
+#' @importClassesFrom AcidGenomes TxToGene
 #' @importClassesFrom DESeq2 DESeqDataSet DESeqTransform
 #' @importClassesFrom IRanges DFrameList
 #' @importClassesFrom SummarizedExperiment RangedSummarizedExperiment
@@ -23,7 +23,7 @@ NULL
 
 ## S4 generics and methods =====================================================
 
-#' @importFrom AcidGenerics Gene2Symbol alphaSummary alphaThreshold
+#' @importFrom AcidGenerics GeneToSymbol alphaSummary alphaThreshold
 #' alphaThreshold<- as.DESeqDataSet as.DESeqTransform autopadZeros
 #' baseMeanThreshold baseMeanThreshold<- camelCase contrastName contrastName<-
 #' contrastSamples convertGenesToSymbols convertSampleIDsToNames correlation
@@ -46,10 +46,10 @@ NULL
 NULL
 
 #' @importMethodsFrom AcidBase intersectionMatrix
-#' @importMethodsFrom AcidExperiment Gene2Symbol autopadZeros
+#' @importMethodsFrom AcidExperiment GeneToSymbol autopadZeros
 #' convertGenesToSymbols convertSampleIDsToNames droplevels2 export
 #' interestingGroups interestingGroups<- mapGenesToSymbols melt
-#' @importMethodsFrom AcidGenomes Gene2Symbol
+#' @importMethodsFrom AcidGenomes GeneToSymbol
 #' @importMethodsFrom AcidPlots plotCounts plotHeatmap plotPCA plotUpset
 #' @importMethodsFrom AcidPlyr leftJoin melt
 #' @importMethodsFrom DESeq2 counts design
