@@ -50,7 +50,7 @@ corresponding \code{DESeqResults} object. Note that this only works for simple
 comparisons.
 }
 \note{
-Updated 2022-05-17.
+Updated 2023-09-26.
 }
 \examples{
 data(deseq)
