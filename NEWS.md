@@ -1,5 +1,11 @@
 # Release notes
 
+## DESeqAnalysis 0.6.13 (UNRELEASED)
+
+Minor changes:
+
+- Removed dependency on stringi package, in favor of `strMatch` from AcidBase.
+
 ## DESeqAnalysis 0.6.12 (2023-08-15)
 
 Minor changes:
