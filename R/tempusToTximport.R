@@ -59,7 +59,7 @@ tempusToTximport <- function(file) {
         object = spl,
         name = names(spl),
         MoreArgs = list(dir = tmpdir),
-        f = function(object, name, dir ) {
+        f = function(object, name, dir) {
             export(
                 object = object,
                 con = file.path(dir, paste0(name, ".tsv")),
