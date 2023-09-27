@@ -25,7 +25,7 @@ NULL
 
 
 ## This method is to be used primarily to set the contrast name on DESeqResults
-## inside plotting functions. See `plotMA()` method, for example.
+## inside plotting functions. See `plotMa()` method, for example.
 ## Updated 2021-03-15.
 `contrastName,DESeqAnalysis` <- # nolint
     function(object, i, ...) {

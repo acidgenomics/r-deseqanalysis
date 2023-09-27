@@ -33,9 +33,9 @@ to the first argument in the \code{character} vector.}
 \value{
 \itemize{
 \item \code{matrix}: Matrix containing numbers of DEGs per contrast.
-Intended primarily for use with \code{plotDEGStackedBar()}.
+Intended primarily for use with \code{plotDegStackedBar()}.
 \item \code{list}: Named vector containing the DEG identifiers.
-Intended primarily for use with \code{plotDEGUpset()}.
+Intended primarily for use with \code{plotDegUpset()}.
 }
 }
 \description{

@@ -1,36 +1,24 @@
-## NOTE Consider adding deprecated fallback support for passing of `results` as
-## primary argument instead of `object`, which is still in use in bcbioRNASeq
-## F1000 v2 paper.
-
-
-
-#' @name plotDEGHeatmap
-#' @inherit AcidGenerics::plotDEGHeatmap
-#' @note Updated 2022-04-15.
+#' @name plotDegPca
+#' @inherit AcidGenerics::plotDegPca
+#' @note Updated 2021-08-02.
 #'
-#' @inheritParams AcidPlots::plotHeatmap
+#' @inheritParams plotDegHeatmap
+#' @inheritParams AcidPlots::plotPca
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
 #' @param ... Additional arguments.
-#'
-#' @param title `logical(1)`, `character(1)`.
-#' Include contrast name as title?
-#' Can manually define as `character`.
-#'
-#' @param subtitle `logical(1)`.
-#' Include subtitle containing DEG information?
 #'
 #' @examples
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' plotDEGHeatmap(deseq, i = 1L)
+#' plotDegPca(deseq, i = 1L)
 NULL
 
 
 
-## Updated 2021-08-02.
-`plotDEGHeatmap,DESeqAnalysis` <- # nolint
+## Updated 2021-03-15.
+`plotDegPca,DESeqAnalysis` <- # nolint
     function(object,
              i,
              contrastSamples = FALSE,
@@ -38,7 +26,6 @@ NULL
              baseMeanThreshold = NULL,
              lfcThreshold = NULL,
              ...) {
-        validObject(object)
         assert(isFlag(contrastSamples))
         res <- results(object, i = i, quiet = TRUE)
         dt <- as(object, "DESeqTransform")
@@ -48,7 +35,7 @@ NULL
             dt <- dt[, samples, drop = FALSE]
             dt <- droplevels2(dt)
         }
-        plotDEGHeatmap(
+        plotDegPca(
             object = res,
             DESeqTransform = dt,
             alphaThreshold = ifelse(
@@ -72,19 +59,14 @@ NULL
 
 
 
-## This method is used in F1000 paper and needs to be included. Note that in
-## newer versions of bcbioRNASeq, this step won't work because we've slotted the
-## rlog/vst counts in as a matrix instead of DESeqTransform.
-## Updated 2021-03-15.
-`plotDEGHeatmap,DESeqResults` <- # nolint
+## Updated 2021-08-02.
+`plotDegPca,DESeqResults` <- # nolint
     function(object,
              DESeqTransform, # nolint
              direction = c("both", "up", "down"),
              alphaThreshold = NULL,
              baseMeanThreshold = NULL,
              lfcThreshold = NULL,
-             title = TRUE,
-             subtitle = TRUE,
              ...) {
         validObject(object)
         validObject(DESeqTransform)
@@ -104,9 +86,7 @@ NULL
         assert(
             is(res, "DESeqResults"),
             is(dt, "DESeqTransform"),
-            identical(rownames(res), rownames(dt)),
-            isFlag(title) || isCharacter(title) || is.null(title),
-            isFlag(subtitle)
+            identical(rownames(res), rownames(dt))
         )
         direction <- match.arg(direction)
         deg <- deg(
@@ -119,54 +99,47 @@ NULL
         )
         if (length(deg) < .minDEGThreshold) {
             alertWarning(sprintf(
-                fmt = "Fewer than %s DEGs to plot. Skipping.",
+                fmt = "Fewer than %s DEG to plot. Skipping.",
                 .minDEGThreshold
             ))
             return(invisible(NULL))
         }
         ## Subset to only include the DEGs.
         dt <- dt[deg, , drop = FALSE]
-        ## Title.
-        if (isTRUE(title)) {
-            title <- contrastName(res, format = "title")
-        } else if (identical(title, FALSE)) {
-            title <- NULL
-        }
-        if (isString(title) && isTRUE(subtitle)) {
-            subtitle <- .thresholdLabel(
-                object = object,
-                direction = direction,
-                alphaThreshold = alphaThreshold,
-                baseMeanThreshold = baseMeanThreshold,
-                lfcShrinkType = lfcShrinkType,
-                lfcThreshold = lfcThreshold
-            )
-            title <- paste(title, subtitle, sep = "\n")
-        }
-        ## Using SummarizedExperiment method defined in AcidPlots here.
+        ## Using SummarizedExperiment method here.
         args <- list(
             object = as(dt, "RangedSummarizedExperiment"),
-            title = title
+            ntop = Inf,
+            labels = list(
+                title = contrastName(res),
+                subtitle = .thresholdLabel(
+                    object = object,
+                    direction = direction,
+                    alphaThreshold = alphaThreshold,
+                    baseMeanThreshold = baseMeanThreshold,
+                    lfcShrinkType = lfcShrinkType,
+                    lfcThreshold = lfcThreshold
+                )
+            )
         )
         args <- c(args, list(...))
-        do.call(what = plotHeatmap, args = args)
+        do.call(what = plotPca, args = args)
     }
 
 
 
-#' @describeIn plotDEGHeatmap Passes to `DESeqResults` method.
+#' @describeIn plotDegPca Passes to `DESeqResults` method.
 #' @export
 setMethod(
-    f = "plotDEGHeatmap",
+    f = "plotDegPca",
     signature = signature(object = "DESeqAnalysis"),
-    definition = `plotDEGHeatmap,DESeqAnalysis`
+    definition = `plotDegPca,DESeqAnalysis`
 )
 
-#' @describeIn plotDEGHeatmap Passes to `plotHeatmap()` `SummarizedExperiment`
-#' method defined in AcidPlots.
+#' @rdname plotDegPca
 #' @export
 setMethod(
-    f = "plotDEGHeatmap",
+    f = "plotDegPca",
     signature = signature(object = "DESeqResults"),
-    definition = `plotDEGHeatmap,DESeqResults`
+    definition = `plotDegPca,DESeqResults`
 )

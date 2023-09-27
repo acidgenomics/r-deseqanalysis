@@ -1,5 +1,5 @@
 test_that("DESeqAnalysis", {
     object <- objs[["deseq"]]
-    p <- plotDEGStackedBar(object)
+    p <- plotDegStackedBar(object)
     expect_s3_class(p, "ggplot")
 })

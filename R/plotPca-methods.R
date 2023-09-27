@@ -1,11 +1,14 @@
 #' Principal component analysis plot
 #'
-#' @name plotPCA
-#' @note Updated 2022-03-08.
+#' @name plotPca
+#' @note Updated 2022-09-27.
 #'
 #' @details Passes to `SummarizedExperiment` defined in AcidPlots package.
 #'
 #' @inheritParams AcidRoxygen::params
+#'
+#' @seealso
+#' - `DESeq2::plotPCA`.
 #'
 #' @return `ggplot`.
 #'
@@ -13,27 +16,27 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' plotPCA(deseq)
+#' plotPca(deseq)
 NULL
 
 
 
 ## Updated 2021-01-21.
-`plotPCA,DESeqAnalysis` <- # nolint
+`plotPca,DESeqAnalysis` <- # nolint
     function(object, ...) {
         validObject(object)
         dt <- as(object, "DESeqTransform")
         rse <- as(dt, "RangedSummarizedExperiment")
-        plotPCA(rse, ...)
+        plotPca(rse, ...)
     }
 
 
 
-#' @describeIn plotPCA Extracts `DESeqTransform`, converts to
+#' @describeIn plotPca Extracts `DESeqTransform`, converts to
 #' `RangedSummarizedExperiment`, and passes to method defined in AcidPlots.
 #' @export
 setMethod(
-    f = "plotPCA",
+    f = "plotPca",
     signature = signature(object = "DESeqAnalysis"),
-    definition = `plotPCA,DESeqAnalysis`
+    definition = `plotPca,DESeqAnalysis`
 )

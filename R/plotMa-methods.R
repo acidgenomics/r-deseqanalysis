@@ -1,6 +1,6 @@
 #' MA plot
 #'
-#' @name plotMA
+#' @name plotMa
 #' @author Michael Steinbaugh, Rory Kirchner
 #' @note Updated 2022-03-08.
 #'
@@ -31,10 +31,10 @@
 #' print(genes)
 #'
 #' ## DESeqAnalysis ====
-#' plotMA(deseq, i = 1L)
+#' plotMa(deseq, i = 1L)
 #'
 #' ## Customize the colors.
-#' plotMA(
+#' plotMa(
 #'     object = deseq,
 #'     i = 1L,
 #'     pointColor = c(
@@ -45,18 +45,18 @@
 #' )
 #'
 #' ## Directional support (up or down).
-#' plotMA(deseq, i = 1L, direction = "up", ntop = 5L)
-#' plotMA(deseq, i = 1L, direction = "down", ntop = 5L)
+#' plotMa(deseq, i = 1L, direction = "up", ntop = 5L)
+#' plotMa(deseq, i = 1L, direction = "down", ntop = 5L)
 #'
 #' ## Label genes manually.
 #' ## Note that either gene IDs or names (symbols) are supported.
-#' plotMA(deseq, i = 1L, genes = genes)
+#' plotMa(deseq, i = 1L, genes = genes)
 NULL
 
 
 
 ## Updated 2021-06-29.
-`plotMA,DESeqAnalysis` <- # nolint
+`plotMa,DESeqAnalysis` <- # nolint
     function(object,
              i,
              alphaThreshold = NULL,
@@ -85,7 +85,7 @@ NULL
             dds <- convertGenesToSymbols(dds)
             rownames(res) <- rownames(dds)
         }
-        plotMA(
+        plotMa(
             object = res,
             alphaThreshold = ifelse(
                 test = is.null(alphaThreshold),
@@ -111,7 +111,7 @@ NULL
 
 
 ## Updated 2021-08-09.
-`plotMA,DESeqResults` <- # nolint
+`plotMa,DESeqResults` <- # nolint
     function(object,
              direction = c("both", "up", "down"),
              alphaThreshold = NULL,
@@ -350,19 +350,19 @@ NULL
 
 
 
-#' @describeIn plotMA Passes to `DESeqResults` method, with `gene2symbol`
+#' @describeIn plotMa Passes to `DESeqResults` method, with `gene2symbol`
 #' argument automatically defined.
 #' @export
 setMethod(
-    f = "plotMA",
+    f = "plotMa",
     signature = signature(object = "DESeqAnalysis"),
-    definition = `plotMA,DESeqAnalysis`
+    definition = `plotMa,DESeqAnalysis`
 )
 
-#' @rdname plotMA
+#' @rdname plotMa
 #' @export
 setMethod(
-    f = "plotMA",
+    f = "plotMa",
     signature = signature(object = "DESeqResults"),
-    definition = `plotMA,DESeqResults`
+    definition = `plotMa,DESeqResults`
 )

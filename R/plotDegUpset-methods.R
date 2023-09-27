@@ -1,5 +1,5 @@
-#' @name plotDEGUpset
-#' @inherit AcidGenerics::plotDEGUpset
+#' @name plotDegUpset
+#' @inherit AcidGenerics::plotDegUpset
 #' @note Updated 2022-05-18.
 #'
 #' @inheritParams degPerContrast
@@ -11,13 +11,13 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' plotDEGUpset(deseq)
+#' plotDegUpset(deseq)
 NULL
 
 
 
 ## Updated 2022-05-18.
-`plotDEGUpset,DESeqAnalysis` <- # nolint
+`plotDegUpset,DESeqAnalysis` <- # nolint
     function(object,
              i = NULL,
              direction = c("both", "up", "down"),
@@ -40,10 +40,10 @@ NULL
 
 
 
-#' @rdname plotDEGUpset
+#' @rdname plotDegUpset
 #' @export
 setMethod(
-    f = "plotDEGUpset",
+    f = "plotDegUpset",
     signature = signature(object = "DESeqAnalysis"),
-    definition = `plotDEGUpset,DESeqAnalysis`
+    definition = `plotDegUpset,DESeqAnalysis`
 )

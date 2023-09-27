@@ -129,7 +129,7 @@ NULL
     function(object,
              contrastName = NULL,
              n = 10L) {
-        assert(isString(contrastName, nullOK = TRUE))
+        assert(isString(contrastName, nullOk = TRUE))
         out <- list()
         if (hasLength(object[["up"]])) {
             out[["up"]] <- .degKable(

@@ -176,27 +176,27 @@ NULL
 NULL
 
 #' @export
-#' @name plotDEGHeatmap
-#' @rdname plotDEGHeatmap
-#' @usage plotDEGHeatmap(object, ...)
+#' @name plotDegHeatmap
+#' @rdname plotDegHeatmap
+#' @usage plotDegHeatmap(object, ...)
 NULL
 
 #' @export
-#' @name plotDEGPCA
-#' @rdname plotDEGPCA
-#' @usage plotDEGPCA(object, ...)
+#' @name plotDegPca
+#' @rdname plotDegPca
+#' @usage plotDegPca(object, ...)
 NULL
 
 #' @export
-#' @name plotDEGStackedBar
-#' @rdname plotDEGStackedBar
-#' @usage plotDEGStackedBar(object, ...)
+#' @name plotDegStackedBar
+#' @rdname plotDegStackedBar
+#' @usage plotDegStackedBar(object, ...)
 NULL
 
 #' @export
-#' @name plotDEGUpset
-#' @rdname plotDEGUpset
-#' @usage plotDEGUpset(object, ...)
+#' @name plotDegUpset
+#' @rdname plotDegUpset
+#' @usage plotDegUpset(object, ...)
 NULL
 
 #' @export
@@ -206,21 +206,21 @@ NULL
 NULL
 
 #' @export
-#' @name plotLFC
-#' @rdname plotLFC
-#' @usage plotLFC(object, ...)
+#' @name plotLfc
+#' @rdname plotLfc
+#' @usage plotLfc(object, ...)
 NULL
 
 #' @export
-#' @name plotMA
-#' @rdname plotMA
-#' @usage plotMA(object, ...)
+#' @name plotMa
+#' @rdname plotMa
+#' @usage plotMa(object, ...)
 NULL
 
 #' @export
-#' @name plotPCA
-#' @rdname plotPCA
-#' @usage plotPCA(object, ...)
+#' @name plotPca
+#' @rdname plotPca
+#' @usage plotPca(object, ...)
 NULL
 
 #' @export

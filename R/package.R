@@ -31,13 +31,13 @@ NULL
 #' import interestingGroups<- intersectionMatrix leftJoin lfcShrink lfcShrink<-
 #' lfcShrinkType lfcThreshold lfcThreshold<- makeNames mapGenesToSymbols
 #' markdownTables melt metadata2 metadata2<- plotBaseMean plotContrastScatter
-#' plotCorrelationHeatmap plotCounts plotDEGHeatmap plotDEGPCA plotDEGStackedBar
-#' plotDEGUpset plotHeatmap plotLFC plotQuantileHeatmap plotUpset plotVolcano
-#' removeNA results resultsDiff resultsMatrix resultsNames resultsNames<-
-#' resultsTables sampleData snakeCase transformType
+#' plotCorrelationHeatmap plotCounts plotDegHeatmap plotDegPca plotDegStackedBar
+#' plotDegUpset plotHeatmap plotLfc plotMa plotPca plotQuantileHeatmap plotUpset
+#' plotVolcano removeNa results resultsDiff resultsMatrix resultsNames
+#' resultsNames<- resultsTables sampleData snakeCase transformType
 #' @importFrom BiocGenerics Map Reduce anyDuplicated as.data.frame cbind
-#' colnames combine counts design do.call match plotPCA plotMA rownames sort
-#' unlist updateObject
+#' colnames combine counts design do.call match rownames sort unlist
+#' updateObject
 #' @importFrom DESeq2 priorInfo
 #' @importFrom S4Vectors complete.cases cor decode droplevels head mcols mcols<-
 #' metadata metadata<- na.omit split
@@ -50,11 +50,11 @@ NULL
 #' convertGenesToSymbols convertSampleIDsToNames droplevels2 export
 #' interestingGroups interestingGroups<- mapGenesToSymbols melt
 #' @importMethodsFrom AcidGenomes GeneToSymbol
-#' @importMethodsFrom AcidPlots plotCounts plotHeatmap plotPCA plotUpset
+#' @importMethodsFrom AcidPlots plotCounts plotHeatmap plotPca plotUpset
 #' @importMethodsFrom AcidPlyr leftJoin melt
 #' @importMethodsFrom DESeq2 counts design
 #' @importMethodsFrom pipette droplevels2 export import metadata2 metadata2<-
-#' removeNA
+#' removeNa
 #' @importMethodsFrom syntactic autopadZeros camelCase makeNames snakeCase
 NULL
 

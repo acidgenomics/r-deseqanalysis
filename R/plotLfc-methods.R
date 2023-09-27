@@ -1,5 +1,5 @@
-#' @name plotLFC
-#' @inherit AcidGenerics::plotLFC
+#' @name plotLfc
+#' @inherit AcidGenerics::plotLfc
 #' @note Updated 2022-05-17.
 #'
 #' Plot the log2 fold change distributions for all contrasts in the analysis.
@@ -14,13 +14,13 @@
 #' ## DESeqAnalysis ====
 #' object <- deseq
 #' lfcThreshold(object) <- 0.5
-#' plotLFC(object)
+#' plotLfc(object)
 NULL
 
 
 
 ## Updated 2023-08-11.
-`plotLFC,DESeqAnalysis` <- # nolint
+`plotLfc,DESeqAnalysis` <- # nolint
     function(object) {
         assert(validObject(object))
         lfcThreshold <- lfcThreshold(object)
@@ -62,10 +62,10 @@ NULL
 
 
 
-#' @rdname plotLFC
+#' @rdname plotLfc
 #' @export
 setMethod(
-    f = "plotLFC",
+    f = "plotLfc",
     signature = signature(object = "DESeqAnalysis"),
-    definition = `plotLFC,DESeqAnalysis`
+    definition = `plotLfc,DESeqAnalysis`
 )

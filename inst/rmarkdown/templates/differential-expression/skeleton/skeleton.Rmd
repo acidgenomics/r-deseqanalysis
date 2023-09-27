@@ -97,7 +97,7 @@ sampleData(object)
 # DEG summary
 
 ```{r plot-deg-stacked-bar}
-plotDEGStackedBar(object)
+plotDegStackedBar(object)
 ```
 
 ```{r plot-deg-upset, include=FALSE}
@@ -109,7 +109,7 @@ pdf(
     width = 15L,
     height = 10L
 )
-plotDEGUpset(object)
+plotDegUpset(object)
 dev.off()
 ```
 
@@ -121,7 +121,7 @@ An MA plot compares transformed counts on `M` (log ratio) and `A` (mean average)
 invisible(Map(
     f = function(object, i) {
         markdownHeader(i, level = 2L, asis = TRUE)
-        print(plotMA(object = object, i = i))
+        print(plotMa(object = object, i = i))
     },
     i = resultsNames,
     MoreArgs = list("object" = object)
@@ -149,7 +149,7 @@ invisible(Map(
 invisible(Map(
     f = function(object, i, ...) {
         markdownHeader(i, level = 2L, asis = TRUE)
-        print(plotDEGPCA(object = object, i = i, ...))
+        print(plotDegPca(object = object, i = i, ...))
     },
     i = resultsNames,
     MoreArgs = list(
@@ -167,7 +167,7 @@ This plot shows only differentially expressed genes on a per-sample basis. We ha
 invisible(Map(
     f = function(object, i, ...) {
         markdownHeader(i, level = 2L, asis = TRUE)
-        plotDEGHeatmap(object = object, i = i, ...)
+        plotDegHeatmap(object = object, i = i, ...)
     },
     i = resultsNames,
     MoreArgs = list(
