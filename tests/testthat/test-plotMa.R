@@ -1,7 +1,7 @@
 args <- list("object" = objs[["deseq"]], "i" = 1L)
 
 test_that("DESeqAnalysis", {
-    x <- do.call(plotMA, args)
+    x <- do.call(plotMa, args)
     expect_s3_class(x, "ggplot")
     geomtype <- vapply(
         X = x[["layers"]],
@@ -26,7 +26,7 @@ test_that("DESeqAnalysis", {
 
 test_that("Directional support", {
     x <- do.call(
-        what = plotMA,
+        what = plotMa,
         args = append(
             x = args,
             values = list("direction" = "up")
@@ -34,7 +34,7 @@ test_that("Directional support", {
     )
     expect_s3_class(x, "ggplot")
     x <- do.call(
-        what = plotMA,
+        what = plotMa,
         args = append(
             x = args,
             values = list("direction" = "down")
@@ -45,7 +45,7 @@ test_that("Directional support", {
 
 test_that("Label the top genes", {
     x <- do.call(
-        what = plotMA,
+        what = plotMa,
         args = append(
             x = args,
             values = list("ntop" = 10L)
@@ -56,7 +56,7 @@ test_that("Label the top genes", {
 
 test_that("Label specific genes", {
     x <- do.call(
-        what = plotMA,
+        what = plotMa,
         args = append(
             x = args,
             values = list("genes" = objs[["geneNames"]])

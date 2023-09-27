@@ -11,9 +11,9 @@
 #'
 #' @return
 #' - `matrix`: Matrix containing numbers of DEGs per contrast.
-#' Intended primarily for use with `plotDEGStackedBar()`.
+#' Intended primarily for use with `plotDegStackedBar()`.
 #' - `list`: Named vector containing the DEG identifiers.
-#' Intended primarily for use with `plotDEGUpset()`.
+#' Intended primarily for use with `plotDegUpset()`.
 #'
 #' @examples
 #' data(deseq)

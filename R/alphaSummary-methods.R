@@ -51,7 +51,7 @@ NULL
                 FUN.VALUE = logical(1L)
             )),
             isAny(contrast, classes = c("character", "NULL")),
-            isString(name, nullOK = TRUE)
+            isString(name, nullOk = TRUE)
         )
         ## Either `contrast` or `name`.
         ## If neither are defined, we're checking the intercept.

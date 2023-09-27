@@ -34,7 +34,7 @@ NULL
     function(object, ..., samples = NULL, transform = FALSE) {
         validObject(object)
         assert(
-            isCharacter(samples, nullOK = TRUE),
+            isCharacter(samples, nullOk = TRUE),
             isFlag(transform)
         )
         if (isTRUE(transform)) {

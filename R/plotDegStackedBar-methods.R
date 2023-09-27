@@ -1,7 +1,7 @@
 #' Stacked bar plot of DEGs
 #'
-#' @name plotDEGStackedBar
-#' @inherit AcidGenerics::plotDEGStackedBar
+#' @name plotDegStackedBar
+#' @inherit AcidGenerics::plotDegStackedBar
 #' @note Updated 2022-05-18.
 #'
 #' @inheritParams degPerContrast
@@ -19,13 +19,13 @@
 #' data(deseq)
 #'
 #' ## DESeqAnalysis ====
-#' plotDEGStackedBar(deseq)
+#' plotDegStackedBar(deseq)
 NULL
 
 
 
 ## Updated 2022-05-18.
-`plotDEGStackedBar,DESeqAnalysis` <- # nolint
+`plotDegStackedBar,DESeqAnalysis` <- # nolint
     function(object,
              i = NULL,
              direction = c("both", "up", "down"),
@@ -100,10 +100,10 @@ NULL
 
 
 
-#' @rdname plotDEGStackedBar
+#' @rdname plotDegStackedBar
 #' @export
 setMethod(
-    f = "plotDEGStackedBar",
+    f = "plotDegStackedBar",
     signature = signature(object = "DESeqAnalysis"),
-    definition = `plotDEGStackedBar,DESeqAnalysis`
+    definition = `plotDegStackedBar,DESeqAnalysis`
 )
