@@ -1,10 +1,20 @@
 # Release notes
 
-## DESeqAnalysis 0.6.13 (UNRELEASED)
+## DESeqAnalysis 0.7.0 (2023-10-04)
 
 Minor changes:
 
 - Removed dependency on stringi package, in favor of `strMatch` from AcidBase.
+- `export`: Reworked methods to use AcidGenerics convention instead of BiocIO.
+- Now enforcing strict camel case for all function names.
+- Renamed `plotDEGHeatmap` to `plotDegHeatmap`.
+- Renamed `plotDEGPCA` to `plotDegPca`.
+- Renamed `plotDEGStackedBar` to `plotDegStackedBar`.
+- Renamed `plotDEGUpset` to `plotDegUpset`.
+- Renamed `plotLFC` to `plotLfc`.
+- Renamed `plotMA` to `plotMa`. Now using AcidGenerics instead of BiocGenerics.
+- Renamed `plotPCA` to `plotPca`. Now using AcidGenerics instead of
+  BiocGenerics.
 
 ## DESeqAnalysis 0.6.12 (2023-08-15)
 
