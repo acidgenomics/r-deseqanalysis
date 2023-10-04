@@ -1,6 +1,6 @@
 #' @name degIntersection
 #' @inherit AcidGenerics::degIntersection return title
-#' @note Updated 2022-05-17.
+#' @note Updated 2023-10-04.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @param ... Passthrough arguments to `DESeqResultsList` method.
@@ -32,21 +32,20 @@
 #'
 #' ## DESeqAnalysis ====
 #' mat <- degIntersection(deseq, return = "matrix")
-#' class(mat)
-#' type(mat)
-#' head(mat)
+#' print(class(mat))
+#' print(head(mat))
 #'
 #' count <- degIntersection(deseq, return = "count")
-#' class(count)
-#' head(count)
+#' print(class(count))
+#' print(head(count))
 #'
 #' ratio <- degIntersection(deseq, return = "ratio")
-#' class(ratio)
-#' head(ratio)
+#' print(class(ratio))
+#' print(head(ratio))
 #'
 #' names <- degIntersection(deseq, i = c(1L, 2L), return = "names")
-#' class(names)
-#' head(names)
+#' print(class(names))
+#' print(head(names))
 #'
 #' ## DESeqAnalysisList ====
 #' object <- DESeqAnalysisList(list("object1" = deseq, "object2" = deseq))
