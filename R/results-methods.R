@@ -64,7 +64,7 @@ NULL
             dds <- as(object, "DESeqDataSet")
             ## This step ensures we humanize the sample names, when possible.
             suppressMessages({
-                dds <- convertSampleIDsToNames(dds)
+                dds <- convertSampleIdsToNames(dds)
             })
             res <- .joinRowData(object = res, DESeqDataSet = dds)
             res <- .joinCounts(object = res, DESeqDataSet = dds)

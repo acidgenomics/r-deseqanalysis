@@ -26,7 +26,7 @@ NULL
 #' @importFrom AcidGenerics GeneToSymbol alphaSummary alphaThreshold
 #' alphaThreshold<- as.DESeqDataSet as.DESeqTransform autopadZeros
 #' baseMeanThreshold baseMeanThreshold<- camelCase contrastName contrastName<-
-#' contrastSamples convertGenesToSymbols convertSampleIDsToNames correlation
+#' contrastSamples convertGenesToSymbols convertSampleIdsToNames correlation
 #' deg degIntersection degPerContrast droplevels2 export interestingGroups
 #' import interestingGroups<- intersectionMatrix leftJoin lfcShrink lfcShrink<-
 #' lfcShrinkType lfcThreshold lfcThreshold<- makeNames mapGenesToSymbols
@@ -47,7 +47,7 @@ NULL
 
 #' @importMethodsFrom AcidBase intersectionMatrix
 #' @importMethodsFrom AcidExperiment GeneToSymbol autopadZeros
-#' convertGenesToSymbols convertSampleIDsToNames droplevels2 export
+#' convertGenesToSymbols convertSampleIdsToNames droplevels2 export
 #' interestingGroups interestingGroups<- mapGenesToSymbols melt
 #' @importMethodsFrom AcidGenomes GeneToSymbol
 #' @importMethodsFrom AcidPlots plotCounts plotHeatmap plotPca plotUpset
