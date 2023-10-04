@@ -1,7 +1,7 @@
 #' DESeqAnalysis
 #'
 #' Toolkit for performing differential expression with
-#' [DESeq2](http://bioconductor.org/packages/DESeq2/).
+#' [DESeq2](https://bioconductor.org/packages/DESeq2/).
 #'
 #' @aliases NULL
 #' @keywords internal
