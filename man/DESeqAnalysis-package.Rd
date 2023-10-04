@@ -5,7 +5,7 @@
 \title{DESeqAnalysis}
 \description{
 Toolkit for performing differential expression with
-\href{http://bioconductor.org/packages/DESeq2/}{DESeq2}.
+\href{https://bioconductor.org/packages/DESeq2/}{DESeq2}.
 }
 \seealso{
 Useful links:
