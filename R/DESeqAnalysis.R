@@ -16,6 +16,9 @@
 #' Assign the `DESeq2::lfcShrink()` return here.
 #'
 #' @examples
+#' suppressPackageStartupMessages({
+#'     library(S4Vectors)
+#' })
 #' data <- DESeq2::makeExampleDESeqDataSet()
 #' rowRanges <- AcidGenomes::emptyRanges(names = rownames(data))
 #' mcols(rowRanges)[["geneId"]] <- paste0("id", seq_len(length(rowRanges)))
