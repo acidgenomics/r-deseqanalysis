@@ -89,28 +89,27 @@ lowest. Gene identifiers are defined as the names.
 Intersection of differentially expressed genes
 }
 \note{
-Updated 2022-05-17.
+Updated 2023-10-04.
 }
 \examples{
 data(deseq)
 
 ## DESeqAnalysis ====
 mat <- degIntersection(deseq, return = "matrix")
-class(mat)
-type(mat)
-head(mat)
+print(class(mat))
+print(head(mat))
 
 count <- degIntersection(deseq, return = "count")
-class(count)
-head(count)
+print(class(count))
+print(head(count))
 
 ratio <- degIntersection(deseq, return = "ratio")
-class(ratio)
-head(ratio)
+print(class(ratio))
+print(head(ratio))
 
 names <- degIntersection(deseq, i = c(1L, 2L), return = "names")
-class(names)
-head(names)
+print(class(names))
+print(head(names))
 
 ## DESeqAnalysisList ====
 object <- DESeqAnalysisList(list("object1" = deseq, "object2" = deseq))
