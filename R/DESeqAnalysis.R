@@ -18,6 +18,7 @@
 #' @examples
 #' suppressPackageStartupMessages({
 #'     library(S4Vectors)
+#'     library(SummarizedExperiment)
 #' })
 #' data <- DESeq2::makeExampleDESeqDataSet()
 #' rowRanges <- AcidGenomes::emptyRanges(names = rownames(data))
