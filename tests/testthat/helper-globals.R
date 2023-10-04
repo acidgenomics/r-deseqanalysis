@@ -1,5 +1,6 @@
 ## nolint start
 GeneToSymbol <- AcidGenomes::GeneToSymbol
+data <- utils::data
 realpath <- AcidBase::realpath
 render <- rmarkdown::render
 tempdir2 <- AcidBase::tempdir2
