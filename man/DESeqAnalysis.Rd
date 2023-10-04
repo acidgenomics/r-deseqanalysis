@@ -33,6 +33,9 @@ to ensure \code{DESeqTransform} and \code{DESeqResults} correspond to the
 Updated 2021-03-15.
 }
 \examples{
+suppressPackageStartupMessages({
+    library(S4Vectors)
+})
 data <- DESeq2::makeExampleDESeqDataSet()
 rowRanges <- AcidGenomes::emptyRanges(names = rownames(data))
 mcols(rowRanges)[["geneId"]] <- paste0("id", seq_len(length(rowRanges)))
