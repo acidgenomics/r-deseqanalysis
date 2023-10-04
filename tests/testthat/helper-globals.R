@@ -1,5 +1,7 @@
 ## nolint start
 GeneToSymbol <- AcidGenomes::GeneToSymbol
+`rowData<-` <- SummarizedExperiment::`rowData<-`
+`rowRanges<-` <- SummarizedExperiment::`rowRanges<-`
 data <- utils::data
 realpath <- AcidBase::realpath
 render <- rmarkdown::render
