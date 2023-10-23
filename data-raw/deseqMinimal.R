@@ -2,9 +2,10 @@
 suppressPackageStartupMessages({
     library(devtools)
     library(usethis)
+    library(DESeq2)
 })
 ## nolint end
-load_all()
+load_all(helpers = FALSE)
 dds <- makeExampleDESeqDataSet(n = 50L, m = 4L)
 dds <- DESeq(dds, fitType = "local")
 dt <- varianceStabilizingTransformation(dds, fitType = "local")
