@@ -3,9 +3,10 @@ suppressPackageStartupMessages({
     library(devtools)
     library(usethis)
     library(AcidGenomes)
+    library(DESeq2)
 })
 ## nolint end
-load_all()
+load_all(helpers = FALSE)
 dds <- makeExampleDESeqDataSet(n = 500L, m = 12L, betaSD = 1L)
 rowRanges <- makeGRangesFromEnsembl(
     organism = "Homo sapiens",
@@ -62,7 +63,7 @@ deseq <- DESeqAnalysis(
     results = res,
     lfcShrink = shrink
 )
-limit <- structure(2e6L, class = "object_size")
+limit <- structure(3e6L, class = "object_size")
 stopifnot(
     is(deseq, "DESeqAnalysis"),
     validObject(deseq),
