@@ -16,7 +16,7 @@ object <- DESeqAnalysis(
     results = res,
     lfcShrink = NULL
 )
-limit <- structure(1e6L, class = "object_size")
+limit <- structure(1e6L, class = "object_size") # nolint
 stopifnot(
     is(object, "DESeqAnalysis"),
     validObject(object),
