@@ -28,13 +28,11 @@ NULL
         assert(isFlag(verbose))
         if (!isTRUE(.hasSlot(object, "metadata"))) {
             if (isTRUE(verbose)) {
-                ## nocov start
                 alertWarning(paste(
                     "Legacy object < 0.1.8 detected.",
                     "Updating to support metadata slot.",
                     sep = "\n"
                 ))
-                ## nocov end
             }
         }
         out <- DESeqAnalysis(
