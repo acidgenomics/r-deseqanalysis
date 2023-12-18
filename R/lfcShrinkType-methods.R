@@ -36,14 +36,40 @@ NULL
 
 
 
-## Updated 2020-08-04.
+#' Log fold change shrinkage type
+#'
+#' @note Updated 2023-12-18.
+#' @noRd
+#'
+#' @seealso
+#' - https://doi.org/10.1186/s13059-014-0550-8
 `lfcShrinkType,DESeqResults` <- # nolint
     function(object) {
-        pi <- priorInfo(object)
-        if (isSubset("type", names(pi))) {
-            type <- pi[["type"]]
+        pi <- try(
+            expr = {
+                priorInfo(object)
+            },
+            silent = TRUE
+        )
+        ## This provides support for legacy DESeqResults objects generated
+        ## before to `priorInfo` support.
+        if (is(pi, "try-error")) {
+            mc <- mcols(object)
+            desc <- mc["log2FoldChange", "description"]
+            ## MAP (shrunken) vs. MLE (unshrunken).
+            if (isMatchingFixed(x = desc, pattern = "MAP")) {
+                type <- "shrunken"
+            } else if (isMatchingFixed(x = desc, pattern = "MLE")) {
+                type <- "unshrunken"
+            } else {
+                type <- "unknown"
+            }
         } else {
-            type <- "unshrunken"
+            if (isSubset("type", names(pi))) {
+                type <- pi[["type"]]
+            } else {
+                type <- "unshrunken"
+            }
         }
         assert(isString(type))
         type
