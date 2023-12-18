@@ -45,6 +45,8 @@ NULL
 #' - https://doi.org/10.1186/s13059-014-0550-8
 `lfcShrinkType,DESeqResults` <- # nolint
     function(object) {
+        ## Not checking here, to provide support for legacy objects.
+        ## > assert(validObject(object))
         pi <- try(
             expr = {
                 priorInfo(object)
