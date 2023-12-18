@@ -1,7 +1,7 @@
 #' Results
 #'
 #' @name results
-#' @note Updated 2022-08-30.
+#' @note Updated 2023-12-18.
 #'
 #' @section Extra mode:
 #'
@@ -32,15 +32,15 @@ NULL
 
 
 
-## Updated 2022-08-30.
+## Updated 2023-12-18.
 `results,DESeqAnalysis` <- # nolint
     function(object,
              i,
              lfcShrink = NULL,
              extra = FALSE,
              quiet = TRUE) {
-        validObject(object)
         assert(
+            validObject(object),
             isScalar(i),
             isFlag(extra),
             isFlag(quiet)
@@ -79,7 +79,8 @@ NULL
         if (isFALSE(quiet)) {
             alert(msg)
         }
-        validObject(res)
+        ## Disabling this check to provide support for legacy objects.
+        ## > assert(validObject(res))
         res
     }
 

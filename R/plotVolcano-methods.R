@@ -1,7 +1,7 @@
 #' @name plotVolcano
 #' @author Michael Steinbaugh, John Hutchinson, Lorena Pantano
 #' @inherit AcidGenerics::plotVolcano
-#' @note Updated 2022-04-15.
+#' @note Updated 2023-12-18.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -56,7 +56,7 @@ NULL
 
 
 
-## Updated 2021-07-27.
+## Updated 2023-12-18.
 `plotVolcano,DESeqAnalysis` <- # nolint
     function(object,
              i,
@@ -66,8 +66,8 @@ NULL
              genes = NULL,
              ntop = 0L,
              ...) {
-        validObject(object)
         assert(
+            validObject(object),
             isAny(genes, classes = c("character", "NULL")),
             isInt(ntop),
             isNonNegative(ntop)
@@ -139,7 +139,8 @@ NULL
                  "subtitle" = NULL
              ),
              histograms = FALSE) {
-        validObject(object)
+        ## Disabling this check to provide support for legacy objects.
+        ## > assert(validObject(object))
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }

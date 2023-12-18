@@ -85,12 +85,13 @@ NULL
 
 
 
-## Updated 2019-09-10.
+## Updated 2023-12-18.
 `contrastName<-,DESeqResults,character` <- # nolint
     function(object, value) {
         assert(isString(value))
         metadata(object)[["contrastName"]] <- value
-        validObject(object)
+        ## Disabling this check to provide support for legacy objects.
+        ## > assert(validObject(object))
         object
     }
 
