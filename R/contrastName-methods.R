@@ -7,7 +7,7 @@
 
 #' @name contrastName
 #' @inherit AcidGenerics::contrastName
-#' @note Updated 2021-03-15.
+#' @note Updated 2023-12-18.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -45,11 +45,12 @@ NULL
 
 
 
-## Updated 2021-03-15.
+## Updated 2023-12-18.
 `contrastName,DESeqResults` <- # nolint
     function(object,
              format = c("resultsNames", "title")) {
-        validObject(object)
+        ## Not checking here, to provide support for legacy objects.
+        ## > assert(validObject(object))
         format <- match.arg(format)
         ## Use metadata stash, if defined. This is the recommended approach
         ## when passing off from DESeqAnalysis object, using `resultsNames()`.
