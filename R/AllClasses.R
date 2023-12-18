@@ -28,7 +28,7 @@
 #'
 #' @author Michael Steinbaugh
 #' @export
-#' @note Updated 2021-03-15.
+#' @note Updated 2023-12-18.
 #'
 #' @slot data `DESeqDataSet`.
 #'
@@ -252,7 +252,7 @@ setValidity(
 #'
 #' @author Michael Steinbaugh
 #' @export
-#' @note Updated 2021-03-09.
+#' @note Updated 2023-12-18.
 #' @return `DESeqResultsList`.
 setClass(
     Class = "DESeqResultsList",
@@ -284,13 +284,14 @@ setValidity(
             return(ok)
         }
         ## Ensure that all slotted DESeqResults objects are valid.
-        ok <- validate(
-            all(bapply(object, validObject)),
-            msg = "Not all DESeqResults in list are valid."
-        )
-        if (!isTRUE(ok)) {
-            return(ok)
-        }
+        ## NOTE Disabling this to provide support for legacy objects.
+        ## > ok <- validate(
+        ## >     all(bapply(object, validObject)),
+        ## >     msg = "Not all DESeqResults in list are valid."
+        ## > )
+        ## > if (!isTRUE(ok)) {
+        ## .     return(ok)
+        ## > }
         ## Check that all rownames in slotted DESeqResults are identical.
         rn <- rownames(object[[1L]])
         ok <- validate(

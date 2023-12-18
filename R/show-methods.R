@@ -13,10 +13,10 @@ NULL
 
 
 
-## Updated 2021-10-15.
+## Updated 2023-12-18.
 `show,DESeqAnalysis` <- # nolint
     function(object) {
-        validObject(object)
+        assert(validObject(object))
         dds <- as(object, "DESeqDataSet")
         cat(paste0(
             class(object), " ",
@@ -28,7 +28,9 @@ NULL
         cat("data:", ddsInfo, sep = "\n")
         list <- list(
             "transformType" = transformType(object),
+            ## FIXME This is failing with legacy object.
             "resultsNames" = resultsNames(object),
+            ## FIXME This is failing with legacy object.
             "alphaThreshold" = alphaThreshold(object)
         )
         baseMeanThreshold <- baseMeanThreshold(object)
