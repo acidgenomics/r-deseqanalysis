@@ -18,7 +18,7 @@ NULL
     function(object,
              lfcShrink = NULL,
              quiet = FALSE) {
-        validObject(object)
+        assert(validObject(object))
         if (is.null(lfcShrink)) {
             lfcShrink <- lfcShrink(object)
         }
