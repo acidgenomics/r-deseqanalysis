@@ -1,3 +1,10 @@
+## FIXME This doesn't work for old DESeqDataSet objects, need to rethink.
+## Error in h(simpleError(msg, call)) :
+##   error in evaluating the argument 'object' in selecting a method for function 'makeNames': invalid class “DESeqResults” object: slots in class definition but not in object: "priorInfo"
+## Calls: DESeqAnalysis ... contrastName -> contrastName -> .local -> validObject
+
+
+
 #' @name contrastName
 #' @inherit AcidGenerics::contrastName
 #' @note Updated 2021-03-15.
