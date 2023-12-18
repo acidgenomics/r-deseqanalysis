@@ -1,6 +1,6 @@
 #' @name deg
 #' @inherit AcidGenerics::deg
-#' @note Updated 2022-05-18.
+#' @note Updated 2023-12-18.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @inheritParams params
@@ -39,7 +39,7 @@ NULL
 ## Note that we're not sorting the identifiers here by LFC or P value.
 ## It's just performing a simple subset to get the identifiers as a character.
 ##
-## Updated 2021-08-09.
+## Updated 2023-12-18.
 `deg,DESeqResults` <- # nolint
     function(object,
              direction = c("both", "up", "down"),
@@ -47,7 +47,8 @@ NULL
              baseMeanThreshold = NULL,
              lfcThreshold = NULL,
              quiet = FALSE) {
-        validObject(object)
+        ## Disabling this check to provide support for legacy objects.
+        ## > assert(validObject(object))
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
