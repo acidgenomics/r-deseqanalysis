@@ -41,8 +41,8 @@ NULL
              alpha = c(0.1, 0.05, 0.01, 1e-3, 1e-6),
              contrast = NULL,
              name = NULL) {
-        validObject(object)
         assert(
+            validObject(object),
             is.numeric(alpha),
             ## isAlpha requires scalar, so let's apply here.
             all(vapply(

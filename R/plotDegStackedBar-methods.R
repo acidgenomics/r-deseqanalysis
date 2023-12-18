@@ -24,7 +24,7 @@ NULL
 
 
 
-## Updated 2022-05-18.
+## Updated 2023-12-18.
 `plotDegStackedBar,DESeqAnalysis` <- # nolint
     function(object,
              i = NULL,
@@ -32,8 +32,8 @@ NULL
              orderBySize = FALSE,
              label = TRUE,
              flip = TRUE) {
-        validObject(object)
         assert(
+            validObject(object),
             isFlag(orderBySize),
             isFlag(label),
             isFlag(flip)

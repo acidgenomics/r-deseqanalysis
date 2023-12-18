@@ -29,11 +29,11 @@ NULL
 
 ## Putting the args after `...` here so we can pass in genes easily as a
 ## positional argument, during interactive use.
-## Updated 2019-12-18.
+## Updated 2023-12-18.
 `plotCounts,DESeqAnalysis` <- # nolint
     function(object, ..., samples = NULL, transform = FALSE) {
-        validObject(object)
         assert(
+            validObject(object),
             isCharacter(samples, nullOk = TRUE),
             isFlag(transform)
         )

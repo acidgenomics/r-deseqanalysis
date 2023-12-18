@@ -59,7 +59,7 @@ NULL
 
 
 
-## Updated 2021-08-02.
+## Updated 2023-12-18.
 `plotDegPca,DESeqResults` <- # nolint
     function(object,
              DESeqTransform, # nolint
@@ -68,8 +68,11 @@ NULL
              baseMeanThreshold = NULL,
              lfcThreshold = NULL,
              ...) {
-        validObject(object)
-        validObject(DESeqTransform)
+        ## Disabling this check to support legacy objects.
+        ## > assert(
+        ## >     validObject(object),
+        ## >     validObject(DESeqTransform)
+        ## > )
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform

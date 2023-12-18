@@ -30,8 +30,10 @@ NULL
 `extract,DESeqAnalysis` <- # nolint
     function(x, i, j,
              drop = FALSE) {
-        validObject(x)
-        assert(isFALSE(drop))
+        assert(
+            validObject(x),
+            isFALSE(drop)
+        )
         ## Genes (rows).
         if (missing(i)) {
             i <- seq_len(nrow(x))

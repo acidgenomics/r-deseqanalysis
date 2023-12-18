@@ -46,8 +46,11 @@ NULL
              alphaThreshold = NULL,
              baseMeanThreshold = NULL,
              lfcThreshold = NULL) {
-        validObject(x)
-        validObject(y)
+        ## Disabling this check to support legacy objects.
+        ## > assert(
+        ## >     validObject(x),
+        ## >     validObject(y)
+        ## > )
         col <- match.arg(col)
         deg <- match.arg(deg)
         direction <- match.arg(direction)

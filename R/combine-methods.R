@@ -30,12 +30,12 @@ NULL
 
 
 
-## Updated 2020-08-04.
+## Updated 2023-12-18.
 `combine,DESeqAnalysis` <- # nolint
     function(x, y) {
-        validObject(x)
-        validObject(y)
         assert(
+            validObject(x),
+            validObject(y),
             areDisjointSets(resultsNames(x), resultsNames(y)),
             identical(x@data@assays, y@data@assays),
             identical(x@data@colData, y@data@colData),

@@ -62,7 +62,7 @@ NULL
 
 
 
-## Updated 2021-03-15.
+## Updated 2023-12-18.
 `degIntersection,DESeqAnalysis` <- # nolint
     function(object,
              i = NULL,
@@ -71,7 +71,7 @@ NULL
              lfcThreshold = NULL,
              direction,
              return) {
-        validObject(object)
+        assert(validObject(object))
         resList <- DESeqResultsList(object = object, quiet = TRUE)
         if (!is.null(i)) {
             assert(length(i) > 1L)
@@ -118,7 +118,7 @@ formals(`degIntersection,DESeqAnalysis`)[names(.args)] <- # nolint
              baseMeanThreshold = NULL,
              lfcThreshold = NULL,
              return) {
-        validObject(object)
+        assert(validObject(object))
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
