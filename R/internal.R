@@ -188,7 +188,7 @@
 
 
 
-## Updated 2019-11-12.
+## Updated 2023-12-18.
 .joinCounts <-
     function(object,
              DESeqDataSet # nolint
@@ -205,8 +205,6 @@
                 y = colnames(DESeqDataSet)
             )
         )
-        validObject(object)
-        validObject(DESeqDataSet)
         counts <- counts(DESeqDataSet, normalized = TRUE)
         out <- cbind(object, counts)
         ## Ensure we're not changing the object class on return.
@@ -214,7 +212,7 @@
         if (!identical(x = class(object), y = class(out))) {
             out <- as(out, Class = class(object)[[1L]])
         }
-        validObject(out)
+        assert(validObject(out))
         out
     }
 
@@ -239,8 +237,6 @@
         assert(
             is(object, "DFrame"),
             is(DESeqDataSet, "DESeqDataSet"),
-            validObject(object),
-            validObject(DESeqDataSet),
             identical(
                 x = rownames(object),
                 y = rownames(DESeqDataSet)
@@ -288,7 +284,7 @@
         if (!identical(x = class(object), y = class(out))) {
             out <- as(out, Class = class(object)[[1L]])
         }
-        validObject(out)
+        assert(validObject(out))
         out
     }
 

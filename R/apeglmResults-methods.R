@@ -75,15 +75,15 @@ NULL
 
 ## Useful for avoiding this issue:
 ## type='apeglm' shrinkage only for use with 'coef'
-## Updated 2022-05-17.
+## Updated 2023-12-18.
 `apeglmResults,DESeqDataSet` <- # nolint
     function(object,
              contrast,
              res,
              ...) {
-        validObject(object)
-        requireNamespaces("apeglm")
         assert(
+            requireNamespaces("apeglm"),
+            validObject(object),
             isCharacter(resultsNames(object)),
             isCharacter(contrast),
             hasLength(contrast, n = 3L),

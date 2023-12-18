@@ -20,7 +20,7 @@ NULL
 ## Updated 2021-03-15.
 `plotHeatmap,DESeqAnalysis` <- # nolint
     function(object, ...) {
-        validObject(object)
+        assert(validObject(object))
         alertInfo(sprintf(
             "Using {.var %s} {.var %s} counts.",
             "DESeqTransform", transformType(object)
@@ -34,7 +34,7 @@ NULL
 ## Updated 2021-03-15.
 `plotCorrelationHeatmap,DESeqAnalysis` <- # nolint
     function(object, ...) {
-        validObject(object)
+        assert(validObject(object))
         alertInfo(sprintf(
             "Using {.var %s} {.var %s} counts.",
             "DESeqTransform", transformType(object)
@@ -48,7 +48,7 @@ NULL
 ## Updated 2021-03-15.
 `plotQuantileHeatmap,DESeqAnalysis` <- # nolint
     function(object, ...) {
-        validObject(object)
+        assert(validObject(object))
         alertInfo(sprintf(
             "Using {.var %s} {.var %s} counts.",
             "DESeqTransform", transformType(object)

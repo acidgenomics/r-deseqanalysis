@@ -40,7 +40,7 @@ NULL
 
 
 
-## Updated 2022-05-24.
+## Updated 2023-12-18.
 `resultsTables,DESeqAnalysis` <- # nolint
     function(object,
              i,
@@ -48,7 +48,7 @@ NULL
              baseMeanThreshold = NULL,
              lfcThreshold = NULL,
              extra = TRUE) {
-        validObject(object)
+        assert(validObject(object))
         resultsTables(
             object = results(object = object, i = i, extra = extra),
             alphaThreshold = ifelse(
@@ -77,7 +77,8 @@ NULL
              alphaThreshold = NULL,
              baseMeanThreshold = NULL,
              lfcThreshold = NULL) {
-        validObject(object)
+        ## Disabling this to provide support for legacy objects.
+        ## > assert(validObject(object))
         both <- deg(
             object = object,
             direction = "both",

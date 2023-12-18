@@ -46,14 +46,14 @@ NULL
 
 
 
-## Updated 2019-09-10.
+## Updated 2023-12-18.
 `resultsNames<-,DESeqAnalysis,character` <- # nolint
     function(object, value) {
         names(object@results) <- value
         if (!is.null(object@lfcShrink)) {
             names(object@lfcShrink) <- value
         }
-        validObject(object)
+        ## > assert(validObject(object))
         object
     }
 
@@ -63,7 +63,7 @@ NULL
 `resultsNames<-,DESeqResultsList,character` <- # nolint
     function(object, value) {
         names(object) <- value
-        validObject(object)
+        ## > assert(validObject(object))
         object
     }
 

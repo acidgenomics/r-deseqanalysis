@@ -34,14 +34,16 @@ NULL
 
 
 
-## Updated 2023-09-26.
+## Updated 2023-12-18.
 `contrastSamples,DESeqAnalysis` <- # nolint
     function(object,
              i,
              quiet = FALSE,
              return = c("character", "list")) {
-        validObject(object)
-        assert(isFlag(quiet))
+        assert(
+            validObject(object),
+            isFlag(quiet)
+        )
         return <- match.arg(return)
         ## This will return "contrastName" stash in metadata.
         res <- results(object, i = i, quiet = TRUE)

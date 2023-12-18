@@ -24,7 +24,7 @@ NULL
 ## Updated 2021-01-21.
 `plotPca,DESeqAnalysis` <- # nolint
     function(object, ...) {
-        validObject(object)
+        assert(validObject(object))
         dt <- as(object, "DESeqTransform")
         rse <- as(dt, "RangedSummarizedExperiment")
         plotPca(rse, ...)

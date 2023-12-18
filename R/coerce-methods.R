@@ -43,29 +43,30 @@ NULL
 
 
 
-## Updated 2022-03-30.
+## Updated 2023-12-18.
 `coerce,DESeqAnalysis,DESeqDataSet` <- # nolint
     function(from) {
-        validObject(from)
+        assert(validObject(from))
         to <- slot(from, "data")
-        validObject(to)
+        assert(validObject(to))
         to
     }
 
 ## Updated 2022-03-30.
 `coerce,DESeqAnalysis,DESeqTransform` <- # nolint
     function(from) {
-        validObject(from)
+        assert(validObject(from))
         to <- slot(from, "transform")
-        validObject(to)
+        assert(validObject(to))
         to
     }
 
 ## Updated 2022-03-30.
 `coerce,DESeqAnalysis,DESeqResultsList` <- # nolint
     function(from) {
-        validObject(from)
+        assert(validObject(from))
         to <- DESeqResultsList(from, quiet = TRUE)
+        ## > assert(validObject(to))
         to
     }
 

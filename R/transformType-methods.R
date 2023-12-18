@@ -15,10 +15,10 @@ NULL
 
 
 
-## Updated 2019-07-23.
+## Updated 2023-12-18.
 `transformType,DESeqAnalysis` <- # nolint
     function(object) {
-        validObject(object)
+        ## > assert(validObject(object))
         dt <- as(object, "DESeqTransform")
         transformType(dt)
     }
@@ -34,10 +34,10 @@ NULL
 
 
 
-## Updated 2022-09-22.
+## Updated 2023-12-18.
 `transformType,DESeqTransform` <- # nolint
     function(object) {
-        validObject(object)
+        assert(validObject(object))
         ifelse(
             test = isTRUE(isSubset(
                 x = "rlogIntercept",

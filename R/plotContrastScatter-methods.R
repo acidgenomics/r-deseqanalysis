@@ -18,7 +18,7 @@ NULL
 
 
 
-## Updated 2022-04-15.
+## Updated 2023-12-18.
 `plotContrastScatter,DESeqAnalysis` <- # nolint
     function(object,
              i,
@@ -41,7 +41,7 @@ NULL
                  "x" = TRUE,
                  "y" = TRUE
              )) {
-        validObject(object)
+        assert(validObject(object))
         direction <- match.arg(direction)
         trans <- match.arg(trans)
         if (is.null(alphaThreshold)) {

@@ -34,13 +34,15 @@ NULL
 
 
 
-## Updated 2021-08-09.
+## Updated 2023-12-18.
 `resultsMatrix,DESeqAnalysis` <- # nolint
     function(object,
              value = c("log2FoldChange", "stat", "alpha"),
              rowData = FALSE) {
-        validObject(object)
-        assert(isFlag(rowData))
+        assert(
+            validObject(object),
+            isFlag(rowData)
+        )
         value <- match.arg(value)
         slotName <- .whichResults(object, value = value)
         results <- slot(object, name = slotName)
@@ -101,8 +103,10 @@ NULL
 ## Updated 2022-05-17.
 `resultsMatrix,DESeqAnalysisList` <- # nolint
     function(object, value, rowData) {
-        validObject(object)
-        assert(isFlag(rowData))
+        assert(
+            validObject(object),
+            isFlag(rowData)
+        )
         value <- match.arg(value)
         slotName <- .whichResults(object, value)
         list <- Map(
