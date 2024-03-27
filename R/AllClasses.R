@@ -283,15 +283,6 @@ setValidity(
         if (!isTRUE(ok)) {
             return(ok)
         }
-        ## Ensure that all slotted DESeqResults objects are valid.
-        ## NOTE Disabling this to provide support for legacy objects.
-        ## > ok <- validate(
-        ## >     all(bapply(object, validObject)),
-        ## >     msg = "Not all DESeqResults in list are valid."
-        ## > )
-        ## > if (!isTRUE(ok)) {
-        ## .     return(ok)
-        ## > }
         ## Check that all rownames in slotted DESeqResults are identical.
         rn <- rownames(object[[1L]])
         ok <- validate(

@@ -66,7 +66,6 @@ NULL
     function(from) {
         assert(validObject(from))
         to <- DESeqResultsList(from, quiet = TRUE)
-        ## > assert(validObject(to))
         to
     }
 

@@ -68,11 +68,6 @@ NULL
              baseMeanThreshold = NULL,
              lfcThreshold = NULL,
              ...) {
-        ## Disabling this check to support legacy objects.
-        ## > assert(
-        ## >     validObject(object),
-        ## >     validObject(DESeqTransform)
-        ## > )
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
