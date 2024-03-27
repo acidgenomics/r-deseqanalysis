@@ -139,8 +139,6 @@ NULL
                  "subtitle" = NULL
              ),
              histograms = FALSE) {
-        ## Disabling this check to provide support for legacy objects.
-        ## > assert(validObject(object))
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }

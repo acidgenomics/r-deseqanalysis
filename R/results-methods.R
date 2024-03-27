@@ -79,8 +79,6 @@ NULL
         if (isFALSE(quiet)) {
             alert(msg)
         }
-        ## Disabling this check to provide support for legacy objects.
-        ## > assert(validObject(res))
         res
     }
 

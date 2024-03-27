@@ -53,7 +53,6 @@ NULL
         if (!is.null(object@lfcShrink)) {
             names(object@lfcShrink) <- value
         }
-        ## > assert(validObject(object))
         object
     }
 
@@ -63,7 +62,6 @@ NULL
 `resultsNames<-,DESeqResultsList,character` <- # nolint
     function(object, value) {
         names(object) <- value
-        ## > assert(validObject(object))
         object
     }
 

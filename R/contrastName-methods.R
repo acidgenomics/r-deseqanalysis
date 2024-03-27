@@ -38,12 +38,10 @@ NULL
 
 
 
-## Updated 2023-12-18.
+## Updated 2024-03-27.
 `contrastName,DESeqResults` <- # nolint
     function(object,
              format = c("resultsNames", "title")) {
-        ## Not checking here, to provide support for legacy objects.
-        ## > assert(validObject(object))
         format <- match.arg(format)
         ## Use metadata stash, if defined. This is the recommended approach
         ## when passing off from DESeqAnalysis object, using `resultsNames()`.
@@ -83,8 +81,6 @@ NULL
     function(object, value) {
         assert(isString(value))
         metadata(object)[["contrastName"]] <- value
-        ## Disabling this check to provide support for legacy objects.
-        ## > assert(validObject(object))
         object
     }
 

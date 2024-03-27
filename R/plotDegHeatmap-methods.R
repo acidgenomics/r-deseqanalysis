@@ -88,11 +88,6 @@ NULL
              title = TRUE,
              subtitle = TRUE,
              ...) {
-        ## Disabling this check to support legacy objects.
-        ## > assert(
-        ## >     validObject(object),
-        ## >     validObject(DESeqTransform)
-        ## > )
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform

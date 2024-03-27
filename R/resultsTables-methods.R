@@ -77,8 +77,6 @@ NULL
              alphaThreshold = NULL,
              baseMeanThreshold = NULL,
              lfcThreshold = NULL) {
-        ## Disabling this to provide support for legacy objects.
-        ## > assert(validObject(object))
         both <- deg(
             object = object,
             direction = "both",
