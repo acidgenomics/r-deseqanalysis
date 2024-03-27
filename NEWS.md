@@ -5,6 +5,10 @@
 Minor changes:
 
 - Updated dependencies to Bioconductor 3.18.
+- Ensured that `validObject` calls are enclosed within `assert`.
+- Relaxed `validObject` assert checks on legacy `DESeqResults` methods.
+- Resaved minimal example objects for unit tests.
+- Improved `lfcShrinkType` for legacy `DESeqResults` objects.
 
 ## DESeqAnalysis 0.7.0 (2023-10-04)
 
