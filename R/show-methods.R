@@ -28,9 +28,7 @@ NULL
         cat("data:", ddsInfo, sep = "\n")
         list <- list(
             "transformType" = transformType(object),
-            ## FIXME This is failing with legacy object.
             "resultsNames" = resultsNames(object),
-            ## FIXME This is failing with legacy object.
             "alphaThreshold" = alphaThreshold(object)
         )
         baseMeanThreshold <- baseMeanThreshold(object)
