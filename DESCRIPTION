@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: Acid Genomics DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.7.1.9000
-Date: 2023-12-18
+Version: 0.7.1
+Date: 2024-03-27
 Authors@R: c(
     person(
         given = "Michael",
@@ -27,17 +27,17 @@ Imports:
     AcidBase (>= 0.7.3),
     AcidCLI (>= 0.3.0),
     AcidExperiment (>= 0.5.4),
-    AcidGenerics (>= 0.7.6),
+    AcidGenerics (>= 0.7.7),
     AcidGenomes (>= 0.7.2),
     AcidMarkdown (>= 0.3.0),
-    AcidPlots (>= 0.7.2),
-    AcidPlyr (>= 0.5.3),
+    AcidPlots (>= 0.7.3),
+    AcidPlyr (>= 0.5.4),
     BiocGenerics (>= 0.48.0),
     DESeq2 (>= 1.42.0),
     IRanges (>= 2.36.0),
     S4Vectors (>= 0.40.0),
     SummarizedExperiment (>= 1.32.0),
-    ggplot2 (>= 3.4.4),
+    ggplot2 (>= 3.5.0),
     goalie (>= 0.7.7),
     pipette (>= 0.15.2),
     syntactic (>= 0.7.1),
@@ -49,10 +49,10 @@ Suggests:
     apeglm (>= 1.24.0),
     ashr (>= 2.2.63),
     basejump (>= 0.18.0),
-    ggrepel (>= 0.9.4),
+    ggrepel (>= 0.9.5),
     knitr (>= 1.45),
     pheatmap (>= 1.0.12),
-    rmarkdown (>= 2.25),
+    rmarkdown (>= 2.26),
     testthat (>= 3.2.1),
     tximport (>= 1.30.0),
     tximportData (>= 1.30.0)

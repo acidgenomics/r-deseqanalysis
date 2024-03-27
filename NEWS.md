@@ -1,5 +1,11 @@
 # Release notes
 
+## DESeqAnalysis 0.7.1 (2024-03-27)
+
+Minor changes:
+
+- Updated dependencies to Bioconductor 3.18.
+
 ## DESeqAnalysis 0.7.0 (2023-10-04)
 
 Minor changes:
