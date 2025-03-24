@@ -29,17 +29,17 @@ alphaThreshold(object, ...) <- value
 
 \S4method{alphaThreshold}{DESeqAnalysis,numeric}(object) <- value
 
-\S4method{alphaThreshold}{DESeqAnalysis,`NULL`}(object) <- value
+\S4method{alphaThreshold}{DESeqAnalysis,NULL}(object) <- value
 
 \S4method{alphaThreshold}{DESeqAnalysisList,numeric}(object) <- value
 
-\S4method{alphaThreshold}{DESeqAnalysisList,`NULL`}(object) <- value
+\S4method{alphaThreshold}{DESeqAnalysisList,NULL}(object) <- value
 
 \S4method{alphaThreshold}{DESeqResults,numeric}(object) <- value
 
 \S4method{alphaThreshold}{DESeqResultsList,numeric}(object) <- value
 
-\S4method{alphaThreshold}{DESeqResultsList,`NULL`}(object) <- value
+\S4method{alphaThreshold}{DESeqResultsList,NULL}(object) <- value
 }
 \arguments{
 \item{object}{Object.}

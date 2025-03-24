@@ -30,19 +30,19 @@ baseMeanThreshold(object, ...) <- value
 
 \S4method{baseMeanThreshold}{DESeqAnalysis,numeric}(object) <- value
 
-\S4method{baseMeanThreshold}{DESeqAnalysis,`NULL`}(object) <- value
+\S4method{baseMeanThreshold}{DESeqAnalysis,NULL}(object) <- value
 
 \S4method{baseMeanThreshold}{DESeqAnalysisList,numeric}(object) <- value
 
-\S4method{baseMeanThreshold}{DESeqAnalysisList,`NULL`}(object) <- value
+\S4method{baseMeanThreshold}{DESeqAnalysisList,NULL}(object) <- value
 
 \S4method{baseMeanThreshold}{DESeqResults,numeric}(object) <- value
 
-\S4method{baseMeanThreshold}{DESeqResults,`NULL`}(object) <- value
+\S4method{baseMeanThreshold}{DESeqResults,NULL}(object) <- value
 
 \S4method{baseMeanThreshold}{DESeqResultsList,numeric}(object) <- value
 
-\S4method{baseMeanThreshold}{DESeqResultsList,`NULL`}(object) <- value
+\S4method{baseMeanThreshold}{DESeqResultsList,NULL}(object) <- value
 }
 \arguments{
 \item{object}{Object.}

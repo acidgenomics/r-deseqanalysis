@@ -28,11 +28,11 @@ lfcThreshold(object, ...) <- value
 
 \S4method{lfcThreshold}{DESeqAnalysis,numeric}(object) <- value
 
-\S4method{lfcThreshold}{DESeqAnalysis,`NULL`}(object) <- value
+\S4method{lfcThreshold}{DESeqAnalysis,NULL}(object) <- value
 
 \S4method{lfcThreshold}{DESeqAnalysisList,numeric}(object) <- value
 
-\S4method{lfcThreshold}{DESeqAnalysisList,`NULL`}(object) <- value
+\S4method{lfcThreshold}{DESeqAnalysisList,NULL}(object) <- value
 
 \S4method{lfcThreshold}{DESeqResults,numeric}(object) <- value
 

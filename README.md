@@ -35,6 +35,6 @@ R
 ```
 
 [bioconda]: https://bioconda.github.io/
-[conda]: https://conda.io/
+[conda]: https://docs.conda.io/
 [deseq2]: https://bioconductor.org/packages/DESeq2/
 [r]: https://www.r-project.org/

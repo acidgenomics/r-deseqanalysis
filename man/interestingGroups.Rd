@@ -15,7 +15,7 @@ interestingGroups(object, ...)  <- value
 
 \S4method{interestingGroups}{DESeqAnalysis,character}(object) <- value
 
-\S4method{interestingGroups}{DESeqAnalysis,`NULL`}(object) <- value
+\S4method{interestingGroups}{DESeqAnalysis,NULL}(object) <- value
 }
 \arguments{
 \item{object}{Object.}
