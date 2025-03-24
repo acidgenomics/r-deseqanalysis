@@ -2,6 +2,7 @@
 % Please edit documentation in R/package.R
 \docType{package}
 \name{DESeqAnalysis-package}
+\alias{DESeqAnalysis-package}
 \title{DESeqAnalysis}
 \description{
 Toolkit for performing differential expression with

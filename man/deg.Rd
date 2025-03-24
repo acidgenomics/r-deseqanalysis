@@ -59,7 +59,7 @@ Gene identifiers.
 Differentially expressed genes
 }
 \note{
-Updated 2022-05-18.
+Updated 2023-12-18.
 }
 \examples{
 data(deseq)
