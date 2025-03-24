@@ -1,5 +1,11 @@
 # Release notes
 
+## DESeqAnalysis 0.7.2 (2025-03-24)
+
+Minor changes:
+
+- Decreased R dependency from 4.3 to 4.0.
+
 ## DESeqAnalysis 0.7.1 (2024-03-27)
 
 Minor changes:
