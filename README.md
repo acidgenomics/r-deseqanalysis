@@ -1,6 +1,6 @@
 # DESeqAnalysis
 
-[![Install with Bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://bioconda.github.io/recipes/r-deseqanalysis/README.html) ![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)
+[![Install with Bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg)](https://bioconda.github.io/recipes/r-deseqanalysis/README.html) ![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)
 
 Toolkit for performing differential expression with [DESeq2][].
 
@@ -38,3 +38,7 @@ R
 [conda]: https://docs.conda.io/
 [deseq2]: https://bioconductor.org/packages/DESeq2/
 [r]: https://www.r-project.org/
+
+## License
+
+Apache-2.0 — Copyright 2018 Acid Genomics LLC — see [LICENSE.md](LICENSE.md).
