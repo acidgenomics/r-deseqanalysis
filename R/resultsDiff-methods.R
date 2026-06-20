@@ -23,10 +23,9 @@
 NULL
 
 
-
 ## Updated 2020-08-05.
 `resultsDiff,DESeqAnalysis,missing` <- # nolint
-    function(x, y = NULL, i, j, ...) {
+    function(x, y = NULL, i, j, ...) { # nolint
         resultsDiff(
             x = results(x, i = i),
             y = results(x, i = j),
@@ -35,17 +34,18 @@ NULL
     }
 
 
-
 ## Updated 2021-06-29.
 `resultsDiff,DESeqResults,DESeqResults` <- # nolint
-    function(x,
-             y,
-             col = c("log2FoldChange", "stat"),
-             deg = c("no", "intersect", "union"),
-             direction = c("both", "up", "down"),
-             alphaThreshold = NULL,
-             baseMeanThreshold = NULL,
-             lfcThreshold = NULL) {
+    function(
+        x,
+        y,
+        col = c("log2FoldChange", "stat"),
+        deg = c("no", "intersect", "union"),
+        direction = c("both", "up", "down"),
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL
+    ) {
         col <- match.arg(col)
         deg <- match.arg(deg)
         direction <- match.arg(direction)
@@ -81,13 +81,13 @@ NULL
             }
             alertInfo(sprintf(
                 "Returning %s of DEGs (%d).",
-                deg, length(genes)
+                deg,
+                length(genes)
             ))
             diff <- diff[genes]
         }
         diff
     }
-
 
 
 #' @describeIn resultsDiff Passes arguments to `DESeqResults` method.

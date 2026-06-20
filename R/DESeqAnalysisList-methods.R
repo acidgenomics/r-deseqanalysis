@@ -11,7 +11,6 @@
 NULL
 
 
-
 ## Updated 2021-03-12.
 `DESeqAnalysisList,SimpleList` <- # nolint
     function(object) {
@@ -20,11 +19,9 @@ NULL
     }
 
 
-
 ## Updated 2021-03-12.
 `DESeqAnalysisList,list` <- # nolint
     `DESeqAnalysisList,SimpleList`
-
 
 
 ## Updated 2021-03-08.
@@ -32,7 +29,6 @@ NULL
     function(object) {
         new(Class = "DESeqAnalysisList", list())
     }
-
 
 
 #' @rdname DESeqAnalysisList

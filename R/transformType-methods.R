@@ -14,7 +14,6 @@
 NULL
 
 
-
 ## Updated 2023-12-18.
 `transformType,DESeqAnalysis` <- # nolint
     function(object) {
@@ -23,14 +22,12 @@ NULL
     }
 
 
-
 ## Updated 2019-07-23.
 `transformType,DESeqAnalysisList` <- # nolint
     function(object) {
         assert(hasLength(object))
         transformType(object[[1L]])
     }
-
 
 
 ## Updated 2023-12-18.
@@ -45,7 +42,6 @@ NULL
             no = "varianceStabilizingTransformation"
         )
     }
-
 
 
 #' @rdname transformType

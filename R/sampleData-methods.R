@@ -13,14 +13,12 @@
 NULL
 
 
-
 ## Updated 2021-03-15.
 `sampleData,DESeqAnalysis` <- # nolint
     function(object) {
         dds <- as(object, "DESeqDataSet")
         sampleData(dds)
     }
-
 
 
 #' @rdname sampleData

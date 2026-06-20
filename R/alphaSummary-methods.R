@@ -25,7 +25,6 @@
 NULL
 
 
-
 ## Updated 2020-08-04.
 `alphaSummary,DESeqAnalysis` <- # nolint
     function(object, ...) {
@@ -34,13 +33,14 @@ NULL
     }
 
 
-
 ## Updated 2023-09-26.
 `alphaSummary,DESeqDataSet` <- # nolint
-    function(object,
-             alpha = c(0.1, 0.05, 0.01, 1e-3, 1e-6),
-             contrast = NULL,
-             name = NULL) {
+    function(
+        object,
+        alpha = c(0.1, 0.05, 0.01, 1e-3, 1e-6),
+        contrast = NULL,
+        name = NULL
+    ) {
         assert(
             validObject(object),
             is.numeric(alpha),
@@ -58,7 +58,8 @@ NULL
         if (!is.null(contrast) && !is.null(name)) {
             abort(sprintf(
                 "Specify either {.arg %s} or {.arg %s}.",
-                "contrast", "name"
+                "contrast",
+                "name"
             ))
         }
         ## Generate an automatic caption.
@@ -94,7 +95,7 @@ NULL
                 output <- capture.output(summary(results))
                 ## Subset the lines of interest from summary.
                 ## Keep only the summary lines that contain a colon.
-                output <- output[grepl(" : ", output)]
+                output <- output[grepl(" : ", output, fixed = TRUE)]
                 ## Extract the values after the colon in summary.
                 match <- strMatch(
                     x = output,
@@ -110,7 +111,6 @@ NULL
         colnames(data) <- alpha
         data
     }
-
 
 
 #' @rdname alphaSummary

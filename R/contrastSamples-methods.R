@@ -33,13 +33,9 @@
 NULL
 
 
-
 ## Updated 2023-12-18.
 `contrastSamples,DESeqAnalysis` <- # nolint
-    function(object,
-             i,
-             quiet = FALSE,
-             return = c("character", "list")) {
+    function(object, i, quiet = FALSE, return = c("character", "list")) {
         assert(
             validObject(object),
             isFlag(quiet)
@@ -111,10 +107,11 @@ NULL
         )
         if (isFALSE(quiet)) {
             dl(c(
-                "Numerator samples" =
-                    toInlineString(numeratorSamples, n = 5L),
-                "Denominator samples" =
-                    toInlineString(denominatorSamples, n = 5L)
+                "Numerator samples" = toInlineString(numeratorSamples, n = 5L),
+                "Denominator samples" = toInlineString(
+                    denominatorSamples,
+                    n = 5L
+                )
             ))
         }
         switch(
@@ -137,7 +134,6 @@ NULL
             }
         )
     }
-
 
 
 #' @rdname contrastSamples

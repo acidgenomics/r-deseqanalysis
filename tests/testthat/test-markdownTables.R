@@ -3,7 +3,7 @@ test_that("DESeqAnalysis with extra rowData", {
     out <- capture.output(markdownTables(object, i = 1L))
     x <- out[[5L]]
     x <- strsplit(x = x, split = "|", fixed = TRUE)[[1L]]
-    x <- gsub(pattern = " ", replacement = "", x = x)
+    x <- gsub(pattern = " ", replacement = "", x = x, fixed = TRUE)
     expect_identical(
         object = x,
         expected = c(
@@ -42,7 +42,7 @@ test_that("DESeqAnalysis with minimal rowData", {
     x <- capture.output(markdownTables(object, i = 1L))
     x <- x[[5L]]
     x <- strsplit(x = x, split = "|", fixed = TRUE)[[1L]]
-    x <- gsub(pattern = " ", replacement = "", x = x)
+    x <- gsub(pattern = " ", replacement = "", x = x, fixed = TRUE)
     expect_identical(
         object = x,
         expected = c(

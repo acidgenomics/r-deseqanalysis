@@ -15,13 +15,9 @@
 NULL
 
 
-
 ## Updated 2022-05-18.
 `plotDegUpset,DESeqAnalysis` <- # nolint
-    function(object,
-             i = NULL,
-             direction = c("both", "up", "down"),
-             ...) {
+    function(object, i = NULL, direction = c("both", "up", "down"), ...) {
         direction <- match.arg(direction)
         degs <- degPerContrast(
             object = object,
@@ -37,7 +33,6 @@ NULL
         }
         plotUpset(object = list, ...)
     }
-
 
 
 #' @rdname plotDegUpset

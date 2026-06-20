@@ -12,13 +12,11 @@
 NULL
 
 
-
 ## Updated 2020-08-04.
 `lfcShrink,DESeqDataSet` <- # nolint
     function(object, ...) {
         DESeq2::lfcShrink(object, ...)
     }
-
 
 
 ## Updated 2020-09-18.
@@ -33,14 +31,12 @@ NULL
     }
 
 
-
 ## Updated 2021-03-12.
 `lfcShrink,DESeqAnalysisList` <- # nolint
     function(object) {
         assert(hasLength(object))
         lfcShrink(object[[1L]])
     }
-
 
 
 ## Updated 2020-08-04.
@@ -50,7 +46,6 @@ NULL
         metadata(object)[["lfcShrink"]] <- value
         object
     }
-
 
 
 ## Updated 2020-08-04.
@@ -63,7 +58,6 @@ NULL
         metadata(object[[1L]])[["lfcShrink"]] <- value
         object
     }
-
 
 
 #' @rdname lfcShrink
@@ -89,7 +83,6 @@ setMethod(
     signature = signature(object = "DESeqDataSet"),
     definition = `lfcShrink,DESeqDataSet`
 )
-
 
 
 #' @rdname lfcShrink

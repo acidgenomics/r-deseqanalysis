@@ -23,15 +23,16 @@
 NULL
 
 
-
 ## Updated 2023-12-18.
 `plotDegStackedBar,DESeqAnalysis` <- # nolint
-    function(object,
-             i = NULL,
-             direction = c("both", "up", "down"),
-             orderBySize = FALSE,
-             label = TRUE,
-             flip = TRUE) {
+    function(
+        object,
+        i = NULL,
+        direction = c("both", "up", "down"),
+        orderBySize = FALSE,
+        label = TRUE,
+        flip = TRUE
+    ) {
         assert(
             validObject(object),
             isFlag(orderBySize),
@@ -71,25 +72,27 @@ NULL
                 stat = "identity"
             )
         if (isTRUE(label)) {
-            p <- p + geom_text(
-                size = 3L,
-                position = position_stack(vjust = 0.5)
-            )
+            p <- p +
+                geom_text(
+                    size = 3L,
+                    position = position_stack(vjust = 0.5)
+                )
         }
-        p <- p + labs(
-            x = "contrast",
-            y = "differentially expressed genes",
-            fill = "direction",
-            title = "Differentially expressed genes per contrast",
-            subtitle = .thresholdLabel(
-                object = object,
-                direction = direction,
-                alphaThreshold = alphaThreshold(object),
-                baseMeanThreshold = baseMeanThreshold(object),
-                lfcShrinkType = lfcShrinkType(object),
-                lfcThreshold = lfcThreshold(object)
+        p <- p +
+            labs(
+                x = "contrast",
+                y = "differentially expressed genes",
+                fill = "direction",
+                title = "Differentially expressed genes per contrast",
+                subtitle = .thresholdLabel(
+                    object = object,
+                    direction = direction,
+                    alphaThreshold = alphaThreshold(object),
+                    baseMeanThreshold = baseMeanThreshold(object),
+                    lfcShrinkType = lfcShrinkType(object),
+                    lfcThreshold = lfcThreshold(object)
+                )
             )
-        )
         ## Color palette.
         p <- p + acid_scale_fill_discrete()
         if (isTRUE(flip)) {
@@ -97,7 +100,6 @@ NULL
         }
         p
     }
-
 
 
 #' @rdname plotDegStackedBar

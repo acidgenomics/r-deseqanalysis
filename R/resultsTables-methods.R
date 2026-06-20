@@ -39,15 +39,16 @@
 NULL
 
 
-
 ## Updated 2023-12-18.
 `resultsTables,DESeqAnalysis` <- # nolint
-    function(object,
-             i,
-             alphaThreshold = NULL,
-             baseMeanThreshold = NULL,
-             lfcThreshold = NULL,
-             extra = TRUE) {
+    function(
+        object,
+        i,
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
+        extra = TRUE
+    ) {
         assert(validObject(object))
         resultsTables(
             object = results(object = object, i = i, extra = extra),
@@ -70,13 +71,14 @@ NULL
     }
 
 
-
 ## Updated 2022-05-24.
 `resultsTables,DESeqResults` <- # nolint
-    function(object,
-             alphaThreshold = NULL,
-             baseMeanThreshold = NULL,
-             lfcThreshold = NULL) {
+    function(
+        object,
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL
+    ) {
         both <- deg(
             object = object,
             direction = "both",
@@ -84,9 +86,7 @@ NULL
             baseMeanThreshold = baseMeanThreshold,
             lfcThreshold = lfcThreshold
         )
-        if (!hasLength(both)) {
-            out <- list("all" = object)
-        } else {
+        if (hasLength(both)) {
             up <- deg(
                 object = object,
                 direction = "up",
@@ -108,11 +108,12 @@ NULL
                 "both" = object[both, , drop = FALSE]
             )
             out <- Filter(f = hasRows, x = out)
+        } else {
+            out <- list("all" = object)
         }
         out <- DataFrameList(out)
         out
     }
-
 
 
 #' @rdname resultsTables
