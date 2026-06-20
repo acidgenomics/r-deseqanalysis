@@ -54,17 +54,18 @@
 NULL
 
 
-
 ## Updated 2023-12-18.
 `plotMa,DESeqAnalysis` <- # nolint
-    function(object,
-             i,
-             alphaThreshold = NULL,
-             baseMeanThreshold = NULL,
-             lfcThreshold = NULL,
-             genes = NULL,
-             ntop = 0L,
-             ...) {
+    function(
+        object,
+        i,
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
+        genes = NULL,
+        ntop = 0L,
+        ...
+    ) {
         assert(
             validObject(object),
             isAny(genes, classes = c("character", "NULL")),
@@ -109,28 +110,29 @@ NULL
     }
 
 
-
 ## Updated 2023-12-18.
 `plotMa,DESeqResults` <- # nolint
-    function(object,
-             direction = c("both", "up", "down"),
-             alphaThreshold = NULL,
-             baseMeanThreshold = NULL,
-             lfcThreshold = NULL,
-             genes = NULL,
-             ntop = 0L,
-             pointColor = c(
-                 "downregulated" = AcidPlots::lightPalette[["purple"]],
-                 "upregulated" = AcidPlots::lightPalette[["orange"]],
-                 "nonsignificant" = AcidPlots::lightPalette[["gray"]]
-             ),
-             pointSize = 2L,
-             pointAlpha = 0.8,
-             limits = list("x" = NULL, "y" = NULL),
-             labels = list(
-                 "title" = TRUE,
-                 "subtitle" = NULL
-             )) {
+    function(
+        object,
+        direction = c("both", "up", "down"),
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
+        genes = NULL,
+        ntop = 0L,
+        pointColor = c(
+            "downregulated" = AcidPlots::lightPalette[["purple"]],
+            "upregulated" = AcidPlots::lightPalette[["orange"]],
+            "nonsignificant" = AcidPlots::lightPalette[["gray"]]
+        ),
+        pointSize = 2L,
+        pointAlpha = 0.8,
+        limits = list("x" = NULL, "y" = NULL),
+        labels = list(
+            "title" = TRUE,
+            "subtitle" = NULL
+        )
+    ) {
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
@@ -346,7 +348,6 @@ NULL
         }
         p
     }
-
 
 
 #' @describeIn plotMa Passes to `DESeqResults` method, with `gene2symbol`

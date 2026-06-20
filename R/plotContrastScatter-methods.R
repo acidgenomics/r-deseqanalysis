@@ -17,30 +17,31 @@
 NULL
 
 
-
 ## Updated 2023-12-18.
 `plotContrastScatter,DESeqAnalysis` <- # nolint
-    function(object,
-             i,
-             direction = c("both", "up", "down"),
-             alphaThreshold = NULL,
-             baseMeanThreshold = NULL,
-             lfcThreshold = NULL,
-             pointColor = c(
-                 "downregulated" = AcidPlots::lightPalette[["purple"]],
-                 "upregulated" = AcidPlots::lightPalette[["orange"]],
-                 "nonsignificant" = AcidPlots::lightPalette[["gray"]]
-             ),
-             pointSize = 2L,
-             pointAlpha = 0.8,
-             trans = c("log2", "log10", "identity"),
-             limits = list("x" = NULL, "y" = NULL),
-             labels = list(
-                 "title" = TRUE,
-                 "subtitle" = NULL,
-                 "x" = TRUE,
-                 "y" = TRUE
-             )) {
+    function(
+        object,
+        i,
+        direction = c("both", "up", "down"),
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
+        pointColor = c(
+            "downregulated" = AcidPlots::lightPalette[["purple"]],
+            "upregulated" = AcidPlots::lightPalette[["orange"]],
+            "nonsignificant" = AcidPlots::lightPalette[["gray"]]
+        ),
+        pointSize = 2L,
+        pointAlpha = 0.8,
+        trans = c("log2", "log10", "identity"),
+        limits = list("x" = NULL, "y" = NULL),
+        labels = list(
+            "title" = TRUE,
+            "subtitle" = NULL,
+            "x" = TRUE,
+            "y" = TRUE
+        )
+    ) {
         assert(validObject(object))
         direction <- match.arg(direction)
         trans <- match.arg(trans)
@@ -195,7 +196,6 @@ NULL
         }
         p
     }
-
 
 
 #' @rdname plotContrastScatter

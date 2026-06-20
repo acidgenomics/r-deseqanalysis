@@ -16,19 +16,18 @@
 NULL
 
 
-
 ## Updated 2021-03-15.
 `plotHeatmap,DESeqAnalysis` <- # nolint
     function(object, ...) {
         assert(validObject(object))
         alertInfo(sprintf(
             "Using {.var %s} {.var %s} counts.",
-            "DESeqTransform", transformType(object)
+            "DESeqTransform",
+            transformType(object)
         ))
         dt <- as(object, "DESeqTransform")
         plotHeatmap(dt, ...)
     }
-
 
 
 ## Updated 2021-03-15.
@@ -37,12 +36,12 @@ NULL
         assert(validObject(object))
         alertInfo(sprintf(
             "Using {.var %s} {.var %s} counts.",
-            "DESeqTransform", transformType(object)
+            "DESeqTransform",
+            transformType(object)
         ))
         dt <- as(object, "DESeqTransform")
         plotCorrelationHeatmap(dt, ...)
     }
-
 
 
 ## Updated 2021-03-15.
@@ -51,12 +50,12 @@ NULL
         assert(validObject(object))
         alertInfo(sprintf(
             "Using {.var %s} {.var %s} counts.",
-            "DESeqTransform", transformType(object)
+            "DESeqTransform",
+            transformType(object)
         ))
         dt <- as(object, "DESeqTransform")
         plotQuantileHeatmap(dt, ...)
     }
-
 
 
 #' @rdname plotHeatmap
@@ -68,7 +67,6 @@ setMethod(
 )
 
 
-
 #' @rdname plotHeatmap
 #' @export
 setMethod(
@@ -76,7 +74,6 @@ setMethod(
     signature = signature(object = "DESeqAnalysis"),
     definition = `plotCorrelationHeatmap,DESeqAnalysis`
 )
-
 
 
 #' @rdname plotHeatmap

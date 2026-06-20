@@ -21,7 +21,6 @@
 NULL
 
 
-
 ## Updated 2020-10-28.
 `colnames,DESeqAnalysis` <- # nolint
     function(x) {
@@ -32,13 +31,11 @@ formals(`colnames,DESeqAnalysis`) <- # nolint
     formals(colnames)
 
 
-
 ## Updated 2020-10-28.
 `dim,DESeqAnalysis` <- # nolint
     function(x) {
         dim(as(x, "DESeqDataSet"))
     }
-
 
 
 ## Updated 2020-10-28.
@@ -48,13 +45,11 @@ formals(`colnames,DESeqAnalysis`) <- # nolint
     }
 
 
-
 ## Updated 2020-10-28.
 `names,DESeqAnalysis` <- # nolint
     function(x) {
         names(as(x, "DESeqDataSet"))
     }
-
 
 
 ## Updated 2020-10-28.
@@ -65,7 +60,6 @@ formals(`colnames,DESeqAnalysis`) <- # nolint
 
 formals(`rownames,DESeqAnalysis`) <- # nolint
     formals(rownames)
-
 
 
 #' @rdname base

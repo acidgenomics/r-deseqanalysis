@@ -33,12 +33,13 @@
 NULL
 
 
-
 ## Updated 2023-12-18.
 `resultsMatrix,DESeqAnalysis` <- # nolint
-    function(object,
-             value = c("log2FoldChange", "stat", "alpha"),
-             rowData = FALSE) {
+    function(
+        object,
+        value = c("log2FoldChange", "stat", "alpha"),
+        rowData = FALSE
+    ) {
         assert(
             validObject(object),
             isFlag(rowData)
@@ -99,7 +100,6 @@ NULL
     }
 
 
-
 ## Updated 2022-05-17.
 `resultsMatrix,DESeqAnalysisList` <- # nolint
     function(object, value, rowData) {
@@ -145,7 +145,6 @@ NULL
 formals(`resultsMatrix,DESeqAnalysisList`)[.args] <- # nolint
     formals(`resultsMatrix,DESeqAnalysis`)[.args]
 rm(.args)
-
 
 
 #' @rdname resultsMatrix

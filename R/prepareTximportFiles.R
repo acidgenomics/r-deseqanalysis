@@ -51,9 +51,11 @@
 #' print(kallistoFiles)
 #' unlink2(tempdir)
 prepareTximportFiles <-
-    function(dir,
-             type = c("salmon", "kallisto"),
-             makeNames = c("makeNames", "snakeCase", "camelCase")) {
+    function(
+        dir,
+        type = c("salmon", "kallisto"),
+        makeNames = c("makeNames", "snakeCase", "camelCase")
+    ) {
         makeNames <- get(
             x = match.arg(makeNames),
             envir = asNamespace("syntactic"),
@@ -80,7 +82,8 @@ prepareTximportFiles <-
             hasLength(files),
             msg = sprintf(
                 "Failed to detect {.file %s} in {.dir %s}.",
-                pattern, dir
+                pattern,
+                dir
             )
         )
         files <- realpath(files)

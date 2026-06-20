@@ -15,13 +15,9 @@
 NULL
 
 
-
 ## Updated 2022-05-18.
 `deg,DESeqAnalysis` <- # nolint
-    function(object,
-             i,
-             direction = c("both", "up", "down"),
-             quiet = FALSE) {
+    function(object, i, direction = c("both", "up", "down"), quiet = FALSE) {
         deg(
             object = results(object = object, i = i, quiet = quiet),
             direction = match.arg(direction),
@@ -33,7 +29,6 @@ NULL
     }
 
 
-
 ## Get differential expressed genes (DEGs) from DESeqResults table.
 ##
 ## Note that we're not sorting the identifiers here by LFC or P value.
@@ -41,12 +36,14 @@ NULL
 ##
 ## Updated 2023-12-18.
 `deg,DESeqResults` <- # nolint
-    function(object,
-             direction = c("both", "up", "down"),
-             alphaThreshold = NULL,
-             baseMeanThreshold = NULL,
-             lfcThreshold = NULL,
-             quiet = FALSE) {
+    function(
+        object,
+        direction = c("both", "up", "down"),
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
+        quiet = FALSE
+    ) {
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
@@ -118,14 +115,18 @@ NULL
             status <- paste0(status, " (alpha < ", alphaThreshold)
             if (lfcThreshold > 0L) {
                 status <- paste0(
-                    status, sep,
-                    "lfc >= ", lfcThreshold
+                    status,
+                    sep,
+                    "lfc >= ",
+                    lfcThreshold
                 )
             }
             if (baseMeanThreshold > 0L) {
                 status <- paste0(
-                    status, sep,
-                    "baseMean >= ", baseMeanThreshold
+                    status,
+                    sep,
+                    "baseMean >= ",
+                    baseMeanThreshold
                 )
             }
             status <- paste0(status, ").")
@@ -133,7 +134,6 @@ NULL
         }
         deg
     }
-
 
 
 #' @rdname deg

@@ -22,14 +22,9 @@
 NULL
 
 
-
 ## Updated 2022-05-17.
 .exportResultsMatrices <-
-    function(object,
-             dir,
-             compress,
-             overwrite,
-             quiet) {
+    function(object, dir, compress, overwrite, quiet) {
         assert(
             is(object, "DESeqAnalysis"),
             isString(dir),
@@ -74,17 +69,12 @@ NULL
     }
 
 
-
 ## Here we are looping across each contrast and writing out DEG tables. We
 ## don't need to support humanize mode because `geneName` is required.
 ##
 ## Updated 2022-05-17.
 .exportResultsTables <-
-    function(object,
-             dir,
-             compress,
-             overwrite,
-             quiet) {
+    function(object, dir, compress, overwrite, quiet) {
         assert(
             is(object, "DESeqAnalysis"),
             isFlag(compress),
@@ -125,14 +115,9 @@ NULL
     }
 
 
-
 ## Updated 2021-10-15.
 `export,DESeqAnalysis` <- # nolint
-    function(object,
-             con,
-             compress = FALSE,
-             overwrite = TRUE,
-             quiet = FALSE) {
+    function(object, con, compress = FALSE, overwrite = TRUE, quiet = FALSE) {
         assert(
             validObject(object),
             isString(con),
@@ -145,7 +130,8 @@ NULL
         ## DESeqDataSet.
         alert(sprintf(
             "Exporting {.cls %s} to {.path %s}.",
-            "DESeqDataSet", "data"
+            "DESeqDataSet",
+            "data"
         ))
         files[["data"]] <-
             export(
@@ -158,7 +144,8 @@ NULL
         ## DESeqTransform.
         alert(sprintf(
             "Exporting {.cls %s} to {.path %s}.",
-            "DESeqTransform", "transform"
+            "DESeqTransform",
+            "transform"
         ))
         files[["transform"]] <-
             export(
@@ -171,7 +158,8 @@ NULL
         ## DESeqResults tables.
         alert(sprintf(
             "Exporting {.var %s} tables to {.path %s}.",
-            "DESeqResults", "resultsTables"
+            "DESeqResults",
+            "resultsTables"
         ))
         files[["resultsTables"]] <-
             .exportResultsTables(
@@ -184,7 +172,8 @@ NULL
         ## Combined DESeqResults matrices.
         alert(sprintf(
             "Exporting {.cls %s} matrices to {.path %s}.",
-            "DESeqResults", "resultsMatrices"
+            "DESeqResults",
+            "resultsMatrices"
         ))
         files[["resultsMatrices"]] <-
             .exportResultsMatrices(
@@ -199,18 +188,13 @@ NULL
     }
 
 
-
 ## Inheriting the SummarizedExperiment method internally here.
 ## Only export the raw and normalized counts.
 ## Skip exporting other assays, including mu, H, cooks.
 
 ## Updated 2022-09-13.
 `export,DESeqDataSet` <- # nolint
-    function(object,
-             con,
-             compress = FALSE,
-             overwrite = TRUE,
-             quiet = FALSE) {
+    function(object, con, compress = FALSE, overwrite = TRUE, quiet = FALSE) {
         assert(
             validObject(object),
             isString(con),
@@ -234,7 +218,6 @@ NULL
             quiet = quiet
         )
     }
-
 
 
 #' @rdname export

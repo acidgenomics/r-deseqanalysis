@@ -26,7 +26,6 @@
 NULL
 
 
-
 ## Putting the args after `...` here so we can pass in genes easily as a
 ## positional argument, during interactive use.
 ## Updated 2023-12-18.
@@ -52,7 +51,6 @@ NULL
     }
 
 
-
 ## Updated 2019-11-18.
 `plotCounts,DESeqDataSet` <- # nolint
     function(object, ...) {
@@ -69,7 +67,6 @@ NULL
         args[["labels"]] <- labels
         do.call(what = plotCounts, args = args)
     }
-
 
 
 ## Updated 2019-11-18.
@@ -91,7 +88,6 @@ NULL
         args[["labels"]] <- labels
         do.call(what = plotCounts, args = args)
     }
-
 
 
 #' @describeIn plotCounts Plot either `DESeqDataSet` normalized counts or

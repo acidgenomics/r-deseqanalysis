@@ -72,15 +72,11 @@
 NULL
 
 
-
 ## Useful for avoiding this issue:
 ## type='apeglm' shrinkage only for use with 'coef'
 ## Updated 2023-12-18.
 `apeglmResults,DESeqDataSet` <- # nolint
-    function(object,
-             contrast,
-             res,
-             ...) {
+    function(object, contrast, res, ...) {
         assert(
             requireNamespaces("apeglm"),
             validObject(object),
@@ -100,11 +96,13 @@ NULL
         group <- relevel(x = group, ref = denominator)
         colData(object)[[factor]] <- group
         ## nolint start
-        dl(c("design" = paste(
-            as.character(design(object)),
-            sep = "",
-            collapse = ""
-        )))
+        dl(c(
+            "design" = paste(
+                as.character(design(object)),
+                sep = "",
+                collapse = ""
+            )
+        ))
         ## nolint end
         object <- DESeq(object = object, parallel = parallel)
         resultsNames <- resultsNames(object)
@@ -144,7 +142,6 @@ NULL
         )
         shrink
     }
-
 
 
 #' @rdname apeglmResults

@@ -53,7 +53,6 @@
 NULL
 
 
-
 ## Updated 2021-03-15.
 .args <- list(
     "direction" = c("up", "down"),
@@ -61,16 +60,17 @@ NULL
 )
 
 
-
 ## Updated 2023-12-18.
 `degIntersection,DESeqAnalysis` <- # nolint
-    function(object,
-             i = NULL,
-             alphaThreshold = NULL,
-             baseMeanThreshold = NULL,
-             lfcThreshold = NULL,
-             direction,
-             return) {
+    function(
+        object,
+        direction,
+        return,
+        i = NULL,
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL
+    ) {
         assert(validObject(object))
         resList <- DESeqResultsList(object = object, quiet = TRUE)
         if (!is.null(i)) {
@@ -103,21 +103,21 @@ formals(`degIntersection,DESeqAnalysis`)[names(.args)] <- # nolint
     .args
 
 
-
 ## Updated 2021-03-15.
 `degIntersection,DESeqAnalysisList` <- # nolint
     `degIntersection,DESeqAnalysis`
 
 
-
 ## Updated 2022-05-17.
 `degIntersection,DESeqResultsList` <- # nolint
-    function(object,
-             direction,
-             alphaThreshold = NULL,
-             baseMeanThreshold = NULL,
-             lfcThreshold = NULL,
-             return) {
+    function(
+        object,
+        direction,
+        return,
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL
+    ) {
         assert(validObject(object))
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
@@ -156,7 +156,9 @@ formals(`degIntersection,DESeqAnalysis`)[names(.args)] <- # nolint
         mat <- intersectionMatrix(x)
         alert(sprintf(
             "Returning intersection %s of %s %s-regulated DEGs.",
-            return, nrow(mat), direction
+            return,
+            nrow(mat),
+            direction
         ))
         count <- rowSums(mat)
         mode(count) <- "integer"
@@ -179,9 +181,7 @@ formals(`degIntersection,DESeqResultsList`)[names(.args)] <- # nolint
     .args
 
 
-
 rm(.args)
-
 
 
 #' @rdname degIntersection

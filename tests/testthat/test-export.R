@@ -51,33 +51,46 @@ test_that("New 'con' BiocIO approach", {
             "resultsTables" = list(
                 "condition_B_vs_A" = c(
                     "all" = file.path(
-                        resTblPrefix, "condition_B_vs_A", "all.csv.gz"
+                        resTblPrefix,
+                        "condition_B_vs_A",
+                        "all.csv.gz"
                     ),
                     "up" = file.path(
-                        resTblPrefix, "condition_B_vs_A", "up.csv.gz"
+                        resTblPrefix,
+                        "condition_B_vs_A",
+                        "up.csv.gz"
                     ),
                     "down" = file.path(
-                        resTblPrefix, "condition_B_vs_A", "down.csv.gz"
+                        resTblPrefix,
+                        "condition_B_vs_A",
+                        "down.csv.gz"
                     ),
                     "both" = file.path(
-                        resTblPrefix, "condition_B_vs_A", "both.csv.gz"
+                        resTblPrefix,
+                        "condition_B_vs_A",
+                        "both.csv.gz"
                     )
                 ),
                 "treatment_D_vs_C" = c(
                     "all" = file.path(
-                        resTblPrefix, "treatment_D_vs_C", "all.csv.gz"
+                        resTblPrefix,
+                        "treatment_D_vs_C",
+                        "all.csv.gz"
                     )
                 )
             ),
             "resultsMatrices" = c(
                 "log2FoldChange" = file.path(
-                    resMatPrefix, "log2FoldChange.csv.gz"
+                    resMatPrefix,
+                    "log2FoldChange.csv.gz"
                 ),
                 "stat" = file.path(
-                    resMatPrefix, "stat.csv.gz"
+                    resMatPrefix,
+                    "stat.csv.gz"
                 ),
                 "padj" = file.path(
-                    resMatPrefix, "padj.csv.gz"
+                    resMatPrefix,
+                    "padj.csv.gz"
                 )
             )
         )
