@@ -55,7 +55,8 @@ x <- object[genes, samples]
 print(x)
 }
 \references{
-Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988)
-  \emph{The New S Language}.
-  Wadsworth & Brooks/Cole.
+{\if{html}{\out{<span id="reference+Extract.Rd+R+3ABecker+2BChambers+2BWilks+3A1988"></span>}}Becker RA, Chambers JM, Wilks AR (1988).
+\emph{The New S Language}.
+Chapman and Hall/CRC, London.
+ISBN 053409192X.}
 }

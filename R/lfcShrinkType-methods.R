@@ -14,7 +14,6 @@
 NULL
 
 
-
 ## Updated 2021-03-12.
 `lfcShrinkType,DESeqAnalysis` <- # nolint
     function(object) {
@@ -26,14 +25,12 @@ NULL
     }
 
 
-
 ## Updated 2021-03-12.
 `lfcShrinkType,DESeqAnalysisList` <- # nolint
     function(object) {
         assert(hasLength(object))
         lfcShrinkType(object[[1L]])
     }
-
 
 
 #' Log fold change shrinkage type
@@ -64,17 +61,14 @@ NULL
             } else {
                 type <- "unknown"
             }
+        } else if (isSubset("type", names(pi))) {
+            type <- pi[["type"]]
         } else {
-            if (isSubset("type", names(pi))) {
-                type <- pi[["type"]]
-            } else {
-                type <- "unshrunken"
-            }
+            type <- "unshrunken"
         }
         assert(isString(type))
         type
     }
-
 
 
 ## Updated 2021-03-12.
@@ -83,7 +77,6 @@ NULL
         assert(hasLength(object))
         lfcShrinkType(object[[1L]])
     }
-
 
 
 #' @rdname lfcShrinkType

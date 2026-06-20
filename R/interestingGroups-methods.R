@@ -17,14 +17,12 @@
 NULL
 
 
-
 ## Updated 2020-08-04.
 `interestingGroups,DESeqAnalysis` <- # nolint
     function(object) {
         dds <- as(object, "DESeqDataSet")
         interestingGroups(dds)
     }
-
 
 
 ## Updated 2020-08-04.
@@ -40,10 +38,8 @@ NULL
     }
 
 
-
 `interestingGroups<-,DESeqAnalysis,NULL` <- # nolint
     `interestingGroups<-,DESeqAnalysis,character`
-
 
 
 #' @rdname interestingGroups
@@ -53,7 +49,6 @@ setMethod(
     signature = signature(object = "DESeqAnalysis"),
     definition = `interestingGroups,DESeqAnalysis`
 )
-
 
 
 #' @rdname interestingGroups

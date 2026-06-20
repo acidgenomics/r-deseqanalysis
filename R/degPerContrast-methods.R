@@ -23,19 +23,17 @@
 NULL
 
 
-
 ## Updated 2022-05-17.
 `degPerContrast,DESeqAnalysis` <- # nolint
-    function(object,
-             i = NULL,
-             direction = c("both", "up", "down"),
-             return = c("matrix", "list")) {
+    function(
+        object,
+        i = NULL,
+        direction = c("both", "up", "down"),
+        return = c("matrix", "list")
+    ) {
         direction <- match.arg(direction)
         return <- match.arg(return)
-        n <- switch(EXPR = return,
-            "matrix" = TRUE,
-            "list" = FALSE
-        )
+        n <- switch(EXPR = return, "matrix" = TRUE, "list" = FALSE)
         resultsNames <- resultsNames(object)
         if (is.null(i)) {
             i <- resultsNames
@@ -92,7 +90,6 @@ NULL
             "list" = list
         )
     }
-
 
 
 #' @rdname degPerContrast

@@ -21,19 +21,16 @@
 NULL
 
 
-
 ## Updated 2020-08-04.
 `updateObject,DESeqAnalysis` <- # nolint
     function(object, ..., verbose = FALSE) {
         assert(isFlag(verbose))
-        if (!isTRUE(.hasSlot(object, "metadata"))) {
-            if (isTRUE(verbose)) {
-                alertWarning(paste(
-                    "Legacy object < 0.1.8 detected.",
-                    "Updating to support metadata slot.",
-                    sep = "\n"
-                ))
-            }
+        if (!isTRUE(.hasSlot(object, "metadata")) && isTRUE(verbose)) {
+            alertWarning(paste(
+                "Legacy object < 0.1.8 detected.",
+                "Updating to support metadata slot.",
+                sep = "\n"
+            ))
         }
         out <- DESeqAnalysis(
             data = object@data,
@@ -48,7 +45,6 @@ NULL
         }
         out
     }
-
 
 
 #' @rdname updateObject

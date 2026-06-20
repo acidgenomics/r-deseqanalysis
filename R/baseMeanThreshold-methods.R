@@ -12,7 +12,6 @@
 NULL
 
 
-
 ## Updated 2021-03-10.
 `baseMeanThreshold,DESeqAnalysis` <- # nolint
     function(object) {
@@ -23,7 +22,6 @@ NULL
         assert(isNumber(x), isNonNegative(x))
         x
     }
-
 
 
 ## Updated 2021-03-10.
@@ -38,11 +36,9 @@ NULL
     }
 
 
-
 ## Updated 2021-03-03.
 `baseMeanThreshold,DESeqResults` <- # nolint
     `baseMeanThreshold,DESeqAnalysis`
-
 
 
 ## Updated 2021-03-10.
@@ -57,7 +53,6 @@ NULL
     }
 
 
-
 ## Updated 2021-03-12.
 `baseMeanThreshold<-,DESeqAnalysis,numeric` <- # nolint
     function(object, value) {
@@ -65,7 +60,6 @@ NULL
         metadata(object)[["baseMeanThreshold"]] <- value
         object
     }
-
 
 
 ## Updated 2021-03-12.
@@ -76,11 +70,9 @@ NULL
     }
 
 
-
 ## Updated 2021-03-12.
 `baseMeanThreshold<-,DESeqAnalysisList,numeric` <- # nolint
     `baseMeanThreshold<-,DESeqAnalysis,numeric`
-
 
 
 ## Updated 2021-03-12.
@@ -88,11 +80,9 @@ NULL
     `baseMeanThreshold<-,DESeqAnalysis,NULL`
 
 
-
 ## Updated 2021-03-12.
 `baseMeanThreshold<-,DESeqResults,numeric` <- # nolint
     `baseMeanThreshold<-,DESeqAnalysis,numeric`
-
 
 
 ## Updated 2021-03-12.
@@ -100,17 +90,14 @@ NULL
     `baseMeanThreshold<-,DESeqAnalysis,NULL`
 
 
-
 ## Updated 2021-03-12.
 `baseMeanThreshold<-,DESeqResultsList,numeric` <- # nolint
     `baseMeanThreshold<-,DESeqResults,numeric`
 
 
-
 ## Updated 2021-03-12.
 `baseMeanThreshold<-,DESeqResultsList,NULL` <- # nolint
     `baseMeanThreshold<-,DESeqResults,NULL`
-
 
 
 #' @rdname baseMeanThreshold
@@ -144,7 +131,6 @@ setMethod(
     signature = signature(object = "DESeqResultsList"),
     definition = `baseMeanThreshold,DESeqResultsList`
 )
-
 
 
 #' @rdname baseMeanThreshold

@@ -31,14 +31,9 @@
 NULL
 
 
-
 ## Updated 2023-12-18.
 `results,DESeqAnalysis` <- # nolint
-    function(object,
-             i,
-             lfcShrink = NULL,
-             extra = FALSE,
-             quiet = TRUE) {
+    function(object, i, lfcShrink = NULL, extra = FALSE, quiet = TRUE) {
         assert(
             validObject(object),
             isScalar(i),
@@ -83,13 +78,11 @@ NULL
     }
 
 
-
 ## Updated 2019-07-23.
 `results,DESeqDataSet` <- # nolint
     function(object, ...) {
         DESeq2::results(object, ...)
     }
-
 
 
 #' @rdname results

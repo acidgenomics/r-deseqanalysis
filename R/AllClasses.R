@@ -171,7 +171,6 @@ setValidity(
 )
 
 
-
 ## DESeqAnalysisList ===========================================================
 
 #' List containing related DESeq2 analyses
@@ -243,7 +242,6 @@ setValidity(
         TRUE
     }
 )
-
 
 
 ## DESeqResultsList ============================================================

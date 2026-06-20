@@ -30,11 +30,13 @@
 #' x <- importPairwiseContrasts(file)
 #' print(x)
 importPairwiseContrasts <-
-    function(file,
-             groupCol = "group",
-             numeratorCol = "numerator",
-             denominatorCol = "denominator",
-             namesCol = "description") {
+    function(
+        file,
+        groupCol = "group",
+        numeratorCol = "numerator",
+        denominatorCol = "denominator",
+        namesCol = "description"
+    ) {
         assert(
             isAFile(file),
             isString(groupCol),

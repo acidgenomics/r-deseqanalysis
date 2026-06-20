@@ -25,7 +25,6 @@
 NULL
 
 
-
 ## Updated 2022-05-24.
 .degKable <- # nolint
     function(object, caption, n = 10L) {
@@ -89,7 +88,6 @@ NULL
     }
 
 
-
 ## Updated 2022-05-24.
 `markdownTables,DESeqAnalysis` <- # nolint
     function(object, i, n = 10L) {
@@ -101,12 +99,9 @@ NULL
     }
 
 
-
 ## Updated 2022-05-24.
 `markdownTables,DESeqResults` <- # nolint
-    function(object,
-             contrastName = NULL,
-             n = 10L) {
+    function(object, contrastName = NULL, n = 10L) {
         if (is.null(contrastName)) {
             contrastName <- tryCatch(
                 expr = {
@@ -123,12 +118,9 @@ NULL
     }
 
 
-
 ## Updated 2023-04-28.
 `markdownTables,DFrameList` <- # nolint
-    function(object,
-             contrastName = NULL,
-             n = 10L) {
+    function(object, contrastName = NULL, n = 10L) {
         assert(isString(contrastName, nullOk = TRUE))
         out <- list()
         if (hasLength(object[["up"]])) {
@@ -154,7 +146,6 @@ NULL
         }
         invisible(out)
     }
-
 
 
 #' @rdname markdownTables

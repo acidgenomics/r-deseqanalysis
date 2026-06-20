@@ -12,12 +12,9 @@
 NULL
 
 
-
 ## Updated 2021-03-09.
 `DESeqResultsList,DESeqAnalysis` <- # nolint
-    function(object,
-             lfcShrink = NULL,
-             quiet = FALSE) {
+    function(object, lfcShrink = NULL, quiet = FALSE) {
         assert(validObject(object))
         if (is.null(lfcShrink)) {
             lfcShrink <- lfcShrink(object)
@@ -44,7 +41,8 @@ NULL
                     "defined in {.var %s} slot.\n",
                     "Set {.code %s}."
                 ),
-                "DESeqResults", "lfcShrink",
+                "DESeqResults",
+                "lfcShrink",
                 "lfcShrink(object) <- NULL"
             ))
         }
@@ -70,7 +68,6 @@ NULL
     }
 
 
-
 ## Coercion to `SimpleList` here doesn't unlist like we'd want here.
 ## Updated 2021-03-15.
 `DESeqResultsList,DESeqAnalysisList` <- # nolint
@@ -83,7 +80,6 @@ NULL
     }
 
 
-
 ## Updated 2021-03-12.
 `DESeqResultsList,SimpleList` <- # nolint
     function(object) {
@@ -91,11 +87,9 @@ NULL
     }
 
 
-
 ## Updated 2021-03-12.
 `DESeqResultsList,list` <- # nolint
     `DESeqResultsList,SimpleList`
-
 
 
 ## Updated 2021-03-08.
@@ -103,7 +97,6 @@ NULL
     function(object) {
         new(Class = "DESeqResultsList", list())
     }
-
 
 
 #' @rdname DESeqResultsList

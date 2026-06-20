@@ -1,8 +1,8 @@
 test_that("DESeqAnalysis", {
     data <- DESeq2::makeExampleDESeqDataSet()
     rowRanges <- AcidGenomes::emptyRanges(names = rownames(data))
-    mcols(rowRanges)[["geneId"]] <- paste0("id", seq_len(length(rowRanges)))
-    mcols(rowRanges)[["geneName"]] <- paste0("name", seq_len(length(rowRanges)))
+    mcols(rowRanges)[["geneId"]] <- paste0("id", seq_along(rowRanges))
+    mcols(rowRanges)[["geneName"]] <- paste0("name", seq_along(rowRanges))
     rowRanges(data) <- rowRanges
     data <- DESeq2::DESeq(data)
     transform <- DESeq2::varianceStabilizingTransformation(data)

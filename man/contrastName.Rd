@@ -34,7 +34,7 @@ For more information:
 Name format to return:
 \itemize{
 \item \code{resultsNames}: Attempt to matching the conventions in
-\code{\link[DESeq2:results]{resultsNames()}}.
+\code{\link[DESeq2:resultsNames]{resultsNames()}}.
 \item \code{title}: Human readable, for plot titles and/or table captions.
 }}
 

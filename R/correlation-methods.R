@@ -18,14 +18,12 @@
 NULL
 
 
-
 .method <- formals(S4Vectors::cor)[["method"]]
-
 
 
 ## Updated 2019-11-08.
 `correlation,DESeqResults,DESeqResults` <- # nolint
-    function(x, y, col = "log2FoldChange", method) {
+    function(x, y, method, col = "log2FoldChange") {
         assert(
             hasRownames(x),
             hasRownames(y),
@@ -51,15 +49,9 @@ formals(`correlation,DESeqResults,DESeqResults`)[["method"]] <- # nolint
     .method
 
 
-
 ## Updated 2020-08-05.
 `correlation,DESeqAnalysis,missing` <- # nolint
-    function(x,
-             y = NULL,
-             i,
-             j,
-             col = "log2FoldChange",
-             method) {
+    function(x, y = NULL, i, j, method, col = "log2FoldChange") { # nolint
         assert(!identical(i, j))
         method <- match.arg(method)
         correlation(
@@ -73,9 +65,7 @@ formals(`correlation,DESeqAnalysis,missing`)[["method"]] <- # nolint
     .method
 
 
-
 rm(.method)
-
 
 
 #' @rdname correlation

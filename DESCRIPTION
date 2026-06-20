@@ -1,8 +1,8 @@
 Package: DESeqAnalysis
 Title: Acid Genomics DESeq2 Analysis Utilities
 Description: Toolkit for performing differential expression with DESeq2.
-Version: 0.7.2
-Date: 2025-03-24
+Version: 0.7.3
+Date: 2026-06-19
 Authors@R: c(
     person(
         given = "Michael",
@@ -19,7 +19,7 @@ URL:
     https://r.acidgenomics.com/packages/deseqanalysis/,
     https://github.com/acidgenomics/r-deseqanalysis/
 BugReports: https://github.com/acidgenomics/r-deseqanalysis/issues/
-License: AGPL-3
+License: Apache License (>= 2)
 Encoding: UTF-8
 LazyData: false
 Depends: R (>= 4.0)
@@ -57,8 +57,8 @@ Suggests:
     tximport,
     tximportData
 Additional_repositories: https://r.acidgenomics.com
+Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
 biocViews: DifferentialExpression, RNASeq

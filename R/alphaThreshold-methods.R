@@ -17,7 +17,6 @@
 NULL
 
 
-
 ## Updated 2021-03-10.
 `alphaThreshold,DESeqAnalysis` <- # nolint
     function(object) {
@@ -29,7 +28,6 @@ NULL
         assert(isAlpha(x))
         x
     }
-
 
 
 ## Updated 2021-03-10.
@@ -45,7 +43,6 @@ NULL
     }
 
 
-
 ## Other methods slot "alphaThreshold" instead of "alpha".
 ## Updated 2021-03-10.
 `alphaThreshold,DESeqResults` <- # nolint
@@ -57,7 +54,6 @@ NULL
         assert(isAlpha(x))
         x
     }
-
 
 
 ## Updated 2021-03-12.
@@ -73,7 +69,6 @@ NULL
     }
 
 
-
 ## Updated 2020-08-04.
 `alphaThreshold<-,DESeqAnalysis,numeric` <- # nolint
     function(object, value) {
@@ -81,7 +76,6 @@ NULL
         metadata(object)[["alphaThreshold"]] <- value
         object
     }
-
 
 
 ## Updated 2020-08-04.
@@ -92,17 +86,14 @@ NULL
     }
 
 
-
 ## Updated 2021-03-10.
 `alphaThreshold<-,DESeqAnalysisList,numeric` <- # nolint
     `alphaThreshold<-,DESeqAnalysis,numeric`
 
 
-
 ## Updated 2021-03-10.
 `alphaThreshold<-,DESeqAnalysisList,NULL` <- # nolint
     `alphaThreshold<-,DESeqAnalysis,NULL`
-
 
 
 ## Updated 2021-03-03.
@@ -114,17 +105,14 @@ NULL
     }
 
 
-
 ## Updated 2021-03-10.
 `alphaThreshold<-,DESeqResultsList,numeric` <- # nolint
     `alphaThreshold<-,DESeqAnalysisList,numeric`
 
 
-
 ## Updated 2021-03-10.
 `alphaThreshold<-,DESeqResultsList,NULL` <- # nolint
     `alphaThreshold<-,DESeqAnalysisList,NULL`
-
 
 
 #' @rdname alphaThreshold
@@ -158,7 +146,6 @@ setMethod(
     signature = signature(object = "DESeqResultsList"),
     definition = `alphaThreshold,DESeqResultsList`
 )
-
 
 
 #' @rdname alphaThreshold

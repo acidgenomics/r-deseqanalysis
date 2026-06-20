@@ -25,11 +25,9 @@
 NULL
 
 
-
 ## Updated 2020-10-28.
 `extract,DESeqAnalysis` <- # nolint
-    function(x, i, j,
-             drop = FALSE) {
+    function(x, i, j, drop = FALSE) {
         assert(
             validObject(x),
             isFALSE(drop)
@@ -91,7 +89,6 @@ NULL
         metadata(out) <- meta
         out
     }
-
 
 
 #' @rdname extract

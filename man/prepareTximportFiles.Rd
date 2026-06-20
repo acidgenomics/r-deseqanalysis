@@ -34,7 +34,7 @@ Prepare quant files for tximport
 Runs the following internal comments:
 \enumerate{
 \item Extract sample directory name from quant file using
-\code{\link[base:basename]{dirname()}} and \code{\link[base:basename]{basename()}}.
+\code{\link[base:dirname]{dirname()}} and \code{\link[base:basename]{basename()}}.
 \item Autopad zeros, if necessary, via
 \code{\link[syntactic:autopadZeros]{autopadZeros()}}.
 \item Sanitizes names with \code{\link[syntactic:snakeCase]{snakeCase()}}.

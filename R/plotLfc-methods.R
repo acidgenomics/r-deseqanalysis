@@ -18,7 +18,6 @@
 NULL
 
 
-
 ## Updated 2023-08-11.
 `plotLfc,DESeqAnalysis` <- # nolint
     function(object) {
@@ -59,7 +58,6 @@ NULL
             acid_scale_color_discrete()
         p
     }
-
 
 
 #' @rdname plotLfc
