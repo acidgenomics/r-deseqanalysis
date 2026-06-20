@@ -5,7 +5,7 @@ test_that("sanitizeTximportIdentifiers", {
     samples <- read.table(file.path(dir, "samples.txt"), header = TRUE)
     files <- file.path(dir, "salmon", samples[["run"]], "quant.sf.gz")
     names(files) <- paste0("sample", seq(from = 1L, to = length(files)))
-    txi <- tximport::tximport(files, type = "salmon", txIn = TRUE, txOut = TRUE)
+    txi <- tximport::tximport(files, type = "salmon", txIn = TRUE, txOut = TRUE) # nolint
     txi <- sanitizeTximportIdentifiers(txi)
     expect_type(txi, "list")
 })

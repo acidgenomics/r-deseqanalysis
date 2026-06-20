@@ -20,7 +20,6 @@
 NULL
 
 
-
 ## Updated 2021-01-21.
 `plotPca,DESeqAnalysis` <- # nolint
     function(object, ...) {
@@ -29,7 +28,6 @@ NULL
         rse <- as(dt, "RangedSummarizedExperiment")
         plotPca(rse, ...)
     }
-
 
 
 #' @describeIn plotPca Extracts `DESeqTransform`, converts to

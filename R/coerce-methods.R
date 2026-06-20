@@ -28,7 +28,6 @@
 NULL
 
 
-
 ## Updated 2022-03-30.
 `as.DESeqDataSet,DESeqAnalysis` <- # nolint
     function(x) {
@@ -40,7 +39,6 @@ NULL
     function(x) {
         as(object = x, Class = "DESeqTransform")
     }
-
 
 
 ## Updated 2023-12-18.
@@ -70,7 +68,6 @@ NULL
     }
 
 
-
 #' @rdname coerce
 #' @export
 setMethod(
@@ -86,7 +83,6 @@ setMethod(
     signature = signature(x = "DESeqAnalysis"),
     definition = `as.DESeqTransform,DESeqAnalysis`
 )
-
 
 
 #' @rdname coerce

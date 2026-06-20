@@ -29,7 +29,6 @@
 NULL
 
 
-
 ## Updated 2023-12-18.
 `combine,DESeqAnalysis` <- # nolint
     function(x, y) {
@@ -72,7 +71,6 @@ NULL
         }
         out
     }
-
 
 
 #' @rdname combine

@@ -16,7 +16,6 @@
 NULL
 
 
-
 ## Updated 2021-03-12.
 `lfcThreshold,DESeqAnalysis` <- # nolint
     function(object) {
@@ -28,7 +27,6 @@ NULL
         assert(isNumber(x), isNonNegative(x))
         x
     }
-
 
 
 ## Updated 2021-03-12.
@@ -44,7 +42,6 @@ NULL
     }
 
 
-
 ## Updated 2021-03-03.
 `lfcThreshold,DESeqResults` <- # nolint
     function(object) {
@@ -55,7 +52,6 @@ NULL
         assert(isNumber(x), isNonNegative(x))
         x
     }
-
 
 
 ## Updated 2021-03-12.
@@ -71,7 +67,6 @@ NULL
     }
 
 
-
 ## Updated 2021-03-03.
 `lfcThreshold<-,DESeqAnalysis,numeric` <- # nolint
     function(object, value) {
@@ -79,7 +74,6 @@ NULL
         metadata(object)[["lfcThreshold"]] <- value
         object
     }
-
 
 
 ## Updated 2020-08-04.
@@ -90,11 +84,9 @@ NULL
     }
 
 
-
 ## Updated 2021-03-13.
 `lfcThreshold<-,DESeqAnalysisList,numeric` <- # nolint
     `lfcThreshold<-,DESeqAnalysis,numeric`
-
 
 
 ## Updated 2021-03-13.
@@ -102,17 +94,14 @@ NULL
     `lfcThreshold<-,DESeqAnalysis,NULL`
 
 
-
 ## Updated 2021-03-12.
 `lfcThreshold<-,DESeqResults,numeric` <- # nolint
     `lfcThreshold<-,DESeqAnalysis,numeric`
 
 
-
 ## Updated 2021-03-13.
 `lfcThreshold<-,DESeqResultsList,numeric` <- # nolint
     `lfcThreshold<-,DESeqResults,numeric`
-
 
 
 #' @rdname lfcThreshold
@@ -146,7 +135,6 @@ setMethod(
     signature = signature(object = "DESeqResultsList"),
     definition = `lfcThreshold,DESeqResultsList`
 )
-
 
 
 #' @rdname lfcThreshold

@@ -5,7 +5,7 @@
 
 ## nolint start
 suppressPackageStartupMessages({
-library(rmarkdown)
+    library(rmarkdown)
 })
 ## nolint end
 templateFile <- "deseqanalysis.Rmd"
@@ -20,7 +20,7 @@ objectFiles <- file.path(
     paste0(datasets, ".rds")
 )
 names(objectFiles) <- names(datasets)
-stopifnot(all(file.exists(objectFiles)))
+stopifnot(file.exists(objectFiles))
 outputDir <- file.path("results", Sys.Date(), "differential-expression")
 invisible(Map(
     name = names(objectFiles),

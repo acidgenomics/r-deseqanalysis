@@ -55,17 +55,18 @@
 NULL
 
 
-
 ## Updated 2023-12-18.
 `plotVolcano,DESeqAnalysis` <- # nolint
-    function(object,
-             i,
-             alphaThreshold = NULL,
-             baseMeanThreshold = NULL,
-             lfcThreshold = NULL,
-             genes = NULL,
-             ntop = 0L,
-             ...) {
+    function(
+        object,
+        i,
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
+        genes = NULL,
+        ntop = 0L,
+        ...
+    ) {
         assert(
             validObject(object),
             isAny(genes, classes = c("character", "NULL")),
@@ -113,32 +114,33 @@ NULL
     }
 
 
-
 ## Updated 2021-08-09.
 `plotVolcano,DESeqResults` <- # nolint
-    function(object,
-             direction = c("both", "up", "down"),
-             alphaThreshold = NULL,
-             baseMeanThreshold = NULL,
-             lfcThreshold = NULL,
-             genes = NULL,
-             ntop = 0L,
-             pointColor = c(
-                 "downregulated" = AcidPlots::lightPalette[["purple"]],
-                 "upregulated" = AcidPlots::lightPalette[["orange"]],
-                 "nonsignificant" = AcidPlots::lightPalette[["gray"]]
-             ),
-             pointSize = 2L,
-             pointAlpha = 0.8,
-             limits = list(
-                 "x" = NULL,
-                 "y" = c(1e-10, 1L)
-             ),
-             labels = list(
-                 "title" = TRUE,
-                 "subtitle" = NULL
-             ),
-             histograms = FALSE) {
+    function(
+        object,
+        direction = c("both", "up", "down"),
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
+        genes = NULL,
+        ntop = 0L,
+        pointColor = c(
+            "downregulated" = AcidPlots::lightPalette[["purple"]],
+            "upregulated" = AcidPlots::lightPalette[["orange"]],
+            "nonsignificant" = AcidPlots::lightPalette[["gray"]]
+        ),
+        pointSize = 2L,
+        pointAlpha = 0.8,
+        limits = list(
+            "x" = NULL,
+            "y" = c(1e-10, 1L)
+        ),
+        labels = list(
+            "title" = TRUE,
+            "subtitle" = NULL
+        ),
+        histograms = FALSE
+    ) {
         if (is.null(alphaThreshold)) {
             alphaThreshold <- alphaThreshold(object)
         }
@@ -432,7 +434,6 @@ NULL
             p
         }
     }
-
 
 
 #' @describeIn plotVolcano Passes to `DESeqResults` method, with `gene2symbol`

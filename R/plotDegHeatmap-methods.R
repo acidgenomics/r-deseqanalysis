@@ -2,8 +2,6 @@
 ## primary argument instead of `object`, which is still in use in bcbioRNASeq
 ## F1000 v2 paper.
 
-
-
 #' @name plotDegHeatmap
 #' @inherit AcidGenerics::plotDegHeatmap
 #' @note Updated 2022-04-15.
@@ -28,16 +26,17 @@
 NULL
 
 
-
 ## Updated 2023-12-18.
 `plotDegHeatmap,DESeqAnalysis` <- # nolint
-    function(object,
-             i,
-             contrastSamples = FALSE,
-             alphaThreshold = NULL,
-             baseMeanThreshold = NULL,
-             lfcThreshold = NULL,
-             ...) {
+    function(
+        object,
+        i,
+        contrastSamples = FALSE,
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
+        ...
+    ) {
         assert(
             validObject(object),
             isFlag(contrastSamples)
@@ -73,21 +72,22 @@ NULL
     }
 
 
-
 ## This method is used in F1000 paper and needs to be included. Note that in
 ## newer versions of bcbioRNASeq, this step won't work because we've slotted the
 ## rlog/vst counts in as a matrix instead of DESeqTransform.
 ## Updated 2021-03-15.
 `plotDegHeatmap,DESeqResults` <- # nolint
-    function(object,
-             DESeqTransform, # nolint
-             direction = c("both", "up", "down"),
-             alphaThreshold = NULL,
-             baseMeanThreshold = NULL,
-             lfcThreshold = NULL,
-             title = TRUE,
-             subtitle = TRUE,
-             ...) {
+    function(
+        object,
+        DESeqTransform, # nolint
+        direction = c("both", "up", "down"),
+        alphaThreshold = NULL,
+        baseMeanThreshold = NULL,
+        lfcThreshold = NULL,
+        title = TRUE,
+        subtitle = TRUE,
+        ...
+    ) {
         ## Rename objects internally to make the code more readable.
         res <- object
         dt <- DESeqTransform
@@ -151,7 +151,6 @@ NULL
         args <- c(args, list(...))
         do.call(what = plotHeatmap, args = args)
     }
-
 
 
 #' @describeIn plotDegHeatmap Passes to `DESeqResults` method.

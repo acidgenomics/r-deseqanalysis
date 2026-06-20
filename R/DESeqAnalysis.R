@@ -52,10 +52,7 @@
 #' )
 #' print(object)
 DESeqAnalysis <- # nolint
-    function(data,
-             transform,
-             results,
-             lfcShrink = NULL) {
+    function(data, transform, results, lfcShrink = NULL) {
         ## Allow input of single `DESeqResults`.
         if (is(results, "DESeqResults")) {
             results <- .coerceResultsToList(results)

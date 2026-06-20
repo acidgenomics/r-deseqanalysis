@@ -18,7 +18,7 @@ apeglmResults(object, ...)
 Pairwise contrast vector:
 \enumerate{
 \item \code{factor}: Grouping factor. Corresponds to column name in
-\code{\link[SummarizedExperiment:SummarizedExperiment-class]{colData()}}.
+\code{\link[SummarizedExperiment:colData]{colData()}}.
 \item \code{numerator}: Numerator samples.
 \item \code{denominator}: Denominator samples.
 }
@@ -42,7 +42,7 @@ reference levels to use the required \code{coef} argument.
 \details{
 Dynamically sets reference factor levels, as recommended by DESeq2 vignette.
 Matches \code{contrast} input internally to corresponding \code{coef} corresponding
-to values in \code{\link[DESeq2:results]{resultsNames()}}.
+to values in \code{\link[DESeq2:resultsNames]{resultsNames()}}.
 
 Runs \code{\link[DESeq2:nbinomWaldTest]{nbinomWaldTest()}} via
 \code{\link[DESeq2:DESeq]{DESeq()}}, followed by \code{\link[DESeq2:lfcShrink]{lfcShrink()}}.

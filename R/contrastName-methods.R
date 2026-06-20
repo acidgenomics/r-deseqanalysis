@@ -23,7 +23,6 @@
 NULL
 
 
-
 ## This method is to be used primarily to set the contrast name on DESeqResults
 ## inside plotting functions. See `plotMa()` method, for example.
 ## Updated 2021-03-15.
@@ -37,11 +36,9 @@ NULL
     }
 
 
-
 ## Updated 2024-03-27.
 `contrastName,DESeqResults` <- # nolint
-    function(object,
-             format = c("resultsNames", "title")) {
+    function(object, format = c("resultsNames", "title")) {
         format <- match.arg(format)
         ## Use metadata stash, if defined. This is the recommended approach
         ## when passing off from DESeqAnalysis object, using `resultsNames()`.
@@ -68,12 +65,11 @@ NULL
                 ## Ensure "vs." contains a period.
                 x <- sub("\\svs\\s", " vs. ", x)
                 ## Improve appearance for difference of differences.
-                x <- gsub("\\+", " \\+\n    ", x)
+                x <- gsub("+", " +\n    ", x, fixed = TRUE)
             }
         )
         x
     }
-
 
 
 ## Updated 2023-12-18.
@@ -83,7 +79,6 @@ NULL
         metadata(object)[["contrastName"]] <- value
         object
     }
-
 
 
 #' @rdname contrastName
@@ -101,7 +96,6 @@ setMethod(
     signature = signature(object = "DESeqResults"),
     definition = `contrastName,DESeqResults`
 )
-
 
 
 #' @rdname contrastName

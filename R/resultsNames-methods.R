@@ -14,7 +14,6 @@
 NULL
 
 
-
 ## Updated 2021-03-15.
 `resultsNames,DESeqAnalysis` <- # nolint
     function(object) {
@@ -23,11 +22,9 @@ NULL
     }
 
 
-
 ## Updated 2021-03-15.
 `resultsNames,DESeqAnalysisList` <- # nolint
     `resultsNames,DESeqAnalysis`
-
 
 
 ## Updated 2019-07-23.
@@ -37,13 +34,11 @@ NULL
     }
 
 
-
 ## Updated 2021-03-15.
 `resultsNames,DESeqResultsList` <- # nolint
     function(object) {
         names(object)
     }
-
 
 
 ## Updated 2023-12-18.
@@ -57,14 +52,12 @@ NULL
     }
 
 
-
 ## Updated 2021-03-15.
 `resultsNames<-,DESeqResultsList,character` <- # nolint
     function(object, value) {
         names(object) <- value
         object
     }
-
 
 
 #' @rdname resultsNames
@@ -98,7 +91,6 @@ setMethod(
     signature = signature(object = "DESeqResultsList"),
     definition = `resultsNames,DESeqResultsList`
 )
-
 
 
 #' @rdname resultsNames

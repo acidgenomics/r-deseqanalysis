@@ -12,17 +12,22 @@
 NULL
 
 
-
 ## Updated 2023-12-18.
 `show,DESeqAnalysis` <- # nolint
     function(object) {
         assert(validObject(object))
         dds <- as(object, "DESeqDataSet")
-        cat(paste0(
-            class(object), " ",
-            metadata(object)[["packageVersion"]], "; ",
-            "DESeq2 ", metadata(dds)[["version"]]
-        ), sep = "\n")
+        cat(
+            paste0(
+                class(object),
+                " ",
+                metadata(object)[["packageVersion"]],
+                "; ",
+                "DESeq2 ",
+                metadata(dds)[["version"]]
+            ),
+            sep = "\n"
+        )
         ## Show information about the DESeqDataSet.
         ddsInfo <- paste0("  ", capture.output(show(dds))[-1L])
         cat("data:", ddsInfo, sep = "\n")
@@ -48,7 +53,6 @@ NULL
         }
         showSlotInfo(list)
     }
-
 
 
 #' @rdname show

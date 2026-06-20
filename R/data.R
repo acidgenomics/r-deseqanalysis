@@ -11,7 +11,6 @@
 "deseq"
 
 
-
 #' Minimal DESeq2 example analysis
 #'
 #' @author Michael Steinbaugh

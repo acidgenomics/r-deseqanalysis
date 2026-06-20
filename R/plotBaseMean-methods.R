@@ -26,17 +26,18 @@
 NULL
 
 
-
 ## Updated 2022-05-18.
 `plotBaseMean,DESeqAnalysis` <- # nolint
-    function(object,
-             nonzero = TRUE,
-             trans = c("log10", "log2", "identity"),
-             summary = TRUE,
-             labels = list(
-                 "title" = "Base mean distribution",
-                 "subtitle" = NULL
-             )) {
+    function(
+        object,
+        nonzero = TRUE,
+        trans = c("log10", "log2", "identity"),
+        summary = TRUE,
+        labels = list(
+            "title" = "Base mean distribution",
+            "subtitle" = NULL
+        )
+    ) {
         plotBaseMean(
             object = as.DESeqDataSet(object),
             nonzero = nonzero,
@@ -47,17 +48,18 @@ NULL
     }
 
 
-
 ## Updated 2022-05-18.
 `plotBaseMean,DESeqDataSet` <- # nolint
-    function(object,
-             nonzero = TRUE,
-             trans = c("log10", "log2", "identity"),
-             summary = TRUE,
-             labels = list(
-                 "title" = "Base mean distribution",
-                 "subtitle" = NULL
-             )) {
+    function(
+        object,
+        nonzero = TRUE,
+        trans = c("log10", "log2", "identity"),
+        summary = TRUE,
+        labels = list(
+            "title" = "Base mean distribution",
+            "subtitle" = NULL
+        )
+    ) {
         `plotBaseMean,numeric`(
             object = rowMeans(counts(object, normalized = TRUE)),
             nonzero = nonzero,
@@ -68,17 +70,18 @@ NULL
     }
 
 
-
 ## Updated 2022-05-18.
 `plotBaseMean,DESeqResults` <- # nolint
-    function(object,
-             nonzero = TRUE,
-             trans = c("log10", "log2", "identity"),
-             summary = TRUE,
-             labels = list(
-                 "title" = "Base mean distribution",
-                 "subtitle" = NULL
-             )) {
+    function(
+        object,
+        nonzero = TRUE,
+        trans = c("log10", "log2", "identity"),
+        summary = TRUE,
+        labels = list(
+            "title" = "Base mean distribution",
+            "subtitle" = NULL
+        )
+    ) {
         `plotBaseMean,numeric`(
             object = object[["baseMean"]],
             nonzero = nonzero,
@@ -89,17 +92,18 @@ NULL
     }
 
 
-
 ## Updated 2019-10-15.
 `plotBaseMean,numeric` <- # nolint
-    function(object,
-             nonzero = TRUE,
-             trans = c("log10", "log2", "identity"),
-             summary = TRUE,
-             labels = list(
-                 "title" = "Base mean distribution",
-                 "subtitle" = NULL
-             )) {
+    function(
+        object,
+        nonzero = TRUE,
+        trans = c("log10", "log2", "identity"),
+        summary = TRUE,
+        labels = list(
+            "title" = "Base mean distribution",
+            "subtitle" = NULL
+        )
+    ) {
         assert(
             is.numeric(object),
             isFlag(nonzero),
@@ -222,7 +226,6 @@ NULL
         ## Return.
         p
     }
-
 
 
 #' @describeIn plotBaseMean Passes to `DESeqDataSet` method.

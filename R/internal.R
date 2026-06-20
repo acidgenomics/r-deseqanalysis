@@ -21,7 +21,6 @@
 }
 
 
-
 #' Prepare `DESeqResults` data for plot
 #'
 #' @details
@@ -41,11 +40,13 @@
 #'
 #' @return `DFrame`.
 .prepareResultsForPlot <-
-    function(object,
-             direction,
-             alphaThreshold,
-             baseMeanThreshold,
-             lfcThreshold) {
+    function(
+        object,
+        direction,
+        alphaThreshold,
+        baseMeanThreshold,
+        lfcThreshold
+    ) {
         assert(is(object, "DESeqResults"))
         df <- as(object, "DFrame")
         colnames(df) <- camelCase(colnames(df), strict = TRUE)
@@ -88,12 +89,14 @@
                 "baseMeanThreshold" = baseMeanThreshold,
                 "lfcThreshold" = lfcThreshold
             ),
-            f = function(alpha,
-                         alphaThreshold,
-                         baseMean,
-                         baseMeanThreshold,
-                         lfc,
-                         lfcThreshold) {
+            f = function(
+                alpha,
+                alphaThreshold,
+                baseMean,
+                baseMeanThreshold,
+                lfc,
+                lfcThreshold
+            ) {
                 if (
                     anyNA(c(alpha, lfc, baseMean)) ||
                         alpha >= alphaThreshold ||
@@ -134,7 +137,6 @@
     }
 
 
-
 #' Coerce a DESeqResults object to named list
 #'
 #' @note Updated 2019-07-23.
@@ -148,7 +150,6 @@
     names(to) <- makeNames(contrastName(from))
     to
 }
-
 
 
 #' Map contrast vector to coefficient
@@ -177,7 +178,6 @@
 }
 
 
-
 ## Updated 2020-08-04.
 .ddsMsg <- function() {
     alertInfo(sprintf(
@@ -187,11 +187,11 @@
 }
 
 
-
 ## Updated 2023-12-18.
 .joinCounts <-
-    function(object,
-             DESeqDataSet # nolint
+    function(
+        object,
+        DESeqDataSet # nolint
     ) {
         assert(
             is(object, "DFrame"),
@@ -217,7 +217,6 @@
     }
 
 
-
 #' Join the row annotations
 #'
 #' @note Updated 2022-05-17.
@@ -231,8 +230,9 @@
 #' will fail to write to disk as CSV. Note that we're using `decode()` here to
 #' handle S4 Rle columns from the Genomic Ranges.
 .joinRowData <-
-    function(object,
-             DESeqDataSet # nolint
+    function(
+        object,
+        DESeqDataSet # nolint
     ) {
         assert(
             is(object, "DFrame"),
@@ -289,18 +289,19 @@
     }
 
 
-
 #' Threshold label that goes in subtitle for plot on DESeqResults
 #'
 #' @note Updated 2022-04-15.
 #' @noRd
 .thresholdLabel <-
-    function(object,
-             direction,
-             alphaThreshold,
-             baseMeanThreshold,
-             lfcShrinkType = NULL,
-             lfcThreshold) {
+    function(
+        object,
+        direction,
+        alphaThreshold,
+        baseMeanThreshold,
+        lfcThreshold,
+        lfcShrinkType = NULL
+    ) {
         assert(isAny(object, c("DESeqAnalysis", "DESeqResults")))
         x <- character()
         sep <- "; "
@@ -353,12 +354,10 @@
     }
 
 
-
 ## Updated 2019-07-23.
 .transformCountsAxisLabel <- function(object) {
     paste(transformType(object), "counts (log2)")
 }
-
 
 
 #' Determine which results slot to use

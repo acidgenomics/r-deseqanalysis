@@ -29,11 +29,13 @@
 #' print(head(rownames(txi[["counts"]])))
 sanitizeTximportIdentifiers <- function(txi) {
     assert(isTximport(txi))
-    if (!all(grepl(
-        pattern = "|",
-        x = rownames(txi[["abundance"]]),
-        fixed = TRUE
-    ))) {
+    if (
+        !all(grepl(
+            pattern = "|",
+            x = rownames(txi[["abundance"]]),
+            fixed = TRUE
+        ))
+    ) {
         return(txi)
     }
     sanitize <- function(x) {
