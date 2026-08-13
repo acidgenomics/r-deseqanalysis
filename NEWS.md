@@ -1,5 +1,3 @@
-# Release notes
-
 ## DESeqAnalysis 0.7.3 (2026-06-19)
 
 License changes:
@@ -906,11 +904,11 @@ Minor changes:
 Initial release. Some of the functions defined in this package have been
 migrated from my [bcbioRNASeq][] R package.
 
-[acidplots]: https://r.acidgenomics.com/packages/acidplots/
+[acidplots]: https://r.acidgenomics.com/acidplots/
 [acid genomics]: https://acidgenomics.com/
 [appveyor CI]: https://www.appveyor.com/
-[basejump]: https://r.acidgenomics.com/packages/basejump/
-[bcbiornaseq]: https://r.acidgenomics.com/packages/bcbiornaseq/
-[goalie]: https://r.acidgenomics.com/packages/goalie/
+[basejump]: https://r.acidgenomics.com/basejump/
+[bcbiornaseq]: https://r.acidgenomics.com/bcbiornaseq/
+[goalie]: https://r.acidgenomics.com/goalie/
 [testthat]: https://testthat.r-lib.org/
 [travis ci]: https://www.travis-ci.com/

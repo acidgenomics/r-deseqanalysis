@@ -16,7 +16,7 @@ Authors@R: c(
         role = c("cph", "fnd")
     ))
 URL:
-    https://r.acidgenomics.com/packages/deseqanalysis/,
+    https://r.acidgenomics.com/deseqanalysis/,
     https://github.com/acidgenomics/r-deseqanalysis/
 BugReports: https://github.com/acidgenomics/r-deseqanalysis/issues/
 License: Apache License (>= 2)
